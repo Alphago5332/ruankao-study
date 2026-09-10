@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>康奈尔笔记 · 第 1 章 信息化发展 · 带答案版</title>
+<style>
+  :root{
+    --ink:#1f2328;
+    --ink-2:#4b5563;
+    --ink-3:#8b949e;
+    --line:#2f3742;
+    --rule:#d6dae0;
+    --accent:#185FA5;
+    --accent-soft:#E6F1FB;
+    --warm:#854F0B;
+    --warm-soft:#FAEEDA;
+    --paper:#ffffff;
+    --ans-bg:#fffaf2;
+    --ans-border:#e8d9b8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    padding:28px 16px 48px;
+    background:#eef0f3;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+    color:var(--ink);
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .toolbar{
+    max-width:210mm;margin:0 auto 14px;display:flex;gap:10px;align-items:center;
+    justify-content:space-between;flex-wrap:wrap;
+  }
+  .toolbar .hint{font-size:12.5px;color:#5b6470;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;
+    font-size:13px;padding:7px 14px;border-radius:8px;cursor:pointer;
+    font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn.active{background:var(--warm);border-color:var(--warm);color:#fff;}
+
+  .page{
+    width:210mm;min-height:297mm;margin:0 auto;background:var(--paper);
+    padding:14mm 13mm 12mm;box-shadow:0 2px 14px rgba(16,24,40,.12);
+  }
+
+  .head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    border-bottom:2px solid var(--line);padding-bottom:8px;margin-bottom:10px;
+    gap:12px;
+  }
+  .head h1{font-size:19px;margin:0;font-weight:600;letter-spacing:.3px;}
+  .head .sub{font-size:12px;color:var(--ink-3);margin-top:4px;}
+  .head .meta{font-size:12px;color:var(--ink-2);text-align:right;line-height:1.9;white-space:nowrap;}
+  .head .meta b{font-weight:600;color:var(--accent);}
+
+  .band{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+  .chip{
+    font-size:11.5px;padding:4px 9px;border-radius:5px;
+    background:var(--accent-soft);color:#0C447C;border:1px solid #B5D4F4;
+  }
+  .chip.warm{background:var(--warm-soft);color:#633806;border-color:#EFC98A;}
+
+  .cols{
+    display:grid;grid-template-columns:62mm 1fr;gap:0;
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .col-cue{
+    background:#fafbfc;border-right:1px solid var(--line);padding:8px 9px 9px;
+  }
+  .col-note{padding:8px 11px 9px;}
+  .col-hd{
+    font-size:11.5px;font-weight:600;letter-spacing:.6px;color:var(--ink-2);
+    text-transform:uppercase;padding-bottom:6px;margin-bottom:7px;
+    border-bottom:1px dashed #b9c0c9;
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  .col-hd span{font-size:10.5px;font-weight:400;color:var(--ink-3);text-transform:none;letter-spacing:0;}
+
+  .q{
+    font-size:12px;line-height:1.5;color:#1f2328;
+    padding:5px 0 5px 20px;position:relative;border-bottom:1px dotted #dfe3e8;
+  }
+  .q:last-child{border-bottom:0;}
+  .q::before{
+    content:attr(data-n);position:absolute;left:0;top:5px;
+    width:14px;height:14px;border-radius:50%;
+    background:var(--accent);color:#fff;font-size:9.5px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:600;line-height:1;
+  }
+  .q b{font-weight:600;}
+  .q em{font-style:normal;color:var(--warm);font-weight:600;}
+
+  .grouplabel{
+    font-size:10.5px;font-weight:600;color:var(--accent);
+    letter-spacing:.4px;margin:8px 0 2px;
+  }
+  .grouplabel:first-child{margin-top:0;}
+
+  /* === 答案区样式 === */
+  .ans-block{
+    margin-bottom:7px;padding:5px 8px 6px;
+    background:var(--ans-bg);border:1px solid var(--ans-border);border-radius:3px;
+  }
+  .ans-block .ans-title{
+    font-size:10.5px;font-weight:600;color:var(--warm);
+    letter-spacing:.3px;margin-bottom:2px;display:flex;align-items:baseline;gap:6px;
+  }
+  .ans-block .ans-title .num{
+    display:inline-block;min-width:14px;height:14px;border-radius:50%;
+    background:var(--warm);color:#fff;font-size:9.5px;font-weight:600;
+    text-align:center;line-height:14px;
+  }
+  .ans-block ul{
+    margin:2px 0 3px 0;padding:0 0 0 16px;font-size:11.5px;line-height:1.55;color:#2b323b;
+  }
+  .ans-block ul li{padding:1px 0;}
+  .ans-block .key{
+    color:var(--warm);font-weight:600;
+  }
+  .ans-block .tip{
+    font-size:10.5px;color:#633806;margin-top:2px;line-height:1.5;
+    padding:2px 6px;background:var(--warm-soft);border-radius:2px;
+  }
+  .ans-block .fill{
+    height:18px;border-bottom:1px dashed #c8c0aa;margin-top:3px;
+  }
+  body.hide-answers .ans-block{display:none;}
+  body.hide-answers .summary-prefill{display:none;}
+
+  .summary{
+    margin-top:10px;border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .summary .col-hd{
+    margin:0;padding:7px 11px;background:#fafbfc;border-bottom:1px solid var(--line);
+  }
+  .summary .body{padding:6px 11px 8px;font-size:11.5px;line-height:1.7;color:#2b323b;}
+  .summary .body b{color:var(--accent);}
+  .summary .body .small{font-size:10.5px;color:var(--ink-3);margin-top:3px;display:block;}
+
+  .footer{
+    margin-top:9px;font-size:10.5px;color:var(--ink-3);
+    display:flex;justify-content:space-between;gap:10px;
+  }
+
+  .guide{
+    width:210mm;margin:16px auto 0;background:#fff;border:1px solid #d9dee5;
+    border-radius:8px;padding:16px 18px;
+  }
+  .guide h2{font-size:14px;margin:0 0 10px;font-weight:600;}
+  .guide table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .guide th,.guide td{
+    border:1px solid #e2e6eb;padding:7px 9px;text-align:left;vertical-align:top;line-height:1.6;
+  }
+  .guide th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .guide td:first-child{width:88px;font-weight:600;color:var(--accent);}
+  .guide .note{font-size:12px;color:#5b6470;margin-top:10px;line-height:1.7;}
+
+  @page{size:A4 portrait;margin:0;}
+  @media print{
+    body{background:#fff;padding:0;}
+    .toolbar,.guide{display:none;}
+    .page{box-shadow:none;margin:0;width:auto;min-height:auto;padding:13mm 12mm;}
+    body.hide-answers .ans-block{display:none;}
+    body.hide-answers .summary-prefill{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="hint">A4 竖版 · 带答案版 · 建议先默写、再对照；打印时可「隐藏答案」变填空版</div>
+  <div>
+    <button class="btn" id="toggleBtn" onclick="toggleAnswers()">👁 隐藏答案（打印填空版）</button>
+    <button class="btn primary" onclick="window.print()">打印 / 导出 PDF</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="head">
+    <div>
+      <h1>康奈尔笔记 · 第 1 章 信息化发展 <span style="color:var(--warm);font-size:14px;">（带答案版）</span></h1>
+      <div class="sub">《信息系统项目管理师教程（第 4 版）》P1 ~ P35　｜　答案口径以 2026-09-10 二次核对为准</div>
+    </div>
+    <div class="meta">
+      日期：__________<br>
+      第 <b>__</b> 轮复习　用时 <b>__</b> 分钟
+    </div>
+  </div>
+
+  <div class="band">
+    <span class="chip">上午 2~4 题</span>
+    <span class="chip">不出大题</span>
+    <span class="chip warm">必背：1.1 信息 / 1.2 基础设施</span>
+    <span class="chip warm">通读：1.3 ~ 1.5</span>
+    <span class="chip warm">📝 含答案</span>
+  </div>
+
+  <div class="cols">
+
+    <div class="col-cue">
+      <div class="col-hd">线索栏 <span>遮住右侧自问</span></div>
+
+      <div class="grouplabel">1.1 信息与信息化</div>
+      <div class="q" data-n="1">信息 <b>7 项质量属性</b>是？<br>「非授权访问可能性最小」是哪项？</div>
+      <div class="q" data-n="2">香农对信息的定义？<br>信息量的单位是？</div>
+      <div class="q" data-n="3">信息系统 = <b>三结合</b>是哪三个？<br>组成部件有哪些？</div>
+      <div class="q" data-n="4">信息系统生命周期 <b>5 阶段</b>顺序？</div>
+      <div class="q" data-n="5">4 种开发方法各适合什么需求场景？</div>
+      <div class="q" data-n="6">组织信息化的 <b>4 大趋势</b>？<br>产品信息化的<b>两层含义</b>？</div>
+      <div class="q" data-n="7">国家信息化体系 <b>六要素</b>？<br>谁是<em>龙头</em>、谁是<em>核心任务</em>？</div>
+
+      <div class="grouplabel">1.2 现代化基础设施</div>
+      <div class="q" data-n="8"><b>新基建三大类</b>分别装什么？<br>判别口诀？</div>
+      <div class="q" data-n="9">工业互联网的<b>四大定位</b>？<br>平台体系的<b>四层级</b>是？</div>
+
+      <div class="grouplabel">1.3 ~ 1.5（通读）</div>
+      <div class="q" data-n="10">两化融合 = 哪两化？<br>智能制造分哪三层？</div>
+      <div class="q" data-n="11">数字经济 <b>两条腿</b>分别是什么？<br>各举 2 例。</div>
+    </div>
+
+    <div class="col-note">
+      <div class="col-hd">答案区 <span>默写后对照 · 留白处写自己的补充</span></div>
+
+      <div class="grouplabel">1.1 信息与信息化</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">1</span>信息的 7 项质量属性</div>
+        <ul>
+          <li><span class="key">精确性</span>（精准程度）/ <span class="key">完整性</span>（全面程度）</li>
+          <li><span class="key">可靠性</span>（来源/方法可被信任）/ <span class="key">及时性</span>（与事件发生的间隔）</li>
+          <li><span class="key">经济性</span>（成本可接受）/ <span class="key">可验证性</span>（可证实/证伪）</li>
+          <li><span class="key">安全性</span>（非授权访问可能性最小） ← 本题答案</li>
+        </ul>
+        <div class="tip">口诀：<b>精完可及经可安</b>　场景配对：金融信息→安全性；经济社会信息→及时性</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">2</span>香农对信息的定义</div>
+        <ul>
+          <li>信息是用来<span class="key">消除随机不定性</span>的东西（香农，1948，创立信息论）</li>
+          <li>信息量的单位 = <span class="key">比特（bit）</span></li>
+          <li>信息是物质、能量及其属性的标示的集合；是确定性的增加</li>
+          <li>信息<b>既不是物质、也不是能量</b></li>
+        </ul>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">3</span>信息系统 = 三结合</div>
+        <ul>
+          <li><span class="key">管理模型</span>（对象领域知识 + 处理模型）</li>
+          <li><span class="key">信息处理模型</span>（处理信息的结构与方法）</li>
+          <li><span class="key">系统实现条件</span>（计算机/通信技术 + 人员 + 控制融合）</li>
+        </ul>
+        <div class="tip">⚠️ 第 4 版口径，不是中级教材的「人机一体化系统」</div>
+        <div class="ans-title" style="margin-top:4px;"><span class="num">·</span>组成部件（9 类）</div>
+        <ul>
+          <li>硬件、软件、数据库、网络、存储设备、感知设备、外设、人员、把数据处理成信息的<b>规程</b></li>
+        </ul>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">4</span>信息系统生命周期 5 阶段</div>
+        <ul>
+          <li>顺序：<span class="key">规划 → 分析 → 设计 → 实施 → 运行与维护</span></li>
+          <li>各阶段核心产出：可行性研究 / 需求说明书 / 系统设计说明书 / 软件+测试 / 运维</li>
+          <li>系统分析 → <span class="key">逻辑模型</span>；系统设计 → <span class="key">物理模型</span>（常考辨析）</li>
+        </ul>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">5</span>4 种开发方法适配场景</div>
+        <ul>
+          <li><span class="key">结构化</span>：需求明确、稳定（瀑布）</li>
+          <li><span class="key">原型化</span>：需求不清、需快速验证</li>
+          <li><span class="key">面向对象</span>：复杂、可复用要求高</li>
+          <li><span class="key">面向服务（SOA）</span>：系统集成、异构环境</li>
+        </ul>
+        <div class="tip">第 4 版第 1 章未展开，第 5 章软件工程会再涉及</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">6</span>组织信息化 4 大趋势 + 产品信息化两层含义</div>
+        <ul>
+          <li>4 大趋势：<span class="key">产品信息化 / 产业信息化 / 社会生活信息化 / 国民经济信息化</span></li>
+          <li>产品信息化①：信息比重日益增大、物质比重日益降低</li>
+          <li>产品信息化②：嵌入智能化元器件，具越来越强的信息处理功能</li>
+        </ul>
+        <div class="tip">⚠️ 中级教材另有「5 层次」（含企业信息化），高项第 4 版按 4 项趋势表述</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">7</span>国家信息化体系六要素</div>
+        <ul>
+          <li><span class="key">信息技术应用</span> → <b>龙头</b>（主阵地）</li>
+          <li><span class="key">信息资源</span> → <b>核心任务</b>（开发利用；薄弱环节）</li>
+          <li><span class="key">信息网络</span> → 基础设施</li>
+          <li><span class="key">信息技术和产业</span> → 物质基础</li>
+          <li><span class="key">信息化人才</span> → 成功之本</li>
+          <li><span class="key">信息化政策法规和标准规范</span> → 保障</li>
+        </ul>
+        <div class="tip">口诀：<b>应资网产人法</b>（信息技术应用 / 信息资源 / 信息网络 / 信息技术和产业 / 信息化人才 / 政策法规）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">1.2 现代化基础设施</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">8</span>新基建三大类 + 信息基础设施三小类</div>
+        <ul>
+          <li><span class="key">信息基础设施</span>（纯数字底座）：5G / 物联网 / 工业互联网 / 卫星互联网 + AI / 云计算 / 区块链 + 数据中心 / 智能计算中心</li>
+          <li><span class="key">融合基础设施</span>（传统设施被改造）：智能交通 / 智慧能源</li>
+          <li><span class="key">创新基础设施</span>（搞科研的）：重大科技 / 科教 / 产业技术创新</li>
+        </ul>
+        <div class="tip">信息基础设施三小类：<b>通信网络</b>（5G/物联网/工业互联网/卫星）+ <b>新技术</b>（AI/云计算/区块链）+ <b>算力</b>（数据中心/智能计算中心）<br>判别口诀：<b>纯数字=信息；改造=融合；科研=创新</b></div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">9</span>工业互联网四大定位 + 平台四层级</div>
+        <ul>
+          <li>四大定位：<span class="key">网络为基础 / 平台为中枢 / 数据为要素 / 安全为保障</span></li>
+          <li>平台四层级：<span class="key">边缘层、IaaS、PaaS、SaaS</span>（=工业互联网的「操作系统」）</li>
+          <li>平台四大作用：数据汇聚 / 建模分析 / 知识复用 / 应用创新</li>
+          <li>网络体系三部分：网络互联 / 数据互通 / 标识解析</li>
+        </ul>
+        <div class="tip">⚠️ 第 4 版新增「数据为要素」；旧资料常说「三大体系」，按四项记</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">1.3 ~ 1.5（通读）</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">10</span>两化融合 + 智能制造</div>
+        <ul>
+          <li>两化融合 = <span class="key">信息化 + 工业化</span></li>
+          <li>智能制造三阶段：数字化制造 → 数字化网络化制造 → 数字化网络化智能化制造</li>
+          <li>国家战略背景：「中国制造 2025」</li>
+        </ul>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">11</span>数字经济两条腿</div>
+        <ul>
+          <li><span class="key">数字产业化</span>（数字技术本身成产业）：电子信息制造、软件、通信、互联网</li>
+          <li><span class="key">产业数字化</span>（数字技术赋能传统产业）：工业互联网、智能制造、数字农业、数字金融</li>
+          <li>关键指标：<span class="key">数字经济核心产业增加值占 GDP 比重</span></li>
+        </ul>
+        <div class="tip">辨析：「工业互联网」作为产品供给时归数字产业化；作为赋能能力时归产业数字化 —— 看题干落脚点</div>
+        <div class="fill"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="summary">
+    <div class="col-hd">总结区 <span>本章本质 + 考点地图</span></div>
+    <div class="body summary-prefill">
+      <b>本章本质</b>：信息化背景术语 + 政策框架；上午 2~4 题，不出大题、不进论文主线。<br>
+      <b>考点地图（按考频排序）</b>：① 信息 7 属性（含场景配对）→ ② 国家信息化体系六要素（龙头/核心任务）→ ③ 新基建三大类 + 信息基础设施三小类 → ④ 工业互联网四大定位 + 平台四层级 → ⑤ 数字经济两条腿 → ⑥ 信息系统三结合 + 生命周期 5 阶段 → ⑦ 香农定义、组织信息化 4 大趋势、两化融合。<br>
+      <span class="small">⚠️ 口径陷阱：①信息系统是「三结合」非「人机一体化」；②工业互联网「四大定位」非「三大体系」；③组织信息化按「4 大趋势」非「5 层次」；④系统分析→逻辑模型、系统设计→物理模型。</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>康奈尔笔记法 · 第 1 章 带答案版　｜　复习记录：当日 ☐　+1 天 ☐　+3 天 ☐　+7 天 ☐　+14 天 ☐</span>
+    <span>正确率 ____ / 11</span>
+  </div>
+
+</div>
+
+<div class="guide">
+  <h2>怎么用这一页</h2>
+  <table>
+    <tr>
+      <th>步骤</th><th>做法</th>
+    </tr>
+    <tr>
+      <td>第 1 遍 · 遮答默写</td>
+      <td>用纸<b>遮住右栏答案区</b>，只看左栏 11 个问题。口头/默写回答，答不出的画「×」。</td>
+    </tr>
+    <tr>
+      <td>第 2 遍 · 对照修正</td>
+      <td>揭开答案区逐项对照。每条答案下的<b>虚线</b>是留给你的「补充线」——记下易漏点（如「四大定位的具体顺序」「六要素口诀」）。</td>
+    </tr>
+    <tr>
+      <td>第 3 遍 · 隐藏答案打印</td>
+      <td>点工具栏「👁 隐藏答案」按钮，再打印一份当填空卷，可反复练习。</td>
+    </tr>
+    <tr>
+      <td>第 4 遍 · 复习节奏</td>
+      <td>页脚 5 个框按「当日 → +1 天 → +3 天 → +7 天 → +14 天」打勾，这就是你的艾宾浩斯进度条。全部打勾后，本章可不再看。</td>
+    </tr>
+  </table>
+  <div class="note">
+    <b>为什么这份是「带答案版」</b>：直接默写全章答案容易翻车（口径不准就白背）。本版每个答案都标注<b>关键术语</b>（暖色）和<b>口诀</b>（橙色框），默写后对照一眼就能定位偏差。考前冲刺只看「总结区 · 考点地图」+「橙色 tip 框」即可。
+  </div>
+</div>
+
+<script>
+  function toggleAnswers(){
+    document.body.classList.toggle('hide-answers');
+    const btn = document.getElementById('toggleBtn');
+    const hidden = document.body.classList.contains('hide-answers');
+    btn.textContent = hidden ? '👁 显示答案' : '👁 隐藏答案（打印填空版）';
+    btn.classList.toggle('active', hidden);
+  }
+</script>
+
+</body>
+</html>
