@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="ON9jFkDbaAq1sN5SH5P6QG">
+<head data-page-node-id="pmOgFHoNzQLYrkQxFCY9EL">
+<meta charset="UTF-8" data-page-node-id="MCROGhfBeqS933j7zezrxe">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="0ZIBJrrSG1lHGSq7s4V4tQ">
+<title>康奈尔笔记 · 第 1 章 信息化发展</title>
+<style>
+  :root{
+    --ink:#1f2328;
+    --ink-2:#4b5563;
+    --ink-3:#8b949e;
+    --line:#2f3742;
+    --rule:#d6dae0;
+    --accent:#185FA5;
+    --accent-soft:#E6F1FB;
+    --warm:#854F0B;
+    --warm-soft:#FAEEDA;
+    --paper:#ffffff;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    padding:28px 16px 48px;
+    background:#eef0f3;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+    color:var(--ink);
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .toolbar{
+    max-width:210mm;margin:0 auto 14px;display:flex;gap:10px;align-items:center;
+    justify-content:space-between;flex-wrap:wrap;
+  }
+  .toolbar .hint{font-size:12.5px;color:#5b6470;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;
+    font-size:13px;padding:7px 14px;border-radius:8px;cursor:pointer;
+    font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+
+  .page{
+    width:210mm;min-height:297mm;margin:0 auto;background:var(--paper);
+    padding:14mm 13mm 12mm;box-shadow:0 2px 14px rgba(16,24,40,.12);
+  }
+
+  .head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    border-bottom:2px solid var(--line);padding-bottom:8px;margin-bottom:10px;
+    gap:12px;
+  }
+  .head h1{font-size:19px;margin:0;font-weight:600;letter-spacing:.3px;}
+  .head .sub{font-size:12px;color:var(--ink-3);margin-top:4px;}
+  .head .meta{font-size:12px;color:var(--ink-2);text-align:right;line-height:1.9;white-space:nowrap;}
+  .head .meta b{font-weight:600;color:var(--accent);}
+
+  .band{
+    display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;
+  }
+  .chip{
+    font-size:11.5px;padding:4px 9px;border-radius:5px;
+    background:var(--accent-soft);color:#0C447C;border:1px solid #B5D4F4;
+  }
+  .chip.warm{background:var(--warm-soft);color:#633806;border-color:#EFC98A;}
+
+  .cols{
+    display:grid;grid-template-columns:62mm 1fr;gap:0;
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .col-cue{
+    background:#fafbfc;border-right:1px solid var(--line);padding:8px 9px 9px;
+  }
+  .col-note{padding:8px 11px 9px;}
+  .col-hd{
+    font-size:11.5px;font-weight:600;letter-spacing:.6px;color:var(--ink-2);
+    text-transform:uppercase;padding-bottom:6px;margin-bottom:7px;
+    border-bottom:1px dashed #b9c0c9;
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  .col-hd span{font-size:10.5px;font-weight:400;color:var(--ink-3);text-transform:none;letter-spacing:0;}
+
+  .q{
+    font-size:12px;line-height:1.5;color:#1f2328;
+    padding:5px 0 5px 20px;position:relative;border-bottom:1px dotted #dfe3e8;
+  }
+  .q:last-child{border-bottom:0;}
+  .q::before{
+    content:attr(data-n);position:absolute;left:0;top:5px;
+    width:14px;height:14px;border-radius:50%;
+    background:var(--accent);color:#fff;font-size:9.5px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:600;line-height:1;
+  }
+  .q b{font-weight:600;}
+  .q em{font-style:normal;color:var(--warm);font-weight:600;}
+
+  .grouplabel{
+    font-size:10.5px;font-weight:600;color:var(--accent);
+    letter-spacing:.4px;margin:8px 0 2px;
+  }
+  .grouplabel:first-child{margin-top:0;}
+
+  .writeline{
+    height:0;border-bottom:1px solid var(--rule);
+  }
+  .writeline.tall{border-bottom-style:none;height:23px;}
+  .fill{height:23px;border-bottom:1px solid var(--rule);}
+
+  .subj{font-size:10.5px;font-weight:600;color:var(--warm);letter-spacing:.4px;margin:11px 0 4px;}
+  .subj:first-child{margin-top:0;}
+
+  .summary{
+    margin-top:10px;border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .summary .col-hd{
+    margin:0;padding:7px 11px;background:#fafbfc;border-bottom:1px solid var(--line);
+  }
+  .summary .body{padding:6px 11px 8px;}
+
+  .footer{
+    margin-top:9px;font-size:10.5px;color:var(--ink-3);
+    display:flex;justify-content:space-between;gap:10px;
+  }
+
+  .guide{
+    width:210mm;margin:16px auto 0;background:#fff;border:1px solid #d9dee5;
+    border-radius:8px;padding:16px 18px;
+  }
+  .guide h2{font-size:14px;margin:0 0 10px;font-weight:600;}
+  .guide table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .guide th,.guide td{
+    border:1px solid #e2e6eb;padding:7px 9px;text-align:left;vertical-align:top;line-height:1.6;
+  }
+  .guide th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .guide td:first-child{width:88px;font-weight:600;color:var(--accent);}
+  .guide .note{font-size:12px;color:#5b6470;margin-top:10px;line-height:1.7;}
+
+  @page{size:A4 portrait;margin:0;}
+  @media print{
+    body{background:#fff;padding:0;}
+    .toolbar,.guide{display:none;}
+    .page{box-shadow:none;margin:0;width:auto;min-height:auto;padding:13mm 12mm;}
+  }
+</style>
+</head>
+<body data-page-node-id="R5pgCACV9v6Dx40mcE7sij">
+
+<div class="toolbar" data-page-node-id="fstTD5q9mYYSpJ5epD9AfE">
+  <div class="hint" data-page-node-id="TO1yXIw43CfNR08gIUNYoh">A4 竖版 · 建议双面留白手写，打印后配合「遮罩法」复习 5 次以上</div>
+  <div data-page-node-id="W1zHl4mSaTX9vFm3GkTLAz">
+    <button class="btn" onclick="window.print()" data-page-node-id="EW9gEmjzxct6xIi81hPCFE">打印 / 导出 PDF</button>
+  </div>
+</div>
+
+<div class="page" data-page-node-id="ZSzFexQyReLhp4TCTpZVBO">
+
+  <div class="head" data-page-node-id="5t3Qz4TrOcbneQmMPEkQpa">
+    <div data-page-node-id="LtJ9dkN1wp663puFCaTHMF">
+      <h1 data-page-node-id="fAsQyXsf3BvwJP1tcmHcIo">康奈尔笔记 · 第 1 章 信息化发展</h1>
+      <div class="sub" data-page-node-id="Pr74xpzExzZKGC4fIITkvV">《信息系统项目管理师教程（第 4 版）》P1 ~ P35</div>
+    </div>
+    <div class="meta" data-page-node-id="IMbFCOCVzpieuAk1p1Xiih">
+      日期：__________<br data-page-node-id="GQEBmJnYXYBoL42Z0LSfFp">
+      第 <b data-page-node-id="yKvRKuc1hCp53zZ2nTbEKx">__</b> 轮复习　用时 <b data-page-node-id="a1x8B9VJ3QR7iqm4DUfxGw">__</b> 分钟
+    </div>
+  </div>
+
+  <div class="band" data-page-node-id="mrQ9jzAyC0Bxra9qx0SSJz">
+    <span class="chip" data-page-node-id="LuhxDPDDRZIz2tJFZhcznG">上午 2~4 题</span>
+    <span class="chip" data-page-node-id="jkuZqAGEsUW9L6bQfY1LE0">不出大题</span>
+    <span class="chip warm" data-page-node-id="QUb3rfaqEaaJGNbelXzQN8">必背：1.1 信息 / 1.2 基础设施</span>
+    <span class="chip warm" data-page-node-id="xCbGn9Qma8lB7xii5VnBP9">通读：1.3 ~ 1.5</span>
+  </div>
+
+  <div class="cols" data-page-node-id="TXrwtIbGWjWt9UWkLT1zhI">
+
+    <div class="col-cue" data-page-node-id="7lKOsgnxclgr0ygG6WDHxG">
+      <div class="col-hd" data-page-node-id="aKrWo6kKfNghWCk2IZ2dkA">线索栏 <span data-page-node-id="SRsFNpR3KRcYVhzhAWxBrT">遮住右侧自问</span></div>
+
+      <div class="grouplabel" data-page-node-id="WnHtXkgWhYrHu95NFFLXOe">1.1 信息与信息化</div>
+      <div class="q" data-n="1" data-page-node-id="zMR6lBQNFGD58dBWLB0E0K">信息 <b data-page-node-id="FL6jqwOBTZExURUKSMDPjn">7 项质量属性</b>是？<br data-page-node-id="zwJdCkEAGz2QAqvIA7niLS">「非授权访问可能性最小」是哪项？</div>
+      <div class="q" data-n="2" data-page-node-id="8CBco1d7jXZYjJrwUvtCWI">香农对信息的定义？<br data-page-node-id="zwJdCkEAGz2QAqvIA7niLS2">信息量的单位是？</div>
+      <div class="q" data-n="3" data-page-node-id="LMRTnBufZQ545kEWleGaCl">信息系统 = <b data-page-node-id="LMRTnBufZQ545kEWleGaCl">三结合</b>是哪三个？<br data-page-node-id="LMRTnBufZQ545kEWleGaCl2">组成部件有哪些？</div>
+      <div class="q" data-n="4" data-page-node-id="4KgNitoC43LmYQuFSMk2ph">信息系统生命周期 <b data-page-node-id="fCaIKuUc9DTQol9qqZciRH">5 阶段</b>顺序？</div>
+      <div class="q" data-n="5" data-page-node-id="mSsdiqyFDCNcpohgdgp9Hp">4 种开发方法各适合什么需求场景？</div>
+      <div class="q" data-n="6" data-page-node-id="ONGa3D1QHLCHz6bIoFRyqu">组织信息化的 <b data-page-node-id="7Ou93mhmCSP35ABVG1L2WK">4 大趋势</b>？<br data-page-node-id="7Ou93mhmCSP35ABVG1L2WK2">产品信息化的<b data-page-node-id="7Ou93mhmCSP35ABVG1L2WK3">两层含义</b>？</div>
+      <div class="q" data-n="7" data-page-node-id="QCnL1fxXYbugSNwfVnojyh">国家信息化体系 <b data-page-node-id="cjq0MxJGYPF23KsipwTzYN">六要素</b>？<br data-page-node-id="yXZOUurz65wb6zVqDZCiQr">谁是<em data-page-node-id="kzVZg4kfmH7568SBH4t5q4">龙头</em>、谁是<em data-page-node-id="sBgE3WoBJn95nk2XlpUzys">核心任务</em>？</div>
+
+      <div class="grouplabel" data-page-node-id="KvxBuspRDBwBuXmajutHit">1.2 现代化基础设施</div>
+      <div class="q" data-n="8" data-page-node-id="ZpZ1ZU3vgAuoObHm4iU1Pe"><b data-page-node-id="TfMEswA6p8PuIwi44v1p4Y">新基建三大类</b>分别装什么？<br data-page-node-id="TOqgTxIZYjJe48vGXjahli">判别口诀？</div>
+      <div class="q" data-n="9" data-page-node-id="tAC2hgicnyO00ixaU8PPaX">工业互联网的<b data-page-node-id="ZsoyFb9uPU4DPhjEcdNltZ">四大定位</b>？<br data-page-node-id="ZsoyFb9uPU4DPhjEcdNltZ2">平台体系的<b data-page-node-id="ZsoyFb9uPU4DPhjEcdNltZ3">四层级</b>是？</div>
+
+      <div class="grouplabel" data-page-node-id="MWeDR0ReahTa2dCvm4pyBe">1.3 ~ 1.5（通读）</div>
+      <div class="q" data-n="10" data-page-node-id="MNE5SXEhasmpT0WsHR81gZ">两化融合 = 哪两化？<br data-page-node-id="hdppPjLA1MAQiaHvQnG3hk">智能制造分哪三层？</div>
+      <div class="q" data-n="11" data-page-node-id="SMttm2xSwFaMA5MBFirpi7">数字经济 <b data-page-node-id="a87ObpNbzphEZQVetrgHAG">两条腿</b>分别是什么？<br data-page-node-id="AGCm0ulWFhu0tNzOt69Oh1">各举 2 例。</div>
+    </div>
+
+    <div class="col-note" data-page-node-id="Cqjl2zs4Fk4ozYxODIf7h7">
+      <div class="col-hd" data-page-node-id="FgNeXFoGYkboU9sPZnIPVq">笔记区 <span data-page-node-id="GAZvDgtoCxy6hEQPjfYENE">用自己的话写，不抄书</span></div>
+
+      <div class="subj" data-page-node-id="wJlO11g7WShYVOGfh1vDvK">1.1 信息与信息化</div>
+      <div class="fill" data-page-node-id="4ceJLxwtERfNKRh6PU7B8A"></div><div class="fill" data-page-node-id="jubQGmUxAyhUNo6oCvCoCU"></div><div class="fill" data-page-node-id="t4x6JOGheswEyqeCA7JXWu"></div>
+      <div class="fill" data-page-node-id="K0WsJxACmmgDDJRxGHrO22"></div><div class="fill" data-page-node-id="n3D7Hb4EcqGW2CvrUoq3kq"></div><div class="fill" data-page-node-id="oLyVwqFrlDDwXP8tHzmaC1"></div>
+      <div class="fill" data-page-node-id="BNyHEht04oj4nG8CZRqx8o"></div><div class="fill" data-page-node-id="ZnXTgyQmRWo2BzO8z2RZHU"></div><div class="fill" data-page-node-id="FQquMH3vJZ1Cb0N8yxdUtB"></div>
+      <div class="fill" data-page-node-id="lgSb645JwzybtUaP2ceasT"></div><div class="fill" data-page-node-id="avzpyTiGRkR8f3VAaFnBJw"></div>
+
+      <div class="subj" data-page-node-id="rLryZovjsoBGOTF42ddI6U">1.2 现代化基础设施</div>
+      <div class="fill" data-page-node-id="dEUU49tioDEGg4VPGdQF07"></div><div class="fill" data-page-node-id="f18uKZiJ4S034bJ6uzWbhe"></div><div class="fill" data-page-node-id="YGjgFdxJXAHG5Jp3BtCq4J"></div>
+      <div class="fill" data-page-node-id="qMo4SPBBmDYCEZ9A7nsu7O"></div><div class="fill" data-page-node-id="8GGtGOWDia9eiHEnVngLWr"></div><div class="fill" data-page-node-id="Fa0ZCwV4XDldfr8NvDRGfF"></div>
+
+      <div class="subj" data-page-node-id="mAmP5uhgVSBFmB0A3OuiMV">1.3 ~ 1.5 通读要点</div>
+      <div class="fill" data-page-node-id="lCZ72p9ObhOnA0KmW0mPAU"></div><div class="fill" data-page-node-id="SYCFjxIOgrw67FKvHSoRD8"></div><div class="fill" data-page-node-id="yFyo2gvA7GimN7XXlD4bZ0"></div>
+      <div class="fill" data-page-node-id="ar5VLBrEOzU4GSlNxl4m1u"></div>
+
+      <div class="subj" data-page-node-id="LsrCiG5vEKrefozCuiLHjD">易混 / 易错（考前只看这一块）</div>
+      <div class="fill" data-page-node-id="2Bp6FVgNSrAkWiS1HIMUmT"></div><div class="fill" data-page-node-id="Rbok8uXT6jBZAeJNzSD95H"></div><div class="fill" data-page-node-id="QoZmz9FdXtolh1qkrz16Nm"></div>
+    </div>
+
+  </div>
+
+  <div class="summary" data-page-node-id="YSxg0YYEt8sjtdEiThcEAr">
+    <div class="col-hd" data-page-node-id="sqMESgYeFJKfQ35dE7QMHJ">总结区 <span data-page-node-id="VR8hDAToeo9gxY9MIpBIqM">一句话概括本章 + 考试怎么用</span></div>
+    <div class="body" data-page-node-id="HzKY4UXJw1jKvbl6PdpNkk">
+      <div class="fill" data-page-node-id="JUiopfu8uSShFAA1XOLNyV"></div>
+      <div class="fill" data-page-node-id="VF6dF949HwZEYWVzByiMCS"></div>
+      <div class="fill" data-page-node-id="Bi1rw4xbmufCK7N6wHSHM2"></div>
+    </div>
+  </div>
+
+  <div class="footer" data-page-node-id="YD5ErrtVpixJeodtlw0Kll">
+    <span data-page-node-id="PpINtj0Q4bWi29E2IJGDd1">康奈尔笔记法 · 第 1 章　｜　复习记录：当日 ☐　+1 天 ☐　+3 天 ☐　+7 天 ☐　+14 天 ☐</span>
+    <span data-page-node-id="VMXXRA2HnrgXCUI1D0pcBO">正确率 ____ / 11</span>
+  </div>
+
+</div>
+
+<div class="guide" data-page-node-id="CfnTuRUV13wrmvfrKjKTXk">
+  <h2 data-page-node-id="kaWGtNexr9zgclpSg9bGy2">怎么用这一页（别只写一次就丢）</h2>
+  <table data-page-node-id="KHKakcRBl86dHhJAFiJ3pZ">
+    <tr data-page-node-id="vVHe7dY0W6ygVWHjqh5DiA">
+      <th data-page-node-id="8WT8DZhXcl0be6iKuq1Uoq">步骤</th><th data-page-node-id="GZxAEJKvdyxZY36IbetNDd">做法</th>
+    </tr>
+    <tr data-page-node-id="yXe66nf4ymFGsShzT99GTs">
+      <td data-page-node-id="pbOnJ69OPBlmdVGu50uIcE">第 1 遍 · 记</td>
+      <td data-page-node-id="oJ4r9LiGQAu7RJB4IJJaTu">通读教材 1.1~1.2，在<b data-page-node-id="JVNtDBI70QFkyjNXBGkncV">笔记区</b>用自己的话写下七属性、六要素、新基建三类、工业互联网四定位。禁止直接抄书 —— 抄书等于没记。</td>
+    </tr>
+    <tr data-page-node-id="buv9udDi9rxRaerFBK15h8">
+      <td data-page-node-id="T9RSJRYvTgNFBx0xALUgxD">第 2 遍 · 遮</td>
+      <td data-page-node-id="4NGWO1BvQIgUFk8tSAW6ks">用一张纸<b data-page-node-id="eEurEPBlZtb2Ll3VDMgxEs">遮住笔记区</b>，只看左栏 11 个问题，口头/默写回答。答不出的在问题旁画「×」，答完再翻开对照。</td>
+    </tr>
+    <tr data-page-node-id="In9VPLD1HAboGH99CcJMZF">
+      <td data-page-node-id="iqNSmusgoMkfANzlxbyxpZ">第 3 遍 · 补</td>
+      <td data-page-node-id="094syB7iJKN3b2zfRDdDoC">只把画「×」的那几条重写一遍，写在「易混 / 易错」区。这一块就是考前一天唯一要看的。</td>
+    </tr>
+    <tr data-page-node-id="NE87wc7rEaeyQQIu6lq0uD">
+      <td data-page-node-id="VTJvj2kOxrDPTqAgQvGP6g">第 4 遍 · 收</td>
+      <td data-page-node-id="2QYFtLknUuKeY6OfPRNKMs">在总结区写一句话：<b data-page-node-id="p1jrsXhVruAB58GGVVna5r">「本章本质是信息化背景术语，考点集中在信息属性 + 六要素 + 新基建分类」</b>——类似这样，写出自己的版本。</td>
+    </tr>
+    <tr data-page-node-id="1rjf5XKdzFVUsMJbNvcpmJ">
+      <td data-page-node-id="HIJkPJ0qrmOIV86D1bWUjh">复习节奏</td>
+      <td data-page-node-id="EfE4tVclzuFsNeff6SDtn8">页脚 5 个框按「当日 → +1 天 → +3 天 → +7 天 → +14 天」打勾，这就是你的艾宾浩斯进度条。全部打勾后，本章可以不再看。</td>
+    </tr>
+  </table>
+  <div class="note" data-page-node-id="5mDUFcVmKIbuRjtI56nMOm">
+    右栏按左栏 11 个问题预留了 24 条书写线，行距 23px 是手写舒适区间。若要反复使用，可打印多份，每轮换一种笔色（黑写内容、蓝补遗漏、红标易错），三轮下来整章的薄弱点会自己浮出来。
+  </div>
+</div>
+
+</body>
+</html>

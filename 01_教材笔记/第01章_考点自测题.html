@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="7Vo046DjJ7T8liVVqCDdA0">
+<head data-page-node-id="n91uBAK3zZq8nG53dfP7XT">
+<meta charset="UTF-8" data-page-node-id="aiORUae8ybzFEj5jJ0HPgu">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="6W3PltmzJdNw8kH7AhnHPc">
+<title>第 1 章 信息化发展 · 考点自测 22 题</title>
+<style>
+  *{box-sizing:border-box;}
+  body{
+    margin:0;padding:24px 14px 60px;background:#eef0f3;color:#1f2328;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    gap:14px;margin-bottom:18px;flex-wrap:wrap;
+  }
+  h1{font-size:20px;margin:0;font-weight:600;}
+  .sub{font-size:12.5px;color:#6b7280;margin:5px 0 0;}
+  .score-chip{
+    background:#E6F1FB;border:1px solid #B5D4F4;color:#0C447C;
+    border-radius:8px;padding:7px 13px;font-size:13px;white-space:nowrap;
+  }
+  .score-chip b{font-size:16px;font-weight:600;}
+
+  #quiz{
+    background:#fff;border-radius:12px;padding:22px 24px;
+    box-shadow:0 2px 12px rgba(16,24,40,.08);
+  }
+  .progress-row{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:8px;font-size:13px;color:#4b5563;
+  }
+  .chip{
+    background:#FAEEDA;border:1px solid #EFC98A;color:#633806;
+    border-radius:5px;padding:2px 9px;font-size:12px;
+  }
+  .progress{height:6px;background:#e5e8ee;border-radius:4px;overflow:hidden;margin-bottom:20px;}
+  #bar{height:100%;width:0;background:#185FA5;border-radius:4px;transition:width .25s;}
+
+  .qtext{font-size:16px;line-height:1.75;font-weight:500;margin:0 0 18px;}
+  .opt{
+    display:flex;gap:10px;align-items:flex-start;
+    border:1px solid #d9dee5;border-radius:9px;padding:11px 14px;
+    margin-bottom:10px;cursor:pointer;font-size:14.5px;line-height:1.6;
+    background:#fff;transition:border-color .12s,background .12s;
+  }
+  .opt:hover{border-color:#185FA5;background:#f7fafd;}
+  .opt .tag{
+    flex:0 0 22px;height:22px;border-radius:50%;
+    background:#eef1f5;color:#3b4552;font-size:12px;font-weight:600;
+    display:flex;align-items:center;justify-content:center;margin-top:2px;
+  }
+  .opt.correct{border-color:#0F6E56;background:#E1F5EE;}
+  .opt.correct .tag{background:#0F6E56;color:#fff;}
+  .opt.wrong{border-color:#A32D2D;background:#FCEBEB;}
+  .opt.wrong .tag{background:#A32D2D;color:#fff;}
+  .opt.dim{opacity:.55;cursor:default;}
+  .opt.correct.dim{opacity:1;}
+  .opt.locked{cursor:default;}
+
+  #feedback{margin-top:14px;border-radius:9px;overflow:hidden;border:1px solid #d9dee5;}
+  #verdict{
+    padding:10px 14px;font-size:14px;font-weight:600;
+    background:#E1F5EE;color:#085041;border-bottom:1px solid #cbe9da;
+  }
+  #verdict.bad{background:#FCEBEB;color:#501313;border-bottom:1px solid #f3cdcd;}
+  #explain{padding:12px 14px;font-size:13.5px;line-height:1.8;color:#374151;background:#fdfdfe;}
+  #explain b{color:#1f2328;}
+  #nextBtn{
+    display:block;margin:14px 16px 16px;float:right;
+    background:#185FA5;color:#fff;border:none;border-radius:8px;
+    padding:9px 26px;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  #nextBtn:hover{background:#14507f;}
+  #feedback::after{content:"";display:block;clear:both;}
+  .kbd{font-size:11.5px;color:#9aa3af;margin:14px 2px 0;}
+
+  #result{background:#fff;border-radius:12px;padding:26px 28px;box-shadow:0 2px 12px rgba(16,24,40,.08);}
+  .r-head{display:flex;gap:22px;align-items:center;margin-bottom:6px;flex-wrap:wrap;}
+  .r-score{font-size:44px;font-weight:600;color:#185FA5;line-height:1;}
+  .r-score small{font-size:18px;color:#8b949e;font-weight:400;}
+  .r-msg{font-size:14px;color:#4b5563;line-height:1.7;}
+  h3{font-size:15px;font-weight:600;margin:26px 0 10px;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th,td{border:1px solid #e2e6eb;padding:7px 10px;text-align:left;line-height:1.6;}
+  th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .mbar{height:8px;background:#e5e8ee;border-radius:4px;overflow:hidden;min-width:120px;}
+  .mbar div{height:100%;background:#1D9E75;border-radius:4px;}
+
+  .wq{
+    border:1px solid #f3cdcd;border-radius:9px;padding:13px 15px;
+    margin-bottom:12px;background:#fffafa;
+  }
+  .wq .wt{font-size:14px;font-weight:600;line-height:1.7;margin-bottom:7px;}
+  .wq .wa{font-size:13px;color:#A32D2D;margin-bottom:2px;}
+  .wq .wc{font-size:13px;color:#0F6E56;margin-bottom:8px;}
+  .wq .we{font-size:12.5px;color:#57606a;line-height:1.75;border-top:1px dashed #e8d9d9;padding-top:7px;}
+
+  .btns{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;border-radius:8px;
+    padding:9px 22px;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:#185FA5;border-color:#185FA5;color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn:disabled{opacity:.45;cursor:not-allowed;}
+  .hidden{display:none;}
+</style>
+</head>
+<body data-page-node-id="VQVKqzfTzATlTVpp339cl1">
+<div class="wrap" data-page-node-id="Psi52moju4xDbe1kzYQHWv">
+
+  <header data-page-node-id="BivGdOKW2YjUMdATrk6siN">
+    <div data-page-node-id="X3tLDcz3M1JCaEI3Bgu3QY">
+      <h1 data-page-node-id="SkE8OJ99oAqcfuwn17dI6m">第 1 章 信息化发展 · 考点自测</h1>
+      <p class="sub" data-page-node-id="QCMM6TUOPDGrBA7A6HBdXQ">22 题 · 按真题题型与考点分布出题（场景配对 / 正误判断 / 归类辨析）· 逐题精讲</p>
+    </div>
+    <div class="score-chip" data-page-node-id="EU5W5WeIAfX3tXl7OAsJcU">已答对 <b id="scoreNow" data-page-node-id="8MSn00r6skUzkIlrqCl1pS">0</b> / <span id="totalNow" data-page-node-id="as5jdsfDljwrTJBdIIE66C">22</span> 题</div>
+  </header>
+
+  <div id="quiz" data-page-node-id="LHeJD3hL9i1kTuZHElnt5x">
+    <div class="progress-row" data-page-node-id="HjmBhARqKNgBKEkBaqBAyp">
+      <span id="pos" data-page-node-id="6qfaRr5htUXC04LMi7GAxZ"></span>
+      <span class="chip" id="moduleChip" data-page-node-id="zfqONPiWVTNyqYnyzF9gVm"></span>
+    </div>
+    <div class="progress" data-page-node-id="sIiwl0Pv5F2xAAczatbfeY"><div id="bar" data-page-node-id="81YlsOUO2euJ0b1bcvaEIv"></div></div>
+    <div class="qcard" data-page-node-id="9mAaArYDY6ADQR8tFHQNTM">
+      <p class="qtext" id="qtext" data-page-node-id="sfmXY6PJnecOyaEGtlFCUC"></p>
+      <div id="options" data-page-node-id="ZAq6NFoaGA1jWElriFpWKY"></div>
+      <div id="feedback" class="hidden" data-page-node-id="gzH91CW5iSVB3YVDcvaLxH">
+        <div id="verdict" data-page-node-id="oV8CFeuBL7wQMmtzE4lItT"></div>
+        <div id="explain" data-page-node-id="h9YgdNxRy4HruQch33zHVO"></div>
+        <button id="nextBtn" data-page-node-id="xtDZC5BgLQ3aFAQKnIZATM">下一题 →</button>
+      </div>
+    </div>
+    <p class="kbd" data-page-node-id="1G2D9p80w4jk1Jq70Ayf3Q">键盘可用：A~D 或 1~4 选择，Enter 下一题</p>
+  </div>
+
+  <div id="result" class="hidden" data-page-node-id="4c0LHmeUrdUGwY2w76lDXi"></div>
+
+</div>
+
+<script>
+const QS = [
+{m:"1.1 信息",
+ q:"1948 年，数学家（ ）指出“信息是用来消除随机不定性的东西”。",
+ o:["维纳","香农","图灵","冯·诺依曼"],a:1,
+ e:"香农于 1948 年创立信息论，指出<b>“信息是用来消除随机不定性的东西”</b>，并把热力学中的熵引入信息论——信息是系统有序程度的度量，表现为<b>负熵</b>；信息量的单位是<b>比特（bit）</b>。见教材 1.1.1。"},
+
+{m:"1.1 信息",
+ q:"关于信息质量属性的描述中，不正确的是（ ）。",
+ o:["精确性是对事物状态描述的精准程度",
+    "及时性是指获得信息的时刻与事件发生时刻的间隔长短",
+    "可验证性是指信息的主要质量属性可以被证实或证伪的程度",
+    "可靠性是指在信息的生命周期中，信息可以被非授权访问的可能性最小"],a:3,
+ e:"D 项描述的是<b>安全性</b>。可靠性是指<b>信息来源、采集方法可以信任的程度</b>。七属性口诀：精完可及经可安（精确、完整、可靠、及时、经济、可验证、安全）。"},
+
+{m:"1.1 信息",
+ q:"对于金融信息而言，其最重要的质量属性是（ ）。",
+ o:["及时性","安全性","完整性","经济性"],a:1,
+ e:"教材原例：<b>金融信息最重要的是安全性；经济与社会信息最重要的是及时性</b>。这是典型的“场景—属性”配对考点，命题人很喜欢拿这两个场景做互换干扰。"},
+
+{m:"1.1 信息",
+ q:"“信息的主要质量属性可以被证实或者证伪的程度”指的是信息的（ ）。",
+ o:["可靠性","可验证性","精确性","完整性"],a:1,
+ e:"这是<b>可验证性</b>的定义。注意与可靠性区分：可验证性讲“<b>能否被证明</b>”，可靠性讲“<b>可不可信</b>”（来源和采集方法）。"},
+
+{m:"1.1 信息系统",
+ q:"信息系统是（ ）的结合。<br>① 管理模型　② 信息处理模型　③ 系统实现条件　④ 数学模型",
+ o:["①②③","①②④","②③④","①③④"],a:0,
+ e:"信息系统 = <b>管理模型 + 信息处理模型 + 系统实现条件</b>。管理模型是系统服务对象领域的专门知识及分析处理模型（又称对象的处理模型）；信息处理模型是系统处理信息的结构和方法；系统实现条件是可供应用的计算机与通信技术、领域人员及对资源的控制与融合。见教材 1.1.2。"},
+
+{m:"1.1 信息系统",
+ q:"从用途类型来划分，主要支持组织日常业务数据的记录与处理、保障业务流程运转的信息系统属于（ ）。",
+ o:["事务处理系统","决策支持系统","管理信息系统","电子政务系统"],a:0,
+ e:"教材按用途列举六类：电子商务、<b>事务处理</b>、<b>管理信息</b>、生产制造、电子政务、<b>决策支持</b>系统。日常业务记录与处理 → 事务处理系统；辅助高层决策 → 决策支持系统。"},
+
+{m:"1.1 信息系统",
+ q:"信息系统的生命周期可以简化为（ ）。",
+ o:["系统规划、系统分析、系统设计、系统实施、系统运行和维护",
+    "系统分析、系统规划、系统设计、系统实施、系统运行和维护",
+    "系统规划、系统设计、系统分析、系统实施、系统验收",
+    "立项、开发、运维、消亡、重建"],a:0,
+ e:"第 4 版口径：系统规划（<b>可行性分析与项目开发计划</b>）→ 系统分析（<b>需求分析</b>）→ 系统设计（<b>概要设计、详细设计</b>）→ 系统实施（<b>编码、测试</b>）→ 系统运行和维护。括号里的对应关系是命题点。"},
+
+{m:"1.1 信息系统",
+ q:"系统分析阶段的任务是确定新系统的基本目标和逻辑功能要求，即提出新系统的（ ）。",
+ o:["物理模型","逻辑模型","总体结构","数据模型"],a:1,
+ e:"<b>系统分析 → 逻辑模型</b>（工作成果体现在系统说明书）；<b>系统设计 → 物理模型</b>（又称物理设计阶段，技术文档是系统设计说明书）。“逻辑 / 物理”这一对是高频坑。"},
+
+{m:"1.1 信息系统",
+ q:"概要设计和详细设计属于信息系统生命周期（ ）阶段的工作。",
+ o:["系统分析","系统规划","系统设计","系统实施"],a:2,
+ e:"系统设计阶段又称<b>物理设计阶段</b>，可分为<b>总体设计（概要设计）和详细设计</b>两个子阶段；编码、测试、设备购置安装调试等属于系统实施阶段。"},
+
+{m:"1.1 信息化",
+ q:"国家信息化体系六要素中，信息技术应用是（ ）。",
+ o:["龙头，是国家信息化建设的主阵地",
+    "国家信息化的核心任务",
+    "信息资源开发利用的基础设施",
+    "信息化的成功之本"],a:0,
+ e:"六要素定位各有说法：<b>信息技术应用=龙头（主阵地）</b>；<b>信息资源开发利用=核心任务（薄弱环节）</b>；信息网络=基础设施；信息技术和产业=物质基础；信息化人才=成功之本；政策法规和标准规范=保障。"},
+
+{m:"1.1 信息化",
+ q:"下列选项中，不属于国家信息化体系六要素的是（ ）。",
+ o:["信息技术应用","信息资源","信息技术和产业","信息安全"],a:3,
+ e:"六要素：信息技术应用、信息资源、信息网络、信息技术和产业、信息化人才、信息化政策法规和标准规范（记法：<b>应资网产人法</b>）。“信息安全”不在六要素之列，是典型干扰项。"},
+
+{m:"1.1 信息化",
+ q:"信息资源的开发和利用是国家信息化的（ ）。",
+ o:["成功之本","核心任务","保障","物质基础"],a:1,
+ e:"教材原文：信息资源的开发和利用是国家信息化的<b>核心任务</b>，是国家信息化建设取得实效的关键，也是我国信息化的<b>薄弱环节</b>。成功之本=人才，保障=法规标准，物质基础=信息技术和产业。"},
+
+{m:"1.1 信息化",
+ q:"关于产品信息化的描述，不正确的是（ ）。",
+ o:["产品中各类信息比重日益增大、物质比重日益降低",
+    "越来越多的产品中嵌入了智能化元器件",
+    "产品具有越来越强的信息处理功能",
+    "产品信息化是指企业全面使用信息系统进行经营管理"],a:3,
+ e:"产品信息化的两层含义：①产品中<b>信息比重增大、物质比重降低</b>，物质产品特征向信息产品特征迈进；②<b>嵌入智能化元器件</b>，信息处理功能越来越强。D 描述的是企业/组织信息化，不是产品信息化。"},
+
+{m:"1.2 新基建",
+ q:"以 5G、物联网、工业互联网、卫星互联网为代表的通信网络基础设施，属于新型基础设施中的（ ）。",
+ o:["融合基础设施","信息基础设施","创新基础设施","算力基础设施"],a:1,
+ e:"信息基础设施分三小类：<b>通信网络基础设施</b>（5G、物联网、工业互联网、卫星互联网）、<b>新技术基础设施</b>（人工智能、云计算、区块链）、<b>算力基础设施</b>（数据中心、智能计算中心）。"},
+
+{m:"1.2 新基建",
+ q:"智能计算中心属于信息基础设施中的（ ）。",
+ o:["通信网络基础设施","新技术基础设施","算力基础设施","创新基础设施"],a:2,
+ e:"<b>算力基础设施 = 数据中心、智能计算中心</b>；新技术基础设施 = 人工智能、云计算、区块链。这三小类的归属判断是近年高频考点，注意“智能计算中心”和“人工智能”分属不同小类。"},
+
+{m:"1.2 新基建",
+ q:"智能交通基础设施、智慧能源基础设施属于新型基础设施中的（ ）。",
+ o:["信息基础设施","融合基础设施","创新基础设施","新技术基础设施"],a:1,
+ e:"融合基础设施指深度应用互联网、大数据、人工智能等技术，<b>支撑传统基础设施转型升级</b>形成的基础设施，重在“<b>应用新</b>”；创新基础设施强调“平台新”，支撑科学研究、技术开发、产品研制（重大科技、科教、产业技术创新基础设施）。"},
+
+{m:"1.2 工业互联网",
+ q:"工业互联网平台体系的四大定位中，作为“中枢”的是（ ）。",
+ o:["网络体系","数据体系","平台体系","安全体系"],a:2,
+ e:"第 4 版口径：<b>以网络为基础、平台为中枢、数据为要素、安全为保障</b>。注意是四个定位——旧资料的“三大体系”少了“数据为要素”，别按旧口径背。"},
+
+{m:"1.2 工业互联网",
+ q:"工业互联网平台体系的四个层级是（ ）。",
+ o:["感知层、网络层、平台层、应用层",
+    "边缘层、IaaS、PaaS、SaaS",
+    "边缘层、网络层、数据层、应用层",
+    "IaaS、PaaS、SaaS、DaaS"],a:1,
+ e:"平台体系包括<b>边缘层、IaaS、PaaS、SaaS</b> 四个层级，相当于工业互联网的“<b>操作系统</b>”；四大作用：数据汇聚、建模分析、知识复用、应用创新。选项 A 的“感知—网络—平台—应用”是物联网分层，别混淆。"},
+
+{m:"1.2 工业互联网",
+ q:"工业互联网网络体系包括的三部分是（ ）。",
+ o:["网络互联、数据互通、标识解析",
+    "网络互联、数据存储、标识解析",
+    "数据汇聚、建模分析、知识复用",
+    "监测预警、应急响应、检测评估"],a:0,
+ e:"网络体系三部分：<b>网络互联</b>（企业内网/外网，TSN、5G 等技术）、<b>数据互通</b>（标准化描述与统一建模）、<b>标识解析</b>（标识编码、解析系统、标识数据服务）。C 项是平台作用，D 项是安全体系手段。"},
+
+{m:"1.4 数字经济",
+ q:"某传统制造企业应用工业互联网平台对生产线进行数字化、网络化、智能化改造，这属于数字经济中的（ ）。",
+ o:["数字产业化","产业数字化","数据要素化","数字化治理"],a:1,
+ e:"<b>数字产业化</b>=数字技术本身形成的产业（电子信息制造、软件、通信等）；<b>产业数字化</b>=数字技术赋能传统产业升级。传统制造企业用数字技术改造生产线 = 产业数字化。判断依据：看主体是“造数字技术的”还是“用数字技术改造自己的”。"},
+
+{m:"1.3 创新发展",
+ q:"“两化融合”是指信息化与（ ）的深度融合。",
+ o:["工业化","城镇化","农业现代化","市场化"],a:0,
+ e:"两化融合 = <b>信息化 + 工业化</b>。智能制造是其高级形态：<b>数字化制造 → 数字化网络化制造 → 数字化网络化智能化制造</b>。"},
+
+{m:"1.5 数字化转型",
+ q:"关于数字化转型，描述不正确的是（ ）。",
+ o:["数字化转型是建立在数字化转换、数字化升级基础上，进一步触及组织核心业务的高层次转型",
+    "数字化转型旨在驱动组织商业模式创新和商业生态系统重构",
+    "数字化转型就是将现有业务流程原封不动地搬到线上",
+    "数字化转型是一项系统工程，涉及战略、组织、文化等多方面变革"],a:2,
+ e:"“原封不动搬到线上”只是数字化转换/升级，不是转型。数字化转型强调<b>触及核心业务、变革商业模式与组织生态</b>。元宇宙则被视为互联网发展的更高形态（虚实融合），尚无统一定义。"}
+];
+
+const LETTERS = ["A","B","C","D"];
+let pool = [], cur = 0, answered = false, stats = {}, wrongList = [];
+
+function init(list){
+  pool = list.map(x=>Object.assign({},x));
+  cur = 0; answered = false; stats = {}; wrongList = [];
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  document.getElementById("totalNow").textContent = pool.length;
+  document.getElementById("scoreNow").textContent = "0";
+  render();
+}
+function render(){
+  const q = pool[cur];
+  document.getElementById("pos").textContent = "第 " + (cur+1) + " / " + pool.length + " 题";
+  document.getElementById("moduleChip").textContent = q.m;
+  document.getElementById("bar").style.width = (cur/pool.length*100) + "%";
+  document.getElementById("qtext").innerHTML = q.q;
+  const box = document.getElementById("options");
+  box.innerHTML = "";
+  q.o.forEach((t,i)=>{
+    const d = document.createElement("div");
+    d.className = "opt";
+    d.innerHTML = '<span class="tag">'+LETTERS[i]+'</span><span>'+t+"</span>";
+    d.onclick = ()=>choose(i);
+    box.appendChild(d);
+  });
+  document.getElementById("feedback").classList.add("hidden");
+}
+function choose(i){
+  if(answered) return;
+  answered = true;
+  const q = pool[cur];
+  const ok = (i === q.a);
+  if(!stats[q.m]) stats[q.m] = {right:0,total:0};
+  stats[q.m].total++;
+  const opts = document.querySelectorAll(".opt");
+  opts.forEach((d,idx)=>{
+    d.classList.add("locked");
+    if(idx === q.a) d.classList.add("correct");
+    else if(idx === i) d.classList.add("wrong");
+    else d.classList.add("dim");
+    d.onclick = null;
+  });
+  if(ok){
+    stats[q.m].right++;
+    document.getElementById("scoreNow").textContent = sumRight();
+  } else {
+    wrongList.push({q:q, picked:i});
+  }
+  const v = document.getElementById("verdict");
+  v.textContent = ok ? "✓ 答对了" : "✗ 答错了　正确答案：" + LETTERS[q.a];
+  v.className = ok ? "" : "bad";
+  document.getElementById("explain").innerHTML = q.e;
+  document.getElementById("feedback").classList.remove("hidden");
+  document.getElementById("nextBtn").textContent =
+    (cur === pool.length-1) ? "查看成绩单 →" : "下一题 →";
+}
+function sumRight(){
+  let s = 0; for(const k in stats) s += stats[k].right; return s;
+}
+function next(){
+  cur++;
+  if(cur >= pool.length){ showResult(); }
+  else { answered = false; render(); window.scrollTo(0,0); }
+}
+function showResult(){
+  document.getElementById("quiz").classList.add("hidden");
+  const r = document.getElementById("result");
+  const total = pool.length, right = sumRight();
+  const pct = Math.round(right/total*100);
+  let msg;
+  if(pct >= 82) msg = "达标（≥18/22）。这一章可以翻篇，明天进入第 2 章「信息技术发展」——那是上午 8~12 题的大头。";
+  else if(pct >= 60) msg = "基本掌握，但还有漏洞。把下面的错题解析看完，明天用康奈尔模板的「遮」字诀再过一遍线索栏。";
+  else msg = "不着急，第一天正确率低是正常信号——说明发现了该补的洞。先把知识点清单的「必背」块过一遍再重做错题。";
+
+  let tbl = '<h3>分模块得分</h3><table><tr><th>模块</th><th>正确 / 题数</th><th>正确率</th></tr>';
+  for(const k in stats){
+    const s = stats[k];
+    const p = Math.round(s.right/s.total*100);
+    tbl += '<tr><td>'+k+'</td><td>'+s.right+' / '+s.total+'</td><td><div class="mbar"><div style="width:'+p+'%"></div></div></td></tr>';
+  }
+  tbl += "</table>";
+
+  let wrong = "";
+  if(wrongList.length){
+    wrong = "<h3>错题回顾（"+wrongList.length+" 题）</h3>";
+    wrongList.forEach((w,i)=>{
+      wrong += '<div class="wq"><div class="wt">'+(i+1)+". "+w.q.q+"</div>"
+        + '<div class="wa">你的选择：'+LETTERS[w.picked]+"　"+w.q.o[w.picked]+"</div>"
+        + '<div class="wc">正确答案：'+LETTERS[w.q.a]+"　"+w.q.o[w.q.a]+"</div>"
+        + '<div class="we">'+w.q.e+"</div></div>";
+    });
+  } else {
+    wrong = '<h3>错题回顾</h3><p style="font-size:13px;color:#0F6E56;">全部答对，本章知识点已闭环。</p>';
+  }
+
+  r.innerHTML =
+    '<div class="r-head"><div class="r-score">'+right+"<small> / "+total+"</small></div>"
+    + '<div class="r-msg"><b>'+pct+"%</b><br>"+msg+"</div></div>"
+    + tbl + wrong
+    + '<div class="btns">'
+    + '<button class="btn primary" id="retryWrong"'+(wrongList.length?"":" disabled")+">只重做错题（"+wrongList.length+" 题）</button>"
+    + '<button class="btn" id="retryAll">全部重来</button></div>';
+  r.classList.remove("hidden");
+  document.getElementById("retryWrong").onclick = ()=>{
+    const list = wrongList.map(w=>w.q);
+    init(list);
+    window.scrollTo(0,0);
+  };
+  document.getElementById("retryAll").onclick = ()=>{ init(QS); window.scrollTo(0,0); };
+  window.scrollTo(0,0);
+}
+document.getElementById("nextBtn").onclick = next;
+document.addEventListener("keydown", e=>{
+  if(document.getElementById("quiz").classList.contains("hidden")) return;
+  if(e.key === "Enter" || e.key === " "){ if(answered){ e.preventDefault(); next(); } return; }
+  const map = {"a":0,"b":1,"c":2,"d":3,"1":0,"2":1,"3":2,"4":3};
+  const k = e.key.toLowerCase();
+  if(k in map && !answered) choose(map[k]);
+});
+init(QS);
+</script>
+</body>
+</html>
