@@ -123,7 +123,8 @@ function parse(md, relPath) {
     if (isCheckbox(line)) {
       const m = line.match(/^(\s*)-\s+\[([xX ])\]\s+(.*)$/);
       const checked = m[2].toLowerCase() === 'x' ? 'checked' : '';
-      const key = `${relPath}:L${i}`;
+      // 关键修复：data-key 只用行号，不要包含 relPath 前缀（避免和 STORE_KEY 拼出超长 key）
+      const key = `L${i + 1}`;
       const text = inline(m[3]);
       i++;
       const cont = [];
@@ -232,21 +233,45 @@ function wrap(title, bodyHtml, relPath) {
 <script>
 (function(){
   const REL = ${safeRel};
-  const key = k => 'checklist:' + REL + ':' + k;
+  const STORE_KEY = 'checklist:' + REL;
+
+  // 一次性加载整个文件的勾选状态（JSON），避免 key 过长
+  let store = {};
+  try { store = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch (e) {}
+
+  // 兼容迁移：旧的错误 key（包含重复 REL 前缀的）自动迁到新格式
+  for (let i = localStorage.length - 1; i >= 0; i--) {
+    const k = localStorage.key(i);
+    if (!k || !k.startsWith('checklist:')) continue;
+    // 检测旧 bug key：包含 REL 两次
+    if (k.indexOf(REL) !== k.lastIndexOf(REL)) {
+      const v = localStorage.getItem(k);
+      const m = k.match(/:L(\\d+)$/);
+      if (m && v === '1') store['L' + m[1]] = true;
+      localStorage.removeItem(k);
+    }
+  }
+
   const boxes = document.querySelectorAll('.task input[type="checkbox"]');
   boxes.forEach(box => {
     const k = box.dataset.key;
-    const saved = localStorage.getItem(key(k));
-    if (saved === '1') { box.checked = true; }
+    if (store[k]) box.checked = true;
     box.addEventListener('change', () => {
-      localStorage.setItem(key(k), box.checked ? '1' : '0');
+      store[k] = box.checked;
+      try {
+        localStorage.setItem(STORE_KEY, JSON.stringify(store));
+      } catch (e) {
+        console.error('localStorage 写入失败：', e);
+      }
       updateProgress();
     });
   });
+
   function updateProgress() {
     const total = boxes.length;
     const done = Array.from(boxes).filter(b => b.checked).length;
-    document.getElementById('progress').innerHTML = '已完成：<b>' + done + ' / ' + total + '</b>（' + Math.round(done/total*100) + '%）';
+    const pct = total ? Math.round(done / total * 100) : 0;
+    document.getElementById('progress').innerHTML = '已完成：<b>' + done + ' / ' + total + '</b>（' + pct + '%）';
   }
   updateProgress();
 })();
