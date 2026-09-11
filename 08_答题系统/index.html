@@ -422,7 +422,7 @@
         { id: "1.1-B2", module: "B 信息系统", source: "1.1_知识点清单.md#B2 · 生命周期", q: "信息系统生命周期 5 阶段：系统规划 → 系统分析 → 系统设计 → ____ → 系统运行与维护", blanks: ["系统实施"], difficulty: "必考", hint: "包含编码、测试" },
         { id: "1.1-B3", module: "B 信息系统", source: "1.1_知识点清单.md#B2", q: "信息系统生命周期中，系统分析阶段提出的是 ____ 模型", blanks: ["逻辑"], difficulty: "必考", hint: "对应物理模型" },
         { id: "1.1-C1", module: "C 信息化", source: "1.1_知识点清单.md#C2 · 信息化六要素", q: "国家信息化体系 6 要素中，____ 是龙头", blanks: ["信息技术应用"], difficulty: "必考", hint: "6 要素口诀「应资网产人法」中的「应」" },
-        { id: "1.1-C2", module: "C 信息化", source: "1.1_知识点清单.md#C2", q: "国家信息化体系 6 要素中，____ 是核心任务（也是我国信息化的薄弱环节）", blanks: ["信息资源的开发利用|信息资源开发利用"], difficulty: "必考", hint: "口诀「应资网产人法」中的「资」" },
+        { id: "1.1-C2", module: "C 信息化", source: "1.1_知识点清单.md#C2", q: "国家信息化体系 6 要素中，____ 是核心任务（也是我国信息化的薄弱环节）", blanks: ["信息资源的开发利用|信息资源开发利用|信息资源"], difficulty: "必考", hint: "口诀「应资网产人法」中的「资」" },
         { id: "1.1-D1", module: "C 信息化", source: "1.1_知识点清单.md#D1 · 信息基础设施三小类", q: "信息基础设施 3 小类：通信网络、新技术、____", blanks: ["算力"], difficulty: "必背", hint: "数据中心和智能计算中心属于这一类" },
         { id: "1.1-F1", module: "F 数字中国", source: "1.1_知识点清单.md#F1 · 数字经济两大组成", q: "数字经济两大组成：____ 化 vs 产业 ____ 化", blanks: ["数字", "数字"], difficulty: "必考", hint: "前者是数字技术本身形成产业，后者是数字技术赋能传统产业" }
       ],
@@ -708,10 +708,33 @@
 
     function handleBlankBlur(input, idx) {
       const v = input.value.trim();
-      if (!v) return;
-      if (input.classList.contains("correct")) return;
-      // 失焦时还没匹配上 → 标红（视觉提示，但不计入错题）
+      const fb = document.getElementById("feedback");
+      if (!v) {
+        fb.className = "feedback";
+        fb.innerHTML = "";
+        return;
+      }
+      if (input.classList.contains("correct")) {
+        fb.className = "feedback";
+        fb.innerHTML = "";
+        return;
+      }
+
+      // 失焦时还没匹配上 → 标红
       input.classList.add("wrong");
+
+      // 接近提示：如果输入是某个候选的子串，告诉完整说法
+      const acceptedList = currentQuestion.blanks[idx].split("|").map(a => a.trim());
+      const best = acceptedList.find(a => a.includes(v) && a.length > v.length);
+      if (best) {
+        fb.className = "feedback show wrong";
+        fb.innerHTML = `<div class="answer-line">不完整，完整说法：<strong>${escapeHtml(best)}</strong></div>`;
+      } else if (fb.innerHTML && fb.innerHTML.includes("不完整")) {
+        // 保持已有的不完整提示
+      } else {
+        fb.className = "feedback show wrong";
+        fb.innerHTML = `<div class="answer-line">再想想，正确答案包含：<strong>${escapeHtml(acceptedList[0])}</strong></div>`;
+      }
     }
 
     function checkAllBlanksCorrect() {
