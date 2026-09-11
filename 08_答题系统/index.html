@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>高项答题系统 · 填空专练</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-card: #1e293b;
+      --bg-input: #334155;
+      --border: #475569;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --success: #10b981;
+      --success-bg: rgba(16, 185, 129, 0.1);
+      --danger: #ef4444;
+      --danger-bg: rgba(239, 68, 68, 0.1);
+      --warning: #f59e0b;
+      --warning-bg: rgba(245, 158, 11, 0.1);
+      --radius: 10px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 24px 16px;
+      line-height: 1.6;
+    }
+
+    .container { max-width: 880px; margin: 0 auto; }
+
+    /* 顶部 */
+    header { text-align: center; margin-bottom: 28px; }
+    h1 {
+      font-size: 28px;
+      background: linear-gradient(135deg, #60a5fa, #34d399);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 6px;
+    }
+    .subtitle { color: var(--text-muted); font-size: 14px; }
+
+    /* 章节切换 */
+    .chapter-tabs {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      justify-content: center; margin: 20px 0 16px;
+    }
+    .tab {
+      padding: 8px 18px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+    .tab:hover { color: var(--text); border-color: var(--primary); }
+    .tab.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+    .tab .count {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 1px 8px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 999px;
+      font-size: 12px;
+    }
+
+    /* 进度卡片 */
+    .progress-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      display: flex; flex-wrap: wrap;
+      align-items: center; gap: 16px;
+    }
+    .progress-info { flex: 1; min-width: 220px; }
+    .progress-info .label { font-size: 13px; color: var(--text-muted); margin-bottom: 6px; }
+    .progress-bar {
+      height: 8px;
+      background: var(--bg-input);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #3b82f6, #10b981);
+      transition: width 0.3s;
+    }
+    .stats {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      font-size: 13px;
+    }
+    .stat-item { display: flex; flex-direction: column; align-items: center; min-width: 60px; }
+    .stat-value { font-size: 18px; font-weight: 600; }
+    .stat-value.green { color: var(--success); }
+    .stat-value.orange { color: var(--warning); }
+    .stat-value.red { color: var(--danger); }
+    .stat-label { color: var(--text-muted); font-size: 11px; margin-top: 2px; }
+
+    /* 题目卡 */
+    .question-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin-bottom: 16px;
+      min-height: 240px;
+    }
+    .question-meta {
+      display: flex; flex-wrap: wrap;
+      gap: 8px; margin-bottom: 16px;
+    }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .badge.module { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
+    .badge.difficulty { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+    .badge.difficulty.必考 { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+    .badge.difficulty.必背 { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+    .badge.source { background: rgba(148, 163, 184, 0.15); color: var(--text-muted); font-size: 11px; }
+
+    .question-text {
+      font-size: 17px;
+      line-height: 1.9;
+      margin: 12px 0 24px;
+      color: var(--text);
+    }
+    .blank-input {
+      display: inline-block;
+      min-width: 80px;
+      max-width: 240px;
+      padding: 4px 10px;
+      margin: 0 4px;
+      background: var(--bg-input);
+      border: 1.5px solid var(--border);
+      border-bottom: 2px solid var(--primary);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 16px;
+      text-align: center;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .blank-input:focus {
+      border-color: var(--primary);
+      background: rgba(59, 130, 246, 0.08);
+    }
+    .blank-input.correct {
+      border-color: var(--success);
+      background: var(--success-bg);
+      color: var(--success);
+    }
+    .blank-input.wrong {
+      border-color: var(--danger);
+      background: var(--danger-bg);
+      color: var(--danger);
+    }
+    .blank-input::placeholder { color: var(--text-muted); }
+
+    /* 反馈区 */
+    .feedback {
+      margin: 16px 0;
+      padding: 14px 18px;
+      border-radius: 8px;
+      font-size: 14px;
+      display: none;
+    }
+    .feedback.show { display: block; }
+    .feedback.correct {
+      background: var(--success-bg);
+      border-left: 3px solid var(--success);
+      color: var(--success);
+    }
+    .feedback.wrong {
+      background: var(--danger-bg);
+      border-left: 3px solid var(--danger);
+      color: var(--danger);
+    }
+    .feedback .answer-line {
+      color: var(--text);
+      margin-top: 6px;
+      font-weight: 500;
+    }
+    .feedback .hint-line {
+      color: var(--text-muted);
+      margin-top: 6px;
+      font-size: 13px;
+    }
+    .feedback .source-line {
+      color: var(--text-muted);
+      margin-top: 8px;
+      font-size: 12px;
+      border-top: 1px dashed var(--border);
+      padding-top: 8px;
+    }
+
+    /* 按钮区 */
+    .action-row {
+      display: flex; gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    button {
+      padding: 10px 22px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-primary:disabled {
+      background: var(--bg-input);
+      color: var(--text-muted);
+      cursor: not-allowed;
+    }
+    .btn-secondary {
+      background: var(--bg-input);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { border-color: var(--primary); }
+    .btn-success {
+      background: var(--success);
+      color: white;
+    }
+    .btn-success:hover { filter: brightness(0.9); }
+
+    /* 提示按钮 */
+    .hint-btn {
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 13px;
+      padding: 6px 12px;
+    }
+    .hint-btn:hover { color: var(--warning); }
+
+    /* 完成态 */
+    .done-card {
+      background: var(--bg-card);
+      border: 1px solid var(--success);
+      border-radius: var(--radius);
+      padding: 48px 32px;
+      text-align: center;
+    }
+    .done-card h2 {
+      color: var(--success);
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+    .done-card p { color: var(--text-muted); margin-bottom: 20px; }
+
+    /* 错题列表 */
+    .wrongbook {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-top: 20px;
+    }
+    .wrongbook h3 {
+      font-size: 16px;
+      margin-bottom: 12px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .wrongbook h3 .count-pill {
+      background: var(--danger);
+      color: white;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+    .wrong-item {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .wrong-item:last-child { border-bottom: none; }
+    .wrong-item:hover { color: var(--text); }
+    .wrong-item .wi-q { color: var(--text); margin-bottom: 4px; }
+    .wrong-item .wi-a { color: var(--success); font-size: 12px; }
+
+    /* 学习进度联动 */
+    .sync-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .sync-panel .sync-icon { color: var(--success); }
+    .sync-panel .sync-link {
+      color: var(--primary);
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    /* 重置 */
+    .footer-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 20px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .footer-actions a {
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .footer-actions a:hover { color: var(--warning); }
+
+    @media (max-width: 640px) {
+      .question-card { padding: 20px; }
+      .progress-card { padding: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>高项答题系统 · 填空专练</h1>
+      <div class="subtitle">从 1.1 / 1.2 知识点清单高频必考点抽取 · 答对自动进入下一题</div>
+    </header>
+
+    <!-- 学习进度联动提示 -->
+    <div class="sync-panel" id="syncPanel">
+      <span class="sync-icon">🔗</span>
+      <span id="syncInfo">检测可勾选清单的勾选状态中…</span>
+      <a class="sync-link" id="syncLink" style="display:none">↻ 重新检测</a>
+    </div>
+
+    <!-- 章节切换 -->
+    <div class="chapter-tabs" id="chapterTabs"></div>
+
+    <!-- 进度卡片 -->
+    <div class="progress-card">
+      <div class="progress-info">
+        <div class="label">
+          <span id="progressLabel">章节进度</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-value green" id="statCorrect">0</div>
+          <div class="stat-label">已答对</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value red" id="statWrong">0</div>
+          <div class="stat-label">错题</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value orange" id="statToday">0</div>
+          <div class="stat-label">今日答题</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 题目卡片 -->
+    <div id="questionArea"></div>
+
+    <!-- 错题本 -->
+    <div class="wrongbook" id="wrongbook" style="display:none">
+      <h3>📒 错题本 <span class="count-pill" id="wrongCount">0</span></h3>
+      <div id="wrongList"></div>
+    </div>
+
+    <!-- 底部操作 -->
+    <div class="footer-actions">
+      <a id="resetBtn">🗑 重置全部进度</a>
+      <a id="exportBtn">📤 导出错题</a>
+      <a href="README.md" target="_blank">📖 使用说明</a>
+    </div>
+  </div>
+
+  <script>
+    /* ==================== 内嵌题库（同步 题库.json） ==================== */
+    const QUESTION_BANK = {
+      "1.1": [
+        { id: "1.1-A1", module: "A 信息", source: "1.1_知识点清单.md#A1 · 信息的定义（香农表述）", q: "香农对信息的定义：「信息是用来 ____ 的东西」", blanks: ["消除随机不定性"], difficulty: "必考", hint: "1948 年创立信息论的科学家给的定义" },
+        { id: "1.1-A2", module: "A 信息", source: "1.1_知识点清单.md#A1", q: "信息量的单位是 ____", blanks: ["bit"], difficulty: "高频", hint: "英文缩写，3 个字母" },
+        { id: "1.1-A3", module: "A 信息", source: "1.1_知识点清单.md#A1", q: "信息 7 大质量属性口诀「精完可及经可安」中，「完」代表 ____", blanks: ["完整性"], difficulty: "必考", hint: "指对事物状态描述的全面程度" },
+        { id: "1.1-B1", module: "B 信息系统", source: "1.1_知识点清单.md#B1 · 三结合", q: "信息系统由「管理模型 + 信息处理模型 + ____」三结合组成", blanks: ["系统实现条件"], difficulty: "必考", hint: "包括计算机/通信技术、人员、对资源的控制与融合" },
+        { id: "1.1-B2", module: "B 信息系统", source: "1.1_知识点清单.md#B2 · 生命周期", q: "信息系统生命周期 5 阶段：系统规划 → 系统分析 → 系统设计 → ____ → 系统运行与维护", blanks: ["系统实施"], difficulty: "必考", hint: "包含编码、测试" },
+        { id: "1.1-B3", module: "B 信息系统", source: "1.1_知识点清单.md#B2", q: "信息系统生命周期中，系统分析阶段提出的是 ____ 模型", blanks: ["逻辑"], difficulty: "必考", hint: "对应物理模型" },
+        { id: "1.1-C1", module: "C 信息化", source: "1.1_知识点清单.md#C2 · 信息化六要素", q: "国家信息化体系 6 要素中，____ 是龙头", blanks: ["信息技术应用"], difficulty: "必考", hint: "6 要素口诀「应资网产人法」中的「应」" },
+        { id: "1.1-C2", module: "C 信息化", source: "1.1_知识点清单.md#C2", q: "国家信息化体系 6 要素中，____ 是核心任务（也是我国信息化的薄弱环节）", blanks: ["信息资源的开发利用|信息资源开发利用"], difficulty: "必考", hint: "口诀「应资网产人法」中的「资」" },
+        { id: "1.1-D1", module: "C 信息化", source: "1.1_知识点清单.md#D1 · 信息基础设施三小类", q: "信息基础设施 3 小类：通信网络、新技术、____", blanks: ["算力"], difficulty: "必背", hint: "数据中心和智能计算中心属于这一类" },
+        { id: "1.1-F1", module: "F 数字中国", source: "1.1_知识点清单.md#F1 · 数字经济两大组成", q: "数字经济两大组成：____ 化 vs 产业 ____ 化", blanks: ["数字", "数字"], difficulty: "必考", hint: "前者是数字技术本身形成产业，后者是数字技术赋能传统产业" }
+      ],
+      "1.2": [
+        { id: "1.2-A1", module: "A 新型基础设施", source: "1.2_知识点清单.md#A2 · 三大类 + 三个「新」", q: "新基建三大类：信息基础设施（技术新）/ 融合基础设施（应用新）/ ____", blanks: ["创新基础设施"], difficulty: "必考", hint: "重大科技基础设施、科教基础设施属于此类" },
+        { id: "1.2-A2", module: "A 新型基础设施", source: "1.2_知识点清单.md#A2", q: "「智能交通基础设施」属于新基建的 ____ 类", blanks: ["融合基础设施|融合"], difficulty: "必考", hint: "传统交通基础设施被新技术改造升级" },
+        { id: "1.2-A3", module: "A 新型基础设施", source: "1.2_知识点清单.md#A3 · 信息基础设施三小类", q: "信息基础设施 3 小类：通信网络、新技术、____", blanks: ["算力"], difficulty: "必背", hint: "数据中心/智能计算中心属于这一小类" },
+        { id: "1.2-B1", module: "B 工业互联网", source: "1.2_知识点清单.md#B2 · 平台体系四大定位", q: "工业互联网平台体系四大定位：「网络为基础、平台为 ____、数据为要素、安全为保障」", blanks: ["中枢"], difficulty: "必考", hint: "口诀「基中素保」中的「中」" },
+        { id: "1.2-B2", module: "B 工业互联网", source: "1.2_知识点清单.md#B4 · 平台体系四层级", q: "工业互联网平台体系 4 层级：边缘层 → ____ → PaaS → SaaS", blanks: ["IaaS"], difficulty: "必背", hint: "基础设施即服务（云计算三层之一）" },
+        { id: "1.2-B3", module: "B 工业互联网", source: "1.2_知识点清单.md#B4", q: "工业互联网的「____」是整个平台体系，相当于工业版操作系统", blanks: ["平台"], difficulty: "必背", hint: "四大作用：数据汇聚/建模分析/知识复用/应用创新" },
+        { id: "1.2-B4", module: "B 工业互联网", source: "1.2_知识点清单.md#B7 · 六大典型应用模式", q: "工业互联网六大典型应用模式口诀「设造制定延管」中，「延」代表 ____", blanks: ["服务化延伸"], difficulty: "必考", hint: "远程运维/融资租赁属于此模式" },
+        { id: "1.2-B5", module: "B 工业互联网", source: "1.2_知识点清单.md#B5 · 数据三特性", q: "工业互联网数据 3 特性口诀「重专复」中，「专」代表 ____", blanks: ["专业性"], difficulty: "必背", hint: "工业数据需要专业领域知识才能解读" },
+        { id: "1.2-B6", module: "B 工业互联网", source: "1.2_知识点清单.md#B7", q: "工业互联网六大应用模式中，供应链共享信息/协同生产对应 ____ 化协同", blanks: ["网络"], difficulty: "必考", hint: "口诀「设造制定延管」中的「协」" },
+        { id: "1.2-C1", module: "C 车联网", source: "1.2_知识点清单.md#C2 · 端管云三层体系", q: "车联网「端、管、云」三层中，____ 系统负责解决车与车/车与路/车与网/车与人的互联互通", blanks: ["管"], difficulty: "必背", hint: "是公网与专网的统一体" },
+        { id: "1.2-C2", module: "C 车联网", source: "1.2_知识点清单.md#C3 · 五种链接方式", q: "车联网 5 种链接方式口诀「云端 + 三外一内」中，「内」代表 ____", blanks: ["车内设备"], difficulty: "必背", hint: "车内通信，不是车与外部" },
+        { id: "1.2-D1", module: "B 工业互联网", source: "1.2_知识点清单.md#B3 · 网络体系三部分", q: "工业互联网网络体系三部分：网络互联、____、标识解析", blanks: ["数据互通"], difficulty: "必考", hint: "标准化描述 + 统一建模" }
+      ]
+    };
+
+    /* ==================== 状态 ==================== */
+    const STORE_KEY = "ruankao-qa-system-v1";
+    const CHECKLIST_PATTERN = /^01_教材笔记\/.*知识点清单\.md:L\d+$/;
+
+    const todayStr = () => new Date().toISOString().slice(0, 10);
+
+    const defaultState = () => ({
+      currentChapter: "1.1",
+      answered: {},      // { [id]: true } — 答对的题目
+      wrong: {},         // { [id]: { count, lastWrongAt } } — 错题
+      history: [],       // [{ id, correct, at }]
+      todayAnswered: 0,  // 今日答题数
+      todayDate: todayStr(),
+      mastery: {}        // { [id]: "mastered" | "learning" }
+    });
+
+    let state = loadState();
+    let currentQuestion = null;
+    let currentQuestionIdx = -1;
+    let showingHint = false;
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORE_KEY);
+        if (!raw) return defaultState();
+        const s = JSON.parse(raw);
+        if (s.todayDate !== todayStr()) {
+          s.todayAnswered = 0;
+          s.todayDate = todayStr();
+        }
+        return { ...defaultState(), ...s };
+      } catch (e) {
+        return defaultState();
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(STORE_KEY, JSON.stringify(state));
+    }
+
+    /* ==================== 渲染 ==================== */
+    function renderTabs() {
+      const chapters = ["1.1", "1.2"];
+      const tabs = document.getElementById("chapterTabs");
+      tabs.innerHTML = "";
+
+      // 「全部」tab
+      const allCount = Object.values(QUESTION_BANK).reduce((sum, arr) => sum + arr.length, 0);
+      const allTab = document.createElement("div");
+      allTab.className = "tab" + (state.currentChapter === "all" ? " active" : "");
+      allTab.innerHTML = `全部 <span class="count">${allCount}</span>`;
+      allTab.onclick = () => { state.currentChapter = "all"; saveState(); render(); };
+      tabs.appendChild(allTab);
+
+      // 章节 tab
+      chapters.forEach(ch => {
+        const items = QUESTION_BANK[ch] || [];
+        const answered = items.filter(q => state.answered[q.id]).length;
+        const tab = document.createElement("div");
+        tab.className = "tab" + (state.currentChapter === ch ? " active" : "");
+        tab.innerHTML = `${ch} <span class="count">${answered}/${items.length}</span>`;
+        tab.onclick = () => { state.currentChapter = ch; saveState(); render(); };
+        tabs.appendChild(tab);
+      });
+    }
+
+    function renderProgress() {
+      const pool = currentPool();
+      const total = pool.length;
+      const correct = pool.filter(q => state.answered[q.id]).length;
+      const wrong = pool.filter(q => state.wrong[q.id]).length;
+      const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+
+      document.getElementById("progressLabel").textContent =
+        `${state.currentChapter === "all" ? "全部" : state.currentChapter} 进度 · ${correct}/${total} 已答对`;
+      document.getElementById("progressFill").style.width = pct + "%";
+      document.getElementById("statCorrect").textContent = correct;
+      document.getElementById("statWrong").textContent = wrong;
+      document.getElementById("statToday").textContent = state.todayAnswered;
+    }
+
+    function renderWrongBook() {
+      const pool = currentPool();
+      const wrongItems = pool.filter(q => state.wrong[q.id]);
+      const wb = document.getElementById("wrongbook");
+      const list = document.getElementById("wrongList");
+      document.getElementById("wrongCount").textContent = wrongItems.length;
+
+      if (wrongItems.length === 0) {
+        wb.style.display = "none";
+        return;
+      }
+      wb.style.display = "block";
+      list.innerHTML = "";
+      wrongItems.forEach(q => {
+        const div = document.createElement("div");
+        div.className = "wrong-item";
+        div.innerHTML = `
+          <div class="wi-q">${escapeHtml(q.q.replace(/____/g, '<u style="color:var(--success)">' + escapeHtml(q.blanks.join(" / ")) + '</u>'))}</div>
+          <div class="wi-a">✓ ${escapeHtml(q.blanks.join(" / "))} · 答错 ${state.wrong[q.id].count} 次 · ${escapeHtml(q.module)}</div>
+        `;
+        div.onclick = () => jumpToQuestion(q.id);
+        list.appendChild(div);
+      });
+    }
+
+    function currentPool() {
+      if (state.currentChapter === "all") {
+        return Object.values(QUESTION_BANK).flat();
+      }
+      return QUESTION_BANK[state.currentChapter] || [];
+    }
+
+    /* ==================== 出题策略 ==================== */
+    function pickNextQuestion() {
+      const pool = currentPool();
+      if (pool.length === 0) return null;
+
+      // 优先级：未答对 且 答错过 > 未答对 > 答对最早
+      const buckets = { wrongUnanswered: [], fresh: [], correct: [] };
+      pool.forEach((q, i) => {
+        if (state.answered[q.id] && state.wrong[q.id]) buckets.wrongUnanswered.push(i);
+        else if (!state.answered[q.id]) buckets.fresh.push(i);
+        else buckets.correct.push(i);
+      });
+
+      let idx;
+      if (buckets.wrongUnanswered.length > 0) {
+        idx = buckets.wrongUnanswered[Math.floor(Math.random() * buckets.wrongUnanswered.length)];
+      } else if (buckets.fresh.length > 0) {
+        idx = buckets.fresh[Math.floor(Math.random() * buckets.fresh.length)];
+      } else {
+        // 全部答对 → 随机复习
+        idx = buckets.correct[Math.floor(Math.random() * buckets.correct.length)];
+      }
+      return { question: pool[idx], idx };
+    }
+
+    function jumpToQuestion(qid) {
+      // 先在当前章节池里找
+      let pool = currentPool();
+      let idx = pool.findIndex(q => q.id === qid);
+      // 找不到就遍历所有章节
+      if (idx < 0) {
+        for (const ch of Object.keys(QUESTION_BANK)) {
+          pool = QUESTION_BANK[ch];
+          idx = pool.findIndex(q => q.id === qid);
+          if (idx >= 0) {
+            state.currentChapter = ch === "1.1" || ch === "1.2" ? ch : state.currentChapter;
+            saveState();
+            break;
+          }
+        }
+      }
+      if (idx >= 0) {
+        currentQuestion = pool[idx];
+        currentQuestionIdx = idx;
+        renderTabs();
+        renderProgress();
+        renderWrongBook();
+        renderQuestion();
+      }
+    }
+
+    /* ==================== 题目渲染 ==================== */
+    function renderQuestion() {
+      const area = document.getElementById("questionArea");
+      if (!currentQuestion) {
+        const next = pickNextQuestion();
+        if (!next) {
+          area.innerHTML = `<div class="done-card"><h2>暂无题目</h2><p>请检查章节选择或题库文件。</p></div>`;
+          return;
+        }
+        currentQuestion = next.question;
+        currentQuestionIdx = next.idx;
+      }
+
+      const q = currentQuestion;
+      const parts = q.q.split("____");
+      const numBlanks = q.blanks.length;
+      let textHtml = "";
+      for (let i = 0; i < parts.length; i++) {
+        textHtml += escapeHtml(parts[i]);
+        if (i < numBlanks) {
+          textHtml += `<input type="text" class="blank-input" data-idx="${i}" placeholder="第 ${i+1} 空" style="min-width:${numBlanks > 1 ? '100px' : '80px'}" autocomplete="off" />`;
+        }
+      }
+
+      area.innerHTML = `
+        <div class="question-card">
+          <div class="question-meta">
+            <span class="badge module">${escapeHtml(q.module)}</span>
+            <span class="badge difficulty ${escapeHtml(q.difficulty)}">${escapeHtml(q.difficulty)}</span>
+            <span class="badge source">${escapeHtml(q.source.split('·')[0].trim())}</span>
+          </div>
+          <div class="question-text">${textHtml}</div>
+          <div class="feedback" id="feedback"></div>
+          <div class="action-row">
+            <button class="btn-primary" id="submitBtn">提交答案</button>
+            <button class="hint-btn" id="hintBtn">💡 看提示</button>
+            <button class="btn-secondary" id="skipBtn" style="display:none">跳过 →</button>
+            <button class="btn-success" id="nextBtn" style="display:none">下一题 →</button>
+          </div>
+        </div>
+      `;
+
+      // 绑定事件
+      document.getElementById("submitBtn").onclick = handleSubmit;
+      document.getElementById("hintBtn").onclick = () => {
+        const fb = document.getElementById("feedback");
+        fb.className = "feedback show hint";
+        fb.style.background = "var(--warning-bg)";
+        fb.style.borderLeft = "3px solid var(--warning)";
+        fb.style.color = "var(--warning)";
+        fb.innerHTML = `<div class="hint-line">💡 ${escapeHtml(q.hint || "无提示")}</div>`;
+      };
+      document.getElementById("skipBtn").onclick = () => {
+        const fb = document.getElementById("feedback");
+        fb.className = "feedback show wrong";
+        fb.innerHTML = `<div class="answer-line">⏭ 已跳过。正确答案：<strong>${q.blanks.map(escapeHtml).join(" / ")}</strong></div>`;
+        document.getElementById("skipBtn").style.display = "none";
+        document.getElementById("nextBtn").style.display = "inline-block";
+        document.getElementById("nextBtn").focus();
+      };
+      document.getElementById("nextBtn").onclick = nextQuestion;
+
+      // 回车提交
+      area.querySelectorAll(".blank-input").forEach(input => {
+        input.addEventListener("keydown", e => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            if (document.getElementById("nextBtn").style.display !== "none") {
+              nextQuestion();
+            } else {
+              handleSubmit();
+            }
+          }
+        });
+        // 自动 focus 第一个空
+        if (input.dataset.idx === "0") setTimeout(() => input.focus(), 50);
+      });
+    }
+
+    function handleSubmit() {
+      const inputs = document.querySelectorAll(".blank-input");
+      const userAnswers = Array.from(inputs).map(i => i.value.trim());
+      const correctAnswers = currentQuestion.blanks;
+
+      // 判分：宽松匹配（忽略空格、首尾标点、全角半角）
+      const normalize = s => s.replace(/[，。！？、；：""''《》（）\.\s,!?:;"'()]/g, "").toLowerCase();
+      let allCorrect = userAnswers.length === correctAnswers.length;
+      for (let i = 0; i < correctAnswers.length; i++) {
+        const u = normalize(userAnswers[i] || "");
+        const accepted = [correctAnswers[i], ...(correctAnswers[i + 1] && correctAnswers[i + 1] === correctAnswers[i] ? [] : [])];
+        // 多答案支持：blanks 中可写多个并列写法
+        const acceptedList = correctAnswers[i].split("|").map(a => normalize(a.trim()));
+        if (!acceptedList.some(a => u === a)) {
+          allCorrect = false;
+        }
+      }
+
+      // 视觉反馈
+      inputs.forEach((input, i) => {
+        const u = normalize(input.value.trim() || "");
+        const acceptedList = correctAnswers[i].split("|").map(a => normalize(a.trim()));
+        if (acceptedList.some(a => u === a)) {
+          input.classList.add("correct");
+        } else {
+          input.classList.add("wrong");
+        }
+      });
+
+      // 反馈区
+      const fb = document.getElementById("feedback");
+      const q = currentQuestion;
+      const correctText = q.blanks.map(escapeHtml).join(" / ");
+      if (allCorrect) {
+        fb.className = "feedback show correct";
+        fb.innerHTML = `
+          <div>✓ 答对了！</div>
+          <div class="answer-line">正确答案：${correctText}</div>
+          <div class="source-line">📍 出处：${escapeHtml(q.source)}</div>
+        `;
+        state.answered[q.id] = { at: Date.now() };
+        state.todayAnswered++;
+        state.history.push({ id: q.id, correct: true, at: Date.now() });
+        if (state.wrong[q.id]) delete state.wrong[q.id];
+        state.mastery[q.id] = "mastered";
+        saveState();
+        renderProgress();
+        renderWrongBook();
+
+        // 答对自动进入下一题（延迟 1.2s）
+        document.getElementById("submitBtn").disabled = true;
+        document.getElementById("hintBtn").disabled = true;
+        setTimeout(nextQuestion, 1200);
+      } else {
+        fb.className = "feedback show wrong";
+        fb.innerHTML = `
+          <div>✗ 答错了，再看看</div>
+          <div class="answer-line">正确答案：<strong>${correctText}</strong></div>
+          <div class="hint-line">💡 提示：${escapeHtml(q.hint || "无提示")}</div>
+          <div class="source-line">📍 出处：${escapeHtml(q.source)}</div>
+        `;
+        if (!state.wrong[q.id]) state.wrong[q.id] = { count: 0, lastWrongAt: null };
+        state.wrong[q.id].count++;
+        state.wrong[q.id].lastWrongAt = Date.now();
+        state.history.push({ id: q.id, correct: false, at: Date.now() });
+        state.mastery[q.id] = "learning";
+        saveState();
+        renderProgress();
+        renderWrongBook();
+
+        // 答错：显示「跳过」和「下一题」
+        document.getElementById("submitBtn").disabled = true;
+        document.getElementById("submitBtn").textContent = "已判分";
+        document.getElementById("skipBtn").style.display = "inline-block";
+        document.getElementById("nextBtn").style.display = "inline-block";
+      }
+    }
+
+    function nextQuestion() {
+      const next = pickNextQuestion();
+      if (!next) {
+        document.getElementById("questionArea").innerHTML =
+          `<div class="done-card"><h2>🎉 恭喜！本章节全部答对</h2><p>已无未答对题目，可错点其他章节继续练习。</p></div>`;
+        return;
+      }
+      currentQuestion = next.question;
+      currentQuestionIdx = next.idx;
+      renderQuestion();
+      renderProgress();
+    }
+
+    /* ==================== 学习进度联动（读勾选状态） ==================== */
+    function checkChecklistSync() {
+      let syncedKeys = 0;
+      let syncedItems = 0;
+      try {
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (!key) continue;
+          if (CHECKLIST_PATTERN.test(key)) {
+            syncedKeys++;
+            try {
+              const data = JSON.parse(localStorage.getItem(key));
+              if (data && data.checked) syncedItems += data.checked.length;
+            } catch (e) {}
+          }
+        }
+      } catch (e) {}
+
+      const info = document.getElementById("syncInfo");
+      const link = document.getElementById("syncLink");
+      if (syncedKeys > 0) {
+        info.innerHTML = `🔗 已检测到 <strong>${syncedKeys}</strong> 个知识点清单的勾选状态（<strong>${syncedItems}</strong> 项已掌握）。答对题目后会自动同步勾选。`;
+        info.style.color = "var(--success)";
+      } else {
+        info.innerHTML = `⚠ 未检测到任何 知识点清单_可勾选.html 的勾选数据。在 1.1 / 1.2 可勾选版打卡后，状态会自动同步。`;
+        info.style.color = "var(--warning)";
+      }
+      link.style.display = "inline";
+      link.onclick = checkChecklistSync;
+    }
+
+    /* ==================== 工具 ==================== */
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, c => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      }[c]));
+    }
+
+    function render() {
+      renderTabs();
+      renderProgress();
+      renderWrongBook();
+      checkChecklistSync();
+      if (!currentQuestion || !currentPool().find(q => q.id === currentQuestion.id)) {
+        const next = pickNextQuestion();
+        if (next) {
+          currentQuestion = next.question;
+          currentQuestionIdx = next.idx;
+        }
+      }
+      renderQuestion();
+    }
+
+    /* ==================== 启动 ==================== */
+    document.getElementById("resetBtn").onclick = () => {
+      if (confirm("⚠ 重置全部答题记录、错题本、勾选同步吗？\n此操作不可恢复！")) {
+        state = defaultState();
+        saveState();
+        currentQuestion = null;
+        render();
+      }
+    };
+    document.getElementById("exportBtn").onclick = () => {
+      const pool = currentPool();
+      const wrongItems = pool.filter(q => state.wrong[q.id]);
+      if (wrongItems.length === 0) { alert("当前章节没有错题"); return; }
+      const lines = ["# 错题本 · " + state.currentChapter + " · " + new Date().toLocaleString("zh-CN"), ""];
+      wrongItems.forEach(q => {
+        lines.push("## " + q.id + " · " + q.module);
+        lines.push("**题目**： " + q.q);
+        lines.push("**答案**： " + q.blanks.join(" / "));
+        lines.push("**出处**： " + q.source);
+        lines.push("**答错次数**： " + state.wrong[q.id].count);
+        lines.push("");
+      });
+      const md = lines.join("\n");
+      const blob = new Blob([md], { type: "text/markdown;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `错题本_${state.currentChapter}_${todayStr()}.md`;
+      a.click();
+      URL.revokeObjectURL(url);
+    };
+
+    render();
+  </script>
+</body>
+</html>
