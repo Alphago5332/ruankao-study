@@ -640,16 +640,14 @@
           <div class="question-text">${textHtml}</div>
           <div class="feedback" id="feedback"></div>
           <div class="action-row">
-            <button class="btn-primary" id="submitBtn">提交答案</button>
             <button class="hint-btn" id="hintBtn">💡 看提示</button>
-            <button class="btn-secondary" id="skipBtn" style="display:none">跳过 →</button>
-            <button class="btn-success" id="nextBtn" style="display:none">下一题 →</button>
+            <button class="btn-secondary" id="skipBtn">⏭ 跳过（计入错题）</button>
+            <button class="btn-secondary" id="switchBtn">🔄 换一题</button>
           </div>
         </div>
       `;
 
       // 绑定事件
-      document.getElementById("submitBtn").onclick = handleSubmit;
       document.getElementById("hintBtn").onclick = () => {
         const fb = document.getElementById("feedback");
         fb.className = "feedback show hint";
@@ -659,108 +657,103 @@
         fb.innerHTML = `<div class="hint-line">💡 ${escapeHtml(q.hint || "无提示")}</div>`;
       };
       document.getElementById("skipBtn").onclick = () => {
+        // 跳过 = 主动放弃本题，记一次错题
         const fb = document.getElementById("feedback");
         fb.className = "feedback show wrong";
-        fb.innerHTML = `<div class="answer-line">⏭ 已跳过。正确答案：<strong>${q.blanks.map(escapeHtml).join(" / ")}</strong></div>`;
-        document.getElementById("skipBtn").style.display = "none";
-        document.getElementById("nextBtn").style.display = "inline-block";
-        document.getElementById("nextBtn").focus();
+        fb.innerHTML = `
+          <div>⏭ 已跳过</div>
+          <div class="answer-line">正确答案：<strong>${q.blanks.map(escapeHtml).join(" / ")}</strong></div>
+          <div class="hint-line">💡 ${escapeHtml(q.hint || "")}</div>
+          <div class="source-line">📍 ${escapeHtml(q.source)}</div>
+        `;
+        recordWrong();
+        // 显示自动进入下一题的提示
+        setTimeout(nextQuestion, 1500);
       };
-      document.getElementById("nextBtn").onclick = nextQuestion;
+      document.getElementById("switchBtn").onclick = () => {
+        // 换一题 = 不计入答题记录
+        nextQuestion();
+      };
 
-      // 回车提交
+      // 即输即判：每个 input 上监听
       area.querySelectorAll(".blank-input").forEach(input => {
+        const idx = parseInt(input.dataset.idx);
+        input.addEventListener("input", () => handleBlankInput(input, idx));
+        input.addEventListener("blur", () => handleBlankBlur(input, idx));
         input.addEventListener("keydown", e => {
           if (e.key === "Enter") {
             e.preventDefault();
-            if (document.getElementById("nextBtn").style.display !== "none") {
-              nextQuestion();
-            } else {
-              handleSubmit();
-            }
+            // Enter 也触发 blur 时的判错提示
+            input.blur();
           }
         });
         // 自动 focus 第一个空
-        if (input.dataset.idx === "0") setTimeout(() => input.focus(), 50);
+        if (idx === 0) setTimeout(() => input.focus(), 50);
       });
     }
 
-    function handleSubmit() {
-      const inputs = document.querySelectorAll(".blank-input");
-      const userAnswers = Array.from(inputs).map(i => i.value.trim());
-      const correctAnswers = currentQuestion.blanks;
-
-      // 判分：宽松匹配（忽略空格、首尾标点、全角半角）
-      const normalize = s => s.replace(/[，。！？、；：""''《》（）\.\s,!?:;"'()]/g, "").toLowerCase();
-      let allCorrect = userAnswers.length === correctAnswers.length;
-      for (let i = 0; i < correctAnswers.length; i++) {
-        const u = normalize(userAnswers[i] || "");
-        const accepted = [correctAnswers[i], ...(correctAnswers[i + 1] && correctAnswers[i + 1] === correctAnswers[i] ? [] : [])];
-        // 多答案支持：blanks 中可写多个并列写法
-        const acceptedList = correctAnswers[i].split("|").map(a => normalize(a.trim()));
-        if (!acceptedList.some(a => u === a)) {
-          allCorrect = false;
-        }
+    /* 即输即判：边输边判，全对自动跳下一题 */
+    function handleBlankInput(input, idx) {
+      const v = input.value.trim();
+      const acceptedList = currentQuestion.blanks[idx].split("|").map(a => a.trim());
+      input.classList.remove("correct", "wrong");
+      if (v && acceptedList.includes(v)) {
+        // 完全匹配 → 标绿
+        input.classList.add("correct");
+        // 检查是否所有空都答对
+        checkAllBlanksCorrect();
       }
+      // 输入中或非匹配：不标红，避免中途视觉干扰
+    }
 
-      // 视觉反馈
-      inputs.forEach((input, i) => {
-        const u = normalize(input.value.trim() || "");
-        const acceptedList = correctAnswers[i].split("|").map(a => normalize(a.trim()));
-        if (acceptedList.some(a => u === a)) {
-          input.classList.add("correct");
-        } else {
-          input.classList.add("wrong");
-        }
-      });
+    function handleBlankBlur(input, idx) {
+      const v = input.value.trim();
+      if (!v) return;
+      if (input.classList.contains("correct")) return;
+      // 失焦时还没匹配上 → 标红（视觉提示，但不计入错题）
+      input.classList.add("wrong");
+    }
+
+    function checkAllBlanksCorrect() {
+      const inputs = document.querySelectorAll(".blank-input");
+      const allCorrect = inputs.length > 0 && Array.from(inputs).every(i => i.classList.contains("correct"));
+      if (allCorrect) {
+        recordCorrect();
+      }
+    }
+
+    function recordCorrect() {
+      const q = currentQuestion;
+      // 防重复
+      if (state.answered[q.id] && Date.now() - (state.answered[q.id].at || 0) < 2000) return;
+      state.answered[q.id] = { at: Date.now() };
+      state.todayAnswered++;
+      state.history.push({ id: q.id, correct: true, at: Date.now() });
+      if (state.wrong[q.id]) delete state.wrong[q.id];
+      state.mastery[q.id] = "mastered";
+      saveState();
+      renderProgress();
+      renderWrongBook();
 
       // 反馈区
       const fb = document.getElementById("feedback");
+      fb.className = "feedback show correct";
+      fb.innerHTML = `<div>✓ 答对！下一题…</div>`;
+
+      // 0.8s 后自动跳下一题
+      setTimeout(nextQuestion, 800);
+    }
+
+    function recordWrong() {
       const q = currentQuestion;
-      const correctText = q.blanks.map(escapeHtml).join(" / ");
-      if (allCorrect) {
-        fb.className = "feedback show correct";
-        fb.innerHTML = `
-          <div>✓ 答对了！</div>
-          <div class="answer-line">正确答案：${correctText}</div>
-          <div class="source-line">📍 出处：${escapeHtml(q.source)}</div>
-        `;
-        state.answered[q.id] = { at: Date.now() };
-        state.todayAnswered++;
-        state.history.push({ id: q.id, correct: true, at: Date.now() });
-        if (state.wrong[q.id]) delete state.wrong[q.id];
-        state.mastery[q.id] = "mastered";
-        saveState();
-        renderProgress();
-        renderWrongBook();
-
-        // 答对自动进入下一题（延迟 1.2s）
-        document.getElementById("submitBtn").disabled = true;
-        document.getElementById("hintBtn").disabled = true;
-        setTimeout(nextQuestion, 1200);
-      } else {
-        fb.className = "feedback show wrong";
-        fb.innerHTML = `
-          <div>✗ 答错了，再看看</div>
-          <div class="answer-line">正确答案：<strong>${correctText}</strong></div>
-          <div class="hint-line">💡 提示：${escapeHtml(q.hint || "无提示")}</div>
-          <div class="source-line">📍 出处：${escapeHtml(q.source)}</div>
-        `;
-        if (!state.wrong[q.id]) state.wrong[q.id] = { count: 0, lastWrongAt: null };
-        state.wrong[q.id].count++;
-        state.wrong[q.id].lastWrongAt = Date.now();
-        state.history.push({ id: q.id, correct: false, at: Date.now() });
-        state.mastery[q.id] = "learning";
-        saveState();
-        renderProgress();
-        renderWrongBook();
-
-        // 答错：显示「跳过」和「下一题」
-        document.getElementById("submitBtn").disabled = true;
-        document.getElementById("submitBtn").textContent = "已判分";
-        document.getElementById("skipBtn").style.display = "inline-block";
-        document.getElementById("nextBtn").style.display = "inline-block";
-      }
+      if (!state.wrong[q.id]) state.wrong[q.id] = { count: 0, lastWrongAt: null };
+      state.wrong[q.id].count++;
+      state.wrong[q.id].lastWrongAt = Date.now();
+      state.history.push({ id: q.id, correct: false, at: Date.now() });
+      state.mastery[q.id] = "learning";
+      saveState();
+      renderProgress();
+      renderWrongBook();
     }
 
     function nextQuestion() {
