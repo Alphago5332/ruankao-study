@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>康奈尔笔记 · 第 1 章第 2 节 现代化基础设施 · 带答案版</title>
+<style>
+  :root{
+    --ink:#1f2328;
+    --ink-2:#4b5563;
+    --ink-3:#8b949e;
+    --line:#2f3742;
+    --rule:#d6dae0;
+    --accent:#185FA5;
+    --accent-soft:#E6F1FB;
+    --warm:#854F0B;
+    --warm-soft:#FAEEDA;
+    --paper:#ffffff;
+    --ans-bg:#fffaf2;
+    --ans-border:#e8d9b8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    padding:28px 16px 48px;
+    background:#eef0f3;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+    color:var(--ink);
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .toolbar{
+    max-width:210mm;margin:0 auto 14px;display:flex;gap:10px;align-items:center;
+    justify-content:space-between;flex-wrap:wrap;
+  }
+  .toolbar .hint{font-size:12.5px;color:#5b6470;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;
+    font-size:13px;padding:7px 14px;border-radius:8px;cursor:pointer;
+    font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn.active{background:var(--warm);border-color:var(--warm);color:#fff;}
+
+  .page{
+    width:210mm;min-height:297mm;margin:0 auto;background:var(--paper);
+    padding:14mm 13mm 12mm;box-shadow:0 2px 14px rgba(16,24,40,.12);
+  }
+
+  .head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    border-bottom:2px solid var(--line);padding-bottom:8px;margin-bottom:10px;
+    gap:12px;
+  }
+  .head h1{font-size:19px;margin:0;font-weight:600;letter-spacing:.3px;}
+  .head .sub{font-size:12px;color:var(--ink-3);margin-top:4px;}
+  .head .meta{font-size:12px;color:var(--ink-2);text-align:right;line-height:1.9;white-space:nowrap;}
+  .head .meta b{font-weight:600;color:var(--accent);}
+
+  .band{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+  .chip{
+    font-size:11.5px;padding:4px 9px;border-radius:5px;
+    background:var(--accent-soft);color:#0C447C;border:1px solid #B5D4F4;
+  }
+  .chip.warm{background:var(--warm-soft);color:#633806;border-color:#EFC98A;}
+
+  .cols{
+    display:grid;grid-template-columns:62mm 1fr;gap:0;
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .col-cue{
+    background:#fafbfc;border-right:1px solid var(--line);padding:8px 9px 9px;
+  }
+  .col-note{padding:8px 11px 9px;}
+  .col-hd{
+    font-size:11.5px;font-weight:600;letter-spacing:.6px;color:var(--ink-2);
+    text-transform:uppercase;padding-bottom:6px;margin-bottom:7px;
+    border-bottom:1px dashed #b9c0c9;
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  .col-hd span{font-size:10.5px;font-weight:400;color:var(--ink-3);text-transform:none;letter-spacing:0;}
+
+  .q{
+    font-size:12px;line-height:1.5;color:#1f2328;
+    padding:5px 0 5px 20px;position:relative;border-bottom:1px dotted #dfe3e8;
+  }
+  .q:last-child{border-bottom:0;}
+  .q::before{
+    content:attr(data-n);position:absolute;left:0;top:5px;
+    width:14px;height:14px;border-radius:50%;
+    background:var(--accent);color:#fff;font-size:9.5px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:600;line-height:1;
+  }
+  .q b{font-weight:600;}
+  .q em{font-style:normal;color:var(--warm);font-weight:600;}
+
+  .grouplabel{
+    font-size:10.5px;font-weight:600;color:var(--accent);
+    letter-spacing:.4px;margin:8px 0 2px;
+  }
+  .grouplabel:first-child{margin-top:0;}
+
+  /* === 答案区样式 === */
+  .ans-block{
+    margin-bottom:7px;padding:5px 8px 6px;
+    background:var(--ans-bg);border:1px solid var(--ans-border);border-radius:3px;
+  }
+  .ans-block .ans-title{
+    font-size:10.5px;font-weight:600;color:var(--warm);
+    letter-spacing:.3px;margin-bottom:2px;display:flex;align-items:baseline;gap:6px;
+  }
+  .ans-block .ans-title .num{
+    display:inline-block;min-width:14px;height:14px;border-radius:50%;
+    background:var(--warm);color:#fff;font-size:9.5px;font-weight:600;
+    text-align:center;line-height:14px;
+  }
+  .ans-block ul{
+    margin:2px 0 3px 0;padding:0 0 0 16px;font-size:11.5px;line-height:1.55;color:#2b323b;
+  }
+  .ans-block ul li{padding:1px 0;}
+  .ans-block .key{
+    color:var(--warm);font-weight:600;
+  }
+  .ans-block .tip{
+    font-size:10.5px;color:#633806;margin-top:2px;line-height:1.5;
+    padding:2px 6px;background:var(--warm-soft);border-radius:2px;
+  }
+  .ans-block .fill{
+    height:18px;border-bottom:1px dashed #c8c0aa;margin-top:3px;
+  }
+  body.hide-answers .ans-block{display:none;}
+  body.hide-answers .summary-prefill{display:none;}
+
+  .summary{
+    margin-top:10px;border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .summary .col-hd{
+    margin:0;padding:7px 11px;background:#fafbfc;border-bottom:1px solid var(--line);
+  }
+  .summary .body{padding:6px 11px 8px;font-size:11.5px;line-height:1.7;color:#2b323b;}
+  .summary .body b{color:var(--accent);}
+  .summary .body .small{font-size:10.5px;color:var(--ink-3);margin-top:3px;display:block;}
+
+  .footer{
+    margin-top:9px;font-size:10.5px;color:var(--ink-3);
+    display:flex;justify-content:space-between;gap:10px;
+  }
+
+  .guide{
+    width:210mm;margin:16px auto 0;background:#fff;border:1px solid #d9dee5;
+    border-radius:8px;padding:16px 18px;
+  }
+  .guide h2{font-size:14px;margin:0 0 10px;font-weight:600;}
+  .guide table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .guide th,.guide td{
+    border:1px solid #e2e6eb;padding:7px 9px;text-align:left;vertical-align:top;line-height:1.6;
+  }
+  .guide th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .guide td:first-child{width:88px;font-weight:600;color:var(--accent);}
+  .guide .note{font-size:12px;color:#5b6470;margin-top:10px;line-height:1.7;}
+
+  @page{size:A4 portrait;margin:0;}
+  @media print{
+    body{background:#fff;padding:0;}
+    .toolbar,.guide{display:none;}
+    .page{box-shadow:none;margin:0;width:auto;min-height:auto;padding:13mm 12mm;}
+    body.hide-answers .ans-block{display:none;}
+    body.hide-answers .summary-prefill{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="hint">A4 竖版 · 带答案版 · 建议先默写、再对照；打印时可「隐藏答案」变填空版</div>
+  <div>
+    <button class="btn" id="toggleBtn" onclick="toggleAnswers()">👁 隐藏答案（打印填空版）</button>
+    <button class="btn primary" onclick="window.print()">打印 / 导出 PDF</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="head">
+    <div>
+      <h1>康奈尔笔记 · 第 1 章第 2 节 现代化基础设施 <span style="color:var(--warm);font-size:14px;">（带答案版）</span></h1>
+      <div class="sub">《信息系统项目管理师教程（第 4 版）》P7 ~ P12　｜　答案口径以 2026-09-11 核对为准</div>
+    </div>
+    <div class="meta">
+      日期：__________<br>
+      第 <b>__</b> 轮复习　用时 <b>__</b> 分钟
+    </div>
+  </div>
+
+  <div class="band">
+    <span class="chip">上午 1~2 题</span>
+    <span class="chip">不出大题</span>
+    <span class="chip warm">必背：1.2.1 新基建 + 1.2.2 工互</span>
+    <span class="chip warm">通读：1.2.3 车联网 C1/C4</span>
+    <span class="chip warm">📝 含答案</span>
+  </div>
+
+  <div class="cols">
+
+    <div class="col-cue">
+      <div class="col-hd">线索栏 <span>遮住右侧自问</span></div>
+
+      <div class="grouplabel">1.2.1 新型基础设施建设</div>
+      <div class="q" data-n="1"><b>新基建定义的三个搭配</b>：引领 / 驱动 / 基础各是什么？</div>
+      <div class="q" data-n="2"><b>新基建三大方面</b> + 三个「新」字特点？<br>判别口诀？</div>
+      <div class="q" data-n="3"><b>信息基础设施拆三小类</b>？各举 2 例。</div>
+
+      <div class="grouplabel">1.2.2 工业互联网</div>
+      <div class="q" data-n="4"><b>工业互联网的定义</b>？是<b>什么</b>的重要基石？</div>
+      <div class="q" data-n="5"><b>四大定位</b>口诀「网平数安」对应对什么？<br>谁是中枢？</div>
+      <div class="q" data-n="6">网络体系<b>三部分</b>？<br>标识解析<b>三组成</b>？</div>
+      <div class="q" data-n="7"><b>平台四层级</b>顺序？<br>相当于工业互联网的什么角色？<br>四大作用？</div>
+      <div class="q" data-n="8">工业互联网数据<b>三特性</b>？</div>
+      <div class="q" data-n="9">安全<b>三大特点</b>？<br>核心任务<b>四手段</b>？</div>
+      <div class="q" data-n="10"><b>六大典型应用模式</b>口诀「设造制定延管」？</div>
+      <div class="q" data-n="11">「远程运维 / 融资租赁」对应哪个模式？</div>
+
+      <div class="grouplabel">1.2.3 车联网</div>
+      <div class="q" data-n="12"><b>车联网三层体系</b>各自的职责？</div>
+    </div>
+
+    <div class="col-note">
+      <div class="col-hd">答案区 <span>默写后对照 · 留白处写自己的补充</span></div>
+
+      <div class="grouplabel">1.2.1 新型基础设施建设</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">1</span>新基建定义的三个搭配</div>
+        <ul>
+          <li><span class="key">引领</span> = <span class="key">新发展理念</span></li>
+          <li><span class="key">驱动</span> = <span class="key">技术创新</span> ← 2024 上原题</li>
+          <li><span class="key">基础</span> = <span class="key">信息网络</span></li>
+        </ul>
+        <div class="tip">⚠️ 三个搭配千万<b>不要互换</b>，定义题最容易扣字眼。完整定义：以新发展理念为引领，以技术创新为驱动，以信息网络为基础，面向高质量发展需要，提供数字转型、智能升级、融合创新等服务的基础设施体系。</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">2</span>新基建三大方面 + 三个「新」字特点</div>
+        <ul>
+          <li><span class="key">信息基础设施</span> → 凸显「<span class="key">技术新</span>」</li>
+          <li><span class="key">融合基础设施</span> → 重在「<span class="key">应用新</span>」 ← 2025 上原题</li>
+          <li><span class="key">创新基础设施</span> → 强调「<span class="key">平台新</span>」</li>
+        </ul>
+        <div class="tip">判别口诀：<b>纯数字底座 = 信息</b>（5G、数据中心）；<b>传统设施被改造 = 融合</b>（智能交通、智慧能源）；<b>搞科研的 = 创新</b>（重大科技、科教、产业技术创新）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">3</span>信息基础设施三小类</div>
+        <ul>
+          <li><span class="key">通信网络</span>基础设施：5G / 物联网 / 工业互联网 / 卫星互联网</li>
+          <li><span class="key">新技术</span>基础设施：人工智能 / 云计算 / 区块链</li>
+          <li><span class="key">算力</span>基础设施：数据中心 / 智能计算中心</li>
+        </ul>
+        <div class="tip">记法：「<b>通信、新技术、算力</b>」；或口诀「五物工卫、AI 云链、数据中心 智算」</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">1.2.2 工业互联网</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">4</span>工业互联网定义</div>
+        <ul>
+          <li>工业互联网 = <span class="key">新一代信息通信技术与工业经济深度融合</span>的<span class="key">新型基础设施、应用模式和工业生态</span></li>
+          <li>是<span class="key">第四次工业革命</span>的<span class="key">重要基石</span></li>
+        </ul>
+        <div class="tip">⚠️ 第 4 版口径（非旧版「工业以太网 + 互联网」的简单加和）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">5</span>平台体系四大定位</div>
+        <ul>
+          <li><span class="key">网络</span> = <span class="key">基础</span></li>
+          <li><span class="key">平台</span> = <span class="key">中枢</span> ← 第 4 版新口径</li>
+          <li><span class="key">数据</span> = <span class="key">要素</span></li>
+          <li><span class="key">安全</span> = <span class="key">保障</span></li>
+        </ul>
+        <div class="tip">口诀：<b>网平数安 / 基中素保</b>；⚠️ 旧资料常写「三大体系」按四项记</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">6</span>网络体系三部分 + 标识解析三组成</div>
+        <ul>
+          <li>网络体系三部分：<span class="key">网络互联 / 数据互通 / 标识解析</span></li>
+          <li>标识解析三组成：<span class="key">标识编码 / 标识解析系统 / 标识数据服务</span></li>
+          <li>典型技术：工业总线、工业以太网、<span class="key">TSN（时间敏感网络）、确定性网络、5G</span></li>
+        </ul>
+        <div class="tip">标识解析 = 实现要素的<b>标记、管理和定位</b></div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">7</span>平台四层级 + 四大作用</div>
+        <ul>
+          <li>顺序：<span class="key">边缘层 → IaaS → PaaS → SaaS</span></li>
+          <li>相当于工业互联网的「<span class="key">操作系统</span>」</li>
+          <li>四大作用：<span class="key">数据汇聚 / 建模分析 / 知识复用 / 应用创新</span></li>
+          <li>边缘层 = 设备连接管理 + 数据互联互通互操作</li>
+        </ul>
+        <div class="tip">顺序记法：<b>边 I P S</b>（像单词 EDIPS）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">8</span>工业互联网数据三特性</div>
+        <ul>
+          <li><span class="key">重要性</span>（数据是要素，地位核心）</li>
+          <li><span class="key">专业性</span>（与行业知识深度耦合）</li>
+          <li><span class="key">复杂性</span>（多源异构，标准化难）</li>
+        </ul>
+        <div class="tip">口诀：<b>重专复</b></div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">9</span>安全三特点 + 核心任务四手段</div>
+        <ul>
+          <li>三特点：<span class="key">涉及范围广 / 造成影响大 / 企业防护基础弱</span></li>
+          <li>核心任务四手段：<span class="key">监测预警 / 应急响应 / 检测评估 / 功能测试</span></li>
+        </ul>
+        <div class="tip">口诀：<b>广、大、弱</b>（三特点）；核心任务四手段 = 网络安全的常见四步法</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">10</span>六大典型应用模式</div>
+        <ul>
+          <li><span class="key">平台化设计</span>（敏捷 / 并行 / 基于模型的设计）</li>
+          <li><span class="key">智能化制造</span></li>
+          <li><span class="key">网络化协同</span>（供应链 / 协同生产）</li>
+          <li><span class="key">个性化定制</span></li>
+          <li><span class="key">服务化延伸</span>（远程运维 / 融资租赁）</li>
+          <li><span class="key">数字化管理</span></li>
+        </ul>
+        <div class="tip">口诀：<b>设造制定延管</b>（设计 / 制造 / 协同 / 定制 / 延伸 / 管理）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">11</span>「远程运维 / 融资租赁」对应模式</div>
+        <ul>
+          <li>对应 <span class="key">服务化延伸</span></li>
+          <li>本质：制造业从加工组装向价值链<b>两端</b>高附加值环节延伸</li>
+        </ul>
+        <div class="tip">两端 = 上游研发设计 + 下游运维服务；「设造制定延管」中「<b>延</b>」就是「服务化延伸」</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">1.2.3 车联网</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">12</span>车联网「端、管、云」三层体系</div>
+        <ul>
+          <li><span class="key">端系统</span>：智能传感器；采集车辆信息 / 感知行车状态与环境；<b>车内通信、车间通信、车网通信</b>的泛在通信终端；具备 <span class="key">IoV 寻址和网络可信标识</span>能力</li>
+          <li><span class="key">管系统</span>：解决<b>车与车 / 车与路 / 车与网 / 车与人</b>的互联互通；保障<b>实时性、可服务性、网络泛在性</b>；是<b>公网与专网的统一体</b></li>
+          <li><span class="key">云系统</span>：云架构的车辆运行信息平台；生态链含 ITS、物流、汽修汽配、保险、紧急救援等；<b>多源海量信息汇聚</b>；需要虚拟化、安全认证、实时交互、海量存储</li>
+        </ul>
+        <div class="tip">五种链接方式：<b>车与云 / 车与车 / 车与路 / 车与人 / 车内设备</b>（口诀：<b>云端 + 三外一内</b>）</div>
+        <div class="fill"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="summary">
+    <div class="col-hd">总结区 <span>本节本质 + 考点地图</span></div>
+    <div class="body summary-prefill">
+      <b>本节本质</b>：新一代信息基础设施（数字底座）+ 工业 / 交通行业的融合应用场景；上午 1~2 题，连续两年考「新基建归属」是高频套路。<br>
+      <b>考点地图（按考频排序）</b>：① 新基建三大方面归属判断（2025 上原题）→ ② 新基建定义「引领/驱动/基础」（2024 上原题）→ ③ 工业互联网四大定位 + 平台四层级 → ④ 六大典型应用模式（场景反推模式名）→ ⑤ 信息基础设施三小类 → ⑥ 车联网端管云 + 五种链接方式 → ⑦ 数据三特性 / 安全三特点 / 核心任务四手段。<br>
+      <span class="small">⚠️ 口径陷阱：①定义三搭配「引领/驱动/基础」勿互换；②信息基础设施 =「技术新」，融合 =「应用新」，创新 =「平台新」；③工业互联网「四大定位」非「三大体系」；④车联网第 4 版未提 DSRC/C-V2X，仅写 5 类链接方式。</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>康奈尔笔记法 · 第 1 章第 2 节 带答案版　｜　复习记录：当日 ☐　+1 天 ☐　+3 天 ☐　+7 天 ☐　+14 天 ☐</span>
+    <span>正确率 ____ / 12</span>
+  </div>
+
+</div>
+
+<div class="guide">
+  <h2>怎么用这一页</h2>
+  <table>
+    <tr>
+      <th>步骤</th><th>做法</th>
+    </tr>
+    <tr>
+      <td>第 1 遍 · 遮答默写</td>
+      <td>用纸<b>遮住右栏答案区</b>，只看左栏 12 个问题。口头/默写回答，答不出的画「×」。</td>
+    </tr>
+    <tr>
+      <td>第 2 遍 · 对照修正</td>
+      <td>揭开答案区逐项对照。每条答案下的<b>虚线</b>是留给你的「补充线」——记下易漏点（如「四大定位的具体顺序」「六要素口诀」「车联网五种链接方式」）。</td>
+    </tr>
+    <tr>
+      <td>第 3 遍 · 隐藏答案打印</td>
+      <td>点工具栏「👁 隐藏答案」按钮，再打印一份当填空卷，可反复练习。</td>
+    </tr>
+    <tr>
+      <td>第 4 遍 · 复习节奏</td>
+      <td>页脚 5 个框按「当日 → +1 天 → +3 天 → +7 天 → +14 天」打勾，这就是你的艾宾浩斯进度条。全部打勾后，本节可不再看。</td>
+    </tr>
+  </table>
+  <div class="note">
+    <b>为什么这份是「带答案版」</b>：直接默写全节答案容易翻车（口径不准就白背）。本版每个答案都标注<b>关键术语</b>（暖色）和<b>口诀 / 易错提醒</b>（橙色框），默写后对照一眼就能定位偏差。考前冲刺只看「总结区 · 考点地图」+「橙色 tip 框」即可。
+  </div>
+</div>
+
+<script>
+  function toggleAnswers(){
+    document.body.classList.toggle('hide-answers');
+    const btn = document.getElementById('toggleBtn');
+    const hidden = document.body.classList.contains('hide-answers');
+    btn.textContent = hidden ? '👁 显示答案' : '👁 隐藏答案（打印填空版）';
+    btn.classList.toggle('active', hidden);
+  }
+</script>
+
+</body>
+</html>
