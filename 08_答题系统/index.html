@@ -60,8 +60,13 @@
       border-radius: 999px;
       cursor: pointer;
       font-size: 14px;
+      font-family: inherit;
       color: var(--text-muted);
       transition: all 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+      outline: none;
+      line-height: 1.4;
     }
     .tab:hover { color: var(--text); border-color: var(--primary); }
     .tab.active {
@@ -490,20 +495,22 @@
 
       // 「全部」tab
       const allCount = Object.values(QUESTION_BANK).reduce((sum, arr) => sum + arr.length, 0);
-      const allTab = document.createElement("div");
+      const allTab = document.createElement("button");
+      allTab.type = "button";
       allTab.className = "tab" + (state.currentChapter === "all" ? " active" : "");
       allTab.innerHTML = `全部 <span class="count">${allCount}</span>`;
-      allTab.onclick = () => { state.currentChapter = "all"; saveState(); render(); };
+      allTab.addEventListener("click", () => { console.log("[tab] click: all"); state.currentChapter = "all"; currentQuestion = null; saveState(); render(); });
       tabs.appendChild(allTab);
 
       // 章节 tab
       chapters.forEach(ch => {
         const items = QUESTION_BANK[ch] || [];
         const answered = items.filter(q => state.answered[q.id]).length;
-        const tab = document.createElement("div");
+        const tab = document.createElement("button");
+        tab.type = "button";
         tab.className = "tab" + (state.currentChapter === ch ? " active" : "");
         tab.innerHTML = `${ch} <span class="count">${answered}/${items.length}</span>`;
-        tab.onclick = () => { state.currentChapter = ch; saveState(); render(); };
+        tab.addEventListener("click", () => { console.log("[tab] click:", ch); state.currentChapter = ch; currentQuestion = null; saveState(); render(); });
         tabs.appendChild(tab);
       });
     }
