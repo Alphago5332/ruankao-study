@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>康奈尔笔记 · 第 1 章第 3 节 现代化创新发展 · 带答案版</title>
+<style>
+  :root{
+    --ink:#1f2328;
+    --ink-2:#4b5563;
+    --ink-3:#8b949e;
+    --line:#2f3742;
+    --rule:#d6dae0;
+    --accent:#185FA5;
+    --accent-soft:#E6F1FB;
+    --warm:#854F0B;
+    --warm-soft:#FAEEDA;
+    --paper:#ffffff;
+    --ans-bg:#fffaf2;
+    --ans-border:#e8d9b8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    padding:28px 16px 48px;
+    background:#eef0f3;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+    color:var(--ink);
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .toolbar{
+    max-width:210mm;margin:0 auto 14px;display:flex;gap:10px;align-items:center;
+    justify-content:space-between;flex-wrap:wrap;
+  }
+  .toolbar .hint{font-size:12.5px;color:#5b6470;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;
+    font-size:13px;padding:7px 14px;border-radius:8px;cursor:pointer;
+    font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn.active{background:var(--warm);border-color:var(--warm);color:#fff;}
+
+  .page{
+    width:210mm;min-height:297mm;margin:0 auto;background:var(--paper);
+    padding:14mm 13mm 12mm;box-shadow:0 2px 14px rgba(16,24,40,.12);
+  }
+
+  .head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    border-bottom:2px solid var(--line);padding-bottom:8px;margin-bottom:10px;
+    gap:12px;
+  }
+  .head h1{font-size:19px;margin:0;font-weight:600;letter-spacing:.3px;}
+  .head .sub{font-size:12px;color:var(--ink-3);margin-top:4px;}
+  .head .meta{font-size:12px;color:var(--ink-2);text-align:right;line-height:1.9;white-space:nowrap;}
+  .head .meta b{font-weight:600;color:var(--accent);}
+
+  .band{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+  .chip{
+    font-size:11.5px;padding:4px 9px;border-radius:5px;
+    background:var(--accent-soft);color:#0C447C;border:1px solid #B5D4F4;
+  }
+  .chip.warm{background:var(--warm-soft);color:#633806;border-color:#EFC98A;}
+
+  .cols{
+    display:grid;grid-template-columns:62mm 1fr;gap:0;
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .col-cue{
+    background:#fafbfc;border-right:1px solid var(--line);padding:8px 9px 9px;
+  }
+  .col-note{padding:8px 11px 9px;}
+  .col-hd{
+    font-size:11.5px;font-weight:600;letter-spacing:.6px;color:var(--ink-2);
+    text-transform:uppercase;padding-bottom:6px;margin-bottom:7px;
+    border-bottom:1px dashed #b9c0c9;
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  .col-hd span{font-size:10.5px;font-weight:400;color:var(--ink-3);text-transform:none;letter-spacing:0;}
+
+  .q{
+    font-size:12px;line-height:1.5;color:#1f2328;
+    padding:5px 0 5px 20px;position:relative;border-bottom:1px dotted #dfe3e8;
+  }
+  .q:last-child{border-bottom:0;}
+  .q::before{
+    content:attr(data-n);position:absolute;left:0;top:5px;
+    width:14px;height:14px;border-radius:50%;
+    background:var(--accent);color:#fff;font-size:9.5px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:600;line-height:1;
+  }
+  .q b{font-weight:600;}
+  .q em{font-style:normal;color:var(--warm);font-weight:600;}
+
+  .grouplabel{
+    font-size:10.5px;font-weight:600;color:var(--accent);
+    letter-spacing:.4px;margin:8px 0 2px;
+  }
+  .grouplabel:first-child{margin-top:0;}
+
+  /* === 答案区样式 === */
+  .ans-block{
+    margin-bottom:7px;padding:5px 8px 6px;
+    background:var(--ans-bg);border:1px solid var(--ans-border);border-radius:3px;
+  }
+  .ans-block .ans-title{
+    font-size:10.5px;font-weight:600;color:var(--warm);
+    letter-spacing:.3px;margin-bottom:2px;display:flex;align-items:baseline;gap:6px;
+  }
+  .ans-block .ans-title .num{
+    display:inline-block;min-width:14px;height:14px;border-radius:50%;
+    background:var(--warm);color:#fff;font-size:9.5px;font-weight:600;
+    text-align:center;line-height:14px;
+  }
+  .ans-block ul{
+    margin:2px 0 3px 0;padding:0 0 0 16px;font-size:11.5px;line-height:1.55;color:#2b323b;
+  }
+  .ans-block ul li{padding:1px 0;}
+  .ans-block .key{
+    color:var(--warm);font-weight:600;
+  }
+  .ans-block .tip{
+    font-size:10.5px;color:#633806;margin-top:2px;line-height:1.5;
+    padding:2px 6px;background:var(--warm-soft);border-radius:2px;
+  }
+  .ans-block .fill{
+    height:18px;border-bottom:1px dashed #c8c0aa;margin-top:3px;
+  }
+  body.hide-answers .ans-block{display:none;}
+  body.hide-answers .summary-prefill{display:none;}
+
+  .summary{
+    margin-top:10px;border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .summary .col-hd{
+    margin:0;padding:7px 11px;background:#fafbfc;border-bottom:1px solid var(--line);
+  }
+  .summary .body{padding:6px 11px 8px;font-size:11.5px;line-height:1.7;color:#2b323b;}
+  .summary .body b{color:var(--accent);}
+  .summary .body .small{font-size:10.5px;color:var(--ink-3);margin-top:3px;display:block;}
+
+  .footer{
+    margin-top:9px;font-size:10.5px;color:var(--ink-3);
+    display:flex;justify-content:space-between;gap:10px;
+  }
+
+  .guide{
+    width:210mm;margin:16px auto 0;background:#fff;border:1px solid #d9dee5;
+    border-radius:8px;padding:16px 18px;
+  }
+  .guide h2{font-size:14px;margin:0 0 10px;font-weight:600;}
+  .guide table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .guide th,.guide td{
+    border:1px solid #e2e6eb;padding:7px 9px;text-align:left;vertical-align:top;line-height:1.6;
+  }
+  .guide th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .guide td:first-child{width:88px;font-weight:600;color:var(--accent);}
+  .guide .note{font-size:12px;color:#5b6470;margin-top:10px;line-height:1.7;}
+
+  @page{size:A4 portrait;margin:0;}
+  @media print{
+    body{background:#fff;padding:0;}
+    .toolbar,.guide{display:none;}
+    .page{box-shadow:none;margin:0;width:auto;min-height:auto;padding:13mm 12mm;}
+    body.hide-answers .ans-block{display:none;}
+    body.hide-answers .summary-prefill{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="hint">A4 竖版 · 带答案版 · 建议先默写、再对照；打印时可「隐藏答案」变填空版</div>
+  <div>
+    <button class="btn" id="toggleBtn" onclick="toggleAnswers()">👁 隐藏答案（打印填空版）</button>
+    <button class="btn primary" onclick="window.print()">打印 / 导出 PDF</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="head">
+    <div>
+      <h1>康奈尔笔记 · 第 1 章第 3 节 现代化创新发展 <span style="color:var(--warm);font-size:14px;">（带答案版）</span></h1>
+      <div class="sub">《信息系统项目管理师教程（第 4 版）》约 P13 ~ P18　｜　答案口径以 2026-09-13 核对为准</div>
+    </div>
+    <div class="meta">
+      日期：__________<br>
+      第 <b>__</b> 轮复习　用时 <b>__</b> 分钟
+    </div>
+  </div>
+
+  <div class="band">
+    <span class="chip">上午约 1 题</span>
+    <span class="chip">不出大题</span>
+    <span class="chip warm">必背：两化融合四方面 + 智能制造五级</span>
+    <span class="chip warm">通读：无身份社会 / 人机一体化</span>
+    <span class="chip warm">📝 含答案</span>
+  </div>
+
+  <div class="cols">
+
+    <div class="col-cue">
+      <div class="col-hd">线索栏 <span>遮住右侧自问</span></div>
+
+      <div class="grouplabel">1.3.1 农业农村现代化</div>
+      <div class="q" data-n="1"><b>农业现代化定义</b>（四个「用」）？<br>核心手段是什么？</div>
+      <div class="q" data-n="2"><b>乡村振兴数字赋能三大重点</b>？各举 2 个关键词。</div>
+      <div class="q" data-n="3"><b>智慧农业核心抓手</b>：体系 / 四技术 / 三载体？</div>
+
+      <div class="grouplabel">1.3.2 两化融合</div>
+      <div class="q" data-n="4"><b>两化融合定义</b>与核心？</div>
+      <div class="q" data-n="5"><b>四个方面融合</b>口诀？各自含义？</div>
+      <div class="q" data-n="6">「数控机床 / 智能家电」属于哪个融合？<br>「网络营销」「工业软件」呢？</div>
+      <div class="q" data-n="7"><b>意义三个「是」</b>？</div>
+
+      <div class="grouplabel">1.3.2 智能制造</div>
+      <div class="q" data-n="8"><b>智能制造定义</b>：「五自」？贯穿哪些环节？</div>
+      <div class="q" data-n="9"><b>GB/T 39116 五等级</b>名称？各级关键词？</div>
+      <div class="q" data-n="10"><b>能力要素四项</b>？「技术」下几个子域？</div>
+
+      <div class="grouplabel">1.3.3 消费互联网</div>
+      <div class="q" data-n="11"><b>两大基本属性</b>？各包含什么？</div>
+      <div class="q" data-n="12"><b>「无身份社会」</b>靠什么实现信任？</div>
+    </div>
+
+    <div class="col-note">
+      <div class="col-hd">答案区 <span>默写后对照 · 留白处写自己的补充</span></div>
+
+      <div class="grouplabel">1.3.1 农业农村现代化</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">1</span>农业现代化定义 + 核心手段</div>
+        <ul>
+          <li>用<span class="key">现代工业</span>装备农业 / 用<span class="key">现代科学技术</span>改造农业 / 用<span class="key">现代管理方法</span>管理农业 / 用<span class="key">现代科学文化知识</span>提高农民素质</li>
+          <li>核心手段 = <span class="key">农业信息化</span>（既是目标也是手段）</li>
+        </ul>
+        <div class="tip">农业信息化 = 利用信息技术和信息系统为农业<b>产、供、销及相关管理、服务</b>提供有效信息支持</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">2</span>乡村振兴数字赋能三大重点</div>
+        <ul>
+          <li><span class="key">建设基础设施</span>：农村<span class="key">千兆光网、5G、移动物联网</span>与城市<b>同步</b>规划建设；<b>新建和改造两手抓</b></li>
+          <li><span class="key">发展智慧农业</span>：农业农村<span class="key">大数据体系</span>；数字田园、数字灌区、智慧农牧渔场</li>
+          <li><span class="key">建设数字乡村</span>：乡村<span class="key">数字惠民服务体系</span>；「互联网+」政务服务向农村基层延伸</li>
+        </ul>
+        <div class="tip">记法：<b>设施、农业、乡村</b>（先修路 → 再种田 → 后惠民）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">3</span>智慧农业核心抓手</div>
+        <ul>
+          <li>体系：<span class="key">农业农村大数据体系</span></li>
+          <li>四技术：<span class="key">物联网、大数据、人工智能、区块链</span>与农业生产经营深度融合</li>
+          <li>三载体：<span class="key">数字田园、数字灌区、智慧农牧渔场</span></li>
+        </ul>
+        <div class="tip">数字乡村还有：乡村<b>智慧社区</b>建设；农村<b>教育、医疗、文化</b>数字化</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">1.3.2 两化融合</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">4</span>两化融合定义与核心</div>
+        <ul>
+          <li>定义：信息化和工业化的<span class="key">高层次深度结合</span>，以<span class="key">信息化带动工业化</span>、以<span class="key">工业化促进信息化</span>，走<span class="key">新型工业化道路</span></li>
+          <li>核心 = <span class="key">信息化支撑</span>，追求<span class="key">可持续发展</span>模式</li>
+        </ul>
+        <div class="tip">两个「带动 / 促进」方向勿写反：<b>信息化带动工业化</b></div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">5</span>四个方面融合</div>
+        <ul>
+          <li><span class="key">技术融合</span>：工业技术 + 信息技术 → <b>产生新技术</b>（汽车电子技术、工业控制技术）</li>
+          <li><span class="key">产品融合</span>：信息技术<b>渗透到产品中</b>（数控机床、智能家电、遥控飞机）</li>
+          <li><span class="key">业务融合</span>：信息技术应用到<b>研发设计、生产制造、经营管理、市场营销</b>各环节（替代手工台账、网络营销）</li>
+          <li><span class="key">产业衍生</span>：催生<b>新产业、新兴业态</b>（工业电子、工业软件、工业信息服务业）</li>
+        </ul>
+        <div class="tip">判别法：<b>出新东西 = 技术；装进产品 = 产品；进流程环节 = 业务；生出新产业 = 产业衍生</b>（口诀「技产务衍」）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">6</span>例子归类</div>
+        <ul>
+          <li>数控机床 / 智能家电 → <span class="key">产品融合</span></li>
+          <li>网络营销 / 计算机管理替代手工台账 → <span class="key">业务融合</span></li>
+          <li>工业软件 / B2B 电商 / 信息化咨询 → <span class="key">产业衍生</span></li>
+          <li>汽车电子技术 / 工业控制技术 → <span class="key">技术融合</span></li>
+        </ul>
+        <div class="tip">工业电子含：机械、汽车、船舶、航空电子；工业软件含：设计软件、控制软件</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">7</span>两化融合意义的三个「是」</div>
+        <ul>
+          <li>制造业<span class="key">数字化、网络化、智能化</span>发展的<span class="key">必由之路</span></li>
+          <li><span class="key">中国特色新型工业化道路</span>的集中体现</li>
+          <li>建设<span class="key">制造强国、网络强国和数字中国</span>的关键点</li>
+        </ul>
+        <div class="tip">三个「是」按「路径 → 道路 → 关键点」梯度记</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">1.3.2 智能制造</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">8</span>智能制造定义</div>
+        <ul>
+          <li>基于<span class="key">新一代信息通信技术与先进制造技术深度融合</span></li>
+          <li>贯穿于<span class="key">设计、生产、管理、服务</span>等制造活动的各个环节（口诀：设生管服）</li>
+          <li>「五自」：<span class="key">自感知、自学习、自决策、自执行、自适应</span></li>
+        </ul>
+        <div class="tip">五自记法：<b>感、学、决、执、适</b>；本质 = 新型生产方式</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">9</span>GB/T 39116 成熟度五等级</div>
+        <ul>
+          <li>一级<span class="key">规划级</span>：基础条件<b>规划</b>，核心业务活动<b>流程化</b>管理</li>
+          <li>二级<span class="key">规范级</span>：自动化 / 信息技术改造规范，<b>单一业务活动</b>数据共享</li>
+          <li>三级<span class="key">集成级</span>：装备、系统集成，<b>跨业务活动</b>数据共享</li>
+          <li>四级<span class="key">优化级</span>：<b>数据挖掘</b>形成知识、模型，精准<b>预测和优化</b></li>
+          <li>五级<span class="key">引领级</span>：模型<b>持续驱动</b>优化创新，<b>产业链协同</b>并衍生新模式</li>
+        </ul>
+        <div class="tip">⚠️ 易混：智慧城市五级 = 规划 / <b>管理 / 协同</b> / 优化 / 引领——第二、三级名称不同，勿背串！高等级涵盖低等级要求。</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">10</span>能力要素四项</div>
+        <ul>
+          <li><span class="key">人员</span>：组织战略、人员技能（2 子域）</li>
+          <li><span class="key">技术</span>：数据、集成、信息安全（3 子域）</li>
+          <li><span class="key">资源</span>：装备、网络（2 子域）</li>
+          <li><span class="key">制造</span>：设计、生产、物流、销售、服务（5 子域）</li>
+        </ul>
+        <div class="tip">口诀：<b>人技资制</b>；「制造」5 子域 = 智能制造贯穿的五个环节</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">1.3.3 消费互联网</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">11</span>消费互联网两大基本属性</div>
+        <ul>
+          <li><span class="key">媒体属性</span>：自媒体、社交媒体、资讯门户网站</li>
+          <li><span class="key">产业属性</span>：在线旅游、为消费者提供生活服务的电子商务</li>
+        </ul>
+        <div class="tip">定义关键词：<b>个人用户</b>为中心、<b>日常生活场景</b>为应用背景；实质是<b>个人虚拟化</b>过程</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">12</span>「无身份社会」的实现基础</div>
+        <ul>
+          <li>互联网搭建<b>更高层次的<span class="key">信任校验模式</span></b></li>
+          <li>通过<span class="key">数据记录、存储、整合和共享</span>，实现复杂校验和<span class="key">过程可追溯</span></li>
+          <li>相关参与者无需花费时间完成「身份认定」</li>
+        </ul>
+        <div class="tip">社交圈<b>聚集</b> → 新型网络经济：网络商城、快递、外卖、网红带货（消费互联网的核心地位）</div>
+        <div class="fill"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="summary">
+    <div class="col-hd">总结区 <span>本节本质 + 考点地图</span></div>
+    <div class="body summary-prefill">
+      <b>本节本质</b>：创新驱动战略的四个落地场景（农业农村 / 工业两化融合 / 智能制造 / 消费互联网）；上午约 1 题，「四个方面融合」给例子判归类是高频套路。<br>
+      <b>考点地图（按考频排序）</b>：① 两化融合四个方面 + 例子归类 → ② 智能制造成熟度五级（规划 / 规范 / 集成 / 优化 / 引领）→ ③ 智能制造定义「五自」+ 贯穿环节 → ④ 乡村振兴数字赋能三重点 → ⑤ 消费互联网两大属性 → ⑥ 农业现代化核心手段 = 农业信息化 → ⑦ 能力要素四项（人技资制）。<br>
+      <span class="small">⚠️ 口径陷阱：①智能制造成熟度五级 ≠ 智慧城市成熟度五级（第二、三级「规范·集成」vs「管理·协同」）；②两化融合是「高层次深度结合」非简单叠加；③能力要素「技术」下是数据 / 集成 / 信息安全三个子域；④「产业衍生」不叫「产业融合」。</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>康奈尔笔记法 · 第 1 章第 3 节 带答案版　｜　复习记录：当日 ☐　+1 天 ☐　+3 天 ☐　+7 天 ☐　+14 天 ☐</span>
+    <span>正确率 ____ / 12</span>
+  </div>
+
+</div>
+
+<div class="guide">
+  <h2>怎么用这一页</h2>
+  <table>
+    <tr>
+      <th>步骤</th><th>做法</th>
+    </tr>
+    <tr>
+      <td>第 1 遍 · 遮答默写</td>
+      <td>用纸<b>遮住右栏答案区</b>，只看左栏 12 个问题。口头/默写回答，答不出的画「×」。</td>
+    </tr>
+    <tr>
+      <td>第 2 遍 · 对照修正</td>
+      <td>揭开答案区逐项对照。每条答案下的<b>虚线</b>是留给你的「补充线」——记下易漏点（如「四个方面融合的判别法」「成熟度五级名称」「能力要素子域」）。</td>
+    </tr>
+    <tr>
+      <td>第 3 遍 · 隐藏答案打印</td>
+      <td>点工具栏「👁 隐藏答案」按钮，再打印一份当填空卷，可反复练习。</td>
+    </tr>
+    <tr>
+      <td>第 4 遍 · 复习节奏</td>
+      <td>页脚 5 个框按「当日 → +1 天 → +3 天 → +7 天 → +14 天」打勾，这就是你的艾宾浩斯进度条。全部打勾后，本节可不再看。</td>
+    </tr>
+  </table>
+  <div class="note">
+    <b>为什么这份是「带答案版」</b>：直接默写全节答案容易翻车（口径不准就白背）。本版每个答案都标注<b>关键术语</b>（暖色）和<b>口诀 / 易错提醒</b>（橙色框），默写后对照一眼就能定位偏差。考前冲刺只看「总结区 · 考点地图」+「橙色 tip 框」即可。
+  </div>
+</div>
+
+<script>
+  function toggleAnswers(){
+    document.body.classList.toggle('hide-answers');
+    const btn = document.getElementById('toggleBtn');
+    const hidden = document.body.classList.contains('hide-answers');
+    btn.textContent = hidden ? '👁 显示答案' : '👁 隐藏答案（打印填空版）';
+    btn.classList.toggle('active', hidden);
+  }
+</script>
+
+</body>
+</html>

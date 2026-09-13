@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1.3 现代化创新发展 · 考点自测题</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #333; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 20px 16px 60px; }
+  header { background: #185FA5; color: #fff; border-radius: 8px; padding: 18px 20px; margin-bottom: 16px; }
+  header h1 { font-size: 19px; margin-bottom: 4px; }
+  header p { font-size: 12.5px; opacity: .85; }
+  .progress-bar { background: rgba(255,255,255,.25); border-radius: 4px; height: 8px; margin-top: 10px; }
+  .progress-bar i { display: block; height: 100%; background: #ffc53d; border-radius: 4px; width: 0; transition: width .3s; }
+  .card { background: #fff; border-radius: 8px; padding: 18px 20px; margin-bottom: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+  .qtag { font-size: 11px; color: #854F0B; background: #fff7e6; border: 1px solid #f0d9a0; border-radius: 3px; padding: 1px 6px; margin-right: 6px; }
+  .qno { font-weight: bold; color: #185FA5; }
+  .qtext { font-size: 14.5px; line-height: 1.65; margin: 8px 0 12px; }
+  .opt { display: block; width: 100%; text-align: left; border: 1px solid #d9e2ec; border-radius: 6px;
+    background: #fff; padding: 9px 12px; font-size: 13.5px; margin-bottom: 8px; cursor: pointer; line-height: 1.5; }
+  .opt:hover { border-color: #185FA5; }
+  .opt.sel { border-color: #185FA5; background: #eef4fb; }
+  .opt.right { border-color: #2e7d32; background: #eef7ee; }
+  .opt.wrong { border-color: #c62828; background: #fdeeee; }
+  .opt .mark { font-weight: bold; margin-right: 6px; color: #185FA5; }
+  .explain { display: none; background: #f4f8fc; border-left: 3px solid #185FA5; border-radius: 4px;
+    padding: 10px 12px; font-size: 13px; line-height: 1.7; color: #444; margin-top: 4px; }
+  .explain b { color: #185FA5; }
+  .btn { background: #185FA5; color: #fff; border: none; border-radius: 6px; padding: 9px 22px;
+    font-size: 14px; cursor: pointer; margin-top: 10px; }
+  .btn.gray { background: #90a4ae; }
+  .btn:disabled { background: #b0bec5; cursor: not-allowed; }
+  #result { display: none; text-align: center; }
+  #result .big { font-size: 40px; font-weight: bold; color: #185FA5; margin: 10px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 14px 0; }
+  th, td { border: 1px solid #d9e2ec; padding: 7px 8px; text-align: center; }
+  th { background: #eef4fb; color: #185FA5; }
+  .module-stat td:first-child { text-align: left; }
+  #reviewList { text-align: left; }
+  .wrong-item { border: 1px solid #f0c4c4; border-radius: 6px; padding: 10px 12px; margin-bottom: 8px; font-size: 13px; background: #fffafa; }
+  .wrong-item b { color: #c62828; }
+  .kbd-tip { font-size: 11.5px; color: #999; margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>1.3 现代化创新发展 · 考点自测（20 题）</h1>
+    <p>第 4 版教材 1.3 节 · 达标线 16/20（80%）· 键盘 A~D 选择，Enter 确认</p>
+    <div class="progress-bar"><i id="pbar"></i></div>
+  </header>
+  <div id="quiz"></div>
+  <div id="result" class="card">
+    <h2>测验完成</h2>
+    <div class="big" id="finalScore">0 / 20</div>
+    <div id="advice" style="font-size:14px; margin-bottom: 6px;"></div>
+    <table class="module-stat" id="moduleTable">
+      <tr><th>模块</th><th>正确率</th><th>状态</th></tr>
+    </table>
+    <div id="reviewWrap" style="display:none">
+      <h3 style="color:#c62828; font-size:14px; margin-bottom:8px;">错题回顾</h3>
+      <div id="reviewList"></div>
+    </div>
+    <button class="btn" id="retryWrong" style="display:none">只重做错题</button>
+    <button class="btn gray" onclick="initAll()">重新测验</button>
+  </div>
+  <div class="kbd-tip">对照资料：同目录《1.3_知识点清单.md》· 教材出处：《信息系统项目管理师教程（第4版）》约 P13~P18</div>
+</div>
+
+<script>
+const QUESTIONS = [
+  // 模块A 农业农村现代化 (1-5)
+  { m: "A·农业农村现代化", q: "农业现代化的核心手段是（　）。",
+    o: ["农业机械化","农业信息化","农业数字化","农业规模化"], a: 1,
+    e: "教材原文：农业信息化是农业现代化的重要技术手段。农业现代化用现代工业装备、现代科学技术改造、现代管理方法管理、现代科学文化知识提高农民素质。" },
+  { m: "A·农业农村现代化", q: "乡村振兴战略聚焦数字赋能农业农村现代化建设，重点方面（　）不属于其中。",
+    o: ["建设基础设施","发展智慧农业","建设数字乡村","发展乡村旅游"], a: 3,
+    e: "三重点：建设基础设施、发展智慧农业、建设数字乡村（口诀：设施、农业、乡村）。" },
+  { m: "A·农业农村现代化", q: "建设基础设施要求：推动农村千兆光网、5G、移动物联网等新技术与（　）同步规划建设。",
+    o: ["县城","城市","东部地区","产业园区"], a: 1,
+    e: "教材原文：与城市同步规划建设，提升农村宽带网络水平；同时注重新建和改造两手抓。" },
+  { m: "A·农业农村现代化", q: "发展智慧农业要建立和推广应用农业农村（　）体系。",
+    o: ["电子商务","大数据","现代物流","普惠金融"], a: 1,
+    e: "发展智慧农业：建立和推广应用农业农村大数据体系，推动物联网、大数据、人工智能、区块链与农业生产经营深度融合。" },
+  { m: "A·农业农村现代化", q: "建设数字田园、数字灌区和智慧农牧渔场，属于乡村振兴三重点中的（　）。",
+    o: ["建设基础设施","发展智慧农业","建设数字乡村","数字化治理"], a: 1,
+    e: "数字田园、数字灌区、智慧农牧渔场是「发展智慧农业」的载体；数字惠民服务体系、「互联网+」政务服务延伸属于「建设数字乡村」。" },
+  // 模块B 两化融合 (6-11)
+  { m: "B·两化融合", q: "两化融合是指信息化和工业化的（　）。",
+    o: ["简单叠加","高层次深度结合","部分替代","先后接续"], a: 1,
+    e: "教材定义：信息化和工业化的高层次深度结合；以信息化带动工业化、以工业化促进信息化，走新型工业化道路。" },
+  { m: "B·两化融合", q: "两化融合的核心就是（　）支撑。",
+    o: ["工业化","信息化","政策","资本"], a: 1,
+    e: "两化融合的核心就是信息化支撑，追求可持续发展模式。" },
+  { m: "B·两化融合", q: "汽车制造技术与电子技术融合产生汽车电子技术，属于四个方面融合中的（　）。",
+    o: ["技术融合","产品融合","业务融合","产业衍生"], a: 0,
+    e: "技术融合 = 工业技术与信息技术融合产生新技术；另一例子：工业和计算机控制技术融合产生工业控制技术。" },
+  { m: "B·两化融合", q: "普通机床加上数控系统变成数控机床，属于（　）。",
+    o: ["技术融合","产品融合","业务融合","产业衍生"], a: 1,
+    e: "产品融合 = 电子信息技术或产品渗透到产品中，增加技术含量。同类例子：传统家电智能化变成智能家电、飞机模型加控制芯片变遥控飞机。" },
+  { m: "B·两化融合", q: "计算机管理方式改变了传统手工台账，属于（　）。",
+    o: ["产品融合","技术融合","业务融合","产业衍生"], a: 2,
+    e: "业务融合 = 信息技术应用到研发设计、生产制造、经营管理、市场营销等各个环节（计算机管理替代手工台账、网络营销）。" },
+  { m: "B·两化融合", q: "两化融合催生出工业电子、工业软件、工业信息服务业等新产业，这称为（　）。",
+    o: ["技术融合","产业衍生","业务融合","产品融合"], a: 1,
+    e: "产业衍生 = 催生新产业、形成新兴业态：工业电子（机械/汽车/船舶/航空电子）、工业软件（设计/控制软件）、工业信息服务业（B2B 电商、信息化咨询）。注意：是「产业衍生」不是「产业融合」。" },
+  // 模块C 智能制造 (12-17)
+  { m: "C·智能制造", q: "智能制造具有「自感知、自学习、自决策、（　）、自适应」等功能。",
+    o: ["自修复","自执行","自配置","自诊断"], a: 1,
+    e: "「五自」：自感知、自学习、自决策、自执行、自适应（口诀：感学决执适）。" },
+  { m: "C·智能制造", q: "智能制造贯穿于（　）等制造活动的各个环节。",
+    o: ["设计、生产、管理、服务","采购、销售、运输、售后","研发、市场、财务、人事","规划、建设、运营、维护"], a: 0,
+    e: "教材原文：贯穿于设计、生产、管理、服务等制造活动的各个环节（口诀：设生管服）；本质是基于新一代信息通信技术与先进制造技术深度融合的新型生产方式。" },
+  { m: "C·智能制造", q: "《智能制造能力成熟度模型》的国家标准编号是（　）。",
+    o: ["GB/T 39116","GB/T 22239","GB/T 36073","GB 50174"], a: 0,
+    e: "GB/T 39116《智能制造能力成熟度模型》。防坑：GB/T 22239 是等保基本要求，GB/T 36073 是数据管理能力成熟度（DCMM）。" },
+  { m: "C·智能制造", q: "智能制造能力成熟度模型的能力要素包括（　）。",
+    o: ["人员、技术、资源、制造","人、机、料、法、环","战略、流程、组织、技术","规划、规范、集成、优化"], a: 0,
+    e: "能力要素四项「人技资制」：人员（组织战略、人员技能）、技术（数据、集成、信息安全）、资源（装备、网络）、制造（设计、生产、物流、销售、服务）。D 是五个等级的名称。" },
+  { m: "C·智能制造", q: "智能制造能力成熟度等级中，「对装备、系统等开展集成，实现跨业务活动间的数据共享」的是（　）。",
+    o: ["规划级","规范级","集成级","优化级"], a: 2,
+    e: "三级集成级 = 装备、系统集成 + 跨业务活动数据共享。对照：二级规范级 = 单一业务活动数据共享；四级优化级 = 数据挖掘形成知识模型、精准预测和优化。" },
+  { m: "C·智能制造", q: "智能制造能力成熟度自低向高的第三级是（　），第五级是（　）。",
+    o: ["规范级、引领级","集成级、引领级","集成级、优化级","优化级、引领级"], a: 1,
+    e: "五级顺序：规划级 → 规范级 → 集成级 → 优化级 → 引领级。⚠️ 智慧城市成熟度五级是规划/管理/协同/优化/引领，第二、三级名称不同，勿背串。" },
+  // 模块D 消费互联网 (18-20)
+  { m: "D·消费互联网", q: "消费互联网的两大基本属性是（　）。",
+    o: ["媒体属性和产业属性","社交属性和娱乐属性","信息属性和交易属性","平台属性和流量属性"], a: 0,
+    e: "两大属性：媒体属性（自媒体、社交媒体、资讯门户网站）、产业属性（在线旅游、为消费者提供生活服务的电子商务）。" },
+  { m: "D·消费互联网", q: "下列属于消费互联网「媒体属性」的是（　）。",
+    o: ["在线旅游","自媒体、社交媒体和资讯门户网站","生活服务电子商务","网络商城"], a: 1,
+    e: "媒体属性 = 自媒体、社交媒体、资讯门户网站；产业属性 = 在线旅游、生活服务类电子商务。" },
+  { m: "D·消费互联网", q: "消费互联网推动的「无身份社会」，其实现基础是互联网通过数据记录、存储、整合和共享实现了（　）。",
+    o: ["完全匿名交易","更高层次的信任校验和过程可追溯","取消实名认证","去中心化自治"], a: 1,
+    e: "「无身份社会」= 参与者无需完成「身份认定」，因为互联网搭建了更高层次的信任校验模式，通过数据记录、存储、整合和共享实现复杂校验和过程可追溯。" }
+];
+
+let idx = 0, score = 0, answers = [], current = QUESTIONS, locked = false;
+
+function initAll() {
+  idx = 0; score = 0; answers = []; current = QUESTIONS.slice();
+  document.getElementById("quiz").style.display = "block";
+  document.getElementById("result").style.display = "none";
+  renderQ();
+}
+function renderQ() {
+  locked = false;
+  const q = current[idx];
+  document.getElementById("pbar").style.width = (idx / current.length * 100) + "%";
+  let html = '<div class="card"><span class="qtag">' + q.m + '</span><span class="qno">第 ' + (idx+1) + ' / ' + current.length + ' 题</span>';
+  html += '<div class="qtext">' + q.q + '</div>';
+  q.o.forEach((t, i) => { html += '<button class="opt" data-i="' + i + '"><span class="mark">' + "ABCD"[i] + '</span>' + t + '</button>'; });
+  html += '<div class="explain" id="ex"><b>精讲：</b>' + q.e + '</div>';
+  html += '<button class="btn" id="next" disabled>' + (idx === current.length-1 ? "查看结果" : "下一题 (Enter)") + '</button></div>';
+  document.getElementById("quiz").innerHTML = html;
+  document.querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => choose(+b.dataset.i)));
+  document.getElementById("next").addEventListener("click", next);
+}
+function choose(i) {
+  if (locked) return; locked = true;
+  const q = current[idx], ok = i === q.a;
+  if (ok) score++;
+  answers[idx] = { ok, q };
+  document.querySelectorAll(".opt").forEach((b, j) => {
+    b.disabled = true;
+    if (j === q.a) b.classList.add("right");
+    else if (j === i) b.classList.add("wrong");
+  });
+  document.getElementById("ex").style.display = "block";
+  document.getElementById("next").disabled = false;
+}
+function next() {
+  if (idx < current.length - 1) { idx++; renderQ(); }
+  else finish();
+}
+function finish() {
+  document.getElementById("quiz").style.display = "none";
+  document.getElementById("pbar").style.width = "100%";
+  const res = document.getElementById("result");
+  res.style.display = "block";
+  document.getElementById("finalScore").textContent = score + " / " + current.length;
+  const pct = Math.round(score / current.length * 100);
+  document.getElementById("advice").textContent =
+    pct >= 80 ? "✅ 达标（≥80%），可进入 1.4「数字中国」打卡！" :
+    pct >= 60 ? "🔶 接近达标：回看错题对应模块的知识点清单，明天重测。" :
+    "❌ 未达标：请重读《1.3_知识点清单》后重新测验。";
+  // 分模块统计
+  const mods = {};
+  current.forEach((q, i) => {
+    mods[q.m] = mods[q.m] || { t: 0, r: 0 };
+    mods[q.m].t++;
+    if (answers[i] && answers[i].ok) mods[q.m].r++;
+  });
+  let rows = "";
+  Object.keys(mods).forEach(m => {
+    const st = mods[m].r / mods[m].t >= 0.8 ? "✅" : "🔶";
+    rows += '<tr><td class="module-stat">' + m + '</td><td>' + mods[m].r + " / " + mods[m].t + '</td><td>' + st + '</td></tr>';
+  });
+  document.getElementById("moduleTable").innerHTML = '<tr><th>模块</th><th>正确率</th><th>状态</th></tr>' + rows;
+  // 错题
+  const wrongs = current.map((q, i) => ({ q, i })).filter(x => !answers[x.i] || !answers[x.i].ok);
+  if (wrongs.length) {
+    document.getElementById("reviewWrap").style.display = "block";
+    document.getElementById("retryWrong").style.display = "inline-block";
+    document.getElementById("reviewList").innerHTML = wrongs.map(x =>
+      '<div class="wrong-item"><b>【' + x.q.m + '】</b>' + x.q.q +
+      '<br>✔ 正确答案：<b>' + "ABCD"[x.q.a] + " · " + x.q.o[x.q.a] + '</b><br><span style="color:#666">' + x.q.e + '</span></div>'
+    ).join("");
+  } else {
+    document.getElementById("reviewWrap").style.display = "none";
+    document.getElementById("retryWrong").style.display = "none";
+  }
+}
+document.getElementById("retryWrong").addEventListener("click", () => {
+  current = current.filter((q, i) => !answers[i] || !answers[i].ok);
+  idx = 0; score = 0; answers = [];
+  document.getElementById("result").style.display = "none";
+  document.getElementById("quiz").style.display = "block";
+  renderQ();
+});
+document.addEventListener("keydown", ev => {
+  if (document.getElementById("result").style.display === "block") return;
+  const k = ev.key.toUpperCase();
+  const sel = "ABCD".indexOf(k);
+  if (sel >= 0 && !locked) choose(sel);
+  else if ((ev.key === "Enter" || k === "ENTER") && locked) next();
+});
+initAll();
+</script>
+</body>
+</html>
