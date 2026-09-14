@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1.5 数字化转型与元宇宙 · 考点自测题</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #333; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 20px 16px 60px; }
+  header { background: #185FA5; color: #fff; border-radius: 8px; padding: 18px 20px; margin-bottom: 16px; }
+  header h1 { font-size: 19px; margin-bottom: 4px; }
+  header p { font-size: 12.5px; opacity: .85; }
+  .progress-bar { background: rgba(255,255,255,.25); border-radius: 4px; height: 8px; margin-top: 10px; }
+  .progress-bar i { display: block; height: 100%; background: #ffc53d; border-radius: 4px; width: 0; transition: width .3s; }
+  .card { background: #fff; border-radius: 8px; padding: 18px 20px; margin-bottom: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+  .qtag { font-size: 11px; color: #854F0B; background: #fff7e6; border: 1px solid #f0d9a0; border-radius: 3px; padding: 1px 6px; margin-right: 6px; }
+  .qno { font-weight: bold; color: #185FA5; }
+  .qtext { font-size: 14.5px; line-height: 1.65; margin: 8px 0 12px; }
+  .opt { display: block; width: 100%; text-align: left; border: 1px solid #d9e2ec; border-radius: 6px;
+    background: #fff; padding: 9px 12px; font-size: 13.5px; margin-bottom: 8px; cursor: pointer; line-height: 1.5; }
+  .opt:hover { border-color: #185FA5; }
+  .opt.sel { border-color: #185FA5; background: #eef4fb; }
+  .opt.right { border-color: #2e7d32; background: #eef7ee; }
+  .opt.wrong { border-color: #c62828; background: #fdeeee; }
+  .opt .mark { font-weight: bold; margin-right: 6px; color: #185FA5; }
+  .explain { display: none; background: #f4f8fc; border-left: 3px solid #185FA5; border-radius: 4px;
+    padding: 10px 12px; font-size: 13px; line-height: 1.7; color: #444; margin-top: 4px; }
+  .explain b { color: #185FA5; }
+  .btn { background: #185FA5; color: #fff; border: none; border-radius: 6px; padding: 9px 22px;
+    font-size: 14px; cursor: pointer; margin-top: 10px; }
+  .btn.gray { background: #90a4ae; }
+  .btn:disabled { background: #b0bec5; cursor: not-allowed; }
+  #result { display: none; text-align: center; }
+  #result .big { font-size: 40px; font-weight: bold; color: #185FA5; margin: 10px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 14px 0; }
+  th, td { border: 1px solid #d9e2ec; padding: 7px 8px; text-align: center; }
+  th { background: #eef4fb; color: #185FA5; }
+  .module-stat td:first-child { text-align: left; }
+  #reviewList { text-align: left; }
+  .wrong-item { border: 1px solid #f0c4c4; border-radius: 6px; padding: 10px 12px; margin-bottom: 8px; font-size: 13px; background: #fffafa; }
+  .wrong-item b { color: #c62828; }
+  .kbd-tip { font-size: 11.5px; color: #999; margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>1.5 数字化转型与元宇宙 · 考点自测（22 题）</h1>
+    <p>第 4 版新增小节 · 达标线 18/22（80%）· 键盘 A~D 选择，Enter 确认</p>
+    <div class="progress-bar"><i id="pbar"></i></div>
+  </header>
+  <div id="quiz"></div>
+  <div id="result" class="card">
+    <h2>测验完成</h2>
+    <div class="big" id="finalScore">0 / 22</div>
+    <div id="advice" style="font-size:14px; margin-bottom: 6px;"></div>
+    <table class="module-stat" id="moduleTable">
+      <tr><th>模块</th><th>正确率</th><th>状态</th></tr>
+    </table>
+    <div id="reviewWrap" style="display:none">
+      <h3 style="color:#c62828; font-size:14px; margin-bottom:8px;">错题回顾</h3>
+      <div id="reviewList"></div>
+    </div>
+    <button class="btn" id="retryWrong" style="display:none">只重做错题</button>
+    <button class="btn gray" onclick="initAll()">重新测验</button>
+  </div>
+  <div class="kbd-tip">对照资料：同目录《1.5_知识点清单.md》· 教材出处：《信息系统项目管理师教程（第4版）》约 P24~P35 · ⚠️ 本节为第 4 版新增内容，旧真题无对应题</div>
+</div>
+
+<script>
+const QUESTIONS = [
+  // 模块A 数字化转型总论 (1-4)
+  { m: "A·数字化转型总论", q: "数字化转型是建立在（　）基础上，进一步触及组织核心业务，以新建一种（　）为目标的高层次转型。",
+    o: ["数字化转换与数字化升级；业务模式","数字化转换与数字化升级；技术模式","信息化与工业化；商业模式","信息处理与信息传输；组织模式"], a: 0,
+    e: "教材原文：数字化转型（Digital Transformation）是建立在数字化转换（Digitization）、数字化升级（Digitalization）基础上，进一步触及组织核心业务，以新建一种【业务模式】为目标的高层次转型。技术模式 / 组织模式 / 评估模式都是常见干扰项。" },
+  { m: "A·数字化转型总论", q: "关于数字化转型，下列说法错误的是（　）。",
+    o: ["是对组织活动、流程、业务模式和员工能力等方方面面进行重新定义","本质上只是 IT 系统的升级换代","是开发数字化技术及支持能力以新建一个富有活力的数字化商业模式","是一种系统性、彻底的（重大和完全的）重新定义"], a: 1,
+    e: "教材明确：数字化转型【不仅仅是 IT】，而是对组织活动、流程、业务模式和员工能力等方方面面进行重新定义，只有进行系统性、彻底的（重大和完全的）重新定义，成功才会得以实现。B 把范围收窄成 IT，错。" },
+  { m: "A·数字化转型总论", q: "数字化转换（Digitization）、数字化升级（Digitalization）、数字化转型（Digital Transformation）三者的关系是（　）。",
+    o: ["三者是并列的三种技术手段，无先后之分","依次递进，数字化转型是建立在后两者基础上、触及核心业务的高层次转型","数字化转型是基础，数字化转换是最高层次","三者含义相同，可互换使用"], a: 1,
+    e: "三层是【递进关系】：数字化转换 → 数字化升级 → 数字化转型。数字化转型的定语是「高层次」，它建立在数字化转换与数字化升级的基础上，进一步触及组织核心业务。" },
+  { m: "A·数字化转型总论", q: "随着众多信息通信新技术的迅速发展与普及应用，信息空间成长为（　），并与物理空间、社会空间共同构成人类社会的三元空间。",
+    o: ["第三空间","虚拟空间","数字孪生空间","赛博空间"], a: 0,
+    e: "教材 1.5 引言：信息空间成长为【第三空间】，并与物理空间和社会空间共同构成人类社会的三元空间。记法：三元空间 = 物理 + 社会 + 信息。" },
+  // 模块B 驱动因素 (5-10)
+  { m: "B·驱动因素", q: "教材提出的推动人类社会生产关系创新变革的「叠加」范式，不包括下列哪一项？",
+    o: ["生产力飞跃","生产要素变化","信息传播效率突破","全球治理体系变革"], a: 3,
+    e: "四要素叠加 = 【生产力飞跃 + 生产要素变化 + 信息传播效率突破 + 社会「智慧主体」规模扩容】。这个范式驱动完成了原始经济 → 农业经济 → 工业经济，同样驱动工业经济向数字经济转型。「全球治理体系变革」不在其中。" },
+  { m: "B·驱动因素", q: "第四次科技革命对应四个科学范式，其正确顺序是（　）。",
+    o: ["经验范式 → 理论范式 → 模拟范式 → 数据密集型研究范式","理论范式 → 经验范式 → 数据密集型研究范式 → 模拟范式","经验范式 → 模拟范式 → 理论范式 → 数据密集型研究范式","模拟范式 → 经验范式 → 理论范式 → 数据密集型研究范式"], a: 0,
+    e: "四范式顺序：① 经验范式 → ② 理论范式 → ③ 模拟范式 → ④ 数据密集型研究范式。速记「经 → 理 → 模 → 数」，与四次科技革命一一对应。" },
+  { m: "B·驱动因素", q: "偏重经验事实的描述和明确具体的实用性、在研究方法上以归纳为主并带有较多盲目性的观测和实验，这是（　）。",
+    o: ["经验范式","理论范式","模拟范式","数据密集型研究范式"], a: 0,
+    e: "第一科学范式 = 【经验范式】：偏重经验事实的描述和明确具体的实用性，研究方法以归纳为主，带有较多盲目性的观测和实验。看到「归纳为主 / 盲目性观测实验」直接选经验范式。" },
+  { m: "B·驱动因素", q: "下列哪一范式的表述是「由传统的假设驱动向基于科学数据进行探索的科学方法转变，即由计算机实施第一、第二、第三科学范式」？",
+    o: ["数据密集型研究范式","模拟范式","理论范式","经验范式"], a: 0,
+    e: "第四科学范式 = 【数据密集型研究范式】。其研究方法基于计算机生产实践产生的数据，按照驱动理论获得猜想与假设，完成数据自动化的计算和原理探索；核心价值是通过数据洞察，从大数据中自动化挖掘实践经验、理论原理并自行开展模拟仿真，完成【自决策和自优化】。" },
+  { m: "B·驱动因素", q: "关于生产要素变化与智慧主体，下列表述正确的是（　）。",
+    o: ["数据与土地、劳动力、资本、技术并列成为主要生产要素","数据只与资本、技术并列，与土地、劳动力无关","培育一个自然人「智慧主体」通常只需 10 年左右","智慧主体规模扩容后，智力密集型社会劳动将逐步消退"], a: 0,
+    e: "数据与【土地、劳动力、资本和技术】并列成为主要生产要素（链条：数据记载信息，信息融合知识，知识孕育智慧）。培育一个自然人「智慧主体」往往需要【超过 20 年】；扩容后是【劳动密集型逐步消退、智力密集型持续强化】，D 方向说反了。" },
+  { m: "B·驱动因素", q: "在互联网虚拟社交网络下，社交网络信息传输具有的特征是（　）。",
+    o: ["永生性、无限性、即时性、方向性","客观性、普遍性、无限性、动态性","精确性、完整性、可靠性、及时性","共享性、开放性、协同性、安全性"], a: 0,
+    e: "社交网络信息传输四特征 = 【永生性】（不会被破坏或消灭）、【无限性】（像病毒一样无限传播）、【即时性】（传播时间大大缩短甚至可忽略）、【方向性】（传播具有目的性）。B 是 1.1 的「信息的特征」，C 是「信息的质量属性」，都是干扰项。" },
+  // 模块C 原理与智慧转移 (11-17)
+  { m: "C·原理与智慧转移", q: "数字化转型的基本原理不包括（　）。",
+    o: ["能力因子定义和数字化「封装」","基于「互联网+」的调度和决策","转型控制","数据资产化与数据资本化"], a: 3,
+    e: "基本原理三条 = 【能力因子定义和数字化「封装」】、【基于「互联网+」的调度和决策】、【转型控制】。「数据资源化 / 资产化 / 资本化」是 1.4.1 数据价值化「三化」的内容，属于数字经济的整体构成，别错位。" },
+  { m: "C·原理与智慧转移", q: "「能力因子」的层级由粗到细是（　）。",
+    o: ["能力域 → 能力子域 → 能力项 → 能力分项 → 能力子项","能力项 → 能力子项 → 能力域 → 能力子域 → 能力分项","能力因子 → 能力模块 → 能力组件 → 能力接口","能力域 → 能力项 → 能力子域 → 能力子项 → 能力分项"], a: 0,
+    e: "能力因子是有层次或可组合的：能力域、能力子域、能力项、能力分项、能力子项（域 → 子域 → 项 → 分项 → 子项）。不同成熟度组织的差异主要体现在能力因子定义的【颗粒度、学科性和有效性】。" },
+  { m: "C·原理与智慧转移", q: "基于「互联网+」的调度和决策，其核心目标是（　）。",
+    o: ["让调度和决策脱离「自然人」，从而提高调度和决策效率及其科学性","实现组织全部知识的数字化存储","建立跨组织的产业协同网络","用区块链保证数据的不可篡改"], a: 0,
+    e: "该原理要求把组织沉淀的各类知识经验数字化提炼，形成数字算法、模型和框架等，满足信息系统能够理解和使用的方式，让【调度和决策脱离「自然人」】。「脱离自然人」与智慧转移的「脑力替代」是同一思路的两种说法。" },
+  { m: "C·原理与智慧转移", q: "关于「智慧转移」，下列表述正确的是（　）。",
+    o: ["又称「智慧移植」，其 S8D 模型以 DIKW 模型为基础，核心目标是实现「脑力替代」","又称「知识转移」，其模型以 SWOT 分析为基础","指把本地信息系统的数据迁移到云平台的过程","指把组织智慧拆解为个体技能、再分配给员工的过程"], a: 0,
+    e: "智慧转移 = 个体智慧（知识、技能和经验）由「自然人」个体转移到组织智慧（计算机、信息系统等掌握的），也称【智慧移植】；教材图 1-10 的「智慧转移」模型即 S8D 模型，其基础是【DIKW 模型】，核心目标是实现【脑力替代】。" },
+  { m: "C·原理与智慧转移", q: "「数据—智慧」过程（智慧化过程）的四步中，完成「物理对象到信息空间映射」的是（　）。",
+    o: ["孪生虚拟化","对象数字化","架构可视化","计算智能化"], a: 0,
+    e: "「数据—智慧」过程四步：① 对象数字化（各类对象的数字化表达）→ ② 【孪生虚拟化】（物理对象到信息空间的映射）→ ③ 架构可视化（业务知识模型与经验沉淀的复用和创新）→ ④ 计算智能化（多元条件下的调度和决策）。速记「对 · 孪 · 架 · 计」。" },
+  { m: "C·原理与智慧转移", q: "「智慧—数据」过程（传统信息化过程）的正确步骤是（　）。",
+    o: ["智慧结构化 → 知识模型化 → 过程信息化 → 数据平台化","对象数字化 → 孪生虚拟化 → 架构可视化 → 计算智能化","数据平台化 → 过程信息化 → 知识模型化 → 智慧结构化","智慧结构化 → 过程信息化 → 知识模型化 → 数据平台化"], a: 0,
+    e: "「智慧—数据」过程 = 传统【信息化过程】：① 智慧结构化（明确业务体系层面内容）→ ② 知识模型化（定义业务活动的逻辑关系）→ ③ 过程信息化（管理和工艺流程化，明确执行操作要求）→ ④ 数据平台化（数据采集、存储、共享）。B 是方向相反的「数据—智慧」过程。⚠️ 两过程方向相反，别接错。" },
+  { m: "C·原理与智慧转移", q: "关于数字化转型的「持续迭代」，下列表述错误的是（　）。",
+    o: ["包括信息物理世界建设、决策能力边际化部署、科学物理赛博机制构筑、数据框架与信息调制设计四项活动","决策能力边际化是指处置执行层面的装置和人员能基于决策算法模型敏捷取得更高的决策能力（权）","科学物理赛博机制构筑是在 CPS 的基础上，汇聚环境因素力量、建设高密度数据框架","四项活动必须严格按顺序执行，形成单向线性流程"], a: 3,
+    e: "针对能力因子的持续迭代可以【从任何一项活动开始】实施四项活动，形成【持续迭代闭环】，不是单向线性流程。决策能力边际化 = 决策权下游到执行端（敏捷响应、决策权融合与调制）；科学物理赛博机制构筑以 CPS 为基础。本节内容属「了解」级，四项活动名称要记住。" },
+  // 模块D 元宇宙 (18-22)
+  { m: "D·元宇宙", q: "关于元宇宙的三位定义者，下列说法正确的是（　）。",
+    o: ["陈刚（北京大学）：与现实世界映射与交互的虚拟世界，具备新型社会体系的数字生活空间","沈阳（北京大学）：从时空性、真实性、独立性、连接性四方面交叉定义","左鹏飞（清华大学）：整合多种新技术而产生的新型虚实相融的互联网应用和社会形态","陈刚（清华大学）：元宇宙是扩展现实、数字孪生与区块链技术的简单叠加"], a: 0,
+    e: "三人三口径：【陈刚 · 北京大学】——利用科技手段进行链接与创造的、与现实世界映射与交互的虚拟世界，具备新型社会体系的数字生活空间；【沈阳 · 清华大学】——整合多种新技术而产生的新型虚实相融的互联网应用和社会形态（扩展现实提供沉浸式体验、数字孪生生成现实镜像、区块链搭建经济体系）；【左鹏飞 · 中国社会科学院】——从时空性、真实性、独立性、连接性四方面交叉定义。" },
+  { m: "D·元宇宙", q: "左鹏飞从时空性、真实性、独立性、连接性四方面交叉定义元宇宙，其中「时空性」的表述是（　）。",
+    o: ["元宇宙是一个空间维度上虚拟而时间维度上真实的数字世界","元宇宙是一个空间和时间维度上均虚拟的数字世界","元宇宙是一个空间维度上真实而时间维度上虚拟的数字世界","元宇宙既非虚拟也非真实，是全新的第四时空"], a: 0,
+    e: "时空性 = 空间维度上【虚拟】而时间维度上【真实】的数字世界。⚠️ 别记成「时空都虚拟」。另外三性：真实性 = 既有现实世界的数字化复制物，也有虚拟世界的创造物；独立性 = 与外部真实世界既紧密相连又高度独立的平行空间；连接性 = 把网络、硬件终端和用户囊括进来的永续的、广覆盖的虚拟现实系统。" },
+  { m: "D·元宇宙", q: "教材列出的元宇宙主要特征不包括（　）。",
+    o: ["沉浸式体验","虚拟身份","虚拟经济","低延迟与随地接入"], a: 3,
+    e: "教材 1.5.2 的元宇宙主要特征是【4 条】：沉浸式体验、虚拟身份、虚拟经济、虚拟社会治理。「低延迟」「随地」「文明」属业界（Roblox 等）提出的「元宇宙八大要素」口径，【不是教材口径】——本节最大防坑点。另外，虚拟社会治理强调元宇宙也需要社区化的社会治理、需要法律法规和规则的约束。" },
+  { m: "D·元宇宙", q: "关于元宇宙的定位，下列表述符合教材的是（　）。",
+    o: ["元宇宙的流行是互联网发展到了一定高度，也可以认为是互联网发展的另一阶段","元宇宙是独立于互联网之外的全新技术体系","元宇宙的技术基础仅有扩展现实技术一项","元宇宙作为现实世界的孪生空间，其社会属性将淡化、物理属性将强化"], a: 0,
+    e: "教材：元宇宙的流行是【互联网发展到了一定高度】，也可以认为是【互联网发展的另一阶段】。关键技术包括虚拟现实、人工智能、数字孪生、云计算等（不止一项）；结论是【物理属性淡化，但社会属性将会被强化】，D 说反了。" },
+  { m: "D·元宇宙", q: "元宇宙的发展演进链条是（　）。",
+    o: ["社交娱乐文化领域 → 虚拟「数字人」 → 虚拟身份 → 「数字人生」 → 「数字组织」 → 「数字生态」 → 「数字社会治理」","虚拟身份 → 沉浸式体验 → 虚拟经济 → 虚拟社会治理","数字组织 → 数字人 → 数字生态 → 数字人生 → 数字社会治理","物理空间 → 社会空间 → 信息空间 → 三元空间协同"], a: 0,
+    e: "演进链条：首先在【社交、娱乐和文化领域】发展，形成虚拟「数字人」→ 向虚拟身份方向演进，形成「数字人生」（偏向个体用户需求）→ 向「数字组织」领域延伸，形成「数字生态」→ 形成「数字社会治理」，实现物理空间、社会空间和信息空间三元空间的协同发展新格局。速记：人 → 人生 → 组织 → 生态 → 治理。" }
+];
+
+let idx = 0, score = 0, answers = [], current = QUESTIONS, locked = false;
+
+function initAll() {
+  idx = 0; score = 0; answers = []; current = QUESTIONS.slice();
+  document.getElementById("quiz").style.display = "block";
+  document.getElementById("result").style.display = "none";
+  renderQ();
+}
+function renderQ() {
+  locked = false;
+  const q = current[idx];
+  document.getElementById("pbar").style.width = (idx / current.length * 100) + "%";
+  let html = '<div class="card"><span class="qtag">' + q.m + '</span><span class="qno">第 ' + (idx+1) + ' / ' + current.length + ' 题</span>';
+  html += '<div class="qtext">' + q.q + '</div>';
+  q.o.forEach((t, i) => { html += '<button class="opt" data-i="' + i + '"><span class="mark">' + "ABCD"[i] + '</span>' + t + '</button>'; });
+  html += '<div class="explain" id="ex"><b>精讲：</b>' + q.e + '</div>';
+  html += '<button class="btn" id="next" disabled>' + (idx === current.length-1 ? "查看结果" : "下一题 (Enter)") + '</button></div>';
+  document.getElementById("quiz").innerHTML = html;
+  document.querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => choose(+b.dataset.i)));
+  document.getElementById("next").addEventListener("click", next);
+}
+function choose(i) {
+  if (locked) return; locked = true;
+  const q = current[idx], ok = i === q.a;
+  if (ok) score++;
+  answers[idx] = { ok, q };
+  document.querySelectorAll(".opt").forEach((b, j) => {
+    b.disabled = true;
+    if (j === q.a) b.classList.add("right");
+    else if (j === i) b.classList.add("wrong");
+  });
+  document.getElementById("ex").style.display = "block";
+  document.getElementById("next").disabled = false;
+}
+function next() {
+  if (idx < current.length - 1) { idx++; renderQ(); }
+  else finish();
+}
+function finish() {
+  document.getElementById("quiz").style.display = "none";
+  document.getElementById("pbar").style.width = "100%";
+  const res = document.getElementById("result");
+  res.style.display = "block";
+  document.getElementById("finalScore").textContent = score + " / " + current.length;
+  const pct = Math.round(score / current.length * 100);
+  document.getElementById("advice").textContent =
+    pct >= 80 ? "✅ 达标（≥80%），第一章 5 节全部学完，可进入 1.6 本章练习（整章重测）！" :
+    pct >= 60 ? "🔶 接近达标：回看错题对应模块的知识点清单（重点对照「四个科学范式 / 智慧转移八步 / 元宇宙四特征」三组四件套），明天重测。" :
+    "❌ 未达标：请重读《1.5_知识点清单》后重新测验。";
+  // 分模块统计
+  const mods = {};
+  current.forEach((q, i) => {
+    mods[q.m] = mods[q.m] || { t: 0, r: 0 };
+    mods[q.m].t++;
+    if (answers[i] && answers[i].ok) mods[q.m].r++;
+  });
+  let rows = "";
+  Object.keys(mods).forEach(m => {
+    const st = mods[m].r / mods[m].t >= 0.8 ? "✅" : "🔶";
+    rows += '<tr><td class="module-stat">' + m + '</td><td>' + mods[m].r + " / " + mods[m].t + '</td><td>' + st + '</td></tr>';
+  });
+  document.getElementById("moduleTable").innerHTML = '<tr><th>模块</th><th>正确率</th><th>状态</th></tr>' + rows;
+  // 错题
+  const wrongs = current.map((q, i) => ({ q, i })).filter(x => !answers[x.i] || !answers[x.i].ok);
+  if (wrongs.length) {
+    document.getElementById("reviewWrap").style.display = "block";
+    document.getElementById("retryWrong").style.display = "inline-block";
+    document.getElementById("reviewList").innerHTML = wrongs.map(x =>
+      '<div class="wrong-item"><b>【' + x.q.m + '】</b>' + x.q.q +
+      '<br>✔ 正确答案：<b>' + "ABCD"[x.q.a] + " · " + x.q.o[x.q.a] + '</b><br><span style="color:#666">' + x.q.e + '</span></div>'
+    ).join("");
+  } else {
+    document.getElementById("reviewWrap").style.display = "none";
+    document.getElementById("retryWrong").style.display = "none";
+  }
+}
+document.getElementById("retryWrong").addEventListener("click", () => {
+  current = current.filter((q, i) => !answers[i] || !answers[i].ok);
+  idx = 0; score = 0; answers = [];
+  document.getElementById("result").style.display = "none";
+  document.getElementById("quiz").style.display = "block";
+  renderQ();
+});
+document.addEventListener("keydown", ev => {
+  if (document.getElementById("result").style.display === "block") return;
+  const k = ev.key.toUpperCase();
+  const sel = "ABCD".indexOf(k);
+  if (sel >= 0 && !locked) choose(sel);
+  else if ((ev.key === "Enter" || k === "ENTER") && locked) next();
+});
+initAll();
+</script>
+</body>
+</html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>康奈尔笔记 · 第 1 章第 5 节 数字化转型与元宇宙 · 带答案版</title>
+<style>
+  :root{
+    --ink:#1f2328;
+    --ink-2:#4b5563;
+    --ink-3:#8b949e;
+    --line:#2f3742;
+    --rule:#d6dae0;
+    --accent:#185FA5;
+    --accent-soft:#E6F1FB;
+    --warm:#854F0B;
+    --warm-soft:#FAEEDA;
+    --paper:#ffffff;
+    --ans-bg:#fffaf2;
+    --ans-border:#e8d9b8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    padding:28px 16px 48px;
+    background:#eef0f3;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+    color:var(--ink);
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .toolbar{
+    max-width:210mm;margin:0 auto 14px;display:flex;gap:10px;align-items:center;
+    justify-content:space-between;flex-wrap:wrap;
+  }
+  .toolbar .hint{font-size:12.5px;color:#5b6470;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;
+    font-size:13px;padding:7px 14px;border-radius:8px;cursor:pointer;
+    font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn.active{background:var(--warm);border-color:var(--warm);color:#fff;}
+
+  .page{
+    width:210mm;min-height:297mm;margin:0 auto;background:var(--paper);
+    padding:14mm 13mm 12mm;box-shadow:0 2px 14px rgba(16,24,40,.12);
+  }
+
+  .head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    border-bottom:2px solid var(--line);padding-bottom:8px;margin-bottom:10px;
+    gap:12px;
+  }
+  .head h1{font-size:19px;margin:0;font-weight:600;letter-spacing:.3px;}
+  .head .sub{font-size:12px;color:var(--ink-3);margin-top:4px;}
+  .head .meta{font-size:12px;color:var(--ink-2);text-align:right;line-height:1.9;white-space:nowrap;}
+  .head .meta b{font-weight:600;color:var(--accent);}
+
+  .band{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+  .chip{
+    font-size:11.5px;padding:4px 9px;border-radius:5px;
+    background:var(--accent-soft);color:#0C447C;border:1px solid #B5D4F4;
+  }
+  .chip.warm{background:var(--warm-soft);color:#633806;border-color:#EFC98A;}
+
+  .cols{
+    display:grid;grid-template-columns:60mm 1fr;gap:0;
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .col-cue{
+    background:#fafbfc;border-right:1px solid var(--line);padding:8px 9px 9px;
+  }
+  .col-note{padding:8px 11px 9px;}
+  .col-hd{
+    font-size:11.5px;font-weight:600;letter-spacing:.6px;color:var(--ink-2);
+    text-transform:uppercase;padding-bottom:6px;margin-bottom:7px;
+    border-bottom:1px dashed #b9c0c9;
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  .col-hd span{font-size:10.5px;font-weight:400;color:var(--ink-3);text-transform:none;letter-spacing:0;}
+
+  .q{
+    font-size:11.5px;line-height:1.5;color:#1f2328;
+    padding:5px 0 5px 20px;position:relative;border-bottom:1px dotted #dfe3e8;
+  }
+  .q:last-child{border-bottom:0;}
+  .q::before{
+    content:attr(data-n);position:absolute;left:0;top:5px;
+    width:14px;height:14px;border-radius:50%;
+    background:var(--accent);color:#fff;font-size:9.5px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:600;line-height:1;
+  }
+  .q b{font-weight:600;}
+  .q em{font-style:normal;color:var(--warm);font-weight:600;}
+
+  .grouplabel{
+    font-size:10.5px;font-weight:600;color:var(--accent);
+    letter-spacing:.4px;margin:8px 0 2px;
+  }
+  .grouplabel:first-child{margin-top:0;}
+
+  /* === 答案区样式 === */
+  .ans-block{
+    margin-bottom:6px;padding:5px 8px 6px;
+    background:var(--ans-bg);border:1px solid var(--ans-border);border-radius:3px;
+  }
+  .ans-block .ans-title{
+    font-size:10.5px;font-weight:600;color:var(--warm);
+    letter-spacing:.3px;margin-bottom:2px;display:flex;align-items:baseline;gap:6px;
+  }
+  .ans-block .ans-title .num{
+    display:inline-block;min-width:14px;height:14px;border-radius:50%;
+    background:var(--warm);color:#fff;font-size:9.5px;font-weight:600;
+    text-align:center;line-height:14px;
+  }
+  .ans-block ul{
+    margin:2px 0 3px 0;padding:0 0 0 16px;font-size:11px;line-height:1.55;color:#2b323b;
+  }
+  .ans-block ul li{padding:1px 0;}
+  .ans-block .key{
+    color:var(--warm);font-weight:600;
+  }
+  .ans-block .tip{
+    font-size:10px;color:#633806;margin-top:2px;line-height:1.5;
+    padding:2px 6px;background:var(--warm-soft);border-radius:2px;
+  }
+  .ans-block .fill{
+    height:16px;border-bottom:1px dashed #c8c0aa;margin-top:3px;
+  }
+  body.hide-answers .ans-block{display:none;}
+  body.hide-answers .summary-prefill{display:none;}
+
+  .summary{
+    margin-top:10px;border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .summary .col-hd{
+    margin:0;padding:7px 11px;background:#fafbfc;border-bottom:1px solid var(--line);
+  }
+  .summary .body{padding:6px 11px 8px;font-size:11.5px;line-height:1.7;color:#2b323b;}
+  .summary .body b{color:var(--accent);}
+  .summary .body .small{font-size:10.5px;color:var(--ink-3);margin-top:3px;display:block;}
+
+  .footer{
+    margin-top:9px;font-size:10.5px;color:var(--ink-3);
+    display:flex;justify-content:space-between;gap:10px;
+  }
+
+  .guide{
+    width:210mm;margin:16px auto 0;background:#fff;border:1px solid #d9dee5;
+    border-radius:8px;padding:16px 18px;
+  }
+  .guide h2{font-size:14px;margin:0 0 10px;font-weight:600;}
+  .guide table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .guide th,.guide td{
+    border:1px solid #e2e6eb;padding:7px 9px;text-align:left;vertical-align:top;line-height:1.6;
+  }
+  .guide th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .guide td:first-child{width:88px;font-weight:600;color:var(--accent);}
+  .guide .note{font-size:12px;color:#5b6470;margin-top:10px;line-height:1.7;}
+
+  @page{size:A4 portrait;margin:0;}
+  @media print{
+    body{background:#fff;padding:0;}
+    .toolbar,.guide{display:none;}
+    .page{box-shadow:none;margin:0;width:auto;min-height:auto;padding:13mm 12mm;}
+    body.hide-answers .ans-block{display:none;}
+    body.hide-answers .summary-prefill{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="hint">A4 竖版 · 带答案版 · 建议先默写、再对照；打印时可「隐藏答案」变填空卷</div>
+  <div>
+    <button class="btn" id="toggleBtn" onclick="toggleAnswers()">👁 隐藏答案（打印填空卷）</button>
+    <button class="btn primary" onclick="window.print()">打印 / 导出 PDF</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="head">
+    <div>
+      <h1>康奈尔笔记 · 第 1 章第 5 节 数字化转型与元宇宙 <span style="color:var(--warm);font-size:14px;">（带答案版）</span></h1>
+      <div class="sub">《信息系统项目管理师教程（第 4 版）》约 P24 ~ P35　｜　答案口径以 2026-09-14 核对为准</div>
+    </div>
+    <div class="meta">
+      日期：__________<br>
+      第 <b>__</b> 轮复习　用时 <b>__</b> 分钟
+    </div>
+  </div>
+
+  <div class="band">
+    <span class="chip">第 4 版新增小节</span>
+    <span class="chip">要素归类型</span>
+    <span class="chip warm">必背：四科学范式 + 智慧转移八步 + 元宇宙四特征</span>
+    <span class="chip warm">通读：持续迭代四项活动 / 演进论证段</span>
+    <span class="chip warm">📝 含答案</span>
+  </div>
+
+  <div class="cols">
+
+    <div class="col-cue">
+      <div class="col-hd">线索栏 <span>遮住右侧自问</span></div>
+
+      <div class="grouplabel">1.5.1 数字化转型（总论 · 驱动）</div>
+      <div class="q" data-n="1"><b>数字化转型定义</b>（三限定词）？与数字化转换 / 升级的递进？</div>
+      <div class="q" data-n="2"><b>四要素叠加范式</b>？四大驱动因素？<b>四个科学范式</b>及区分关键词？</div>
+      <div class="q" data-n="3"><b>数据要素</b>与谁并列？「数据—信息—知识—智慧」链条？社交网络信息传输<b>四性</b>？</div>
+      <div class="q" data-n="4"><b>「智慧主体」</b>可以是哪些？新兴主体<b>四能力</b>？自然人培育周期？劳动结构走向？</div>
+
+      <div class="grouplabel">1.5.1 数字化转型（原理 · 智慧转移）</div>
+      <div class="q" data-n="5"><b>基本原理三条</b>？能力因子<b>五层级</b>？不同成熟度差异三方面？</div>
+      <div class="q" data-n="6"><b>「互联网+」调度决策</b>核心目标？<b>转型控制</b>关键词与借鉴对象？</div>
+      <div class="q" data-n="7"><b>「智慧转移」</b>又称什么？S8D 模型基础？核心目标？</div>
+      <div class="q" data-n="8"><b>「智慧—数据」过程</b>（信息化过程）四步？各落到哪一层？</div>
+      <div class="q" data-n="9"><b>「数据—智慧」过程</b>（智慧化过程）四步？重点解决什么？</div>
+      <div class="q" data-n="10"><b>持续迭代四项活动</b>？哪项与 CPS 相关？「决策能力边际化」含义？</div>
+
+      <div class="grouplabel">1.5.2 元宇宙</div>
+      <div class="q" data-n="11"><b>三位定义者（单位）</b>？左鹏飞「四性」？「时空性」表述？</div>
+      <div class="q" data-n="12"><b>元宇宙主要特征几条</b>？关键技术四项？发展演进链条？</div>
+    </div>
+
+    <div class="col-note">
+      <div class="col-hd">答案区 <span>默写后对照 · 虚线处写自己的补充</span></div>
+
+      <div class="grouplabel">1.5.1 数字化转型（总论 · 驱动）</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">1</span>数字化转型定义与概念递进</div>
+        <ul>
+          <li><b>定义</b>：建立在<span class="key">数字化转换（Digitization）</span>、<span class="key">数字化升级（Digitalization）</span>基础上，进一步触及<span class="key">组织核心业务</span>，以新建一种<span class="key">业务模式</span>为目标的<span class="key">高层次转型</span></li>
+          <li>另一句表述：是开发数字化技术及支持能力以新建一个富有活力的<span class="key">数字化商业模式</span></li>
+          <li><b>不只是 IT</b>：是对<span class="key">组织活动、流程、业务模式和员工能力</span>等方方面面进行<span class="key">系统性、彻底的</span>（重大和完全的）<span class="key">重新定义</span></li>
+          <li>递进三级：<span class="key">数字化转换 → 数字化升级 → 数字化转型</span></li>
+        </ul>
+        <div class="tip">三限定词：<b>基础上</b>（数字化转换 + 数字化升级）→ <b>触及</b>（组织核心业务）→ <b>目标</b>（新建业务模式）。⚠️ 目标不是「技术模式 / 组织模式 / 评估模式」</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">2</span>四要素叠加 + 四大驱动因素 + 四个科学范式</div>
+        <ul>
+          <li><b>叠加范式</b>：<span class="key">生产力飞跃、生产要素变化、信息传播效率突破和社会「智慧主体」规模扩容的叠加</span> → 促使<span class="key">人类社会生产关系的创新变革</span> → 最终引发<span class="key">经济与民生的深层发展</span>（驱动了原始经济 → 农业经济 → 工业经济，同样驱动工业经济 → 数字经济）</li>
+          <li>四大驱动：① <span class="key">生产力飞升：第四次科技革命</span>；② <span class="key">生产要素变化：数据要素的诞生</span>；③ <span class="key">信息传播效率突破：社会互联网新格局</span>；④ <span class="key">社会「智慧主体」规模：快速复制与「智能+」</span></li>
+          <li>四个科学范式：<span class="key">经验范式</span>（经验事实描述 / <b>归纳为主</b> / 盲目性观测实验）→ <span class="key">理论范式</span>（理论总结与理性概括 / 强调<b>较高普遍的理论认识</b>）→ <span class="key">模拟范式</span>（<b>数据模型构建、定量分析方法、利用计算机</b>分析解决科学问题）→ <span class="key">数据密集型研究范式</span>（<b>假设驱动 → 基于科学数据探索</b>；<b>由计算机实施前三范式</b>）</li>
+        </ul>
+        <div class="tip">第四范式的价值：通过<span class="key">数据洞察</span>从大数据中自动化挖掘实践经验与理论原理、自行开展模拟仿真，完成基于数据的<b>自决策和自优化</b>。速记：<b>经 → 理 → 模 → 数</b></div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">3</span>数据要素 + 社交网络信息四性</div>
+        <ul>
+          <li>数据与<span class="key">土地、劳动力、资本和技术</span>并列成为<span class="key">主要生产要素</span>，是未来社会数字化、智能化发展的<b>重要基础</b></li>
+          <li>链条：<span class="key">数据记载信息，信息融合知识，知识孕育智慧</span>（反过来：把智慧解构成知识、知识分解为信息、信息拆解为数据）</li>
+          <li>因此数据具备<span class="key">单列为生产要素的现实条件</span>，与土地、设备、原材料、资本、劳动、技术同等重要</li>
+          <li>社交网络信息传输四特征：<span class="key">永生性</span>（不被破坏或消灭）、<span class="key">无限性</span>（像病毒一样无限传播）、<span class="key">即时性</span>（传播时间大大缩短甚至可忽略）、<span class="key">方向性</span>（传播具有目的性，仅传给特定的人）</li>
+        </ul>
+        <div class="tip">四性口诀 <b>永无即方</b>。互联网的特性 = 信息可以<b>跨越时间和地理障碍</b>迅速传播，成为<b>信息扩散的主要渠道</b></div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">4</span>社会「智慧主体」规模扩容</div>
+        <ul>
+          <li>过去「智慧主体」<b>都是自然人</b>，培育一个自然人智慧主体往往需要<span class="key">超过 20 年</span></li>
+          <li>现在「智慧主体」不单纯是自然人，可以是<span class="key">互联网账号、自动驾驶的汽车、智能手机、工厂中的智能机器人</span></li>
+          <li>新兴智慧主体四能力：<span class="key">较强的可复制性、自我学习能力、更加广泛的连接能力、更加标准的交互手段</span></li>
+          <li>后果：<span class="key">劳动密集型</span>社会劳动<b>逐步消退</b>，<span class="key">智力密集型</span>社会劳动<b>持续强化</b>；自然人竞争力聚焦在「<span class="key">服务</span>」为典型代表的领域</li>
+        </ul>
+        <div class="tip">四能力口诀 <b>复 · 学 · 连 · 互</b>。⚠️「20 年」是自然人的培育周期；新兴主体在<b>数据生产、数据开发利用、劳动力贡献和决策能力</b>上具备自然人的关键特征</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">1.5.1 数字化转型（原理 · 智慧转移）</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">5</span>基本原理三条</div>
+        <ul>
+          <li>① <span class="key">能力因子定义和数字化「封装」</span>：把各项能力和活动进行清晰的结构化并定义，形成细化的<span class="key">可灵活调度和编排的能力因子</span></li>
+          <li>② <span class="key">基于「互联网+」的调度和决策</span>：在已有治理与管理、工艺、服务、产品体系基础上，用「互联网+」模式把知识经验数字化提炼为<span class="key">数字算法、模型和框架</span></li>
+          <li>③ <span class="key">转型控制</span>：数字化转型<b>是一个持续的过程</b>，不能一蹴而就</li>
+          <li>能力因子五层级：<span class="key">能力域、能力子域、能力项、能力分项、能力子项</span></li>
+          <li>不同成熟度组织的差异体现在：<span class="key">能力因子定义的颗粒度、学科性和有效性</span></li>
+        </ul>
+        <div class="tip">五层级由粗到细：<b>域 → 子域 → 项 → 分项 → 子项</b>；三差异口诀 <b>颗 · 学 · 效</b></div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">6</span>「互联网+」调度决策 与 转型控制</div>
+        <ul>
+          <li>「互联网+」核心目标：让<span class="key">调度和决策脱离「自然人」</span>，从而提高调度和决策的<b>效率及其科学性</b></li>
+          <li>转型控制关键词：<span class="key">持续的过程</span>（不是结果的表达）、<span class="key">不能一蹴而就</span>、<span class="key">有效管控转型过程</span></li>
+          <li>借鉴对象：充分借鉴<span class="key">信息化与工业化、信息化与领域现代化</span>等深度融合的<span class="key">最佳实践</span>，结合自身实际<span class="key">持续建设、优化和改进</span></li>
+        </ul>
+        <div class="tip">「脱离自然人」（本节）与「脑力替代」（智慧转移）是同一思路的两个说法，别当成两件事</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">7</span>智慧转移（S8D 模型）总论</div>
+        <ul>
+          <li>含义：<span class="key">个体智慧（知识、技能和经验等）由「自然人」个体，转移到组织智慧（计算机、信息系统等掌握的）</span></li>
+          <li>又称：<span class="key">智慧移植</span>；对应教材<span class="key">图 1-10「智慧转移」模型</span></li>
+          <li>模型名：<span class="key">S8D 模型</span>；基础：<span class="key">DIKW 模型</span>（数据 → 信息 → 知识 → 智慧）</li>
+          <li>核心目标：实现「<span class="key">脑力替代</span>」</li>
+        </ul>
+        <div class="tip">一句话：<b>把自然人的智慧搬进信息系统</b> = 智慧转移（智慧移植），目标 = <b>脑力替代</b></div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">8</span>「智慧—数据」过程 = 传统「信息化过程」</div>
+        <ul>
+          <li>指<span class="key">信息系统规划、建设、运行过程</span>，即传统讲的「<span class="key">信息化过程</span>」</li>
+          <li>四步：① <span class="key">智慧结构化</span>（明确<b>业务体系</b>层面的内容）→ ② <span class="key">知识模型化</span>（定义<b>业务活动的逻辑关系</b>）→ ③ <span class="key">过程信息化</span>（管理和工艺流程化，明确各执行操作系列要求）→ ④ <span class="key">数据平台化</span>（数据的<b>采集、存储和共享</b>）</li>
+        </ul>
+        <div class="tip">口诀 <b>慧 · 识 · 息 · 据</b>，对应 DIKW 由高到低：智慧 → 知识 → 信息 → 数据</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">9</span>「数据—智慧」过程 = 「智慧化过程」</div>
+        <ul>
+          <li>指<span class="key">数据的开发利用和资源管理</span>的过程，即「<span class="key">智慧化过程</span>」；前提是<span class="key">大数据「筑底」</span></li>
+          <li>四步：① <span class="key">对象数字化</span>（对各类对象的<b>数字化表达</b>）→ ② <span class="key">孪生虚拟化</span>（<b>物理对象到信息空间的映射</b>）→ ③ <span class="key">架构可视化</span>（业务知识模型与经验沉淀的<b>复用和创新</b>）→ ④ <span class="key">计算智能化</span>（<b>多元条件下的调度和决策</b>）</li>
+          <li>重点解决：基于各类组织组成对象（<span class="key">人员、流程、业务、工艺、装备</span>）「<span class="key">数字关系</span>」的「<span class="key">脑力替代</span>」</li>
+        </ul>
+        <div class="tip">口诀 <b>对 · 孪 · 架 · 计</b>。⚠️ 两过程方向相反：<b>「智慧—数据」= 信息化过程</b>（把智慧拆成数据）；<b>「数据—智慧」= 智慧化过程</b>（把数据还原成智慧）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">10</span>持续迭代（四项活动）</div>
+        <ul>
+          <li>① <span class="key">信息物理世界建设</span>：对能力因子中各类对象实施<b>数字孪生建设</b>，并加入因子间<b>配置关系</b></li>
+          <li>② <span class="key">决策能力边际化部署</span>：处置<b>执行层面的装置和人员</b>能基于决策算法模型敏捷取得更高的<b>决策能力（权）</b>，达到<b>敏捷响应</b>；价值 = <b>决策权融合与调制</b>、装备智能化</li>
+          <li>③ <span class="key">科学物理赛博机制构筑</span>：在 <b>CPS</b> 基础上，汇聚环境因素力量（或外部社会力量），建设<b>高密度数据框架</b>，封装、解构和重构各能力因子协同关系</li>
+          <li>④ <span class="key">数据框架与信息调制设计</span>：能力因子<b>数字密度越高 → 可控性越高 → 安全可靠性越高</b>；提升应急与动员能力、已知风险管控与未知风险应对能力</li>
+        </ul>
+        <div class="tip">四项活动名称必记，细节了解即可；四项活动形成<b>持续迭代闭环</b>，可从任何一项开始。<b>「决策能力边际化」= 决策权下沉到执行端</b>（与 1.4 智慧城市「边际决策」同源）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">1.5.2 元宇宙</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">11</span>三位学者定义 + 左鹏飞「四性」</div>
+        <ul>
+          <li><span class="key">陈刚</span>（<b>北京大学</b>）：元宇宙是利用<b>科技手段</b>进行链接与创造的、与现实世界<b>映射与交互</b>的虚拟世界，具备<b>新型社会体系的数字生活空间</b></li>
+          <li><span class="key">沈阳</span>（<b>清华大学</b>）：整合多种新技术而产生的<b>新型虚实相融</b>的互联网应用和社会形态；基于<span class="key">扩展现实技术</span>提供沉浸式体验、<span class="key">数字孪生技术</span>生成现实世界的镜像、<span class="key">区块链技术</span>搭建经济体系；在<span class="key">经济系统、社交系统、身份系统</span>上密切融合；允许每个用户<span class="key">内容生产和编辑</span></li>
+          <li><span class="key">左鹏飞</span>（<b>中国社会科学院</b>）：从<span class="key">时空性、真实性、独立性、连接性</span>四方面<b>交叉定义</b></li>
+          <li>四性表述：<span class="key">时空性</span> = 空间维度上虚拟而<b>时间维度上真实</b>的数字世界；<span class="key">真实性</span> = 既有现实世界的<b>数字化复制物</b>，也有虚拟世界的<b>创造物</b>；<span class="key">独立性</span> = 与外部真实世界既<b>紧密相连</b>又<b>高度独立</b>的<b>平行空间</b>；<span class="key">连接性</span> = 把<b>网络、硬件终端和用户</b>囊括进来的<b>永续的、广覆盖的</b>虚拟现实系统</li>
+        </ul>
+        <div class="tip">技术分工别错位：<b>扩展现实 → 沉浸式体验</b>；<b>数字孪生 → 现实世界镜像</b>；<b>区块链 → 经济体系</b>。四性口诀 <b>时空真独连</b>；⚠️ 时空性是「空间虚拟 + 时间真实」</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">12</span>元宇宙主要特征 + 发展演进</div>
+        <ul>
+          <li>主要特征（<b>4 条</b>）：<span class="key">沉浸式体验</span>（即时信息基础上的沉浸式体验）、<span class="key">虚拟身份</span>（互联网账号 → 一个或若干个<b>数字身份</b>，即数字世界的<b>一个或一组角色</b>）、<span class="key">虚拟经济</span>（虚拟身份促使元宇宙具备开展虚拟社会活动的能力，需一定经济模式）、<span class="key">虚拟社会治理</span>（需法律法规和规则约束，需<b>社区化的社会治理</b>）</li>
+          <li>关键技术：<span class="key">虚拟现实、人工智能、数字孪生、云计算</span>；元宇宙的流行是<b>互联网发展到了一定高度</b>，是<b>互联网发展的另一阶段</b></li>
+          <li>结论：元宇宙作为现实世界的<b>孪生空间和虚拟世界</b>，<span class="key">物理属性淡化，但社会属性将会被强化</span></li>
+          <li>发展演进链条：<span class="key">社交、娱乐和文化领域 → 虚拟「数字人」 → 虚拟身份 → 「数字人生」（偏向个体用户需求） → 「数字组织」 → 「数字生态」 → 「数字社会治理」</span>，实现<span class="key">物理空间、社会空间和信息空间三元空间的协同发展新格局</span></li>
+        </ul>
+        <div class="tip">四特征口诀 <b>沉浸 · 身份 · 经济 · 治理</b>。⚠️⚠️ 教材口径就是<b> 4 条</b>，「低延迟 / 随地 / 文明」是业界「元宇宙八大要素」口径，<b>不要选</b>。演进链条 = <b>人 → 人生 → 组织 → 生态 → 治理</b></div>
+        <div class="fill"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="col-hd">总结区 <span>本节本质 + 考点地图</span></div>
+    <div class="body summary-prefill">
+      <b>本节本质</b>：1.5 是<b>第 4 版新增小节</b>（旧真题无对应题），讲<b>组织层面</b>如何承接 1.4 的国家战略——把「数字化」从国家工程下沉为组织行动。上午约 0~1 题，题型是<b>要素归类 / 名词配对</b>。<br>
+      <b>考点地图（按考频排序）</b>：① <b>元宇宙主要特征四条</b>（沉浸式体验 / 虚拟身份 / 虚拟经济 / 虚拟社会治理）→ ② <b>四个科学范式</b>（经验 / 理论 / 模拟 / 数据密集型）→ ③ <b>数字化转型定义</b>（三限定词 + 新建业务模式）→ ④ <b>智慧转移两个过程各四步</b>（智慧结构化…数据平台化 / 对象数字化…计算智能化）→ ⑤ <b>四大驱动因素</b> + 四要素叠加范式 → ⑥ <b>社交网络信息传输四性</b>（永生 / 无限 / 即时 / 方向）→ ⑦ <b>基本原理三条</b> + 能力因子五层级 → ⑧ 三位学者定义归属 + 左鹏飞四性 → ⑨ 元宇宙演进链条 → ⑩ 持续迭代四项活动。<br>
+      <span class="small">⚠️ 口径陷阱：① 元宇宙特征是 <b>4 条</b>，不是业界「八大要素」（低延迟 / 随地 / 文明不入教材）；② 数字化转型目标 = 新建<b>业务模式</b>，不是技术 / 组织 / 评估模式；③「智慧—数据」= <b>信息化过程</b>，「数据—智慧」= <b>智慧化过程</b>，方向相反别接错；④ S8D 模型基础是 <b>DIKW</b>；⑤ 数据并列要素是<b>土地 / 劳动力 / 资本 / 技术</b>；⑥ 时空性是「空间虚拟 + <b>时间真实</b>」；⑦ 本节「数字生态」≠ 1.4.4 的「数字生态」。</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>康奈尔笔记法 · 第 1 章第 5 节 带答案版　｜　复习记录：当日 ☐　+1 天 ☐　+3 天 ☐　+7 天 ☐　+14 天 ☐</span>
+    <span>正确率 ____ / 12</span>
+  </div>
+
+</div>
+
+<div class="guide">
+  <h2>怎么用这一页</h2>
+  <table>
+    <tr>
+      <th>步骤</th><th>做法</th>
+    </tr>
+    <tr>
+      <td>第 1 遍 · 遮答默写</td>
+      <td>用纸<b>遮住右栏答案区</b>，只看左栏 12 个问题。口头/默写回答，答不出的画「×」。</td>
+    </tr>
+    <tr>
+      <td>第 2 遍 · 对照修正</td>
+      <td>揭开答案区逐项对照。每条答案下的<b>虚线</b>是留给你的「补充线」——记下易漏点（如「四个科学范式的区分关键词」「智慧转移两过程各自的四步顺序」「元宇宙四特征 vs 业界八大要素」）。</td>
+    </tr>
+    <tr>
+      <td>第 3 遍 · 隐藏答案打印</td>
+      <td>点工具栏「👁 隐藏答案」按钮，再打印一份当填空卷，可反复练习。</td>
+    </tr>
+    <tr>
+      <td>第 4 遍 · 复习节奏</td>
+      <td>页脚 5 个框按「当日 → +1 天 → +3 天 → +7 天 → +14 天」打勾，这就是你的艾宾浩斯进度条。全部打勾后，本节可不再看。</td>
+    </tr>
+  </table>
+  <div class="note">
+    <b>为什么这份是「带答案版」</b>：1.5 节全是「成组名词」型考点，自己默写时最容易犯的错是<b>把三组四件套互相串位</b>（四科学范式 / 智慧转移两过程各四步 / 元宇宙四特征），或把<b>业界口径</b>（元宇宙八大要素）当教材口径。本版每个答案都标注<b>关键术语</b>（暖色）和<b>对照提醒</b>（橙色框），默写后对照一眼就能定位偏差。考前冲刺只看「总结区 · 考点地图」+「橙色 tip 框」即可。
+  </div>
+</div>
+
+<script>
+  function toggleAnswers(){
+    document.body.classList.toggle('hide-answers');
+    const btn = document.getElementById('toggleBtn');
+    const hidden = document.body.classList.contains('hide-answers');
+    btn.textContent = hidden ? '👁 显示答案' : '👁 隐藏答案（打印填空卷）';
+    btn.classList.toggle('active', hidden);
+  }
+</script>
+
+</body>
+</html>
