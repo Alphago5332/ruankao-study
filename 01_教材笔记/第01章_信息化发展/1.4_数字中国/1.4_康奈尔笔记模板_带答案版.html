@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>康奈尔笔记 · 第 1 章第 4 节 数字中国 · 带答案版</title>
+<style>
+  :root{
+    --ink:#1f2328;
+    --ink-2:#4b5563;
+    --ink-3:#8b949e;
+    --line:#2f3742;
+    --rule:#d6dae0;
+    --accent:#185FA5;
+    --accent-soft:#E6F1FB;
+    --warm:#854F0B;
+    --warm-soft:#FAEEDA;
+    --paper:#ffffff;
+    --ans-bg:#fffaf2;
+    --ans-border:#e8d9b8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    padding:28px 16px 48px;
+    background:#eef0f3;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+    color:var(--ink);
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .toolbar{
+    max-width:210mm;margin:0 auto 14px;display:flex;gap:10px;align-items:center;
+    justify-content:space-between;flex-wrap:wrap;
+  }
+  .toolbar .hint{font-size:12.5px;color:#5b6470;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;
+    font-size:13px;padding:7px 14px;border-radius:8px;cursor:pointer;
+    font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn.active{background:var(--warm);border-color:var(--warm);color:#fff;}
+
+  .page{
+    width:210mm;min-height:297mm;margin:0 auto;background:var(--paper);
+    padding:14mm 13mm 12mm;box-shadow:0 2px 14px rgba(16,24,40,.12);
+  }
+
+  .head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    border-bottom:2px solid var(--line);padding-bottom:8px;margin-bottom:10px;
+    gap:12px;
+  }
+  .head h1{font-size:19px;margin:0;font-weight:600;letter-spacing:.3px;}
+  .head .sub{font-size:12px;color:var(--ink-3);margin-top:4px;}
+  .head .meta{font-size:12px;color:var(--ink-2);text-align:right;line-height:1.9;white-space:nowrap;}
+  .head .meta b{font-weight:600;color:var(--accent);}
+
+  .band{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+  .chip{
+    font-size:11.5px;padding:4px 9px;border-radius:5px;
+    background:var(--accent-soft);color:#0C447C;border:1px solid #B5D4F4;
+  }
+  .chip.warm{background:var(--warm-soft);color:#633806;border-color:#EFC98A;}
+
+  .cols{
+    display:grid;grid-template-columns:60mm 1fr;gap:0;
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .col-cue{
+    background:#fafbfc;border-right:1px solid var(--line);padding:8px 9px 9px;
+  }
+  .col-note{padding:8px 11px 9px;}
+  .col-hd{
+    font-size:11.5px;font-weight:600;letter-spacing:.6px;color:var(--ink-2);
+    text-transform:uppercase;padding-bottom:6px;margin-bottom:7px;
+    border-bottom:1px dashed #b9c0c9;
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  .col-hd span{font-size:10.5px;font-weight:400;color:var(--ink-3);text-transform:none;letter-spacing:0;}
+
+  .q{
+    font-size:11.5px;line-height:1.5;color:#1f2328;
+    padding:5px 0 5px 20px;position:relative;border-bottom:1px dotted #dfe3e8;
+  }
+  .q:last-child{border-bottom:0;}
+  .q::before{
+    content:attr(data-n);position:absolute;left:0;top:5px;
+    width:14px;height:14px;border-radius:50%;
+    background:var(--accent);color:#fff;font-size:9.5px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:600;line-height:1;
+  }
+  .q b{font-weight:600;}
+  .q em{font-style:normal;color:var(--warm);font-weight:600;}
+
+  .grouplabel{
+    font-size:10.5px;font-weight:600;color:var(--accent);
+    letter-spacing:.4px;margin:8px 0 2px;
+  }
+  .grouplabel:first-child{margin-top:0;}
+
+  /* === 答案区样式 === */
+  .ans-block{
+    margin-bottom:6px;padding:5px 8px 6px;
+    background:var(--ans-bg);border:1px solid var(--ans-border);border-radius:3px;
+  }
+  .ans-block .ans-title{
+    font-size:10.5px;font-weight:600;color:var(--warm);
+    letter-spacing:.3px;margin-bottom:2px;display:flex;align-items:baseline;gap:6px;
+  }
+  .ans-block .ans-title .num{
+    display:inline-block;min-width:14px;height:14px;border-radius:50%;
+    background:var(--warm);color:#fff;font-size:9.5px;font-weight:600;
+    text-align:center;line-height:14px;
+  }
+  .ans-block ul{
+    margin:2px 0 3px 0;padding:0 0 0 16px;font-size:11px;line-height:1.55;color:#2b323b;
+  }
+  .ans-block ul li{padding:1px 0;}
+  .ans-block .key{
+    color:var(--warm);font-weight:600;
+  }
+  .ans-block .tip{
+    font-size:10px;color:#633806;margin-top:2px;line-height:1.5;
+    padding:2px 6px;background:var(--warm-soft);border-radius:2px;
+  }
+  .ans-block .fill{
+    height:16px;border-bottom:1px dashed #c8c0aa;margin-top:3px;
+  }
+  body.hide-answers .ans-block{display:none;}
+  body.hide-answers .summary-prefill{display:none;}
+
+  .summary{
+    margin-top:10px;border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .summary .col-hd{
+    margin:0;padding:7px 11px;background:#fafbfc;border-bottom:1px solid var(--line);
+  }
+  .summary .body{padding:6px 11px 8px;font-size:11.5px;line-height:1.7;color:#2b323b;}
+  .summary .body b{color:var(--accent);}
+  .summary .body .small{font-size:10.5px;color:var(--ink-3);margin-top:3px;display:block;}
+
+  .footer{
+    margin-top:9px;font-size:10.5px;color:var(--ink-3);
+    display:flex;justify-content:space-between;gap:10px;
+  }
+
+  .guide{
+    width:210mm;margin:16px auto 0;background:#fff;border:1px solid #d9dee5;
+    border-radius:8px;padding:16px 18px;
+  }
+  .guide h2{font-size:14px;margin:0 0 10px;font-weight:600;}
+  .guide table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .guide th,.guide td{
+    border:1px solid #e2e6eb;padding:7px 9px;text-align:left;vertical-align:top;line-height:1.6;
+  }
+  .guide th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .guide td:first-child{width:88px;font-weight:600;color:var(--accent);}
+  .guide .note{font-size:12px;color:#5b6470;margin-top:10px;line-height:1.7;}
+
+  @page{size:A4 portrait;margin:0;}
+  @media print{
+    body{background:#fff;padding:0;}
+    .toolbar,.guide{display:none;}
+    .page{box-shadow:none;margin:0;width:auto;min-height:auto;padding:13mm 12mm;}
+    body.hide-answers .ans-block{display:none;}
+    body.hide-answers .summary-prefill{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="hint">A4 竖版 · 带答案版 · 建议先默写、再对照；打印时可「隐藏答案」变填空卷</div>
+  <div>
+    <button class="btn" id="toggleBtn" onclick="toggleAnswers()">👁 隐藏答案（打印填空卷）</button>
+    <button class="btn primary" onclick="window.print()">打印 / 导出 PDF</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="head">
+    <div>
+      <h1>康奈尔笔记 · 第 1 章第 4 节 数字中国 <span style="color:var(--warm);font-size:14px;">（带答案版）</span></h1>
+      <div class="sub">《信息系统项目管理师教程（第 4 版）》约 P18 ~ P24　｜　答案口径以 2026-09-14 核对为准</div>
+    </div>
+    <div class="meta">
+      日期：__________<br>
+      第 <b>__</b> 轮复习　用时 <b>__</b> 分钟
+    </div>
+  </div>
+
+  <div class="band">
+    <span class="chip">上午约 1 题</span>
+    <span class="chip">归属 / 关键词型</span>
+    <span class="chip warm">必背：数据价值化三化 + 智慧城市五级</span>
+    <span class="chip warm">通读：范式概念 / 数字生活细目</span>
+    <span class="chip warm">📝 含答案</span>
+  </div>
+
+  <div class="cols">
+
+    <div class="col-cue">
+      <div class="col-hd">线索栏 <span>遮住右侧自问</span></div>
+
+      <div class="grouplabel">1.4.1 数字经济</div>
+      <div class="q" data-n="1"><b>数字经济定位与本质</b>？技术经济范式结构四要素？</div>
+      <div class="q" data-n="2"><b>构成两种口径</b>？《统计分类(2021)》5 类如何归属？</div>
+      <div class="q" data-n="3"><b>数字产业化</b>定义 / 地位 / 8 个重点？<b>产业数字化</b>「三个以」？</div>
+      <div class="q" data-n="4"><b>数字化治理</b>核心特征？<b>数据价值化「三化」</b>地位与本质？</div>
+
+      <div class="grouplabel">1.4.2 数字政府</div>
+      <div class="q" data-n="5"><b>数字政府定义</b>：着力点 / 三架构 / 「用数据」三连？</div>
+      <div class="q" data-n="6"><b>五大新特征</b>？建设<b>三关键词</b>？</div>
+      <div class="q" data-n="7"><b>一网通办 / 跨省通办 / 一网统管</b> 要点？跨省三模式？统管五要点？</div>
+
+      <div class="grouplabel">1.4.3 数字社会</div>
+      <div class="q" data-n="8"><b>数字民生三重点</b>？各一句关键词？</div>
+      <div class="q" data-n="9"><b>智慧城市</b>五个核心能力要素？全生命周期五阶段？「五位一体」？</div>
+      <div class="q" data-n="10"><b>智慧城市成熟度五级</b>？与智能制造五级哪几级不同？</div>
+
+      <div class="grouplabel">1.4.4 数字生态</div>
+      <div class="q" data-n="11"><b>数据要素市场</b>定义与目的？为何是「结果不是手段」？<b>双重属性</b>？</div>
+      <div class="q" data-n="12"><b>营商环境 5 个一级指标</b>？<b>网络安全</b>三法一条例 + 标准体系？</div>
+    </div>
+
+    <div class="col-note">
+      <div class="col-hd">答案区 <span>默写后对照 · 虚线处写自己的补充</span></div>
+
+      <div class="grouplabel">1.4.1 数字经济</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">1</span>数字经济定位与本质</div>
+        <ul>
+          <li>定位：继<span class="key">农业经济、工业经济</span>之后的<span class="key">更高级经济形态</span></li>
+          <li>本质：是一种<span class="key">新的技术经济范式</span>，建立在<span class="key">信息与通信技术</span>重大突破的基础上；是以<span class="key">数字技术与实体经济融合</span>驱动的产业梯次转型和经济创新发展的<span class="key">主引擎</span></li>
+          <li>与农业 / 工业经济的差异体现在 4 方面：<span class="key">基础设施、生产要素、产业结构、治理结构</span></li>
+          <li>技术经济范式结构 = <span class="key">驱动力、新结构、价值创造、经济增长</span></li>
+        </ul>
+        <div class="tip">「范式」由<b>库恩</b>在《科学革命的结构》中定义，<b>多西</b>引入技术创新提出「技术范式」。新形态举例：平台经济 / 分享经济 / 算法经济 / 服务经济 / 协同经济</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">2</span>两种构成口径（最高频）</div>
+        <ul>
+          <li><b>产业构成</b>：<span class="key">数字产业化</span> + <span class="key">产业数字化</span>（两大部分）</li>
+          <li><b>整体构成</b>：<span class="key">数字产业化</span> + <span class="key">产业数字化</span> + <span class="key">数字化治理</span> + <span class="key">数据价值化</span>（四部分）</li>
+          <li>《数字经济及其核心产业统计分类（2021）》5 类：<span class="key">数字产品制造业、数字产品服务业、数字技术应用业、数字要素驱动业、数字化效率提升业</span></li>
+        </ul>
+        <div class="tip">归属规则：前 <b>4</b> 类 = <b>数字产业化</b>；第 <b>5</b> 类（数字化效率提升业）= <b>产业数字化</b></div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">3</span>数字产业化 与 产业数字化</div>
+        <ul>
+          <li><span class="key">数字产业化</span>：为产业数字化发展提供数字技术、产品、服务、基础设施和解决方案，以及完全依赖数字技术、数据要素的各类经济活动；含电子信息制造业、电信业、软件、信息技术、互联网行业；是数字经济的 <span class="key">基础部分</span></li>
+          <li>数字产业化发展重点 8 项：<span class="key">云计算、大数据、物联网、工业互联网、区块链、人工智能、虚拟现实和增强现实</span></li>
+          <li><span class="key">产业数字化</span>：以<span class="key">数据为关键要素</span>、以<span class="key">价值释放为核心</span>、以<span class="key">数据赋能为主线</span>，对产业链上下游<span class="key">全要素</span>数字化升级、转型和再造</li>
+          <li>十四五抓手：<span class="key">「上云用数赋智」</span>行动，推动数据赋能全产业链协同转型</li>
+        </ul>
+        <div class="tip">6 条典型特征 →<b>工要产市生机</b>：数字科技变革<b>生产工具</b> / 数据资源为关键<b>生产要素</b> / 数字内容重构<b>产品结构</b> / 信息网络为<b>市场配置纽带</b> / 服务平台为<b>产业生态载体</b> / 数字善治为<b>发展机制条件</b></div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">4</span>数字化治理 与 数据价值化</div>
+        <ul>
+          <li>数字化治理<span class="key">核心特征</span>：全社会的<span class="key">数据互通</span>、<span class="key">数字化全面协同</span>与<span class="key">跨部门的流程再造</span>，形成「<span class="key">用数据说话、用数据决策、用数据管理、用数据创新</span>」的治理机制</li>
+          <li>内涵至少三方面：<span class="key">对数据的治理</span> / <span class="key">运用数据进行治理</span> / <span class="key">对数字融合空间进行治理</span></li>
+          <li><span class="key">数据资源化</span>：<b>基础</b>，本质 = 提升<span class="key">数据质量</span>，形成<span class="key">数据使用价值</span></li>
+          <li><span class="key">数据资产化</span>：<b>核心</b>，本质 = 形成<span class="key">数据交换价值</span>（通过流通交易带来经济利益）</li>
+          <li><span class="key">数据资本化</span>：<b>途径</b>，本质 = 实现<span class="key">数据要素社会化配置</span>；两种方式 = <span class="key">数据信贷融资</span> + <span class="key">数据证券化</span></li>
+        </ul>
+        <div class="tip">⚠️ 别把「核心」安到资本化头上：<b>资源=基础=使用价值 → 资产=核心=交换价值 → 资本=途径=社会化配置</b></div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">1.4.2 数字政府</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">5</span>数字政府定义</div>
+        <ul>
+          <li>以<span class="key">新一代信息技术</span>为支撑，「<span class="key">业务数据化、数据业务化</span>」为<span class="key">着力点</span></li>
+          <li>通过数据驱动重塑政务信息化<span class="key">管理架构、业务架构、组织架构</span></li>
+          <li>形成「<span class="key">用数据决策、数据服务、数据创新</span>」的<span class="key">现代化治理模式</span></li>
+        </ul>
+        <div class="tip">两组「三连」别串：着力点 = 业务数据化 / 数据业务化；目标 = 用数据决策 / 服务 / 创新</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">6</span>五大新特征 + 三关键词</div>
+        <ul>
+          <li><span class="key">协同化</span>：组织互联互通，跨<span class="key">层级、地域、部门、系统、业务</span>「五跨」协同</li>
+          <li><span class="key">云端化</span>：<b>云平台</b>是政府数字化最基本的技术要求；政务上云 = 分散建设 → 集群集约式，整体转型的<b>必要条件</b></li>
+          <li><span class="key">智能化</span>：应对治理多元参与、环境复杂、内容多样化的关键手段</li>
+          <li><span class="key">数据化</span>：现阶段建设的<b>重点</b>，建立在政务数据整合共享基础上</li>
+          <li><span class="key">动态化</span>：数据驱动下动态发展、不断演进的过程</li>
+          <li>关键词三：<span class="key">共享</span>（数字政府数据先行，数据共享是效能抓手）/ <span class="key">互通</span>（打破地域阻隔与部门壁垒）/ <span class="key">便利</span>（利企便民，根本目标是服务企业与群众）</li>
+        </ul>
+        <div class="tip">特征口诀 <b>协云智数动</b>；关键词口诀 <b>享通便</b>——两套完全不同，别混成一锅</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">7</span>主要内容三件事</div>
+        <ul>
+          <li><span class="key">一网通办</span>：依托<span class="key">一体化在线政务服务平台</span>，搭建统一的互联网政务服务总门户；企业群众办事线上<span class="key">只登录一次即可全网通办</span></li>
+          <li><span class="key">跨省通办</span>：异地提出申请办理；模式 = <span class="key">全程网办、代收代办、多地联办</span></li>
+          <li><span class="key">一网统管</span>：从<b>城市治理</b>突出问题出发，以<span class="key">城市事件</span>为牵引，统筹管理网格，构建多级城市运行应用体系；实现态势感知、体征指标监测、统一事件受理、智能调度指挥、联动协同处置、监督评价考核全流程监管</li>
+        </ul>
+        <div class="tip">一网统管五要点 → <b>网屏联预创</b>：一网（政务云 / 政务网 / 政务大数据中心）、一屏（多部门数据整合）、联动（跨部门区域层级）、预警（多维海量全息数据）、创新（管理需求带动智能化建设）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">1.4.3 数字社会</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">8</span>数字民生三重点</div>
+        <ul>
+          <li><span class="key">普惠</span>：扩大民生保障覆盖范围，解决<b>民生资源配置不均衡</b></li>
+          <li><span class="key">赋能</span>：与民生深度融合赋予<b>新动能</b>，促进民生保障实效<b>指数式增长</b>（互联网+教育 / 医疗 / 养老 / 交通）</li>
+          <li><span class="key">利民</span>：拓展公共服务场景，使民生服务日趋<b>智慧化、便利化和人性化</b></li>
+        </ul>
+        <div class="tip">口诀 <b>普赋利</b>（普惠 / 赋能 / 利民）——注意与数字政府关键词「共享 / 互通 / 便利」区分</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">9</span>智慧城市：五要素 / 全生命周期 / 五位一体</div>
+        <ul>
+          <li>五个核心能力要素：<span class="key">数据治理、数字孪生、边际决策、多元融合、态势感知</span></li>
+          <li>全生命周期管理五阶段：<span class="key">规划设计、部署实施、运营管理、评估改进、创新发展</span></li>
+          <li>「五位一体」高质量发展：<span class="key">城市治理、民生服务、生态宜居、产业经济、精神文明</span></li>
+          <li>基本原理另两条：强调「<span class="key">人民城市为人民</span>」，以面向<b>政府、企业、市民</b>提供服务为主要模式；持续推动城市治理体系与治理能力现代化</li>
+        </ul>
+        <div class="tip">要素速记 <b>数孪边多态</b>：数据治理（责权利管控）/ 数字孪生（社会·城市·设备孪生）/ 边际决策（强化<b>执行端</b>决策）/ 多元融合（服务可编排与快速集成）/ 态势感知（可变与不可见因素）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">10</span>智慧城市成熟度五级</div>
+        <ul>
+          <li><span class="key">规划级</span>：围绕发展进行策划，明确职责分工与工作机制，初步开展数据采集和应用</li>
+          <li><span class="key">管理级</span>：明确战略 / 原则 / 目标 / 实施计划，推进城市基础设施智能化改造，多领域实现<b>信息系统单项应用</b>，对全生命周期实施管理</li>
+          <li><span class="key">协同级</span>：实施多业务、多层级、<b>跨领域应用系统的集成</b>，持续推进信息资源共享与交换，实现<b>跨领域协同改进</b></li>
+          <li><span class="key">优化级</span>：与城市经济社会发展深度融合，基于<b>数据与知识模型</b>实施精准化治理，推动数据要素价值挖掘</li>
+          <li><span class="key">引领级</span>：构建<b>敏捷发展能力</b>，实现<b>物理空间、社会空间、信息空间</b>融合演进与共生共治，引领<b>城市集群治理联动</b>，形成高质量发展共同体</li>
+        </ul>
+        <div class="tip">⚠️ 最大防坑：智慧城市 = 规划 / <b>管理 / 协同</b> / 优化 / 引领；智能制造 = 规划 / <b>规范 / 集成</b> / 优化 / 引领。<b>城市管「管理·协同」，制造管「规范·集成」</b></div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">1.4.4 数字生态</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">11</span>数据要素市场</div>
+        <ul>
+          <li>双重属性：数据作为新型生产要素，具有<span class="key">劳动工具和劳动对象的双重属性</span>；作为<b>劳动对象</b>经采集 / 加工 / 存储 / 流通 / 分析具备价值与使用价值，作为<b>劳动工具</b>通过融合应用提升生产效能</li>
+          <li>定义：将<span class="key">尚未完全由市场配置</span>的数据要素转向<span class="key">由市场配置</span>的<span class="key">动态过程</span></li>
+          <li>目的：形成以<span class="key">市场为根本调配机制</span>，实现<span class="key">数据流动的价值</span>或数据在流动中产生价值</li>
+          <li>保障制度：<span class="key">数据产权、交易机制、定价机制、分配机制、监管机制、法律范围</span></li>
+          <li>核心环节：<span class="key">数据流通</span></li>
+        </ul>
+        <div class="tip">原话考点：<b>数据要素市场化配置是一种「结果」，而不是「手段」</b>——因为它建立在上述六项保障制度之上</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">12</span>数字营商环境 + 网络安全保护</div>
+        <ul>
+          <li>全球数字营商环境评价指标体系（<b>国家工业信息安全发展研究中心</b> 2021.12 提出）5 个一级指标：<span class="key">数字支撑体系</span>（普遍接入 / 智慧物流设施 / 电子支付设施）、<span class="key">数据开发利用与安全</span>（公共数据开放 / 数据安全）、<span class="key">数字市场准入</span>（业态准入 / 政务服务便利度）、<span class="key">数字市场规则</span>（平台企业责任 / 商户权利与责任 / 数字消费者保护）、<span class="key">数字创新环境</span>（创新生态 / 数字素养与技能 / 知识产权保护）</li>
+          <li>网络安全三法一条例：<span class="key">《网络安全法》《数据安全法》《个人信息保护法》</span> + <span class="key">《关键信息基础设施安全保护条例》</span></li>
+          <li>标准体系：<span class="key">网络安全等级保护 2.0</span>；关键判断：<span class="key">强大的网络安全产业实力</span>是保障网络空间安全的<b>根本和基石</b></li>
+        </ul>
+        <div class="tip">营商环境五指标口诀 <b>支撑 → 安全 → 准入 → 规则 → 创新</b>（先有网 → 再保数据 → 再进门 → 再立规 → 最后创新）</div>
+        <div class="fill"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="col-hd">总结区 <span>本节本质 + 考点地图</span></div>
+    <div class="body summary-prefill">
+      <b>本节本质</b>：数字中国是<b>国家战略层总纲</b>，四个落地领域（数字经济 / 数字政府 / 数字社会 / 数字生态）；上午约 1 题，主流题型是「下列属于 X 的是」的<b>归属 / 关键词配对</b>。<br>
+      <b>考点地图（按考频排序）</b>：① 数据价值化「三化」地位与本质 → ② 智慧城市成熟度五级（规划 / 管理 / 协同 / 优化 / 引领）→ ③ 数字经济构成两种口径 + 统计分类 5 类归属 → ④ 数字政府五特征 + 三关键词 + 一网通办 / 跨省通办 / 一网统管 → ⑤ 智慧城市五核心能力要素 → ⑥ 数字民生三重点（普惠 / 赋能 / 利民）→ ⑦ 数据要素市场（结果不是手段、双重属性）→ ⑧ 营商环境 5 指标 + 三法一条例。<br>
+      <span class="small">⚠️ 口径陷阱：①智慧城市五级 ≠ 智能制造成熟度五级（第二、三级「管理·协同」vs「规范·集成」）；②「核心」是数据<b>资产化</b>不是资本化；③统计分类前 4 类属数字产业化、第 5 类属产业数字化；④数字政府特征（协云智数动）≠ 关键词（共享 / 互通 / 便利）≠ 数字民生（普惠 / 赋能 / 利民）；⑤数据要素市场化配置是「结果」不是「手段」；⑥数据具有劳动工具 + 劳动对象<b>双重</b>属性。</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>康奈尔笔记法 · 第 1 章第 4 节 带答案版　｜　复习记录：当日 ☐　+1 天 ☐　+3 天 ☐　+7 天 ☐　+14 天 ☐</span>
+    <span>正确率 ____ / 12</span>
+  </div>
+
+</div>
+
+<div class="guide">
+  <h2>怎么用这一页</h2>
+  <table>
+    <tr>
+      <th>步骤</th><th>做法</th>
+    </tr>
+    <tr>
+      <td>第 1 遍 · 遮答默写</td>
+      <td>用纸<b>遮住右栏答案区</b>，只看左栏 12 个问题。口头/默写回答，答不出的画「×」。</td>
+    </tr>
+    <tr>
+      <td>第 2 遍 · 对照修正</td>
+      <td>揭开答案区逐项对照。每条答案下的<b>虚线</b>是留给你的「补充线」——记下易漏点（如「统计分类 5 类的归属规则」「智慧城市五级与智能制造五级的差异」「营商环境 5 个一级指标」）。</td>
+    </tr>
+    <tr>
+      <td>第 3 遍 · 隐藏答案打印</td>
+      <td>点工具栏「👁 隐藏答案」按钮，再打印一份当填空卷，可反复练习。</td>
+    </tr>
+    <tr>
+      <td>第 4 遍 · 复习节奏</td>
+      <td>页脚 5 个框按「当日 → +1 天 → +3 天 → +7 天 → +14 天」打勾，这就是你的艾宾浩斯进度条。全部打勾后，本节可不再看。</td>
+    </tr>
+  </table>
+  <div class="note">
+    <b>为什么这份是「带答案版」</b>：1.4 节全是「归属 + 关键词」型考点，自己默写时最容易犯的错是<b>把两套相似名词串起来</b>（数字政府特征 / 关键词 / 数字民生三重点；智慧城市五级 / 智能制造五级）。本版每个答案都标注<b>关键术语</b>（暖色）和<b>对照提醒</b>（橙色框），默写后对照一眼就能定位偏差。考前冲刺只看「总结区 · 考点地图」+「橙色 tip 框」即可。
+  </div>
+</div>
+
+<script>
+  function toggleAnswers(){
+    document.body.classList.toggle('hide-answers');
+    const btn = document.getElementById('toggleBtn');
+    const hidden = document.body.classList.contains('hide-answers');
+    btn.textContent = hidden ? '👁 显示答案' : '👁 隐藏答案（打印填空卷）';
+    btn.classList.toggle('active', hidden);
+  }
+</script>
+
+</body>
+</html>

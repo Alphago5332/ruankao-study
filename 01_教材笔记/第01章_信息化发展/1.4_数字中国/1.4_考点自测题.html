@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1.4 数字中国 · 考点自测题</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #333; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 20px 16px 60px; }
+  header { background: #185FA5; color: #fff; border-radius: 8px; padding: 18px 20px; margin-bottom: 16px; }
+  header h1 { font-size: 19px; margin-bottom: 4px; }
+  header p { font-size: 12.5px; opacity: .85; }
+  .progress-bar { background: rgba(255,255,255,.25); border-radius: 4px; height: 8px; margin-top: 10px; }
+  .progress-bar i { display: block; height: 100%; background: #ffc53d; border-radius: 4px; width: 0; transition: width .3s; }
+  .card { background: #fff; border-radius: 8px; padding: 18px 20px; margin-bottom: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+  .qtag { font-size: 11px; color: #854F0B; background: #fff7e6; border: 1px solid #f0d9a0; border-radius: 3px; padding: 1px 6px; margin-right: 6px; }
+  .qno { font-weight: bold; color: #185FA5; }
+  .qtext { font-size: 14.5px; line-height: 1.65; margin: 8px 0 12px; }
+  .opt { display: block; width: 100%; text-align: left; border: 1px solid #d9e2ec; border-radius: 6px;
+    background: #fff; padding: 9px 12px; font-size: 13.5px; margin-bottom: 8px; cursor: pointer; line-height: 1.5; }
+  .opt:hover { border-color: #185FA5; }
+  .opt.sel { border-color: #185FA5; background: #eef4fb; }
+  .opt.right { border-color: #2e7d32; background: #eef7ee; }
+  .opt.wrong { border-color: #c62828; background: #fdeeee; }
+  .opt .mark { font-weight: bold; margin-right: 6px; color: #185FA5; }
+  .explain { display: none; background: #f4f8fc; border-left: 3px solid #185FA5; border-radius: 4px;
+    padding: 10px 12px; font-size: 13px; line-height: 1.7; color: #444; margin-top: 4px; }
+  .explain b { color: #185FA5; }
+  .btn { background: #185FA5; color: #fff; border: none; border-radius: 6px; padding: 9px 22px;
+    font-size: 14px; cursor: pointer; margin-top: 10px; }
+  .btn.gray { background: #90a4ae; }
+  .btn:disabled { background: #b0bec5; cursor: not-allowed; }
+  #result { display: none; text-align: center; }
+  #result .big { font-size: 40px; font-weight: bold; color: #185FA5; margin: 10px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 14px 0; }
+  th, td { border: 1px solid #d9e2ec; padding: 7px 8px; text-align: center; }
+  th { background: #eef4fb; color: #185FA5; }
+  .module-stat td:first-child { text-align: left; }
+  #reviewList { text-align: left; }
+  .wrong-item { border: 1px solid #f0c4c4; border-radius: 6px; padding: 10px 12px; margin-bottom: 8px; font-size: 13px; background: #fffafa; }
+  .wrong-item b { color: #c62828; }
+  .kbd-tip { font-size: 11.5px; color: #999; margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>1.4 数字中国 · 考点自测（22 题）</h1>
+    <p>第 4 版教材 1.4 节 · 达标线 18/22（80%）· 键盘 A~D 选择，Enter 确认</p>
+    <div class="progress-bar"><i id="pbar"></i></div>
+  </header>
+  <div id="quiz"></div>
+  <div id="result" class="card">
+    <h2>测验完成</h2>
+    <div class="big" id="finalScore">0 / 22</div>
+    <div id="advice" style="font-size:14px; margin-bottom: 6px;"></div>
+    <table class="module-stat" id="moduleTable">
+      <tr><th>模块</th><th>正确率</th><th>状态</th></tr>
+    </table>
+    <div id="reviewWrap" style="display:none">
+      <h3 style="color:#c62828; font-size:14px; margin-bottom:8px;">错题回顾</h3>
+      <div id="reviewList"></div>
+    </div>
+    <button class="btn" id="retryWrong" style="display:none">只重做错题</button>
+    <button class="btn gray" onclick="initAll()">重新测验</button>
+  </div>
+  <div class="kbd-tip">对照资料：同目录《1.4_知识点清单.md》· 教材出处：《信息系统项目管理师教程（第4版）》约 P18~P24</div>
+</div>
+
+<script>
+const QUESTIONS = [
+  // 模块A 数字经济 (1-9)
+  { m: "A·数字经济", q: "数字经济是继（　）之后的更高级经济形态。",
+    o: ["农业经济、工业经济","信息经济、知识经济","农业经济、服务经济","工业经济、服务经济"], a: 0,
+    e: "教材原文：数字经济是继农业经济、工业经济之后的更高级经济形态。其本质是一种新的技术经济范式，建立在信息与通信技术重大突破的基础上。" },
+  { m: "A·数字经济", q: "从整体构成上看，数字经济包括数字产业化、产业数字化、数字化治理和（　）。",
+    o: ["数据资产化","数据价值化","数字生态化","数字市场化"], a: 1,
+    e: "两种口径要分清：①产业构成 = 数字产业化 + 产业数字化；②整体构成 = 数字产业化 + 产业数字化 + 数字化治理 + 数据价值化（四部分）。" },
+  { m: "A·数字经济", q: "《数字经济及其核心产业统计分类（2021）》将数字经济分为 5 类，其中属于「产业数字化」部分的是（　）。",
+    o: ["数字产品制造业","数字技术应用业","数字要素驱动业","数字化效率提升业"], a: 3,
+    e: "前 4 类（数字产品制造业、数字产品服务业、数字技术应用业、数字要素驱动业）为数字产业化部分；第 5 类数字化效率提升业为产业数字化部分。" },
+  { m: "A·数字经济", q: "数字产业化在数字经济中的地位是（　）。",
+    o: ["数字经济的核心部分","数字经济的基础部分","数字经济的重要途径","数字经济的保障部分"], a: 1,
+    e: "数字产业化 = 数字经济的【基础部分】（提供数字技术、产品、服务、基础设施和解决方案）；产业数字化 = 实现数字经济与传统经济深度融合发展的重要途径。" },
+  { m: "A·数字经济", q: "下列不属于数字产业化发展重点的是（　）。",
+    o: ["云计算、大数据","工业互联网、区块链","人工智能、虚拟现实和增强现实","数字田园、智慧农牧渔场"], a: 3,
+    e: "1.4.1 列出的 8 个发展重点 = 云计算、大数据、物联网、工业互联网、区块链、人工智能、虚拟现实和增强现实。数字田园、智慧农牧渔场是 1.3.1 乡村振兴「发展智慧农业」的载体，别错位。" },
+  { m: "A·数字经济", q: "产业数字化是指在新一代数字科技支撑和引领下，以（　）为关键要素，以价值释放为核心，以数据赋能为主线。",
+    o: ["数据","技术","平台","资本"], a: 0,
+    e: "「三个以」：以【数据】为关键要素、以【价值释放】为核心、以【数据赋能】为主线。十四五抓手是「上云用数赋智」行动。" },
+  { m: "A·数字经济", q: "数据价值化「三化」框架中，处于基础地位、本质是形成数据使用价值的是（　）。",
+    o: ["数据资源化","数据资产化","数据资本化","数据标准化"], a: 0,
+    e: "资源化 = 基础 = 提升数据质量、形成【使用价值】；资产化 = 核心 = 形成【交换价值】；资本化 = 途径 = 实现数据要素【社会化配置】。" },
+  { m: "A·数字经济", q: "数据资本化的两种方式是（　）。",
+    o: ["数据采集与数据标注","数据确权与数据定价","数据信贷融资与数据证券化","数据交易与数据流转"], a: 2,
+    e: "数据资本化主要包括两种方式：数据信贷融资与数据证券化。它是拓展数据价值的途径，本质是实现数据要素社会化配置。" },
+  { m: "A·数字经济", q: "数字化治理的核心特征是（　）。",
+    o: ["数据采集的全覆盖与实时化","全社会的数据互通、数字化全面协同与跨部门的流程再造","政务上云与集约化建设","多元主体共同参与社会治理"], a: 1,
+    e: "核心特征 = 全社会的数据互通 + 数字化全面协同 + 跨部门的流程再造，形成「用数据说话、用数据决策、用数据管理、用数据创新」的治理机制。内涵至少包含：对数据的治理、运用数据进行治理、对数字融合空间进行治理。" },
+  // 模块B 数字政府 (10-15)
+  { m: "B·数字政府", q: "数字政府以（　）为着力点，通过数据驱动重塑政务信息化管理架构、业务架构和组织架构。",
+    o: ["业务数据化、数据业务化","数据采集化、采集标准化","平台云端化、云端集约化","治理智能化、智能动态化"], a: 0,
+    e: "定义原文：以新一代信息技术为支撑，以「业务数据化、数据业务化」为着力点，重塑管理架构、业务架构和组织架构，形成「用数据决策、数据服务、数据创新」的现代化治理模式。" },
+  { m: "B·数字政府", q: "下列不属于数字政府新特征的是（　）。",
+    o: ["协同化","云端化","动态化","市场化"], a: 3,
+    e: "五大新特征 = 协同化、云端化、智能化、数据化、动态化（口诀「协云智数动」）。「市场化」不属于数字政府特征。" },
+  { m: "B·数字政府", q: "数字政府建设的三个关键词是（　）。",
+    o: ["共享、互通、便利","普惠、赋能、利民","开放、协同、创新","集约、安全、高效"], a: 0,
+    e: "关键词 = 共享（数字政府数据先行）/ 互通（打破地域阻隔与部门壁垒）/ 便利（利企便民）。「普惠、赋能、利民」是数字民生建设三重点，选 B 说明已串行。" },
+  { m: "B·数字政府", q: "「跨省通办」的办理模式通常可分为（　）。",
+    o: ["全程网办、代收代办、多地联办","一网通办、一网统管、一站服务","线上办、线下办、自助办","省内通办、跨省通办、跨境通办"], a: 0,
+    e: "跨省通办 = 申请人在办理地之外的省市提出事项申请，或本地提出办理其他省市事项申请；模式 = 全程网办、代收代办、多地联办。" },
+  { m: "B·数字政府", q: "「一网统管」建设通常强调的五个方面是（　）。",
+    o: ["一网、一屏、联动、预警、创新","共享、互通、便利、协同、集约","规划、管理、协同、优化、引领","数据治理、数字孪生、边际决策、多元融合、态势感知"], a: 0,
+    e: "一网统管五要点 = 一网（政务云 / 政务网 / 政务大数据中心）、一屏（多部门数据整合）、联动（跨部门区域层级联勤联动）、预警（多维海量全息数据智能预警）、创新（管理需求带动智能化建设）。C 是智慧城市成熟度五级，D 是智慧城市五能力要素。" },
+  { m: "B·数字政府", q: "「一网通办」的核心目标是（　）。",
+    o: ["实现城市运行态势感知与联动处置","企业群众办事线上只登录一次即可全网通办","打通异地事项办理的三种模式","推动政务数据无条件向社会开放"], a: 1,
+    e: "一网通办 = 依托一体化在线政务服务平台，搭建统一的互联网政务服务总门户，推动企业群众办事线上【只登录一次即可全网通办】。A 是一网统管，C 是跨省通办。" },
+  // 模块C 数字社会 (16-19)
+  { m: "C·数字社会", q: "数字民生建设的重点通常强调（　）。",
+    o: ["共享、互通、便利","普惠、赋能、利民","协同化、云端化、智能化","规划级、管理级、协同级"], a: 1,
+    e: "数字民生三重点：普惠（扩大民生保障覆盖范围，解决资源配置不均衡）、赋能（深度融合赋予新动能，如互联网+教育/医疗/养老/交通）、利民（拓展公共服务场景，使民生服务智慧化、便利化、人性化）。" },
+  { m: "C·数字社会", q: "智慧城市重点强化的五个核心能力要素是（　）。",
+    o: ["数据治理、数字孪生、边际决策、多元融合、态势感知","数据采集、数据存储、数据加工、数据流通、数据应用","网络、平台、数据、安全、应用","人员、技术、资源、制造、流程"], a: 0,
+    e: "智慧城市五核心能力要素（口诀「数孪边多态」）：数据治理（责权利管控）、数字孪生（社会/城市/设备孪生）、边际决策（强化【执行端】决策能力）、多元融合（服务可编排、快速集成）、态势感知（洞察可变与不可见因素）。" },
+  { m: "C·数字社会", q: "智慧城市发展成熟度等级中，第三级是（　）。",
+    o: ["管理级","协同级","集成级","优化级"], a: 1,
+    e: "智慧城市五级 = 规划级 → 管理级 → 协同级 → 优化级 → 引领级；「集成级」是【智能制造成熟度】五级的第三级。⚠️ 智慧城市讲「管理、协同」，智能制造讲「规范、集成」，别背串。" },
+  { m: "C·数字社会", q: "关于数字乡村的定位，下列表述正确的是（　）。",
+    o: ["既是乡村振兴的战略方向，也是建设数字中国的重要内容","仅是乡村振兴的战略方向，与数字中国无关","仅是建设数字中国的重要内容，与乡村振兴无关","是数字政府在城市治理领域的延伸形态"], a: 0,
+    e: "数字乡村是伴随网络化、信息化和数字化在农业农村经济社会发展中的应用，以及农民现代信息技能提高而内生的农业农村现代化发展和转型进程；既是乡村振兴的【战略方向】，也是建设数字中国的【重要内容】。" },
+  // 模块D 数字生态 (20-22)
+  { m: "D·数字生态", q: "关于数据要素市场化配置，下列表述符合教材原文的是（　）。",
+    o: ["它是一种结果，而不是手段","它是一种手段，而不是结果","它既是手段也是终极目标","它是政府行政指令的产物"], a: 0,
+    e: "教材原话考点：数据要素市场化配置是一种【结果】，而不是手段。因为它建立在明确的数据产权、交易机制、定价机制、分配机制、监管机制、法律范围等保障制度的基础上。" },
+  { m: "D·数字生态", q: "数据作为新型生产要素，具有（　）的双重属性。",
+    o: ["劳动工具和劳动对象","使用价值和交换价值","公共物品和私人物品","无形资产和固定资产"], a: 0,
+    e: "数据具有【劳动工具和劳动对象】的双重属性：作为劳动对象，通过采集、加工、存储、流通、分析环节具备价值和使用价值；作为劳动工具，通过融合应用提升生产效能。" },
+  { m: "D·数字生态", q: "全球数字营商环境评价指标体系包含的 5 个一级指标是（　）。",
+    o: ["数字支撑体系、数据开发利用与安全、数字市场准入、数字市场规则、数字创新环境","数字基础设施、数字产业、数字政府、数字社会、数字生态","数字产品制造业、数字产品服务业、数字技术应用业、数字要素驱动业、数字化效率提升业","共享、互通、便利、普惠、赋能"], a: 0,
+    e: "国家工业信息安全发展研究中心 2021 年 12 月提出，含 5 个一级指标：数字支撑体系（普遍接入/智慧物流设施/电子支付设施）、数据开发利用与安全（公共数据开放/数据安全）、数字市场准入（业态准入/政务服务便利度）、数字市场规则（平台企业责任/商户权利与责任/数字消费者保护）、数字创新环境（创新生态/数字素养与技能/知识产权保护）。B 是自编干扰项，C 是数字经济统计分类 5 类。" }
+];
+
+let idx = 0, score = 0, answers = [], current = QUESTIONS, locked = false;
+
+function initAll() {
+  idx = 0; score = 0; answers = []; current = QUESTIONS.slice();
+  document.getElementById("quiz").style.display = "block";
+  document.getElementById("result").style.display = "none";
+  renderQ();
+}
+function renderQ() {
+  locked = false;
+  const q = current[idx];
+  document.getElementById("pbar").style.width = (idx / current.length * 100) + "%";
+  let html = '<div class="card"><span class="qtag">' + q.m + '</span><span class="qno">第 ' + (idx+1) + ' / ' + current.length + ' 题</span>';
+  html += '<div class="qtext">' + q.q + '</div>';
+  q.o.forEach((t, i) => { html += '<button class="opt" data-i="' + i + '"><span class="mark">' + "ABCD"[i] + '</span>' + t + '</button>'; });
+  html += '<div class="explain" id="ex"><b>精讲：</b>' + q.e + '</div>';
+  html += '<button class="btn" id="next" disabled>' + (idx === current.length-1 ? "查看结果" : "下一题 (Enter)") + '</button></div>';
+  document.getElementById("quiz").innerHTML = html;
+  document.querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => choose(+b.dataset.i)));
+  document.getElementById("next").addEventListener("click", next);
+}
+function choose(i) {
+  if (locked) return; locked = true;
+  const q = current[idx], ok = i === q.a;
+  if (ok) score++;
+  answers[idx] = { ok, q };
+  document.querySelectorAll(".opt").forEach((b, j) => {
+    b.disabled = true;
+    if (j === q.a) b.classList.add("right");
+    else if (j === i) b.classList.add("wrong");
+  });
+  document.getElementById("ex").style.display = "block";
+  document.getElementById("next").disabled = false;
+}
+function next() {
+  if (idx < current.length - 1) { idx++; renderQ(); }
+  else finish();
+}
+function finish() {
+  document.getElementById("quiz").style.display = "none";
+  document.getElementById("pbar").style.width = "100%";
+  const res = document.getElementById("result");
+  res.style.display = "block";
+  document.getElementById("finalScore").textContent = score + " / " + current.length;
+  const pct = Math.round(score / current.length * 100);
+  document.getElementById("advice").textContent =
+    pct >= 80 ? "✅ 达标（≥80%），可进入 1.5「数字化转型与元宇宙」！" :
+    pct >= 60 ? "🔶 接近达标：回看错题对应模块的知识点清单，明天重测。" :
+    "❌ 未达标：请重读《1.4_知识点清单》后重新测验。";
+  // 分模块统计
+  const mods = {};
+  current.forEach((q, i) => {
+    mods[q.m] = mods[q.m] || { t: 0, r: 0 };
+    mods[q.m].t++;
+    if (answers[i] && answers[i].ok) mods[q.m].r++;
+  });
+  let rows = "";
+  Object.keys(mods).forEach(m => {
+    const st = mods[m].r / mods[m].t >= 0.8 ? "✅" : "🔶";
+    rows += '<tr><td class="module-stat">' + m + '</td><td>' + mods[m].r + " / " + mods[m].t + '</td><td>' + st + '</td></tr>';
+  });
+  document.getElementById("moduleTable").innerHTML = '<tr><th>模块</th><th>正确率</th><th>状态</th></tr>' + rows;
+  // 错题
+  const wrongs = current.map((q, i) => ({ q, i })).filter(x => !answers[x.i] || !answers[x.i].ok);
+  if (wrongs.length) {
+    document.getElementById("reviewWrap").style.display = "block";
+    document.getElementById("retryWrong").style.display = "inline-block";
+    document.getElementById("reviewList").innerHTML = wrongs.map(x =>
+      '<div class="wrong-item"><b>【' + x.q.m + '】</b>' + x.q.q +
+      '<br>✔ 正确答案：<b>' + "ABCD"[x.q.a] + " · " + x.q.o[x.q.a] + '</b><br><span style="color:#666">' + x.q.e + '</span></div>'
+    ).join("");
+  } else {
+    document.getElementById("reviewWrap").style.display = "none";
+    document.getElementById("retryWrong").style.display = "none";
+  }
+}
+document.getElementById("retryWrong").addEventListener("click", () => {
+  current = current.filter((q, i) => !answers[i] || !answers[i].ok);
+  idx = 0; score = 0; answers = [];
+  document.getElementById("result").style.display = "none";
+  document.getElementById("quiz").style.display = "block";
+  renderQ();
+});
+document.addEventListener("keydown", ev => {
+  if (document.getElementById("result").style.display === "block") return;
+  const k = ev.key.toUpperCase();
+  const sel = "ABCD".indexOf(k);
+  if (sel >= 0 && !locked) choose(sel);
+  else if ((ev.key === "Enter" || k === "ENTER") && locked) next();
+});
+initAll();
+</script>
+</body>
+</html>

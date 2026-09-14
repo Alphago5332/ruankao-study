@@ -2,10 +2,25 @@
  * md2checklist.js
  * 将知识点清单 .md 转换为带交互复选框的 HTML。
  * 勾选状态保存到 localStorage，刷新后保留。
- * 用法：node md2checklist.js <输入.md> <输出.html> [仓库相对路径]
+ * 用法：node md2checklist.js <输入.md> <输出.html> [仓库相对路径] [--semantic]
+ *   --semantic：data-key 取条目标题编号（A1 / B3 …），清单增删条目不丢勾选状态。
+ *               不传则用 L行号（兼容 1.1 / 1.2 早期生成的清单）。
  */
 const fs = require('fs');
 const path = require('path');
+
+/* 是否用「语义键」代替「行号键」。
+ * 默认 false → data-key = "L行号"（向后兼容 1.1 / 1.2 已生成的清单，改行号会失效但基线不变）。
+ * 传 --semantic → 优先取条目标题里的编号（如 "- [ ] **B3 · xxx**" → "B3"），无编号则回落 L行号。
+ * 语义键的好处：清单后续增删条目不会把已勾选状态打乱（1.3 及以后统一用语义键）。
+ * 用法：node md2checklist.js <in.md> <out.html> [relPath] [--semantic] */
+const USE_SEMANTIC = process.argv.includes('--semantic');
+
+function semanticKey(text, lineIdx) {
+  if (!USE_SEMANTIC) return `L${lineIdx + 1}`;   // 关键：data-key 不含 relPath 前缀，避免 key 超长
+  const m = text.match(/^\*\*\s*([A-Z]\d+)\b/);  // 形如 "**B3 · 标题**" / "**A1**"
+  return m ? m[1] : `L${lineIdx + 1}`;
+}
 
 function esc(s) {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -123,8 +138,7 @@ function parse(md, relPath) {
     if (isCheckbox(line)) {
       const m = line.match(/^(\s*)-\s+\[([xX ])\]\s+(.*)$/);
       const checked = m[2].toLowerCase() === 'x' ? 'checked' : '';
-      // 关键修复：data-key 只用行号，不要包含 relPath 前缀（避免和 STORE_KEY 拼出超长 key）
-      const key = `L${i + 1}`;
+      const key = semanticKey(m[3], i);
       const text = inline(m[3]);
       i++;
       const cont = [];
@@ -281,13 +295,14 @@ function wrap(title, bodyHtml, relPath) {
 }
 
 if (process.argv.length < 4) {
-  console.log('用法：node md2checklist.js <输入.md> <输出.html> [仓库相对路径]');
+  console.log('用法：node md2checklist.js <输入.md> <输出.html> [仓库相对路径] [--semantic]');
   process.exit(1);
 }
 
-const input = process.argv[2];
-const output = process.argv[3];
-const relPath = process.argv[4] || path.basename(input);
+const args = process.argv.slice(2).filter(a => !a.startsWith('--'));
+const input = args[0];
+const output = args[1];
+const relPath = args[2] || path.basename(input);
 const md = fs.readFileSync(input, 'utf8');
 const titleMatch = md.match(/^#\s+(.+)$/m);
 const title = titleMatch ? titleMatch[1] : path.basename(input, '.md');
