@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2.1 信息技术及其发展 · 知识点清单 · 可勾选清单</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Microsoft YaHei", "微软雅黑", sans-serif; background: #f7f9fc; color: #333; padding: 24px; line-height: 1.7; }
+  .wrap { max-width: 820px; margin: 0 auto; background: #fff; padding: 32px 36px; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,.08); }
+  h1 { font-size: 22px; color: #185FA5; margin-bottom: 8px; }
+  h2 { font-size: 18px; color: #185FA5; margin: 22px 0 10px; border-left: 4px solid #185FA5; padding-left: 10px; }
+  h3 { font-size: 15px; color: #185FA5; margin: 16px 0 8px; }
+  h4 { font-size: 14px; color: #185FA5; margin: 14px 0 6px; }
+  blockquote { background: #f4f8fc; border-left: 4px solid #185FA5; padding: 10px 14px; margin: 10px 0; color: #444; font-size: 13.5px; }
+  p, .plain-li { margin: 8px 0; font-size: 14px; }
+  .plain-li { display: flex; gap: 6px; }
+  .bullet { color: #185FA5; font-weight: bold; }
+  .task { display: flex; align-items: flex-start; gap: 8px; margin: 8px 0; cursor: pointer; user-select: none; }
+  .task input[type="checkbox"] { width: 16px; height: 16px; margin-top: 4px; flex-shrink: 0; accent-color: #185FA5; cursor: pointer; }
+  .task-text { font-size: 14px; transition: opacity .2s; }
+  .task input:checked + .task-text { text-decoration: line-through; opacity: .45; color: #666; }
+  .item-body { margin: 4px 0 12px 24px; }
+  .item-body p { margin: 4px 0; color: #555; font-size: 13.5px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; }
+  th, td { border: 1px solid #d9e2ec; padding: 7px 10px; }
+  th { background: #eef4fb; color: #185FA5; font-weight: 600; }
+  td { background: #fff; }
+  ol { margin: 8px 0 8px 22px; font-size: 14px; }
+  li { margin: 4px 0; }
+  code { background: #f0f3f7; padding: 1px 4px; border-radius: 3px; font-family: Consolas, monospace; font-size: 12px; }
+  a { color: #185FA5; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  summary { cursor: pointer; color: #185FA5; font-weight: 600; }
+  details { background: #f9fbfd; border: 1px solid #e3eaf2; border-radius: 6px; padding: 10px 14px; margin: 12px 0; }
+  .progress { position: sticky; top: 0; background: #fff; border-bottom: 1px solid #e3eaf2; padding: 8px 0; margin: -32px -36px 20px; padding-left: 36px; padding-right: 36px; font-size: 12px; color: #666; z-index: 10; }
+  .progress b { color: #185FA5; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="progress" id="progress">已完成：0 / 0</div>
+  <h1>2.1 信息技术及其发展 · 知识点清单</h1>
+<blockquote><b>教材</b>：《信息系统项目管理师教程（第 4 版）》第 2 章第 1 节（约 P37 ~ P49）<br><b>学习日</b>：2026-09-15（Day 6）<br><b>上午分值</b>：第 2 章整体 <b>6~12 题</b>，是<b>上午卷最大的分值块</b>；2.1 一节通常占 <b>4~6 题</b>（网络协议归属 + 存储数据库 + 信息安全三块最密）<br><b>本节定位</b>：<b>纯技术概念辨析型</b>。没有计算，全部是「<b>术语归属 + 层级排序 + 特征匹配</b>」三类题。出题人套路固定：把协议放到错误的层、把 NAS 的特点安到 SAN 头上、把「基础」和「核心」互换。<b>本节不靠理解，靠精确对应</b>——清单里的表格就是得分点</blockquote>
+<h2>今日目标（学完要能做到）</h2>
+<ol><li>说清<b>信息技术的两种形态</b>（硬技术 / 软技术）与<b>软硬件关系</b>的教材结论</li><li>背熟<b>网络协议三要素</b>、<b>OSI 七层顺序</b>、<b>TCP/IP 四层合并逻辑</b>、<b>各层协议归属</b>（尤其 ARP/RARP 在网络层）</li><li>说清 <b>SDN 三个平面 + 三类接口</b> 的连接关系与标准情况</li><li>背出 <b>5G 三大特点 / 三大场景 / 关键指标</b>，说清 <b>DAS → NAS → SAN</b> 的归属层级与选型口诀</li><li>背出<b>数据库三大模型</b>、<b>ACID</b>、<b>NoSQL 四类</b>，说清数据仓库<b>四特征 + 体系结构四部分</b>的「基础 / 核心」归属</li><li>背出<b>信息安全 CIA 三属性</b>、<b>四个层次</b>、<b>网络安全技术</b>、<b>加密两元素</b>与<b>UEBA / 态势感知</b></li></ol>
+<h2>一、必背清单</h2>
+<h3>模块 A ｜ 信息技术总论 + 计算机软硬件（2.1 / 2.1.1）</h3>
+<label class="task"><input type="checkbox" data-key="A0" ><span class="task-text"><b>A0 · 信息技术定义与形态分类</b>（常作分类判断题）</span></label><div class="item-body"><p><b>信息技术</b>是以<b>微电子学为基础的计算机技术和电信技术的结合而形成的</b>，对<b>声音的、图像的、文字的、数字的和各种传感信号</b>的信息进行<b>获取、加工、处理、存储、传播和使用</b>的技术。信息技术是<b>实现信息化的手段，是信息系统建设的基础</b>。</p>
+<p>按<b>表现形态</b>的不同，信息技术可分为<b>硬技术（物化技术）</b>与<b>软技术（非物化技术）</b>：</p></div>
+<table><thead><tr><th>形态</th><th>别称</th><th>含义</th><th>举例</th></tr></thead><tbody><tr><td><b>硬技术</b></td><td><b>物化技术</b></td><td>各种<b>信息设备及其功能</b></td><td>传感器、服务器、智能手机、通信卫星、笔记本电脑</td></tr><tr><td><b>软技术</b></td><td><b>非物化技术</b></td><td>有关<b>信息获取与处理</b>的各种<b>知识、方法与技能</b></td><td>语言文字技术、数据统计分析技术、规划决策技术、计算机软件技术</td></tr></tbody></table>
+<blockquote>记法：硬 = <b>物化</b>（能拿在手上的设备）；软 = <b>非物化</b>（知识 / 方法 / 技能）</blockquote>
+<label class="task"><input type="checkbox" data-key="A1" ><span class="task-text"><b>A1 · 计算机硬件定义</b> ⭕ 必背</span></label><div class="item-body"><p><b>计算机硬件（Computer Hardware）</b>是指计算机系统中由<b>电子、机械和光电元件</b>等组成的各种<b>物理装置</b>的总称；这些物理装置按<b>系统结构</b>的要求构成一个<b>有机整体</b>，<b>为计算机软件运行提供物质基础</b>。</p></div>
+<blockquote>⚠️ 第 4 版 2.1.1 <b>只有两段</b>（硬件定义 + 软硬件关系），<b>没有</b>「运算器 / 控制器 / 存储器 / 输入设备 / 输出设备五大部件」的展开——那是计算机硬件基础类教材的通用口径，别当本节考点背</blockquote>
+<label class="task"><input type="checkbox" data-key="A2" ><span class="task-text"><b>A2 · 计算机软件 = 程序 + 文档</b> ⭕ 必考（一对高频对比）</span></label><div class="item-body"><p><b>计算机软件（Computer Software）</b>是指计算机系统中的<b>程序及其文档</b>：</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>程序</b>：是<b>计算任务的处理对象和处理规则的描述</b>；<b>必须安装入机器内部才能工作</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>文档</b>：是为了便于了解程序所需的<b>阐明性资料</b>；<b>一般是给人看的，不一定安装入机器</b></span></div>
+<blockquote>判别口诀：<b>程序进机器，文档给人看</b></blockquote>
+<label class="task"><input type="checkbox" data-key="A3" ><span class="task-text"><b>A3 · 软硬件关系与「界线」结论</b> ⭕ 常考（爱出判断题）</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span><b>互相依存</b>：<b>硬件是软件赖以工作的物质基础</b>；<b>软件的正常工作是硬件发挥作用的重要途径</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>协同发展</b>：计算机软件随<b>硬件技术的迅速发展而发展</b>，而软件的不断发展与完善又<b>促进硬件的更新</b>，两者<b>密切交织发展，缺一不可</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>计算机系统<b>必须配备完善的软件系统才能正常工作</b>，从而充分发挥其硬件的各种功能</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>⚠️ <b>结论句（最爱出判断题）</b>：在许多情况下，计算机的某些功能<b>既可以由硬件实现，也可以由软件来实现</b>；因此<b>硬件与软件在一定意义上来说没有绝对严格的界线</b></span></div>
+<h3>模块 B ｜ 计算机网络（2.1.2 · 本节最高频考点）</h3>
+<label class="task"><input type="checkbox" data-key="B0" ><span class="task-text"><b>B0 · 计算机网络定义</b>（了解级，记住三个要素）</span></label><div class="item-body"><p>在计算机领域中，网络就是用<b>物理链路</b>将各个孤立的工作站或主机相连在一起，组成<b>数据链路</b>，从而达到<b>资源共享和通信</b>的目的。凡将<b>地理位置不同、并具有独立功能的多个计算机系统</b>通过<b>通信设备和线路</b>连接起来，且以<b>功能完善的网络软件</b>（网络协议、信息交换方式及网络操作系统等）实现网络资源共享的系统，均可称为<b>计算机网络</b>。</p></div>
+<blockquote>三要素：<b>地理位置不同 + 具有独立功能 + 通过通信设备和线路连接（有网络软件）</b></blockquote>
+<label class="task"><input type="checkbox" data-key="B1" ><span class="task-text"><b>B1 · 网络分类（按作用范围）</b> ⭕ 必背</span></label><div class="item-body"><p>六类：<b>个人局域网（PAN）· 局域网（LAN）· 城域网（MAN）· 广域网（WAN）· 公用网（Public Network）· 专用网（Private Network）</b>。</p></div>
+<blockquote>分组记忆：<b>作用范围四项</b>（PAN &lt; LAN &lt; MAN &lt; WAN）+ <b>使用者两项</b>（公用网 / 专用网）<br>⚠️ 教材<b>只给中英文全称，没给覆盖距离数字</b>。「PAN≈10m / LAN≈1km / MAN 5~50km / WAN 几十~几千 km」是教辅补充，别当教材原文记</blockquote>
+<label class="task"><input type="checkbox" data-key="B2" ><span class="task-text"><b>B2 · 网络协议三要素</b> ⭕ 必考（易混排序）</span></label><div class="item-body"><p><b>网络协议</b>是为计算机网络中进行数据交换而建立的<b>规则、标准或约定的集合</b>，由<b>语义、语法、时序</b>三个要素组成：</p></div>
+<table><thead><tr><th>要素</th><th>教材原文</th><th>通俗对应</th></tr></thead><tbody><tr><td><b>语义</b></td><td>解释<b>控制信息每个部分的含义</b>，它规定了需要发出何种控制信息、完成的动作以及做出什么样的响应</td><td><b>要做什么</b></td></tr><tr><td><b>语法</b></td><td><b>用户数据与控制信息的结构与格式</b>，以及<b>数据出现的顺序</b></td><td><b>要怎么做</b></td></tr><tr><td><b>时序</b></td><td>对<b>事件发生顺序</b>的详细说明</td><td><b>做的顺序</b></td></tr></tbody></table>
+<blockquote>口诀：<b>义 · 法 · 时</b>（语义做什么 / 语法怎么做 / 时序什么顺序）</blockquote>
+<label class="task"><input type="checkbox" data-key="B3" ><span class="task-text"><b>B3 · OSI 参考模型</b> ⭕ 必背（年年考）</span></label><div class="item-body"><p>国际标准化组织（<b>ISO</b>）和国际电报电话咨询委员会（<b>CCITT</b>）<b>联合制定</b>的<b>开放系统互连参考模型（Open System Interconnect，OSI）</b>，目的是为<b>异种计算机互连</b>提供一个<b>共同的基础和标准框架</b>，并为保持相关标准的一致性和兼容性提供共同的参考。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>OSI 采用了<b>分层的结构化技术</b>，<b>从下到上</b>共分：<b>物理层、数据链路层、网络层、传输层、会话层、表示层和应用层</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>广域网协议是在 OSI 参考模型的最下面三层操作</b>，定义了在不同的广域网介质上的通信</span></div>
+<blockquote>口诀：<b>物 · 数 · 网 · 传 · 会 · 表 · 应</b>（自下而上）<br>⚠️ 教材原文是「<b>从下到上</b>」；部分教辅写成「从上到下」，方向别记反</blockquote>
+<label class="task"><input type="checkbox" data-key="B4" ><span class="task-text"><b>B4 · 广域网协议清单</b> ⭕ 常考（干扰项多）</span></label><div class="item-body"><p><b>PPP</b> 点对点协议 · <b>ISDN</b> 综合业务数字网 · <b>xDSL</b>（DSL 数字用户线路的统称：HDSL、SDSL、MVL、ADSL）· <b>DDN</b> 数字专线 · <b>x.25</b> · <b>FR</b> 帧中继 · <b>ATM</b> 异步传输模式。</p></div>
+<blockquote>记忆：<b>P·I·x·D·x·F·A</b> 七个。真题干扰项常用「NVL」「IEEE 802.3」「HTTP」冒充广域网协议</blockquote>
+<label class="task"><input type="checkbox" data-key="B5" ><span class="task-text"><b>B5 · IEEE 802 协议族</b> ⭕ 必考（802.3 / 802.11 必记）</span></label><div class="item-body"><p>IEEE 802 规范定义了<b>网卡如何访问传输介质</b>（如光缆、双绞线、无线等），以及<b>如何在传输介质上传输数据的方法</b>，还定义了传输信息的<b>网络设备之间连接的建立、维护和拆除的途径</b>。遵循 IEEE 802 标准的产品包括<b>网卡、桥接器、路由器</b>以及其他一些用来建立局域网络的组件。</p></div>
+<table><thead><tr><th>编号</th><th>内容</th><th>编号</th><th>内容</th></tr></thead><tbody><tr><td>802.1</td><td>802 协议概论</td><td>802.7</td><td>FDDI 宽带技术协议</td></tr><tr><td>802.2</td><td>逻辑链路控制层 LLC 协议</td><td>802.8</td><td>光纤技术协议</td></tr><tr><td><b>802.3</b></td><td><b>以太网的 CSMA/CD 载波监听多路访问/冲突检测协议</b></td><td>802.9</td><td>局域网上的语音/数据集成规范</td></tr><tr><td>802.4</td><td>令牌总线 Token Bus 协议</td><td>802.10</td><td>局域网安全互操作标准</td></tr><tr><td>802.5</td><td>令牌环 Token Ring 协议</td><td><b>802.11</b></td><td><b>无线局域网 WLAN 标准协议</b></td></tr><tr><td>802.6</td><td>城域网 MAN 协议</td><td></td><td></td></tr></tbody></table>
+<blockquote>高频两连：<b>802.3 = 有线以太网（CSMA/CD）</b>；<b>802.11 = 无线局域网 WLAN</b>（手机热点属 802.11）<br>次要记：<b>802.5 = 令牌环</b>、<b>802.6 = 城域网 MAN</b></blockquote>
+<label class="task"><input type="checkbox" data-key="B6" ><span class="task-text"><b>B6 · TCP/IP 四层与「为什么这样合并」</b> ⭕ 必考</span></label><div class="item-body"><p>TCP/IP 在一定程度上参考了 OSI，<b>将 OSI 的七层简化为四层</b>：<b>应用层、传输层、网络层、网络接口层</b>。教材给出<b>三条合并理由</b>：</p>
+<p>1. <b>应用层、表示层、会话层</b>三个层次提供的服务<b>相差不是很大</b> → 在 TCP/IP 中合并为<b>应用层</b>一个层次</p>
+<p>2. <b>传输层和网络层</b>在网络协议中<b>地位十分重要</b> → 作为<b>独立的两</b>个层次</p>
+<p>3. <b>数据链路层和物理层</b>的内容<b>相差不多</b> → 归并为<b>网络接口层</b>一个层次</p></div>
+<table><thead><tr><th>层次</th><th>协议 / 功能</th></tr></thead><tbody><tr><td><b>应用层</b></td><td><b>FTP</b>（文件传输）· <b>TFTP</b>（简单文件传输）· <b>HTTP</b>（超文本传输）· <b>SMTP</b>（简单邮件传输）· <b>DHCP</b>（动态主机配置）· <b>Telnet</b>（远程登录）· <b>DNS</b>（域名系统）· <b>SNMP</b>（简单网络管理）</td></tr><tr><td><b>传输层</b></td><td><b>TCP</b> 和 <b>UDP</b>，负责提供<b>流量控制、错误校验和排序服务</b></td></tr><tr><td><b>网络层</b></td><td><b>IP</b> · <b>ICMP</b>（网际控制报文）· <b>IGMP</b>（网际组管理）· <b>ARP</b>（地址解析）· <b>RARP</b>（反向地址解析），处理信息的<b>路由</b>和<b>主机地址解析</b></td></tr><tr><td><b>网络接口层</b></td><td>兼并了物理层和数据链路层，既是<b>传输数据的物理媒介</b>，也可为网络层提供一条<b>准确无误的线路</b></td></tr></tbody></table>
+<blockquote>⚠️⚠️ <b>本节最高频陷阱</b>：<b>ARP / RARP 属网络层，不属于应用层</b>；应用层合并的是 OSI 的<b>会话层 + 表示层 + 应用层</b>（三层，不是两层）<br>别丢分：<b>TFTP</b> 也是应用层协议</blockquote>
+<label class="task"><input type="checkbox" data-key="B7" ><span class="task-text"><b>B7 · 软件定义网络 SDN</b> ⭕ 必考</span></label><div class="item-body"><p><b>SDN（Software Defined Network）</b>是一种<b>新型网络创新架构</b>，是<b>网络虚拟化的一种实现方式</b>，可通过<b>软件编程的形式定义和控制网络</b>；其通过将<b>网络设备的控制面与数据面分离开来</b>，实现了<b>网络流量的灵活控制</b>，使网络变得更加智能。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>控制层</b>：包括具有<b>逻辑中心化和可编程</b>的<b>控制器</b>，可掌握<b>全局网络信息</b>，方便运营商和科研人员管理配置网络和部署新协议等</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>数据层</b>：包括<b>哑交换机</b>（与传统的二层交换机不同，专指用于转发数据的设备），<b>仅提供简单的数据转发功能</b>，可以快速处理匹配的数据包</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>两层之间采用<b>开放的统一接口（如 OpenFlow 等）</b>进行交互；控制器通过标准接口向交换机<b>下发统一标准规则</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>整体架构由下到上（由南到北）分三个平面</b>：</span></div>
+<table><thead><tr><th>平面</th><th>内容</th></tr></thead><tbody><tr><td><b>数据平面</b></td><td>由<b>交换机等网络通用硬件</b>组成，各网络设备之间通过不同规则形成的 <b>SDN 数据通路</b>连接</td></tr><tr><td><b>控制平面</b></td><td>包含<b>逻辑上为中心的 SDN 控制器</b>，掌握全局网络信息，负责<b>各种转发规则的控制</b></td></tr><tr><td><b>应用平面</b></td><td>包含各种<b>基于 SDN 的网络应用</b>，用户<b>无须关心底层细节</b>就可以编程、部署新应用</td></tr></tbody></table>
+<div class="plain-li"><span class="bullet">•</span> <span><b>三类接口</b>：</span></div>
+<table><thead><tr><th>接口</th><th>连接方向</th><th>标准情况</th></tr></thead><tbody><tr><td><b>南向接口 CDPI</b>（Control-Data-Plane Interface）</td><td>控制平面 ↔ <b>数据平面</b></td><td><b>具有统一的通信标准</b>，最主要应用 <b>OpenFlow</b> 协议</td></tr><tr><td><b>北向接口 NBI</b>（NorthBound Interface）</td><td>控制平面 ↔ <b>应用平面</b></td><td><b>并非统一标准</b>，允许用户根据自身需求定制开发各种网络管理应用</td></tr><tr><td><b>东西向接口</b></td><td><b>多控制器之间</b></td><td>使控制器具有<b>可扩展性</b>，为<b>负载均衡和性能提升</b>提供技术保障</td></tr></tbody></table>
+<div class="plain-li"><span class="bullet">•</span> <span>OpenFlow 最基本的特点是<b>基于流（Flow）的概念</b>来匹配转发规则，每个交换机维护一个<b>流表（Flow Table）</b>；流表的<b>建立、维护和下发都是由控制器完成</b>的</span></div>
+<blockquote>口诀：<b>控数分离 · 南向 OpenFlow 统一 · 北向不统一 · 东西向管多控制器</b><br>⚠️ 方位别接反：<b>南（South）接硬件/数据平面，北（North）接应用平面</b></blockquote>
+<label class="task"><input type="checkbox" data-key="B8" ><span class="task-text"><b>B8 · 5G 的定位与八大指标</b> ⭕ 必考</span></label><div class="item-body"><p><b>第五代移动通信技术（5G）</b>是具有<b>高速率、低时延和大连接</b>特点的新一代移动通信技术。<b>国际电信联盟（ITU）</b>定义了 5G 的<b>八大指标</b>：</p></div>
+<table><thead><tr><th>指标</th><th>4G</th><th>5G</th></tr></thead><tbody><tr><td>流量密度 /（Tb/s·km²）</td><td>0.1</td><td><b>10</b></td></tr><tr><td>连接数密度 /（万·km⁻²）</td><td>10</td><td><b>100</b></td></tr><tr><td>时延 / ms</td><td><b>空口 10</b></td><td><b>空口 1</b></td></tr><tr><td>移动性 /（km·h⁻¹）</td><td>350</td><td><b>500</b></td></tr><tr><td>能效 / 倍</td><td>1</td><td><b>100</b></td></tr><tr><td>用户体验速率 /（b·s⁻¹）</td><td>10M</td><td><b>0.1 ~ 1G</b></td></tr><tr><td>频道效率 / 倍</td><td>1</td><td><b>3</b></td></tr><tr><td>峰值速率 /（Gb·s⁻¹）</td><td>10</td><td><b>20</b></td></tr></tbody></table>
+<blockquote>只背 4 个「一眼可辨」：<b>空口时延 1ms</b>（4G 是 10ms）· <b>峰值速率 20Gbps</b> · <b>连接数密度 100 万/km²</b> · <b>用户体验速率 0.1~1Gbps</b></blockquote>
+<label class="task"><input type="checkbox" data-key="B9" ><span class="task-text"><b>B9 · 5G 技术基础与三大应用场景</b> ⭕ 必考</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span>技术基础：在<b>正交频分多址（OFDMA）</b>和<b>多入多出（MIMO）</b>基础技术上，5G 为支持三大应用场景，采用了<b>灵活的全新系统设计</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>频段</b>：与 4G 支持中低频不同，考虑到<b>中低频资源有限</b>，<b>5G 同时支持中低频和高频频段</b>——<b>中低频满足覆盖和容量</b>需求，<b>高频满足在热点区域提升容量</b>的需求；5G 针对中低频和高频设计了<b>统一的技术方案</b>，并支持<b>百 MHz 的基础带宽</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>为支持<b>低时延、高可靠</b>，5G 采用<b>短帧、快速反馈、多层/多站数据重传</b>等技术</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>三大类应用场景</b>：</span></div>
+<table><thead><tr><th>场景</th><th>英文</th><th>面向</th></tr></thead><tbody><tr><td><b>增强移动宽带</b></td><td><b>eMBB</b></td><td>面向<b>移动互联网流量爆炸式增长</b>，为移动互联网用户提供更加极致的应用体验</td></tr><tr><td><b>超高可靠低时延通信</b></td><td><b>uRLLC</b></td><td>面向<b>工业控制、远程医疗、自动驾驶</b>等对<b>时延和可靠性</b>具有极高要求的<b>垂直行业</b>应用需求</td></tr><tr><td><b>海量机器类通信</b></td><td><b>mMTC</b></td><td>面向<b>智慧城市、智能家居、环境监测</b>等以<b>传感和数据采集</b>为目标的应用需求</td></tr></tbody></table>
+<blockquote>口诀：<b>e 高（速率）· u 低（时延）· m 多（连接）</b><br>⚠️ 5G 三大特点 = <b>高速率、低时延、大连接</b>；「宏基站」<b>不是</b> 5G 的特点（真题干扰项）</blockquote>
+<h3>模块 C ｜ 存储和数据库（2.1.3）</h3>
+<label class="task"><input type="checkbox" data-key="C0" ><span class="task-text"><b>C0 · 存储分类（两条线索、四层展开）</b> ⭕ 必考</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span>按<b>服务器类型</b>分：<b>封闭系统的存储</b>（封闭系统<b>主要指大型机</b>等服务器）和<b>开放系统的存储</b>（开放系统指基于包括<b>麒麟、欧拉、UNIX、Linux</b> 等操作系统的服务器）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>开放系统的存储</b>分为：<b>内置存储</b>和<b>外挂存储</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>外挂存储</b>根据<b>连接的方式</b>分为：<b>直连式存储（DAS）</b>和<b>网络化存储（FAS，Fabric-Attached Storage）</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>网络化存储</b>根据<b>传输协议</b>又分为：<b>网络接入存储（NAS）</b>和<b>存储区域网络（SAN）</b></span></div>
+<blockquote>链条记忆：<b>服务器类型（封闭/开放）→ 内置 / 外挂 → 连接方式（DAS / FAS）→ 传输协议（NAS / SAN）</b><br>⚠️ <b>DAS 与 NAS/SAN 不在同一层级</b>：外挂存储先分「连接方式」，得到 DAS 与 FAS；FAS 再按「传输协议」分 NAS 与 SAN。别把三者当同层并列做分类题</blockquote>
+<label class="task"><input type="checkbox" data-key="C1" ><span class="task-text"><b>C1 · DAS / NAS / SAN 技术与应用对比（教材表 2-2）</b> ⭕ 必考（场景选型题主力）</span></label>
+<table><thead><tr><th>类型</th><th>定义</th><th>核心特点（技术与应用）</th></tr></thead><tbody><tr><td><b>内置存储</b></td><td><b>直接集成在服务器内部</b>的存储</td><td>安装简单，适合<b>单个服务器独立使用</b>，<b>容量扩充能力低</b></td></tr><tr><td><b>DAS</b></td><td>通过<b>线缆直接连接服务器</b>的外挂存储</td><td>数据传输协议为 <b>SCSI / FC / ATA</b>，传输对象为<b>数据块</b>，适合中小组织服务器<b>捆绑磁盘（JBOD）</b>，<b>文档共享程度低</b></td></tr><tr><td><b>NAS</b></td><td>通过 <b>TCP/IP 网络</b>连接的存储设备</td><td>支持 <b>NFS / CIFS</b> 等<b>文件共享协议</b>，<b>异种操作系统可共享</b>，安装管理<b>简单</b>，适合中小组织、SOHO 族及<b>部门级文件共享</b>，<b>文档共享程度高</b></td></tr><tr><td><b>SAN</b></td><td>基于<b>光纤通道（FC）</b>的<b>专用存储网络</b></td><td>传输<b>数据块</b>，集中式管理需<b>专用工具</b>，<b>容量扩充能力高</b>，适合<b>大型组织、数据中心、大型资料库和数据库</b>，<b>网络环境复杂</b></td></tr></tbody></table>
+<blockquote>选型口诀：<b>文件共享选 NAS · 数据库高性能选 SAN · 单机外接是 DAS</b><br>一句话辨析：<b>NAS 传文件（文件级）、SAN 传数据块（块级）、DAS 靠线缆直连</b></blockquote>
+<label class="task"><input type="checkbox" data-key="C2" ><span class="task-text"><b>C2 · 存储虚拟化</b> ⭕ 必考（「云存储核心技术」）</span></label><div class="item-body"><p><b>存储虚拟化（Storage Virtualization）是「云存储」的核心技术之一</b>：它把来自<b>一个或多个网络</b>的存储资源<b>整合起来</b>，向用户提供一个<b>抽象的逻辑视图</b>，用户可以通过这个视图中的<b>统一逻辑接口</b>来访问被整合的存储资源；<b>用户在访问数据时并不知道真实的物理位置</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>直接好处：<b>提高存储利用率 · 降低存储成本 · 简化大型、复杂、异构的存储环境的管理工作</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>数据存储是类似于<b>文件系统的逻辑容器</b>，它<b>隐藏了每个存储设备的特性</b>，形成一个<b>统一的模型</b>，<b>为虚拟机提供磁盘</b></span></div>
+<blockquote>⚠️ 原话是「<b>存储虚拟化是云存储的核心技术之一</b>」——别被「服务器虚拟化」「网络虚拟化」带偏</blockquote>
+<label class="task"><input type="checkbox" data-key="C3" ><span class="task-text"><b>C3 · 绿色存储</b> ⭕ 常考（常出定义题）</span></label><div class="item-body"><p><b>绿色存储（Green Storage）技术</b>是指从<b>节能环保</b>的角度出发，用来<b>设计生产能效更佳的存储产品</b>，<b>降低数据存储设备的功耗</b>，<b>提高存储设备每瓦性能</b>的技术。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>绿色存储是一个<b>系统设计方案</b>，贯穿于整个存储设计过程，包含存储系统的<b>外部环境、存储架构、存储产品、存储技术、文件系统和软件配置</b>等多方面因素</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>核心是设计<b>运行温度更低的处理器</b>和<b>更有效率的系统</b>，生产更低能耗的存储系统或组件，降低产品所产生的<b>电子碳化合物</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>最终目的：<b>提高所有网络存储设备的能源效率</b>，用<b>最少的存储容量</b>来满足业务需求，从而<b>消耗最低的能源</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>收口句：以绿色理念为指导的存储系统最终是<b>存储容量、性能、能耗三者的平衡</b></span></div>
+<blockquote>三个「更」不要混：<b>更佳能效 · 更低功耗 · 更高每瓦性能</b>；平衡三项 = <b>容量 / 性能 / 能耗</b></blockquote>
+<label class="task"><input type="checkbox" data-key="C4" ><span class="task-text"><b>C4 · 数据结构模型（三大模型）</b> ⭕ 必考</span></label><div class="item-body"><p><b>数据结构模型是数据库系统的核心</b>。它描述了在数据库中<b>结构化和操纵数据</b>的方法：<b>结构部分</b>规定了数据<b>如何被描述</b>（例如树、表等）；<b>操纵部分</b>规定了数据的<b>添加、删除、显示、维护、打印、查找、选择、排序和更新</b>等操作。</p>
+<p>常见的<b>数据结构模型有三种：层次模型、网状模型和关系模型</b>；<b>层次模型和网状模型又统称为格式化数据模型</b>。</p></div>
+<table><thead><tr><th>模型</th><th>教材原文</th><th>关键限定</th></tr></thead><tbody><tr><td><b>层次模型</b></td><td><b>数据库系统最早使用</b>的一种模型，用「<b>树</b>」结构表示实体集之间的关联，实体集（用矩形框表示）为<b>结点</b>，树中各结点之间的<b>连线</b>表示关联</td><td>每个结点表示一个<b>记录类型</b>，联系是<b>父子之间的一对多</b>联系；<b>任何一个给定的记录值只能按其层次路径查看</b>，没有一个<b>子女记录值</b>能够<b>脱离双亲记录值</b>而独立存在</td></tr><tr><td><b>网状模型</b></td><td>用<b>网状结构</b>表示实体类型及其实体之间的联系</td><td>是一种<b>可以灵活地描述事物及其之间关系</b>的数据库模型；网状数据库是<b>导航式（Navigation）数据库</b>——用户在操作数据库时<b>不但说明要做什么，还要说明怎么做</b>（查找语句中不但要说明查找对象，还要<b>规定存取路径</b>）</td></tr><tr><td><b>关系模型</b></td><td>在关系结构的数据库中用<b>二维表格</b>的形式表示<b>实体以及实体之间的联系</b>的模型</td><td>以<b>集合论中的关系概念</b>为基础发展起来；无论是<b>实体还是实体间的联系</b>，均由<b>单一的结构类型「关系」</b>来表示</td></tr></tbody></table>
+<blockquote>口诀：<b>层次＝树 · 网状＝网＋导航式 · 关系＝二维表</b><br>⚠️ 易错三连：①「<b>最早使用</b>」＝层次模型；②「<b>导航式</b>」＝网状模型；③<b>格式化数据模型 = 层次 + 网状</b>（<b>关系模型不算</b>）</blockquote>
+<label class="task"><input type="checkbox" data-key="C5" ><span class="task-text"><b>C5 · 常用数据库类型</b> ⭕ 必考</span></label><div class="item-body"><p>数据库<b>根据存储方式</b>分为<b>关系型数据库（SQL）</b>和<b>非关系型数据库（Not Only SQL，NoSQL）</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>关系型数据库</b>：采用<b>关系模型</b>作为数据的组织方式，是<b>在一个给定的应用领域中，所有实体及实体之间联系的集合</b>；支持事务的 <b>ACID 原则</b>：</span></div>
+<table><thead><tr><th>字母</th><th>英文</th><th>中文</th></tr></thead><tbody><tr><td><b>A</b></td><td>Atomicity</td><td><b>原子性</b></td></tr><tr><td><b>C</b></td><td>Consistency</td><td><b>一致性</b></td></tr><tr><td><b>I</b></td><td>Isolation</td><td><b>隔离性</b></td></tr><tr><td><b>D</b></td><td>Durability</td><td><b>持久性</b></td></tr></tbody></table>
+<p>    （这四种原则<b>保证在事务过程当中数据的正确性</b>）</p>
+<div class="plain-li"><span class="bullet">•</span> <span><b>非关系型数据库</b>：是<b>分布式的、非关系型的、不保证遵循 ACID 原则</b>的数据存储系统；<b>不需要固定的表结构</b>，通常也<b>不存在连接操作</b>；在<b>大数据存取</b>上具备关系型数据库<b>无法比拟的性能优势</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>常见的非关系数据库四类</b>及典型代表：</span></div>
+<table><thead><tr><th>类型</th><th>英文</th><th>代表</th></tr></thead><tbody><tr><td><b>键值数据库</b></td><td>Key-Value</td><td>Redis</td></tr><tr><td><b>列存储数据库</b></td><td>Column-oriented</td><td>HBase</td></tr><tr><td><b>面向文档数据库</b></td><td>Document-Oriented</td><td>MongoDB</td></tr><tr><td><b>图形数据库</b></td><td>Graph</td><td>Neo4j</td></tr></tbody></table>
+<blockquote>⚠️ 对比记牢：关系型「<b>支持</b> ACID」；非关系型「<b>不保证遵循</b> ACID」；NoSQL 四类 = <b>键值 / 列存储 / 面向文档 / 图形</b>（没有「树形 / 网状」）</blockquote>
+<label class="task"><input type="checkbox" data-key="C6" ><span class="task-text"><b>C6 · 数据仓库的定义与基础概念</b> ⭕ 必考</span></label><div class="item-body"><p><b>为了满足中高层管理人员预测、决策分析的需要</b>，在传统数据库的基础上产生了能够满足预测、决策分析需要的<b>数据环境——数据仓库</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>数据仓库定义</b>：数据仓库是一个<b>面向主题的、集成的、非易失的且随时间变化</b>的数据集合，<b>用于支持管理决策</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>基础概念：</span></div>
+<table><thead><tr><th>概念</th><th>教材原文</th></tr></thead><tbody><tr><td><b>清洗 / 转换 / 加载（ETL）</b></td><td>用户从<b>数据源抽取出</b>所需的数据，经过<b>数据清洗、转换</b>，最终按照预先定义好的<b>数据仓库模型</b>，将数据<b>加载到数据仓库</b>中去</td></tr><tr><td><b>元数据</b></td><td><b>关于数据的数据</b>，指在数据仓库建设过程中所产生的有关<b>数据源定义、目标定义、转换规则</b>等相关的<b>关键数据</b>；同时元数据还包含<b>关于数据含义的商业信息</b></td></tr></tbody></table>
+<blockquote>四特征口诀：<b>面向主题 · 集成 · 非易失 · 随时间变化</b><br>⚠️ 对比锚点：<b>数据库面向日常事务处理（OLTP），数据仓库面向决策分析</b></blockquote>
+<label class="task"><input type="checkbox" data-key="C7" ><span class="task-text"><b>C7 · 数据仓库体系结构（四部分）</b> ⭕ 必考（考「基础 / 核心」归属）</span></label>
+<table><thead><tr><th>#</th><th>部分</th><th>教材原文要点</th></tr></thead><tbody><tr><td>1</td><td><b>数据源</b></td><td>它是数据仓库<b>系统的基础</b>，是整个系统的<b>数据源泉</b></td></tr><tr><td>2</td><td><b>数据的存储与管理</b></td><td>它是<b>整个数据仓库系统的核心</b>；针对现有各业务系统的数据进行<b>抽取、清理并有效集成</b>，<b>按照主题进行组织</b>；按数据的覆盖范围分为<b>组织级数据仓库</b>和<b>部门级数据仓库（通常称为数据集市）</b></td></tr><tr><td>3</td><td><b>联机分析处理（OLAP）服务器</b></td><td><b>OLAP 对分析需要的数据进行有效集成，按多维模型予以组织</b>，以便进行<b>多角度、多层次的分析</b>，并发现趋势</td></tr><tr><td>4</td><td><b>前端工具</b></td><td>主要包括各种<b>查询工具、报表工具、分析工具、数据挖掘工具</b>以及各种基于数据仓库或数据集市的应用开发工具；其中<b>数据分析工具主要针对 OLAP 服务器</b>，<b>报表工具、数据挖掘工具主要针对数据仓库</b></td></tr></tbody></table>
+<div class="plain-li"><span class="bullet">•</span> <span><b>OLAP 的三种实现</b>：</span></div>
+<table><thead><tr><th>类型</th><th>基本数据</th><th>聚合数据</th></tr></thead><tbody><tr><td><b>ROLAP</b></td><td>RDBMS</td><td>RDBMS</td></tr><tr><td><b>MOLAP</b></td><td>多维数据库</td><td>多维数据库</td></tr><tr><td><b>HOLAP</b></td><td><b>RDBMS</b></td><td><b>多维数据库</b></td></tr></tbody></table>
+<blockquote>记忆锚：<b>基础 = 数据源 · 核心 = 数据的存储与管理 · 分析引擎 = OLAP 服务器 · 出口 = 前端工具</b><br>⚠️ 别把「数据源」和「数据的存储与管理」的基础/核心属性对调</blockquote>
+<h3>模块 D ｜ 信息安全（2.1.4）</h3>
+<label class="task"><input type="checkbox" data-key="D1" ><span class="task-text"><b>D1 · 信息安全三大属性（CIA）</b> ⭕ 必背</span></label><div class="item-body"><p>信息安全强调<b>信息（数据）本身的安全属性</b>，主要包括：</p></div>
+<table><thead><tr><th>属性</th><th>英文</th><th>教材原文</th></tr></thead><tbody><tr><td><b>保密性</b></td><td>Confidentiality</td><td>信息<b>不被未授权者知晓</b>的属性</td></tr><tr><td><b>完整性</b></td><td>Integrity</td><td>信息是<b>正确的、真实的、未被篡改的、完整无缺</b>的属性</td></tr><tr><td><b>可用性</b></td><td>Availability</td><td>信息可以<b>随时正常使用</b>的属性</td></tr></tbody></table>
+<blockquote>口诀：<b>报完用</b>（保密 / 完整 / 可用）</blockquote>
+<label class="task"><input type="checkbox" data-key="D2" ><span class="task-text"><b>D2 · 信息系统安全的四个层次</b> ⭕ 必考（数量易错）</span></label><div class="item-body"><p>信息<b>必须依赖其存储、传输、处理及应用的载体（媒介）而存在</b>，因此<b>针对信息系统，安全可以划分为四个层次</b>：<b>设备安全、数据安全、内容安全、行为安全</b>。</p></div>
+<blockquote>口诀：<b>设 · 数 · 内 · 行</b>（由表及里、由静到动）<br>⚠️ 是「<b>四个层次</b>」，不是三层</blockquote>
+<label class="task"><input type="checkbox" data-key="D3" ><span class="task-text"><b>D3 · 信息系统安全的五个组成 + 网络安全技术</b> ⭕ 常考</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span>信息系统一般由<b>计算机系统、网络系统、操作系统、数据库系统和应用系统</b>组成。与此对应，<b>信息系统安全</b>主要包括：<b>计算机设备安全、网络安全、操作系统安全、数据库系统安全和应用系统安全</b>等</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>网络安全技术主要包括</b>：<b>防火墙 · 入侵检测与防护 · VPN · 安全扫描 · 网络蜜罐技术 · 用户和实体行为分析技术</b>等</span></div>
+<blockquote>口诀：<b>防入 V · 扫蜜行</b>（防火墙 / 入侵检测与防护 / VPN / 安全扫描 / 网络蜜罐 / 用户和实体行为分析）</blockquote>
+<label class="task"><input type="checkbox" data-key="D4" ><span class="task-text"><b>D4 · 加密解密与两种密码体制</b> ⭕ 必考（算法归属）</span></label><div class="item-body"><p>将<b>明文数据加密成密文</b>，然后将密文数据送入网络传输或存入计算机文件，而且<b>只给合法收信者分配密钥</b>；合法收信者接收到密文后，实行<b>与加密变换相逆的变换</b>，去掉密文的伪装并<b>恢复出明文</b>，这一过程称为<b>解密（Decryption）</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>⚠️ <b>加密技术包括两个元素：算法和密钥</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>密钥加密技术的<b>密码体制</b>分为<b>对称密钥体制</b>和<b>非对称密钥体制</b>两种，相应地<b>数据加密的技术分为两类</b>：</span></div>
+<table><thead><tr><th>类别</th><th>别名</th><th>密钥关系</th><th>教材代表</th><th>适用场景</th></tr></thead><tbody><tr><td><b>对称加密</b></td><td><b>私人密钥加密</b></td><td>加密密钥和解密密钥<b>相同</b></td><td><b>数据加密标准（DES）算法</b>为典型代表</td><td>大量数据快速加密</td></tr><tr><td><b>非对称加密</b></td><td><b>公开密钥加密</b></td><td>加密密钥和解密密钥<b>不同</b>；<b>加密密钥可以公开</b>而<b>解密密钥需要保密</b></td><td>通常以 <b>RSA</b> 算法为代表</td><td>密钥交换、数字签名</td></tr></tbody></table>
+<blockquote>口诀：<b>对称 = DES（快 · 密钥难管）；非对称 = RSA（慢 · 密钥好管）</b><br>⚠️ 两个元素是「<b>算法 + 密钥</b>」，不是「算法 + 密文」</blockquote>
+<label class="task"><input type="checkbox" data-key="D5" ><span class="task-text"><b>D5 · 安全行为分析技术（UEBA）</b> ⭕ 常考（新考点）</span></label><div class="item-body"><p><b>用户和实体行为分析（User and Entity Behavior Analytics，UEBA）</b>提供了<b>用户画像</b>及基于各种分析方法的<b>异常检测</b>，结合<b>基本分析方法</b>（利用签名的规则、模式匹配、简单统计、阈值等）和<b>高级分析方法</b>（监督和无监督的机器学习等），用<b>打包分析</b>来评估<b>用户和其他实体（主机、应用程序、网络、数据库等）</b>，发现与用户或实体<b>标准画像或行为异常</b>的活动所相关的<b>潜在事件</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>定位：虽然大多数的攻击可能来自组织<b>以外</b>，但<b>最严重的损害往往是由内部人员造成的</b>；只有<b>管理好内部威胁</b>，才能保证信息和网络安全</span></div>
+<blockquote>关键词三连：<b>用户画像 + 异常检测 + 内部威胁</b>（三处都落在「内」，看到「内部人员造成损害」选 UEBA）</blockquote>
+<label class="task"><input type="checkbox" data-key="D6" ><span class="task-text"><b>D6 · 网络安全态势感知</b> ⭕ 常考（口诀固定，好拿分）</span></label><div class="item-body"><p><b>网络安全态势感知</b>是在<b>大规模网络环境中</b>，对能够引起网络态势发生变化的<b>安全要素</b>进行<b>获取、理解、显示</b>，并<b>据此预测未来网络的安全发展趋势</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>它是一种<b>基于环境的、动态的、整体的</b>洞悉安全风险的能力</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>安全态势感知的前提是安全大数据</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>关键技术四项</b>：</span></div>
+<table><thead><tr><th>#</th><th>技术</th></tr></thead><tbody><tr><td>1</td><td><b>海量多元异构数据的汇聚（融合）技术</b></td></tr><tr><td>2</td><td>面向<b>多类型</b>的网络安全<b>威胁评估</b>技术</td></tr><tr><td>3</td><td>网络安全态势<b>评估与决策支撑</b>技术</td></tr><tr><td>4</td><td>网络安全<b>态势可视化</b></td></tr></tbody></table>
+<blockquote>口诀：<b>海量融合 → 多类型评估 → 决策支撑 → 可视化</b>（四步递进）</blockquote>
+<h3>模块 E ｜ 信息技术的发展（2.1.5）</h3>
+<label class="task"><input type="checkbox" data-key="E1" ><span class="task-text"><b>E1 · 四个方向的未来趋势</b> ⭕ 必考（易考归属）</span></label>
+<table><thead><tr><th>方向</th><th>教材原文</th></tr></thead><tbody><tr><td><b>计算机软硬件</b></td><td>计算机<b>硬件技术</b>将向<b>超高速、超小型、平行处理、智能化</b>的方向发展；硬件设备的<b>体积越来越小、速度越来越高、容量越来越大、功耗越来越低、可靠性越来越高</b>。计算机<b>软件</b>越来越丰富、功能越来越强大，<b>「软件定义一切」</b>概念成为当前发展的主流</td></tr><tr><td><b>网络技术</b></td><td>计算机<b>网络</b>与<b>通信</b>技术之间的联系<b>日益密切，甚至是已经融为一体</b>；作为国家最重要的基础设施之一，<b>5G 成为当前的主流</b>；面向<b>物联网</b>、<b>低时延</b>场景的<b>窄带物联网（NB-IoT）</b>和<b>增强型机器类型通信（eMTC）</b>、<b>工业物联网（IIoT）</b>和<b>低延时高可靠通信（URLLC）</b>等技术，将进一步得到充分发展</td></tr><tr><td><b>存储和数据库</b></td><td>数据量的不断<b>爆炸式增长</b>推动数据库技术不断向着<b>模型拓展、架构解耦</b>的方向演进</td></tr><tr><td><b>信息安全</b></td><td>传统计算机安全理念将过渡到以<b>可信计算理念</b>为核心的计算机安全；由网络普及应用引发的技术与应用模式的变革，正在进一步推动<b>信息安全网络化关键技术</b>的创新；<b>信息安全标准的研究与制定</b>、<b>信息安全产品和服务的集成和融合</b>，正引领着当前信息安全技术<b>标准化和集成化</b>发展</td></tr></tbody></table>
+<blockquote>四关键词速查：<b>硬件</b>＝超高速 · 超小型 · 平行处理 · 智能化｜<b>软件</b>＝软件定义一切｜<b>数据库</b>＝模型拓展 · 架构解耦｜<b>安全</b>＝可信计算 + 标准化 + 集成化<br>⚠️ 最易互换的两个词：<b>「软件定义一切」</b>属于<b>软件</b>趋势（不是「软件定义网络」）；<b>「可信计算」</b>属于<b>信息安全</b>趋势</blockquote>
+<h2>二、可以只通读、暂不背的（标记避免浪费时间）</h2>
+<table><thead><tr><th>小节</th><th>处理方式</th></tr></thead><tbody><tr><td>第 2 章引言段（信息技术与信息化、信息系统的关系）</td><td>通读，记住三句：<b>信息技术是实现信息化的手段，是信息系统建设的基础</b>；<b>信息化的需求驱动信息技术高速发展</b>；新一代信息技术已成为世界各国投资和重点发展的<b>战略性产业</b></td></tr><tr><td>2.1 引言「硬技术 / 软技术」的举例列表</td><td>记住分类 + 各 2~3 个例子即可，列表不背</td></tr><tr><td>2.1.2 计算机网络定义段</td><td>通读，只记「<b>物理链路 + 数据链路 → 资源共享和通信</b>」</td></tr><tr><td>2.1.2 IEEE 802 协议族 802.1~802.10 明细</td><td><b>只背 802.3（以太网 CSMA/CD）和 802.11（WLAN）</b>；802.5 令牌环 / 802.6 城域网留印象，其余扫一眼</td></tr><tr><td>2.1.2 SDN 的 OpenFlow 流表机制段</td><td>通读，只记「<b>基于流（Flow）匹配转发规则；流表由控制器建立、维护、下发</b>」</td></tr><tr><td>2.1.2 5G 八大指标表</td><td><b>只背</b>空口时延（1ms）· 峰值速率（20Gbps）· 连接数密度（100 万/km²）· 用户体验速率（0.1~1Gbps），其余了解</td></tr><tr><td>2.1.3 绿色存储的技术清单</td><td>通读，只背「<b>定义 + 最终目的（容量 / 性能 / 能耗三者平衡）</b>」</td></tr><tr><td>2.1.3 数据仓库体系结构各部分的展开描述</td><td>通读，记住<b>四部分名称 + 「基础 / 核心」归属 + OLAP 三种实现</b></td></tr><tr><td>2.1.4 加密解密过程叙述段</td><td>通读，只背「<b>加密技术两元素 = 算法 + 密钥</b>」「对称 DES / 非对称 RSA」</td></tr><tr><td>2.1.5 各方向趋势的展开论证</td><td>通读，只背<b>四方向各自的关键词</b>（见 E1 表）</td></tr></tbody></table>
+<h2>三、本节自检题（做完再合书）</h2>
+<ol><li>信息技术以什么为基础？按表现形态分为哪两类？「硬技术」与「软技术」各举两例。</li><li>计算机硬件的定义是什么？它为软件提供什么？「五大部件」属不属于第 4 版 2.1.1 的内容？</li><li>计算机软件由哪两部分组成？「程序」与「文档」在「是否必须安装入机器」上有何区别？（各用教材原话回答）</li><li>硬件与软件的关系如何表述？教材关于「软硬件界线」的结论句是什么？</li><li>计算机网络的定义需要哪三个条件？</li><li>按作用范围，网络分为哪六类？教材是否给出了各类的覆盖距离？</li><li>网络协议由哪三个要素组成？三者分别对应「做什么 / 怎么做 / 什么顺序」中的哪一个？</li><li>OSI 由哪两个组织联合制定？七层自下而上的顺序是什么？广域网协议在哪几层操作？</li><li>请列举七个广域网协议。「NVL」是不是广域网协议？</li><li>IEEE 802.3 与 802.11 分别对应什么？802.5 和 802.6 呢？</li><li>TCP/IP 把 OSI 七层简化为哪四层？教材给出的三条合并理由分别是什么？</li><li>应用层、传输层、网络层各自的典型协议有哪些？<b>ARP / RARP 属于哪一层</b>？</li><li>SDN 的核心思想是什么？整体架构自下而上分哪三个平面？各由什么组成？</li><li>SDN 的南向接口、北向接口、东西向接口分别连接什么？哪一个「有统一标准」？最主要应用的协议是什么？</li><li>5G 的三大特点是什么？三大应用场景的英文缩写与各自面向的领域？</li><li>5G 在频段使用上的特点是什么（中低频 / 高频各满足什么需求）？为支持低时延高可靠采用了哪些技术？</li><li>存储按服务器类型分为哪两类？开放系统的存储分为哪两级？DAS、NAS、SAN <b>分别按哪一层分类标准得出</b>？</li><li>DAS、NAS、SAN 在「传输对象 / 协议 / 共享程度 / 适用场景」上的区别？（用「文件共享选什么、数据库高性能选什么、单机外接是什么」作结）</li><li>为什么说存储虚拟化是「云存储的核心技术之一」？它带来哪三项直接好处？</li><li>绿色存储的定义是什么？其最终追求的「三者平衡」是哪三者？</li><li>三种数据结构模型分别是什么？哪两种合称「格式化数据模型」？「最早使用」和「导航式」分别对应哪种模型？</li><li>关系型数据库的 ACID 分别指什么（中英文）？非关系型数据库的四类及各自代表产品？</li><li>数据仓库的四个特征是什么？体系结构四部分中哪部分是「系统的基础」、哪部分是「系统的核心」？ROLAP / MOLAP / HOLAP 的基本数据与聚合数据分别存放于何处？</li><li>信息安全的三大属性是什么（含英文）？信息系统安全的四个层次是什么？信息系统安全包含哪五个方面？</li><li>网络安全技术包括哪些？加密技术的两个元素是什么？对称加密与非对称加密的代表算法、密钥特点、别名分别是什么？</li><li>UEBA 的核心作用是什么（三个关键词）？网络安全态势感知的定义与关键技术四项？</li><li>信息技术未来发展的四个方向及各自的关键词？（注意「软件定义一切」与「可信计算」分别属于哪个方向）</li></ol>
+<details>
+<summary>参考答案（先自己答完再展开）</summary>
+
+1. 以**微电子学为基础的计算机技术和电信技术的结合**而形成；分为**硬技术（物化技术）**与**软技术（非物化技术）**。硬技术例：传感器、服务器、智能手机、通信卫星、笔记本电脑；软技术例：语言文字技术、数据统计分析技术、规划决策技术、计算机软件技术
+2. 计算机硬件是指计算机系统中由**电子、机械和光电元件**等组成的各种**物理装置**的总称，按系统结构要求构成有机整体，**为计算机软件运行提供物质基础**。**不属于**——第 4 版 2.1.1 只有硬件定义与软硬件关系，没有「五大部件」展开
+3. 软件 = **程序 + 文档**。**程序**是「计算任务的处理对象和处理规则的描述」，**必须安装入机器内部才能工作**；**文档**是「为了便于了解程序所需的阐明性资料」，**一般是给人看的，不一定安装入机器**
+4. **互相依存**：硬件是软件赖以工作的**物质基础**，软件的正常工作是硬件发挥作用的**重要途径**；两者**协同发展、密切交织发展，缺一不可**。结论句：计算机的某些功能**既可以由硬件实现，也可以由软件来实现**，因此**硬件与软件在一定意义上来说没有绝对严格的界线**
+5. **地理位置不同 + 并具有独立功能的多个计算机系统 + 通过通信设备和线路连接起来（且以功能完善的网络软件实现资源共享）**
+6. **个人局域网（PAN）· 局域网（LAN）· 城域网（MAN）· 广域网（WAN）· 公用网 · 专用网**。教材**未给出覆盖距离数字**
+7. **语义 · 语法 · 时序**。**语义**＝要做什么（解释控制信息每个部分的含义，规定发出何种控制信息、完成什么动作、做出什么响应）；**语法**＝要怎么做（用户数据与控制信息的结构与格式、数据出现的顺序）；**时序**＝做的顺序（对事件发生顺序的详细说明）
+8. **国际标准化组织（ISO）**和**国际电报电话咨询委员会（CCITT）**联合制定。七层自下而上：**物理层、数据链路层、网络层、传输层、会话层、表示层、应用层**。广域网协议在**最下面三层**操作
+9. **PPP 点对点协议 · ISDN 综合业务数字网 · xDSL（HDSL/SDSL/MVL/ADSL）· DDN 数字专线 · x.25 · FR 帧中继 · ATM 异步传输模式**。**NVL 不是**广域网协议（真题高频干扰项）
+10. **802.3 = 以太网的 CSMA/CD 载波监听多路访问/冲突检测协议**（有线以太网）；**802.11 = 无线局域网 WLAN 标准协议**；**802.5 = 令牌环 Token Ring 协议**；**802.6 = 城域网 MAN 协议**
+11. 简化为**应用层、传输层、网络层、网络接口层**四层。理由：①应用层、表示层、会话层**服务相差不大**→合并为应用层；②传输层和网络层**地位十分重要**→作为独立的两个层次；③数据链路层和物理层**内容相差不多**→归并为网络接口层
+12. **应用层**：FTP、TFTP、HTTP、SMTP、DHCP、Telnet、DNS、SNMP；**传输层**：TCP、UDP（提供流量控制、错误校验和排序服务）；**网络层**：IP、ICMP、IGMP、ARP、RARP（处理路由和主机地址解析）。**ARP / RARP 属于网络层**
+13. 核心思想 = **将网络设备的控制面与数据面分离开来**（软件编程定义和控制网络，是网络虚拟化的一种实现方式）。架构由下到上（由南到北）：**数据平面**（交换机等网络通用硬件，靠 SDN 数据通路连接）→ **控制平面**（逻辑上为中心的 SDN 控制器，掌握全局网络信息，负责转发规则控制）→ **应用平面**（各种基于 SDN 的网络应用）
+14. **南向接口 CDPI** 连接控制平面与**数据平面**（**具有统一通信标准**，最主要应用 **OpenFlow** 协议）；**北向接口 NBI** 连接控制平面与**应用平面**（**并非统一标准**，允许定制开发）；**东西向接口**连接**多控制器之间**（提供可扩展性、负载均衡和性能提升保障）
+15. 三大特点：**高速率、低时延、大连接**。场景：**eMBB 增强移动宽带**（面向移动互联网流量爆炸式增长）· **uRLLC 超高可靠低时延通信**（面向工业控制、远程医疗、自动驾驶等垂直行业）· **mMTC 海量机器类通信**（面向智慧城市、智能家居、环境监测等以传感和数据采集为目标的应用）
+16. **同时支持中低频和高频频段**：中低频满足**覆盖和容量**需求，高频满足**在热点区域提升容量**需求；针对两者设计**统一的技术方案**，支持**百 MHz 的基础带宽**。为支持低时延高可靠采用**短帧、快速反馈、多层/多站数据重传**等技术
+17. 分为**封闭系统的存储**（主要指大型机等服务器）和**开放系统的存储**（基于麒麟、欧拉、UNIX、Linux 等操作系统的服务器）；开放系统的存储分**内置存储**和**外挂存储**。**DAS 按「连接的方式」**与外挂存储并列（同属该层的是网络化存储 FAS），**NAS 与 SAN 按「传输协议」**在网络化存储 FAS 之下
+18. **DAS**：线缆直连，协议 SCSI/FC/ATA，传**数据块**，文档共享程度**低**，适合中小组织服务器捆绑磁盘 JBOD；**NAS**：走 TCP/IP 网络，支持 **NFS/CIFS** 文件共享协议，异种操作系统可共享，文档共享程度**高**，适合中小组织、SOHO 族及部门级文件共享；**SAN**：基于**光纤通道（FC）**的专用存储网络，传**数据块**，集中管理需专用工具，容量扩充能力**高**，适合大型组织、数据中心、大型资料库和数据库。口诀：**文件共享选 NAS · 数据库高性能选 SAN · 单机外接是 DAS**
+19. 因为它把来自一个或多个网络的存储资源**整合起来**，向用户提供**抽象的逻辑视图**，用户通过**统一逻辑接口**访问，且**访问数据时并不知道真实物理位置**。三项好处：**提高存储利用率 · 降低存储成本 · 简化大型、复杂、异构的存储环境的管理工作**
+20. 绿色存储技术是指从**节能环保**的角度出发，用来**设计生产能效更佳的存储产品**，**降低数据存储设备的功耗**，**提高存储设备每瓦性能**的技术。三者平衡 = **存储容量 · 性能 · 能耗**
+21. **层次模型 · 网状模型 · 关系模型**；**层次模型和网状模型合称格式化数据模型**。**「最早使用」＝层次模型**；**「导航式数据库」＝网状模型**
+22. **A 原子性（Atomicity）· C 一致性（Consistency）· I 隔离性（Isolation）· D 持久性（Durability）**。NoSQL 四类：**键值数据库（Redis）· 列存储数据库（HBase）· 面向文档数据库（MongoDB）· 图形数据库（Neo4j）**
+23. 四特征 = **面向主题的 · 集成的 · 非易失的 · 随时间变化的**数据集合，用于支持管理决策。**数据源是系统的基础**；**数据的存储与管理是整个数据仓库系统的核心**。ROLAP：基本数据与聚合数据均在 **RDBMS**；MOLAP：均在**多维数据库**；HOLAP：**基本数据在 RDBMS、聚合数据在多维数据库**
+24. **保密性（Confidentiality，不被未授权者知晓）· 完整性（Integrity，正确的、真实的、未被篡改的、完整无缺）· 可用性（Availability，可以随时正常使用）**。四个层次：**设备安全 · 数据安全 · 内容安全 · 行为安全**。信息系统安全主要包括**计算机设备安全、网络安全、操作系统安全、数据库系统安全和应用系统安全**
+25. 网络安全技术包括**防火墙 · 入侵检测与防护 · VPN · 安全扫描 · 网络蜜罐技术 · 用户和实体行为分析技术**等。加密技术两个元素 = **算法和密钥**。**对称加密**（私人密钥加密）：加解密密钥**相同**，代表 **DES**；**非对称加密**（公开密钥加密）：加解密密钥**不同**，加密密钥可公开、解密密钥需保密，代表 **RSA**
+26. UEBA 提供**用户画像**及基于各种分析方法的**异常检测**（结合基本分析方法与高级分析方法），评估用户和其他实体，发现异常行为相关的潜在事件；核心是防范**内部威胁**（最严重的损害往往由内部人员造成）。态势感知：在**大规模网络环境**中对能够引起网络态势变化的**安全要素**进行**获取、理解、显示**，并据此**预测未来网络的安全发展趋势**；关键是①海量多元异构数据的汇聚（融合）②面向多类型的网络安全威胁评估 ③网络安全态势评估与决策支撑 ④网络安全态势可视化
+27. **计算机软硬件**：硬件向**超高速、超小型、平行处理、智能化**发展，软件**「软件定义一切」**成为主流；**网络技术**：网络与通信技术**日益密切甚至融为一体**，**5G 成为当前主流**（NB-IoT、eMTC、IIoT、URLLC 等充分发展）；**存储和数据库**：向**模型拓展、架构解耦**演进；**信息安全**：过渡到以**可信计算理念**为核心，技术朝**标准化和集成化**发展
+
+</details>
+<h2>四、康奈尔笔记（可打印模板）</h2>
+<p>📄 <b>模板文件</b>：</p>
+<div class="plain-li"><span class="bullet">•</span> <span><code>2.1_康奈尔笔记模板.html</code> — A4 留白手写版（左栏 12 问，右栏分 5 个模块手写线）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><code>2.1_康奈尔笔记模板_带答案版.html</code> — A4 带答案版，含「👁 隐藏答案」按钮（可切换填空版打印）</span></div>
+<p><b>用法</b>：左栏 12 个问题为线索，遮住右栏自问；右栏按 2.1.1~2.1.5 分模块留手写线；底部总结区收口。带答案版每条答案都标注关键术语和易混提醒，适合先默写、再对照。</p>
+<p><b>打印后自查（不看书答）</b></p>
+<div class="plain-li"><span class="bullet">•</span> <span>线索栏问题 1~12 全部答出 → 正确率 <code>__ / 12</code></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>答不出的条目抄进「易混 / 易错」区，这是考前唯一要看的块</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>页脚 5 个复习框：当日 ☐　+1 天 ☐　+3 天 ☐　+7 天 ☐　+14 天 ☐</span></div>
+<h2>五、刷题任务</h2>
+<div class="plain-li"><span class="bullet">•</span> <span>先做本仓题库：<code>2.1_考点自测题.html</code>（22 题 · 即时判分 + 逐题精讲，目标 ≥ 18 对）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>再刷填空专练：<code>08_答题系统/index.html</code> → 切到「2.1」tab（12 题，答对自动同步勾选本清单）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>真题来源建议：第 2 章在<b>上午卷每年 6~12 题</b>，是这个阶段<b>性价比最高的块</b>。软考达人上刷「网络分层 / 协议归属」「存储」「数据库」「信息安全」关键词；2019 年前的老题仍可用（网络分层、DAS/NAS/SAN、OSI 这些口径十年没变）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>⚠️ 但要注意：<b>SDN 是第 4 版新增内容</b>，2023 上及以前的真题里几乎没有；2.1.3 的「存储虚拟化 / 绿色存储」也是新版口径</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>错题记入 <code>05_错题本/</code>（格式：考点 / 错选原因 / 正选 + 出处）</span></div>
+<h2>六、与前后章节的衔接</h2>
+<p>2.1 是<b>第 2 章的开篇节</b>，也是整个「技术底座」部分的起点：</p>
+<div class="plain-li"><span class="bullet">•</span> <span><b>承接第 1 章</b>：1.1 讲「信息化是实现现代化的手段」，2.1 紧接着给出<b>信息技术是实现信息化的手段、是信息系统建设的基础</b>——第 1 章讲<b>为什么要数字化</b>，第 2 章讲<b>数字化靠什么技术</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>本节内部主线</b>：<b>软硬件（算）→ 网络（传）→ 存储数据库（存）→ 信息安全（保）→ 发展趋势（往哪走）</b>，五节就是一台信息系统的五个部件</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>向后打通</b>：</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>2.2 新一代信息技术及应用</b>：本节 2.1.5 提到的 <b>5G / NB-IoT / eMTC / IIoT / URLLC</b>，正是 2.2.1 物联网与 2.2.2 云计算的网络底座；2.1.3 的 <b>NoSQL / 数据仓库</b> 是 2.2.3 大数据的技术前提</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>第 5 章信息系统工程</b>：2.1.2 网络分层（OSI / TCP/IP）是 5.3.2「网络集成」的直接基础；2.1.3 数据库模型 → 5.2「数据工程」</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>第 4 章信息系统管理</b>：2.1.3 数据仓库、2.1.4 信息安全，在第 4 章会展开为「数据管理」「信息安全管理」</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>第 3 章信息系统治理</b>：2.1.4 的 CIA 三属性是 IT 治理与 IT 审计的评估基线</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>论文素材（实战映射）</b>：写<b>项目背景 / 技术方案</b>段落时，本节可直接引用：</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>SDN「控制面与数据面分离」</b> → 描述数据中心网络架构演进（与 <b>H3C AD-DC 数据中心产品线</b>的技术叙事天然契合）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>DAS → NAS → SAN 选型</b> → 项目里「存储方案论证」一段可直接套用选型口诀</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>数据仓库四特征 + ETL + OLAP</b> → <b>fault-simulator 仿真数据模拟系统</b>的数据沉淀与决策分析链路；<b>H3C-NMS</b> 的故障数据仓库建设</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>UEBA「内部威胁」+ 态势感知四技术</b> → 写<b>安全类项目</b>或<b>运维监控类项目</b>（NMS 的告警态势感知就是典型落地）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>5G 三大场景 eMBB/uRLLC/mMTC</b> → 写<b>工业互联网 / 智能运维</b>类项目的通信方案选型依据</span></div>
+</div>
+<script>
+(function(){
+  const REL = "01_教材笔记/第02章_信息技术发展/2.1_信息技术及其发展/2.1_知识点清单.md";
+  const STORE_KEY = 'checklist:' + REL;
+
+  // 一次性加载整个文件的勾选状态（JSON），避免 key 过长
+  let store = {};
+  try { store = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch (e) {}
+
+  // 兼容迁移：旧的错误 key（包含重复 REL 前缀的）自动迁到新格式
+  for (let i = localStorage.length - 1; i >= 0; i--) {
+    const k = localStorage.key(i);
+    if (!k || !k.startsWith('checklist:')) continue;
+    // 检测旧 bug key：包含 REL 两次
+    if (k.indexOf(REL) !== k.lastIndexOf(REL)) {
+      const v = localStorage.getItem(k);
+      const m = k.match(/:L(\d+)$/);
+      if (m && v === '1') store['L' + m[1]] = true;
+      localStorage.removeItem(k);
+    }
+  }
+
+  const boxes = document.querySelectorAll('.task input[type="checkbox"]');
+  boxes.forEach(box => {
+    const k = box.dataset.key;
+    if (store[k]) box.checked = true;
+    box.addEventListener('change', () => {
+      store[k] = box.checked;
+      try {
+        localStorage.setItem(STORE_KEY, JSON.stringify(store));
+      } catch (e) {
+        console.error('localStorage 写入失败：', e);
+      }
+      updateProgress();
+    });
+  });
+
+  function updateProgress() {
+    const total = boxes.length;
+    const done = Array.from(boxes).filter(b => b.checked).length;
+    const pct = total ? Math.round(done / total * 100) : 0;
+    document.getElementById('progress').innerHTML = '已完成：<b>' + done + ' / ' + total + '</b>（' + pct + '%）';
+  }
+  updateProgress();
+})();
+</script>
+</body>
+</html>

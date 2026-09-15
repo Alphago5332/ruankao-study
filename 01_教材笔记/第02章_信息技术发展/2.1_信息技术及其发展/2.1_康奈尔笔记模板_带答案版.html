@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>康奈尔笔记 · 第 2 章第 1 节 信息技术及其发展 · 带答案版</title>
+<style>
+  :root{
+    --ink:#1f2328;
+    --ink-2:#4b5563;
+    --ink-3:#8b949e;
+    --line:#2f3742;
+    --rule:#d6dae0;
+    --accent:#185FA5;
+    --accent-soft:#E6F1FB;
+    --warm:#854F0B;
+    --warm-soft:#FAEEDA;
+    --paper:#ffffff;
+    --ans-bg:#fffaf2;
+    --ans-border:#e8d9b8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    padding:28px 16px 48px;
+    background:#eef0f3;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+    color:var(--ink);
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .toolbar{
+    max-width:210mm;margin:0 auto 14px;display:flex;gap:10px;align-items:center;
+    justify-content:space-between;flex-wrap:wrap;
+  }
+  .toolbar .hint{font-size:12.5px;color:#5b6470;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;
+    font-size:13px;padding:7px 14px;border-radius:8px;cursor:pointer;
+    font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn.active{background:var(--warm);border-color:var(--warm);color:#fff;}
+
+  .page{
+    width:210mm;min-height:297mm;margin:0 auto;background:var(--paper);
+    padding:14mm 13mm 12mm;box-shadow:0 2px 14px rgba(16,24,40,.12);
+  }
+
+  .head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    border-bottom:2px solid var(--line);padding-bottom:8px;margin-bottom:10px;
+    gap:12px;
+  }
+  .head h1{font-size:19px;margin:0;font-weight:600;letter-spacing:.3px;}
+  .head .sub{font-size:12px;color:var(--ink-3);margin-top:4px;}
+  .head .meta{font-size:12px;color:var(--ink-2);text-align:right;line-height:1.9;white-space:nowrap;}
+  .head .meta b{font-weight:600;color:var(--accent);}
+
+  .band{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+  .chip{
+    font-size:11.5px;padding:4px 9px;border-radius:5px;
+    background:var(--accent-soft);color:#0C447C;border:1px solid #B5D4F4;
+  }
+  .chip.warm{background:var(--warm-soft);color:#633806;border-color:#EFC98A;}
+
+  .cols{
+    display:grid;grid-template-columns:60mm 1fr;gap:0;
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .col-cue{
+    background:#fafbfc;border-right:1px solid var(--line);padding:8px 9px 9px;
+  }
+  .col-note{padding:8px 11px 9px;}
+  .col-hd{
+    font-size:11.5px;font-weight:600;letter-spacing:.6px;color:var(--ink-2);
+    text-transform:uppercase;padding-bottom:6px;margin-bottom:7px;
+    border-bottom:1px dashed #b9c0c9;
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  .col-hd span{font-size:10.5px;font-weight:400;color:var(--ink-3);text-transform:none;letter-spacing:0;}
+
+  .q{
+    font-size:11.5px;line-height:1.5;color:#1f2328;
+    padding:5px 0 5px 20px;position:relative;border-bottom:1px dotted #dfe3e8;
+  }
+  .q:last-child{border-bottom:0;}
+  .q::before{
+    content:attr(data-n);position:absolute;left:0;top:5px;
+    width:14px;height:14px;border-radius:50%;
+    background:var(--accent);color:#fff;font-size:9.5px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:600;line-height:1;
+  }
+  .q b{font-weight:600;}
+  .q em{font-style:normal;color:var(--warm);font-weight:600;}
+
+  .grouplabel{
+    font-size:10.5px;font-weight:600;color:var(--accent);
+    letter-spacing:.4px;margin:8px 0 2px;
+  }
+  .grouplabel:first-child{margin-top:0;}
+
+  /* === 答案区样式 === */
+  .ans-block{
+    margin-bottom:6px;padding:5px 8px 6px;
+    background:var(--ans-bg);border:1px solid var(--ans-border);border-radius:3px;
+  }
+  .ans-block .ans-title{
+    font-size:10.5px;font-weight:600;color:var(--warm);
+    letter-spacing:.3px;margin-bottom:2px;display:flex;align-items:baseline;gap:6px;
+  }
+  .ans-block .ans-title .num{
+    display:inline-block;min-width:14px;height:14px;border-radius:50%;
+    background:var(--warm);color:#fff;font-size:9.5px;font-weight:600;
+    text-align:center;line-height:14px;
+  }
+  .ans-block ul{
+    margin:2px 0 3px 0;padding:0 0 0 16px;font-size:11px;line-height:1.55;color:#2b323b;
+  }
+  .ans-block ul li{padding:1px 0;}
+  .ans-block .key{
+    color:var(--warm);font-weight:600;
+  }
+  .ans-block .subhd{
+    font-size:10.5px;font-weight:600;color:#0C447C;margin:3px 0 1px;
+    padding-left:2px;border-left:3px solid #B5D4F4;
+  }
+  .ans-block .tip{
+    font-size:10px;color:#633806;margin-top:2px;line-height:1.5;
+    padding:2px 6px;background:var(--warm-soft);border-radius:2px;
+  }
+  .ans-block .fill{
+    height:16px;border-bottom:1px dashed #c8c0aa;margin-top:3px;
+  }
+  body.hide-answers .ans-block{display:none;}
+  body.hide-answers .summary-prefill{display:none;}
+
+  .summary{
+    margin-top:10px;border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .summary .col-hd{
+    margin:0;padding:7px 11px;background:#fafbfc;border-bottom:1px solid var(--line);
+  }
+  .summary .body{padding:6px 11px 8px;font-size:11.5px;line-height:1.7;color:#2b323b;}
+  .summary .body b{color:var(--accent);}
+  .summary .body .small{font-size:10.5px;color:var(--ink-3);margin-top:3px;display:block;}
+
+  .footer{
+    margin-top:9px;font-size:10.5px;color:var(--ink-3);
+    display:flex;justify-content:space-between;gap:10px;
+  }
+
+  .guide{
+    width:210mm;margin:16px auto 0;background:#fff;border:1px solid #d9dee5;
+    border-radius:8px;padding:16px 18px;
+  }
+  .guide h2{font-size:14px;margin:0 0 10px;font-weight:600;}
+  .guide table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .guide th,.guide td{
+    border:1px solid #e2e6eb;padding:7px 9px;text-align:left;vertical-align:top;line-height:1.6;
+  }
+  .guide th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .guide td:first-child{width:88px;font-weight:600;color:var(--accent);}
+  .guide .note{font-size:12px;color:#5b6470;margin-top:10px;line-height:1.7;}
+
+  @page{size:A4 portrait;margin:0;}
+  @media print{
+    body{background:#fff;padding:0;}
+    .toolbar,.guide{display:none;}
+    .page{box-shadow:none;margin:0;width:auto;min-height:auto;padding:13mm 12mm;}
+    body.hide-answers .ans-block{display:none;}
+    body.hide-answers .summary-prefill{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="hint">A4 竖版 · 带答案版 · 建议先默写、再对照；打印时可「隐藏答案」变填空卷</div>
+  <div>
+    <button class="btn" id="toggleBtn" onclick="toggleAnswers()">👁 隐藏答案（打印填空卷）</button>
+    <button class="btn primary" onclick="window.print()">打印 / 导出 PDF</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="head">
+    <div>
+      <h1>康奈尔笔记 · 第 2 章第 1 节 信息技术及其发展 <span style="color:var(--warm);font-size:14px;">（带答案版）</span></h1>
+      <div class="sub">《信息系统项目管理师教程（第 4 版）》约 P37 ~ P49　｜　答案口径以 2026-09-15 核对教材原文为准</div>
+    </div>
+    <div class="meta">
+      日期：__________<br>
+      第 <b>__</b> 轮复习　用时 <b>__</b> 分钟
+    </div>
+  </div>
+
+  <div class="band">
+    <span class="chip">上午最大分值块（第 2 章 6~12 题）</span>
+    <span class="chip">术语归属 · 层级排序 · 特征匹配型</span>
+    <span class="chip warm">必背：协议归属 + DAS/NAS/SAN + 数仓基础核心 + CIA</span>
+    <span class="chip warm">通读：802.1~802.10 明细 / 绿色存储技术清单</span>
+    <span class="chip warm">📝 含答案</span>
+  </div>
+
+  <div class="cols">
+
+    <div class="col-cue">
+      <div class="col-hd">线索栏 <span>遮住右侧自问</span></div>
+
+      <div class="grouplabel">2.1 总论 · 2.1.1 计算机软硬件</div>
+      <div class="q" data-n="1"><b>信息技术定义</b>（以什么为基础）？<b>硬技术 / 软技术</b>各指什么、举例？</div>
+      <div class="q" data-n="2"><b>计算机硬件</b>定义？<b>软件＝哪两部分</b>？「程序／文档」谁必须装入机器？软硬件<b>「界线」结论句</b>？</div>
+
+      <div class="grouplabel">2.1.2 计算机网络</div>
+      <div class="q" data-n="3"><b>网络按作用范围六类</b>？协议<b>三要素</b>及各自通俗对应？</div>
+      <div class="q" data-n="4"><b>OSI</b> 由哪两个组织制定？<b>七层（自下而上）</b>？广域网协议在哪几层、列举五个？</div>
+      <div class="q" data-n="5"><b>IEEE 802.3 / 802.11 / 802.5 / 802.6</b> 分别是什么？</div>
+      <div class="q" data-n="6"><b>TCP/IP 四层</b>？三条<b>合并理由</b>？各层<b>典型协议</b>？<b>ARP / RARP 属哪层</b>？</div>
+      <div class="q" data-n="7"><b>SDN 核心思想</b>？自下而上<b>三个平面</b>？<b>南 / 北 / 东西向接口</b>各连什么、哪个统一标准、主用协议？</div>
+      <div class="q" data-n="8"><b>5G 三大特点</b>？三大场景（英文＋面向）？八大指标里<b>必背的四个数值</b>？</div>
+
+      <div class="grouplabel">2.1.3 存储和数据库</div>
+      <div class="q" data-n="9"><b>存储两层分类线索</b>？<b>DAS / NAS / SAN</b> 的协议、传输对象、选型口诀？</div>
+      <div class="q" data-n="10"><b>存储虚拟化</b>为何是「云存储核心技术」？<b>绿色存储</b>定义与「三者平衡」？</div>
+      <div class="q" data-n="11">三大<b>数据结构模型</b>（谁最早 / 谁导航式 / 格式化含哪两个）？<b>ACID</b>？<b>NoSQL 四类</b>？<b>数据仓库四特征</b>与「基础／核心」？<b>OLAP 三种</b>存放？</div>
+
+      <div class="grouplabel">2.1.4 信息安全 · 2.1.5 发展趋势</div>
+      <div class="q" data-n="12"><b>CIA 三属性</b>（中英文）？<b>安全四层次</b>？<b>网络安全技术六项</b>？<b>加密两元素</b>？对称／非对称代表算法？<b>UEBA 三关键词</b>？<b>态势感知四技术</b>？2.1.5 <b>四方向关键词</b>（「软件定义一切」「可信计算」各属哪个方向）？</div>
+    </div>
+
+    <div class="col-note">
+      <div class="col-hd">答案区 <span>默写后对照 · 虚线处写自己的补充</span></div>
+
+      <div class="grouplabel">2.1 总论 · 2.1.1 计算机软硬件</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">1</span>信息技术定义与形态分类</div>
+        <ul>
+          <li><b>定义</b>：信息技术是<span class="key">以微电子学为基础的计算机技术和电信技术的结合而形成的</span>，对<span class="key">声音的、图像的、文字的、数字的和各种传感信号</span>的信息进行<span class="key">获取、加工、处理、存储、传播和使用</span>的技术</li>
+          <li><b>地位</b>：信息技术是<span class="key">实现信息化的手段，是信息系统建设的基础</span></li>
+          <li>按<b>表现形态</b>分为两类：<span class="key">硬技术（物化技术）</span>＝各种<span class="key">信息设备及其功能</span>（传感器、服务器、智能手机、通信卫星、笔记本电脑）；<span class="key">软技术（非物化技术）</span>＝有关信息获取与处理的<span class="key">知识、方法与技能</span>（语言文字技术、数据统计分析技术、规划决策技术、计算机软件技术）</li>
+        </ul>
+        <div class="tip">判别法：能拿在手上的设备 = <b>硬技术（物化）</b>；知识 / 方法 / 技能 = <b>软技术（非物化）</b>。第 2 章开篇还强调「信息技术与信息化、信息系统密不可分」</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">2</span>计算机软硬件：定义 · 程序与文档 · 界线结论</div>
+        <ul>
+          <li><b>硬件</b>：计算机系统中由<span class="key">电子、机械和光电元件</span>等组成的各种<span class="key">物理装置</span>的总称；按系统结构要求构成有机整体，<span class="key">为计算机软件运行提供物质基础</span></li>
+          <li><b>软件</b>＝<span class="key">程序及其文档</span>。<b>程序</b>是<span class="key">计算任务的处理对象和处理规则的描述</span>，<b>必须安装入机器内部才能工作</b>；<b>文档</b>是<span class="key">为了便于了解程序所需的阐明性资料</span>，<b>一般是给人看的，不一定安装入机器</b></li>
+          <li><b>关系</b>：<span class="key">互相依存</span>——硬件是软件赖以工作的<span class="key">物质基础</span>，软件的正常工作是硬件发挥作用的<span class="key">重要途径</span>；两者<span class="key">协同发展、密切交织发展，缺一不可</span></li>
+          <li><b>界线结论句</b>：计算机的某些功能<span class="key">既可以由硬件实现，也可以由软件来实现</span>，因此<span class="key">硬件与软件在一定意义上来说没有绝对严格的界线</span></li>
+        </ul>
+        <div class="tip">一对高频对比：<b>程序进机器，文档给人看</b>。⚠️ 第 4 版 2.1.1 只有两段，<b>没有「五大部件（运算器 / 控制器 / 存储器 / 输入 / 输出）」</b>的展开，别把硬件基础课的内容当本节考点</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">2.1.2 计算机网络</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">3</span>网络分类（按作用范围）与协议三要素</div>
+        <ul>
+          <li><b>六类</b>：<span class="key">个人局域网（PAN）· 局域网（LAN）· 城域网（MAN）· 广域网（WAN）· 公用网（Public Network）· 专用网（Private Network）</span></li>
+          <li><b>三要素</b>：<span class="key">语义</span>——解释控制信息每个部分的含义，规定需要发出何种控制信息、完成的动作以及做出什么样的响应（<b>要做什么</b>）；<span class="key">语法</span>——用户数据与控制信息的结构与格式，以及数据出现的顺序（<b>要怎么做</b>）；<span class="key">时序</span>——对事件发生顺序的详细说明（<b>做的顺序</b>）</li>
+        </ul>
+        <div class="tip">六类分两组记：<b>作用范围四项</b>（PAN / LAN / MAN / WAN）＋<b>使用者两项</b>（公用网 / 专用网）。口诀 <b>义 · 法 · 时</b>。⚠️ 教材<b>未给</b>各类网络的覆盖距离数字（「PAN≈10m」等是教辅补充）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">4</span>OSI 参考模型与广域网协议</div>
+        <ul>
+          <li><b>制定者</b>：<span class="key">国际标准化组织（ISO）</span>和<span class="key">国际电报电话咨询委员会（CCITT）</span>联合制定；目的是为<span class="key">异种计算机互连</span>提供共同的基础和标准框架</li>
+          <li><b>七层（自下而上）</b>：<span class="key">物理层 → 数据链路层 → 网络层 → 传输层 → 会话层 → 表示层 → 应用层</span>（OSI 采用分层的结构化技术）</li>
+          <li><b>广域网协议在 OSI 参考模型的最下面三层操作</b>，定义了在不同广域网介质上的通信</li>
+          <li><b>广域网协议</b>：<span class="key">PPP</span> 点对点协议 · <span class="key">ISDN</span> 综合业务数字网 · <span class="key">xDSL</span>（DSL 数字用户线路统称：HDSL、SDSL、MVL、ADSL）· <span class="key">DDN</span> 数字专线 · <span class="key">x.25</span> · <span class="key">FR</span> 帧中继 · <span class="key">ATM</span> 异步传输模式</li>
+        </ul>
+        <div class="tip">口诀 <b>物 · 数 · 网 · 传 · 会 · 表 · 应</b>。⚠️ 教材原文是「<b>从下到上</b>」；部分教辅写成「从上到下」，方向别记反。广域网协议记忆串 <b>P·I·x·D·x·F·A</b>；「NVL」<b>不是</b>广域网协议（真题高频干扰项）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">5</span>IEEE 802 协议族（只背四个编号）</div>
+        <ul>
+          <li><span class="key">802.3</span> = <span class="key">以太网的 CSMA/CD 载波监听多路访问/冲突检测协议</span>（有线以太网）</li>
+          <li><span class="key">802.11</span> = <span class="key">无线局域网 WLAN 标准协议</span>（手机热点属 802.11）</li>
+          <li><span class="key">802.5</span> = <span class="key">令牌环 Token Ring 协议</span>；<span class="key">802.6</span> = <span class="key">城域网 MAN 协议</span></li>
+          <li>遵循 IEEE 802 标准的产品：<span class="key">网卡、桥接器、路由器</span>等建立局域网络的组件</li>
+        </ul>
+        <div class="tip">802 规范定义三件事：<b>网卡如何访问传输介质</b>（光缆 / 双绞线 / 无线）· <b>如何在介质上传输数据</b> · <b>设备之间连接的建立、维护和拆除途径</b>。其余编号只留印象：802.1 概论 / 802.2 LLC / 802.4 令牌总线 / 802.7 FDDI</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">6</span>TCP/IP 四层 · 三条合并理由 · 协议归属</div>
+        <ul>
+          <li><b>四层</b>：<span class="key">应用层 · 传输层 · 网络层 · 网络接口层</span></li>
+          <li><b>三条理由</b>：① <span class="key">应用层、表示层、会话层</span>服务<b>相差不大</b> → 合并为<b>应用层</b>；② <span class="key">传输层和网络层</span>在网络协议中<b>地位十分重要</b> → 作为<b>独立的两层</b>；③ <span class="key">数据链路层和物理层</span>内容<b>相差不多</b> → 归并为<b>网络接口层</b></li>
+          <li><b>应用层</b>：<span class="key">FTP · TFTP · HTTP · SMTP · DHCP · Telnet · DNS · SNMP</span></li>
+          <li><b>传输层</b>：<span class="key">TCP 和 UDP</span>，负责提供<span class="key">流量控制、错误校验和排序服务</span></li>
+          <li><b>网络层</b>：<span class="key">IP · ICMP（网际控制报文）· IGMP（网际组管理）· ARP（地址解析）· RARP（反向地址解析）</span>，处理信息的<span class="key">路由</span>和<span class="key">主机地址解析</span></li>
+          <li><b>网络接口层</b>：兼并了物理层和数据链路层，既是<b>传输数据的物理媒介</b>，也可为网络层提供一条<b>准确无误的线路</b></li>
+        </ul>
+        <div class="tip">⚠️⚠️ <b>本节最高频陷阱</b>：<span class="key">ARP / RARP 属于网络层，不属于应用层</span>；应用层合并的是 OSI 的<b>会话层 + 表示层 + 应用层三层</b>；<b>TFTP</b> 也是应用层协议</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">7</span>软件定义网络 SDN：三个平面 · 三类接口</div>
+        <ul>
+          <li><b>核心思想</b>：将<span class="key">网络设备的控制面与数据面分离开来</span>，通过软件编程的形式定义和控制网络，实现网络流量的灵活控制；SDN 是<span class="key">网络虚拟化的一种实现方式</span></li>
+          <li><b>架构（由下到上 / 由南到北）</b>：<span class="key">数据平面</span>（交换机等网络通用硬件，靠 SDN 数据通路连接）→ <span class="key">控制平面</span>（逻辑上为中心的 SDN 控制器，掌握全局网络信息、负责转发规则控制）→ <span class="key">应用平面</span>（各种基于 SDN 的网络应用，用户无须关心底层细节即可编程部署）</li>
+          <li><span class="key">南向接口 CDPI</span>：控制平面 ↔ <b>数据平面</b>，<span class="key">具有统一的通信标准</span>，最主要应用 <span class="key">OpenFlow</span> 协议</li>
+          <li><span class="key">北向接口 NBI</span>：控制平面 ↔ <b>应用平面</b>，<span class="key">并非统一标准</span>，允许用户定制开发网络管理应用</li>
+          <li><span class="key">东西向接口</span>：<b>多控制器之间</b>通信，使控制器具有<span class="key">可扩展性</span>，为<b>负载均衡和性能提升</b>提供技术保障</li>
+          <li>数据层中的交换机称<span class="key">哑交换机</span>（专指用于转发数据的设备）；OpenFlow 最基本的特点是<span class="key">基于流（Flow）的概念来匹配转发规则</span>，每个交换机维护一个<span class="key">流表（Flow Table）</span>，其建立、维护和下发<b>均由控制器完成</b></li>
+        </ul>
+        <div class="tip">方位别接反：<b>南（South）接数据平面 / 硬件，北（North）接应用平面</b>；口诀 <b>控数分离 · 南向 OpenFlow 统一 · 北向不统一 · 东西向管多控制器</b></div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">8</span>5G：三大特点 · 三大场景 · 关键指标</div>
+        <ul>
+          <li><b>三大特点</b>：<span class="key">高速率 · 低时延 · 大连接</span></li>
+          <li><b>三大应用场景</b>（ITU 定义）：<span class="key">eMBB 增强移动宽带</span>——面向<span class="key">移动互联网流量爆炸式增长</span>；<span class="key">uRLLC 超高可靠低时延通信</span>——面向<span class="key">工业控制、远程医疗、自动驾驶</span>等对时延和可靠性要求极高的垂直行业；<span class="key">mMTC 海量机器类通信</span>——面向<span class="key">智慧城市、智能家居、环境监测</span>等以传感和数据采集为目标的场景</li>
+          <li><b>技术基础</b>：在<span class="key">正交频分多址（OFDMA）</span>和<span class="key">多入多出（MIMO）</span>基础上采用灵活的全新系统设计</li>
+          <li><b>频段</b>：与 4G 支持中低频不同，<span class="key">5G 同时支持中低频和高频频段</span>——中低频满足<span class="key">覆盖和容量</span>，高频满足<span class="key">热点区域提升容量</span>；支持<span class="key">百 MHz 的基础带宽</span></li>
+          <li>为支持低时延高可靠，采用<span class="key">短帧、快速反馈、多层/多站数据重传</span>等技术</li>
+          <li><b>必背四个指标</b>：<span class="key">空口时延 1ms</span>（4G 是 10ms）· <span class="key">峰值速率 20Gbps</span>（4G 是 10）· <span class="key">连接数密度 100 万/km²</span>（4G 是 10）· <span class="key">用户体验速率 0.1~1Gbps</span>（4G 是 10M）。其余四项了解：流量密度 10 Tb/s·km² · 移动性 500 km/h · 能效 100 倍 · 频道效率 3 倍</li>
+        </ul>
+        <div class="tip">场景口诀 <b>e 高（速率）· u 低（时延）· m 多（连接）</b>。⚠️ 5G 特点里<b>没有「宏基站」</b>（真题干扰项）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">2.1.3 存储和数据库</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">9</span>存储分类线索与 DAS / NAS / SAN</div>
+        <ul>
+          <li><b>分类线索（两层递进）</b>：按<span class="key">服务器类型</span>分 <span class="key">封闭系统的存储</span>（主要指大型机等服务器）/ <span class="key">开放系统的存储</span>（基于麒麟、欧拉、UNIX、Linux 等操作系统）→ 开放系统的存储分 <span class="key">内置存储 / 外挂存储</span> → 外挂存储按<b>连接方式</b>分 <span class="key">DAS（直连式存储）</span> 与 <span class="key">FAS（网络化存储）</span> → 网络化存储按<b>传输协议</b>分 <span class="key">NAS（网络接入存储）</span> 与 <span class="key">SAN（存储区域网络）</span></li>
+          <li><b>DAS</b>：通过<span class="key">线缆直接连接服务器</span>；协议 <span class="key">SCSI / FC / ATA</span>，传<b>数据块</b>，适合中小组织服务器<b>捆绑磁盘（JBOD）</b>，<b>文档共享程度低</b></li>
+          <li><b>NAS</b>：通过 <span class="key">TCP/IP 网络</span>连接；支持 <span class="key">NFS / CIFS</span> 文件共享协议，<b>异种操作系统可共享</b>，安装管理简单，适合中小组织、SOHO 族及<b>部门级文件共享</b>，<b>文档共享程度高</b></li>
+          <li><b>SAN</b>：基于<span class="key">光纤通道（FC）</span>的<b>专用存储网络</b>；传<b>数据块</b>，集中式管理需<b>专用工具</b>，容量扩充能力高，适合<span class="key">大型组织、数据中心、大型资料库和数据库</span>，网络环境复杂</li>
+        </ul>
+        <div class="tip">选型口诀：<b>文件共享选 NAS · 数据库高性能选 SAN · 单机外接是 DAS</b>。⚠️ <b>DAS 与 NAS/SAN 不在同一层级</b>：外挂存储先按<b>连接方式</b>分，NAS/SAN 是「网络化存储 FAS」再按<b>传输协议</b>分出来的</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">10</span>存储虚拟化 与 绿色存储</div>
+        <ul>
+          <li><b>存储虚拟化</b>是<span class="key">「云存储」的核心技术之一</span>：把来自<span class="key">一个或多个网络</span>的存储资源<b>整合起来</b>，向用户提供<span class="key">抽象的逻辑视图</span>，用户通过视图中的<span class="key">统一逻辑接口</span>访问被整合的资源，<b>访问数据时并不知道真实的物理位置</b></li>
+          <li>三项好处：<span class="key">提高存储利用率 · 降低存储成本 · 简化大型、复杂、异构的存储环境的管理工作</span>；数据存储是类似<b>文件系统的逻辑容器</b>，隐藏各设备特性形成统一模型，<b>为虚拟机提供磁盘</b></li>
+          <li><b>绿色存储</b>：从<span class="key">节能环保</span>角度出发，用来<b>设计生产能效更佳的存储产品</b>，<b>降低数据存储设备的功耗</b>，<b>提高存储设备每瓦性能</b>的技术；是一个<b>系统设计方案</b>，贯穿整个存储设计过程</li>
+          <li>核心：设计<b>运行温度更低的处理器</b>和<b>更有效率的系统</b>，降低产品产生的<b>电子碳化合物</b>；最终目的：<b>提高所有网络存储设备的能源效率，用最少的存储容量满足业务需求，消耗最低的能源</b></li>
+          <li>收口：以绿色理念为指导的存储系统最终是<span class="key">存储容量、性能、能耗三者的平衡</span></li>
+        </ul>
+        <div class="tip">⚠️ 原话是「<b>存储虚拟化</b>是云存储的核心技术之一」，别被「服务器虚拟化 / 网络虚拟化」带偏；绿色存储三个「更」：更佳能效 / 更低功耗 / 更高每瓦性能</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">11</span>数据结构模型 · 数据库类型 · 数据仓库</div>
+        <ul>
+          <li><b>数据结构模型是数据库系统的核心</b>；三种模型：<span class="key">层次模型 · 网状模型 · 关系模型</span>；<span class="key">层次模型和网状模型又统称为格式化数据模型</span></li>
+          <li><b>层次模型</b>：<span class="key">数据库系统最早使用</span>的一种模型，用「<b>树</b>」结构表示实体集关联，实体集为<b>结点</b>，联系是<b>父子之间的一对多</b>；记录值只能按<b>层次路径</b>查看，<b>子女记录值不能脱离双亲记录值独立存在</b></li>
+          <li><b>网状模型</b>：用<b>网状结构</b>表示实体类型及联系，可<b>灵活描述事物及其关系</b>；网状数据库是<span class="key">导航式（Navigation）数据库</span>——操作时<b>不但说明要做什么，还要说明怎么做</b>（查找语句要<b>规定存取路径</b>）</li>
+          <li><b>关系模型</b>：用<span class="key">二维表格</span>的形式表示实体以及实体之间的联系；以<span class="key">集合论中的关系概念</span>为基础，实体和联系均由<b>单一的结构类型「关系」</b>表示</li>
+          <li><b>ACID</b>（关系型数据库支持）：<span class="key">A 原子性 Atomicity · C 一致性 Consistency · I 隔离性 Isolation · D 持久性 Durability</span></li>
+          <li><b>非关系型（NoSQL）</b>：分布式的、非关系型的、<span class="key">不保证遵循 ACID 原则</span>，<b>不需要固定表结构</b>，通常<b>不存在连接操作</b>，在<b>大数据存取</b>上有无法比拟的性能优势。四类：<span class="key">键值数据库（Redis）· 列存储数据库（HBase）· 面向文档数据库（MongoDB）· 图形数据库（Neo4j）</span></li>
+          <li><b>数据仓库四特征</b>：<span class="key">面向主题的 · 集成的 · 非易失的 · 随时间变化的</span>数据集合，用于<span class="key">支持管理决策</span>（为满足中高层管理人员预测、决策分析的需要而产生）</li>
+          <li><b>体系结构四部分</b>：① <span class="key">数据源</span>——是数据仓库<b>系统的基础</b>、整个系统的数据源泉；② <span class="key">数据的存储与管理</span>——是整个数据仓库<b>系统的核心</b>，按主题组织，分<b>组织级数据仓库</b>与<b>部门级数据仓库（数据集市）</b>；③ <span class="key">联机分析处理（OLAP）服务器</span>——按<b>多维模型</b>组织数据，进行多角度多层次分析；④ <span class="key">前端工具</span>——查询 / 报表 / 分析 / 数据挖掘工具（<b>数据分析工具针对 OLAP 服务器，报表与数据挖掘工具针对数据仓库</b>）</li>
+          <li><b>OLAP 三种实现</b>：<span class="key">ROLAP</span> 基本数据与聚合数据均在 <b>RDBMS</b>；<span class="key">MOLAP</span> 均在<b>多维数据库</b>；<span class="key">HOLAP</span> 基本数据在 <b>RDBMS</b>、聚合数据在<b>多维数据库</b></li>
+        </ul>
+        <div class="tip">三锚点：<b>最早使用 = 层次</b>｜<b>导航式 = 网状</b>｜<b>格式化数据模型 = 层次 + 网状（关系不算）</b>。四特征口诀 <b>面向主题 · 集成 · 非易失 · 随时间变化</b>。⚠️「<b>基础</b>」是数据源、「<b>核心</b>」是数据的存储与管理，别对调。ETL = 清洗 / 转换 / 加载（从数据源抽取 → 清洗转换 → 按数仓模型加载）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">2.1.4 信息安全 · 2.1.5 发展趋势</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">12</span>信息安全（CIA · 四层次 · 加密 · UEBA · 态势感知）＋ 2.1.5 四方向趋势</div>
+        <div class="subhd">信息安全（2.1.4）</div>
+        <ul>
+          <li><b>CIA 三属性</b>：<span class="key">保密性 Confidentiality</span>（信息不被未授权者知晓）· <span class="key">完整性 Integrity</span>（信息是正确的、真实的、未被篡改的、完整无缺的）· <span class="key">可用性 Availability</span>（信息可以随时正常使用）。口诀 <b>报完用</b></li>
+          <li><b>四个层次</b>：<span class="key">设备安全 · 数据安全 · 内容安全 · 行为安全</span>。口诀 <b>设数内行</b></li>
+          <li><b>信息系统安全五个方面</b>：计算机设备安全 · 网络安全 · 操作系统安全 · 数据库系统安全 · 应用系统安全</li>
+          <li><b>网络安全技术</b>：<span class="key">防火墙 · 入侵检测与防护 · VPN · 安全扫描 · 网络蜜罐技术 · 用户和实体行为分析技术</span>。口诀 <b>防入 V · 扫蜜行</b></li>
+          <li><b>加密技术两个元素</b>＝<span class="key">算法和密钥</span>；<span class="key">对称加密（私人密钥加密）</span>加解密密钥<b>相同</b>，代表 <b>DES</b>；<span class="key">非对称加密（公开密钥加密）</span>加解密密钥<b>不同</b>、加密密钥可公开而解密密钥需保密，代表 <b>RSA</b></li>
+          <li><b>UEBA</b>（用户和实体行为分析）：提供<span class="key">用户画像</span>及基于各种分析方法的<span class="key">异常检测</span>，评估用户和其他实体（主机、应用程序、网络、数据库等），发现异常活动相关的潜在事件；关键是防范<span class="key">内部威胁</span>——<b>最严重的损害往往由内部人员造成</b></li>
+          <li><b>网络安全态势感知</b>：在<span class="key">大规模网络环境</span>中对能够引起网络态势变化的<span class="key">安全要素</span>进行<span class="key">获取、理解、显示</span>，并据此<span class="key">预测未来网络的安全发展趋势</span>；是<b>基于环境的、动态的、整体的</b>能力，<b>前提是安全大数据</b>。关键技术四项：① <span class="key">海量多元异构数据的汇聚（融合）</span> ② 面向<span class="key">多类型</span>的网络安全<span class="key">威胁评估</span> ③ 网络安全态势<span class="key">评估与决策支撑</span> ④ 网络安全<span class="key">态势可视化</span></li>
+        </ul>
+        <div class="subhd">信息技术的发展（2.1.5 四方向）</div>
+        <ul>
+          <li><b>计算机软硬件</b>：硬件向<span class="key">超高速、超小型、平行处理、智能化</span>发展（体积越来越小、速度越来越高、容量越来越大、功耗越来越低、可靠性越来越高）；软件越来越丰富、功能越来越强大，<span class="key">「软件定义一切」</span>成为当前发展主流</li>
+          <li><b>网络技术</b>：计算机<b>网络</b>与<b>通信</b>技术联系<span class="key">日益密切，甚至是已经融为一体</span>；<span class="key">5G 成为当前的主流</span>；面向<b>物联网 / 低时延</b>场景的 <span class="key">NB-IoT</span>（窄带物联网）与 <span class="key">eMTC</span>（增强型机器类型通信）、<span class="key">IIoT</span>（工业物联网）与 <span class="key">URLLC</span>（低延时高可靠通信）等技术将充分发展</li>
+          <li><b>存储和数据库</b>：数据量的不断<b>爆炸式增长</b>推动数据库技术向<span class="key">模型拓展、架构解耦</span>方向演进</li>
+          <li><b>信息安全</b>：传统安全理念过渡到以<span class="key">可信计算理念</span>为核心的计算机安全；信息安全<b>标准的研究与制定</b>、<b>产品和服务的集成和融合</b>，引领技术向<span class="key">标准化和集成化</span>发展</li>
+        </ul>
+        <div class="tip">⚠️ 最易互换两个词：<b>「软件定义一切」属软件趋势</b>（不是「软件定义网络」）；<b>「可信计算」属信息安全趋势</b>。另注意「<b>四个层次</b>」（设备/数据/内容/行为）与「<b>五个方面</b>」（计算机设备/网络/操作系统/数据库系统/应用系统）是两个不同维度的划分，别混为一谈</div>
+        <div class="fill"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="col-hd">总结区 <span>本节本质 + 考点地图</span></div>
+    <div class="body summary-prefill">
+      <b>本节本质</b>：2.1 是第 2 章的开篇节，也是<b>上午卷最大分值块</b>（第 2 章 6~12 题）的主力。全节没有计算，题型固定为三类——<b>协议 / 术语的层级归属</b>、<b>分类与顺序的排序</b>、<b>特征与定义的匹配</b>。本节五小节其实是「一台信息系统的五个部件」：<b>软硬件（算）→ 网络（传）→ 存储数据库（存）→ 信息安全（保）→ 发展趋势（往哪走）</b>。<br>
+      <b>考点地图（按考频排序）</b>：① <b>TCP/IP 各层协议归属</b>（ARP/RARP 在网络层、应用层合并会话+表示+应用三层）→ ② <b>OSI 七层顺序</b>（物数网传会表应）与广域网协议 → ③ <b>DAS / NAS / SAN 的层级与选型</b>（文件选 NAS、数据库选 SAN、单机是 DAS）→ ④ <b>SDN 三个平面 + 三类接口</b>（南向 OpenFlow 统一、北向不统一、东西向管多控制器）→ ⑤ <b>5G 三大场景 eMBB/uRLLC/mMTC</b> 与空口时延 1ms → ⑥ <b>数据仓库四特征</b> + 体系结构「基础＝数据源 / 核心＝数据的存储与管理」→ ⑦ <b>信息安全 CIA</b> + 四个层次 + 网络安全技术 + <b>对称 DES / 非对称 RSA</b> → ⑧ 数据结构三大模型（最早＝层次、导航式＝网状、格式化＝层次+网状）→ ⑨ <b>NoSQL 四类</b>及代表 → ⑩ 网络协议三要素 + 802.3 / 802.11 → ⑪ 存储虚拟化 / 绿色存储 → ⑫ UEBA + 态势感知四技术 + 2.1.5 四方向趋势。<br>
+      <span class="small">⚠️ 口径陷阱：① <b>ARP / RARP 属网络层</b>，不是应用层；② 应用层合并的是 OSI 的<b>三层</b>（会话+表示+应用）；③ OSI 教材原文是「<b>从下到上</b>」；④ 第 4 版 2.1.1 <b>没有「五大部件」</b>；⑤ 教材<b>未给</b> PAN/LAN/MAN/WAN 的覆盖距离数字；⑥ <b>DAS 与 NAS/SAN 不同层级</b>（NAS/SAN 属网络化存储 FAS）；⑦ 存储虚拟化是「<b>云存储</b>」的核心技术，不是服务器虚拟化；⑧ 数据仓库「<b>基础＝数据源 / 核心＝数据的存储与管理</b>」别对调；⑨ 关系型<b>支持</b> ACID，非关系型<b>不保证遵循</b> ACID；⑩ 是「<b>四个层次</b>」（设备/数据/内容/行为），不是三层；⑪ 加密技术两个元素是「<b>算法 + 密钥</b>」；⑫「软件定义<b>一切</b>」属<b>软件</b>趋势，「<b>可信计算</b>」属<b>安全</b>趋势。</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>康奈尔笔记法 · 第 2 章第 1 节 带答案版　｜　复习记录：当日 ☐　+1 天 ☐　+3 天 ☐　+7 天 ☐　+14 天 ☐</span>
+    <span>正确率 ____ / 12</span>
+  </div>
+
+</div>
+
+<div class="guide">
+  <h2>怎么用这一页</h2>
+  <table>
+    <tr>
+      <th>步骤</th><th>做法</th>
+    </tr>
+    <tr>
+      <td>第 1 遍 · 遮答默写</td>
+      <td>用纸<b>遮住右栏答案区</b>，只看左栏 12 个问题。口头/默写回答，答不出的画「×」。</td>
+    </tr>
+    <tr>
+      <td>第 2 遍 · 对照修正</td>
+      <td>揭开答案区逐项对照。每条答案下的<b>虚线</b>是留给你的「补充线」——记下易漏点（如「OSI 七层顺序」「TCP/IP 各层协议归属」「DAS/NAS/SAN 的层级关系」「数仓基础与核心的归属」）。</td>
+    </tr>
+    <tr>
+      <td>第 3 遍 · 隐藏答案打印</td>
+      <td>点工具栏「👁 隐藏答案」按钮，再打印一份当填空卷，可反复练习。</td>
+    </tr>
+    <tr>
+      <td>第 4 遍 · 复习节奏</td>
+      <td>页脚 5 个框按「当日 → +1 天 → +3 天 → +7 天 → +14 天」打勾，这就是你的艾宾浩斯进度条。全部打勾后，本节可不再看。</td>
+    </tr>
+  </table>
+  <div class="note">
+    <b>为什么这一节要特别加练</b>：2.1 是<b>上午卷分值最高的一块</b>（第 2 章 6~12 题），而它的题 90% 都在考「<b>谁属于谁</b>」——协议属于哪一层、存储属于哪一级、哪部分是基础哪部分是核心、哪条特征属于哪个技术。这种题<b>会就是会、不会就是不会</b>，没有推理空间，所以唯一的办法是把表格<b>默写到能条件反射</b>。本版每条答案都标注<b>关键术语</b>（暖色）和<b>对照提醒</b>（橙色框），默写后对照一眼即可定位偏差。考前冲刺只看「总结区 · 考点地图」+「橙色 tip 框」即可。
+  </div>
+</div>
+
+<script>
+  function toggleAnswers(){
+    document.body.classList.toggle('hide-answers');
+    const btn = document.getElementById('toggleBtn');
+    const hidden = document.body.classList.contains('hide-answers');
+    btn.textContent = hidden ? '👁 显示答案' : '👁 隐藏答案（打印填空卷）';
+    btn.classList.toggle('active', hidden);
+  }
+</script>
+
+</body>
+</html>

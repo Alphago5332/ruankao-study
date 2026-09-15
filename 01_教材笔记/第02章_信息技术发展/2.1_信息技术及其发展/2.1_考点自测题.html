@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2.1 信息技术及其发展 · 考点自测题</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #333; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 20px 16px 60px; }
+  header { background: #185FA5; color: #fff; border-radius: 8px; padding: 18px 20px; margin-bottom: 16px; }
+  header h1 { font-size: 19px; margin-bottom: 4px; }
+  header p { font-size: 12.5px; opacity: .85; }
+  .progress-bar { background: rgba(255,255,255,.25); border-radius: 4px; height: 8px; margin-top: 10px; }
+  .progress-bar i { display: block; height: 100%; background: #ffc53d; border-radius: 4px; width: 0; transition: width .3s; }
+  .card { background: #fff; border-radius: 8px; padding: 18px 20px; margin-bottom: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+  .qtag { font-size: 11px; color: #854F0B; background: #fff7e6; border: 1px solid #f0d9a0; border-radius: 3px; padding: 1px 6px; margin-right: 6px; }
+  .qno { font-weight: bold; color: #185FA5; }
+  .qtext { font-size: 14.5px; line-height: 1.65; margin: 8px 0 12px; }
+  .opt { display: block; width: 100%; text-align: left; border: 1px solid #d9e2ec; border-radius: 6px;
+    background: #fff; padding: 9px 12px; font-size: 13.5px; margin-bottom: 8px; cursor: pointer; line-height: 1.5; }
+  .opt:hover { border-color: #185FA5; }
+  .opt.sel { border-color: #185FA5; background: #eef4fb; }
+  .opt.right { border-color: #2e7d32; background: #eef7ee; }
+  .opt.wrong { border-color: #c62828; background: #fdeeee; }
+  .opt .mark { font-weight: bold; margin-right: 6px; color: #185FA5; }
+  .explain { display: none; background: #f4f8fc; border-left: 3px solid #185FA5; border-radius: 4px;
+    padding: 10px 12px; font-size: 13px; line-height: 1.7; color: #444; margin-top: 4px; }
+  .explain b { color: #185FA5; }
+  .btn { background: #185FA5; color: #fff; border: none; border-radius: 6px; padding: 9px 22px;
+    font-size: 14px; cursor: pointer; margin-top: 10px; }
+  .btn.gray { background: #90a4ae; }
+  .btn:disabled { background: #b0bec5; cursor: not-allowed; }
+  #result { display: none; text-align: center; }
+  #result .big { font-size: 40px; font-weight: bold; color: #185FA5; margin: 10px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 14px 0; }
+  th, td { border: 1px solid #d9e2ec; padding: 7px 8px; text-align: center; }
+  th { background: #eef4fb; color: #185FA5; }
+  .module-stat td:first-child { text-align: left; }
+  #reviewList { text-align: left; }
+  .wrong-item { border: 1px solid #f0c4c4; border-radius: 6px; padding: 10px 12px; margin-bottom: 8px; font-size: 13px; background: #fffafa; }
+  .wrong-item b { color: #c62828; }
+  .kbd-tip { font-size: 11.5px; color: #999; margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>2.1 信息技术及其发展 · 考点自测（22 题）</h1>
+    <p>第 2 章 = 上午最大分值块 · 达标线 18/22（80%）· 键盘 A~D 选择，Enter 确认</p>
+    <div class="progress-bar"><i id="pbar"></i></div>
+  </header>
+  <div id="quiz"></div>
+  <div id="result" class="card">
+    <h2>测验完成</h2>
+    <div class="big" id="finalScore">0 / 22</div>
+    <div id="advice" style="font-size:14px; margin-bottom: 6px;"></div>
+    <table class="module-stat" id="moduleTable">
+      <tr><th>模块</th><th>正确率</th><th>状态</th></tr>
+    </table>
+    <div id="reviewWrap" style="display:none">
+      <h3 style="color:#c62828; font-size:14px; margin-bottom:8px;">错题回顾</h3>
+      <div id="reviewList"></div>
+    </div>
+    <button class="btn" id="retryWrong" style="display:none">只重做错题</button>
+    <button class="btn gray" onclick="initAll()">重新测验</button>
+  </div>
+  <div class="kbd-tip">对照资料：同目录《2.1_知识点清单.md》· 教材出处：《信息系统项目管理师教程（第4版）》约 P37~P49 · 第 2 章上午 6~12 题，是当前性价比最高的一块</div>
+</div>
+
+<script>
+const QUESTIONS = [
+  // 模块A 信息技术与软硬件 (1-3)
+  { m: "A·信息技术与软硬件", q: "按表现形态的不同，信息技术可分为（　）。",
+    o: ["硬技术（物化技术）与软技术（非物化技术）","硬件技术与软件技术","数字技术与模拟技术","传感技术与通信技术"], a: 0,
+    e: "教材 2.1 原文：按表现形态的不同，信息技术可分为【硬技术（物化技术）】与【软技术（非物化技术）】。前者指各种信息设备及其功能（传感器、服务器、智能手机、通信卫星、笔记本电脑）；后者指有关信息获取与处理的各种知识、方法与技能（语言文字技术、数据统计分析技术、规划决策技术、计算机软件技术）。注意别称是「物化 / 非物化」，不是「硬件 / 软件」。" },
+  { m: "A·信息技术与软硬件", q: "关于计算机软件中的「程序」与「文档」，下列表述符合教材的是（　）。",
+    o: ["程序是计算任务的处理对象和处理规则的描述，必须安装入机器内部才能工作","文档必须安装入机器内部才能被程序调用","程序一般是给人看的，不一定安装入机器","文档是计算任务的处理对象和处理规则的描述"], a: 0,
+    e: "教材原文：计算机软件是指计算机系统中的【程序及其文档】；【程序】是计算任务的处理对象和处理规则的描述，【必须安装入机器内部才能工作】；【文档】是为了便于了解程序所需的阐明性资料，【一般是给人看的，不一定安装入机器】。B、C 把两者的特性互换，D 把定义安错了对象。口诀：程序进机器，文档给人看。" },
+  { m: "A·信息技术与软硬件", q: "关于计算机硬件与软件的关系，下列表述错误的是（　）。",
+    o: ["硬件是软件赖以工作的物质基础，软件的正常工作是硬件发挥作用的重要途径","硬件与软件协同发展，软件随硬件技术发展而发展，软件的完善又促进硬件更新","计算机的某些功能既可以由硬件实现，也可以由软件来实现","硬件与软件之间存在绝对严格的界线，同一功能不可能由两种方式实现"], a: 3,
+    e: "教材结论句：在许多情况下，计算机的某些功能【既可以由硬件实现，也可以由软件来实现】，因此【硬件与软件在一定意义上来说没有绝对严格的界线】。D 的说法与教材正好相反。A、B 均为教材原文（互相依存 + 协同发展、密切交织发展、缺一不可）。" },
+  // 模块B 计算机网络 (4-11)
+  { m: "B·计算机网络", q: "从网络的作用范围可将网络类别进行划分，下列不属于教材所列类别的是（　）。",
+    o: ["个人局域网（PAN）","城域网（MAN）","物联网（IoT）","专用网（Private Network）"], a: 2,
+    e: "教材 2.1.2 列出的六类：【个人局域网 PAN · 局域网 LAN · 城域网 MAN · 广域网 WAN · 公用网 Public Network · 专用网 Private Network】。「物联网」是 2.2.1 节的内容（通过信息传感设备按约定协议将物品与互联网连接、实现智能化识别定位跟踪监控管理的网络），不属于「按作用范围」的网络分类。" },
+  { m: "B·计算机网络", q: "网络协议由三个要素组成，其中「规定用户数据与控制信息的结构与格式，以及数据出现的顺序」的是（　）。",
+    o: ["语法","语义","时序","协议栈"], a: 0,
+    e: "教材原文：网络协议三要素 = 语义、语法、时序。【语义】解释控制信息每个部分的含义，规定需要发出何种控制信息、完成的动作以及做出什么样的响应（要做什么）；【语法】是用户数据与控制信息的结构与格式，以及数据出现的顺序（要怎么做）；【时序】是对事件发生顺序的详细说明（做的顺序）。题干问「结构与格式、数据出现顺序」，选语法。口诀：义法时。" },
+  { m: "B·计算机网络", q: "关于 OSI 参考模型，下列表述正确的是（　）。",
+    o: ["由 ISO 和 CCITT 联合制定，从下到上共分物理层、数据链路层、网络层、传输层、会话层、表示层和应用层","由 IEEE 单独制定，从上到下共分七层","广域网协议在 OSI 参考模型的最上面三层操作","OSI 将七层简化为四层，即应用层、传输层、网络层和网络接口层"], a: 0,
+    e: "OSI 由【国际标准化组织（ISO）】和【国际电报电话咨询委员会（CCITT）】联合制定，采用分层的结构化技术，【从下到上】共分七层：物理层 → 数据链路层 → 网络层 → 传输层 → 会话层 → 表示层 → 应用层。广域网协议是在 OSI 参考模型的【最下面三层】操作。把七层简化为四层的是 TCP/IP，不是 OSI（D 错）。" },
+  { m: "B·计算机网络", q: "下列不属于广域网协议的是（　）。",
+    o: ["NVL","PPP 点对点协议","FR 帧中继","ATM 异步传输模式"], a: 0,
+    e: "教材列出的广域网协议：PPP 点对点协议、ISDN 综合业务数字网、xDSL（DSL 数字用户线路的统称：HDSL/SDSL/MVL/ADSL）、DDN 数字专线、x.25、FR 帧中继、ATM 异步传输模式。「NVL」是历年真题里的高频干扰项，不属于广域网协议。" },
+  { m: "B·计算机网络", q: "IEEE 802 协议族中，802.3 和 802.11 分别对应（　）。",
+    o: ["以太网的 CSMA/CD 载波监听多路访问/冲突检测协议；无线局域网 WLAN 标准协议","无线局域网 WLAN 标准协议；以太网协议","城域网 MAN 协议；令牌环协议","光纤技术协议；令牌总线协议"], a: 0,
+    e: "教材原文：【802.3】= 以太网的 CSMA/CD 载波监听多路访问/冲突检测协议；【802.11】= 无线局域网 WLAN 标准协议。其余留印象：802.1 = 802 协议概论；802.2 = LLC 逻辑链路控制层协议；802.4 = 令牌总线；802.5 = 令牌环；802.6 = 城域网 MAN；802.7 = FDDI 宽带技术；802.8 = 光纤技术。手机热点属于 802.11。" },
+  { m: "B·计算机网络", q: "TCP/IP 将 OSI 的七层简化为四层，下列说法正确的是（　）。",
+    o: ["OSI 的应用层、表示层、会话层被合并为应用层，ARP 属于网络层","OSI 的表示层和应用层被合并为应用层，ARP 属于应用层","OSI 的物理层、数据链路层和网络层被归并为网络接口层","传输层和网络层被合并为一层，因为两者地位同等重要"], a: 0,
+    e: "教材给出三条合并理由：① 应用层、表示层、会话层服务相差不大 → 合并为【应用层】；② 传输层和网络层地位十分重要 → 作为【独立的两层】；③ 数据链路层和物理层内容相差不多 → 归并为【网络接口层】。【ARP / RARP 属于网络层】——本节最高频陷阱，教材网络层协议明确为 IP、ICMP、IGMP、ARP、RARP。" },
+  { m: "B·计算机网络", q: "关于软件定义网络（SDN），下列表述错误的是（　）。",
+    o: ["整体架构由下到上（由南到北）分为数据平面、控制平面和应用平面","核心是通过将网络设备的控制面与数据面分离开来，实现网络流量的灵活控制","南向接口 CDPI 具有统一的通信标准，最主要应用的是 OpenFlow 协议","北向接口 NBI 具有统一标准，用于控制平面与数据平面之间的通信"], a: 3,
+    e: "教材原文：SDN 通过将网络设备的【控制面与数据面分离开来】实现网络流量灵活控制；整体架构由下到上（由南到北）分为【数据平面、控制平面、应用平面】。接口方面：【南向接口 CDPI】连接控制平面与数据平面，具有统一的通信标准，最主要应用 OpenFlow 协议；【北向接口 NBI】连接控制平面与应用平面，【并非统一标准】，允许用户定制开发；【东西向接口】负责多控制器之间通信。D 既说反了连接对象，又给了「统一标准」的错误属性。" },
+  { m: "B·计算机网络", q: "5G 定义了三大类应用场景，其中面向工业控制、远程医疗、自动驾驶等对时延和可靠性要求极高场景的是（　）。",
+    o: ["超高可靠低时延通信（uRLLC）","增强移动宽带（eMBB）","海量机器类通信（mMTC）","窄带物联网（NB-IoT）"], a: 0,
+    e: "教材原文：三大场景 = 【增强移动宽带 eMBB】面向移动互联网流量爆炸式增长；【超高可靠低时延通信 uRLLC】面向工业控制、远程医疗、自动驾驶等对时延和可靠性要求极高的垂直行业应用需求；【海量机器类通信 mMTC】面向智慧城市、智能家居、环境监测等以传感和数据采集为目标的应用需求。NB-IoT 属 2.1.5「信息技术的发展」中面向物联网的技术，不是 5G 三大场景。5G 三大特点 = 高速率、低时延、大连接。" },
+  // 模块C 存储与数据库 (12-17)
+  { m: "C·存储与数据库", q: "关于存储的分类，下列表述正确的是（　）。",
+    o: ["外挂存储根据连接的方式分为直连式存储（DAS）和网络化存储（FAS），网络化存储又根据传输协议分为 NAS 和 SAN","存储按服务器类型分为 DAS、NAS 和 SAN 三类","DAS、NAS、SAN 是同一层级上并列的三种存储","开放系统的存储分为 DAS 和 NAS"], a: 0,
+    e: "教材原文：存储分类根据服务器类型分为封闭系统的存储（主要指大型机等服务器）和开放系统的存储（基于麒麟、欧拉、UNIX、Linux 等操作系统的服务器）；开放系统的存储分为内置存储和外挂存储；外挂存储根据【连接的方式】分为直连式存储（DAS）和网络化存储（FAS）；网络化存储根据【传输协议】又分为网络接入存储（NAS）和存储区域网络（SAN）。所以 DAS 与 NAS/SAN【不在同一层级】。" },
+  { m: "C·存储与数据库", q: "某企业需要为财务部门搭建共享存储，用于存放大量报表和合同文档，要求成本可控、便于员工跨操作系统访问和管理。优先采用（　）。",
+    o: ["NAS","DAS","SAN","内置存储"], a: 0,
+    e: "场景关键词判断：「文件共享 + 便于管理 + 跨系统」→【NAS】（通过 TCP/IP 网络连接，支持 NFS/CIFS 文件共享协议，异种操作系统可共享，安装管理简单，适合中小组织、SOHO 族及部门级文件共享，文档共享程度高）。对照记忆：【DAS】单机外接、线缆直连、文档共享程度低；【SAN】基于光纤通道的专用存储网络、传数据块、适合核心数据库与大型数据中心；【内置存储】直接集成在服务器内部、容量扩充能力低。" },
+  { m: "C·存储与数据库", q: "关于存储虚拟化与绿色存储，下列表述错误的是（　）。",
+    o: ["存储虚拟化是「云存储」的核心技术之一，把来自一个或多个网络的存储资源整合起来，向用户提供抽象的逻辑视图","用户在通过存储虚拟化访问数据时并不知道真实的物理位置","绿色存储技术是从节能环保角度出发，降低数据存储设备的功耗、提高存储设备每瓦性能的技术","以绿色理念为指导的存储系统最终追求的是容量、速度与安全三者的平衡"], a: 3,
+    e: "教材原文：存储虚拟化是「云存储」的核心技术之一，把来自一个或多个网络的存储资源整合起来，向用户提供抽象的逻辑视图，用户通过统一逻辑接口访问，访问数据时并不知道真实物理位置；好处是提高存储利用率、降低存储成本、简化大型复杂异构存储环境的管理。绿色存储是从节能环保角度出发，设计生产能效更佳的存储产品，降低数据存储设备功耗、提高每瓦性能；以绿色理念为指导的存储系统最终是【存储容量、性能、能耗三者的平衡】。D 把「能耗」换成了「安全」。" },
+  { m: "C·存储与数据库", q: "关于三种数据结构模型，下列表述正确的是（　）。",
+    o: ["层次模型是数据库系统最早使用的模型，用「树」结构表示实体集之间的关联；网状数据库是导航式数据库","关系模型是数据库系统最早使用的模型","层次模型和关系模型又统称为格式化数据模型","网状模型用二维表格的形式表示实体以及实体之间的联系"], a: 0,
+    e: "教材原文：层次模型是【数据库系统最早使用】的一种模型，用「树」结构表示实体集之间的关联，实体集为结点，联系是父子之间的一对多联系；网状数据库是【导航式（Navigation）数据库】，用户操作时不但说明要做什么，还要说明怎么做；关系模型用【二维表格】形式表示实体以及实体之间的联系，以集合论中的关系概念为基础。【层次模型和网状模型又统称为格式化数据模型】——关系模型不算（C 错）。" },
+  { m: "C·存储与数据库", q: "关于数据库类型，下列表述正确的是（　）。",
+    o: ["关系型数据库支持事务的 ACID 原则：原子性、一致性、隔离性、持久性；非关系型数据库不保证遵循 ACID 原则","非关系型数据库的四类包括键值数据库、树形数据库、面向文档数据库和图形数据库","关系型数据库在大数据存取上具备非关系型数据库无法比拟的性能优势","NoSQL 数据库必须有固定的表结构，并支持连接操作"], a: 0,
+    e: "教材原文：数据库根据存储方式分为关系型数据库（SQL）和非关系型数据库（Not Only SQL，NoSQL）。关系型数据库支持事务的【ACID 原则】——原子性（Atomicity）、一致性（Consistency）、隔离性（Isolation）、持久性（Durability）。非关系型数据库是分布式的、非关系型的、【不保证遵循 ACID 原则】的数据存储系统，不需要固定的表结构，通常也不存在连接操作，在【大数据存取】上具备关系型数据库无法比拟的性能优势（C 把主客颠倒）。常见的非关系数据库分为【键值数据库、列存储数据库、面向文档数据库、图形数据库】四类（B 的「树形数据库」是编的）。" },
+  { m: "C·存储与数据库", q: "关于数据仓库，下列表述错误的是（　）。",
+    o: ["数据仓库是一个面向主题的、集成的、非易失的且随时间变化的数据集合，用于支持管理决策","数据源是数据仓库系统的基础，是整个系统的数据源泉","数据的存储与管理是整个数据仓库系统的核心","数据仓库体系结构中的 OLAP 服务器用于按二维表格存储日常事务数据"], a: 3,
+    e: "数据仓库定义 = 【面向主题的、集成的、非易失的且随时间变化的】数据集合，用于支持管理决策。体系结构四部分：【数据源是系统的基础】（数据源泉）；【数据的存储与管理是整个数据仓库系统的核心】（按主题组织，分组织级数据仓库与部门级数据集市）；【OLAP 服务器】把分析需要的数据有效集成、按【多维模型】组织，以便多角度多层次分析并发现趋势；【前端工具】含查询 / 报表 / 分析 / 数据挖掘工具。D 把关系型数据库的单表日常事务处理当成了 OLAP 的职能。OLAP 三种实现：ROLAP（基本与聚合数据均在 RDBMS）、MOLAP（均在多维数据库）、HOLAP（基本在 RDBMS、聚合在多维数据库）。" },
+  // 模块D 信息安全 (18-20)
+  { m: "D·信息安全", q: "关于信息安全基础，下列表述正确的是（　）。",
+    o: ["保密性指信息不被未授权者知晓；针对信息系统，安全可以划分为设备安全、数据安全、内容安全、行为安全四个层次","信息安全只有可用性这一个属性","针对信息系统，安全可以划分为物理安全、网络安全、应用安全三个层次","完整性指信息可以随时正常使用"], a: 0,
+    e: "教材原文：信息安全强调信息（数据）本身的安全属性，主要包括【保密性】——信息不被未授权者知晓的属性；【完整性】——信息是正确的、真实的、未被篡改的、完整无缺的属性；【可用性】——信息可以随时正常使用的属性。针对信息系统，安全可以划分为【四个层次：设备安全、数据安全、内容安全、行为安全】。D 把可用性的定义安到完整性上了。⚠️ 注意「四个层次」与「信息系统安全的五个方面」（计算机设备安全、网络安全、操作系统安全、数据库系统安全、应用系统安全）是两个不同维度的划分。" },
+  { m: "D·信息安全", q: "关于网络安全技术与加密解密，下列表述错误的是（　）。",
+    o: ["网络安全技术主要包括防火墙、入侵检测与防护、VPN、安全扫描、网络蜜罐技术、用户和实体行为分析技术等","加密技术包括算法和密钥两个元素","对称加密的加密密钥和解密密钥相同，以 DES 算法为典型代表","非对称加密通常以 RSA 算法为代表，其加密密钥和解密密钥相同"], a: 3,
+    e: "教材原文：网络安全技术主要包括防火墙、入侵检测与防护、VPN、安全扫描、网络蜜罐技术、用户和实体行为分析技术等（口诀：防入 V、扫蜜行）。加密技术包括【两个元素：算法和密钥】。密码体制分为对称密钥体制和非对称密钥体制：【对称加密（私人密钥加密）】的加密密钥和解密密钥【相同】，以数据加密标准【DES】算法为典型代表；【非对称加密（公开密钥加密）】以【RSA】算法为代表，加密密钥和解密密钥【不同】，加密密钥可以公开而解密密钥需要保密。D 说「密钥相同」，错。" },
+  { m: "D·信息安全", q: "关于安全行为分析技术（UEBA）与网络安全态势感知，下列表述正确的是（　）。",
+    o: ["UEBA 提供用户画像及异常检测，重点防范内部威胁；网络安全态势感知的前提是安全大数据","UEBA 的核心是防范来自组织外部的攻击，内部人员不构成主要风险","网络安全态势感知的关键技术不包括数据可视化","网络安全态势感知是对已发生安全事件的统计报表工具，不具备预测能力"], a: 0,
+    e: "教材原文：UEBA（用户和实体行为分析）提供了【用户画像】及基于各种分析方法的【异常检测】，结合基本分析方法（签名的规则、模式匹配、简单统计、阈值等）与高级分析方法（监督和无监督的机器学习等）评估用户和其他实体，发现异常活动相关的潜在事件；教材强调「大多数攻击可能来自组织以外，但【最严重的损害往往是由内部人员造成的】」，因此重点是管理内部威胁。网络安全态势感知是在大规模网络环境中对能够引起网络态势变化的安全要素进行【获取、理解、显示】，并据此【预测未来网络的安全发展趋势】，其前提是【安全大数据】；关键技术四项 = 海量多元异构数据的汇聚（融合）、面向多类型的网络安全威胁评估、网络安全态势评估与决策支撑、网络安全态势【可视化】。" },
+  // 模块E 发展趋势 (21-22)
+  { m: "E·发展趋势", q: "在计算机软硬件方面，教材所述的发展方向不包括（　）。",
+    o: ["超高速","超小型","平行处理、智能化","低功耗与小型化并重，放弃性能提升"], a: 3,
+    e: "教材 2.1.5 原文：计算机硬件技术将向【超高速、超小型、平行处理、智能化】的方向发展，计算机硬件设备的【体积越来越小、速度越来越高、容量越来越大、功耗越来越低、可靠性越来越高】。同时计算机软件越来越丰富、功能越来越强大，【「软件定义一切」】概念成为当前发展的主流。D 与教材表述不符。" },
+  { m: "E·发展趋势", q: "关于信息技术各方向的发展趋势，下列表述错误的是（　）。",
+    o: ["在网络技术方面，计算机网络与通信技术之间的联系日益密切，甚至是已经融为一体，5G 成为当前的主流","在存储和数据库方面，数据量的不断爆炸式增长推动数据库技术向着模型拓展、架构解耦的方向演进","在信息安全方面，传统计算机安全理念将过渡到以可信计算理念为核心的计算机安全","「软件定义一切」是信息安全方向的发展趋势，而「可信计算」是计算机软件方向的发展趋势"], a: 3,
+    e: "教材 2.1.5 原文：硬件向超高速、超小型、平行处理、智能化发展，软件方面【「软件定义一切」】概念成为当前发展的主流；网络方面计算机【网络】与【通信】技术联系日益密切甚至已经融为一体，5G 成为当前主流，NB-IoT、eMTC、IIoT、URLLC 等技术进一步发展；存储和数据库方面向【模型拓展、架构解耦】演进；信息安全方面传统理念过渡到以【可信计算理念】为核心，技术朝【标准化和集成化】发展。D 把「软件定义一切」与「可信计算」的归属对调了——这是本节最易互换的两个词。" }
+];
+
+let idx = 0, score = 0, answers = [], current = QUESTIONS, locked = false;
+
+function initAll() {
+  idx = 0; score = 0; answers = []; current = QUESTIONS.slice();
+  document.getElementById("quiz").style.display = "block";
+  document.getElementById("result").style.display = "none";
+  renderQ();
+}
+function renderQ() {
+  locked = false;
+  const q = current[idx];
+  document.getElementById("pbar").style.width = (idx / current.length * 100) + "%";
+  let html = '<div class="card"><span class="qtag">' + q.m + '</span><span class="qno">第 ' + (idx+1) + ' / ' + current.length + ' 题</span>';
+  html += '<div class="qtext">' + q.q + '</div>';
+  q.o.forEach((t, i) => { html += '<button class="opt" data-i="' + i + '"><span class="mark">' + "ABCD"[i] + '</span>' + t + '</button>'; });
+  html += '<div class="explain" id="ex"><b>精讲：</b>' + q.e + '</div>';
+  html += '<button class="btn" id="next" disabled>' + (idx === current.length-1 ? "查看结果" : "下一题 (Enter)") + '</button></div>';
+  document.getElementById("quiz").innerHTML = html;
+  document.querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => choose(+b.dataset.i)));
+  document.getElementById("next").addEventListener("click", next);
+}
+function choose(i) {
+  if (locked) return; locked = true;
+  const q = current[idx], ok = i === q.a;
+  if (ok) score++;
+  answers[idx] = { ok, q };
+  document.querySelectorAll(".opt").forEach((b, j) => {
+    b.disabled = true;
+    if (j === q.a) b.classList.add("right");
+    else if (j === i) b.classList.add("wrong");
+  });
+  document.getElementById("ex").style.display = "block";
+  document.getElementById("next").disabled = false;
+}
+function next() {
+  if (idx < current.length - 1) { idx++; renderQ(); }
+  else finish();
+}
+function finish() {
+  document.getElementById("quiz").style.display = "none";
+  document.getElementById("pbar").style.width = "100%";
+  const res = document.getElementById("result");
+  res.style.display = "block";
+  document.getElementById("finalScore").textContent = score + " / " + current.length;
+  const pct = Math.round(score / current.length * 100);
+  document.getElementById("advice").textContent =
+    pct >= 80 ? "✅ 达标（≥80%），2.1 基础模块已过关，可进入下一节 2.2 新一代信息技术及应用！" :
+    pct >= 60 ? "🔶 接近达标：回看错题对应模块的清单条目，重点补「TCP/IP 协议归属」「DAS/NAS/SAN 层级」「数仓基础与核心」「CIA 与四个层次」四组，明天重测。" :
+    "❌ 未达标：请重读《2.1_知识点清单》的表格部分后重新测验。第 2 章是上午最大分值块，这一节值得多花一天。";
+  // 分模块统计
+  const mods = {};
+  current.forEach((q, i) => {
+    mods[q.m] = mods[q.m] || { t: 0, r: 0 };
+    mods[q.m].t++;
+    if (answers[i] && answers[i].ok) mods[q.m].r++;
+  });
+  let rows = "";
+  Object.keys(mods).forEach(m => {
+    const st = mods[m].r / mods[m].t >= 0.8 ? "✅" : "🔶";
+    rows += '<tr><td class="module-stat">' + m + '</td><td>' + mods[m].r + " / " + mods[m].t + '</td><td>' + st + '</td></tr>';
+  });
+  document.getElementById("moduleTable").innerHTML = '<tr><th>模块</th><th>正确率</th><th>状态</th></tr>' + rows;
+  // 错题
+  const wrongs = current.map((q, i) => ({ q, i })).filter(x => !answers[x.i] || !answers[x.i].ok);
+  if (wrongs.length) {
+    document.getElementById("reviewWrap").style.display = "block";
+    document.getElementById("retryWrong").style.display = "inline-block";
+    document.getElementById("reviewList").innerHTML = wrongs.map(x =>
+      '<div class="wrong-item"><b>【' + x.q.m + '】</b>' + x.q.q +
+      '<br>✔ 正确答案：<b>' + "ABCD"[x.q.a] + " · " + x.q.o[x.q.a] + '</b><br><span style="color:#666">' + x.q.e + '</span></div>'
+    ).join("");
+  } else {
+    document.getElementById("reviewWrap").style.display = "none";
+    document.getElementById("retryWrong").style.display = "none";
+  }
+}
+document.getElementById("retryWrong").addEventListener("click", () => {
+  current = current.filter((q, i) => !answers[i] || !answers[i].ok);
+  idx = 0; score = 0; answers = [];
+  document.getElementById("result").style.display = "none";
+  document.getElementById("quiz").style.display = "block";
+  renderQ();
+});
+document.addEventListener("keydown", ev => {
+  if (document.getElementById("result").style.display === "block") return;
+  const k = ev.key.toUpperCase();
+  const sel = "ABCD".indexOf(k);
+  if (sel >= 0 && !locked) choose(sel);
+  else if ((ev.key === "Enter" || k === "ENTER") && locked) next();
+});
+initAll();
+</script>
+</body>
+</html>
