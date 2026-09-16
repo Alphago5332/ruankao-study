@@ -55,8 +55,26 @@ const norm = s => String(s || '')
   .replace(/[\s_＿,，。．.、:：;；!！?？\-—~～/]/g, '')
   .toLowerCase();
 
+/** 字符二元组 Dice 相似度：0~1，用来抓「同考点换说法」的近似重复 */
+function dice(a, b) {
+  if (!a || !b) return 0;
+  if (a === b) return 1;
+  const grams = s => { const m = new Map(); for (let i = 0; i < s.length - 1; i++) { const g = s.slice(i, i + 2); m.set(g, (m.get(g) || 0) + 1); } return m; };
+  const A = grams(a), B = grams(b);
+  let inter = 0, total = 0;
+  A.forEach((v, k) => { total += v; if (B.has(k)) inter += Math.min(v, B.get(k)); });
+  B.forEach(v => { total += v; });
+  return total ? (2 * inter) / total : 0;
+}
+
+// 近似重复阈值 & 关注小节（命令行可传，如：node tools/audit_bank.js 1.4 0.45）
+const FOCUS = (process.argv[2] || '').trim();
+const NEAR = Number(process.argv[3] || process.env.NEAR || 0.62);
+
 const report = [];
 const add = (title, items) => { if (items.length) report.push({ title, items }); };
+
+const POOL = [];   // 全部题目（答题系统 + 自测题）统一池，用于跨库近似查重
 
 /** 通用查重：all = [{ file, sec, id, q, ans }] */
 function dupChecks(all, label) {
@@ -92,6 +110,7 @@ if (fs.existsSync(bankFile)) {
   const all = [];
   bankSecs.forEach(sec => BANK[sec].forEach(q => all.push({ file: CH, sec, ...q, ans: (q.blanks || []).join(' / ') })));
   dupChecks(all, '答题系统');
+  all.forEach(q => POOL.push({ from: '答题系统', sec: q.sec, id: q.id, q: q.q, ans: q.ans }));
 
   // check 键重复
   const byCheck = {};
@@ -139,15 +158,65 @@ seen.forEach(p => {
   if (!Array.isArray(qs)) { lines.push('⚠ ' + rel + ' 未解析出题目数组'); return; }
   const sec = (rel.match(/(1|2|3|4|5|6|7|8|9)\.\d+/) || ['－'])[0];
   perFile.push(`${rel.replace(/_考点自测题\.html$/, '')}: ${qs.length} 题`);
-  qs.forEach((q, i) => selfAll.push({
-    file: rel, sec, id: `${sec}-Q${i + 1}`, q: q.q,
-    ans: Array.isArray(q.o) ? (q.o[q.a] || '') : ''
-  }));
+  qs.forEach((q, i) => {
+    const item = {
+      file: rel, sec, id: `${sec}-Q${i + 1}`, q: q.q,
+      ans: Array.isArray(q.o) ? (q.o[q.a] || '') : ''
+    };
+    selfAll.push(item);
+    POOL.push({ from: '自测题', sec, id: item.id, q: item.q, ans: item.ans });
+  });
 });
 dupChecks(selfAll, '自测题');
 head('B. 各节自测题（选择题，已含跨节查重）');
 perFile.forEach(l => lines.push(l));
 lines.push('合计：' + selfAll.length + ' 题');
+
+/* ---------- C. 近似重复（同考点换说法，跨库跨节） ---------- */
+{
+  const pool = FOCUS ? POOL.filter(x => x.sec === FOCUS) : POOL;
+  const pairs = [];
+  for (let i = 0; i < pool.length; i++) {
+    for (let j = i + 1; j < pool.length; j++) {
+      const a = pool[i], b = pool[j];
+      if (norm(a.q) === norm(b.q)) continue;             // 完全同题已由上面报告
+      const s = dice(norm(a.q), norm(b.q));
+      if (s >= NEAR) pairs.push({ s, a, b });
+    }
+  }
+  pairs.sort((x, y) => y.s - x.s);
+  add(`近似重复 · 题干相似度 ≥ ${NEAR}${FOCUS ? '（只看 ' + FOCUS + ' 相关）' : ''}（参考项：同模板句「下列不属于…」会假阳性，按考点人工判定）`,
+    pairs.slice(0, 25).map(p =>
+      `${(p.s * 100).toFixed(0)}%  ${p.a.from}/${p.a.id}[${p.a.sec}]  ≈  ${p.b.from}/${p.b.id}[${p.b.sec}]`
+      + '\n     A：' + p.a.q + '\n     B：' + p.b.q));
+  head('C. 近似重复扫描（Dice 二元组相似度）');
+  lines.push(`参与比对：${pool.length} 题${FOCUS ? '（关注节 ' + FOCUS + '）' : ''}｜阈值 ${NEAR}｜命中 ${pairs.length} 组`);
+  if (FOCUS) lines.push('提示：加小节号参数可只看某节，如 `node tools/audit_bank.js 1.4`；阈值可作第 2 个参数，如 `node tools/audit_bank.js 1.4 0.45`');
+}
+
+/* ---------- D. 跨库重复（答题系统 ⇄ 自测题，只保留不同库的配对） ---------- */
+{
+  const pairs = [];
+  for (let i = 0; i < POOL.length; i++) {
+    for (let j = i + 1; j < POOL.length; j++) {
+      const a = POOL[i], b = POOL[j];
+      if (a.from === b.from) continue;                   // 库内配对留给 A/B/C 段
+      if (FOCUS && a.sec !== FOCUS && b.sec !== FOCUS) continue;
+      if (norm(a.q) === norm(b.q)) { pairs.push({ s: 1, a, b }); continue; }
+      const s = dice(norm(a.q), norm(b.q));
+      if (s >= NEAR) pairs.push({ s, a, b });
+    }
+  }
+  pairs.sort((x, y) => y.s - x.s);
+  const bySec = {};
+  pairs.forEach(p => { if (p.a.sec === p.b.sec) bySec[p.a.sec] = (bySec[p.a.sec] || 0) + 1; });
+  add('跨库重复 · 答题系统题 ≈ 该节自测题（同考点做了两遍）',
+    pairs.map(p =>
+      `${(p.s * 100).toFixed(0)}%  [${p.a.sec}] 答题系统 ${p.a.id}  ≈  自测题 ${p.b.id}`
+      + '\n     A：' + p.a.q + '\n     B：' + p.b.q));
+  head('D. 跨库重复（答题系统 ⇄ 自测题）');
+  lines.push(`命中 ${pairs.length} 组｜按节分布：` + (Object.entries(bySec).map(([k, v]) => `${k}: ${v}`).join(' | ') || '—'));
+}
 
 /* ---------- 汇总 ---------- */
 console.log('题库体检报告');
