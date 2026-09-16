@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2.2 新一代信息技术及应用 · 知识点清单 · 可勾选清单</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Microsoft YaHei", "微软雅黑", sans-serif; background: #f7f9fc; color: #333; padding: 24px; line-height: 1.7; }
+  .wrap { max-width: 820px; margin: 0 auto; background: #fff; padding: 32px 36px; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,.08); }
+  h1 { font-size: 22px; color: #185FA5; margin-bottom: 8px; }
+  h2 { font-size: 18px; color: #185FA5; margin: 22px 0 10px; border-left: 4px solid #185FA5; padding-left: 10px; }
+  h3 { font-size: 15px; color: #185FA5; margin: 16px 0 8px; }
+  h4 { font-size: 14px; color: #185FA5; margin: 14px 0 6px; }
+  blockquote { background: #f4f8fc; border-left: 4px solid #185FA5; padding: 10px 14px; margin: 10px 0; color: #444; font-size: 13.5px; }
+  p, .plain-li { margin: 8px 0; font-size: 14px; }
+  .plain-li { display: flex; gap: 6px; }
+  .bullet { color: #185FA5; font-weight: bold; }
+  .task { display: flex; align-items: flex-start; gap: 8px; margin: 8px 0; cursor: pointer; user-select: none; }
+  .task input[type="checkbox"] { width: 16px; height: 16px; margin-top: 4px; flex-shrink: 0; accent-color: #185FA5; cursor: pointer; }
+  .task-text { font-size: 14px; transition: opacity .2s; }
+  .task input:checked + .task-text { text-decoration: line-through; opacity: .45; color: #666; }
+  .item-body { margin: 4px 0 12px 24px; }
+  .item-body p { margin: 4px 0; color: #555; font-size: 13.5px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; }
+  th, td { border: 1px solid #d9e2ec; padding: 7px 10px; }
+  th { background: #eef4fb; color: #185FA5; font-weight: 600; }
+  td { background: #fff; }
+  ol { margin: 8px 0 8px 22px; font-size: 14px; }
+  li { margin: 4px 0; }
+  code { background: #f0f3f7; padding: 1px 4px; border-radius: 3px; font-family: Consolas, monospace; font-size: 12px; }
+  a { color: #185FA5; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  summary { cursor: pointer; color: #185FA5; font-weight: 600; }
+  details { background: #f9fbfd; border: 1px solid #e3eaf2; border-radius: 6px; padding: 10px 14px; margin: 12px 0; }
+  .progress { position: sticky; top: 0; background: #fff; border-bottom: 1px solid #e3eaf2; padding: 8px 0; margin: -32px -36px 20px; padding-left: 36px; padding-right: 36px; font-size: 12px; color: #666; z-index: 10; }
+  .progress b { color: #185FA5; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="progress" id="progress">已完成：0 / 0</div>
+  <h1>2.2 新一代信息技术及应用 · 知识点清单</h1>
+<blockquote><b>教材</b>：《信息系统项目管理师教程（第 4 版）》第 2 章第 2 节（约 P49 ~ P65）<br><b>学习日</b>：2026-09-16（Day 7）<br><b>上午分值</b>：第 2 章整体 <b>6~12 题</b>，是<b>上午卷最大的分值块</b>；2.2 一节通常占 <b>3~5 题</b>（物联网 / 云计算 / 大数据 / 区块链 / 人工智能 / 虚拟现实六个子节轮流考，<b>每年必出，但不会六节全考</b>）<br><b>本节定位</b>：<b>六大新技术的「定义 + 分层 + 特征 + 关键技术」辨析</b>。仍是「术语归属 / 层级排序 / 特征匹配」三类题，<b>唯一的计算是数据量单位换算（1PB=1024TB）</b>。套路固定：把云端三服务层级搞反（IaaS/PaaS/SaaS）、把区块链说成「三类链」「去中心化」、把 VR 说成「3I」、把大数据的四条特征说成「4V」</blockquote>
+<h2>今日目标（学完要能做到）</h2>
+<ol><li>说清 <b>新一代信息技术的四个「化」基础</b>与<b>六大技术</b></li><li>背出<b>物联网定义</b>（三个要素）+ 三种互连（T2T / H2T / H2H）+ <b>三层架构</b>各层组成与职责 + <b>三项关键技术</b></li><li>背出<b>云计算定义</b>（快速 / 按需 / 弹性）、<b>三种服务类型</b>的边界与典型例子、<b>四项关键技术</b></li><li>背出<b>大数据定义</b>与<b>四大主要特征</b>，说清 <b>Hadoop / Spark / Storm 的分工</b>，背出<b>数据量单位换算</b></li><li>背出<b>区块链定义</b>、<b>四大类链</b>、<b>七大典型特征</b>、<b>三项关键技术</b>与共识机制四维度</li><li>背出<b>人工智能定义</b>与<b>三个关键技术</b>，说清<b>专家系统 6 个组成部分</b>、<b>AI 发展六阶段</b></li><li>背出<b>虚拟现实定义</b>与<b>五大特征</b>、<b>四项关键技术</b>、<b>向 AR 与元宇宙演进</b>的路径</li></ol>
+<h2>一、必背清单</h2>
+<h3>模块 A ｜ 新一代信息技术总论 + 物联网（2.2 / 2.2.1）</h3>
+<label class="task"><input type="checkbox" data-key="A0" ><span class="task-text"><b>A0 · 新一代信息技术总论</b> ⭕ 必背（开篇定调）</span></label><div class="item-body"><p><b>信息技术在智能化、系统化、微型化、云端化的基础上不断融合创新</b>，促进了<b>物联网、云计算、大数据、区块链、人工智能、虚拟现实</b>等新一代信息技术的诞生。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>新一代信息技术与<b>信息资源充分开发利用</b>形成的<b>新模式、新业态</b>等，是<b>信息化发展的主要趋势</b>，也是<b>信息系统集成领域未来的重要业务范畴</b></span></div>
+<blockquote>口诀：<b>四化奠基（智系微云）→ 六大技术（物云大区人虚）</b><br>⚠️ 六个技术名：<b>物联网 · 云计算 · 大数据 · 区块链 · 人工智能 · 虚拟现实</b></blockquote>
+<label class="task"><input type="checkbox" data-key="A1" ><span class="task-text"><b>A1 · 物联网定义与三种互连</b> ⭕ 必考</span></label><div class="item-body"><p><b>物联网（The Internet of Things）</b>是指通过<b>信息传感设备</b>，按<b>约定的协议</b>将<b>任何物品</b>与互联网相连接，进行<b>信息交换和通信</b>，以实现<b>智能化识别、定位、跟踪、监控和管理</b>的网络。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>物联网主要解决<b>物品与物品（Thing to Thing，T2T）</b>、<b>人与物品（Human to Thing，H2T）</b>、<b>人与人（Human to Human，H2H）</b>之间的互连</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>许多学者讨论物联网时会引入 <b>M2M</b> 概念：可解释为<b>人与人（Man to Man）</b>、<b>人与机器（Man to Machine）</b>或<b>机器与机器（Machine to Machine）</b></span></div>
+<blockquote>定义三要素：<b>信息传感设备 + 约定的协议 + 任何物品与互联网相连</b><br>四大功能动词：<b>识别 · 定位 · 跟踪 · 监控 · 管理</b><br>T2T / H2T / H2H 这三个缩写<b>必须能对上号</b></blockquote>
+<label class="task"><input type="checkbox" data-key="A2" ><span class="task-text"><b>A2 · 物联网三层架构</b> ⭕ 必考（最高频，几乎年年出）</span></label>
+<table><thead><tr><th>层</th><th>组成</th><th>职责</th></tr></thead><tbody><tr><td><b>感知层</b></td><td>由<b>各种传感器</b>构成，包括<b>温度传感器、二维码标签、RFID 标签和读写器、摄像头、GPS</b> 等<b>感知终端</b></td><td><b>物联网识别物体、采集信息的来源</b></td></tr><tr><td><b>网络层</b></td><td>由<b>各种网络</b>组成，包括<b>互联网、广电网、网络管理系统和云计算平台</b>等</td><td><b>整个物联网的中枢</b>，负责<b>传递和处理感知层获取的信息</b></td></tr><tr><td><b>应用层</b></td><td>物联网和<b>用户的接口</b></td><td>与<b>行业需求结合</b>以实现物联网的<b>智能应用</b></td></tr></tbody></table>
+<blockquote>口诀：<b>感知采集 → 网络传递处理 → 应用落地</b>（采 · 传 · 用）<br>⚠️ 真题原题（2023 上）：「（ ）<b>不属于</b>物联网感知层设备」→ 答 <b>以太网交换机</b>；摄像头 / 温度传感器 / 二维码标签<b>都是感知层</b><br>⚠️ <b>网络层是「中枢」</b>，不是「大脑」；<b>应用层才是物联网和用户的接口</b></blockquote>
+<label class="task"><input type="checkbox" data-key="A3" ><span class="task-text"><b>A3 · 物联网产业链与应用领域</b> ⭕ 常考（爱出「下列不属于」）</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span><b>产业链</b>包括：<b>传感器和芯片 · 设备 · 网络运营及服务 · 软件与应用开发 · 系统集成</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>应用领域</b>：<b>智能电网、智慧物流、智能家居、智能交通、智慧农业、环境保护、医疗健康、城市管理（智慧城市）、金融服务与保险业、公共安全</b>等</span></div>
+<blockquote>产业链记五个环节：<b>芯 → 设备 → 网络 → 软件 → 集成</b></blockquote>
+<label class="task"><input type="checkbox" data-key="A4" ><span class="task-text"><b>A4 · 关键技术① 传感器技术 + RFID</b> ⭕ 必考（RFID 是高频词）</span></label><div class="item-body"><p><b>传感器</b>是一种<b>检测装置</b>，它能「<b>感受</b>」到被测量的信息，并能将检测到的信息<b>按一定规律变换成为电信号或其他所需形式的信息输出</b>，以满足信息的<b>传输、处理、存储、显示、记录和控制</b>等要求。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>传感器是<b>实现自动检测和自动控制的首要环节</b>，也是<b>物联网获取物理世界信息的基本手段</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>射频识别技术（Radio Frequency Identification，RFID）</b>是物联网中使用的一种<b>传感器技术</b>，在物联网发展中备受关注</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>RFID 可<b>通过无线电信号识别特定目标并读写相关数据</b>，而<b>无须识别系统与特定目标之间建立机械或光学接触</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>RFID 技术让物品能够「开口说话」</b>——这就赋予了物联网一个特性：<b>可跟踪性</b>（可以随时掌握物品的准确位置及其周边环境）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>RFID 是一种<b>简单的无线系统</b>，由一个<b>询问器（或阅读器）</b>和很多<b>应答器（或标签）</b>组成；标签由<b>耦合元件及芯片</b>组成，每个标签具有<b>唯一的电子编码</b>，附着在物体上<b>标识目标对象</b>，通过<b>天线</b>将射频信息传递给阅读器</span></div>
+<blockquote>三连速记：<b>免接触读写 · 物品「开口说话」· 赋予物联网可跟踪性</b><br>⚠️ 教材明确 RFID <b>是一种传感器技术</b>（不是通信技术、不是定位技术）</blockquote>
+<label class="task"><input type="checkbox" data-key="A5" ><span class="task-text"><b>A5 · 关键技术② 传感网（MEMS）</b> ⭕ 常考</span></label><div class="item-body"><p><b>微机电系统（Micro-Electro-Mechanical Systems，MEMS）</b>是由<b>微传感器、微执行器、信号处理和控制电路、通信接口和电源</b>等部件组成的<b>一体化的微型器件系统</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>目标是把信息的<b>获取、处理和执行集成在一起</b>，组成<b>具有多功能的微型系统</b>，集成于<b>大尺寸系统</b>中，从而<b>大幅提高系统的自动化、智能化和可靠性水平</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>MEMS 赋予了普通物体新的「生命」</b>——它们有了属于自己的<b>数据传输通路、存储功能、操作系统和专门的应用程序</b>，从而形成一个<b>庞大的传感网</b>，使物联网能够<b>通过物品来实现对人的监控与保护</b></span></div>
+<blockquote>MEMS 五部件：<b>微传感器 · 微执行器 · 信号处理和控制电路 · 通信接口 · 电源</b><br>教材三个生活例（只留印象）：衣服通过传感网「告诉」洗衣机放多少水与洗衣粉最经济 · 文件夹会「检查」忘带了什么重要文件 · 蔬果标签向顾客手机介绍自己是否真正「绿色安全」</blockquote>
+<label class="task"><input type="checkbox" data-key="A6" ><span class="task-text"><b>A6 · 关键技术③ 应用系统框架</b> ⭕ 常考（考「五个技术部分」）</span></label><div class="item-body"><p>物联网<b>应用系统框架</b>是一种<b>以机器终端智能交互为核心</b>的、<b>网络化的应用与服务</b>；它使对象实现<b>智能化的控制</b>，涉及 <b>5 个重要的技术部分：机器 · 传感器硬件 · 通信网络 · 中间件 · 应用</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>该框架<b>基于云计算平台和智能网络</b>，可以<b>依据传感器网络获取的数据进行决策</b>，<b>改变对象的行为控制和反馈</b></span></div>
+<blockquote>五部分口诀：<b>机 · 感 · 通 · 中 · 用</b><br>教材例子：智能化的住宅在主人上班时，<b>传感器自动关闭水电气和门窗</b>，定时向主人手机发送消息汇报安全情况</blockquote>
+<h3>模块 B ｜ 云计算（2.2.2）</h3>
+<label class="task"><input type="checkbox" data-key="B0" ><span class="task-text"><b>B0 · 云计算定义与服务特征</b> ⭕ 必背</span></label><div class="item-body"><p><b>云计算是一种基于互联网的计算方式</b>，通过这种方式将网络上配置为共享的<b>软件资源、计算资源、存储资源和信息资源</b>，<b>按需求提供给网上的终端设备和终端用户</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>云计算实现了「<b>快速、按需、弹性</b>」的服务：用户可随时通过<b>宽带网络接入「云」并获得服务</b>，<b>按照实际需求获取或释放资源</b>，<b>根据需求对资源进行动态扩展</b></span></div>
+<blockquote>四个「资源」：<b>软件 · 计算 · 存储 · 信息</b><br>三个服务特征同义反复记牢：<b>快速 · 按需 · 弹性</b></blockquote>
+<label class="task"><input type="checkbox" data-key="B1" ><span class="task-text"><b>B1 · 三种服务类型 IaaS / PaaS / SaaS</b> ⭕⭕ 必考（本节最高频，年年出）</span></label><div class="item-body"><p>按照云计算<b>服务提供的资源层次</b>，可分为三种服务类型：</p></div>
+<table><thead><tr><th>类型</th><th>英文</th><th>向用户提供</th><th>典型例子</th><th>用户自己负责</th></tr></thead><tbody><tr><td><b>基础设施即服务</b></td><td><b>IaaS</b></td><td><b>计算机能力、存储空间</b>等<b>基础设施</b>方面的服务</td><td>云服务器 / 云主机、云硬盘</td><td>操作系统、中间件、数据库、业务软件</td></tr><tr><td><b>平台即服务</b></td><td><b>PaaS</b></td><td><b>虚拟的操作系统、数据库管理系统、Web 应用</b>等<b>平台化</b>的服务</td><td>开发平台、云数据库</td><td>自己开发的业务代码</td></tr><tr><td><b>软件即服务</b></td><td><b>SaaS</b></td><td><b>应用软件（如 CRM、办公软件等）、组件、工作流</b>等<b>虚拟化软件</b>的服务</td><td>在线办公、CRM、在线文档</td><td>只用，其余全由服务商维护</td></tr></tbody></table>
+<div class="plain-li"><span class="bullet">•</span> <span>补充：<b>SaaS 一般采用 Web 技术和 SOA 架构</b></span></div>
+<blockquote>口诀：<b>I 搭硬件（基础设施）· P 搭平台（运行环境）· S 直接用软件（成品应用）</b><br>判别法：<b>看服务商交付什么</b>——交付服务器/存储 → IaaS；交付开发运行环境 → PaaS；交付可直接用的应用软件 → SaaS<br>⚠️ 三个反向陷阱：租用<b>虚拟机/存储</b>属 <b>IaaS</b>（不是 PaaS）；<b>在线办公软件</b>属 <b>SaaS</b>（不是 PaaS）；<b>开发运行环境/云数据库</b>属 <b>PaaS</b>（不是 IaaS）</blockquote>
+<label class="task"><input type="checkbox" data-key="B2" ><span class="task-text"><b>B2 · 云计算关键技术四项</b> ⭕ 必背</span></label><div class="item-body"><p>云计算的关键技术主要涉及：<b>虚拟化技术 · 云存储技术 · 多租户和访问控制管理 · 云安全技术</b>。</p></div>
+<blockquote>口诀：<b>虚 · 存 · 权 · 安</b>（四项，正好对应「底层算力 / 数据 / 权限 / 防护」）</blockquote>
+<label class="task"><input type="checkbox" data-key="B3" ><span class="task-text"><b>B3 · 关键技术① 虚拟化技术（含容器 Docker）</b> ⭕ 必考（最爱考「三者区别」）</span></label><div class="item-body"><p><b>虚拟化</b>是一个<b>广义术语</b>，在计算机领域通常是指<b>计算元件在虚拟的基础上而不是真实的基础上运行</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>虚拟化技术可以<b>扩大硬件的容量</b>，<b>简化软件的重新配置过程</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>CPU 的虚拟化技术可以单 CPU 模拟多 CPU 并行</b>，允许<b>一个平台同时运行多个操作系统</b>，且<b>应用程序都可以在相互独立的空间内运行而互不影响</b>，从而<b>显著提高计算机的工作效率</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>⚠️ <b>虚拟化技术与多任务以及超线程技术是完全不同的</b>：</span></div>
+<table><thead><tr><th>技术</th><th>特征</th></tr></thead><tbody><tr><td><b>多任务</b></td><td>在<b>一个操作系统中</b>多个程序<b>同时并行运行</b></td></tr><tr><td><b>虚拟化技术</b></td><td>可以<b>同时运行多个操作系统</b>，且<b>每一个操作系统中都有多个程序运行</b>，<b>每一个操作系统都运行在一个虚拟的 CPU 或者虚拟主机上</b></td></tr><tr><td><b>超线程技术</b></td><td>只是<b>单 CPU 模拟双 CPU</b> 来平衡程序运行性能，<b>这两个模拟出来的 CPU 是不能分离的</b>，<b>只能协同工作</b></td></tr></tbody></table>
+<div class="plain-li"><span class="bullet">•</span> <span><b>容器（Container）技术</b>是一种<b>全新意义上的虚拟化技术</b>，属于<b>操作系统虚拟化</b>的范畴（即由<b>操作系统</b>提供虚拟化的支持）；目前<b>最受欢迎的容器环境是 Docker</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>容器技术将<b>单个操作系统的资源划分到孤立的组中</b>，以便更好地<b>在孤立的组之间平衡有冲突的资源使用需求</b></span></div>
+<blockquote>一句话辨析：<b>多任务 = 一个 OS 跑多程序；虚拟化 = 多个 OS 各跑多程序；超线程 = 单 CPU 假装双 CPU 且不可分离</b><br>⚠️ 容器属<b>操作系统虚拟化</b>，不是硬件虚拟化</blockquote>
+<label class="task"><input type="checkbox" data-key="B4" ><span class="task-text"><b>B4 · 关键技术②③④ 云存储 / 多租户与访问控制 / 云安全</b> ⭕ 常考</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span><b>云存储技术</b>：<b>分布式文件系统</b>是云存储技术中的<b>重要组成部分</b>，在<b>维持兼容性的基础上</b>，对<b>系统复制和容错功能</b>进行提升；同时通过<b>云集群管理</b>实现云存储的<b>可拓展性</b>，借助<b>模块之间的合理搭配</b>，完成解决方案拟定解决的<b>网络存储问题、联合存储问题、多节点存储问题、备份处理、负载均衡</b>等</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>多租户和访问控制管理</b>：<b>访问控制管理是云计算应用的核心问题之一</b>；云计算访问控制的研究主要集中在<b>云计算访问控制模型</b>、<b>基于 ABE 密码体制的云计算访问控制</b>、<b>云中多租户及虚拟化访问控制研究</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>云中多租户及虚拟化访问控制是云计算的典型特征</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>基于 ABE 密码机制的云计算访问控制包括 4 个参与方：数据提供者 · 可信第三方授权中心 · 云存储服务器 · 用户</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>常见访问控制模型：<b>基于任务的访问控制模型 · 基于属性模型的云计算访问控制 · 基于 UCON 模型的云计算访问控制 · 基于 BLP 模型的云计算访问控制</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>云安全技术</b>：研究主要包含<b>两个方面</b>——① <b>云计算技术本身的安全保护工作</b>（涉及数据完整性及可用性、隐私保护性以及服务可用性等）；② <b>借助于云服务的方式来保障客户端用户的安全防护需求</b>，即通过云计算技术来实现互联网安全（涉及<b>基于云计算的病毒防治、木马检测技术</b>等）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>云安全技术主要包含：<b>云计算安全性 · 保障云基础设施的安全性 · 云安全技术服务</b></span></div>
+<blockquote>ABE 四个参与方<b>是 2023 下真题原题</b>，要能默写<br>⚠️ 云安全的「两个方面」= <b>保护云自身安全 + 用云来保护用户安全</b>（一内一外，别只答一个）</blockquote>
+<label class="task"><input type="checkbox" data-key="B5" ><span class="task-text"><b>B5 · 部署模式（教材外补充，标注防混）</b> 🔸 通读</span></label>
+<blockquote>⚠️ <b>口径提醒（2026-09-16 三方核对）</b>：第 4 版 2.2.2 正文只有「<b>技术基础</b>（定义 + 三种服务类型）」与「<b>关键技术</b>（四项）」，<b>没有</b>「公有云 / 私有云 / 混合云 / 社区云」的部署模式段落——那属中级教材与业界口径。下表<b>仅作背景知识</b>，若真题考到按题目语境作答，<b>不要用它覆盖教材的「三种服务类型」</b></blockquote>
+<div class="plain-li"><span class="bullet">•</span> <span>公有云（面向公众开放）· 私有云（单一组织专用，安全可控性高）· 混合云（公有云 + 私有云组合，兼顾安全与弹性）· 社区云（具有共同任务/安全需求/政策的多个组织共同使用）</span></div>
+<blockquote>⚠️ <b>本地机房 ≠ 私有云</b>（私有云必须具备虚拟化、资源池、弹性伸缩等云计算特征）</blockquote>
+<h3>模块 C ｜ 大数据（2.2.3）</h3>
+<label class="task"><input type="checkbox" data-key="C0" ><span class="task-text"><b>C0 · 大数据定义与四个过程</b> ⭕ 必背</span></label><div class="item-body"><p><b>大数据（Big Data）</b>指<b>无法在一定时间范围内用常规软件工具进行捕捉、管理和处理</b>的数据集合，是<b>具有更强的决策力、洞察发现力和流程优化能力</b>的<b>海量、高增长率和多样化</b>的<b>信息资产</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>大数据是<b>具有体量大、结构多样、时效性强等特征</b>的数据，<b>处理大数据需要采用新型计算架构和智能算法等新技术</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>从<b>数据源</b>到<b>最终价值实现</b>，一般要经过 <b>4 个过程：数据准备 → 数据存储与管理 → 数据分析和计算 → 数据治理和知识展现</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>涉及<b>数据模型、处理模型、计算理论</b>，以及<b>分布计算、分布存储平台技术、数据清洗和挖掘技术、流式计算和增量处理技术、数据质量控制</b>等方面的研究</span></div>
+<blockquote>定义三要素：<b>常规工具处理不了 + 海量高增长多样化 + 是「信息资产」</b>（注意落点是「资产」，不是「数据」）<br>四过程记：<b>准备 · 存储管理 · 分析计算 · 治理展现</b></blockquote>
+<label class="task"><input type="checkbox" data-key="C1" ><span class="task-text"><b>C1 · 大数据四大主要特征</b> ⭕⭕ 必考（最高频，年年出）</span></label>
+<table><thead><tr><th>#</th><th>特征</th><th>教材原文要点</th></tr></thead><tbody><tr><td>1</td><td><b>数据海量</b></td><td>数据体量巨大，从 <b>TB</b> 级别跃升到 <b>PB</b> 级别（<b>1PB = 1024TB</b>）、<b>EB</b> 级别（<b>1EB = 1024PB</b>），甚至达到 <b>ZB</b> 级别（<b>1ZB = 1024EB</b>）</td></tr><tr><td>2</td><td><b>数据类型多样</b></td><td>数据类型繁多，一般分为<b>结构化数据</b>和<b>非结构化数据</b>；相对于以往便于存储的<b>以文本为主的结构化数据</b>，<b>非结构化数据越来越多</b>，包括<b>网络日志、音频、视频、图片、地理位置信息</b>等</td></tr><tr><td>3</td><td><b>数据价值密度低</b></td><td><b>数据价值密度的高低与数据总量的大小成反比</b>；以视频为例，<b>一部 1 小时的视频，在连续不间断的监控中，有用数据可能仅有一二秒</b>；如何通过强大的机器算法更迅速地完成数据的<b>价值「提纯」</b>，是大数据背景下亟待解决的难题</td></tr><tr><td>4</td><td><b>数据处理速度快</b></td><td>为了从海量数据中快速挖掘数据价值，一般要求对<b>不同类型的数据进行快速的处理</b>——<b>这是大数据区分于传统数据挖掘的最显著特征</b></td></tr></tbody></table>
+<blockquote>口诀：<b>量 · 样 · 值 · 速</b>（海量 / 多样 / 低密 / 快速）<br>⚠️⚠️ <b>最大陷阱</b>：教材用的是「<b>数据海量 · 数据类型多样 · 数据价值密度低 · 数据处理速度快</b>」这四条表述，<b>教材正文没有「4V」这个说法</b>（Volume/Variety/Value/Velocity 是业界口径）。看到「4V」别慌，把四条中文对上即可；但要能认出 <b>「真实性和多样性」不在教材四条里</b><br>单位换算<b>必背</b>：<b>1PB=1024TB · 1EB=1024PB · 1ZB=1024EB</b><br>「<b>最显著特征</b>」这一问的答案<b>只能是「数据处理速度快」</b></blockquote>
+<label class="task"><input type="checkbox" data-key="C2" ><span class="task-text"><b>C2 · 技术架构总览 + 大数据获取技术</b> ⭕ 常考</span></label><div class="item-body"><p>大数据技术架构主要包含 <b>4 类</b>：<b>大数据获取技术 · 分布式数据处理技术 · 大数据管理技术 · 大数据应用和服务技术</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>大数据获取技术</b>：研究主要集中在 <b>数据采集、整合和清洗</b> 三个方面</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>数据采集技术</b>：实现<b>数据源的获取</b>，然后通过<b>整合和清理技术保证数据质量</b>；主要通过<b>分布式爬取、分布式高速高可靠性数据采集、高速全网数据映像技术</b>，从网站上获取数据信息；对于<b>网络流量的采集</b>可以使用 <b>DPI 或 DFI 等带宽管理技术</b>处理</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>数据整合技术</b>：在<b>数据采集和实体识别</b>的基础上，实现<b>数据到信息的高质量整合</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>数据清洗技术</b>：一般根据<b>正确性条件和数据约束规则</b>，清除<b>不合理和错误的数据</b>，对重要的信息进行<b>修复</b>，保证<b>数据的完整性</b></span></div>
+<blockquote>获取三步：<b>采集 → 整合 → 清洗</b><br>⚠️ <b>DPI / DFI</b> 是「网络流量采集」用的<b>带宽管理技术</b>，别当成数据清洗技术</blockquote>
+<label class="task"><input type="checkbox" data-key="C3" ><span class="task-text"><b>C3 · 分布式数据处理技术（Hadoop / Spark / Storm）</b> ⭕⭕ 必考（分工必考）</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span><b>分布式计算</b>是随着分布式系统的发展而兴起的，其<b>核心是将任务分解成许多小的部分，分配给多台计算机进行处理</b>，通过<b>并行工作的机制</b>，达到<b>节约整体计算时间、提高计算效率</b>的目的</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>目前<b>主流的分布式计算系统有三个</b>：</span></div>
+<table><thead><tr><th>系统</th><th>适用场景</th></tr></thead><tbody><tr><td><b>Hadoop</b></td><td>常用于<b>离线的、复杂的</b>大数据处理</td></tr><tr><td><b>Spark</b></td><td>常用于<b>离线的、快速的</b>大数据处理</td></tr><tr><td><b>Storm</b></td><td>常用于<b>在线的、实时的</b>大数据处理</td></tr></tbody></table>
+<div class="plain-li"><span class="bullet">•</span> <span><b>大数据分析与挖掘技术</b>：主要指<b>改进已有数据挖掘和机器学习技术</b>；开发<b>数据网络挖掘、特异群组挖掘、图挖掘</b>等新型数据挖掘技术；创新<b>基于对象的数据连接、相似性连接</b>等大数据融合技术；突破<b>用户兴趣分析、网络行为分析、情感语义分析</b>等面向领域的大数据挖掘技术</span></div>
+<blockquote>三者辨析口诀：<b>Hadoop 离线复杂 · Spark 离线快速 · Storm 在线实时</b><br>判别法：看到「<b>实时 / 在线</b>」→ 只能是 <b>Storm</b>；看到「<b>离线</b>」才在 Hadoop 与 Spark 之间二选一</blockquote>
+<label class="task"><input type="checkbox" data-key="C4" ><span class="task-text"><b>C4 · 大数据管理技术 + 应用和服务技术</b> ⭕ 常考</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span><b>大数据管理技术</b>：主要集中在 <b>大数据存储 · 大数据协同 · 安全隐私</b> 等方面</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>大数据存储技术三个方面</b>：① 采用 <b>MPP 架构的新型数据库集群</b>（通过<b>列存储、粗粒度索引</b>等多项大数据处理技术和高效的分布式计算模式）；② 围绕 <b>Hadoop 衍生</b>出相关的大数据技术（<b>应对传统关系型数据库较难处理的数据和场景</b>，通过<b>扩展和封装 Hadoop</b> 实现对大数据存储、分析的支撑）；③ 基于<b>集成的服务器、存储设备、操作系统、数据库管理系统</b>，实现具有良好<b>稳定性、扩展性</b>的<b>大数据一体机</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>多数据中心的协同管理技术</b>：通过<b>分布式工作流引擎</b>实现<b>工作流调度、负载均衡</b>，整合多个数据中心的<b>存储和计算资源</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>大数据隐私性技术</b>：主要集中于<b>新型数据发布技术</b>，尝试在<b>尽可能少损失数据信息</b>的同时<b>最大化地隐藏用户隐私</b>；<b>数据信息量和隐私之间是有矛盾的，目前没有非常好的解决办法</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>大数据应用和服务技术</b>：主要包含 <b>分析应用技术</b> 和 <b>可视化技术</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>大数据分析应用</b>：<b>面向业务的分析应用</b>，以<b>业务需求为驱动</b>，面向不同类型的业务需求开展<b>专题数据分析</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>可视化</b>：通过<b>交互式视觉表现</b>的方式帮助人们<b>探索和理解复杂的数据</b>；主要集中在 <b>文本可视化 · 网络（图）可视化 · 时空数据可视化 · 多维数据可视化 · 交互可视化</b> 等；技术方面主要关注<b>原位交互分析、数据表示、不确定性量化和面向领域的可视化工具库</b></span></div>
+<blockquote>存储三路：<b>MPP 新型数据库集群 / Hadoop 衍生生态 / 大数据一体机</b><br>可视化五类口诀：<b>文 · 图 · 时空 · 多维 · 交互</b><br>⚠️ 教材明确：<b>数据信息量与隐私之间存在矛盾，目前没有非常好的解决办法</b>（爱出判断题）</blockquote>
+<h3>模块 D ｜ 区块链（2.2.4）</h3>
+<label class="task"><input type="checkbox" data-key="D0" ><span class="task-text"><b>D0 · 区块链定义与四大类</b> ⭕⭕ 必考（「四大类」是陷阱点）</span></label><div class="item-body"><p><b>区块链技术具有多中心化存储、隐私保护、防篡改等特点</b>，提供了<b>开放、分散和容错的事务机制</b>，成为<b>新一代匿名在线支付、汇款和数字资产交易的核心</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>定义</b>：区块链概念可以理解为<b>以非对称加密算法为基础</b>，以<b>改进的默克尔树（Merkle Tree）为数据结构</b>，使用<b>共识机制、点对点网络、智能合约</b>等技术结合而成的<b>一种分布式存储数据库技术</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>分类</b>：区块链分为 <b>公有链（Public Blockchain）· 联盟链（Consortium Blockchain）· 私有链（Private Blockchain）· 混合链（Hybrid Blockchain）四大类</b></span></div>
+<blockquote>定义四要素：<b>非对称加密算法（基础）· 改进的默克尔树（数据结构）· 共识机制 · 点对点网络 · 智能合约</b><br>⚠️⚠️ <b>最大陷阱</b>：教材是「<b>四大类</b>」（<b>含混合链</b>），不是常说的「公有链 / 联盟链 / 私有链」三类；看到「区块链分为公有链、联盟链和私有链三类」要能判错<br>⚠️ 教材用词是「<b>多中心化</b>」——<b>不是「去中心化」</b>；数据结构的准确名称是「<b>改进的默克尔树</b>」</blockquote>
+<label class="task"><input type="checkbox" data-key="D1" ><span class="task-text"><b>D1 · 区块链七大典型特征</b> ⭕⭕ 必考（数量必考）</span></label>
+<table><thead><tr><th>#</th><th>特征</th><th>教材原文要点</th></tr></thead><tbody><tr><td>1</td><td><b>多中心化</b></td><td>链上数据的<b>验证、核算、存储、维护和传输</b>等过程均依赖<b>分布式系统结构</b>，运用<b>纯数学方法代替中心化组织机构</b>在多个分布式节点之间<b>构建信任关系</b>，从而建立<b>可信的分布式系统</b></td></tr><tr><td>2</td><td><b>多方维护</b></td><td><b>激励机制</b>可确保分布式系统中的<b>所有节点均可参与数据区块的验证过程</b>，并通过<b>共识机制选择特定节点</b>将新产生的区块加入到区块链中</td></tr><tr><td>3</td><td><b>时序数据</b></td><td>运用带有<b>时间戳信息</b>的<b>链式结构</b>来存储数据信息，为数据信息添加<b>时间维度的属性</b>，从而实现<b>数据信息的可追溯性</b></td></tr><tr><td>4</td><td><b>智能合约</b></td><td>能够为用户提供<b>灵活可变的脚本代码</b>，以支持其创建<b>新型的智能合约</b></td></tr><tr><td>5</td><td><b>不可篡改</b></td><td>相邻区块间<b>后序区块可对前序区块进行验证</b>；若篡改某一区块，则需<b>递归修改该区块及其所有后序区块</b>的数据信息，而<b>每一次哈希的重新计算代价是巨大的</b>，且<b>须在有限时间内完成</b>，因此可保障链上数据的不可篡改性</td></tr><tr><td>6</td><td><b>开放共识</b></td><td>每台<b>物理设备均可作为网络中的一个节点</b>，<b>任意节点可自由加入</b>且<b>拥有一份完整的数据库拷贝</b></td></tr><tr><td>7</td><td><b>安全可信</b></td><td>数据安全可通过<b>基于非对称加密技术</b>对链上数据进行<b>加密</b>来实现；各节点通过<b>区块链共识算法所形成的算力</b>来<b>抵御外部攻击</b>、保证链上数据<b>不被篡改和伪造</b>，从而具有较高的<b>保密性、可信性和安全性</b></td></tr></tbody></table>
+<blockquote>七特征口诀：<b>中 · 维 · 时 · 约 · 篡 · 共 · 信</b><br>（ <b>多中心化 · 多方维护 · 时序数据 · 智能合约 · 不可篡改 · 开放共识 · 安全可信</b>）<br>归因速记：<b>时序数据 → 可追溯性</b>；<b>不可篡改 → 后序区块验证前序区块、哈希重算代价巨大</b>；<b>开放共识 → 节点自由加入 + 一份完整数据库拷贝</b></blockquote>
+<label class="task"><input type="checkbox" data-key="D2" ><span class="task-text"><b>D2 · 区块链三项关键技术 + 共识机制四维度</b> ⭕ 必考</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span><b>① 分布式账本</b>（<b>区块链技术的核心之一</b>）：核心思想是<b>交易记账由分布在不同地方的多个节点共同完成</b>，且<b>每一个节点保存一个唯一、真实账本的副本</b>，它们可以<b>参与监督交易合法性</b>、同时<b>共同为其作证</b>；账本里的<b>任何改动都会在所有的副本中被反映出来</b>，<b>反应时间会在几分钟甚至是几秒内</b>，<b>记账节点足够多</b>，理论上<b>除非所有的节点被破坏</b>，所以整个分布式账本系统<b>非常稳健</b>，从而保证<b>账目数据的安全性</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>分布式账本中存储的资产是<b>指法律认可的合法资产</b>（金融、实体、电子等任何形式的<b>有价资产</b>）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>为确保资产的安全性和准确性：一方面通过<b>公私钥以及签名控制账本的访问权</b>；另一方面<b>根据共识的规则</b>，账本中的信息更新可以由<b>一个、一部分人或者是所有参与者</b>共同完成</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>② 加密算法</b>：区块数据的加密是<b>区块链研究和关注的重点</b>，主要作用是<b>保证区块数据在网络传输、存储和修改过程中的安全</b>；区块链系统的加密算法一般分为 <b>散列（哈希）算法</b> 和 <b>非对称加密算法</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>③ 共识机制</b>：共识算法能<b>保证分布式的计算机或软件程序协作一致</b>，对系统的<b>输入输出做出正确的响应</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>思想：<b>在没有中心点总体协调的情况下</b>，当某个<b>记账节点提议区块数据增加或减少</b>并把该提议<b>广播给所有参与节点</b>，所有节点要<b>根据一定的规则和机制</b>对这一提议<b>是否能够达成一致</b>进行计算和处理</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>常用共识机制：<b>PoW（工作量证明）· PoS（权益证明）· DPoS（代理权益证明）· Paxos · PBFT</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>共识机制分析四维度</b>：<b>合规监管</b>（是否支持<b>超级权限节点</b>对全网节点、数据进行监管）· <b>性能效率</b>（交易达成共识被确认的效率）· <b>资源消耗</b>（共识过程中耗费的 <b>CPU、网络输入输出、存储</b>等资源）· <b>容错性</b>（<b>防攻击、防欺诈</b>的能力）</span></div>
+<blockquote>三技术口诀：<b>账本 · 加密 · 共识</b><br>共识机制四维度口诀：<b>管 · 效 · 耗 · 容</b><br>⚠️ 「<b>分布式账本是区块链技术的核心之一</b>」这句教材原话要能填；账本副本的「<b>唯一、真实</b>」和改动<b>全局反映</b>是它的两大要点</blockquote>
+<h3>模块 E ｜ 人工智能（2.2.5）</h3>
+<label class="task"><input type="checkbox" data-key="E0" ><span class="task-text"><b>E0 · 人工智能定义与六个发展阶段</b> ⭕ 必背</span></label><div class="item-body"><p><b>人工智能</b>是指<b>研究和开发用于模拟、延伸和扩展人类智能的理论、方法、技术及应用系统</b>的一门<b>技术科学</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>从产生到现在，其发展历程经历了 <b>6 个主要阶段</b>：</span></div>
+<table><thead><tr><th>阶段</th><th>时间</th></tr></thead><tbody><tr><td><b>起步发展期</b></td><td>1956 年至 20 世纪 60 年代初</td></tr><tr><td><b>反思发展期</b></td><td>20 世纪 60 年代初至 70 年代初</td></tr><tr><td><b>应用发展期</b></td><td>20 世纪 70 年代初至 80 年代中</td></tr><tr><td><b>低迷发展期</b></td><td>20 世纪 80 年代中至 90 年代中</td></tr><tr><td><b>稳步发展期</b></td><td>20 世纪 90 年代中至 2010 年</td></tr><tr><td><b>蓬勃发展期</b></td><td><b>2011 年至今</b></td></tr></tbody></table>
+<blockquote>六阶段口诀：<b>起步 → 反思 → 应用 → 低迷 → 稳步 → 蓬勃</b>（一条「高开—低落—再起」的曲线）<br>⚠️ 定义落点是「<b>一门技术科学</b>」，三个动词是「<b>模拟、延伸和扩展</b>」人类智能</blockquote>
+<label class="task"><input type="checkbox" data-key="E1" ><span class="task-text"><b>E1 · 技术研究三聚焦 + 新型学习方法</b> ⭕ 常考</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span>当前人工智能在技术研究方面主要聚焦 <b>三个方面：热点技术 · 共性技术 · 新兴技术</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>以机器学习为代表的基础算法的优化改进和实践</b>，以及<b>迁移学习、强化学习、多核学习和多视图学习等新型学习方法</b>是<b>研究探索的热点</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>自然语言处理</b>相关的<b>特征提取、语义分类、词嵌入</b>等基础技术和模型研究，以及<b>智能自动问答、机器翻译</b>等应用研究也取得诸多成果</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>以<b>知识图谱、专家系统</b>为逻辑的<b>系统化分析</b>也在不断取得突破，大大拓展了人工智能的应用场景</span></div>
+<blockquote>⚠️ 四种「新型学习方法」：<b>迁移学习 · 强化学习 · 多核学习 · 多视图学习</b>（注意没有「深度学习」）<br>三个聚焦：<b>热点 · 共性 · 新兴</b></blockquote>
+<label class="task"><input type="checkbox" data-key="E2" ><span class="task-text"><b>E2 · 关键技术① 机器学习</b> ⭕ 必考</span></label><div class="item-body"><p><b>机器学习是一种自动将模型与数据匹配，并通过训练模型对数据进行「学习」的技术。</b></p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>神经网络是机器学习的一种形式</b>，该技术出现在 <b>20 世纪 60 年代</b>，并用于<b>分类型应用程序</b>；它<b>根据输入、输出、变量权重或将输入与输出关联的「特征」来分析问题</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>强化学习是机器学习的另外一种方式</b>，指机器学习系统<b>制订了目标</b>而且<b>迈向目标的每一步都会得到某种形式的奖励</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>机器学习模型是以统计为基础的</b>，而且应该将其<b>与常规分析进行对比以明确其价值增量</b>；它们往往比基于人类假设和回归分析的传统「手工」分析模型<b>更准确，但也更复杂和难以解释</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>相比传统统计分析，<b>自动化机器学习模型更容易创建</b>，而且<b>能够揭示更多的数据细节</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>机器学习的研究主要聚焦在<b>机器学习算法及应用、强化学习算法、近似及优化算法和规划问题</b>等方面；常见的学习算法主要包括 <b>回归、聚类、分类、近似、估计和优化</b> 等基础算法的改进研究</span></div>
+<blockquote>三个归属：<b>神经网络 ⊂ 机器学习</b>；<b>强化学习 ⊂ 机器学习</b>；机器学习模型<b>以统计为基础</b><br>⚠️ 强化学习的关键词是「<b>目标 + 每一步的奖励</b>」；神经网络的关键词是「<b>输入 / 输出 / 权重 / 特征</b>」</blockquote>
+<label class="task"><input type="checkbox" data-key="E3" ><span class="task-text"><b>E3 · 关键技术② 自然语言处理（NLP）</b> ⭕ 必考（爱考应用清单）</span></label><div class="item-body"><p><b>自然语言处理（Natural Language Processing，NLP）</b>是<b>计算机科学领域与人工智能领域中的一个重要方向</b>；它研究能实现<b>人与计算机之间用自然语言进行有效通信</b>的各种<b>理论和方法</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>主要应用于 9 个方面：<b>机器翻译 · 舆情监测 · 自动摘要 · 观点提取 · 文本分类 · 问题回答 · 文本语义对比 · 语音识别 · 中文 OCR</b></span></div>
+<blockquote>九项应用口诀：<b>译 · 情 · 摘 · 观 · 分 · 答 · 比 · 听 · 认</b><br>⚠️ 学科归属：NLP 是「<b>计算机科学领域</b>与人工智能领域中的一个重要方向」——教材把<b>计算机科学</b>放在前面<br>⚠️ 「<b>语音识别</b>」和「<b>中文 OCR</b>」都属于 <b>NLP 的应用</b>（常被误判为其他技术）</blockquote>
+<label class="task"><input type="checkbox" data-key="E4" ><span class="task-text"><b>E4 · 关键技术③ 专家系统</b> ⭕⭕ 必考（「六个部分」必考）</span></label><div class="item-body"><p><b>专家系统是一个智能计算机程序系统</b>，通常由 <b>6 个部分</b>构成：<b>人机交互界面 · 知识库 · 推理机 · 解释器 · 综合数据库 · 知识获取</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>其内部含有<b>大量的某个领域专家水平的知识与经验</b>，能够应用<b>人工智能技术和计算机技术</b>，根据系统中的知识与经验，进行<b>推理和判断</b>，<b>模拟人类专家的决策过程</b>，以便解决那些需要<b>人类专家处理的复杂问题</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>简而言之，专家系统是一种<b>模拟人类专家解决领域问题的计算机程序系统</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>在人工智能的发展过程中，<b>专家系统的发展已经历了三个阶段，正向第四代过渡和发展</b>；第四个阶段主要研究<b>大型多专家协作系统、多种知识表示、综合知识库、自组织解题机制、多学科协同解题与并行推理、专家系统工具与环境、人工神经网络知识获取及学习机制</b>等</span></div>
+<blockquote>六部分口诀：<b>界 · 库 · 机 · 释 · 数 · 取</b>（人机交互界面 / 知识库 / 推理机 / 解释器 / 综合数据库 / 知识获取）<br>最核心两件：<b>知识库（存） + 推理机（推）</b><br>一句话定义：<b>模拟人类专家解决领域问题的计算机程序系统</b></blockquote>
+<label class="task"><input type="checkbox" data-key="E5" ><span class="task-text"><b>E5 · 人工智能的应用和发展</b> ⭕ 常考</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span>经过 <b>60 多年</b>的发展，人工智能在 <b>算法、算力（计算能力）和算料（数据）</b> 等方面取得了重要突破</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>正处于从「不能用」到「可以用」的技术拐点，但是距离「很好用」还存在诸多瓶颈</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>实现从专用人工智能向通用人工智能的跨越式发展</b>，既是<b>下一代人工智能发展的必然趋势</b>，也是<b>研究与应用领域的重大挑战</b>，是<b>未来应用和发展的趋势</b></span></div>
+<blockquote>三个「料」口诀：<b>算法 · 算力 · 算料</b>（算料＝数据）<br>⚠️ 三个引号词是教材原话，最易考：<b>「不能用」→「可以用」→ 距离「很好用」还有瓶颈</b><br>⚠️ 趋势原话是「<b>从专用人工智能向通用人工智能</b>跨越」，方向别接反</blockquote>
+<h3>模块 F ｜ 虚拟现实（2.2.6）</h3>
+<label class="task"><input type="checkbox" data-key="F0" ><span class="task-text"><b>F0 · 虚拟现实定义与五大特征</b> ⭕⭕ 必考（「五特征」是陷阱点）</span></label><div class="item-body"><p><b>虚拟现实（Virtual Reality，VR）</b>是一种<b>可以创立和体验虚拟世界的计算机系统</b>（其中<b>虚拟世界是全体虚拟环境的总称</b>）。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>主要特征包括 5 条</b>：</span></div>
+<table><thead><tr><th>#</th><th>特征</th><th>含义</th></tr></thead><tbody><tr><td>1</td><td><b>沉浸性</b></td><td>用户「身临其境」感受虚拟环境</td></tr><tr><td>2</td><td><b>交互性</b></td><td>用户可与虚拟环境中的物体交互</td></tr><tr><td>3</td><td><b>多感知性</b></td><td>融合视觉、听觉、触觉、力觉等多种感知体验</td></tr><tr><td>4</td><td><b>构想性（也称想象性）</b></td><td>支持用户想象与创造</td></tr><tr><td>5</td><td><b>自主性</b></td><td>虚拟环境自主运行</td></tr></tbody></table>
+<blockquote>口诀：<b>沉浸 · 交互 · 多感知 · 构想 · 自主</b>（记成「<b>5I</b>」：Immersion / Interaction / Multi-Sensory / Imagination / Autonomy）<br>⚠️⚠️ <b>最大陷阱</b>：业界常说「VR 三特征 = 沉浸性、交互性、构想性（3I）」，但<b>教材写的是 5 条</b>，比 3I <b>多出「多感知性」和「自主性」</b>。考「虚拟现实的主要特征包括」时<b>必须能认出 5 条</b><br>⚠️ 定义落点是「<b>一种计算机系统</b>」；「<b>虚拟世界是全体虚拟环境的总称</b>」是括号里的原文</blockquote>
+<label class="task"><input type="checkbox" data-key="F1" ><span class="task-text"><b>F1 · 虚拟现实的发展演进路径</b> ⭕ 常考</span></label><div class="item-body"><p>随着虚拟现实技术的快速发展，按照其「<b>沉浸性</b>」程度的高低和<b>交互程度</b>的不同，虚拟现实技术已经：</p>
+<p><b>桌面虚拟现实系统 → 沉浸式虚拟现实系统 → 分布式虚拟现实系统</b> 等，<b>向着增强式虚拟现实系统（Augmented Reality，AR）和元宇宙的方向发展</b>。</p></div>
+<blockquote>演进链：<b>桌面 → 沉浸式 → 分布式 → AR / 元宇宙</b>（分类依据是「<b>沉浸性高低 + 交互程度</b>」）<br>⚠️ <b>AR 的英文全称是 Augmented Reality</b>（教材此处用的中文名是「<b>增强式虚拟现实系统</b>」）</blockquote>
+<label class="task"><input type="checkbox" data-key="F2" ><span class="task-text"><b>F2 · 虚拟现实四项关键技术</b> ⭕ 必考</span></label>
+<table><thead><tr><th>#</th><th>技术</th><th>教材原文要点</th></tr></thead><tbody><tr><td>1</td><td><b>人机交互技术</b></td><td>是一种<b>新型的利用 VR 眼镜、控制手柄等传感器设备</b>，能<b>让用户真实感受到周围事物存在</b>的一种<b>三维交互技术</b></td></tr><tr><td>2</td><td><b>传感器技术</b></td><td>是 <b>VR 技术更好地实现人机交互的关键</b></td></tr><tr><td>3</td><td><b>动态环境建模技术</b></td><td><b>虚拟环境的建立是 VR 技术的核心内容</b>；其目的是<b>获取实际环境的三维数据</b>，并根据应用的需要<b>利用获取的三维数据建立相应的虚拟环境模型</b>；三维数据的获取可采用 <b>CAD 技术或非接触式的视觉建模技术</b>，两者有机结合可<b>有效提高数据获取效率</b></td></tr><tr><td>4</td><td><b>系统集成技术</b></td><td>由于 VR 系统中<b>包括大量的感知信息和模型</b>，因此<b>系统的集成技术至关重要</b>；集成技术包括<b>信息同步技术、模型标定技术、数据转换技术、数据管理模型、识别与合成技术</b>等</td></tr></tbody></table>
+<blockquote>四技术口诀：<b>交互 · 传感 · 建模 · 集成</b><br>⚠️ 归属辨析（2024 相关真题）：<b>「语音输入信息、感知信息、数据模型」的信息同步、数据转换、模型标定、识别与合成 → 系统集成技术</b>；「建立虚拟环境模型」→ <b>动态环境建模技术</b>；「VR 眼镜 / 控制手柄实现三维交互」→ <b>人机交互技术</b><br>⚠️ 「<b>虚拟环境的建立是 VR 技术的核心内容</b>」这句挂的是<b>动态环境建模技术</b></blockquote>
+<h2>二、可以只通读、暂不背的（标记避免浪费时间）</h2>
+<table><thead><tr><th>小节</th><th>处理方式</th></tr></thead><tbody><tr><td>2.2 引言段（四化奠基 + 六大技术 + 业务范畴）</td><td>通读，背 <b>A0</b> 两句：四化＝智能化/系统化/微型化/云端化；六大技术名单</td></tr><tr><td>2.2.1 物联网产业链与应用领域清单</td><td>通读，<b>产业链五环节</b>记牢即可，应用领域看一遍（智能电网 / 智慧物流 / 智能家居 / 智能交通 / 智慧农业 / 医疗健康 / 智慧城市…）</td></tr><tr><td>2.2.1 RFID 的询问器 / 应答器 / 标签构成细节</td><td>通读，只背「<b>免接触读写 · 让物品开口说话 · 赋予可跟踪性</b>」</td></tr><tr><td>2.2.1 传感网与 MEMS 的生活化例子（智能衣服 / 智能文件夹 / 蔬果标签）</td><td>只留印象，<b>不背</b>；重点背 MEMS <b>五部件</b>与「赋予普通物体新的『生命』」</td></tr><tr><td>2.2.2 云存储 / 多租户 / 云安全的展开段落</td><td>通读，只背 <b>B4 的加粗要点</b>（分布式文件系统 / ABE 四参与方 / 云安全两方面）</td></tr><tr><td>2.2.2 访问控制模型清单（任务 / 属性 / UCON / BLP）</td><td>通读留印象，<b>不背全称</b></td></tr><tr><td>2.2.3 大数据获取 / 管理技术的展开叙述</td><td>通读，只背 <b>采集→整合→清洗</b>、<b>MPP / Hadoop / 一体机三路</b>、<b>DPI/DFI 属带宽管理</b></td></tr><tr><td>2.2.3 数据挖掘与可视化的技术细目</td><td>通读，只背<b>可视化五类</b>（文 / 图 / 时空 / 多维 / 交互）</td></tr><tr><td>2.2.4 分布式账本的展开叙述</td><td>通读，只背「<b>核心之一</b>」+「<b>每节点保存唯一真实账本副本</b>」+「<b>改动全局反映</b>」</td></tr><tr><td>2.2.4 共识机制五种的算法细节</td><td>通读，只记名字 <b>PoW / PoS / DPoS / Paxos / PBFT</b> 与<b>分析四维度</b></td></tr><tr><td>2.2.5 机器学习算法清单（回归 / 聚类 / 分类 / 近似 / 估计 / 优化）</td><td>通读留印象，重点背「<b>神经网络 ⊂ ML</b>」「<b>强化学习 ⊂ ML</b>」的归属</td></tr><tr><td>2.2.5 专家系统第四代研究内容</td><td>通读，只背「<b>已历三个阶段，正向第四代过渡</b>」</td></tr><tr><td>2.2.6 动态环境建模与系统集成的技术细目</td><td>通读，只背 <b>VR 核心技术归属</b>（见 F2 的 ⚠️）</td></tr></tbody></table>
+<h2>三、本节自检题（做完再合书）</h2>
+<ol><li>新一代信息技术是在哪四个「化」的基础上融合创新产生的？列举六大技术。</li><li>物联网的定义是什么？它主要解决哪三种互连（中英文缩写）？M2M 可以怎么解释？</li><li>物联网架构分哪三层？每层由什么组成、职责是什么？</li><li>真题问「不属于物联网感知层设备」时，哪个设备是错误项？为什么？</li><li>物联网产业链包括哪五个环节？应用领域举出六个。</li><li>传感器是实现什么的首要环节？RFID 属于什么技术？它给物联网赋予了哪个特性？</li><li>MEMS 由哪五部分组成？它给普通物体带来了什么？</li><li>物联网应用系统框架以什么为核心？涉及哪 5 个重要技术部分？</li><li>云计算的四种「资源」是什么？它实现了哪三个字的服务？</li><li>IaaS / PaaS / SaaS 各自向用户提供什么？「在线办公软件」「租用虚拟机」「云数据库」分别属于哪一层？</li><li>云计算的关键技术有哪四项？</li><li>虚拟化技术与多任务、超线程技术的区别是什么？容器技术属于哪一类虚拟化？最受欢迎的容器环境是什么？</li><li>云存储技术中居重要组成部分的是什么？基于 ABE 密码机制的云计算访问控制有哪 4 个参与方？</li><li>云安全研究包含哪两个方面？</li><li>大数据的定义落点是什么（是「数据」还是「资产」）？从数据源到价值实现经过哪四个过程？</li><li>大数据的四大主要特征是什么？数据价值密度与数据总量是什么关系？「区分于传统数据挖掘的最显著特征」是哪一条？</li><li>1PB、1EB、1ZB 分别等于多少？写出换算链。</li><li>大数据获取技术的三个方面是什么？网络流量采集可用哪两类带宽管理技术？</li><li>Hadoop / Spark / Storm 各自适用于什么场景？</li><li>大数据存储技术的三个方面（三种路线）是什么？可视化技术集中在哪五类？</li><li>区块链的定义包含哪些要素（算法 / 数据结构 / 技术）？它分为哪「四大类」？</li><li>区块链的七大典型特征是什么？「时序数据」带来什么好处？「不可篡改」的原因是什么？</li><li>区块链的三大关键技术是什么？哪一个是「区块链技术的核心之一」？共识机制分析有哪四个维度？</li><li>人工智能的定义落点是什么？它的发展经历了哪 6 个阶段？</li><li>人工智能技术研究聚焦哪三个方面？四种「新型学习方法」是什么？</li><li>人工智能的三大关键技术是什么？专家系统由哪 6 个部分构成？NLP 的九项应用是什么？</li><li>教材说人工智能在「算法 / 算力 / 算料」上取得突破，目前处于什么拐点？未来趋势的原话是什么？</li><li>虚拟现实的定义落点是什么？「虚拟世界」是什么的总称？</li><li>虚拟现实的主要特征有几条？分别是哪些？（注意不要只答「3I」）</li><li>虚拟现实按什么分类标准演进？演进链条是什么？最终向哪两个方向发展？</li><li>虚拟现实的四项关键技术是什么？「建立虚拟环境模型」和「信息同步 / 数据转换 / 模型标定」分别属于哪一项？</li></ol>
+<details>
+<summary>参考答案（先自己答完再展开）</summary>
+
+1. 在**智能化、系统化、微型化、云端化**的基础上不断融合创新；六大技术＝**物联网 · 云计算 · 大数据 · 区块链 · 人工智能 · 虚拟现实**
+2. **物联网（The Internet of Things）**是指通过**信息传感设备**，按**约定的协议**将**任何物品**与互联网相连接，进行**信息交换和通信**，以实现**智能化识别、定位、跟踪、监控和管理**的网络。解决 **物品与物品（T2T）· 人与物品（H2T）· 人与人（H2H）** 之间的互连。**M2M** 可解释为**人与人（Man to Man）· 人与机器（Man to Machine）· 机器与机器（Machine to Machine）**
+3. **感知层**（各种传感器：温度传感器、二维码标签、RFID 标签和读写器、摄像头、GPS 等感知终端）→ 是**物联网识别物体、采集信息的来源**；**网络层**（互联网、广电网、网络管理系统和云计算平台等）→ 是**整个物联网的中枢，负责传递和处理感知层获取的信息**；**应用层**（物联网和用户的接口）→ **与行业需求结合以实现物联网的智能应用**
+4. **以太网交换机**。它是网络层设备；摄像头、温度传感器、二维码标签都属于**感知层**的感知终端
+5. 产业链＝**传感器和芯片 · 设备 · 网络运营及服务 · 软件与应用开发 · 系统集成**。应用领域例举：**智能电网 · 智慧物流 · 智能家居 · 智能交通 · 智慧农业 · 医疗健康 · 城市管理（智慧城市）· 公共安全**（任选六个即可）
+6. 传感器是**实现自动检测和自动控制的首要环节**，也是**物联网获取物理世界信息的基本手段**；**RFID（射频识别技术）是物联网中使用的一种传感器技术**；它让物品能够「**开口说话**」，赋予了物联网**可跟踪性**
+7. MEMS＝**微传感器 · 微执行器 · 信号处理和控制电路 · 通信接口 · 电源**；它**赋予了普通物体新的「生命」**——让它们有了属于自己的**数据传输通路、存储功能、操作系统和专门的应用程序**，从而形成**庞大的传感网**
+8. 以**机器终端智能交互**为核心、**网络化的应用与服务**；涉及 **5 个重要技术部分：机器 · 传感器硬件 · 通信网络 · 中间件 · 应用**；基于**云计算平台和智能网络**依据传感网数据决策
+9. 四种资源＝**软件资源 · 计算资源 · 存储资源 · 信息资源**；实现了「**快速、按需、弹性**」的服务
+10. **IaaS** 提供**计算机能力、存储空间等基础设施**；**PaaS** 提供**虚拟的操作系统、数据库管理系统、Web 应用等平台化服务**；**SaaS** 提供**应用软件（CRM、办公软件等）、组件、工作流等虚拟化软件服务**。「在线办公软件」→ **SaaS**；「租用虚拟机」→ **IaaS**；「云数据库」→ **PaaS**
+11. **虚拟化技术 · 云存储技术 · 多租户和访问控制管理 · 云安全技术**
+12. **多任务**＝在**一个操作系统中**多个程序同时并行运行；**虚拟化**＝可**同时运行多个操作系统**，每个 OS 中都有多个程序运行、每个 OS 都运行在虚拟 CPU 或虚拟主机上；**超线程**＝**单 CPU 模拟双 CPU**，两个模拟 CPU **不能分离、只能协同工作**。容器技术属于**操作系统虚拟化**；最受欢迎的容器环境是 **Docker**
+13. **分布式文件系统**是云存储技术中的重要组成部分。基于 ABE 密码机制的云计算访问控制 **4 个参与方 = 数据提供者 · 可信第三方授权中心 · 云存储服务器 · 用户**
+14. ① **云计算技术本身的安全保护工作**（数据完整性及可用性、隐私保护性、服务可用性）；② **借助云服务的方式保障客户端用户的安全防护需求**（基于云计算的病毒防治、木马检测等）
+15. 落点是「**信息资产**」（海量、高增长率和多样化的信息资产）。四个过程＝**数据准备 → 数据存储与管理 → 数据分析和计算 → 数据治理和知识展现**
+16. **数据海量 · 数据类型多样 · 数据价值密度低 · 数据处理速度快**。数据价值密度的高低与数据总量的大小**成反比**。「区分于传统数据挖掘的最显著特征」＝**数据处理速度快**
+17. **1PB = 1024TB · 1EB = 1024PB · 1ZB = 1024EB**（链条 TB → PB → EB → ZB，每级 ×1024）
+18. **数据采集 · 数据整合 · 数据清洗**。网络流量采集可使用 **DPI 或 DFI 等带宽管理技术**
+19. **Hadoop**＝离线的、复杂的大数据处理；**Spark**＝离线的、快速的大数据处理；**Storm**＝在线的、实时的大数据处理
+20. 三条路线：① **MPP 架构的新型数据库集群**（列存储、粗粒度索引）；② **围绕 Hadoop 衍生的相关大数据技术**；③ **大数据一体机**（基于集成的服务器、存储设备、操作系统、数据库管理系统）。可视化五类＝**文本可视化 · 网络（图）可视化 · 时空数据可视化 · 多维数据可视化 · 交互可视化**
+21. 定义要素：**以非对称加密算法为基础**，以**改进的默克尔树（Merkle Tree）为数据结构**，使用**共识机制、点对点网络、智能合约**等技术结合而成的**分布式存储数据库技术**。分为 **公有链 · 联盟链 · 私有链 · 混合链 四大类**
+22. 七特征＝**多中心化 · 多方维护 · 时序数据 · 智能合约 · 不可篡改 · 开放共识 · 安全可信**。「时序数据」运用带**时间戳信息**的**链式结构**存储数据、添加**时间维度属性**，因而实现**数据信息的可追溯性**。「不可篡改」因为相邻区块间**后序区块可对前序区块进行验证**，篡改某一区块需**递归修改该区块及其所有后序区块**，而**每次哈希重算代价巨大且须在有限时间内完成**
+23. 三技术＝**分布式账本 · 加密算法 · 共识机制**。**分布式账本**是「区块链技术的核心之一」。共识机制分析四维度＝**合规监管 · 性能效率 · 资源消耗 · 容错性**
+24. 落点是「**一门技术科学**」（研究开发用于模拟、延伸和扩展人类智能的理论、方法、技术及应用系统）。六阶段＝**起步发展期 · 反思发展期 · 应用发展期 · 低迷发展期 · 稳步发展期 · 蓬勃发展期**（蓬勃发展期自 2011 年至今）
+25. 三聚焦＝**热点技术 · 共性技术 · 新兴技术**。四种新型学习方法＝**迁移学习 · 强化学习 · 多核学习 · 多视图学习**
+26. 三技术＝**机器学习 · 自然语言处理 · 专家系统**。专家系统 **6 个部分 = 人机交互界面 · 知识库 · 推理机 · 解释器 · 综合数据库 · 知识获取**。NLP 九项应用＝**机器翻译 · 舆情监测 · 自动摘要 · 观点提取 · 文本分类 · 问题回答 · 文本语义对比 · 语音识别 · 中文 OCR**
+27. 处于从「**不能用**」到「**可以用**」的技术拐点，距离「**很好用**」还存在诸多瓶颈；趋势原话＝「**实现从专用人工智能向通用人工智能的跨越式发展**」
+28. 落点是「**一种可以创立和体验虚拟世界的计算机系统**」；**虚拟世界是全体虚拟环境的总称**
+29. **5 条**：**沉浸性 · 交互性 · 多感知性 · 构想性（也称想象性）· 自主性**（比业界常说的「3I」多出「多感知性」与「自主性」）
+30. 按「**沉浸性**」程度的高低和**交互程度**的不同分类；链条＝**桌面虚拟现实系统 → 沉浸式虚拟现实系统 → 分布式虚拟现实系统 → 增强式虚拟现实系统（AR）/ 元宇宙**
+31. 四项＝**人机交互技术 · 传感器技术 · 动态环境建模技术 · 系统集成技术**。「建立虚拟环境模型」→ **动态环境建模技术**（虚拟环境的建立是 VR 技术的核心内容）；「信息同步 / 模型标定 / 数据转换 / 识别与合成」→ **系统集成技术**
+
+</details>
+<h2>四、康奈尔笔记（可打印模板）</h2>
+<p>📄 <b>模板文件</b>：</p>
+<div class="plain-li"><span class="bullet">•</span> <span><code>2.2_康奈尔笔记模板.html</code> — A4 留白手写版（左栏 12 问，右栏分 6 个模块手写线）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><code>2.2_康奈尔笔记模板_带答案版.html</code> — A4 带答案版，含「👁 隐藏答案」按钮（可切换填空版打印）</span></div>
+<p><b>用法</b>：左栏 12 个问题为线索，遮住右栏自问；右栏按 2.2.1~2.2.6 分模块留手写线；底部总结区收口。带答案版每条答案都标注关键术语和易混提醒，适合先默写、再对照。</p>
+<p><b>打印后自查（不看书答）</b></p>
+<div class="plain-li"><span class="bullet">•</span> <span>线索栏问题 1~12 全部答出 → 正确率 <code>__ / 12</code></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>答不出的条目抄进「易混 / 易错」区，这是考前唯一要看的块</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>页脚 5 个复习框：当日 ☐　+1 天 ☐　+3 天 ☐　+7 天 ☐　+14 天 ☐</span></div>
+<h2>五、刷题任务</h2>
+<div class="plain-li"><span class="bullet">•</span> <span>先做本仓题库：<code>2.2_考点自测题.html</code>（22 题 · 即时判分 + 逐题精讲，目标 ≥ 18 对）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>再刷填空专练：<code>08_答题系统/index.html</code> → 切到「2.2」tab（12 题，答对自动同步勾选本清单）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>真题来源建议：<b>物联网三层（感知层设备辨析）</b>、<b>云计算 IaaS/PaaS/SaaS 分层</b>、<b>区块链特征与分类</b>、<b>虚拟现实关键技术归属</b>在 2023 下~2025 上的真题里反复出现，是<b>第 2 章的稳定得分点</b>。软考达人上刷「物联网 感知层」「云计算 服务类型」「区块链」「人工智能 专家系统」「虚拟现实」关键词</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>⚠️ 但要注意：<b>区块链（2.2.4）与虚拟现实（2.2.6）是第 4 版新增/大改内容</b>，2023 上及以前的真题里几乎没有；2.2.2 的「多租户与访问控制」也是新版口径</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>错题记入 <code>05_错题本/</code>（格式：考点 / 错选原因 / 正选 + 出处）</span></div>
+<h2>六、与前后章节的衔接</h2>
+<p>2.2 是第 2 章的<b>收束节</b>，把 2.1 的「技术底座」接到了「新一代数字技术」上：</p>
+<div class="plain-li"><span class="bullet">•</span> <span><b>承接 2.1</b>：2.1 讲<b>一台信息系统怎么构成</b>（软硬件 → 网络 → 存储数据库 → 信息安全），2.2 讲<b>这些底座上长出来的六大新技术</b>。2.1.5 提到的 <b>5G / NB-IoT / eMTC / IIoT / URLLC</b> 正是 2.2.1 物联网与 2.2.2 云计算的网络底座；2.1.3 的 <b>NoSQL / 数据仓库</b> 是 2.2.3 大数据的技术前提；2.1.2 的<b>网络分层</b>是物联网三层架构的底层</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>本节内部主线</b>：<b>物联网（感知与连接）→ 云计算（算力供给）→ 大数据（数据资产）→ 区块链（信任机制）→ 人工智能（智能算法）→ 虚拟现实（交互界面）</b>——即「<b>感 → 算 → 数 → 信 → 智 → 显</b>」一条链</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>向后打通</b>：</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>第 1 章 1.4 数字经济</b>：1.4.1 的「数字产业化」明确点名 <b>物联网 / 工业互联网 / 区块链 / 人工智能 / 虚拟现实和增强现实 / 云计算 / 大数据</b>——与 2.2 六节<b>一一对应</b>，是同一批技术从「产业视角」和「技术视角」的两次出现</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>第 4 章信息系统管理</b>：2.2.2 云计算的虚拟化 / 多租户 → 云资源管理；2.2.3 大数据 → 数据管理（DCMM）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>第 3 章信息系统治理</b>：2.2.4 区块链的「<b>合规监管</b>」维度、2.2.2 云安全 → IT 治理与审计</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>第 5 章信息系统工程</b>：2.2.1 物联网三层 → 5.3.4「物联网集成」；2.2.2 → 「云集成」</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>论文素材（实战映射）</b>：写<b>项目背景 / 技术方案</b>段落时，本节可直接引用：</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>物联网三层架构 + 感知层设备清单</b> → 写<b>智能运维 / 机房监控</b>类项目（与 <b>H3C-NMS</b> 的设备视图、实时监控天然契合）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>云计算 IaaS/PaaS/SaaS 分层 + 虚拟化（容器 / Docker）</b> → 写<b>平台化改造 / 中台建设</b>类项目；<b>fault-simulator</b> 的部署架构（Flask 双端口服务）可直接套「PaaS / IaaS 选型论证」</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>大数据 Hadoop / Spark / Storm 分工</b> → 写<b>海量告警数据处理</b>类项目（<b>Kafka 1023+ Topic 的故障数据</b>是极好的「实时流（Storm 思路）+ 离线批（Hadoop/Spark 思路）」素材）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>人工智能三大关键技术（尤其 NLP 九项应用）</b> → 写<b>智能体 / 智能问答</b>类项目（用户当前在智能体开发部，这是<b>最贴合其岗位的论文落点</b>）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>区块链七特征（不可篡改 / 时序数据 / 可追溯）</b> → 写<b>数据存证 / 供应链溯源 / 审计留痕</b>类项目</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>虚拟现实五特征 + 四项关键技术</b> → 写<b>可视化仿真 / 数字孪生</b>类项目（<b>fault-simulator 的「仿真」主题与动态环境建模技术可以直接对接</b>）</span></div>
+</div>
+<script>
+(function(){
+  const REL = "01_教材笔记/第02章_信息技术发展/2.2_新一代信息技术及应用/2.2_知识点清单.md";
+  const STORE_KEY = 'checklist:' + REL;
+
+  // 一次性加载整个文件的勾选状态（JSON），避免 key 过长
+  let store = {};
+  try { store = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch (e) {}
+
+  // 兼容迁移：旧的错误 key（包含重复 REL 前缀的）自动迁到新格式
+  for (let i = localStorage.length - 1; i >= 0; i--) {
+    const k = localStorage.key(i);
+    if (!k || !k.startsWith('checklist:')) continue;
+    // 检测旧 bug key：包含 REL 两次
+    if (k.indexOf(REL) !== k.lastIndexOf(REL)) {
+      const v = localStorage.getItem(k);
+      const m = k.match(/:L(\d+)$/);
+      if (m && v === '1') store['L' + m[1]] = true;
+      localStorage.removeItem(k);
+    }
+  }
+
+  const boxes = document.querySelectorAll('.task input[type="checkbox"]');
+  boxes.forEach(box => {
+    const k = box.dataset.key;
+    if (store[k]) box.checked = true;
+    box.addEventListener('change', () => {
+      store[k] = box.checked;
+      try {
+        localStorage.setItem(STORE_KEY, JSON.stringify(store));
+      } catch (e) {
+        console.error('localStorage 写入失败：', e);
+      }
+      updateProgress();
+    });
+  });
+
+  function updateProgress() {
+    const total = boxes.length;
+    const done = Array.from(boxes).filter(b => b.checked).length;
+    const pct = total ? Math.round(done / total * 100) : 0;
+    document.getElementById('progress').innerHTML = '已完成：<b>' + done + ' / ' + total + '</b>（' + pct + '%）';
+  }
+  updateProgress();
+})();
+</script>
+</body>
+</html>

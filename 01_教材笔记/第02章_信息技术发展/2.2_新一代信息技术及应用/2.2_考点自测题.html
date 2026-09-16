@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2.2 新一代信息技术及应用 · 考点自测题</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #333; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 20px 16px 60px; }
+  header { background: #185FA5; color: #fff; border-radius: 8px; padding: 18px 20px; margin-bottom: 16px; }
+  header h1 { font-size: 19px; margin-bottom: 4px; }
+  header p { font-size: 12.5px; opacity: .85; }
+  .progress-bar { background: rgba(255,255,255,.25); border-radius: 4px; height: 8px; margin-top: 10px; }
+  .progress-bar i { display: block; height: 100%; background: #ffc53d; border-radius: 4px; width: 0; transition: width .3s; }
+  .card { background: #fff; border-radius: 8px; padding: 18px 20px; margin-bottom: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+  .qtag { font-size: 11px; color: #854F0B; background: #fff7e6; border: 1px solid #f0d9a0; border-radius: 3px; padding: 1px 6px; margin-right: 6px; }
+  .qno { font-weight: bold; color: #185FA5; }
+  .qtext { font-size: 14.5px; line-height: 1.65; margin: 8px 0 12px; }
+  .opt { display: block; width: 100%; text-align: left; border: 1px solid #d9e2ec; border-radius: 6px;
+    background: #fff; padding: 9px 12px; font-size: 13.5px; margin-bottom: 8px; cursor: pointer; line-height: 1.5; }
+  .opt:hover { border-color: #185FA5; }
+  .opt.sel { border-color: #185FA5; background: #eef4fb; }
+  .opt.right { border-color: #2e7d32; background: #eef7ee; }
+  .opt.wrong { border-color: #c62828; background: #fdeeee; }
+  .opt .mark { font-weight: bold; margin-right: 6px; color: #185FA5; }
+  .explain { display: none; background: #f4f8fc; border-left: 3px solid #185FA5; border-radius: 4px;
+    padding: 10px 12px; font-size: 13px; line-height: 1.7; color: #444; margin-top: 4px; }
+  .explain b { color: #185FA5; }
+  .btn { background: #185FA5; color: #fff; border: none; border-radius: 6px; padding: 9px 22px;
+    font-size: 14px; cursor: pointer; margin-top: 10px; }
+  .btn.gray { background: #90a4ae; }
+  .btn:disabled { background: #b0bec5; cursor: not-allowed; }
+  #result { display: none; text-align: center; }
+  #result .big { font-size: 40px; font-weight: bold; color: #185FA5; margin: 10px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 14px 0; }
+  th, td { border: 1px solid #d9e2ec; padding: 7px 8px; text-align: center; }
+  th { background: #eef4fb; color: #185FA5; }
+  .module-stat td:first-child { text-align: left; }
+  #reviewList { text-align: left; }
+  .wrong-item { border: 1px solid #f0c4c4; border-radius: 6px; padding: 10px 12px; margin-bottom: 8px; font-size: 13px; background: #fffafa; }
+  .wrong-item b { color: #c62828; }
+  .kbd-tip { font-size: 11.5px; color: #999; margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>2.2 新一代信息技术及应用 · 考点自测（22 题）</h1>
+    <p>第 2 章 = 上午最大分值块 · 达标线 18/22（80%）· 键盘 A~D 选择，Enter 确认</p>
+    <div class="progress-bar"><i id="pbar"></i></div>
+  </header>
+  <div id="quiz"></div>
+  <div id="result" class="card">
+    <h2>测验完成</h2>
+    <div class="big" id="finalScore">0 / 22</div>
+    <div id="advice" style="font-size:14px; margin-bottom: 6px;"></div>
+    <table class="module-stat" id="moduleTable">
+      <tr><th>模块</th><th>正确率</th><th>状态</th></tr>
+    </table>
+    <div id="reviewWrap" style="display:none">
+      <h3 style="color:#c62828; font-size:14px; margin-bottom:8px;">错题回顾</h3>
+      <div id="reviewList"></div>
+    </div>
+    <button class="btn" id="retryWrong" style="display:none">只重做错题</button>
+    <button class="btn gray" onclick="initAll()">重新测验</button>
+  </div>
+  <div class="kbd-tip">对照资料：同目录《2.2_知识点清单.md》· 教材出处：《信息系统项目管理师教程（第4版）》约 P49~P65 · 第 2 章上午 6~12 题，本节通常 3~5 题</div>
+</div>
+
+<script>
+const QUESTIONS = [
+  // 模块A 物联网 (1-5)
+  { m: "A·物联网", q: "关于物联网，下列表述错误的是（　）。",
+    o: ["物联网是指通过信息传感设备，按约定的协议将任何物品与互联网相连接，进行信息交换和通信，以实现智能化识别、定位、跟踪、监控和管理的网络","物联网主要解决物品与物品（T2T）、人与物品（H2T）、人与人（H2H）之间的互连","许多学者讨论物联网时会引入 M2M 的概念，可解释为人与人、人与机器或机器与机器","物联网的定义要求把服务器、交换机等 IT 设备作为唯一接入对象，不包含普通物品"], a: 3,
+    e: "教材 2.2.1 原文：物联网（The Internet of Things）是指通过【信息传感设备】，按【约定的协议】将【任何物品】与互联网相连接，进行【信息交换和通信】，以实现【智能化识别、定位、跟踪、监控和管理】的网络。它主要解决【物品与物品（Thing to Thing，T2T）· 人与物品（Human to Thing，H2T）· 人与人（Human to Human，H2H）】之间的互连；M2M 可解释为【人与人（Man to Man）· 人与机器（Man to Machine）· 机器与机器（Machine to Machine）】。D 把定义里的「任何物品」偷换成「服务器、交换机等 IT 设备」，正好说反。" },
+  { m: "A·物联网", q: "关于物联网三层架构，下列对应正确的是（　）。",
+    o: ["感知层是物联网识别物体、采集信息的来源；网络层是整个物联网的中枢；应用层是物联网和用户的接口","感知层是整个物联网的中枢；网络层负责识别物体和采集信息","应用层是整个物联网的中枢；网络层是物联网和用户的接口","网络层是物联网识别物体、采集信息的来源；应用层负责传递和处理感知层获取的信息"], a: 0,
+    e: "教材 2.2.1 原文：感知层由各种传感器构成，包括温度传感器、二维码标签、RFID 标签和读写器、摄像头、GPS 等感知终端，【感知层是物联网识别物体、采集信息的来源】；网络层由各种网络（互联网、广电网、网络管理系统和云计算平台等）组成，【是整个物联网的中枢，负责传递和处理感知层获取的信息】；【应用层是物联网和用户的接口】，与行业需求结合以实现物联网的智能应用。口诀：感知采集 → 网络传递处理 → 应用落地。" },
+  { m: "A·物联网", q: "下列设备中，不属于物联网感知层的是（　）。",
+    o: ["摄像头","以太网交换机","二维码标签","温度传感器"], a: 1,
+    e: "这是 2023 上半年真题原题。教材明确感知层的感知终端包括【温度传感器、二维码标签、RFID 标签和读写器、摄像头、GPS】等，【以太网交换机】是网络层设备，不属于感知层。答题口诀：能「感知物理世界」的都是感知层；做「数据传输转发」的是网络层。" },
+  { m: "A·物联网", q: "关于射频识别技术（RFID），下列表述错误的是（　）。",
+    o: ["RFID 是物联网中使用的一种传感器技术","RFID 可通过无线电信号识别特定目标并读写相关数据，无须识别系统与特定目标之间建立机械或光学接触","RFID 技术让物品能够「开口说话」，赋予了物联网可跟踪性","RFID 是物联网中独立的通信技术，与传感器技术、传感网并列，不属于物联网关键技术之一"], a: 3,
+    e: "教材 2.2.1「关键技术」原文：物联网关键技术主要涉及【传感器技术、传感网和应用系统框架】等；其中【射频识别技术（Radio Frequency Identification，RFID）是物联网中使用的一种传感器技术】，可通过无线电信号识别特定目标并读写相关数据，而【无须识别系统与特定目标之间建立机械或光学接触】；【RFID 技术让物品能够「开口说话」】，这就赋予了物联网一个特性——【可跟踪性】。D 把 RFID 从「传感器技术」里拆出来变成独立技术，与教材不符。" },
+  { m: "A·物联网", q: "关于物联网的关键技术与产业链，下列表述错误的是（　）。",
+    o: ["微机电系统（MEMS）由微传感器、微执行器、信号处理和控制电路、通信接口和电源等部件组成","物联网应用系统框架是一种以机器终端智能交互为核心的、网络化的应用与服务，涉及机器、传感器硬件、通信网络、中间件和应用 5 个重要技术部分","物联网的产业链包括传感器和芯片、设备、网络运营及服务、软件与应用开发和系统集成","MEMS 的核心作用是替代传感器，让物联网不再需要独立的感知终端"], a: 3,
+    e: "MEMS 原文：微机电系统（Micro-Electro-Mechanical Systems，MEMS）是由【微传感器、微执行器、信号处理和控制电路、通信接口和电源】等部件组成的【一体化的微型器件系统】；其目标是把信息的【获取、处理和执行集成在一起】。它【赋予了普通物体新的『生命』】，使它们有了属于自己的数据传输通路、存储功能、操作系统和专门应用程序，从而形成一个【庞大的传感网】——是「增强」，不是「替代」传感器（D 错）。应用系统框架五部分＝【机器、传感器硬件、通信网络、中间件、应用】；产业链五环节＝【传感器和芯片、设备、网络运营及服务、软件与应用开发、系统集成】。" },
+  // 模块B 云计算 (6-10)
+  { m: "B·云计算", q: "关于云计算的定义与服务特征，下列表述正确的是（　）。",
+    o: ["云计算是一种基于互联网的计算方式，将共享的软件资源、计算资源、存储资源和信息资源按需求提供给网上的终端设备和终端用户","云计算只提供计算资源和存储资源两种资源","云计算实现了「固定、包月、无弹性」的服务，资源不能动态扩展","云计算的用户必须自行采购并维护底层硬件设备"], a: 0,
+    e: "教材 2.2.2 原文：云计算是一种【基于互联网的计算方式】，通过这种方式将网络上配置为共享的【软件资源、计算资源、存储资源和信息资源】，按需求提供给网上的终端设备和终端用户；云计算实现了「【快速、按需、弹性】」的服务，用户可以随时通过宽带网络接入「云」并获得服务，按照实际需求获取或释放资源，根据需求对资源进行动态扩展。B 少了两种资源；C 把「快速、按需、弹性」说反；D 与「无须自建底层硬件」相反。" },
+  { m: "B·云计算", q: "按照云计算服务提供的资源层次，向用户提供虚拟的操作系统、数据库管理系统、Web 应用等平台化服务的是（　）。",
+    o: ["PaaS 平台即服务","IaaS 基础设施即服务","SaaS 软件即服务","DaaS 数据即服务"], a: 0,
+    e: "教材原文：按照云计算服务提供的资源层次，可分为三种服务类型——【IaaS 基础设施即服务】向用户提供计算机能力、存储空间等基础设施方面的服务；【PaaS 平台即服务】向用户提供【虚拟的操作系统、数据库管理系统、Web 应用等平台化】的服务；【SaaS 软件即服务】向用户提供应用软件（如 CRM、办公软件等）、组件、工作流等虚拟化软件的服务（SaaS 一般采用 Web 技术和 SOA 架构）。题干关键词「虚拟的操作系统、数据库管理系统、Web 应用」直接对应 PaaS。口诀：I 搭硬件 · P 搭平台 · S 直接用软件。" },
+  { m: "B·云计算", q: "下列云服务与层级的对应，错误的是（　）。",
+    o: ["在线办公软件、CRM —— SaaS","租用虚拟机、云硬盘 —— IaaS","云数据库、应用开发运行环境 —— PaaS","虚拟化操作系统、数据库管理系统 —— IaaS"], a: 3,
+    e: "三个反向陷阱（教材分层口径）：①【在线办公软件 / CRM】属【SaaS】（交付可直接使用的成品应用软件）；②【租用虚拟机 / 存储空间】属【IaaS】（交付基础设施能力）；③【虚拟的操作系统、数据库管理系统、Web 应用】属【PaaS】（交付平台化运行环境）。D 把典型的 PaaS 内容说成 IaaS，错。判别法：看服务商交付什么——交付服务器/存储→IaaS；交付开发运行环境→PaaS；交付可直接用的应用软件→SaaS。" },
+  { m: "B·云计算", q: "关于虚拟化技术，下列表述错误的是（　）。",
+    o: ["多任务是指在一个操作系统中多个程序同时并行运行","虚拟化技术中可以同时运行多个操作系统，每一个操作系统都运行在一个虚拟的 CPU 或者虚拟主机上","超线程技术只是单 CPU 模拟双 CPU 来平衡程序运行性能，这两个模拟出来的 CPU 是不能分离的，只能协同工作","容器技术属于硬件虚拟化，目前最受欢迎的容器环境是 Docker"], a: 3,
+    e: "教材原文：虚拟化技术与多任务以及超线程技术是完全不同的。【多任务】是指在一个操作系统中多个程序同时并行运行；而在【虚拟化技术】中，则可以同时运行多个操作系统，而且每一个操作系统中都有多个程序运行，每一个操作系统都运行在一个虚拟的 CPU 或者虚拟主机上；【超线程技术】只是单 CPU 模拟双 CPU 来平衡程序运行性能，这两个模拟出来的 CPU 是不能分离的，只能协同工作。【容器（Container）技术是一种全新意义上的虚拟化技术，属于操作系统虚拟化的范畴】（由操作系统提供虚拟化的支持），目前最受欢迎的容器环境是 Docker。D 把「操作系统虚拟化」错写为「硬件虚拟化」。" },
+  { m: "B·云计算", q: "关于云计算的关键技术，下列表述错误的是（　）。",
+    o: ["云计算的关键技术主要涉及虚拟化技术、云存储技术、多租户和访问控制管理、云安全技术","分布式文件系统是云存储技术中的重要组成部分，在维持兼容性的基础上对系统复制和容错功能进行提升","基于 ABE 密码机制的云计算访问控制包括 4 个参与方：数据提供者、可信第三方授权中心、云存储服务器和用户","云安全研究只包含云计算技术本身的安全保护工作，不涉及借助云服务保障客户端用户的安全防护需求"], a: 3,
+    e: "教材原文：云计算的关键技术主要涉及【虚拟化技术、云存储技术、多租户和访问控制管理、云安全技术】；【分布式文件系统作为云存储技术中的重要组成部分】…；【基于 ABE 密码机制的云计算访问控制包括 4 个参与方：数据提供者、可信第三方授权中心、云存储服务器和用户】（2023 下半年真题原题）。【云安全研究主要包含两个方面的内容】：一是云计算技术本身的安全保护工作（数据完整性及可用性、隐私保护性及服务可用性）；二是借助于云服务的方式来保障客户端用户的安全防护需求（基于云计算的病毒防治、木马检测技术等）。D 只保留了第一个方面，错。" },
+  // 模块C 大数据 (11-14)
+  { m: "C·大数据", q: "关于大数据的定义，下列表述正确的是（　）。",
+    o: ["大数据指无法在一定时间范围内用常规软件工具进行捕捉、管理和处理的数据集合，是具有更强的决策力、洞察发现力和流程优化能力的海量、高增长率和多样化的信息资产","大数据的定义落点是「数据集」，强调的是数据的规模而非价值属性","大数据从数据源到最终价值实现只需要经过数据存储与管理一个过程","大数据处理不需要新型计算架构和智能算法，沿用传统软件工具即可"], a: 0,
+    e: "教材原文：大数据（Big Data）指【无法在一定时间范围内用常规软件工具进行捕捉、管理和处理的数据集合】，是具有更强的【决策力、洞察发现力和流程优化能力】的【海量、高增长率和多样化的信息资产】（落点是「信息资产」）。大数据从数据源到最终价值实现一般需要经过【数据准备、数据存储与管理、数据分析和计算、数据治理和知识展现】四个过程；大数据是具有体量大、结构多样、时效性强等特征的数据，【处理大数据需要采用新型计算架构和智能算法等新技术】。" },
+  { m: "C·大数据", q: "教材所述大数据的主要特征中，「大数据区分于传统数据挖掘的最显著特征」是（　）。",
+    o: ["数据处理速度快","数据价值密度低","数据海量","数据类型多样"], a: 0,
+    e: "教材 2.2.3 原文四条特征＝【数据海量 · 数据类型多样 · 数据价值密度低 · 数据处理速度快】。其中【数据处理速度快】的原文是「为了从海量的数据中快速挖掘数据价值，一般要求要对不同类型的数据进行快速的处理，【这是大数据区分于传统数据挖掘的最显著特征】」。⚠ 另三条的锚点：数据海量（TB→PB→EB→ZB）／价值密度（【价值密度的高低与数据总量的大小成反比】）／类型多样（分结构化与非结构化）。" },
+  { m: "C·大数据", q: "关于大数据的四大主要特征，下列表述错误的是（　）。",
+    o: ["大数据的数据体量巨大，从 TB 级别跃升到 PB 级别（1PB=1024TB）、EB 级别（1EB=1024PB），甚至达到 ZB 级别（1ZB=1024EB）","大数据的数据类型一般分为结构化数据和非结构化数据，非结构化数据包括网络日志、音频、视频、图片、地理位置信息等","教材把大数据的特征表述为「4V」，即 Volume、Variety、Value、Velocity 四条英文特征","数据价值密度的高低与数据总量的大小成反比"], a: 2,
+    e: "⚠ 本节最隐蔽的陷阱：教材 2.2.3 用的是【数据海量 · 数据类型多样 · 数据价值密度低 · 数据处理速度快】这四条【中文表述】，【教材正文并没有出现「4V」这个说法】——4V（Volume/Variety/Value/Velocity）是业界口径，而且业界常见四条里的「真实性（Veracity）」也不在教材清单中。A、B、D 均为教材原文（含 1PB=1024TB、1EB=1024PB、1ZB=1024EB 的换算链，以及「价值密度与数据总量成反比」）。" },
+  { m: "C·大数据", q: "关于大数据的分布式数据处理技术，下列表述正确的是（　）。",
+    o: ["Hadoop 常用于离线的复杂的大数据处理，Spark 常用于离线的快速的大数据处理，Storm 常用于在线的实时的大数据处理","Storm 常用于离线的复杂的大数据处理，Hadoop 常用于在线的实时的大数据处理","三个系统中 Spark 专用于在线实时处理，Storm 专用于离线批处理","分布式计算的核心是把所有数据集中到一台服务器上串行处理"], a: 0,
+    e: "教材原文：分布式计算的核心是【将任务分解成许多小的部分，分配给多台计算机进行处理】，通过并行工作的机制达到【节约整体计算时间、提高计算效率】的目的；目前主流的分布式计算系统有 Hadoop、Spark 和 Storm——【Hadoop 常用于离线的复杂的大数据处理，Spark 常用于离线的快速的大数据处理，而 Storm 常用于在线的实时的大数据处理】。判别法：看到「实时 / 在线」只选 Storm；看到「离线」才在 Hadoop（复杂）与 Spark（快速）之间二选一。" },
+  // 模块D 区块链 (15-17)
+  { m: "D·区块链", q: "关于区块链，下列表述错误的是（　）。",
+    o: ["区块链可以理解为以非对称加密算法为基础，以改进的默克尔树为数据结构，使用共识机制、点对点网络、智能合约等技术结合而成的一种分布式存储数据库技术","区块链分为公有链、联盟链、私有链和混合链四大类","区块链技术具有多中心化存储、隐私保护、防篡改等特点，提供了开放、分散和容错的事务机制","区块链分为公有链、联盟链和私有链三大类，不存在其他类型"], a: 3,
+    e: "教材 2.2.4 原文：区块链概念可以理解为【以非对称加密算法为基础，以改进的默克尔树（Merkle Tree）为数据结构，使用共识机制、点对点网络、智能合约等技术结合而成的一种分布式存储数据库技术】；【区块链分为公有链（Public Blockchain）、联盟链（Consortium Blockchain）、私有链（Private Blockchain）和混合链（Hybrid Blockchain）四大类】。⚠ 这是本节最大陷阱之一：教材是「四大类」（含混合链），不是常说的三类。另注意教材用词是「【多中心化】」而非「去中心化」。" },
+  { m: "D·区块链", q: "关于区块链的典型特征，下列表述错误的是（　）。",
+    o: ["区块链的典型特征包括多中心化、多方维护、时序数据、智能合约、不可篡改、开放共识、安全可信","「时序数据」指运用带有时间戳信息的链式结构来存储数据信息，为数据信息添加时间维度的属性，从而可实现数据信息的可追溯性","「不可篡改」是因为相邻区块间后序区块可对前序区块进行验证，若篡改某一区块则需递归修改该区块及其所有后序区块，而每一次哈希的重新计算代价巨大","「多方维护」指所有节点都必须离线同步，任何节点都无法自由加入区块链网络"], a: 3,
+    e: "教材原文：区块链的典型特征包括【多中心化、多方维护、时序数据、智能合约、不可篡改、开放共识、安全可信】七条。「多方维护」原文是【激励机制可确保分布式系统中的所有节点均可参与数据区块的验证过程，并通过共识机制选择特定节点将新产生的区块加入到区块链中】；而「【每台物理设备均可作为该网络中的一个节点，任意节点可自由加入且拥有一份完整的数据库拷贝】」是【开放共识】的内容。D 把「开放共识」的特征表述反了，还张冠李戴。" },
+  { m: "D·区块链", q: "关于区块链的关键技术，下列表述正确的是（　）。",
+    o: ["区块链的关键技术主要包括分布式账本、加密算法和共识机制，其中分布式账本是区块链技术的核心之一","区块链系统的加密算法只有非对称加密算法一种","共识机制分析的四个维度是合规监管、性能效率、资源消耗和容错性，其中「容错性」指交易达成共识被确认的效率","区块链中不存在中心节点，因此不需要任何监管机制"], a: 0,
+    e: "教材 2.2.4「关键技术」原文三项：① 【分布式账本】（【分布式账本是区块链技术的核心之一】）；② 【加密算法】——区块链系统中的加密算法一般分为【散列（哈希）算法】和【非对称加密算法】两类；③ 【共识机制】。共识机制分析四维度＝【合规监管】（是否支持超级权限节点对全网节点、数据进行监管）·【性能效率】（交易达成共识被确认的效率）·【资源消耗】（共识过程中耗费的 CPU、网络输入输出、存储等资源）·【容错性】（防攻击、防欺诈的能力）。B 漏了哈希算法；C 把「容错性」与「性能效率」的定义对调；D 与「合规监管」维度矛盾。" },
+  // 模块E 人工智能 (18-20)
+  { m: "E·人工智能", q: "关于人工智能，下列表述正确的是（　）。",
+    o: ["人工智能是指研究和开发用于模拟、延伸和扩展人类智能的理论、方法、技术及应用系统的一门技术科学","人工智能就是指机器学习，机器学习就是指深度学习","人工智能的发展经历了起步、反思、应用、低迷、稳步、蓬勃等 6 个主要阶段，其中「蓬勃发展期」自 20 世纪 90 年代中开始","人工智能当前已经完全实现从专用人工智能向通用人工智能的跨越"], a: 0,
+    e: "教材原文：人工智能是指【研究和开发用于模拟、延伸和扩展人类智能的理论、方法、技术及应用系统的一门技术科学】（落点是「技术科学」）。人工智能从产生到现在，其发展历程经历了 6 个主要阶段：【起步发展期】（1956 年至 20 世纪 60 年代初）、【反思发展期】、【应用发展期】、【低迷发展期】、【稳步发展期】（20 世纪 90 年代中至 2010 年）、【蓬勃发展期】（【2011 年至今】）。B 把三个概念等同（AI 是领域、ML 是方法、神经网络是 ML 的一种形式）；C 把「稳步发展期」的时间安给了「蓬勃发展期」；D 与教材「实现从专用人工智能向通用人工智能的跨越式发展，既是下一代人工智能发展的必然趋势，也是研究与应用领域的重大挑战」矛盾。" },
+  { m: "E·人工智能", q: "关于人工智能的关键技术，下列表述错误的是（　）。",
+    o: ["人工智能的关键技术主要涉及机器学习、自然语言处理、专家系统等","神经网络是机器学习的一种形式，用于分类型应用程序；它根据输入、输出、变量权重或将输入与输出关联的「特征」来分析问题","强化学习是机器学习的另外一种方式，指机器学习系统制订了目标而且迈向目标的每一步都会得到某种形式的奖励","自然语言处理只用于机器翻译，不涉及舆情监测、自动摘要、文本分类、语音识别、中文 OCR 等应用"], a: 3,
+    e: "教材 2.2.5「关键技术」原文三项：机器学习、自然语言处理、专家系统。机器学习＝【一种自动将模型与数据匹配，并通过训练模型对数据进行「学习」的技术】；【神经网络是机器学习的一种形式】（20 世纪 60 年代出现，用于分类型应用程序）；【强化学习是机器学习的另外一种方式】（制订了目标且迈向目标的每一步都会得到某种形式的奖励）。自然语言处理（NLP）【主要应用于机器翻译、舆情监测、自动摘要、观点提取、文本分类、问题回答、文本语义对比、语音识别、中文 OCR 等方面】——共 9 项，D 严重漏项。" },
+  { m: "E·人工智能", q: "关于专家系统与人工智能的发展现状，下列表述错误的是（　）。",
+    o: ["专家系统是一个智能计算机程序系统，通常由人机交互界面、知识库、推理机、解释器、综合数据库、知识获取等 6 个部分构成","专家系统是一种模拟人类专家解决领域问题的计算机程序系统，其发展已经历了三个阶段，正向第四代过渡和发展","教材指出人工智能正处于从「不能用」到「可以用」的技术拐点，但是距离「很好用」还存在诸多瓶颈","经过 60 多年发展，人工智能只在算法上取得突破，算力与算料（数据）依然是空白，因此还停留在「不能用」阶段"], a: 3,
+    e: "专家系统原文：是一个【智能计算机程序系统】，通常由【人机交互界面、知识库、推理机、解释器、综合数据库、知识获取】等 6 个部分构成；简而言之，专家系统是一种【模拟人类专家解决领域问题的计算机程序系统】；其发展【已经历了三个阶段，正向第四代过渡和发展】。应用和发展原文：经过 60 多年的发展，人工智能在【算法、算力（计算能力）和算料（数据）】等方面取得了重要突破，正处于【从「不能用」到「可以用」的技术拐点】，但是【距离「很好用」还存在诸多瓶颈】。D 与「三个方面均取得重要突破」矛盾。" },
+  // 模块F 虚拟现实 (21-22)
+  { m: "F·虚拟现实", q: "教材所述虚拟现实的主要特征共有（　）。",
+    o: ["5 条：沉浸性、交互性、多感知性、构想性（也称想象性）和自主性","3 条：沉浸性、交互性、构想性（业界常说的「3I」）","4 条：沉浸性、交互性、多感知性、自主性（不含构想性）","2 条：沉浸性和交互性"], a: 0,
+    e: "⚠ 本节最大陷阱之一。教材 2.2.6 原文：【虚拟现实技术的主要特征包括沉浸性、交互性、多感知性、构想性（也称想象性）和自主性】——共【5 条】。业界常说「VR 三特征（3I）＝沉浸性、交互性、构想性」，教材比它【多出「多感知性」和「自主性」】。定义原文：虚拟现实（Virtual Reality，VR）是一种【可以创立和体验虚拟世界的计算机系统】（其中【虚拟世界是全体虚拟环境的总称】）。" },
+  { m: "F·虚拟现实", q: "关于虚拟现实的发展演进与关键技术，下列表述错误的是（　）。",
+    o: ["按照「沉浸性」程度的高低和交互程度的不同，虚拟现实技术已经从桌面虚拟现实系统、沉浸式虚拟现实系统、分布式虚拟现实系统等，向着增强式虚拟现实系统（AR）和元宇宙的方向发展","虚拟现实的关键技术主要涉及人机交互技术、传感器技术、动态环境建模技术和系统集成技术","动态环境建模技术的目的是获取实际环境的三维数据，并根据应用的需要利用获取的三维数据建立相应的虚拟环境模型——虚拟环境的建立是 VR 技术的核心内容","信息同步、模型标定、数据转换、识别与合成属于动态环境建模技术"], a: 3,
+    e: "教材原文：按「【沉浸性】」程度的高低和交互程度的不同，VR 技术已从【桌面虚拟现实系统、沉浸式虚拟现实系统、分布式虚拟现实系统】等，【向着增强式虚拟现实系统（Augmented Reality，AR）和元宇宙的方向发展】。VR 关键技术四项＝【人机交互技术 · 传感器技术 · 动态环境建模技术 · 系统集成技术】。其中【虚拟环境的建立是 VR 技术的核心内容】，动态环境建模技术的目的是【获取实际环境的三维数据…建立相应的虚拟环境模型】；而【信息同步、模型标定、数据转换、数据管理模型、识别与合成】属于【系统集成技术】——D 张冠李戴。判别口诀：建模解决「环境怎么来」，集成解决「信息怎么合」。" }
+];
+
+let idx = 0, score = 0, answers = [], current = QUESTIONS, locked = false;
+
+function initAll() {
+  idx = 0; score = 0; answers = []; current = QUESTIONS.slice();
+  document.getElementById("quiz").style.display = "block";
+  document.getElementById("result").style.display = "none";
+  renderQ();
+}
+function renderQ() {
+  locked = false;
+  const q = current[idx];
+  document.getElementById("pbar").style.width = (idx / current.length * 100) + "%";
+  let html = '<div class="card"><span class="qtag">' + q.m + '</span><span class="qno">第 ' + (idx+1) + ' / ' + current.length + ' 题</span>';
+  html += '<div class="qtext">' + q.q + '</div>';
+  q.o.forEach((t, i) => { html += '<button class="opt" data-i="' + i + '"><span class="mark">' + "ABCD"[i] + '</span>' + t + '</button>'; });
+  html += '<div class="explain" id="ex"><b>精讲：</b>' + q.e + '</div>';
+  html += '<button class="btn" id="next" disabled>' + (idx === current.length-1 ? "查看结果" : "下一题 (Enter)") + '</button></div>';
+  document.getElementById("quiz").innerHTML = html;
+  document.querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => choose(+b.dataset.i)));
+  document.getElementById("next").addEventListener("click", next);
+}
+function choose(i) {
+  if (locked) return; locked = true;
+  const q = current[idx], ok = i === q.a;
+  if (ok) score++;
+  answers[idx] = { ok, q };
+  document.querySelectorAll(".opt").forEach((b, j) => {
+    b.disabled = true;
+    if (j === q.a) b.classList.add("right");
+    else if (j === i) b.classList.add("wrong");
+  });
+  document.getElementById("ex").style.display = "block";
+  document.getElementById("next").disabled = false;
+}
+function next() {
+  if (idx < current.length - 1) { idx++; renderQ(); }
+  else finish();
+}
+function finish() {
+  document.getElementById("quiz").style.display = "none";
+  document.getElementById("pbar").style.width = "100%";
+  const res = document.getElementById("result");
+  res.style.display = "block";
+  document.getElementById("finalScore").textContent = score + " / " + current.length;
+  const pct = Math.round(score / current.length * 100);
+  document.getElementById("advice").textContent =
+    pct >= 80 ? "✅ 达标（≥80%），2.2 六大新一代信息技术模块已过关，可进入 2.3 本章练习做整章串联重测！" :
+    pct >= 60 ? "🔶 接近达标：回看错题对应模块的清单条目，重点补「IaaS/PaaS/SaaS 分层」「大数据四特征」「区块链四大类与七特征」「专家系统六部分」「VR 五特征」五组，明天重测。" :
+    "❌ 未达标：请重读《2.2_知识点清单》的表格部分后重新测验。2.2 每年必出 3~5 题，这一节值得多花一天。";
+  // 分模块统计
+  const mods = {};
+  current.forEach((q, i) => {
+    mods[q.m] = mods[q.m] || { t: 0, r: 0 };
+    mods[q.m].t++;
+    if (answers[i] && answers[i].ok) mods[q.m].r++;
+  });
+  let rows = "";
+  Object.keys(mods).forEach(m => {
+    const st = mods[m].r / mods[m].t >= 0.8 ? "✅" : "🔶";
+    rows += '<tr><td class="module-stat">' + m + '</td><td>' + mods[m].r + " / " + mods[m].t + '</td><td>' + st + '</td></tr>';
+  });
+  document.getElementById("moduleTable").innerHTML = '<tr><th>模块</th><th>正确率</th><th>状态</th></tr>' + rows;
+  // 错题
+  const wrongs = current.map((q, i) => ({ q, i })).filter(x => !answers[x.i] || !answers[x.i].ok);
+  if (wrongs.length) {
+    document.getElementById("reviewWrap").style.display = "block";
+    document.getElementById("retryWrong").style.display = "inline-block";
+    document.getElementById("reviewList").innerHTML = wrongs.map(x =>
+      '<div class="wrong-item"><b>【' + x.q.m + '】</b>' + x.q.q +
+      '<br>✔ 正确答案：<b>' + "ABCD"[x.q.a] + " · " + x.q.o[x.q.a] + '</b><br><span style="color:#666">' + x.q.e + '</span></div>'
+    ).join("");
+  } else {
+    document.getElementById("reviewWrap").style.display = "none";
+    document.getElementById("retryWrong").style.display = "none";
+  }
+}
+document.getElementById("retryWrong").addEventListener("click", () => {
+  current = current.filter((q, i) => !answers[i] || !answers[i].ok);
+  idx = 0; score = 0; answers = [];
+  document.getElementById("result").style.display = "none";
+  document.getElementById("quiz").style.display = "block";
+  renderQ();
+});
+document.addEventListener("keydown", ev => {
+  if (document.getElementById("result").style.display === "block") return;
+  const k = ev.key.toUpperCase();
+  const sel = "ABCD".indexOf(k);
+  if (sel >= 0 && !locked) choose(sel);
+  else if ((ev.key === "Enter" || k === "ENTER") && locked) next();
+});
+initAll();
+</script>
+</body>
+</html>
