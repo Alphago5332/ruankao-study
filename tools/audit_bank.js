@@ -75,6 +75,7 @@ const report = [];
 const add = (title, items) => { if (items.length) report.push({ title, items }); };
 
 const POOL = [];   // 全部题目（答题系统 + 自测题）统一池，用于跨库近似查重
+let KEY_INFO = { total: 0, bad: 0 };   // check 键绑定统计（A 段填充）
 
 /** 通用查重：all = [{ file, sec, id, q, ans }] */
 function dupChecks(all, label) {
@@ -121,6 +122,27 @@ if (fs.existsSync(bankFile)) {
   add('答题系统 · 同一节清单键被多题挂（参考项，一条清单含多命题点时正常）',
     Object.entries(byCheck).filter(([, v]) => v.length > 1).map(([k, v]) => `${k} ← ${v.join(', ')}`));
 
+  // check 键必须真实存在于对应的「可勾选清单」HTML 里
+  // （键制分裂：1.1/1.2 是行号键 L##，1.3 起是语义键 A1/B3…；清单增删行后 L## 会整体错位）
+  const keyCache = {};
+  const badKey = [];
+  let checkTotal = 0;
+  all.forEach(q => (q.check || []).forEach(([rel, k]) => {
+    checkTotal++;
+    const htmlRel = rel.replace(/\.md$/, '_可勾选.html');
+    if (!(htmlRel in keyCache)) {
+      const p = path.join(root, htmlRel);
+      keyCache[htmlRel] = fs.existsSync(p)
+        ? new Set([...read(p).matchAll(/data-key="([^"]+)"/g)].map(m => m[1]))
+        : null;
+    }
+    const set = keyCache[htmlRel];
+    if (!set) badKey.push(`${q.id}: 清单 HTML 不存在 → ${htmlRel}`);
+    else if (!set.has(k)) badKey.push(`${q.id}: 键 ${k} 不在 ${path.basename(htmlRel)}（点「去清单勾选」会失效；清单增删行后请重跑 md2checklist.js 并同步 check 键）`);
+  }));
+  add('答题系统 · check 键在清单 HTML 里不存在（联动失效，必修）', badKey);
+  KEY_INFO = { total: checkTotal, bad: badKey.length };
+
   // 答案分布
   const byAns = {};
   all.forEach(q => (q.blanks || []).forEach(b => (byAns[norm(b)] = byAns[norm(b)] || []).push(q.sec + '/' + q.id)));
@@ -132,6 +154,7 @@ if (fs.existsSync(bankFile)) {
   lines.push('文件：' + CH);
   lines.push('分节题量：' + bankSecs.map(s => `${s}: ${BANK[s].length}`).join(' | '));
   lines.push('合计：' + bankCount + ' 题');
+  lines.push(`check 键→清单绑定：${KEY_INFO.total} 处，失效 ${KEY_INFO.bad} 处`);
 } else {
   lines.push('（未找到 ' + CH + '，跳过）');
 }
