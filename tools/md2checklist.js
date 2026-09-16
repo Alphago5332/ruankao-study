@@ -47,7 +47,7 @@ function tableHtml(rowsSrc) {
     '</tbody></table>';
 }
 
-function renderContinuation(lines) {
+function renderBlocks(lines) {
   // lines 已经是去掉列表项前导 2 空格后的内容
   const out = [];
   let i = 0;
@@ -72,10 +72,57 @@ function renderContinuation(lines) {
       out.push('<blockquote>' + bqs.map(inline).join('<br>') + '</blockquote>');
       continue;
     }
+    if (/^\d+\.\s+/.test(l.trim())) {
+      const items = [];
+      while (i < lines.length && /^\d+\.\s+/.test(lines[i].trim())) {
+        items.push(lines[i].trim().replace(/^\d+\.\s+/, ''));
+        i++;
+      }
+      out.push('<ol>' + items.map(t => `<li>${inline(t)}</li>`).join('') + '</ol>');
+      continue;
+    }
     out.push('<p>' + inline(l) + '</p>');
     i++;
   }
-  return out.length ? '<div class="item-body">' + out.join('\n') + '</div>' : '';
+  return out;
+}
+
+function renderContinuation(lines) {
+  const blocks = renderBlocks(lines);
+  return blocks.length ? '<div class="item-body">' + blocks.join('\n') + '</div>' : '';
+}
+
+/* <details> 块内需要「原样透传」的块级标签行。
+ * 其余内容行一律交给 renderBlocks 解析 —— 早期版本把整个 <details> 块原样吐出去，
+ * 导致块内的 **加粗** / 序号列表 全部裸露成星号和连成一片的纯文本（2026-09-16 修复）。 */
+const DETAILS_TAG = /^\s*<\/?(?:details|summary|div|section|table|thead|tbody|tr|td|th|ol|ul|li|blockquote|h[1-6]|p)\b/i;
+
+/**
+ * 渲染一个完整的 <details> 块（blockLines 含首行 <details> 与末行 </details>）。
+ * 标签行原样透传（<summary> 内部仍走行内解析），中间内容行交 renderBlocks 解析，顺序严格保持。
+ * 同时被 fix_details_html.js 复用，用于就地修复已生成的旧 HTML。
+ * @returns {string} 用 '\n' 连接的 HTML 片段
+ */
+function renderDetailsInner(blockLines) {
+  const html = [];
+  let buf = [];
+  const flush = () => {
+    const blocks = renderBlocks(buf);
+    if (blocks.length) html.push(blocks.join('\n'));
+    buf = [];
+  };
+  for (const l of blockLines) {
+    const t = l.trim();
+    if (DETAILS_TAG.test(t)) {
+      flush();
+      const m = t.match(/^<summary>([\s\S]*?)<\/summary>$/i);
+      html.push(m ? `<summary>${inline(m[1])}</summary>` : t);
+    } else {
+      buf.push(l);
+    }
+  }
+  flush();
+  return html.join('\n');
 }
 
 function parse(md, relPath) {
@@ -111,7 +158,7 @@ function parse(md, relPath) {
         i++;
       }
       if (i < lines.length) block.push(lines[i++]);
-      out.push(block.join('\n'));
+      out.push(renderDetailsInner(block));
       continue;
     }
 
@@ -294,19 +341,23 @@ function wrap(title, bodyHtml, relPath) {
 </html>`;
 }
 
-if (process.argv.length < 4) {
-  console.log('用法：node md2checklist.js <输入.md> <输出.html> [仓库相对路径] [--semantic]');
-  process.exit(1);
+if (require.main === module) {
+  if (process.argv.length < 4) {
+    console.log('用法：node md2checklist.js <输入.md> <输出.html> [仓库相对路径] [--semantic]');
+    process.exit(1);
+  }
+
+  const args = process.argv.slice(2).filter(a => !a.startsWith('--'));
+  const input = args[0];
+  const output = args[1];
+  const relPath = args[2] || path.basename(input);
+  const md = fs.readFileSync(input, 'utf8');
+  const titleMatch = md.match(/^#\s+(.+)$/m);
+  const title = titleMatch ? titleMatch[1] : path.basename(input, '.md');
+  const body = parse(md, relPath);
+  const html = wrap(title, body, relPath);
+  fs.writeFileSync(output, html, 'utf8');
+  console.log('已生成：' + output);
 }
 
-const args = process.argv.slice(2).filter(a => !a.startsWith('--'));
-const input = args[0];
-const output = args[1];
-const relPath = args[2] || path.basename(input);
-const md = fs.readFileSync(input, 'utf8');
-const titleMatch = md.match(/^#\s+(.+)$/m);
-const title = titleMatch ? titleMatch[1] : path.basename(input, '.md');
-const body = parse(md, relPath);
-const html = wrap(title, body, relPath);
-fs.writeFileSync(output, html, 'utf8');
-console.log('已生成：' + output);
+module.exports = { parse, wrap, inline, renderBlocks, renderDetailsInner };
