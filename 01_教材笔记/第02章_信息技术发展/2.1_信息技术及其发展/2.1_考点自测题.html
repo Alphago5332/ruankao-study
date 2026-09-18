@@ -3,69 +3,144 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2.1 信息技术及其发展 · 考点自测题</title>
+<title>2.1 信息技术及其发展 · 考点自测 22 题</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #333; }
-  .wrap { max-width: 760px; margin: 0 auto; padding: 20px 16px 60px; }
-  header { background: #185FA5; color: #fff; border-radius: 8px; padding: 18px 20px; margin-bottom: 16px; }
-  header h1 { font-size: 19px; margin-bottom: 4px; }
-  header p { font-size: 12.5px; opacity: .85; }
-  .progress-bar { background: rgba(255,255,255,.25); border-radius: 4px; height: 8px; margin-top: 10px; }
-  .progress-bar i { display: block; height: 100%; background: #ffc53d; border-radius: 4px; width: 0; transition: width .3s; }
-  .card { background: #fff; border-radius: 8px; padding: 18px 20px; margin-bottom: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
-  .qtag { font-size: 11px; color: #854F0B; background: #fff7e6; border: 1px solid #f0d9a0; border-radius: 3px; padding: 1px 6px; margin-right: 6px; }
-  .qno { font-weight: bold; color: #185FA5; }
-  .qtext { font-size: 14.5px; line-height: 1.65; margin: 8px 0 12px; }
-  .opt { display: block; width: 100%; text-align: left; border: 1px solid #d9e2ec; border-radius: 6px;
-    background: #fff; padding: 9px 12px; font-size: 13.5px; margin-bottom: 8px; cursor: pointer; line-height: 1.5; }
-  .opt:hover { border-color: #185FA5; }
-  .opt.sel { border-color: #185FA5; background: #eef4fb; }
-  .opt.right { border-color: #2e7d32; background: #eef7ee; }
-  .opt.wrong { border-color: #c62828; background: #fdeeee; }
-  .opt .mark { font-weight: bold; margin-right: 6px; color: #185FA5; }
-  .explain { display: none; background: #f4f8fc; border-left: 3px solid #185FA5; border-radius: 4px;
-    padding: 10px 12px; font-size: 13px; line-height: 1.7; color: #444; margin-top: 4px; }
-  .explain b { color: #185FA5; }
-  .btn { background: #185FA5; color: #fff; border: none; border-radius: 6px; padding: 9px 22px;
-    font-size: 14px; cursor: pointer; margin-top: 10px; }
-  .btn.gray { background: #90a4ae; }
-  .btn:disabled { background: #b0bec5; cursor: not-allowed; }
-  #result { display: none; text-align: center; }
-  #result .big { font-size: 40px; font-weight: bold; color: #185FA5; margin: 10px 0; }
-  table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 14px 0; }
-  th, td { border: 1px solid #d9e2ec; padding: 7px 8px; text-align: center; }
-  th { background: #eef4fb; color: #185FA5; }
-  .module-stat td:first-child { text-align: left; }
-  #reviewList { text-align: left; }
-  .wrong-item { border: 1px solid #f0c4c4; border-radius: 6px; padding: 10px 12px; margin-bottom: 8px; font-size: 13px; background: #fffafa; }
-  .wrong-item b { color: #c62828; }
-  .kbd-tip { font-size: 11.5px; color: #999; margin-top: 8px; }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;padding:24px 14px 60px;background:#eef0f3;color:#1f2328;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    gap:14px;margin-bottom:18px;flex-wrap:wrap;
+  }
+  h1{font-size:20px;margin:0;font-weight:600;}
+  .sub{font-size:12.5px;color:#6b7280;margin:5px 0 0;}
+  .score-chip{
+    background:#E6F1FB;border:1px solid #B5D4F4;color:#0C447C;
+    border-radius:8px;padding:7px 13px;font-size:13px;white-space:nowrap;
+  }
+  .score-chip b{font-size:16px;font-weight:600;}
+
+  #quiz{
+    background:#fff;border-radius:12px;padding:22px 24px;
+    box-shadow:0 2px 12px rgba(16,24,40,.08);
+  }
+  .progress-row{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:8px;font-size:13px;color:#4b5563;
+  }
+  .chip{
+    background:#FAEEDA;border:1px solid #EFC98A;color:#633806;
+    border-radius:5px;padding:2px 9px;font-size:12px;
+  }
+  .progress{height:6px;background:#e5e8ee;border-radius:4px;overflow:hidden;margin-bottom:20px;}
+  #bar{height:100%;width:0;background:#185FA5;border-radius:4px;transition:width .25s;}
+
+  .qtext{font-size:16px;line-height:1.75;font-weight:500;margin:0 0 18px;}
+  .opt{
+    display:flex;gap:10px;align-items:flex-start;
+    border:1px solid #d9dee5;border-radius:9px;padding:11px 14px;
+    margin-bottom:10px;cursor:pointer;font-size:14.5px;line-height:1.6;
+    background:#fff;transition:border-color .12s,background .12s;
+  }
+  .opt:hover{border-color:#185FA5;background:#f7fafd;}
+  .opt .tag{
+    flex:0 0 22px;height:22px;border-radius:50%;
+    background:#eef1f5;color:#3b4552;font-size:12px;font-weight:600;
+    display:flex;align-items:center;justify-content:center;margin-top:2px;
+  }
+  .opt.correct{border-color:#0F6E56;background:#E1F5EE;}
+  .opt.correct .tag{background:#0F6E56;color:#fff;}
+  .opt.wrong{border-color:#A32D2D;background:#FCEBEB;}
+  .opt.wrong .tag{background:#A32D2D;color:#fff;}
+  .opt.dim{opacity:.55;cursor:default;}
+  .opt.correct.dim{opacity:1;}
+  .opt.locked{cursor:default;}
+
+  #feedback{margin-top:14px;border-radius:9px;overflow:hidden;border:1px solid #d9dee5;}
+  #verdict{
+    padding:10px 14px;font-size:14px;font-weight:600;
+    background:#E1F5EE;color:#085041;border-bottom:1px solid #cbe9da;
+  }
+  #verdict.bad{background:#FCEBEB;color:#501313;border-bottom:1px solid #f3cdcd;}
+  #explain{padding:12px 14px;font-size:13.5px;line-height:1.8;color:#374151;background:#fdfdfe;}
+  #explain b{color:#1f2328;}
+  #nextBtn{
+    display:block;margin:14px 16px 16px;float:right;
+    background:#185FA5;color:#fff;border:none;border-radius:8px;
+    padding:9px 26px;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  #nextBtn:hover{background:#14507f;}
+  #feedback::after{content:"";display:block;clear:both;}
+  .kbd{font-size:11.5px;color:#9aa3af;margin:14px 2px 0;}
+
+  #result{background:#fff;border-radius:12px;padding:26px 28px;box-shadow:0 2px 12px rgba(16,24,40,.08);}
+  .r-head{display:flex;gap:22px;align-items:center;margin-bottom:6px;flex-wrap:wrap;}
+  .r-score{font-size:44px;font-weight:600;color:#185FA5;line-height:1;}
+  .r-score small{font-size:18px;color:#8b949e;font-weight:400;}
+  .r-msg{font-size:14px;color:#4b5563;line-height:1.7;}
+  h3{font-size:15px;font-weight:600;margin:26px 0 10px;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th,td{border:1px solid #e2e6eb;padding:7px 10px;text-align:left;line-height:1.6;}
+  th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .mbar{height:8px;background:#e5e8ee;border-radius:4px;overflow:hidden;min-width:120px;}
+  .mbar div{height:100%;background:#1D9E75;border-radius:4px;}
+
+  .wq{
+    border:1px solid #f3cdcd;border-radius:9px;padding:13px 15px;
+    margin-bottom:12px;background:#fffafa;
+  }
+  .wq .wt{font-size:14px;font-weight:600;line-height:1.7;margin-bottom:7px;}
+  .wq .wa{font-size:13px;color:#A32D2D;margin-bottom:2px;}
+  .wq .wc{font-size:13px;color:#0F6E56;margin-bottom:8px;}
+  .wq .we{font-size:12.5px;color:#57606a;line-height:1.75;border-top:1px dashed #e8d9d9;padding-top:7px;}
+
+  .btns{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;border-radius:8px;
+    padding:9px 22px;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:#185FA5;border-color:#185FA5;color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn:disabled{opacity:.45;cursor:not-allowed;}
+  .hidden{display:none;}
 </style>
 </head>
 <body>
 <div class="wrap">
+
   <header>
-    <h1>2.1 信息技术及其发展 · 考点自测（22 题）</h1>
-    <p>第 2 章 = 上午最大分值块 · 达标线 18/22（80%）· 键盘 A~D 选择，Enter 确认</p>
-    <div class="progress-bar"><i id="pbar"></i></div>
-  </header>
-  <div id="quiz"></div>
-  <div id="result" class="card">
-    <h2>测验完成</h2>
-    <div class="big" id="finalScore">0 / 22</div>
-    <div id="advice" style="font-size:14px; margin-bottom: 6px;"></div>
-    <table class="module-stat" id="moduleTable">
-      <tr><th>模块</th><th>正确率</th><th>状态</th></tr>
-    </table>
-    <div id="reviewWrap" style="display:none">
-      <h3 style="color:#c62828; font-size:14px; margin-bottom:8px;">错题回顾</h3>
-      <div id="reviewList"></div>
+    <div>
+      <h1>2.1 信息技术及其发展 · 考点自测</h1>
+      <p class="sub">22 题 · 第 4 版教材 2.1 节 · 达标线 18/22（80%）· 逐题精讲 · 键盘 A~D 或 1~4 选择，Enter 下一题</p>
     </div>
-    <button class="btn" id="retryWrong" style="display:none">只重做错题</button>
-    <button class="btn gray" onclick="initAll()">重新测验</button>
+    <div class="score-chip">已答对 <b id="scoreNow">0</b> / <span id="totalNow">22</span> 题</div>
+  </header>
+
+  <div id="quiz">
+    <div class="progress-row">
+      <span id="pos"></span>
+      <span class="chip" id="moduleChip"></span>
+    </div>
+    <div class="progress"><div id="bar"></div></div>
+    <div class="qcard">
+      <p class="qtext" id="qtext"></p>
+      <div id="options"></div>
+      <div id="feedback" class="hidden">
+        <div id="verdict"></div>
+        <div id="explain"></div>
+        <button id="nextBtn">下一题 →</button>
+      </div>
+    </div>
+    <p class="kbd">键盘可用：A~D 或 1~4 选择，Enter 下一题</p>
+    <p class="kbd" style="margin:4px 2px 0;">对照资料：同目录《2.1_知识点清单.md》· 教材出处：《信息系统项目管理师教程（第4版）》约 P37~P49 · 第 2 章上午 6~12 题，是当前性价比最高的一块</p>
   </div>
-  <div class="kbd-tip">对照资料：同目录《2.1_知识点清单.md》· 教材出处：《信息系统项目管理师教程（第4版）》约 P37~P49 · 第 2 章上午 6~12 题，是当前性价比最高的一块</div>
+
+  <div id="result" class="hidden"></div>
+
 </div>
 
 <script>
@@ -143,97 +218,128 @@ const QUESTIONS = [
     e: "教材 2.1.5 原文：硬件向超高速、超小型、平行处理、智能化发展，软件方面【「软件定义一切」】概念成为当前发展的主流；网络方面计算机【网络】与【通信】技术联系日益密切甚至已经融为一体，5G 成为当前主流，NB-IoT、eMTC、IIoT、URLLC 等技术进一步发展；存储和数据库方面向【模型拓展、架构解耦】演进；信息安全方面传统理念过渡到以【可信计算理念】为核心，技术朝【标准化和集成化】发展。D 把「软件定义一切」与「可信计算」的归属对调了——这是本节最易互换的两个词。" }
 ];
 
-let idx = 0, score = 0, answers = [], current = QUESTIONS, locked = false;
+const LETTERS = ["A","B","C","D"];
+let pool = [], cur = 0, answered = false, stats = {}, wrongList = [];
 
-function initAll() {
-  idx = 0; score = 0; answers = []; current = QUESTIONS.slice();
-  document.getElementById("quiz").style.display = "block";
-  document.getElementById("result").style.display = "none";
-  renderQ();
+function init(list){
+  pool = list.map(x=>Object.assign({},x));
+  cur = 0; answered = false; stats = {}; wrongList = [];
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  document.getElementById("totalNow").textContent = pool.length;
+  document.getElementById("scoreNow").textContent = "0";
+  render();
 }
-function renderQ() {
-  locked = false;
-  const q = current[idx];
-  document.getElementById("pbar").style.width = (idx / current.length * 100) + "%";
-  let html = '<div class="card"><span class="qtag">' + q.m + '</span><span class="qno">第 ' + (idx+1) + ' / ' + current.length + ' 题</span>';
-  html += '<div class="qtext">' + q.q + '</div>';
-  q.o.forEach((t, i) => { html += '<button class="opt" data-i="' + i + '"><span class="mark">' + "ABCD"[i] + '</span>' + t + '</button>'; });
-  html += '<div class="explain" id="ex"><b>精讲：</b>' + q.e + '</div>';
-  html += '<button class="btn" id="next" disabled>' + (idx === current.length-1 ? "查看结果" : "下一题 (Enter)") + '</button></div>';
-  document.getElementById("quiz").innerHTML = html;
-  document.querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => choose(+b.dataset.i)));
-  document.getElementById("next").addEventListener("click", next);
-}
-function choose(i) {
-  if (locked) return; locked = true;
-  const q = current[idx], ok = i === q.a;
-  if (ok) score++;
-  answers[idx] = { ok, q };
-  document.querySelectorAll(".opt").forEach((b, j) => {
-    b.disabled = true;
-    if (j === q.a) b.classList.add("right");
-    else if (j === i) b.classList.add("wrong");
+function render(){
+  const q = pool[cur];
+  document.getElementById("pos").textContent = "第 " + (cur+1) + " / " + pool.length + " 题";
+  document.getElementById("moduleChip").textContent = q.m;
+  document.getElementById("bar").style.width = (cur/pool.length*100) + "%";
+  document.getElementById("qtext").innerHTML = q.q;
+  const box = document.getElementById("options");
+  box.innerHTML = "";
+  q.o.forEach((t,i)=>{
+    const d = document.createElement("div");
+    d.className = "opt";
+    d.innerHTML = '<span class="tag">'+LETTERS[i]+'</span><span>'+t+"</span>";
+    d.onclick = ()=>choose(i);
+    box.appendChild(d);
   });
-  document.getElementById("ex").style.display = "block";
-  document.getElementById("next").disabled = false;
+  document.getElementById("feedback").classList.add("hidden");
 }
-function next() {
-  if (idx < current.length - 1) { idx++; renderQ(); }
-  else finish();
-}
-function finish() {
-  document.getElementById("quiz").style.display = "none";
-  document.getElementById("pbar").style.width = "100%";
-  const res = document.getElementById("result");
-  res.style.display = "block";
-  document.getElementById("finalScore").textContent = score + " / " + current.length;
-  const pct = Math.round(score / current.length * 100);
-  document.getElementById("advice").textContent =
-    pct >= 80 ? "✅ 达标（≥80%），2.1 基础模块已过关，可进入下一节 2.2 新一代信息技术及应用！" :
-    pct >= 60 ? "🔶 接近达标：回看错题对应模块的清单条目，重点补「TCP/IP 协议归属」「DAS/NAS/SAN 层级」「数仓基础与核心」「CIA 与四个层次」四组，明天重测。" :
-    "❌ 未达标：请重读《2.1_知识点清单》的表格部分后重新测验。第 2 章是上午最大分值块，这一节值得多花一天。";
-  // 分模块统计
-  const mods = {};
-  current.forEach((q, i) => {
-    mods[q.m] = mods[q.m] || { t: 0, r: 0 };
-    mods[q.m].t++;
-    if (answers[i] && answers[i].ok) mods[q.m].r++;
+function choose(i){
+  if(answered) return;
+  answered = true;
+  const q = pool[cur];
+  const ok = (i === q.a);
+  if(!stats[q.m]) stats[q.m] = {right:0,total:0};
+  stats[q.m].total++;
+  const opts = document.querySelectorAll(".opt");
+  opts.forEach((d,idx)=>{
+    d.classList.add("locked");
+    if(idx === q.a) d.classList.add("correct");
+    else if(idx === i) d.classList.add("wrong");
+    else d.classList.add("dim");
+    d.onclick = null;
   });
-  let rows = "";
-  Object.keys(mods).forEach(m => {
-    const st = mods[m].r / mods[m].t >= 0.8 ? "✅" : "🔶";
-    rows += '<tr><td class="module-stat">' + m + '</td><td>' + mods[m].r + " / " + mods[m].t + '</td><td>' + st + '</td></tr>';
-  });
-  document.getElementById("moduleTable").innerHTML = '<tr><th>模块</th><th>正确率</th><th>状态</th></tr>' + rows;
-  // 错题
-  const wrongs = current.map((q, i) => ({ q, i })).filter(x => !answers[x.i] || !answers[x.i].ok);
-  if (wrongs.length) {
-    document.getElementById("reviewWrap").style.display = "block";
-    document.getElementById("retryWrong").style.display = "inline-block";
-    document.getElementById("reviewList").innerHTML = wrongs.map(x =>
-      '<div class="wrong-item"><b>【' + x.q.m + '】</b>' + x.q.q +
-      '<br>✔ 正确答案：<b>' + "ABCD"[x.q.a] + " · " + x.q.o[x.q.a] + '</b><br><span style="color:#666">' + x.q.e + '</span></div>'
-    ).join("");
+  if(ok){
+    stats[q.m].right++;
+    document.getElementById("scoreNow").textContent = sumRight();
   } else {
-    document.getElementById("reviewWrap").style.display = "none";
-    document.getElementById("retryWrong").style.display = "none";
+    wrongList.push({q:q, picked:i});
   }
+  const v = document.getElementById("verdict");
+  v.textContent = ok ? "✓ 答对了" : "✗ 答错了　正确答案：" + LETTERS[q.a];
+  v.className = ok ? "" : "bad";
+  document.getElementById("explain").innerHTML = q.e;
+  document.getElementById("feedback").classList.remove("hidden");
+  document.getElementById("nextBtn").textContent =
+    (cur === pool.length-1) ? "查看成绩单 →" : "下一题 →";
 }
-document.getElementById("retryWrong").addEventListener("click", () => {
-  current = current.filter((q, i) => !answers[i] || !answers[i].ok);
-  idx = 0; score = 0; answers = [];
-  document.getElementById("result").style.display = "none";
-  document.getElementById("quiz").style.display = "block";
-  renderQ();
+function sumRight(){
+  let s = 0; for(const k in stats) s += stats[k].right; return s;
+}
+function next(){
+  cur++;
+  if(cur >= pool.length){ showResult(); }
+  else { answered = false; render(); window.scrollTo(0,0); }
+}
+function showResult(){
+  document.getElementById("quiz").classList.add("hidden");
+  const r = document.getElementById("result");
+  const total = pool.length, right = sumRight();
+  const pct = Math.round(right/total*100);
+  let msg;
+  if(pct >= 80) msg = "达标（≥80%）：本节知识点基本闭环，可以进入下一节，或用康奈尔模板的「遮」字诀再过一遍线索栏。";
+  else if(pct >= 60) msg = "接近达标：把下面的错题解析看完，回看对应模块的知识点清单，明天用康奈尔模板遮住答案重测。";
+  else msg = "未达标：正确率低是发现漏洞的正常信号——先把知识点清单的「必背」块过一遍，再点「只重做错题」。";
+
+  let tbl = '<h3>分模块得分</h3><table><tr><th>模块</th><th>正确 / 题数</th><th>正确率</th></tr>';
+  for(const k in stats){
+    const s = stats[k];
+    const p = Math.round(s.right/s.total*100);
+    tbl += '<tr><td>'+k+'</td><td>'+s.right+' / '+s.total+'</td><td><div class="mbar"><div style="width:'+p+'%"></div></div></td></tr>';
+  }
+  tbl += "</table>";
+
+  let wrong = "";
+  if(wrongList.length){
+    wrong = "<h3>错题回顾（"+wrongList.length+" 题）</h3>";
+    wrongList.forEach((w,i)=>{
+      wrong += '<div class="wq"><div class="wt">'+(i+1)+". "+w.q.q+"</div>"
+        + '<div class="wa">你的选择：'+LETTERS[w.picked]+"　"+w.q.o[w.picked]+"</div>"
+        + '<div class="wc">正确答案：'+LETTERS[w.q.a]+"　"+w.q.o[w.q.a]+"</div>"
+        + '<div class="we">'+w.q.e+"</div></div>";
+    });
+  } else {
+    wrong = '<h3>错题回顾</h3><p style="font-size:13px;color:#0F6E56;">全部答对，本节知识点已闭环。</p>';
+  }
+
+  r.innerHTML =
+    '<div class="r-head"><div class="r-score">'+right+"<small> / "+total+"</small></div>"
+    + '<div class="r-msg"><b>'+pct+"%</b><br>"+msg+"</div></div>"
+    + tbl + wrong
+    + '<div class="btns">'
+    + '<button class="btn primary" id="retryWrong"'+(wrongList.length?"":" disabled")+">只重做错题（"+wrongList.length+" 题）</button>"
+    + '<button class="btn" id="retryAll">全部重来</button></div>';
+  r.classList.remove("hidden");
+  document.getElementById("retryWrong").onclick = ()=>{
+    const list = wrongList.map(w=>w.q);
+    init(list);
+    window.scrollTo(0,0);
+  };
+  document.getElementById("retryAll").onclick = ()=>{ init(QUESTIONS); window.scrollTo(0,0); };
+  window.scrollTo(0,0);
+}
+document.getElementById("nextBtn").onclick = next;
+document.addEventListener("keydown", e=>{
+  if(document.getElementById("quiz").classList.contains("hidden")) return;
+  if(e.key === "Enter" || e.key === " "){ if(answered){ e.preventDefault(); next(); } return; }
+  const map = {"a":0,"b":1,"c":2,"d":3,"1":0,"2":1,"3":2,"4":3};
+  const k = e.key.toLowerCase();
+  if(k in map && !answered) choose(map[k]);
 });
-document.addEventListener("keydown", ev => {
-  if (document.getElementById("result").style.display === "block") return;
-  const k = ev.key.toUpperCase();
-  const sel = "ABCD".indexOf(k);
-  if (sel >= 0 && !locked) choose(sel);
-  else if ((ev.key === "Enter" || k === "ENTER") && locked) next();
-});
-initAll();
+init(QUESTIONS);
 </script>
 </body>
 </html>

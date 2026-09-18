@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>1.3 现代化创新发展 · 考点自测 20 题</title>
-<style>
-  *{box-sizing:border-box;}
+const fs = require("fs");
+const crypto = require("crypto");
+
+const WRITE = process.argv.includes("--write");
+const files = process.argv.slice(2).filter((a) => a !== "--write");
+
+const CSS = `  *{box-sizing:border-box;}
   body{
     margin:0;padding:24px 14px 60px;background:#eef0f3;color:#1f2328;
     font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
@@ -106,112 +105,9 @@
   .btn.primary{background:#185FA5;border-color:#185FA5;color:#fff;}
   .btn.primary:hover{background:#14507f;}
   .btn:disabled{opacity:.45;cursor:not-allowed;}
-  .hidden{display:none;}
-</style>
-</head>
-<body>
-<div class="wrap">
+  .hidden{display:none;}`;
 
-  <header>
-    <div>
-      <h1>1.3 现代化创新发展 · 考点自测</h1>
-      <p class="sub">20 题 · 第 4 版教材 1.3 节 · 达标线 16/20（80%）· 逐题精讲 · 键盘 A~D 或 1~4 选择，Enter 下一题</p>
-    </div>
-    <div class="score-chip">已答对 <b id="scoreNow">0</b> / <span id="totalNow">20</span> 题</div>
-  </header>
-
-  <div id="quiz">
-    <div class="progress-row">
-      <span id="pos"></span>
-      <span class="chip" id="moduleChip"></span>
-    </div>
-    <div class="progress"><div id="bar"></div></div>
-    <div class="qcard">
-      <p class="qtext" id="qtext"></p>
-      <div id="options"></div>
-      <div id="feedback" class="hidden">
-        <div id="verdict"></div>
-        <div id="explain"></div>
-        <button id="nextBtn">下一题 →</button>
-      </div>
-    </div>
-    <p class="kbd">键盘可用：A~D 或 1~4 选择，Enter 下一题</p>
-    <p class="kbd" style="margin:4px 2px 0;">对照资料：同目录《1.3_知识点清单.md》· 教材出处：《信息系统项目管理师教程（第4版）》约 P13~P18</p>
-  </div>
-
-  <div id="result" class="hidden"></div>
-
-</div>
-
-<script>
-const QUESTIONS = [
-  // 模块A 农业农村现代化 (1-5)
-  { m: "A·农业农村现代化", q: "农业现代化的核心手段是（　）。",
-    o: ["农业机械化","农业信息化","农业数字化","农业规模化"], a: 1,
-    e: "教材原文：农业信息化是农业现代化的重要技术手段。农业现代化用现代工业装备、现代科学技术改造、现代管理方法管理、现代科学文化知识提高农民素质。" },
-  { m: "A·农业农村现代化", q: "乡村振兴战略聚焦数字赋能农业农村现代化建设，重点方面（　）不属于其中。",
-    o: ["建设基础设施","发展智慧农业","建设数字乡村","发展乡村旅游"], a: 3,
-    e: "三重点：建设基础设施、发展智慧农业、建设数字乡村（口诀：设施、农业、乡村）。" },
-  { m: "A·农业农村现代化", q: "建设基础设施要求：推动农村千兆光网、5G、移动物联网等新技术与（　）同步规划建设。",
-    o: ["县城","城市","东部地区","产业园区"], a: 1,
-    e: "教材原文：与城市同步规划建设，提升农村宽带网络水平；同时注重新建和改造两手抓。" },
-  { m: "A·农业农村现代化", q: "发展智慧农业要建立和推广应用农业农村（　）体系。",
-    o: ["电子商务","大数据","现代物流","普惠金融"], a: 1,
-    e: "发展智慧农业：建立和推广应用农业农村大数据体系，推动物联网、大数据、人工智能、区块链与农业生产经营深度融合。" },
-  { m: "A·农业农村现代化", q: "建设数字田园、数字灌区和智慧农牧渔场，属于乡村振兴三重点中的（　）。",
-    o: ["建设基础设施","发展智慧农业","建设数字乡村","数字化治理"], a: 1,
-    e: "数字田园、数字灌区、智慧农牧渔场是「发展智慧农业」的载体；数字惠民服务体系、「互联网+」政务服务延伸属于「建设数字乡村」。" },
-  // 模块B 两化融合 (6-11)
-  { m: "B·两化融合", q: "两化融合是指信息化和工业化的（　）。",
-    o: ["简单叠加","高层次深度结合","部分替代","先后接续"], a: 1,
-    e: "教材定义：信息化和工业化的高层次深度结合；以信息化带动工业化、以工业化促进信息化，走新型工业化道路。" },
-  { m: "B·两化融合", q: "两化融合的核心就是（　）支撑。",
-    o: ["工业化","信息化","政策","资本"], a: 1,
-    e: "两化融合的核心就是信息化支撑，追求可持续发展模式。" },
-  { m: "B·两化融合", q: "汽车制造技术与电子技术融合产生汽车电子技术，属于四个方面融合中的（　）。",
-    o: ["技术融合","产品融合","业务融合","产业衍生"], a: 0,
-    e: "技术融合 = 工业技术与信息技术融合产生新技术；另一例子：工业和计算机控制技术融合产生工业控制技术。" },
-  { m: "B·两化融合", q: "普通机床加上数控系统变成数控机床，属于（　）。",
-    o: ["技术融合","产品融合","业务融合","产业衍生"], a: 1,
-    e: "产品融合 = 电子信息技术或产品渗透到产品中，增加技术含量。同类例子：传统家电智能化变成智能家电、飞机模型加控制芯片变遥控飞机。" },
-  { m: "B·两化融合", q: "计算机管理方式改变了传统手工台账，属于（　）。",
-    o: ["产品融合","技术融合","业务融合","产业衍生"], a: 2,
-    e: "业务融合 = 信息技术应用到研发设计、生产制造、经营管理、市场营销等各个环节（计算机管理替代手工台账、网络营销）。" },
-  { m: "B·两化融合", q: "两化融合催生出工业电子、工业软件、工业信息服务业等新产业，这称为（　）。",
-    o: ["技术融合","产业衍生","业务融合","产品融合"], a: 1,
-    e: "产业衍生 = 催生新产业、形成新兴业态：工业电子（机械/汽车/船舶/航空电子）、工业软件（设计/控制软件）、工业信息服务业（B2B 电商、信息化咨询）。注意：是「产业衍生」不是「产业融合」。" },
-  // 模块C 智能制造 (12-17)
-  { m: "C·智能制造", q: "智能制造具有「自感知、自学习、自决策、（　）、自适应」等功能。",
-    o: ["自修复","自执行","自配置","自诊断"], a: 1,
-    e: "「五自」：自感知、自学习、自决策、自执行、自适应（口诀：感学决执适）。" },
-  { m: "C·智能制造", q: "智能制造贯穿于（　）等制造活动的各个环节。",
-    o: ["设计、生产、管理、服务","采购、销售、运输、售后","研发、市场、财务、人事","规划、建设、运营、维护"], a: 0,
-    e: "教材原文：贯穿于设计、生产、管理、服务等制造活动的各个环节（口诀：设生管服）；本质是基于新一代信息通信技术与先进制造技术深度融合的新型生产方式。" },
-  { m: "C·智能制造", q: "《智能制造能力成熟度模型》的国家标准编号是（　）。",
-    o: ["GB/T 39116","GB/T 22239","GB/T 36073","GB 50174"], a: 0,
-    e: "GB/T 39116《智能制造能力成熟度模型》。防坑：GB/T 22239 是等保基本要求，GB/T 36073 是数据管理能力成熟度（DCMM）。" },
-  { m: "C·智能制造", q: "智能制造能力成熟度模型的能力要素包括（　）。",
-    o: ["人员、技术、资源、制造","人、机、料、法、环","战略、流程、组织、技术","规划、规范、集成、优化"], a: 0,
-    e: "能力要素四项「人技资制」：人员（组织战略、人员技能）、技术（数据、集成、信息安全）、资源（装备、网络）、制造（设计、生产、物流、销售、服务）。D 是五个等级的名称。" },
-  { m: "C·智能制造", q: "智能制造能力成熟度等级中，「对装备、系统等开展集成，实现跨业务活动间的数据共享」的是（　）。",
-    o: ["规划级","规范级","集成级","优化级"], a: 2,
-    e: "三级集成级 = 装备、系统集成 + 跨业务活动数据共享。对照：二级规范级 = 单一业务活动数据共享；四级优化级 = 数据挖掘形成知识模型、精准预测和优化。" },
-  { m: "C·智能制造", q: "智能制造能力成熟度自低向高的第三级是（　），第五级是（　）。",
-    o: ["规范级、引领级","集成级、引领级","集成级、优化级","优化级、引领级"], a: 1,
-    e: "五级顺序：规划级 → 规范级 → 集成级 → 优化级 → 引领级。⚠️ 智慧城市成熟度五级是规划/管理/协同/优化/引领，第二、三级名称不同，勿背串。" },
-  // 模块D 消费互联网 (18-20)
-  { m: "D·消费互联网", q: "消费互联网的两大基本属性是（　）。",
-    o: ["媒体属性和产业属性","社交属性和娱乐属性","信息属性和交易属性","平台属性和流量属性"], a: 0,
-    e: "两大属性：媒体属性（自媒体、社交媒体、资讯门户网站）、产业属性（在线旅游、为消费者提供生活服务的电子商务）。" },
-  { m: "D·消费互联网", q: "下列属于消费互联网「媒体属性」的是（　）。",
-    o: ["在线旅游","自媒体、社交媒体和资讯门户网站","生活服务电子商务","网络商城"], a: 1,
-    e: "媒体属性 = 自媒体、社交媒体、资讯门户网站；产业属性 = 在线旅游、生活服务类电子商务。" },
-  { m: "D·消费互联网", q: "消费互联网推动的「无身份社会」，其实现基础是互联网通过数据记录、存储、整合和共享实现了（　）。",
-    o: ["完全匿名交易","更高层次的信任校验和过程可追溯","取消实名认证","去中心化自治"], a: 1,
-    e: "「无身份社会」= 参与者无需完成「身份认定」，因为互联网搭建了更高层次的信任校验模式，通过数据记录、存储、整合和共享实现复杂校验和过程可追溯。" }
-];
-
-const LETTERS = ["A","B","C","D"];
+const LOGIC = `const LETTERS = ["A","B","C","D"];
 let pool = [], cur = 0, answered = false, stats = {}, wrongList = [];
 
 function init(list){
@@ -332,7 +228,123 @@ document.addEventListener("keydown", e=>{
   const k = e.key.toLowerCase();
   if(k in map && !answered) choose(map[k]);
 });
-init(QUESTIONS);
+init(QUESTIONS);`;
+
+function sha1(s) {
+  return crypto.createHash("sha1").update(s, "utf8").digest("hex").slice(0, 10);
+}
+
+function build(file) {
+  const raw = fs.readFileSync(file, "utf8");
+  const eol = raw.includes("\r\n") ? "\r\n" : "\n";
+  const lines = raw.split(/\r?\n/);
+
+  let start = -1, end = -1;
+  for (let i = 0; i < lines.length; i++) {
+    if (start < 0 && /^const\s+QUESTIONS\s*=\s*\[$/.test(lines[i])) start = i;
+    else if (start >= 0 && end < 0 && /^\];$/.test(lines[i])) end = i;
+  }
+  if (start < 0 || end < 0) throw new Error("无法定位 QUESTIONS 数组: " + file);
+
+  const arrLines = lines.slice(start, end + 1);
+  const arrText = arrLines.join("\n");
+  const n = (arrText.match(/\bm\s*:/g) || []).length;
+  if (!n) throw new Error("题目数为 0: " + file);
+
+  const h1raw = ((raw.match(/<h1[^>]*>([\s\S]*?)<\/h1>/) || [, ""])[1] || "")
+    .replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+  const h1 = h1raw.replace(/[（(]\s*\d+\s*题\s*[）)]/g, "").trim();
+  const sec = (h1.match(/^([\d.]+)/) || [, ""])[1];
+  const pass = Math.ceil(n * 0.8);
+
+  const srcMatch =
+    raw.match(/<div class="kbd-tip"[^>]*>([\s\S]*?)<\/div>/) ||
+    raw.match(/<p class="kbd-tip"[^>]*>([\s\S]*?)<\/p>/);
+  const srcText = srcMatch ? srcMatch[1].replace(/\s+/g, " ").trim() : "";
+  const srcHtml = srcText
+    ? '\n    <p class="kbd" style="margin:4px 2px 0;">' + srcText + "</p>"
+    : "";
+
+  const sub =
+    n + " 题 · 第 4 版教材 " + sec + " 节 · 达标线 " + pass + "/" + n +
+    "（80%）· 逐题精讲 · 键盘 A~D 或 1~4 选择，Enter 下一题";
+  const title = h1 + " " + n + " 题";
+
+  const out = `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${title}</title>
+<style>
+${CSS}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <h1>${h1}</h1>
+      <p class="sub">${sub}</p>
+    </div>
+    <div class="score-chip">已答对 <b id="scoreNow">0</b> / <span id="totalNow">${n}</span> 题</div>
+  </header>
+
+  <div id="quiz">
+    <div class="progress-row">
+      <span id="pos"></span>
+      <span class="chip" id="moduleChip"></span>
+    </div>
+    <div class="progress"><div id="bar"></div></div>
+    <div class="qcard">
+      <p class="qtext" id="qtext"></p>
+      <div id="options"></div>
+      <div id="feedback" class="hidden">
+        <div id="verdict"></div>
+        <div id="explain"></div>
+        <button id="nextBtn">下一题 →</button>
+      </div>
+    </div>
+    <p class="kbd">键盘可用：A~D 或 1~4 选择，Enter 下一题</p>${srcHtml}
+  </div>
+
+  <div id="result" class="hidden"></div>
+
+</div>
+
+<script>
+${arrText}
+
+${LOGIC}
 </script>
 </body>
 </html>
+`;
+
+  const final = eol === "\r\n" ? out.split("\n").join("\r\n") : out;
+
+  // 回读校验：重写后的文件里必须能原样取出同一段数组
+  const back = final.split(eol);
+  let s2 = -1, e2 = -1;
+  for (let i = 0; i < back.length; i++) {
+    if (s2 < 0 && /^const\s+QUESTIONS\s*=\s*\[$/.test(back[i])) s2 = i;
+    else if (s2 >= 0 && e2 < 0 && /^\];$/.test(back[i])) e2 = i;
+  }
+  const arrBack = back.slice(s2, e2 + 1).join("\n");
+
+  return { file, eol: eol === "\r\n" ? "CRLF" : "LF", n, sec, pass, h1, arrHash: sha1(arrText), same: arrBack === arrText, final };
+}
+
+let bad = 0;
+for (const f of files) {
+  const r = build(f);
+  if (!r.same) { bad++; console.log("[FAIL] 数组回读不一致 " + r.file); continue; }
+  console.log(
+    (WRITE ? "[WRITE] " : "[DRY]  ") + r.file.split(/[\\/]/).pop() +
+    "  eol=" + r.eol + "  n=" + r.n + "  达标=" + r.pass + "/" + r.n +
+    "  arrSha1=" + r.arrHash + "  arrRoundTrip=OK"
+  );
+  if (WRITE) fs.writeFileSync(f, r.final, "utf8");
+}
+console.log(WRITE ? "写入完成，异常文件数：" + bad : "dry-run 结束，异常文件数：" + bad);
