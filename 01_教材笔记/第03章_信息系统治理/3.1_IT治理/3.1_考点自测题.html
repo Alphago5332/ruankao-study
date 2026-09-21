@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3.1 IT治理 22 题</title>
+<style>
+  *{box-sizing:border-box;}
+  body{
+    margin:0;padding:24px 14px 60px;background:#eef0f3;color:#1f2328;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    gap:14px;margin-bottom:18px;flex-wrap:wrap;
+  }
+  h1{font-size:20px;margin:0;font-weight:600;}
+  .sub{font-size:12.5px;color:#6b7280;margin:5px 0 0;}
+  .score-chip{
+    background:#E6F1FB;border:1px solid #B5D4F4;color:#0C447C;
+    border-radius:8px;padding:7px 13px;font-size:13px;white-space:nowrap;
+  }
+  .score-chip b{font-size:16px;font-weight:600;}
+
+  #quiz{
+    background:#fff;border-radius:12px;padding:22px 24px;
+    box-shadow:0 2px 12px rgba(16,24,40,.08);
+  }
+  .progress-row{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:8px;font-size:13px;color:#4b5563;
+  }
+  .chip{
+    background:#FAEEDA;border:1px solid #EFC98A;color:#633806;
+    border-radius:5px;padding:2px 9px;font-size:12px;
+  }
+  .progress{height:6px;background:#e5e8ee;border-radius:4px;overflow:hidden;margin-bottom:20px;}
+  #bar{height:100%;width:0;background:#185FA5;border-radius:4px;transition:width .25s;}
+
+  .qtext{font-size:16px;line-height:1.75;font-weight:500;margin:0 0 18px;}
+  .opt{
+    display:flex;gap:10px;align-items:flex-start;
+    border:1px solid #d9dee5;border-radius:9px;padding:11px 14px;
+    margin-bottom:10px;cursor:pointer;font-size:14.5px;line-height:1.6;
+    background:#fff;transition:border-color .12s,background .12s;
+  }
+  .opt:hover{border-color:#185FA5;background:#f7fafd;}
+  .opt .tag{
+    flex:0 0 22px;height:22px;border-radius:50%;
+    background:#eef1f5;color:#3b4552;font-size:12px;font-weight:600;
+    display:flex;align-items:center;justify-content:center;margin-top:2px;
+  }
+  .opt.correct{border-color:#0F6E56;background:#E1F5EE;}
+  .opt.correct .tag{background:#0F6E56;color:#fff;}
+  .opt.wrong{border-color:#A32D2D;background:#FCEBEB;}
+  .opt.wrong .tag{background:#A32D2D;color:#fff;}
+  .opt.dim{opacity:.55;cursor:default;}
+  .opt.correct.dim{opacity:1;}
+  .opt.locked{cursor:default;}
+
+  #feedback{margin-top:14px;border-radius:9px;overflow:hidden;border:1px solid #d9dee5;}
+  #verdict{
+    padding:10px 14px;font-size:14px;font-weight:600;
+    background:#E1F5EE;color:#085041;border-bottom:1px solid #cbe9da;
+  }
+  #verdict.bad{background:#FCEBEB;color:#501313;border-bottom:1px solid #f3cdcd;}
+  #explain{padding:12px 14px;font-size:13.5px;line-height:1.8;color:#374151;background:#fdfdfe;}
+  #explain b{color:#1f2328;}
+  #nextBtn{
+    display:block;margin:14px 16px 16px;float:right;
+    background:#185FA5;color:#fff;border:none;border-radius:8px;
+    padding:9px 26px;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  #nextBtn:hover{background:#14507f;}
+  #feedback::after{content:"";display:block;clear:both;}
+  .kbd{font-size:11.5px;color:#9aa3af;margin:14px 2px 0;}
+
+  #result{background:#fff;border-radius:12px;padding:26px 28px;box-shadow:0 2px 12px rgba(16,24,40,.08);}
+  .r-head{display:flex;gap:22px;align-items:center;margin-bottom:6px;flex-wrap:wrap;}
+  .r-score{font-size:44px;font-weight:600;color:#185FA5;line-height:1;}
+  .r-score small{font-size:18px;color:#8b949e;font-weight:400;}
+  .r-msg{font-size:14px;color:#4b5563;line-height:1.7;}
+  h3{font-size:15px;font-weight:600;margin:26px 0 10px;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th,td{border:1px solid #e2e6eb;padding:7px 10px;text-align:left;line-height:1.6;}
+  th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .mbar{height:8px;background:#e5e8ee;border-radius:4px;overflow:hidden;min-width:120px;}
+  .mbar div{height:100%;background:#1D9E75;border-radius:4px;}
+
+  .wq{
+    border:1px solid #f3cdcd;border-radius:9px;padding:13px 15px;
+    margin-bottom:12px;background:#fffafa;
+  }
+  .wq .wt{font-size:14px;font-weight:600;line-height:1.7;margin-bottom:7px;}
+  .wq .wa{font-size:13px;color:#A32D2D;margin-bottom:2px;}
+  .wq .wc{font-size:13px;color:#0F6E56;margin-bottom:8px;}
+  .wq .we{font-size:12.5px;color:#57606a;line-height:1.75;border-top:1px dashed #e8d9d9;padding-top:7px;}
+
+  .btns{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;border-radius:8px;
+    padding:9px 22px;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:#185FA5;border-color:#185FA5;color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn:disabled{opacity:.45;cursor:not-allowed;}
+  .hidden{display:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <h1>3.1 IT治理</h1>
+      <p class="sub">22 题 · 第 4 版教材 3.1 节 · 达标线 18/22（80%）· 逐题精讲 · 键盘 A~D 或 1~4 选择，Enter 下一题</p>
+    </div>
+    <div class="score-chip">已答对 <b id="scoreNow">0</b> / <span id="totalNow">22</span> 题</div>
+  </header>
+
+  <div id="quiz">
+    <div class="progress-row">
+      <span id="pos"></span>
+      <span class="chip" id="moduleChip"></span>
+    </div>
+    <div class="progress"><div id="bar"></div></div>
+    <div class="qcard">
+      <p class="qtext" id="qtext"></p>
+      <div id="options"></div>
+      <div id="feedback" class="hidden">
+        <div id="verdict"></div>
+        <div id="explain"></div>
+        <button id="nextBtn">下一题 →</button>
+      </div>
+    </div>
+    <p class="kbd">键盘可用：A~D 或 1~4 选择，Enter 下一题</p>
+    <p class="kbd" style="margin:4px 2px 0;">对照资料：同目录《3.1_知识点清单.md》· 教材出处：《信息系统项目管理师教程（第4版）》约 P67~P80 · 第 3 章为第 4 版新增重点章（综合知识约 3~4 分），2023 上及以前旧真题无对应题</p>
+  </div>
+
+  <div id="result" class="hidden"></div>
+
+</div>
+
+<script>
+const QUESTIONS = [
+  // 模块A IT治理基础 (1-6)
+  { m: "A·IT治理基础", q: "教材对 IT 治理的定义是：描述组织采用有效的机制对信息技术和数据资源开发利用，（　　），确保实现组织的战略目标的过程。",
+    o: ["平衡信息化发展和数字化转型过程中的风险","控制信息化建设的成本和进度","提升信息系统集成的自动化水平","规范信息系统项目的立项与验收流程"], a: 0,
+    e: "教材 3.1.1 原文：IT 治理是描述组织采用有效的机制对【信息技术和数据资源】开发利用，【平衡信息化发展和数字化转型过程中的风险】，确保实现组织的【战略目标】的过程。定义抓三词：机制 · 平衡风险 · 战略目标。" },
+  { m: "A·IT治理基础", q: "从组织治理的角度，教材指出 IT 治理是组织在开发利用信息技术过程中，为鼓励组织所期望的组织行为而明确（　　）的框架。",
+    o: ["决策权归属和责任担当","投资规模和回报周期","组织架构和岗位编制","技术路线和选型标准"], a: 0,
+    e: "教材原文：IT 治理是指组织在开发利用信息技术过程中，为鼓励组织所期望的组织行为而【明确决策权归属和责任担当的框架】，其目标是通过 IT 治理的【决策权和责任】影响组织所期望的组织行为。" },
+  { m: "A·IT治理基础", q: "组织制订 IT 资源统一规划时存在的问题，下列不属于教材所列问题的是（　　）。",
+    o: ["多年来分散开发或引进的信息系统形成了许多「信息孤岛」","缺乏共享的、网络化的信息资源，系统集成难题一直无法解决","信息资源整合目标空泛，缺少数据标准化建设方面的建设规划","信息系统项目的预算普遍超支，必须全部推倒重建"], a: 3,
+    e: "教材列出的两个问题：①分散开发或引进的系统形成【信息孤岛】，缺乏共享的、网络化的信息资源，【系统集成难题一直无法解决】；②【信息资源整合目标空泛】，数据中心建设和数据集中管理等规划缺乏可操作性，尤其是【缺少数据标准化建设】方面的建设规划。D「推倒重建」教材无此说法。" },
+  { m: "A·IT治理基础", q: "关于 IT 治理的内涵，下列表述错误的是（　　）。",
+    o: ["IT 治理是组织上层管理的一个有机组成部分，由组织治理层或高级管理层负责","IT 治理强调数字目标与组织战略目标保持一致","IT 治理保护利益相关者的权益，对风险进行有效管理","IT 治理由信息技术部门独立实施，无须治理层和最高管理层参与"], a: 3,
+    e: "内涵 5 方面之一明确：IT 治理由【组织治理层或高级管理层】负责，从组织【全局高度】对信息化与数字化转型做出【制度安排】，体现了治理层和最高管理层对信息相关活动的关注。D 与此相反。其余三项均为内涵原文（目标一致 / 权益风险 / 制度机制 / 多元组成）。" },
+  { m: "A·IT治理基础", q: "IT 治理的主要目标不包括（　　）。",
+    o: ["与业务目标一致","有效利用信息与数据资源","风险管理","消除组织内部全部信息系统风险"], a: 3,
+    e: "教材 3.1.1：IT 治理主要目标包括【与业务目标一致、有效利用信息与数据资源、风险管理】三项（口诀「一有风」）。D「消除全部风险」表述绝对化，教材只要求制定保护级别、对关键资源实施有效监控和事件处理。" },
+  { m: "A·IT治理基础", q: "IT 治理管理层次中，「证实 IT 战略与业务战略是否一致」「证实通过明确的期望和衡量手段交付 IT 价值」是（　　）的主要职责。",
+    o: ["业务与服务执行层","执行管理层","最高管理层","IT 治理委员会秘书处"], a: 2,
+    e: "管理层次三层：最高管理层（如董事会）——【证实 IT 战略与业务战略是否一致；证实通过明确的期望和衡量手段交付 IT 价值；指导 IT 战略、平衡投资；指导信息和数据资源的分配】；执行管理层——制定目标、分析机遇风险、建设关键过程与核心竞争力等；业务与服务执行层——服务提供和支持、基础设施建设和维护、需求的提出和响应。两个「证实」是最高管理层专属动词。" },
+  // 模块B IT治理体系 (7-13)
+  { m: "B·IT治理体系", q: "教材图 3-1 中，IT 治理体系的构成要素「IT 治理流程」对应的问题是「IT 治理怎么做」，其内容是（　　）。",
+    o: ["投资、风险、绩效、标准和规范","统筹、评估、指导、监督","业务目标与 IT 一致","内外评价"], a: 1,
+    e: "体系构成五项与五问的对应：IT 定位（期望行为与业务目标一致 → 目标是什么）；IT 治理架构（治理委员会构成与权责边界 → 由谁来做）；【IT 治理内容 = 投资、风险、绩效、标准和规范 → 做什么】；【IT 治理流程 = 统筹、评估、指导、监督 → 怎么做】；IT 治理效果（内外评价 → 效果如何）。B 是流程、A 是内容、C 是定位、D 是效果，别互换。" },
+  { m: "B·IT治理体系", q: "有效的 IT 治理必须关注五项关键决策。下列关于决策间驱动关系的表述，正确的是（　　）。",
+    o: ["IT 投资和优先顺序驱动着 IT 原则的形成","IT 原则驱动着 IT 整体架构的形成，整体架构又决定了基础设施","业务应用需求决定了 IT 原则","IT 基础设施决定了 IT 架构"], a: 1,
+    e: "教材原文：IT 原则驱动着 IT 整体架构的形成，而 IT 整体架构又决定了基础设施，这种基础设施所确定的能力又决定着基于业务需求应用的构建，最后，IT 投资和优先顺序必须为 IT 原则、整体架构、基础设施和应用需求所驱动。链条：【原则 → 架构 → 基础设施 → 应用 → 投资（被前面所有决策驱动）】。" },
+  { m: "B·IT治理体系", q: "五项关键决策中，「组织高层关于如何使用 IT 的陈述」指的是（　　）。",
+    o: ["IT 原则的决策","IT 架构的决策","IT 基础设施决策","业务应用需求决策"], a: 0,
+    e: "教材图 3-2：【IT 原则 = 组织高层关于如何使用 IT 的陈述】；IT 架构 = 从一系列政策、关系以及技术选择中捕获的数据、应用和基础设施的逻辑（标准化和一体化）；IT 基础设施 = 集中协调、共享 IT 服务；业务应用需求 = 为购买或内部开发 IT 应用确定业务需求；IT 投资和优先顺序 = 在哪些方面投资及投资多少（含项目审批和论证）。" },
+  { m: "B·IT治理体系", q: "IT 治理体系框架的具体组成部分不包括（　　）。",
+    o: ["IT 战略目标","IT 治理组织","IT 治理机制","IT 运维外包合同"], a: 3,
+    e: "体系框架六部分：【IT 战略目标、IT 治理组织、IT 治理机制、IT 治理域、IT 治理标准、IT 绩效目标】，形成一整套 IT 治理运行闭环（口诀「组机域标绩」）。「IT 运维外包合同」不属于框架组成。" },
+  { m: "B·IT治理体系", q: "IT 治理域的内容包括 IT 信息系统的（　　）。",
+    o: ["计划、构建、运维与监控","决策、投资、风险与绩效","评估、指导和监督","统筹、指导、监督和改进"], a: 0,
+    e: "教材 3.1.2：IT 治理域是在 IT 治理的规则之下，对组织的 IT 资源进行整合与配置、根据 IT 目标所采取的行动，内容包括 IT 信息系统的【计划、构建、运维与监控】。C「评估指导和监督」是 COBIT 治理领域 / ISO 38500 三任务；D「统筹指导监督改进」是 3.1.3 的治理活动定义；B 是图 3-1 中「做什么」的治理内容，均不是治理域。" },
+  { m: "B·IT治理体系", q: "IT 治理本质上关心两点：实现 IT 的业务价值与 IT 风险的规避。其中「IT 风险的规避」通过什么方式来实现？（　　）",
+    o: ["通过 IT 与业务战略匹配来实现","通过在组织内部建立相关职责来实现","通过提高信息系统运行速度来实现","通过压缩 IT 投资规模来实现"], a: 1,
+    e: "教材原文：IT 治理本质上关心：①实现 IT 的业务价值——通过【IT 与业务战略的匹配】来实现；②IT 风险的规避——通过【在组织内部建立相关职责】来实现。两者都需要相关资源的支持，并对其绩效进行有效度量。A 是「业务价值」的实现途径，别对调。" },
+  { m: "B·IT治理体系", q: "关于 IT 治理核心内容六方面中「价值交付」与「风险管理」的价值定位，正确的是（　　）。",
+    o: ["价值交付是保护业务价值，风险管理是创造业务价值","价值交付是创造业务价值，风险管理是保护业务价值","两者都是创造业务价值","两者都是保护业务价值"], a: 1,
+    e: "固定配对：通过 IT 项目全生命周期管理确保 IT 按组织战略实现预期业务价值的是【价值交付 = 创造业务价值】；确保 IT 资产安全、灾难恢复、组织信息资源安全和人员隐私安全的是【风险管理 = 保护业务价值】。核心内容六方面口诀「职匹源价风绩」：组织职责 / 战略匹配 / 资源管理 / 价值交付 / 风险管理 / 绩效管理。" },
+  // 模块C IT治理任务 (14-16)
+  { m: "C·IT治理任务", q: "教材将组织开展 IT 治理活动定义为（　　）。",
+    o: ["统筹、评估、指导、监督","统筹、指导、监督和改进","规划、执行、检查、处理","决策、执行、协调、控制"], a: 1,
+    e: "教材 3.1.3：组织的 IT 治理活动定义为【统筹、指导、监督和改进】。注意与治理流程 / 作用的「统筹、评估、指导、监督」区分——一个含【改进】、一个含【评估】，这是本节最高频的对调陷阱。" },
+  { m: "C·IT治理任务", q: "组织开展 IT 治理活动的主要任务聚焦在五个方面，下列不属于的是（　　）。",
+    o: ["全局统筹","价值导向","机制保障","绩效考核否决"], a: 3,
+    e: "五大任务：【全局统筹、价值导向、机制保障、创新发展、文化助推】（口诀「统价机创文」）。D「绩效考核否决」教材无此说法；注意「绩效」只在治理内容 / 绩效目标里出现，不是五大任务之一。" },
+  { m: "C·IT治理任务", q: "五大任务中，「评审 IT 管理体系的适宜性、充分性和有效性，审计 IT 完整性、有效性和合规性」属于（　　）。",
+    o: ["全局统筹","价值导向","机制保障","文化助推"], a: 2,
+    e: "【机制保障】：组织应对自身 IT 发展进行有效管控，保证 IT 需求与实现的协调发展，使 IT 安全和风险得到有效的识别、管理、防范和处置；具体包括指导建立规范的过程管理和痕迹管理、【评审 IT 管理体系的适宜性、充分性和有效性】、审计 IT 完整性 / 有效性 / 合规性、监督改进内容的实施。全局统筹抓「IT 蓝图」，文化助推抓「沟通 + 组织文化」。" },
+  // 模块D 方法与标准 (17-22)
+  { m: "D·方法与标准", q: "GB/T 34960.1 定义的 IT 治理框架包含三大治理域，下列不属于的是（　　）。",
+    o: ["顶层设计","管理体系","资源","绩效考核"], a: 3,
+    e: "GB/T 34960.1《信息技术服务 治理 第 1 部分：通用要求》定义的 IT 治理框架包含【信息技术顶层设计、管理体系和资源】三大治理域（口诀「顶管资」）：顶层设计 = 战略 + 支撑战略的组织和架构；管理体系 = 质量 / 项目 / 投资 / 服务 / 业务连续性 / 信息安全 / 风险 / 供方 / 资产等管理；资源 = 基础设施 / 应用系统 / 数据。「绩效考核」不属于三大治理域。" },
+  { m: "D·方法与标准", q: "ITSS 三大治理域中，「顶层设计」治理域包含（　　）。",
+    o: ["信息技术的战略，以及支撑战略的组织和架构","质量管理、项目管理、投资管理等","基础设施、应用系统和数据","流程、组织结构和信息"], a: 0,
+    e: "【顶层设计治理域包含信息技术的战略，以及支撑战略的组织和架构】；管理体系治理域包含质量管理、项目管理、投资管理、服务管理、业务连续性管理、信息安全管理、风险管理、供方管理、资产管理和其他管理；资源治理域包含基础设施、应用系统和数据。D 是 COBIT 治理系统组件，别混。" },
+  { m: "D·方法与标准", q: "关于 COBIT 框架对「治理」与「管理」的区分，下列表述正确的是（　　）。",
+    o: ["治理和管理均由董事会和执行管理层负责","治理 = 评估、指导和监控（EDM），由董事会和执行管理层负责","管理 = 评估、指导和监控（EDM），由高级和中级管理层负责","APO / BAI / DSS / MEA 四个领域属于治理目标"], a: 1,
+    e: "COBIT 由美国信息系统审计与控制协会（ISACA，1969 年成立）设计编制。【治理 = EDM（评估、指导和监控）领域，由董事会和执行管理层负责】；【管理 = APO（调整、规划和组织）/ BAI（内部构建、外部采购和实施）/ DSS（交付、服务和支持）/ MEA（监控、评价和评估）四个领域，由高级和中级管理层负责】，即按治理设定的方向计划、构建、运行和监控活动。" },
+  { m: "D·方法与标准", q: "COBIT 治理系统设计流程的第一步是（　　）。",
+    o: ["确定治理系统的初步范围","了解组织环境和战略","优化治理系统的范围","最终确定治理系统的设计"], a: 1,
+    e: "COBIT 给出的建议设计流程四步：①【了解组织环境和战略】→ ②确定治理系统的初步范围 → ③优化治理系统的范围 → ④最终确定治理系统的设计。顺序题常把②④对调，先「了解」再「定范围」，先「优化」再「最终确定」。" },
+  { m: "D·方法与标准", q: "ISO/IEC 38500 标准规定的治理机构治理 IT 的三个主要任务是（　　）。",
+    o: ["计划、执行、检查","评估、指导和监督","统筹、协调、控制","决策、实施、评价"], a: 1,
+    e: "ISO/IEC 38500（2008 年 4 月正式发布的 IT 治理国际标准，其出台标志着信息化正式进入 IT 治理时代）规定治理机构应通过【评估、指导和监督】三个主要任务来治理 IT：评估 = 审查和判断当前和未来的 IT 使用；指导 = 负责战略和政策的编制和执行；监督 = 通过测量系统监测 IT 表现。" },
+  { m: "D·方法与标准", q: "ISO/IEC 38500 标准包括的原则，下列不属于的是（　　）。",
+    o: ["责任","战略","一致性","敏捷"], a: 3,
+    e: "ISO/IEC 38500 六项原则：【责任、战略、收购、性能、一致性、人的行为】（口诀「责战收性一人」）。「敏捷」不属于该标准的原则。另记：该标准 2008 年 4 月发布，是 IT 治理国际标准。" }
+];
+
+const LETTERS = ["A","B","C","D"];
+let pool = [], cur = 0, answered = false, stats = {}, wrongList = [];
+
+function init(list){
+  pool = list.map(x=>Object.assign({},x));
+  cur = 0; answered = false; stats = {}; wrongList = [];
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  document.getElementById("totalNow").textContent = pool.length;
+  document.getElementById("scoreNow").textContent = "0";
+  render();
+}
+function render(){
+  const q = pool[cur];
+  document.getElementById("pos").textContent = "第 " + (cur+1) + " / " + pool.length + " 题";
+  document.getElementById("moduleChip").textContent = q.m;
+  document.getElementById("bar").style.width = (cur/pool.length*100) + "%";
+  document.getElementById("qtext").innerHTML = q.q;
+  const box = document.getElementById("options");
+  box.innerHTML = "";
+  q.o.forEach((t,i)=>{
+    const d = document.createElement("div");
+    d.className = "opt";
+    d.innerHTML = '<span class="tag">'+LETTERS[i]+'</span><span>'+t+"</span>";
+    d.onclick = ()=>choose(i);
+    box.appendChild(d);
+  });
+  document.getElementById("feedback").classList.add("hidden");
+}
+function choose(i){
+  if(answered) return;
+  answered = true;
+  const q = pool[cur];
+  const ok = (i === q.a);
+  if(!stats[q.m]) stats[q.m] = {right:0,total:0};
+  stats[q.m].total++;
+  const opts = document.querySelectorAll(".opt");
+  opts.forEach((d,idx)=>{
+    d.classList.add("locked");
+    if(idx === q.a) d.classList.add("correct");
+    else if(idx === i) d.classList.add("wrong");
+    else d.classList.add("dim");
+    d.onclick = null;
+  });
+  if(ok){
+    stats[q.m].right++;
+    document.getElementById("scoreNow").textContent = sumRight();
+  } else {
+    wrongList.push({q:q, picked:i});
+  }
+  const v = document.getElementById("verdict");
+  v.textContent = ok ? "✓ 答对了" : "✗ 答错了　正确答案：" + LETTERS[q.a];
+  v.className = ok ? "" : "bad";
+  document.getElementById("explain").innerHTML = q.e;
+  document.getElementById("feedback").classList.remove("hidden");
+  document.getElementById("nextBtn").textContent =
+    (cur === pool.length-1) ? "查看成绩单 →" : "下一题 →";
+}
+function sumRight(){
+  let s = 0; for(const k in stats) s += stats[k].right; return s;
+}
+function next(){
+  cur++;
+  if(cur >= pool.length){ showResult(); }
+  else { answered = false; render(); window.scrollTo(0,0); }
+}
+function showResult(){
+  document.getElementById("quiz").classList.add("hidden");
+  const r = document.getElementById("result");
+  const total = pool.length, right = sumRight();
+  const pct = Math.round(right/total*100);
+  let msg;
+  if(pct >= 80) msg = "达标（≥80%）：本节知识点基本闭环，可以进入下一节，或用康奈尔模板的「遮」字诀再过一遍线索栏。";
+  else if(pct >= 60) msg = "接近达标：把下面的错题解析看完，回看对应模块的知识点清单，明天用康奈尔模板遮住答案重测。";
+  else msg = "未达标：正确率低是发现漏洞的正常信号——先把知识点清单的「必背」块过一遍，再点「只重做错题」。";
+
+  let tbl = '<h3>分模块得分</h3><table><tr><th>模块</th><th>正确 / 题数</th><th>正确率</th></tr>';
+  for(const k in stats){
+    const s = stats[k];
+    const p = Math.round(s.right/s.total*100);
+    tbl += '<tr><td>'+k+'</td><td>'+s.right+' / '+s.total+'</td><td><div class="mbar"><div style="width:'+p+'%"></div></div></td></tr>';
+  }
+  tbl += "</table>";
+
+  let wrong = "";
+  if(wrongList.length){
+    wrong = "<h3>错题回顾（"+wrongList.length+" 题）</h3>";
+    wrongList.forEach((w,i)=>{
+      wrong += '<div class="wq"><div class="wt">'+(i+1)+". "+w.q.q+"</div>"
+        + '<div class="wa">你的选择：'+LETTERS[w.picked]+"　"+w.q.o[w.picked]+"</div>"
+        + '<div class="wc">正确答案：'+LETTERS[w.q.a]+"　"+w.q.o[w.q.a]+"</div>"
+        + '<div class="we">'+w.q.e+"</div></div>";
+    });
+  } else {
+    wrong = '<h3>错题回顾</h3><p style="font-size:13px;color:#0F6E56;">全部答对，本节知识点已闭环。</p>';
+  }
+
+  r.innerHTML =
+    '<div class="r-head"><div class="r-score">'+right+"<small> / "+total+"</small></div>"
+    + '<div class="r-msg"><b>'+pct+"%</b><br>"+msg+"</div></div>"
+    + tbl + wrong
+    + '<div class="btns">'
+    + '<button class="btn primary" id="retryWrong"'+(wrongList.length?"":" disabled")+">只重做错题（"+wrongList.length+" 题）</button>"
+    + '<button class="btn" id="retryAll">全部重来</button></div>';
+  r.classList.remove("hidden");
+  document.getElementById("retryWrong").onclick = ()=>{
+    const list = wrongList.map(w=>w.q);
+    init(list);
+    window.scrollTo(0,0);
+  };
+  document.getElementById("retryAll").onclick = ()=>{ init(QUESTIONS); window.scrollTo(0,0); };
+  window.scrollTo(0,0);
+}
+document.getElementById("nextBtn").onclick = next;
+document.addEventListener("keydown", e=>{
+  if(document.getElementById("quiz").classList.contains("hidden")) return;
+  if(e.key === "Enter" || e.key === " "){ if(answered){ e.preventDefault(); next(); } return; }
+  const map = {"a":0,"b":1,"c":2,"d":3,"1":0,"2":1,"3":2,"4":3};
+  const k = e.key.toLowerCase();
+  if(k in map && !answered) choose(map[k]);
+});
+init(QUESTIONS);
+</script>
+</body>
+</html>

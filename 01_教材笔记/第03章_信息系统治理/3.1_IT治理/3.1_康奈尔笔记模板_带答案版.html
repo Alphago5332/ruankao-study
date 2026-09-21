@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>康奈尔笔记 · 第 3 章第 1 节 IT治理 · 带答案版</title>
+<style>
+  :root{
+    --ink:#1f2328;
+    --ink-2:#4b5563;
+    --ink-3:#8b949e;
+    --line:#2f3742;
+    --rule:#d6dae0;
+    --accent:#185FA5;
+    --accent-soft:#E6F1FB;
+    --warm:#854F0B;
+    --warm-soft:#FAEEDA;
+    --paper:#ffffff;
+    --ans-bg:#fffaf2;
+    --ans-border:#e8d9b8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    padding:28px 16px 48px;
+    background:#eef0f3;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+    color:var(--ink);
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .toolbar{
+    max-width:210mm;margin:0 auto 14px;display:flex;gap:10px;align-items:center;
+    justify-content:space-between;flex-wrap:wrap;
+  }
+  .toolbar .hint{font-size:12.5px;color:#5b6470;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;
+    font-size:13px;padding:7px 14px;border-radius:8px;cursor:pointer;
+    font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn.active{background:var(--warm);border-color:var(--warm);color:#fff;}
+
+  .page{
+    width:210mm;min-height:297mm;margin:0 auto;background:var(--paper);
+    padding:14mm 13mm 12mm;box-shadow:0 2px 14px rgba(16,24,40,.12);
+  }
+
+  .head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    border-bottom:2px solid var(--line);padding-bottom:8px;margin-bottom:10px;
+    gap:12px;
+  }
+  .head h1{font-size:19px;margin:0;font-weight:600;letter-spacing:.3px;}
+  .head .sub{font-size:12px;color:var(--ink-3);margin-top:4px;}
+  .head .meta{font-size:12px;color:var(--ink-2);text-align:right;line-height:1.9;white-space:nowrap;}
+  .head .meta b{font-weight:600;color:var(--accent);}
+
+  .band{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+  .chip{
+    font-size:11.5px;padding:4px 9px;border-radius:5px;
+    background:var(--accent-soft);color:#0C447C;border:1px solid #B5D4F4;
+  }
+  .chip.warm{background:var(--warm-soft);color:#633806;border-color:#EFC98A;}
+
+  .cols{
+    display:grid;grid-template-columns:60mm 1fr;gap:0;
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .col-cue{
+    background:#fafbfc;border-right:1px solid var(--line);padding:8px 9px 9px;
+  }
+  .col-note{padding:8px 11px 9px;}
+  .col-hd{
+    font-size:11.5px;font-weight:600;letter-spacing:.6px;color:var(--ink-2);
+    text-transform:uppercase;padding-bottom:6px;margin-bottom:7px;
+    border-bottom:1px dashed #b9c0c9;
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  .col-hd span{font-size:10.5px;font-weight:400;color:var(--ink-3);text-transform:none;letter-spacing:0;}
+
+  .q{
+    font-size:11.5px;line-height:1.5;color:#1f2328;
+    padding:5px 0 5px 20px;position:relative;border-bottom:1px dotted #dfe3e8;
+  }
+  .q:last-child{border-bottom:0;}
+  .q::before{
+    content:attr(data-n);position:absolute;left:0;top:5px;
+    width:14px;height:14px;border-radius:50%;
+    background:var(--accent);color:#fff;font-size:9.5px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:600;line-height:1;
+  }
+  .q b{font-weight:600;}
+  .q em{font-style:normal;color:var(--warm);font-weight:600;}
+
+  .grouplabel{
+    font-size:10.5px;font-weight:600;color:var(--accent);
+    letter-spacing:.4px;margin:8px 0 2px;
+  }
+  .grouplabel:first-child{margin-top:0;}
+
+  /* === 答案区样式 === */
+  .ans-block{
+    margin-bottom:6px;padding:5px 8px 6px;
+    background:var(--ans-bg);border:1px solid var(--ans-border);border-radius:3px;
+  }
+  .ans-block .ans-title{
+    font-size:10.5px;font-weight:600;color:var(--warm);
+    letter-spacing:.3px;margin-bottom:2px;display:flex;align-items:baseline;gap:6px;
+  }
+  .ans-block .ans-title .num{
+    display:inline-block;min-width:14px;height:14px;border-radius:50%;
+    background:var(--warm);color:#fff;font-size:9.5px;font-weight:600;
+    text-align:center;line-height:14px;
+  }
+  .ans-block ul{
+    margin:2px 0 3px 0;padding:0 0 0 16px;font-size:11px;line-height:1.55;color:#2b323b;
+  }
+  .ans-block ul li{padding:1px 0;}
+  .ans-block .key{
+    color:var(--warm);font-weight:600;
+  }
+  .ans-block .subhd{
+    font-size:10.5px;font-weight:600;color:#0C447C;margin:3px 0 1px;
+    padding-left:2px;border-left:3px solid #B5D4F4;
+  }
+  .ans-block .tip{
+    font-size:10px;color:#633806;margin-top:2px;line-height:1.5;
+    padding:2px 6px;background:var(--warm-soft);border-radius:2px;
+  }
+  .ans-block .fill{
+    height:16px;border-bottom:1px dashed #c8c0aa;margin-top:3px;
+  }
+  body.hide-answers .ans-block{display:none;}
+  body.hide-answers .summary-prefill{display:none;}
+
+  .summary{
+    margin-top:10px;border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .summary .col-hd{
+    margin:0;padding:7px 11px;background:#fafbfc;border-bottom:1px solid var(--line);
+  }
+  .summary .body{padding:6px 11px 8px;font-size:11.5px;line-height:1.7;color:#2b323b;}
+  .summary .body b{color:var(--accent);}
+  .summary .body .small{font-size:10.5px;color:var(--ink-3);margin-top:3px;display:block;}
+
+  .footer{
+    margin-top:9px;font-size:10.5px;color:var(--ink-3);
+    display:flex;justify-content:space-between;gap:10px;
+  }
+
+  .guide{
+    width:210mm;margin:16px auto 0;background:#fff;border:1px solid #d9dee5;
+    border-radius:8px;padding:16px 18px;
+  }
+  .guide h2{font-size:14px;margin:0 0 10px;font-weight:600;}
+  .guide table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .guide th,.guide td{
+    border:1px solid #e2e6eb;padding:7px 9px;text-align:left;vertical-align:top;line-height:1.6;
+  }
+  .guide th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .guide td:first-child{width:88px;font-weight:600;color:var(--accent);}
+  .guide .note{font-size:12px;color:#5b6470;margin-top:10px;line-height:1.7;}
+
+  @page{size:A4 portrait;margin:0;}
+  @media print{
+    body{background:#fff;padding:0;}
+    .toolbar,.guide{display:none;}
+    .page{box-shadow:none;margin:0;width:auto;min-height:auto;padding:13mm 12mm;}
+    body.hide-answers .ans-block{display:none;}
+    body.hide-answers .summary-prefill{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="hint">A4 竖版 · 带答案版 · 建议先默写、再对照；打印时可「隐藏答案」变填空卷</div>
+  <div>
+    <button class="btn" id="toggleBtn" onclick="toggleAnswers()">👁 隐藏答案（打印填空卷）</button>
+    <button class="btn primary" onclick="window.print()">打印 / 导出 PDF</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="head">
+    <div>
+      <h1>康奈尔笔记 · 第 3 章第 1 节 IT治理 <span style="color:var(--warm);font-size:14px;">（带答案版）</span></h1>
+      <div class="sub">《信息系统项目管理师教程（第 4 版）》约 P67 ~ P80　｜　答案口径以 2026-09-21 核对教材原文为准</div>
+    </div>
+    <div class="meta">
+      日期：__________<br>
+      第 <b>__</b> 轮复习　用时 <b>__</b> 分钟
+    </div>
+  </div>
+
+  <div class="band">
+    <span class="chip">第 4 版新增重点章（综合知识约 3~4 分）</span>
+    <span class="chip">概念辨析 · 框架归属 · 职责层次型</span>
+    <span class="chip warm">必背：三大目标 + 五项决策 + 六方面核心 + COBIT/38500</span>
+    <span class="chip warm">通读：决策关键问题表 / 五大任务细项展开</span>
+    <span class="chip warm">📝 含答案</span>
+  </div>
+
+  <div class="cols">
+
+    <div class="col-cue">
+      <div class="col-hd">线索栏 <span>遮住右侧自问</span></div>
+
+      <div class="grouplabel">3.1.1 IT治理基础</div>
+      <div class="q" data-n="1"><b>IT 治理的定义</b>（三个关键词）？组织治理角度的<b>「框架」说法</b>？IT 治理关注哪五类问题？</div>
+      <div class="q" data-n="2">制订 IT 资源统一规划的<b>两个问题</b>？驱动高质量治理的<b>八因素</b>关键词？</div>
+      <div class="q" data-n="3"><b>内涵 5 方面</b>？「制度机制」涉及哪<b>四类制衡</b>？</div>
+      <div class="q" data-n="4"><b>三大目标</b>（口诀）？管理体制「导向 / 重心 / 成果 / 控制手段」？</div>
+      <div class="q" data-n="5"><b>管理层次三层</b>？各层职责关键动词（最高管理层两个「证实」各证实什么）？</div>
+
+      <div class="grouplabel">3.1.2 IT治理体系</div>
+      <div class="q" data-n="6"><b>体系构成五项</b>？对应图 3-1 哪<b>五个问题</b>？IT 治理的核心是什么？</div>
+      <div class="q" data-n="7"><b>五项关键决策</b>？<b>驱动链条</b>顺序？</div>
+      <div class="q" data-n="8"><b>体系框架六部分</b>（口诀）？<b>治理域四词</b>？治理机制是哪<b>四种机制</b>的综合体？</div>
+      <div class="q" data-n="9"><b>本质上关心两点</b>及实现途径？<b>核心内容六方面</b>（口诀）？创造 / 保护业务价值配对？</div>
+      <div class="q" data-n="10"><b>治理机制三原则</b>及各自含义？</div>
+
+      <div class="grouplabel">3.1.3 任务 · 3.1.4 方法与标准</div>
+      <div class="q" data-n="11"><b>治理活动定义</b>四词？与「治理流程」的差别？<b>五大任务</b>（口诀）及要点首句？</div>
+      <div class="q" data-n="12"><b>三大典型标准</b>各归属谁？<b>ITSS 三大治理域</b>？<b>COBIT 治理 vs 管理</b>＋七组件＋设计四步？<b>ISO/IEC 38500</b> 发布时间、六原则、三任务？</div>
+    </div>
+
+    <div class="col-note">
+      <div class="col-hd">答案区 <span>默写后对照 · 虚线处写自己的补充</span></div>
+
+      <div class="grouplabel">3.1.1 IT治理基础</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">1</span>IT 治理的定义与关注问题</div>
+        <ul>
+          <li><b>定义</b>：IT 治理是描述组织采用<span class="key">有效的机制</span>对<span class="key">信息技术和数据资源</span>开发利用，<span class="key">平衡信息化发展和数字化转型过程中的风险</span>，确保实现组织的<span class="key">战略目标</span>的过程</li>
+          <li><b>组织治理角度</b>：为鼓励组织所期望的组织行为而<span class="key">明确决策权归属和责任担当的框架</span>，通过 IT 治理的<b>决策权和责任</b>影响组织所期望的组织行为</li>
+          <li><b>定位</b>：IT 资产是组织资产的重要组成部分 → <span class="key">IT 治理是组织治理结构中不可分割的一部分</span>；在数字化转型中起<span class="key">统筹、评估、指导和监督</span>作用</li>
+          <li><b>关注的问题</b>：投资中获得<b>价值</b> / 技术战略与组织战略<b>融合</b> / 数字化能力<b>制度安排</b> / 降低 <b>IT 风险</b> / 利用<b>最佳实践</b>加快信息化数字化</li>
+        </ul>
+        <div class="tip">定义抓三词：<b>机制 · 平衡风险 · 战略目标</b>；框架抓两词：<b>决策权归属 · 责任担当</b></div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">2</span>驱动因素：两问题 + 八因素</div>
+        <ul>
+          <li><b>统一规划两问题</b>：①分散开发或引进形成「<span class="key">信息孤岛</span>」，缺乏共享的网络化信息资源，<b>系统集成难题无法解决</b>；②<span class="key">信息资源整合目标空泛</span>，数据中心建设与数据集中管理规划<b>缺乏可操作性</b>，尤其缺少<b>数据标准化建设</b>规划</li>
+          <li><b>八因素关键词</b>：确保 <span class="key">IT 投资有效性</span> · 知识<span class="key">高度密集</span>（价值弹性大）· <span class="key">融入</span>管理运行生产交付 · 新技术带来<span class="key">新机会</span> · 推动<span class="key">理解 IT 价值</span> · 需要<span class="key">良好价值管理</span> · 高管<span class="key">管理幅度有限</span>（明确责权利）· <span class="key">成熟度较高组织</span>的治理效果</li>
+        </ul>
+        <div class="tip">两问题记「<b>孤岛 + 空泛</b>」；八因素首词串「投资 / 密集 / 融入 / 机会 / 理解 / 管理 / 幅度 / 成熟」</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">3</span>IT 治理的内涵（5 个方面）</div>
+        <ul>
+          <li>①组织<span class="key">上层管理</span>的有机组成部分，由<span class="key">组织治理层或高级管理层</span>负责，从全局高度对信息化与数字化转型做出<span class="key">制度安排</span></li>
+          <li>②强调<span class="key">数字目标与组织战略目标保持一致</span>，为战略规划提供技术或控制支持</li>
+          <li>③<span class="key">保护利益相关者权益</span>，管理风险、合理利用 IT 资源、平衡成本收益，<span class="key">增强核心竞争力</span></li>
+          <li>④是一种<span class="key">制度和机制</span>，主要涉及管理和制衡：<span class="key">信息系统与业务战略匹配 · 建设投资 · 信息系统安全 · 绩效评价</span></li>
+          <li>⑤组成部分包括<span class="key">管理层、组织结构、制度、流程、人员、技术</span>等多方面</li>
+        </ul>
+        <div class="tip">记法：<b>高层安排 · 目标一致 · 权益风险 · 制度制衡 · 多元组成</b>；四类制衡「匹配 / 投资 / 安全 / 绩效评价」爱出多选</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">4</span>目标价值：关系句 + 三大目标</div>
+        <ul>
+          <li><b>关系句</b>：<span class="key">组织治理驱动和调整 IT 治理</span>；IT 治理为战略计划提供关键输入，是组织治理的<span class="key">一个重要功能</span></li>
+          <li><b>体制四要素</b>：以<span class="key">组织战略为导向</span>、以实现 <span class="key">IT 与业务匹配为重心</span>、以<span class="key">价值交付为成果</span>、以<span class="key">绩效管理为控制手段</span></li>
+          <li><b>三大目标</b>：<span class="key">与业务目标一致</span>（抽取需求 → 形成 IT 治理框架和系统整体模型 → 跟上持续变化的业务目标）· <span class="key">有效利用信息与数据资源</span>（管理职责 → 保证投资回收、支持决策）· <span class="key">风险管理</span>（制定保护级别 → 关键资源有效监控和事件处理）</li>
+        </ul>
+        <div class="tip">口诀 <b>一有风</b>。「组织治理驱动 IT 治理」方向别写反；「风险管理的抓手 = 保护级别 + 监控 + 事件处理」</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">5</span>管理层次（三层）与职责归属</div>
+        <ul>
+          <li><b>最高管理层</b>（如董事会）：<span class="key">证实</span> IT 战略与业务战略是否一致；<span class="key">证实</span>通过明确的期望和衡量手段交付 IT 价值；<span class="key">指导</span> IT 战略、平衡投资；<span class="key">指导</span>信息和数据资源的分配</li>
+          <li><b>执行管理层</b>：<span class="key">制定</span> IT 目标；<span class="key">分析</span>新技术机遇和风险；<span class="key">建设</span>关键过程与核心竞争力；<span class="key">分配</span>责任、定义规程、衡量业绩；<span class="key">管理</span>风险和获得可靠保证</li>
+          <li><b>业务与服务执行层</b>：信息和数据服务的<span class="key">提供和支持</span>；IT 基础设施的<span class="key">建设和维护</span>；IT 需求的<span class="key">提出和响应</span></li>
+        </ul>
+        <div class="tip">口诀：最高层「证证导导」→ 执行层「制分建衡」→ 业务层「提建响」。⚠️ 两个「证实」是<b>最高管理层专属</b>；「需求的提出和响应」在<b>业务与服务执行层</b></div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">3.1.2 IT治理体系</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">6</span>体系构成五项（图 3-1 五问）</div>
+        <ul>
+          <li><b>核心</b>：IT 治理的核心是关注 <span class="key">IT 定位</span>和信息化建设与数字化转型的<span class="key">责权利划分</span></li>
+          <li><span class="key">IT 定位</span>：期望行为与业务目标一致 →「目标是什么」</li>
+          <li><span class="key">IT 治理架构</span>：业务和 IT 在治理委员会中的构成、组织 IT 与各分支机构的权责边界 →「由谁来做」</li>
+          <li><span class="key">IT 治理内容</span>：<span class="key">投资、风险、绩效、标准和规范</span>等 →「做什么」</li>
+          <li><span class="key">IT 治理流程</span>：<span class="key">统筹、评估、指导、监督</span> →「怎么做」</li>
+          <li><span class="key">IT 治理效果</span>：内外评价 →「效果如何」</li>
+        </ul>
+        <div class="tip">五项串记：<b>定位 · 架构 · 内容 · 流程 · 效果</b>（定位目标 / 架构定人 / 内容定事 / 流程定法 / 效果定评）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">7</span>五项关键决策与驱动链条</div>
+        <ul>
+          <li><span class="key">IT 原则</span>：<b>组织高层关于如何使用 IT 的陈述</b></li>
+          <li><span class="key">IT 架构</span>：从政策、关系以及技术选择中捕获的<b>数据、应用和基础设施的逻辑</b>（标准化和一体化）</li>
+          <li><span class="key">IT 基础设施</span>：<b>集中协调、共享 IT 服务</b>，为组织 IT 能力提供基础</li>
+          <li><span class="key">业务应用需求</span>：为<b>购买或内部开发 IT 应用</b>确定业务需求</li>
+          <li><span class="key">IT 投资和优先顺序</span>：在哪些方面<b>投资及投资多少</b>（含项目审批和论证）</li>
+          <li><b>链条</b>：<span class="key">IT 原则驱动整体架构 → 架构决定基础设施 → 基础设施能力决定应用构建 → 投资和优先顺序被以上所有决策驱动</span>；同时要确定每个决策<b>由谁输入、由谁决策</b></li>
+        </ul>
+        <div class="tip">链条口诀：<b>原则 → 架构 → 基础设施 → 应用 → 投资</b>。「如何使用 IT 的陈述」= 原则（不是架构）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">8</span>体系框架六部分（运行闭环）</div>
+        <ul>
+          <li>以组织的<span class="key">战略目标为导向</span>，架起组织战略与 IT 的桥梁，形成一整套 <span class="key">IT 治理运行闭环</span></li>
+          <li>① <span class="key">IT 战略目标</span>：针对 IT 与业务关系、IT 决策、资源利用、风险控制制定，从 IT 投入中获<b>最大收益</b></li>
+          <li>② <span class="key">IT 治理组织</span>：核心是<b>治理机构（如 IT 治理委员会）的设置和权限划分</b>，对 <b>IT 治理效率起决定性作用</b></li>
+          <li>③ <span class="key">IT 治理机制</span>：<span class="key">决策、执行、风险控制、协调</span>四种机制的综合体，相辅相成相互促进</li>
+          <li>④ <span class="key">IT 治理域</span>：对 IT 资源<b>整合与配置</b>；内容 = <span class="key">计划、构建、运维与监控</span></li>
+          <li>⑤ <span class="key">IT 治理标准</span>：<b>基本规范、实施参照、评价体系、审计方法</b>（最佳实践与对标依据）</li>
+          <li>⑥ <span class="key">IT 绩效目标</span>：关注 <b>IT 价值的实现</b>，评价是否满足业务需求及<b>工期、成本、质量</b>是否达标</li>
+        </ul>
+        <div class="tip">口诀 <b>组机域标绩</b>；治理域四词 <b>计划 · 构建 · 运维 · 监控</b>。「决定性作用」挂在治理组织上</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">9</span>核心内容：本质关心两点 + 六方面</div>
+        <ul>
+          <li><b>本质上关心</b>：①实现 IT 的<span class="key">业务价值</span>——通过 <span class="key">IT 与业务战略匹配</span>来实现；②IT <span class="key">风险的规避</span>——通过在组织内部<span class="key">建立相关职责</span>来实现</li>
+          <li><b>六方面</b>：<span class="key">组织职责</span>（划分所有者 / 建设者 / 管理者 / 监控者）· <span class="key">战略匹配</span>（贡献业务价值的重要驱动力）· <span class="key">资源管理</span>（优化投资与资源分配）· <span class="key">价值交付</span>（IT 项目<b>全生命周期</b>管理）· <span class="key">风险管理</span>（资产安全 / 灾难恢复 / 信息资源安全 / 人员隐私安全）· <span class="key">绩效管理</span>（追踪监视战略 / 项目 / 资源 / 服务 / 流程绩效）</li>
+        </ul>
+        <div class="tip">口诀 <b>职匹源价风绩</b>；固定配对：<b>价值交付 = 创造业务价值，风险管理 = 保护业务价值</b>（高频对调陷阱）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">10</span>建立 IT 治理机制的三原则</div>
+        <ul>
+          <li><span class="key">简单</span>：机制应该<span class="key">明确地定义</span>特定个人和团体所承担的<b>责任和目标</b></li>
+          <li><span class="key">透明</span>：有效的机制依赖于<span class="key">正式的程序</span>；机制如何工作需要非常清晰</li>
+          <li><span class="key">适合</span>：机制鼓励<span class="key">处于最佳位置的个人</span>去制定特定的决策</li>
+        </ul>
+        <div class="tip">口诀 <b>简透适</b>；干扰项常用「复杂 / 公开 / 灵活」冒充</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">3.1.3 任务 · 3.1.4 方法与标准</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">11</span>治理活动定义与五大任务</div>
+        <ul>
+          <li><b>活动定义</b>：组织的 IT 治理活动 = <span class="key">统筹、指导、监督和改进</span></li>
+          <li><span class="key">全局统筹</span>：统筹目标范围 / 技术环境 / 发展趋势 / 人员责权利；制订满足可持续发展的 <b>IT 蓝图</b>；横向业务集成 + 纵向业务管控</li>
+          <li><span class="key">价值导向</span>：认可 IT / 信息系统 / 数据的价值；<b>识别投资目录</b>；关键指标设定监督；<b>权衡实施成本与预期效益</b></li>
+          <li><span class="key">机制保障</span>：保证需求与实现<b>协调发展</b>；IT 安全和风险有效<b>识别、管理、防范和处置</b>；评审管理体系的<b>适宜性、充分性和有效性</b>；审计完整性 / 有效性 / 合规性；监督改进实施</li>
+          <li><span class="key">创新发展</span>：IT 创新开拓业务领域，<b>改进质量、绩效和降低成本</b>；技术发展 / 管理创新 / 模式革新<b>协调联动</b></li>
+          <li><span class="key">文化助推</span>：与利益相关者<b>沟通治理的目标、策略和职责</b>，营造<b>积极向上、沟通包容</b>的组织文化</li>
+        </ul>
+        <div class="tip">口诀 <b>统价机创文</b>。⚠️ 活动定义「统筹·指导·监督·<b>改进</b>」≠ 治理流程「统筹·<b>评估</b>·指导·监督」——差别在「改进 / 评估」</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">12</span>三大方法与标准：ITSS · COBIT · ISO/IEC 38500</div>
+        <div class="subhd">ITSS（GB/T 34960 系列）</div>
+        <ul>
+          <li><b>34960.1 通用要求</b>：规定 IT 治理的<span class="key">模型和框架</span>、实施<span class="key">原则</span>，以及开展 <span class="key">IT 顶层设计、管理体系和资源</span>的治理要求；可用于①建立治理体系并自我评价 ②开展信息技术审计 ③研发选择评价软件方案 ④第三方评价</li>
+          <li><b>三大治理域</b>：<span class="key">顶层设计</span>（战略 + 支撑战略的组织和架构）· <span class="key">管理体系</span>（质量 / 项目 / 投资 / 服务 / 业务连续性 / 信息安全 / 风险 / 供方 / 资产等）· <span class="key">资源</span>（基础设施 / 应用系统 / 数据）</li>
+          <li><b>34960.2 实施指南</b>：实施框架、实施环境、实施过程</li>
+        </ul>
+        <div class="subhd">COBIT（ISACA · 1969 年成立）</div>
+        <ul>
+          <li>面向<span class="key">整个组织</span>的信息和技术治理及管理框架，含 <span class="key">40 项核心治理和管理目标</span></li>
+          <li><b>治理</b> = <span class="key">EDM</span>（评估、指导和监控）领域，由<span class="key">董事会和执行管理层</span>负责；<b>管理</b> = <span class="key">APO 调整规划和组织 / BAI 内部构建外部采购和实施 / DSS 交付服务和支持 / MEA 监控评价评估</span>，由<span class="key">高级和中级管理层</span>负责（计划、构建、运行和监控）</li>
+          <li><b>治理系统七组件</b>：流程 / 组织结构 / 原则政策和程序 / 信息 / 文化道德和行为 / 人员技能和胜任能力 / 服务基础设施和应用程序</li>
+          <li><b>设计流程四步</b>：了解组织环境和战略 → 确定初步范围 → 优化范围 → 最终确定设计</li>
+        </ul>
+        <div class="subhd">ISO/IEC 38500（IT 治理国际标准）</div>
+        <ul>
+          <li><span class="key">2008 年 4 月</span>发布；标志着信息化正式进入 <span class="key">IT 治理时代</span></li>
+          <li><b>六原则</b>：<span class="key">责任 · 战略 · 收购 · 性能 · 一致性 · 人的行为</span>；<b>三任务</b>：<span class="key">评估、指导、监督</span></li>
+        </ul>
+        <div class="tip">归属题三连：<b>国标看 ITSS · 美国协会看 COBIT · 国际标准看 38500</b>。治理域口诀 <b>顶管资</b>；EDM 是<b>治理</b>（董事会），APO/BAI/DSS/MEA 是<b>管理</b>（高中级管理层）</div>
+        <div class="fill"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="col-hd">总结区 <span>本节本质 + 考点地图</span></div>
+    <div class="body summary-prefill">
+      <b>本节本质</b>：3.1 回答「谁来管、怎么管组织的信息技术与投资」。主线四步：<b>基础（是什么）→ 体系（管什么）→ 任务（干什么）→ 方法与标准（用什么工具）</b>。全节没有计算，题型是「框架组成部分归属 + 标准归属 + 职责层次归属」三类，数字型考点密集（3 目标 / 8 因素 / 5 内涵 / 3 层次 / 5 决策 / 6 部分 / 6 方面 / 5 任务 / 3 治理域 / 7 组件 / 6 原则 / 3 任务）。<br>
+      <b>考点地图（按考频排序）</b>：① <b>IT 治理三大目标「一有风」</b> → ② <b>COBIT 治理 vs 管理区分</b>（EDM 董事会 vs APO/BAI/DSS/MEA 高中级管理层）→ ③ <b>五项关键决策及驱动链条</b>（原则 → 架构 → 基础设施 → 应用 → 投资）→ ④ <b>体系框架六部分「组机域标绩」</b> → ⑤ <b>核心内容六方面「职匹源价风绩」</b>（价值交付 = 创造、风险管理 = 保护）→ ⑥ <b>ISO 38500 六原则三任务</b> → ⑦ <b>ITSS 三大治理域「顶管资」</b> → ⑧ <b>五大任务「统价机创文」</b> → ⑨ <b>管理层次三层职责归属</b>（两个「证实」在最高管理层）→ ⑩ 治理机制三原则「简透适」→ ⑪ 治理活动定义（改进）vs 治理流程（评估）→ ⑫ 内涵 5 方面 + 驱动因素（孤岛 + 空泛）。<br>
+      <span class="small">⚠️ 口径陷阱：① 第 3 章是<b>第 4 版新增章</b>，2023 上及以前旧真题无对应题，别拿旧题正确率评估掌握度；② 治理活动 =「统筹·指导·监督·<b>改进</b>」，治理流程 / 作用 =「统筹·<b>评估</b>·指导·监督」，两套四词别混；③ <b>价值交付 = 创造业务价值、风险管理 = 保护业务价值</b>，别对调；④「如何使用 IT 的陈述」= <b>IT 原则</b>（不是 IT 架构）；⑤ 治理域四词 = <b>计划、构建、运维、监控</b>（不是「统筹评估指导监督」）；⑥ 「对 IT 治理效率起决定性作用」的是<b>治理组织</b>；⑦ EDM 是<b>治理</b>领域（董事会 + 执行管理层），别答成管理领域；⑧ ISO 38500 三任务是「<b>评估、指导、监督</b>」，与五大任务「统价机创文」是两回事；⑨ 34960.**1 = 通用要求**、34960.**2 = 实施指南**，编号别接反。</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>康奈尔笔记法 · 第 3 章第 1 节 带答案版　｜　复习记录：当日 ☐　+1 天 ☐　+3 天 ☐　+7 天 ☐　+14 天 ☐</span>
+    <span>正确率 ____ / 12</span>
+  </div>
+
+</div>
+
+<div class="guide">
+  <h2>怎么用这一页</h2>
+  <table>
+    <tr>
+      <th>步骤</th><th>做法</th>
+    </tr>
+    <tr>
+      <td>第 1 遍 · 遮答默写</td>
+      <td>用纸<b>遮住右栏答案区</b>，只看左栏 12 个问题。口头/默写回答，答不出的画「×」。</td>
+    </tr>
+    <tr>
+      <td>第 2 遍 · 对照修正</td>
+      <td>揭开答案区逐项对照。每条答案下的<b>虚线</b>是留给你的「补充线」——记下易漏点（如「五项决策链条」「六部分框架」「COBIT 治理与管理的领域区分」「创造 / 保护业务价值配对」）。</td>
+    </tr>
+    <tr>
+      <td>第 3 遍 · 隐藏答案打印</td>
+      <td>点工具栏「👁 隐藏答案」按钮，再打印一份当填空卷，可反复练习。</td>
+    </tr>
+    <tr>
+      <td>第 4 遍 · 复习节奏</td>
+      <td>页脚 5 个框按「当日 → +1 天 → +3 天 → +7 天 → +14 天」打勾，这就是你的艾宾浩斯进度条。全部打勾后，本节可不再看。</td>
+    </tr>
+  </table>
+  <div class="note">
+    <b>为什么这一节要特别加练</b>：第 3 章是<b>第 4 版新增重点章</b>，旧真题没有存货，出题人只能从教材原文的「数字型框架」里挖空——这反而让题目<b>更好预测</b>：三大目标、五项决策、六部分框架、六方面核心、五大任务、三大治理域、六原则三任务，全是「缺一个就送分 / 记混就丢分」的固定清单。把本页的口诀串（一有风 / 组机域标绩 / 职匹源价风绩 / 统价机创文 / 顶管资 / 责战收性一人 / 评指监）默写到条件反射，本章综合知识的 3~4 分就稳了。
+  </div>
+</div>
+
+<script>
+  function toggleAnswers(){
+    document.body.classList.toggle('hide-answers');
+    const btn = document.getElementById('toggleBtn');
+    const hidden = document.body.classList.contains('hide-answers');
+    btn.textContent = hidden ? '👁 显示答案' : '👁 隐藏答案（打印填空卷）';
+    btn.classList.toggle('active', hidden);
+  }
+</script>
+
+</body>
+</html>

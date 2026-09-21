@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3.1 IT治理 · 知识点清单 · 可勾选清单</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Microsoft YaHei", "微软雅黑", sans-serif; background: #f7f9fc; color: #333; padding: 24px; line-height: 1.7; }
+  .wrap { max-width: 820px; margin: 0 auto; background: #fff; padding: 32px 36px; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,.08); }
+  h1 { font-size: 22px; color: #185FA5; margin-bottom: 8px; }
+  h2 { font-size: 18px; color: #185FA5; margin: 22px 0 10px; border-left: 4px solid #185FA5; padding-left: 10px; }
+  h3 { font-size: 15px; color: #185FA5; margin: 16px 0 8px; }
+  h4 { font-size: 14px; color: #185FA5; margin: 14px 0 6px; }
+  blockquote { background: #f4f8fc; border-left: 4px solid #185FA5; padding: 10px 14px; margin: 10px 0; color: #444; font-size: 13.5px; }
+  p, .plain-li { margin: 8px 0; font-size: 14px; }
+  .plain-li { display: flex; gap: 6px; }
+  .bullet { color: #185FA5; font-weight: bold; }
+  .task { display: flex; align-items: flex-start; gap: 8px; margin: 8px 0; cursor: pointer; user-select: none; }
+  .task input[type="checkbox"] { width: 16px; height: 16px; margin-top: 4px; flex-shrink: 0; accent-color: #185FA5; cursor: pointer; }
+  .task-text { font-size: 14px; transition: opacity .2s; }
+  .task input:checked + .task-text { text-decoration: line-through; opacity: .45; color: #666; }
+  .item-body { margin: 4px 0 12px 24px; }
+  .item-body p { margin: 4px 0; color: #555; font-size: 13.5px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; }
+  th, td { border: 1px solid #d9e2ec; padding: 7px 10px; }
+  th { background: #eef4fb; color: #185FA5; font-weight: 600; }
+  td { background: #fff; }
+  ol { margin: 8px 0 8px 22px; font-size: 14px; }
+  li { margin: 4px 0; }
+  code { background: #f0f3f7; padding: 1px 4px; border-radius: 3px; font-family: Consolas, monospace; font-size: 12px; }
+  a { color: #185FA5; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  summary { cursor: pointer; color: #185FA5; font-weight: 600; }
+  details { background: #f9fbfd; border: 1px solid #e3eaf2; border-radius: 6px; padding: 10px 14px; margin: 12px 0; }
+  .progress { position: sticky; top: 0; background: #fff; border-bottom: 1px solid #e3eaf2; padding: 8px 0; margin: -32px -36px 20px; padding-left: 36px; padding-right: 36px; font-size: 12px; color: #666; z-index: 10; }
+  .progress b { color: #185FA5; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="progress" id="progress">已完成：0 / 0</div>
+  <h1>3.1 IT治理 · 知识点清单</h1>
+<blockquote><b>教材</b>：《信息系统项目管理师教程（第 4 版）》第 3 章第 1 节（约 P67 ~ P80）<br><b>学习日</b>：2026-09-21（Day 8）<br><b>上午分值</b>：第 3 章是<b>第 4 版新增重点章</b>，近年考频持续上升，综合知识平均 <b>3~4 分</b>；3.1 一节是绝对主力（3.2 IT审计另算一节）。高频块：<b>三大目标 / 五项关键决策 / COBIT 框架 / ISO 38500</b><br><b>本节定位</b>：<b>纯概念辨析 + 框架归属型</b>。没有计算，套路是把「框架的组成部分」「标准的归属」「职责的层次」互相调包。<b>数字类考点特别多</b>（3 个目标 / 5 项决策 / 6 部分框架 / 6 方面核心内容 / 5 大任务 / 3 大治理域 / 6 原则 / 3 任务），表格默写就是得分点<br>⚠️ <b>新旧真题提醒</b>：本章为第 4 版<b>新增章节</b>，2023 上及以前的旧真题<b>没有对应题</b>——别用旧题正确率判断掌握度，以本节自测题 + 清单为准</blockquote>
+<h2>今日目标（学完要能做到）</h2>
+<ol><li>说清 <b>IT 治理的定义</b>（平衡风险 + 确保战略目标）与<b>决策权归属 / 责任担当</b>这个框架内核</li><li>背熟<b>三大目标</b>「一有风」、<b>管理层次三层</b>及各层职责、<b>内涵 5 方面</b></li><li>背熟<b>五项关键决策</b>及其<b>驱动链条</b>、<b>体系框架六部分</b>「组机域标绩」、<b>核心内容六方面</b>「职匹源价风绩」与「创造 / 保护业务价值」配对</li><li>背出<b>五大任务</b>「统价机创文」与治理活动定义「统筹、指导、监督、改进」</li><li>背熟<b>三大治理域</b>「顶管资」（ITSS）、<b>COBIT 治理 vs 管理的区分</b>（EDM vs APO/BAI/DSS/MEA）、<b>ISO/IEC 38500 六原则三任务</b></li></ol>
+<h2>一、必背清单</h2>
+<h3>模块 A ｜ IT 治理基础（3.1.1）</h3>
+<label class="task"><input type="checkbox" data-key="A0" ><span class="task-text"><b>A0 · IT 治理的定义</b> ⭕ 必背（定义题原句）</span></label><div class="item-body"><p><b>IT 治理</b>是描述组织采用<b>有效的机制</b>对<b>信息技术和数据资源</b>开发利用，<b>平衡信息化发展和数字化转型过程中的风险</b>，确保实现组织的<b>战略目标</b>的过程。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>另一个角度（组织治理视角）：IT 治理是指组织在开发利用信息技术过程中，为鼓励组织所期望的组织行为而<b>明确决策权归属和责任担当的框架</b>，其目标是通过 IT 治理的<b>决策权和责任</b>影响组织所期望的组织行为</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>位置定位：IT 资产是组织资产的重要组成部分 → <b>IT 治理是组织治理结构中不可分割的一部分</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>IT 治理关注的问题：从信息系统投资中<b>获得价值</b> / 信息技术战略与<b>组织战略相融合</b> / 从组织治理高度对数字化能力做出<b>制度安排</b> / 降低 IT 风险 / 利用最佳实践加快信息化数字化推进</span></div>
+<blockquote>记法：定义抓三个词——<b>机制 · 平衡风险 · 战略目标</b>；框架抓两个词——<b>决策权归属 · 责任担当</b></blockquote>
+<label class="task"><input type="checkbox" data-key="A1" ><span class="task-text"><b>A1 · 驱动因素</b> ⭕ 常考（「统一规划两问题」+「高质量治理八因素」）</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span>制订 <b>IT 资源统一规划</b>存在的两个问题：①分散开发或引进的信息系统形成许多「<b>信息孤岛</b>」，缺乏共享的、网络化的信息资源，<b>系统集成难题一直无法解决</b>；②<b>信息资源整合目标空泛</b>，没有整合「信息孤岛」的措施，数据中心建设和数据集中管理等规划<b>缺乏可操作性</b>，尤其是<b>缺少数据标准化建设</b>方面的建设规划</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>驱动组织开展高质量 IT 治理的因素（8 条）</b>：①确保组织 <b>IT 投资有效性</b>；②IT 属于<b>知识高度密集型</b>领域，价值发挥<b>弹性较大</b>；③IT 已<b>融入组织管理、运行、生产和交付</b>等各领域；④新兴信息技术带来<b>新的发展空间和业务机会</b>；⑤推动组织充分<b>理解 IT 价值</b>，促进价值挖掘和融合利用；⑥IT 价值不仅取决于好技术，也需要<b>良好的价值管理</b>、场景化的业务融合应用；⑦高级管理层<b>管理幅度有限</b>，需要明确<b>责权利</b>；⑧<b>成熟度较高的组织</b>以不同方式治理 IT，获得行业领先效果</span></div>
+<blockquote>记法：两问题 =「<b>孤岛 + 空泛</b>」；八因素记首词「<b>投资 / 密集 / 融入 / 机会 / 理解 / 管理 / 幅度 / 成熟</b>」</blockquote>
+<label class="task"><input type="checkbox" data-key="A2" ><span class="task-text"><b>A2 · IT 治理的内涵（5 个方面）</b> ⭕ 必考</span></label><div class="item-body"><ol><li>IT 治理是组织<b>上层管理</b>的一个有机组成部分，由<b>组织治理层或高级管理层</b>负责，从组织<b>全局高度</b>对信息化与数字化转型做出<b>制度安排</b></li><li>强调<b>数字目标与组织战略目标保持一致</b>，为组织战略规划提供技术或控制支持</li><li><b>保护利益相关者的权益</b>，对风险进行有效管理，合理利用 IT 资源，平衡成本和收益，<b>增强组织的核心竞争力</b></li><li>是一种<b>制度和机制</b>，主要涉及<b>管理和制衡</b>：信息系统与业务战略<b>匹配</b>、信息系统建设<b>投资</b>、信息系统<b>安全</b>、信息系统<b>绩效评价</b>等内容</li><li>组成部分包括<b>管理层、组织结构、制度、流程、人员、技术</b>等多个方面，共同构建完善的 IT 治理架构</li></ol></div>
+<blockquote>记法：<b>高层安排 · 目标一致 · 权益风险 · 制度制衡 · 多元组成</b></blockquote>
+<label class="task"><input type="checkbox" data-key="A3" ><span class="task-text"><b>A3 · IT 治理的目标价值（三大目标）</b> ⭕ 必背（年年考）</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span>关系句：<b>组织治理驱动和调整 IT 治理</b>；IT 治理为战略计划提供关键输入，是组织治理的<b>一个重要功能</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>IT 治理帮助组织建立：以<b>组织战略为导向</b>、以实现 <b>IT 与业务匹配为重心</b>、以<b>价值交付为成果</b>、以<b>绩效管理为控制手段</b>的 IT 管理体制</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>三大主要目标</b>：</span></div>
+<table><thead><tr><th>目标</th><th>要点</th></tr></thead><tbody><tr><td><b>与业务目标一致</b></td><td>从组织目标和数字战略中<b>抽取信息与数据需求和功能需求</b>，形成<b>总体的 IT 治理框架和系统整体模型</b>，保证信息技术开发利用<b>跟上持续变化的业务目标</b></td></tr><tr><td><b>有效利用信息与数据资源</b></td><td>针对「工程超期 / 需求未满足 / 平台不支持业务 / 数据效能不高 / 融合深度不够」等问题，对信息与数据资源的<b>管理职责</b>进行有效管理，<b>保证投资回收，支持决策</b></td></tr><tr><td><b>风险管理</b></td><td>组织越依赖信息网络、信息系统和数据资源，新风险越多；通过制定信息与数据资源的<b>保护级别</b>，强调对关键信息与数据资源实施<b>有效监控和事件处理</b></td></tr></tbody></table>
+<blockquote>口诀：<b>一有风</b>（与业务目标一致 · 有效利用资源 · 风险管理）</blockquote>
+<label class="task"><input type="checkbox" data-key="A4" ><span class="task-text"><b>A4 · IT 治理的管理层次（三层）</b> ⭕ 必背（职责归属题）</span></label>
+<table><thead><tr><th>层次</th><th>主要职责</th></tr></thead><tbody><tr><td><b>最高管理层</b>（如董事会）</td><td><b>证实</b> IT 战略与业务战略是否一致；<b>证实</b>通过明确的期望和衡量手段交付 IT 价值；<b>指导</b> IT 战略、平衡支持组织当前和未来发展的投资；<b>指导</b>信息和数据资源的分配</td></tr><tr><td><b>执行管理层</b></td><td><b>制定</b> IT 的目标；<b>分析</b>新技术的机遇和风险；<b>建设</b>关键过程与核心竞争力；<b>分配</b>责任、定义规程、衡量业绩；<b>管理</b>风险和获得可靠保证</td></tr><tr><td><b>业务与服务执行层</b></td><td>信息和数据服务的<b>提供和支持</b>；IT 基础设施的<b>建设和维护</b>；IT 需求的<b>提出和响应</b></td></tr></tbody></table>
+<blockquote>口诀：最高层「<b>证证导导</b>」→ 执行层「<b>制分建衡</b>」→ 业务层「<b>提建响</b>」<br>⚠️「证实」两连是<b>最高管理层</b>专属动词；「需求的提出和响应」在<b>业务与服务执行层</b></blockquote>
+<h3>模块 B ｜ IT 治理体系（3.1.2 · 本节最重的一小节）</h3>
+<label class="task"><input type="checkbox" data-key="B0" ><span class="task-text"><b>B0 · IT 治理体系的构成（5 项）</b> ⭕ 必背</span></label><div class="item-body"><p>IT 治理的<b>核心</b>是关注 <b>IT 定位</b>和信息化建设与数字化转型的<b>责权利划分</b>。体系构成五项（对应图 3-1 的五个问题）：</p></div>
+<table><thead><tr><th>构成</th><th>内容</th><th>对应问题</th></tr></thead><tbody><tr><td><b>IT 定位</b></td><td>IT 应用的期望行为与业务目标一致</td><td>目标是什么？</td></tr><tr><td><b>IT 治理架构</b></td><td>业务和 IT 在治理委员会中的构成、组织 IT 与各分支机构的 IT 权责边界等</td><td>由谁来做？</td></tr><tr><td><b>IT 治理内容</b></td><td><b>投资、风险、绩效、标准和规范</b>等</td><td>做什么？</td></tr><tr><td><b>IT 治理流程</b></td><td><b>统筹、评估、指导、监督</b></td><td>怎么做？</td></tr><tr><td><b>IT 治理效果</b></td><td>内外评价</td><td>效果如何？</td></tr></tbody></table>
+<blockquote>记法：<b>定位 · 架构 · 内容 · 流程 · 效果</b>（定位目标 / 架构定人 / 内容定事 / 流程定法 / 效果定评）</blockquote>
+<label class="task"><input type="checkbox" data-key="B1" ><span class="task-text"><b>B1 · 五项关键决策</b> ⭕ 必背（教材图 3-2 + 表 3-1）</span></label>
+<table><thead><tr><th>决策</th><th>核心内容</th></tr></thead><tbody><tr><td><b>IT 原则</b></td><td><b>组织高层关于如何使用 IT 的陈述</b></td></tr><tr><td><b>IT 架构</b></td><td>组织从一系列<b>政策、关系以及技术选择</b>中捕获的<b>数据、应用和基础设施的逻辑</b>，以达到预期的商业、技术的<b>标准化和一体化</b></td></tr><tr><td><b>IT 基础设施</b></td><td><b>集中协调、共享 IT 服务</b>，可以为组织的 IT 能力提供基础</td></tr><tr><td><b>业务应用需求</b></td><td>为<b>购买或内部开发 IT 应用</b>确定业务需求</td></tr><tr><td><b>IT 投资和优先顺序</b></td><td>关于应该在 IT 的<b>哪些方面投资以及投资多少</b>的决策，包括项目的<b>审批和论证</b></td></tr></tbody></table>
+<div class="plain-li"><span class="bullet">•</span> <span><b>驱动链条</b>：<b>IT 原则</b>驱动 IT 整体架构的形成 → IT 整体架构决定基础设施 → 基础设施确定的能力决定基于业务需求应用的构建 → <b>IT 投资和优先顺序</b>必须为 IT 原则、整体架构、基础设施和应用需求所驱动</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>关键问题：IT 治理需要确定每个决策<b>由谁来负责输入</b>、<b>由谁来负责做出决策</b></span></div>
+<blockquote>链条口诀：<b>原则 → 架构 → 基础设施 → 应用 → 投资</b>（投资被前面所有决策驱动）</blockquote>
+<label class="task"><input type="checkbox" data-key="B2" ><span class="task-text"><b>B2 · IT 治理体系框架（六部分）</b> ⭕ 必背（「组机域标绩」）</span></label><div class="item-body"><p>IT 治理体系框架以组织的<b>战略目标为导向</b>，架起组织战略与 IT 的桥梁，实现 IT 风险的全面管理以及 IT 资源的合理利用。六部分形成一整套 <b>IT 治理运行闭环</b>：</p></div>
+<table><thead><tr><th>#</th><th>组成</th><th>要点</th></tr></thead><tbody><tr><td>1</td><td><b>IT 战略目标</b></td><td>为实现 IT 价值和目标，使组织从 IT 投入中获得<b>最大收益</b>，针对 <b>IT 与业务关系、IT 决策、IT 资源利用、IT 风险控制</b>等方面制定的目标</td></tr><tr><td>2</td><td><b>IT 治理组织</b></td><td>界定各相关主体的治理范围、<b>责权利</b>及相互关系的准则；核心是<b>治理机构（如 IT 治理委员会）的设置和权限划分</b>；其强弱<b>对 IT 治理效率起决定性作用</b></td></tr><tr><td>3</td><td><b>IT 治理机制</b></td><td><b>决策机制、执行机制、风险控制机制、协调机制</b>的综合体，各机制相辅相成、相互促进</td></tr><tr><td>4</td><td><b>IT 治理域</b></td><td>在治理规则之下对 IT 资源进行<b>整合与配置</b>、根据 IT 目标采取行动；内容包括 IT 信息系统的<b>计划、构建、运维与监控</b>（信息化「高效做事情」、数字化「敏捷的决策」）</td></tr><tr><td>5</td><td><b>IT 治理标准</b></td><td>包括<b>基本规范、实施参照、评价体系和审计方法</b>，作为组织实施 IT 治理最佳实践和<b>对标依据</b></td></tr><tr><td>6</td><td><b>IT 绩效目标</b></td><td>关注 <b>IT 价值的实现</b>，评价 IT 规划与构建过程中是否满足业务需求以及<b>工期、成本、质量</b>是否达到目标</td></tr></tbody></table>
+<blockquote>口诀：<b>战略目标 · 治理组织 · 治理机制 · 治理域 · 治理标准 · 绩效目标</b>（组机域标绩）；治理域四词 = <b>计划 · 构建 · 运维 · 监控</b></blockquote>
+<label class="task"><input type="checkbox" data-key="B3" ><span class="task-text"><b>B3 · IT 治理的核心内容（六方面）</b> ⭕ 必背（高频）</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span>IT 治理<b>本质上关心</b>：①实现 IT 的<b>业务价值</b>——通过 <b>IT 与业务战略匹配</b>来实现；②IT <b>风险的规避</b>——通过在组织内部<b>建立相关职责</b>来实现；两者都需要相关资源支持并对其绩效进行有效度量</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>核心内容六方面</b>：</span></div>
+<table><thead><tr><th>内容</th><th>含义</th><th>价值定位</th></tr></thead><tbody><tr><td><b>组织职责</b></td><td>明确信息部门和业务部门的关系和责任，划分信息系统的<b>所有者、建设者、管理者和监控者</b></td><td>—</td></tr><tr><td><b>战略匹配</b></td><td>使 IT 建设与组织战略相匹配，是 IT <b>贡献业务价值的重要驱动力</b></td><td>—</td></tr><tr><td><b>资源管理</b></td><td>确保用户对<b>应用系统和基础设施</b>有良好理解和应用，优化 IT 投资与资源（人、应用系统、信息、基础设施）分配，做好人员培训与发展</td><td>—</td></tr><tr><td><b>价值交付</b></td><td>通过对 IT 项目<b>全生命周期</b>的管理，确保 IT 按照组织战略实现预期的业务价值；重点是<b>交付周期成本控制</b>与 IT 业务价值实现</td><td><b>创造业务价值</b></td></tr><tr><td><b>风险管理</b></td><td>确保 <b>IT 资产安全、灾难恢复、组织信息资源安全和人员隐私安全</b></td><td><b>保护业务价值</b></td></tr><tr><td><b>绩效管理</b></td><td><b>追踪和监视</b> IT 战略、项目实施、资源使用、服务提供和业务流程绩效</td><td>—</td></tr></tbody></table>
+<blockquote>口诀：<b>职匹源价风绩</b>；一对必背配对：<b>价值交付 = 创造业务价值，风险管理 = 保护业务价值</b></blockquote>
+<label class="task"><input type="checkbox" data-key="B4" ><span class="task-text"><b>B4 · 建立 IT 治理机制的三原则</b> ⭕ 常考</span></label>
+<table><thead><tr><th>原则</th><th>含义</th></tr></thead><tbody><tr><td><b>简单</b></td><td>机制应该<b>明确地定义</b>特定个人和团体所承担的<b>责任和目标</b></td></tr><tr><td><b>透明</b></td><td>有效的机制依赖于<b>正式的程序</b>；机制如何工作需要非常清晰</td></tr><tr><td><b>适合</b></td><td>机制鼓励<b>处于最佳位置的个人</b>去制定特定的决策</td></tr></tbody></table>
+<blockquote>口诀：<b>简透适</b>（干扰项常用「复杂 / 公开 / 灵活」）</blockquote>
+<h3>模块 C ｜ IT 治理任务（3.1.3）</h3>
+<label class="task"><input type="checkbox" data-key="C0" ><span class="task-text"><b>C0 · IT 治理活动的定义</b> ⭕ 必背（易与「治理流程」混）</span></label><div class="item-body"><p>组织的 IT 治理活动定义为：<b>统筹、指导、监督和改进</b>。</p></div>
+<blockquote>⚠️ 两组四词别混：<b>治理流程 / 治理作用</b> =「统筹 · <b>评估</b> · 指导 · 监督」；<b>治理活动</b> =「统筹 · 指导 · 监督 · <b>改进</b>」——前者有「评估」、后者有「改进」</blockquote>
+<label class="task"><input type="checkbox" data-key="C1" ><span class="task-text"><b>C1 · 五大任务</b> ⭕ 必背（「统价机创文」）</span></label>
+<table><thead><tr><th>任务</th><th>要点</th></tr></thead><tbody><tr><td><b>全局统筹</b></td><td>统筹 IT 治理的<b>目标范围、技术环境、发展趋势和人员责权利</b>；制订满足可持续发展的 <b>IT 蓝图</b>；实施科学决策、集约管理，实现横向业务集成和纵向业务管控；建立持续改进和创新机制</td></tr><tr><td><b>价值导向</b></td><td>认可信息技术、信息系统和数据在组织中的价值；<b>识别投资目录</b>并以相应方式评估管理；对<b>关键指标</b>设定和监督，对变化和偏差及时回应；<b>权衡实施成本与预期效益</b></td></tr><tr><td><b>机制保障</b></td><td>保证 IT 需求与实现的<b>协调发展</b>，使 IT 安全和风险得到有效<b>识别、管理、防范和处置</b>；指导建立规范的过程管理和痕迹管理；<b>评审</b> IT 管理体系的<b>适宜性、充分性和有效性</b>；<b>审计</b> IT 完整性、有效性和合规性；<b>监督</b>改进内容的实施</td></tr><tr><td><b>创新发展</b></td><td>利用 IT 创新开拓业务领域，提升管理水平，<b>改进质量、绩效和降低成本</b>；确保技术发展、管理创新、模式革新<b>协调联动</b>；对组织创新能力进行评估</td></tr><tr><td><b>文化助推</b></td><td>与利益相关者<b>沟通 IT 治理的目标、策略和职责</b>，营造<b>积极向上、沟通包容</b>的组织文化</td></tr></tbody></table>
+<blockquote>口诀：<b>统价机创文</b></blockquote>
+<h3>模块 D ｜ IT 治理方法与标准（3.1.4）</h3>
+<label class="task"><input type="checkbox" data-key="D0" ><span class="task-text"><b>D0 · 三大典型标准 / 框架总览</b> ⭕ 必背（归属题）</span></label>
+<table><thead><tr><th>名称</th><th>归属 / 制定者</th></tr></thead><tbody><tr><td><b>ITSS 中 IT 治理系列标准</b></td><td>我国信息技术服务标准库（GB/T 34960 系列）</td></tr><tr><td><b>COBIT</b></td><td>信息和技术治理框架，由<b>美国信息系统审计与控制协会（ISACA）</b>设计并编制（ISACA 成立于 <b>1969 年</b>）</td></tr><tr><td><b>ISO/IEC 38500</b></td><td><b>IT 治理国际标准</b>（2008 年 4 月正式发布）</td></tr></tbody></table>
+<blockquote>记法：<b>国标看 ITSS · 美国协会看 COBIT · 国际标准看 38500</b></blockquote>
+<label class="task"><input type="checkbox" data-key="D1" ><span class="task-text"><b>D1 · ITSS：GB/T 34960.1 / 34960.2</b> ⭕ 必背（「顶管资」）</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span><b>GB/T 34960.1《信息技术服务 治理 第 1 部分：通用要求》</b>：规定了 IT 治理的<b>模型和框架</b>、实施 IT 治理的<b>原则</b>，以及开展 IT <b>顶层设计、管理体系和资源</b>的治理要求。<b>该标准可用于</b>：①建立组织的 IT 治理体系并实施<b>自我评价</b>；②开展<b>信息技术审计</b>；③<b>研发、选择和评价</b> IT 治理相关的软件或解决方案；④<b>第三方</b>对组织的 IT 治理能力进行评价</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>IT 治理框架三大治理域</b>：</span></div>
+<table><thead><tr><th>治理域</th><th>内容</th></tr></thead><tbody><tr><td><b>顶层设计</b></td><td>信息技术<b>战略</b>，以及支撑战略的<b>组织和架构</b></td></tr><tr><td><b>管理体系</b></td><td><b>质量管理、项目管理、投资管理、服务管理、业务连续性管理、信息安全管理、风险管理、供方管理、资产管理</b>和其他管理</td></tr><tr><td><b>资源</b></td><td>信息技术相关的<b>基础设施、应用系统和数据</b></td></tr></tbody></table>
+<div class="plain-li"><span class="bullet">•</span> <span><b>GB/T 34960.2《信息技术服务 治理 第 2 部分：实施指南》</b>：分析了实施 IT 治理的<b>环境因素</b>，规定了 IT 治理的<b>实施框架、实施环境和实施过程</b>，并明确顶层设计治理、管理体系治理和资源治理的实施要求</span></div>
+<blockquote>口诀：三大治理域 = <b>顶管资</b>；34960.<b>1 = 通用要求</b>、34960.<b>2 = 实施指南</b></blockquote>
+<label class="task"><input type="checkbox" data-key="D2" ><span class="task-text"><b>D2 · COBIT 框架</b> ⭕ 必背（治理 vs 管理区分是高频）</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span><b>COBIT（Control Objectives for Information and related Technology）</b>是面向<b>整个组织</b>的信息和技术治理及管理框架；框架介绍了 <b>40 项核心治理和管理目标</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>治理与管理的区分</b>：</span></div>
+<table><thead><tr><th>类别</th><th>领域</th><th>负责者</th><th>动词</th></tr></thead><tbody><tr><td><b>治理</b></td><td><b>EDM</b>（评估、指导和监控）</td><td><b>董事会和执行管理层</b></td><td><b>评估利益干系人的需求 → 设定方向（定优先级、指定决策）→ 监控绩效与合规</b></td></tr><tr><td><b>管理</b></td><td><b>APO</b>（调整、规划和组织）· <b>BAI</b>（内部构建、外部采购和实施）· <b>DSS</b>（交付、服务和支持）· <b>MEA</b>（监控、评价和评估）</td><td><b>高级和中级管理层</b></td><td>按治理设定的方向<b>计划、构建、运行和监控</b>活动</td></tr></tbody></table>
+<div class="plain-li"><span class="bullet">•</span> <span><b>COBIT 治理系统七大组件</b>：<b>流程 · 组织结构 · 原则政策和程序 · 信息 · 文化道德和行为 · 人员技能和胜任能力 · 服务基础设施和应用程序</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>治理系统设计流程四步</b>：①<b>了解组织环境和战略</b> → ②<b>确定治理系统的初步范围</b> → ③<b>优化治理系统的范围</b> → ④<b>最终确定治理系统的设计</b></span></div>
+<blockquote>口诀：治理 = <b>E</b>DM（董事会）；管理 = <b>A</b>PO/<b>B</b>AI/<b>D</b>SS/<b>M</b>EA（高级中级管理层）；设计四步 = <b>了解 → 定范围 → 优化 → 定设计</b></blockquote>
+<label class="task"><input type="checkbox" data-key="D3" ><span class="task-text"><b>D3 · ISO/IEC 38500</b> ⭕ 必背（六原则 + 三任务）</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span><b>2008 年 4 月</b>正式发布的 <b>IT 治理国际标准</b>；它的出台不仅标志着 IT 治理从概念模糊的探讨阶段进入正确认识的发展阶段，而且<b>标志着信息化正式进入 IT 治理时代</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>六项原则</b>：<b>责任 · 战略 · 收购 · 性能 · 一致性 · 人的行为</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>三大任务</b>：治理机构应通过<b>评估、指导和监督</b>三个主要任务来治理 IT（评估 = 审查判断当前和未来的 IT 使用；指导 = 负责战略和政策的编制和执行；监督 = 通过测量系统监测 IT 表现）</span></div>
+<blockquote>口诀：六原则「<b>责战收性一人</b>」；三任务「<b>评指监</b>」</blockquote>
+<h3>模块 E ｜ 考情与易混对照</h3>
+<label class="task"><input type="checkbox" data-key="E0" ><span class="task-text"><b>E0 · 本章考情提醒</b> ⭕ 了解</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span>第 3 章为<b>第 4 版新增重点章</b>，考频持续上升（综合知识约 3~4 分，偶尔涉案例理论背景）；<b>2023 上及以前的旧真题没有本章对应题</b>，别用旧题正确率评估掌握度</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>高频四块：<b>IT 治理三大目标 / 五项关键决策 / COBIT 框架（治理与管理区分）/ IT 审计三风险与流程</b>（审计在 3.2，本节先打地基）</span></div>
+<label class="task"><input type="checkbox" data-key="E1" ><span class="task-text"><b>E1 · 两组高频易混对照</b> ⭕ 必背</span></label>
+<table><thead><tr><th>对照</th><th>内容</th></tr></thead><tbody><tr><td>「统筹·评估·指导·监督」 vs 「统筹·指导·监督·改进」</td><td>前者 = <b>IT 治理的作用 / 治理流程</b>（第 3 章引言 + 体系构成）；后者 = <b>IT 治理活动的定义</b>（3.1.3）。差别就在「<b>评估</b>」vs「<b>改进</b>」</td></tr><tr><td>「创造业务价值」 vs 「保护业务价值」</td><td><b>价值交付 = 创造</b>；<b>风险管理 = 保护</b>（核心内容六方面的固定配对，别对调）</td></tr><tr><td>「评指监」 vs 「统价机创文」</td><td>前者 = <b>ISO 38500 治理机构的三大任务</b>；后者 = <b>3.1.3 五大治理任务</b>，两套「任务」不同层次</td></tr></tbody></table>
+<h2>二、可以只通读、暂不背的（标记避免浪费时间）</h2>
+<table><thead><tr><th>小节</th><th>处理方式</th></tr></thead><tbody><tr><td>3.1 引言段（IT 治理关注的问题五问）</td><td>通读，记住「获得价值 / 战略融合 / 制度安排 / 降低风险 / 最佳实践」五个关键词</td></tr><tr><td>3.1.1 教材表 3-1「IT 决策的关键问题」逐项展开</td><td>通读，只记每项决策的<b>一句话核心</b>（见 B1 表）</td></tr><tr><td>3.1.2 图 3-3 体系框架的图形连线</td><td>通读，记「<b>以战略目标为导向 → 形成运行闭环</b>」即可</td></tr><tr><td>3.1.2 核心内容中「资源管理 / 绩效管理」的展开描述</td><td>通读，只背六方面名称 + 创造 / 保护配对</td></tr><tr><td>3.1.3 五大任务各自的细项展开</td><td>通读，背「统价机创文」+ 各任务第一句话；「评审适宜性充分性有效性」单独记（爱考）</td></tr><tr><td>3.1.4 GB/T 34960 两个标准的「可用于 / 适用于」四项用途</td><td>通读，理解「自我评价 / 审计 / 软件评价 / 第三方评价」即可，不必逐字背</td></tr></tbody></table>
+<h2>三、本节自检题（做完再合书）</h2>
+<ol><li>背出 IT 治理的教材定义（三个关键词）。从组织治理角度，IT 治理又是什么的框架？</li><li>制订 IT 资源统一规划存在哪两个问题？「信息孤岛」会导致什么难题？</li><li>驱动组织开展高质量 IT 治理的因素有多少条？至少说出五条的关键词。</li><li>IT 治理的内涵体现在哪 5 个方面？「制度机制」主要涉及哪四类管理和制衡内容？</li><li>IT 治理与组织治理的关系句是什么？IT 管理体制的「导向 / 重心 / 成果 / 控制手段」分别是什么？</li><li>IT 治理的三大主要目标是什么？口诀怎么记？</li><li>「与业务目标一致」要求形成什么？「风险管理」通过制定什么、强调对什么实施什么？</li><li>IT 治理的管理层次分哪三层？各层职责的关键动词是什么（最高管理层的两个「证实」分别证实什么）？</li><li>IT 治理体系的具体构成包括哪五项？分别回答图 3-1 的哪五个问题？</li><li>有效的 IT 治理必须关注哪五项关键决策？各自的驱动链条顺序是什么？</li><li>「组织高层关于如何使用 IT 的陈述」是哪项决策？「集中协调、共享 IT 服务」呢？</li><li>IT 治理体系框架包括哪六部分？口诀？治理域的内容是哪四词？</li><li>IT 治理机制是哪四种机制的综合体？治理机构（如 IT 治理委员会）的设置和权限划分属于哪一部分？它对什么起决定性作用？</li><li>IT 治理本质上关心哪两点？各自通过什么来实现？</li><li>IT 治理核心内容有哪六方面？「创造业务价值」「保护业务价值」分别对应哪个？</li><li>建立 IT 治理机制的三原则是什么？各是什么含义？</li><li>组织的 IT 治理活动定义是什么？与「治理流程」的四词有何差别？</li><li>五大治理任务是什么？「全局统筹」要制订什么？「机制保障」要评审管理体系的三性是什么？</li><li>IT 治理方法与标准的典型「三件套」分别是什么、各自由谁制定？</li><li>GB/T 34960.1 规定了什么？IT 治理框架的三大治理域是什么？各域包含什么？</li><li>COBIT 由谁设计编制？治理与管理如何区分（领域 / 负责者 / 动词）？治理系统有哪七大组件？设计流程四步是什么？</li><li>ISO/IEC 38500 何时发布？其出台标志着什么？六项原则和三大任务是什么？</li></ol>
+<details>
+<summary>参考答案（先自己答完再展开）</summary>
+<ol><li>IT 治理是描述组织采用<b>有效的机制</b>对<b>信息技术和数据资源</b>开发利用，<b>平衡信息化发展和数字化转型过程中的风险</b>，确保实现组织的<b>战略目标</b>的过程。组织治理角度：为鼓励组织所期望的组织行为而<b>明确决策权归属和责任担当的框架</b></li><li>①分散开发或引进的信息系统形成许多「<b>信息孤岛</b>」，缺乏共享的、网络化的信息资源，<b>系统集成难题一直无法解决</b>；②<b>信息资源整合目标空泛</b>，没有整合「信息孤岛」的措施，数据中心建设和数据集中管理规划缺乏可操作性，尤其缺少<b>数据标准化建设</b>规划</li><li><b>8 条</b>。关键词：确保 IT 投资有效性 / 知识高度密集型（价值弹性大）/ 已融入管理运行生产交付 / 新技术带来新空间新机会 / 推动理解 IT 价值 / 需要良好价值管理 / 高级管理层管理幅度有限 / 成熟度较高组织以不同方式治理</li><li>①上层管理的有机组成部分，由<b>治理层或高级管理层</b>负责，做<b>制度安排</b>；②强调<b>数字目标与组织战略目标保持一致</b>；③<b>保护利益相关者权益</b>、管理风险、平衡成本收益、增强核心竞争力；④是一种<b>制度和机制</b>；⑤组成部分包括<b>管理层、组织结构、制度、流程、人员、技术</b>。「制度机制」涉及四类制衡：信息系统与业务战略<b>匹配</b>、建设<b>投资</b>、信息<b>安全</b>、<b>绩效评价</b></li><li><b>组织治理驱动和调整 IT 治理</b>；IT 治理为战略计划提供关键输入，是组织治理的一个重要功能。体制四要素：以<b>组织战略为导向</b>、以<b>实现 IT 与业务匹配为重心</b>、以<b>价值交付为成果</b>、以<b>绩效管理为控制手段</b></li><li><b>与业务目标一致、有效利用信息与数据资源、风险管理</b>。口诀「<b>一有风</b>」</li><li>「与业务目标一致」：从组织目标和数字战略中<b>抽取信息与数据需求和功能需求</b>，形成<b>总体的 IT 治理框架和系统整体模型</b>，保证开发利用跟上持续变化的业务目标。「风险管理」：制定信息与数据资源的<b>保护级别</b>，强调对关键的资源实施<b>有效监控和事件处理</b></li><li><b>最高管理层 / 执行管理层 / 业务与服务执行层</b>。最高管理层动词「证实 · 指导」：<b>证实 IT 战略与业务战略是否一致</b>、<b>证实通过明确的期望和衡量手段交付 IT 价值</b>，指导 IT 战略与投资平衡、指导信息与数据资源分配；执行层：制定目标 / 分析机遇风险 / 建设关键过程与核心竞争力 / 分配责任定义规程衡量业绩 / 管理风险；业务与服务执行层：服务提供和支持 / 基础设施建设和维护 / <b>需求的提出和响应</b></li><li><b>IT 定位 / IT 治理架构 / IT 治理内容 / IT 治理流程 / IT 治理效果</b>。对应五问：目标是什么（定位 = 期望行为与业务目标一致）/ 谁来做（架构 = 治理委员会构成与权责边界）/ 做什么（内容 = 投资、风险、绩效、标准和规范）/ 怎么做（流程 = 统筹、评估、指导、监督）/ 效果如何（效果 = 内外评价）</li><li><b>IT 原则 · IT 架构 · IT 基础设施 · 业务应用需求 · IT 投资和优先顺序</b>。链条：<b>IT 原则驱动 IT 整体架构 → 架构决定基础设施 → 基础设施能力决定应用构建 → IT 投资和优先顺序被前面所有决策驱动</b></li><li>「组织高层关于如何使用 IT 的陈述」= <b>IT 原则</b>；「集中协调、共享 IT 服务」= <b>IT 基础设施</b>（「数据、应用和基础设施的逻辑，标准化一体化」= IT 架构；「为购买或内部开发 IT 应用确定业务需求」= 业务应用需求；「投资多少、审批论证」= IT 投资和优先顺序）</li><li><b>IT 战略目标 / IT 治理组织 / IT 治理机制 / IT 治理域 / IT 治理标准 / IT 绩效目标</b>（口诀「组机域标绩」），形成一整套 IT 治理<b>运行闭环</b>。治理域内容 = <b>计划、构建、运维与监控</b></li><li><b>决策机制、执行机制、风险控制机制、协调机制</b>的综合体。治理机构设置与权限划分属 <b>IT 治理组织</b>；其强弱直接影响治理的效率和效能，<b>对 IT 治理效率起决定性作用</b></li><li>①实现 IT 的<b>业务价值</b>——通过 <b>IT 与业务战略匹配</b>实现；②IT <b>风险的规避</b>——通过在组织内部<b>建立相关职责</b>实现</li><li><b>组织职责 · 战略匹配 · 资源管理 · 价值交付 · 风险管理 · 绩效管理</b>（职匹源价风绩）。<b>价值交付 = 创造业务价值；风险管理 = 保护业务价值</b></li><li><b>简单</b>（明确定义责任和目标）· <b>透明</b>（依赖正式的程序，机制如何工作需非常清晰）· <b>适合</b>（鼓励处于最佳位置的个人制定特定决策）。口诀「简透适」</li><li>治理活动 = <b>统筹、指导、监督和改进</b>；治理流程 / 作用 = <b>统筹、评估、指导、监督</b>。差别：「评估」vs「改进」</li><li><b>全局统筹 · 价值导向 · 机制保障 · 创新发展 · 文化助推</b>（统价机创文）。全局统筹制订满足可持续发展的 <b>IT 蓝图</b>；机制保障评审 IT 管理体系的<b>适宜性、充分性和有效性</b></li><li>①<b>ITSS 中 IT 治理系列标准</b>（我国标准库，GB/T 34960 系列）；②<b>COBIT</b>（美国信息系统审计与控制协会 ISACA，1969 年成立）；③<b>ISO/IEC 38500</b>（IT 治理国际标准）</li><li>34960.1 规定了 IT 治理的<b>模型和框架</b>、实施原则，以及开展 <b>IT 顶层设计、管理体系和资源</b>的治理要求。三大治理域：<b>顶层设计</b>（战略 + 支撑战略的组织和架构）/ <b>管理体系</b>（质量、项目、投资、服务、业务连续性、信息安全、风险、供方、资产等）/ <b>资源</b>（基础设施、应用系统、数据）</li><li><b>美国信息系统审计与控制协会（ISACA）</b>设计编制（1969 年成立）。治理 = <b>EDM 评估、指导和监控</b>领域，由<b>董事会和执行管理层</b>负责；管理 = <b>APO 调整规划组织 / BAI 内部构建外部采购和实施 / DSS 交付服务和支持 / MEA 监控评价评估</b>四个领域，由<b>高级和中级管理层</b>负责。七大组件：流程 / 组织结构 / 原则政策和程序 / 信息 / 文化道德和行为 / 人员技能和胜任能力 / 服务基础设施和应用程序。设计四步：了解组织环境和战略 → 确定初步范围 → 优化范围 → 最终确定设计</li><li><b>2008 年 4 月</b>正式发布；标志着 IT 治理从概念模糊的探讨阶段进入正确认识的发展阶段，<b>标志着信息化正式进入 IT 治理时代</b>。六原则：<b>责任、战略、收购、性能、一致性、人的行为</b>（责战收性一人）；三任务：<b>评估、指导、监督</b>（评指监）</li></ol>
+</details>
+<h2>四、康奈尔笔记（可打印模板）</h2>
+<p>📄 <b>模板文件</b>：</p>
+<div class="plain-li"><span class="bullet">•</span> <span><code>3.1_康奈尔笔记模板.html</code> — A4 留白手写版（左栏 12 问，右栏分模块手写线）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><code>3.1_康奈尔笔记模板_带答案版.html</code> — A4 带答案版，含「👁 隐藏答案」按钮（可切换填空版打印）</span></div>
+<p><b>用法</b>：左栏 12 个问题为线索，遮住右栏自问；右栏按 3.1.1~3.1.4 分模块留手写线；底部总结区收口。带答案版每条答案都标注关键术语和易混提醒，适合先默写、再对照。</p>
+<p><b>打印后自查（不看书答）</b></p>
+<div class="plain-li"><span class="bullet">•</span> <span>线索栏问题 1~12 全部答出 → 正确率 <code>__ / 12</code></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>答不出的条目抄进「易混 / 易错」区，这是考前唯一要看的块</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>页脚 5 个复习框：当日 ☐　+1 天 ☐　+3 天 ☐　+7 天 ☐　+14 天 ☐</span></div>
+<h2>五、刷题任务</h2>
+<div class="plain-li"><span class="bullet">•</span> <span>先做本仓题库：<code>3.1_考点自测题.html</code>（22 题 · 即时判分 + 逐题精讲，目标 ≥ 18 对）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>再刷填空专练：<code>08_答题系统/index.html</code> → 切到「3.1」tab（12 题，答对自动同步勾选本清单）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>真题来源建议：本章是<b>第 4 版新增章节</b>，2023 上以前的旧真题没有对应题；练「IT 治理 / IT 审计 / COBIT / 38500」关键词，<b>2024 以后的回忆版真题</b>优先，教辅（软考达人 / 信管网）的本章章节题是主力</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>⚠️ 特别提醒：机构旧讲义若按<b>第 3 版教材</b>讲「信息系统治理」，往往没有本章或口径不同（第 3 版无独立的 3.1.4 方法与标准），别拿旧讲义覆盖本清单</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>错题记入 <code>05_错题本/</code>（格式：考点 / 错选原因 / 正选 + 出处）</span></div>
+<h2>六、与前后章节的衔接</h2>
+<p>3.1 是<b>第 3 章的开篇节</b>，也是「治理底座」：</p>
+<div class="plain-li"><span class="bullet">•</span> <span><b>承接第 1、2 章</b>：第 1 章讲数字化为什么要做、第 2 章讲靠什么技术，第 3 章回答「<b>谁来管、怎么管这些技术和投资</b>」——IT 治理正是把信息化从「项目行为」升格为「组织治理行为」</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>本节内部主线</b>：<b>基础（是什么）→ 体系（管什么）→ 任务（干什么）→ 方法与标准（用什么工具）</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>向后打通</b>：</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>3.2 IT 审计</b>：IT 审计是 IT 治理不可或缺的<b>评估和监督工具</b>；本节治理流程里的「评估、监督」由 3.2 的审计落地；GB/T 34960.1 的用途之一就是「开展信息技术审计」</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>第 4 章信息系统管理</b>：治理定方向、管理做执行——4.1.2「规划和组织」与 IT 治理的组织安排直接衔接</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>第 6 章项目管理概论 / 第 18 章绩效域</b>：本节「绩效目标关注工期、成本、质量」，是项目管理三约束在治理层的投影；「价值交付」与绩效域的交付绩效域思想同源</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>第 22 章组织通用治理</b>：组织治理 ↔ IT 治理是上下位概念，本节「组织治理驱动和调整 IT 治理」的关系句会再见面</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>论文素材（实战映射）</b>：</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>IT 治理三大目标</b> → 写「信息化战略与业务战略匹配」类项目背景的治理段落（<b>H3C AD-DC</b> 数据中心产品线的 IT 决策链条可直接对号「五项关键决策」）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>体系框架六部分</b> → fault-simulator / H3C-NMS 立项时「治理组织（谁批）、治理机制（怎么审）、绩效目标（怎么验）」的制度叙事</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>COBIT / ISO 38500</b> → 写治理类论文的「依据标准」段：国内项目引 <b>GB/T 34960</b>、涉外或最佳实践引 <b>COBIT / 38500</b></span></div>
+</div>
+<script>
+(function(){
+  const REL = "01_教材笔记/第03章_信息系统治理/3.1_IT治理/3.1_知识点清单.md";
+  const STORE_KEY = 'checklist:' + REL;
+
+  // 一次性加载整个文件的勾选状态（JSON），避免 key 过长
+  let store = {};
+  try { store = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch (e) {}
+
+  // 兼容迁移：旧的错误 key（包含重复 REL 前缀的）自动迁到新格式
+  for (let i = localStorage.length - 1; i >= 0; i--) {
+    const k = localStorage.key(i);
+    if (!k || !k.startsWith('checklist:')) continue;
+    // 检测旧 bug key：包含 REL 两次
+    if (k.indexOf(REL) !== k.lastIndexOf(REL)) {
+      const v = localStorage.getItem(k);
+      const m = k.match(/:L(\d+)$/);
+      if (m && v === '1') store['L' + m[1]] = true;
+      localStorage.removeItem(k);
+    }
+  }
+
+  const boxes = document.querySelectorAll('.task input[type="checkbox"]');
+  boxes.forEach(box => {
+    const k = box.dataset.key;
+    if (store[k]) box.checked = true;
+    box.addEventListener('change', () => {
+      store[k] = box.checked;
+      try {
+        localStorage.setItem(STORE_KEY, JSON.stringify(store));
+      } catch (e) {
+        console.error('localStorage 写入失败：', e);
+      }
+      updateProgress();
+    });
+  });
+
+  function updateProgress() {
+    const total = boxes.length;
+    const done = Array.from(boxes).filter(b => b.checked).length;
+    const pct = total ? Math.round(done / total * 100) : 0;
+    document.getElementById('progress').innerHTML = '已完成：<b>' + done + ' / ' + total + '</b>（' + pct + '%）';
+  }
+  updateProgress();
+})();
+</script>
+</body>
+</html>
