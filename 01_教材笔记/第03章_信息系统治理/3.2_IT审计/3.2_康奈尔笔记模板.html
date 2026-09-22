@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3.2 IT审计 · 康奈尔笔记模板</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+    background: #f0f2f5; color: #333; padding: 24px;
+  }
+  .page {
+    width: 210mm; min-height: 297mm; margin: 0 auto; background: #fff;
+    padding: 14mm 12mm; box-shadow: 0 2px 12px rgba(0,0,0,.12);
+  }
+  h1 { font-size: 20px; color: #185FA5; text-align: center; margin-bottom: 4px; }
+  .sub { text-align: center; font-size: 11px; color: #888; margin-bottom: 10px; }
+  .meta { display: flex; justify-content: space-between; font-size: 11px; color: #555;
+    border-bottom: 2px solid #185FA5; padding-bottom: 6px; margin-bottom: 10px; }
+  .cornell { display: flex; border: 1px solid #ccc; min-height: 178mm; }
+  .cue {
+    width: 32%; background: #f4f8fc; border-right: 2px solid #185FA5;
+    padding: 10px 8px; font-size: 11.5px;
+  }
+  .cue h3 { font-size: 12px; color: #185FA5; margin-bottom: 6px; }
+  .cue .q { margin-bottom: 10px; color: #333; line-height: 1.5; }
+  .cue .q b { color: #854F0B; }
+  .cue .grouplabel { font-size: 10.5px; font-weight: bold; color: #185FA5; margin: 7px 0 3px; }
+  .cue .grouplabel:first-of-type { margin-top: 0; }
+  .main { width: 68%; padding: 10px 12px; }
+  .main h4 {
+    font-size: 12px; color: #185FA5; margin: 9px 0 4px;
+    border-left: 4px solid #185FA5; padding-left: 6px;
+  }
+  .main h4:first-child { margin-top: 0; }
+  .lines { line-height: 24px; font-size: 12px; color: #444; }
+  .lines p { border-bottom: 1px solid #e3e3e3; min-height: 24px; }
+  .summary {
+    border: 1px solid #ccc; border-top: none; padding: 8px 10px; min-height: 28mm;
+  }
+  .summary h3 { font-size: 12px; color: #854F0B; margin-bottom: 4px; }
+  .summary p { border-bottom: 1px solid #e3e3e3; min-height: 24px; font-size: 12px; }
+  .footer {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; color: #555; margin-top: 8px;
+  }
+  .ebbing span {
+    display: inline-block; width: 58px; text-align: center;
+    border: 1px solid #185FA5; border-radius: 3px; margin-left: 4px; padding: 1px 0; color: #185FA5;
+  }
+  .score { color: #854F0B; font-weight: bold; }
+  .howto {
+    width: 210mm; margin: 14px auto 0; background: #fffbe8; border: 1px solid #e8d48a;
+    border-radius: 6px; padding: 10px 14px; font-size: 12px; color: #6b5900; line-height: 1.7;
+  }
+  .howto b { color: #854F0B; }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; margin: 0; }
+    .howto { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>3.2 IT审计 · 康奈尔笔记</h1>
+  <div class="sub">《信息系统项目管理师教程（第 4 版）》第 3 章第 2 节 · 3.2.1 IT审计基础 / 3.2.2 审计方法与技术 / 3.2.3 审计流程 / 3.2.4 审计内容</div>
+  <div class="meta">
+    <span>日期：______</span><span>学习时长：______</span><span>今日正确率：<span class="score">____ / 22</span></span>
+  </div>
+
+  <div class="cornell">
+    <div class="cue">
+      <h3>线索栏（自问自答）</h3>
+
+      <div class="grouplabel">3.2.1 IT审计基础</div>
+      <div class="q"><b>1</b> IT 审计的定义（GB/T 34690.4，四个关键词）？在 IT 治理中扮演什么角色？审计重要性指什么（四种后果）？</div>
+      <div class="q"><b>2</b> IT 审计的目的句（落点是什么）？组织的 IT 目标四条？「完整可靠有效」vs「安全可靠有效」各修饰什么？</div>
+      <div class="q"><b>3</b> 审计范围四范围？各自依据 / 内容？实施前怎么定重点范围？对审计人员的要求六方面？</div>
+      <div class="q"><b>4</b> IT 审计风险四类及定义？哪些「只能评估、无法控制」？检查风险的影响因素？</div>
+
+      <div class="grouplabel">3.2.2 审计方法与技术</div>
+      <div class="q"><b>5</b> 国际常用审计准则四项？各自归属（谁发布 / 什么性质）？</div>
+      <div class="q"><b>6</b> 常用审计方法六法？审计技术四类？「抽样」属于方法还是技术？</div>
+      <div class="q"><b>7</b> 风险评估技术四小类内容？属性抽样 vs 变量抽样？大数据审计三技术？</div>
+      <div class="q"><b>8</b> 审计证据定义？五特性？审计证据是什么的支柱 / 基础？</div>
+      <div class="q"><b>9</b> 审计底稿定义？分类三类？内容 / 形式四条？三级复核？作用四条？泄密例外两种？</div>
+
+      <div class="grouplabel">3.2.3 流程 · 3.2.4 内容</div>
+      <div class="q"><b>10</b> 审计流程作用四条？广义 vs 狭义审计流程怎么分？</div>
+      <div class="q"><b>11</b> 四阶段定位句 + 各阶段工作清单？「后续审计」的特殊性？</div>
+      <div class="q"><b>12</b> 审计内容两大类？内控三类各审什么？专项审计六种？「合理保证」配哪种？项目管理审计四类别三方法？</div>
+    </div>
+    <div class="main">
+      <h4>一、定义 · 重要性 · 目的（3.2.1 前半）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>二、IT 目标 · 范围 · 人员 · 四类风险（3.2.1 后半）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>三、准则四项 · 方法六法 · 技术四类 · 证据五性（3.2.2 前半）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>四、审计底稿：分类 · 要求 · 复核（3.2.2 后半）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>五、审计流程四阶段（3.2.3）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>六、审计内容：内控三类 + 专项六种（3.2.4）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>七、易混 / 易错（考前唯一要看的块）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary">
+    <h3>总结栏（一句话收束）</h3>
+    <p></p><p></p>
+  </div>
+
+  <div class="footer">
+    <span class="ebbing">复习打卡：当日<span>＋1天</span><span>＋3天</span><span>＋7天</span><span>＋14天</span></span>
+    <span>正确率：<span class="score">____ / 22</span></span>
+  </div>
+</div>
+
+<div class="howto">
+  <b>怎么用（记 → 遮 → 补 → 收）：</b>
+  ① <b>记</b>：对照《3.2_知识点清单》通读后，凭记忆在笔记区默写要点（表格优先默「四类风险定义」和「流程四阶段工作清单」）；② <b>遮</b>：用手遮住笔记区，只看线索栏 12 个问题作答；③ <b>补</b>：翻开清单对照，用红笔补漏，重点补「七、易混 / 易错」块；④ <b>收</b>：在总结栏用 1~2 句话收束本节骨架（如「定义抓标准·检查评价·发表意见 → 四目标一致安全三性合规 → 四范围总组物逻 → 四风险固控检总 → 方法六法技术四类 → 证据五性 → 底稿综业备 → 流程四阶段 → 内容内控三类专项六种」）。本节与 3.1 同属第 4 版新增章，旧真题无对应题，建议当天默写一遍、次日再遮一次。页脚为艾宾浩斯复习打卡点。
+</div>
+</body>
+</html>

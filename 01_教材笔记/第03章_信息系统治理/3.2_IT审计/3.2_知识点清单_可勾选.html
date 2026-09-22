@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3.2 IT 审计 · 知识点清单 · 可勾选清单</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Microsoft YaHei", "微软雅黑", sans-serif; background: #f7f9fc; color: #333; padding: 24px; line-height: 1.7; }
+  .wrap { max-width: 820px; margin: 0 auto; background: #fff; padding: 32px 36px; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,.08); }
+  h1 { font-size: 22px; color: #185FA5; margin-bottom: 8px; }
+  h2 { font-size: 18px; color: #185FA5; margin: 22px 0 10px; border-left: 4px solid #185FA5; padding-left: 10px; }
+  h3 { font-size: 15px; color: #185FA5; margin: 16px 0 8px; }
+  h4 { font-size: 14px; color: #185FA5; margin: 14px 0 6px; }
+  blockquote { background: #f4f8fc; border-left: 4px solid #185FA5; padding: 10px 14px; margin: 10px 0; color: #444; font-size: 13.5px; }
+  p, .plain-li { margin: 8px 0; font-size: 14px; }
+  .plain-li { display: flex; gap: 6px; }
+  .bullet { color: #185FA5; font-weight: bold; }
+  .task { display: flex; align-items: flex-start; gap: 8px; margin: 8px 0; cursor: pointer; user-select: none; }
+  .task input[type="checkbox"] { width: 16px; height: 16px; margin-top: 4px; flex-shrink: 0; accent-color: #185FA5; cursor: pointer; }
+  .task-text { font-size: 14px; transition: opacity .2s; }
+  .task input:checked + .task-text { text-decoration: line-through; opacity: .45; color: #666; }
+  .item-body { margin: 4px 0 12px 24px; }
+  .item-body p { margin: 4px 0; color: #555; font-size: 13.5px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; }
+  th, td { border: 1px solid #d9e2ec; padding: 7px 10px; }
+  th { background: #eef4fb; color: #185FA5; font-weight: 600; }
+  td { background: #fff; }
+  ol { margin: 8px 0 8px 22px; font-size: 14px; }
+  li { margin: 4px 0; }
+  code { background: #f0f3f7; padding: 1px 4px; border-radius: 3px; font-family: Consolas, monospace; font-size: 12px; }
+  a { color: #185FA5; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  summary { cursor: pointer; color: #185FA5; font-weight: 600; }
+  details { background: #f9fbfd; border: 1px solid #e3eaf2; border-radius: 6px; padding: 10px 14px; margin: 12px 0; }
+  .progress { position: sticky; top: 0; background: #fff; border-bottom: 1px solid #e3eaf2; padding: 8px 0; margin: -32px -36px 20px; padding-left: 36px; padding-right: 36px; font-size: 12px; color: #666; z-index: 10; }
+  .progress b { color: #185FA5; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="progress" id="progress">已完成：0 / 0</div>
+  <h1>3.2 IT 审计 · 知识点清单</h1>
+<blockquote><b>教材</b>：《信息系统项目管理师教程（第 4 版）》第 3 章第 2 节（约 P80 ~ P90）<br><b>学习日</b>：2026-09-22（Day 9）<br><b>上午分值</b>：IT 审计是第 3 章（第 4 版新增重点章）的后半节，与 3.1 合计约 <b>3~4 分</b>；高频块：<b>审计定义与目的 / 四范围 / 三大风险 / 审计证据特性 / 审计流程四阶段 / 审计内容两大类</b><br><b>本节定位</b>：<b>纯概念辨析 + 流程阶段归属型</b>。没有计算，套路是把「风险的定义」「阶段的工作清单」「审计内容的类别」互相调包。数字类考点密集（4 目标 / 4 范围 / 4 风险 / 6 方法 / 4 技术 / 5 证据特性 / 4 阶段 / 2 大类 3+6），表格默写就是得分点<br>⚠️ <b>新旧真题提醒</b>：本章为第 4 版<b>新增章节</b>，2023 上及以前的旧真题<b>没有对应题</b>——练题以 2024 以后的回忆题 + 教辅章节题为主，别用旧题正确率判断掌握度</blockquote>
+<h2>今日目标（学完要能做到）</h2>
+<ol><li>背出 <b>IT 审计定义</b>（GB/T 34690.4 口径：检查、评价、发表审计意见）与 <b>IT 审计目的</b>句</li><li>背熟<b>组织的 IT 目标四条</b>「战略一致 / 资产安全 / 系统三性 / 合规」、<b>审计范围四范围</b>「总组物逻」各自依据</li><li>背出 <b>IT 审计风险四类</b>（固有 / 控制 / 检查 / 总体）的定义与「谁能控制」的辨析</li><li>背熟<b>常用审计方法六法</b>、<b>审计技术四类</b>（风险评估四小技术 / 属性 vs 变量抽样 / 大数据审计三技术）、<b>审计证据五特性</b></li><li>背出<b>审计底稿</b>的分类三类、编制「内容四 + 形式四」要求、<b>三级复核</b>人员</li><li>背熟<b>审计流程四阶段</b>（准备 / 实施 / 终结 / 后续）各自的定位句与工作清单归属</li><li>背出<b>审计内容两大类</b>：内部控制审计三类（组织层面 / 一般控制 / 应用控制）+ 专项审计六种</li></ol>
+<h2>一、必背清单</h2>
+<h3>模块 A ｜ IT 审计基础（3.2.1）</h3>
+<label class="task"><input type="checkbox" data-key="A0" ><span class="task-text"><b>A0 · IT 审计的定义</b> ⭕ 必背（定义题原句）</span></label><div class="item-body"><p><b>IT 审计</b>（GB/T 34690.4《信息技术服务 治理 第 4 部分：审计导则》）是指根据 <b>IT 审计标准</b>的要求，对<b>信息系统及相关的 IT 内部控制和流程</b>进行<b>检查、评价</b>，并<b>发表审计意见</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>引入句：为了有效控制 IT 风险，有必要对组织的<b>信息系统治理及 IT 内控与管理</b>等开展 IT 审计，充分发挥 IT 审计<b>监督</b>的作用</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>定位：IT 审计是 IT 治理的<b>评估和监督工具</b>（3.1 治理流程里的「评估、监督」由审计落地）</span></div>
+<blockquote>记法：定义抓四个词——<b>标准 · 检查评价 · 内部控制流程 · 发表意见</b>；出处记 <b>GB/T 34690.4 = 审计导则</b>（勿与 3.1 的 GB/T 34960 系列混：<b>4960 = 治理</b>，<b>4690 = 审计</b>）</blockquote>
+<label class="task"><input type="checkbox" data-key="A1" ><span class="task-text"><b>A1 · IT 审计的重要性与目的</b> ⭕ 必背</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span><b>IT 审计重要性</b>：指 IT 审计风险（固有风险、控制风险、检查风险）对组织影响的<b>严重程度</b>，如：<b>财务损失、业务中断、失去客户信任、经济制裁</b>等</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>IT 审计的目的</b>：通过开展 IT 审计工作，了解组织 IT 系统与 IT 活动的<b>总体状况</b>，对组织是否实现 <b>IT 目标</b>进行<b>审查和评价</b>，充分<b>识别与评估</b>相关 IT 风险，提出<b>评价意见及改进建议</b>，<b>促进组织实现 IT 目标</b></span></div>
+<blockquote>⚠️ 判断题眼：目的句的落点是「促进实现 IT 目标」——「保护信息资产安全」是 <b>IT 目标</b>之一，不是审计目的本身（真题考过「不属于审计目的」选「保护信息资产的安全」）</blockquote>
+<label class="task"><input type="checkbox" data-key="A2" ><span class="task-text"><b>A2 · 组织的 IT 目标（四条）</b> ⭕ 必背（年年考）</span></label>
+<table><thead><tr><th>#</th><th>IT 目标</th></tr></thead><tbody><tr><td>1</td><td>组织的 <b>IT 战略应与业务战略保持一致</b></td></tr><tr><td>2</td><td><b>保护信息资产</b>的安全及数据的<b>完整、可靠、有效</b></td></tr><tr><td>3</td><td>提高信息系统的<b>安全性、可靠性及有效性</b></td></tr><tr><td>4</td><td>合理保证信息系统及其运用<b>符合有关法律、法规及标准</b>等的要求</td></tr></tbody></table>
+<blockquote>口诀：<b>一致 · 安全 · 三性 · 合规</b>（数据三性「完整可靠有效」≠ 系统三性「安全可靠有效」，别对调）</blockquote>
+<label class="task"><input type="checkbox" data-key="A3" ><span class="task-text"><b>A3 · IT 审计范围（四范围）</b> ⭕ 必背（配对题）</span></label>
+<table><thead><tr><th>范围</th><th>依据 / 内容</th></tr></thead><tbody><tr><td><b>总体范围</b></td><td>根据<b>审计目的和投入的审计成本</b>来确定</td></tr><tr><td><b>组织范围</b></td><td>审计涉及的<b>组织机构、主要流程、活动及人员</b>等</td></tr><tr><td><b>物理范围</b></td><td>具体的<b>物理地点与边界</b></td></tr><tr><td><b>逻辑范围</b></td><td>涉及的<b>信息系统和逻辑边界</b></td></tr></tbody></table>
+<div class="plain-li"><span class="bullet">•</span> <span>实施审计项目前，审计人员应先对组织与信息系统相关的总体情况进行<b>了解和风险评估</b>，确定主要 IT 风险，结合审计项目<b>预计的时间、配备的审计力量</b>等确定<b>重点审计范围</b></span></div>
+<blockquote>口诀：<b>总组物逻</b>；「目的 + 成本」只配<b>总体范围</b>，其余按各自内容配对</blockquote>
+<label class="task"><input type="checkbox" data-key="A4" ><span class="task-text"><b>A4 · 对 IT 审计人员的要求</b> ⭕ 常考</span></label><div class="item-body"><p>根据 <b>GB/T 34690.4</b>，对 IT 审计人员的要求包括：<b>职业道德</b>、<b>知识</b>、<b>技能</b>、<b>资格与经验</b>、<b>专业胜任能力</b>、<b>利用外部专家服务</b>等方面</p></div>
+<blockquote>记法：六个词「<b>德 · 知 · 技 · 资 · 胜 · 外</b>」；出处仍是 34690.4（审计导则管审计人员）</blockquote>
+<label class="task"><input type="checkbox" data-key="A5" ><span class="task-text"><b>A5 · IT 审计风险（四类）</b> ⭕ 必背（定义配对最高频）</span></label>
+<table><thead><tr><th>风险</th><th>定义</th><th>关键特点</th></tr></thead><tbody><tr><td><b>固有风险</b></td><td><b>IT 活动不存在相关控制</b>的情况下，<b>易于导致重大错误</b>的风险</td><td>IT 活动<b>本身所具有</b>；审计人员<b>只能评估，无法控制或影响</b>；衡量是<b>主观的、复杂的</b></td></tr><tr><td><b>控制风险</b></td><td>与 IT 活动相关的<b>内部控制体系不能及时预防或检查出</b>存在的重大错误的风险</td><td>与<b>内部控制制度执行的有效性</b>有关，<b>与审计无关</b>；审计人员只能评估其风险水平</td></tr><tr><td><b>检查风险</b></td><td>通过<b>预定的审计程序未能发现</b>重大、单个或与其他错误相结合的风险</td><td>影响因素：<b>IT 审计规范不完善、审计人员自身或技术原因</b>等</td></tr><tr><td><b>总体审计风险</b></td><td>针对<b>单个控制目标</b>所产生的各类审计风险的<b>总和</b></td><td>= 固有 + 控制 + 检查三者的综合体现</td></tr></tbody></table>
+<blockquote>口诀：<b>固有 = 没控制就出错（活动自带）· 控制 = 内控没拦住 · 检查 = 审计没查出 · 总体 = 单目标总和</b><br>⚠️ 题眼：「内部控制体系」字样 → <b>控制风险</b>；「不存在相关控制 / 活动本身」→ <b>固有风险</b>；「预定审计程序未发现」→ <b>检查风险</b></blockquote>
+<h3>模块 B ｜ 审计方法与技术（3.2.2）</h3>
+<label class="task"><input type="checkbox" data-key="B0" ><span class="task-text"><b>B0 · IT 审计依据与准则</b> ⭕ 必背（归属题）</span></label><div class="item-body"><p>IT 审计活动的开展需要结合相关<b>法律法规、准则与标准</b>。国际上发布的常用审计准则有四项：</p></div>
+<table><thead><tr><th>准则</th><th>说明</th></tr></thead><tbody><tr><td><b>信息系统审计准则</b></td><td><b>ISACA（国际信息系统审计协会）</b>发布</td></tr><tr><td><b>《内部控制——整体框架》报告</b></td><td>通称 <b>COSO</b> 报告（美国虚假财务报告委员会下属的发起人委员会）</td></tr><tr><td><b>《萨班斯法案》（SOX）</b></td><td>美国政府出台的涉及<b>会计职业监管、组织治理、证券市场监管</b>等方面改革的重要法律</td></tr><tr><td><b>COBIT（信息及相关技术控制目标）</b></td><td>目前<b>国际上通用的</b>信息及相关技术控制规范</td></tr></tbody></table>
+<blockquote>记法：<b>ISACA 出准则 · COSO 出内控 · SOX 是美国法 · COBIT 是控制目标</b>（COBIT 在 3.1.4 是「治理框架」、在本节是「审计准则」——一个框架两处出场，不冲突）</blockquote>
+<label class="task"><input type="checkbox" data-key="B1" ><span class="task-text"><b>B1 · IT 审计常用方法（六法）</b> ⭕ 必背</span></label><div class="item-body"><p><b>访谈法、调查法、检查法、观察法、测试法、程序代码检查法</b></p></div>
+<blockquote>口诀：<b>访调检观试码</b>；干扰项常用「穿行法 / 抽样法 / 复核法」——抽样是「审计<b>技术</b>」不是「常用方法」</blockquote>
+<label class="task"><input type="checkbox" data-key="B2" ><span class="task-text"><b>B2 · IT 审计技术（四类）</b> ⭕ 必背（分类归属题）</span></label>
+<table><thead><tr><th>技术</th><th>内容</th></tr></thead><tbody><tr><td><b>风险评估技术</b></td><td>①<b>风险识别</b>：德尔菲法、头脑风暴、检查表法、SWOT 技术及图解技术；②<b>风险分析</b>：定性分析 + 定量分析；③<b>风险评价</b>：单因素风险评价 + 总体风险评价；④<b>风险应对</b>：云计算、冗余链路、冗余资源、系统弹性伸缩、两地三中心灾备、业务熔断限流等</td></tr><tr><td><b>审计抽样技术</b></td><td>①<b>属性抽样</b>（固定样本抽样 / 频率估计抽样）：估计总体中某种<b>属性的发生率</b>，回答「<b>有多少</b>」；②<b>变量抽样</b>（金额估计抽样 / 平均值估计抽样）：由样本估计总体的<b>货币金额或其他度量单位</b></td></tr><tr><td><b>计算机辅助审计技术</b></td><td>利用计算机软件工具辅助完成审计工作（提取、分析、比对数据等）</td></tr><tr><td><b>大数据审计技术</b></td><td><b>大数据智能分析技术、大数据可视化分析技术、大数据多数据源综合分析技术</b></td></tr></tbody></table>
+<blockquote>记法：技术四类「<b>评抽辅数</b>」；属性抽样答「有多少」、变量抽样答「值多少」；大数据三技术「<b>智能 · 可视 · 多源</b>」</blockquote>
+<label class="task"><input type="checkbox" data-key="B3" ><span class="task-text"><b>B3 · IT 审计证据（定义 + 五特性）</b> ⭕ 必背</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span><b>定义</b>：由审计机构和审计人员获取，用于确定所审计实体或数据是否遵循<b>既定标准或目标</b>，形成<b>审计结论的证明材料</b>；审计证据是<b>审计意见的支柱</b>，是审计人员形成<b>审计结论的基础</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>特性（五条）</b>：<b>充分性、客观性、相关性、可靠性、合法性</b></span></div>
+<blockquote>口诀：<b>充 · 客 · 相 · 可 · 合</b></blockquote>
+<label class="task"><input type="checkbox" data-key="B4" ><span class="task-text"><b>B4 · IT 审计底稿</b> ⭕ 必背（分类 + 三级复核高频）</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span><b>定义</b>：审计人员对<b>制订的审计计划、实施的审计程序、获取的相关审计证据、得出的审计结论</b>做出的记录</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>分类（三类）</b>：<b>综合类工作底稿、业务类工作底稿、备查类工作底稿</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>编制要求</b>：①内容——<b>资料翔实、重点突出、繁简得当、结论明确</b>；②形式——<b>要素齐全、格式规范、标识一致、记录清晰</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>作用（四条）</b>：形成审计结论、发表审计意见的<b>直接依据</b>；评价考核审计人员的<b>主要依据</b>；审计<b>质量控制与监督的基础</b>；对未来审计业务具有<b>参考备查</b>作用</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>三级复核制度</b>：<b>审计机构负责人、部门负责人、项目负责人（或项目经理）</b>为复核人</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>保密例外（两种情况查阅不属于泄密）</b>：①<b>法院、检察院及国家其他部门依法查阅</b>并按规定办理了必要手续；②<b>审计协会或其委派单位</b>对审计机构执业情况进行检查</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>归档后</b>由<b>档案管理部门</b>管理，确保安全、完整</span></div>
+<blockquote>口诀：分类「<b>综业备</b>」；内容四条「<b>翔实 · 突出 · 得当 · 明确</b>」对形式四条「<b>齐全 · 规范 · 一致 · 清晰</b>」；三级复核「<b>机构 → 部门 → 项目</b>」由大到小</blockquote>
+<h3>模块 C ｜ 审计流程（3.2.3 · 流程阶段归属题主力）</h3>
+<label class="task"><input type="checkbox" data-key="C0" ><span class="task-text"><b>C0 · 审计流程的含义与作用</b> ⭕ 必背</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span><b>作用（四条）</b>：有效地<b>指导审计工作</b>；有利于<b>提高审计工作效率</b>；有利于<b>保证审计项目质量</b>；有利于<b>规范审计工作</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>狭义的审计流程</b>：审计人员在<b>取得审计证据、完成审计目标、得出审计结论</b>过程中所采取的步骤和方法</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>广义的审计流程</b>：审计机构和审计人员对审计项目<b>从开始到结束的整个过程</b>采取的系统性工作步骤，分为<b>审计准备、审计实施、审计终结及后续审计</b>四个阶段</span></div>
+<blockquote>记法：考「四阶段」默认问<b>广义</b>；狭义只管「证据 → 结论」一段</blockquote>
+<label class="task"><input type="checkbox" data-key="C1" ><span class="task-text"><b>C1 · 审计流程四阶段</b> ⭕ 必背（工作清单归属年年考）</span></label>
+<table><thead><tr><th>阶段</th><th>定位句</th><th>工作清单</th></tr></thead><tbody><tr><td><b>① 审计准备</b></td><td>从<b>计划开始到发出审计通知书</b>为止；整个审计过程的<b>起点和基础</b></td><td>1 明确审计目的及任务；2 <b>组建审计项目组</b>；3 搜集相关信息；4 <b>编制审计计划</b></td></tr><tr><td><b>② 审计实施</b></td><td>将项目审计计划付诸实施；审计全过程的<b>中心环节</b>、整个流程的<b>关键阶段</b></td><td>1 深入调查并<b>调整审计计划</b>；2 了解并<b>初步评估 IT 内部控制</b>；3 进行<b>符合性测试</b>；4 进行<b>实质性测试</b></td></tr><tr><td><b>③ 审计终结</b></td><td>整理审计工作底稿、总结审计工作、编写审计报告、做出审计结论的期间</td><td>1 整理与<b>复核</b>审计工作底稿；2 整理<b>审计证据</b>；3 评价相关 <b>IT 控制目标</b>的实现；4 判断并<b>报告审计发现</b>；5 <b>沟通</b>审计结果；6 <b>出具审计报告</b>；7 <b>归档管理</b></td></tr><tr><td><b>④ 后续审计</b></td><td>审计报告发出后一定时间内，检查被审计单位是否采取<b>纠正措施</b>并取得预期效果的<b>跟踪审计</b></td><td><b>不是一次新的审计</b>，是前一次审计的<b>有机组成部分</b>；可不必遵守审计流程的每一过程和要求，但必须<b>依法依规</b>检查、调查、收集证据，写出<b>后续审计报告</b></td></tr></tbody></table>
+<blockquote>口诀：准备「<b>目组搜编</b>」→ 实施「<b>调评符实</b>」→ 终结七件事「<b>稿证评报沟档</b>」→ 后续「<b>跟踪纠错不重审</b>」<br>⚠️ 题眼：「符合性测试 / 实质性测试」只出现在<b>实施</b>阶段；「发出审计通知书」是<b>准备</b>阶段的终点；「后续审计不是一次新的审计」是判断题常客</blockquote>
+<h3>模块 D ｜ 审计内容（3.2.4 · 两大类归属题主力）</h3>
+<label class="task"><input type="checkbox" data-key="D0" ><span class="task-text"><b>D0 · 审计内容总览（两大类）</b> ⭕ 必背</span></label><div class="item-body"><p>IT 审计主要分为 <b>IT 内部控制审计</b> 和 <b>IT 专项审计</b> 两大类。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>IT 内部控制审计</b>：聚焦组织 IT 内部控制的<b>有效性</b>，包括<b>三类</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>IT 专项审计</b>：根据当前面临的<b>特殊风险或者需求</b>开展的 IT 审计，审计范围可为 IT 综合审计的<b>某一个或几个部分</b>，包括<b>六种</b></span></div>
+<blockquote>口诀：<b>内控三类 · 专项六种</b></blockquote>
+<label class="task"><input type="checkbox" data-key="D1" ><span class="task-text"><b>D1 · IT 内部控制审计（三类）</b> ⭕ 必背（层次归属题）</span></label>
+<table><thead><tr><th>类别</th><th>审计对象</th></tr></thead><tbody><tr><td><b>组织层面 IT 控制审计</b></td><td><b>IT 战略、组织、架构、业务连续性、风险管理、外包管理、网络与信息安全、监督管理</b>等</td></tr><tr><td><b>IT 一般控制审计</b></td><td>与<b>应用系统、数据库、操作系统、网络</b>相关的<b>策略和措施</b>等</td></tr><tr><td><b>应用控制审计</b></td><td><b>业务流程层面运行的人工或自动化程序</b>，主要包括<b>输入控制、处理控制、输出控制</b>审计</td></tr></tbody></table>
+<blockquote>记法：从上到下 =「<b>组织 → 一般 → 应用</b>」三层；组织层面八项「<b>战组架连险包安监</b>」；应用控制三控制「<b>入 · 处 · 出</b>」<br>⚠️ 题眼：「输入 / 处理 / 输出控制」是<b>应用控制审计</b>的内容，别答成一般控制；「操作系统、数据库的策略措施」是<b>一般控制</b>，别答成组织层面</blockquote>
+<label class="task"><input type="checkbox" data-key="D2" ><span class="task-text"><b>D2 · IT 专项审计（六种）</b> ⭕ 必背（名称 - 内容配对题）</span></label>
+<table><thead><tr><th>#</th><th>专项审计</th><th>核心内容</th></tr></thead><tbody><tr><td>1</td><td><b>信息系统生命周期审计</b></td><td>对信息系统的<b>规划、设计、开发、测试、运行和维护</b>等进行审计</td></tr><tr><td>2</td><td><b>信息系统开发过程审计</b></td><td>围绕信息系统的<b>规划、设计、建设、实施</b>是否符合 <b>IT 架构和战略</b>进行评估和监督</td></tr><tr><td>3</td><td><b>信息系统运行维护审计</b></td><td>针对 <b>IT 运维能力</b>、IT 运维<b>流程（策划、实施、监控、改进）</b>等情况；内容包括<b>基础设施的运行、系统的运行、维护、质量保证及 IT 服务管理</b>等</td></tr><tr><td>4</td><td><b>网络与信息安全审计</b></td><td>以网络与信息安全为核心，围绕安全相关的<b>组织、人员、系统、设备和环境</b>等；重点关注<b>流程制度的执行情况</b>、对相关<b>法律法规的遵从性</b>（含数据保护、个人隐私保护等合规要求）</td></tr><tr><td>5</td><td><b>信息系统项目审计</b></td><td>通过对<b>信息系统项目管理过程</b>的评价，向管理层提供项目管理过程<b>得到控制、监督并遵循最佳实践要求</b>的<b>合理保证</b></td></tr><tr><td>6</td><td><b>数据审计</b></td><td>通过控制活动，负责<b>定期分析、验证、讨论、改进</b>数据安全管理相关的<b>政策、标准和活动</b></td></tr></tbody></table>
+<blockquote>口诀：六种 =「<b>生命周期 · 开发 · 运维 · 网安 · 项目 · 数据</b>」；「合理保证」句配<b>项目审计</b>；运维流程四词「<b>策实监改</b>」</blockquote>
+<label class="task"><input type="checkbox" data-key="D3" ><span class="task-text"><b>D3 · 信息系统项目管理审计（专项示例）</b> ⭕ 常考</span></label><div class="item-body"><p>信息系统项目审计聚焦项目管理全过程，示例四类别 + 三方法：</p></div>
+<table><thead><tr><th>审计类别</th><th>核心审计内容</th></tr></thead><tbody><tr><td><b>组织管理</b></td><td>项目管理机构设置、制度流程制定、团队组成与人员能力要求</td></tr><tr><td><b>项目启动与计划</b></td><td>启动会规范性、项目目标清晰度、团队组建与职责分工、计划完备性</td></tr><tr><td><b>项目实施与控制</b></td><td>干系人参与、沟通机制、资源利用、配置管理、采购规范、风险管理、绩效评价、文档真实性、进度与质量控制</td></tr><tr><td><b>项目收尾管理</b></td><td>验收申请材料规范性、验收流程、验收及时性、项目质量、第三方检测机构合规性</td></tr></tbody></table>
+<div class="plain-li"><span class="bullet">•</span> <span><b>常用审计方法</b>：<b>访谈</b>项目管理相关人员；<b>观察</b>项目现场环境；<b>检查</b>项目审查记录、发布通知、安全事件记录、测试资料等</span></div>
+<blockquote>口诀：四类别「<b>组 · 启 · 施 · 收</b>」；方法就是 B1 六法中的「<b>访 · 观 · 检</b>」</blockquote>
+<h3>模块 E ｜ 考情与易混对照</h3>
+<label class="task"><input type="checkbox" data-key="E0" ><span class="task-text"><b>E0 · 本节考情提醒</b> ⭕ 了解</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span>IT 审计与 3.1 IT 治理同属第 4 版<b>新增章</b>，旧真题（2023 上以前）无对应题；2024 以后真题里「审计流程阶段归属」「三风险定义」「证据特性」「审计内容分类」已反复出现</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>本节全是<b>概念 + 归属</b>，无计算；最高频四块：<b>三风险定义配对 / 审计流程四阶段 / 证据五特性 / 内部控制三类</b></span></div>
+<label class="task"><input type="checkbox" data-key="E1" ><span class="task-text"><b>E1 · 三组高频易混对照</b> ⭕ 必背</span></label>
+<table><thead><tr><th>对照</th><th>差别</th></tr></thead><tbody><tr><td><b>GB/T 34960 vs GB/T 34690.4</b></td><td><b>34960 系列 = IT 治理</b>（3.1）；<b>34690.4 = 审计导则</b>（3.2，管定义、管审计人员要求）——「4960 治理 / 4690 审计」</td></tr><tr><td><b>符合性测试 vs 实质性测试</b></td><td>都是<b>实施阶段</b>的工作：符合性测试测「<b>控制有没有被有效执行</b>」，实质性测试测「<b>数据 / 事项本身的真实准确</b>」；初步评估内控也在实施阶段（先评 → 符合 → 实质，三步别倒）</td></tr><tr><td><b>属性抽样 vs 变量抽样</b></td><td>属性抽样 = 固定样本 / 频率估计，答「<b>有多少</b>（发生率）」；变量抽样 = 金额估计 / 平均值估计，答「<b>值多少</b>（金额）」</td></tr><tr><td><b>组织层面 vs 一般控制 vs 应用控制</b></td><td>组织层面看<b>治理管理事项</b>（战略 / 架构 / 外包 / 监督…）；一般控制看<b>系统平台策略</b>（应用系统 / 数据库 / 操作系统 / 网络）；应用控制看<b>业务流程的入处出</b></td></tr><tr><td><b>「审计常用方法」vs「审计技术」</b></td><td>方法六法 = 访调检观试码；技术四类 = 评抽辅数。<b>抽样、计算机辅助、大数据</b>是技术不是方法，出题最爱在这调包</td></tr></tbody></table>
+<h2>二、可以只通读、暂不背的（标记避免浪费时间）</h2>
+<table><thead><tr><th>小节</th><th>处理方式</th></tr></thead><tbody><tr><td>3.2 引言段（为什么要 IT 审计）</td><td>通读，记住「有效控制 IT 风险 + 发挥监督作用」一句即可</td></tr><tr><td>3.2.1 IT 审计定义的多机构口径（ISACA / INTOSAI 等）</td><td>通读，教材主口径以 GB/T 34690.4 为准</td></tr><tr><td>3.2.1 实施审计项目前「了解 + 风险评估 → 定重点范围」的展开</td><td>通读，记住「时间 + 力量 → 重点范围」</td></tr><tr><td>3.2.2 风险应对技术的具体手段（云 / 冗余 / 弹性 / 灾备 / 熔断限流）</td><td>通读，能认出「这是风险<b>应对</b>技术」即可</td></tr><tr><td>3.2.2 计算机辅助审计技术的展开</td><td>通读，无细分小点</td></tr><tr><td>3.2.3 各阶段工作条目的细项展开（如「搜集相关信息」搜集什么）</td><td>通读，背每阶段<b>工作清单的条目名</b>即可</td></tr><tr><td>3.2.4 信息系统项目管理审计示例表的逐格内容</td><td>通读，背四类别名 + 三方法；格内细项不背</td></tr></tbody></table>
+<h2>三、本节自检题（做完再合书）</h2>
+<ol><li>背出 IT 审计的定义（GB/T 34690.4 口径，四个关键词）。IT 审计在 IT 治理中扮演什么角色？</li><li>IT 审计重要性指什么？教材举了哪四种影响后果？</li><li>背出 IT 审计的目的句。它的落点是什么？</li><li>组织的 IT 目标有哪四条？「完整、可靠、有效」修饰的是什么？「安全、可靠、有效」修饰的是什么？</li><li>IT 审计范围分哪四个范围？各自由什么确定 / 包含什么？</li><li>对 IT 审计人员的要求包括哪几个方面？出自哪个标准？</li><li>IT 审计风险包括哪四类？分别背出四类的定义。</li><li>固有风险、控制风险、检查风险中，哪些是审计人员「只能评估、无法控制或影响」的？检查风险的影响因素是什么？</li><li>「内部控制体系不能及时预防或检查出重大错误」是哪种风险？「预定审计程序未能发现」呢？</li><li>国际上常用的审计准则有哪四项？各自由谁发布 / 是什么性质？</li><li>IT 审计常用方法有哪六种？「抽样法」属于方法还是技术？</li><li>IT 审计技术分哪四类？</li><li>风险识别技术有哪些？风险分析分哪两种？风险评价分哪两种？</li><li>属性抽样和变量抽样分别又叫什么？各回答什么问题？</li><li>大数据审计技术包括哪三种？</li><li>审计证据的特性有哪五条？审计证据是什么的支柱和基础？</li><li>审计工作底稿的定义是什么？分哪三类？</li><li>审计底稿编制的内容要求和形式要求各四条是什么？</li><li>审计工作底稿的三级复核制度是哪三级？归档后由谁管理？</li><li>审计流程的作用有哪四条？广义与狭义审计流程怎么区分？</li><li>审计准备 / 实施 / 终结 / 后续四阶段的定位句和工作清单各是什么？</li><li>IT 审计内容分哪两大类？内部控制审计三类各审什么？专项审计六种是什么？「合理保证」配哪种专项审计？</li></ol>
+<details>
+<summary>参考答案（先自己答完再展开）</summary>
+<ol><li>IT 审计是根据 <b>IT 审计标准</b>的要求，对<b>信息系统及相关的 IT 内部控制和流程</b>进行<b>检查、评价</b>，并<b>发表审计意见</b>。角色：IT 治理的<b>评估和监督工具</b></li><li>IT 审计风险（固有、控制、检查）对组织影响的<b>严重程度</b>；后果：<b>财务损失、业务中断、失去客户信任、经济制裁</b></li><li>通过开展 IT 审计工作，了解组织 IT 系统与 IT 活动的<b>总体状况</b>，对组织是否实现 <b>IT 目标</b>进行<b>审查和评价</b>，充分<b>识别与评估</b>相关 IT 风险，提出<b>评价意见及改进建议</b>，<b>促进组织实现 IT 目标</b>。落点 = 促进实现 IT 目标（「保护信息资产安全」是 IT 目标，不是审计目的本身）</li><li>①IT 战略与业务战略<b>保持一致</b>；②保护<b>信息资产</b>安全及数据的<b>完整、可靠、有效</b>；③提高<b>信息系统</b>的安全性、可靠性及有效性；④合理保证符合<b>法律、法规及标准</b>要求。「完整可靠有效」修饰<b>数据</b>；「安全可靠有效」修饰<b>信息系统</b></li><li><b>总体范围</b>（根据审计目的和投入的审计成本确定）/ <b>组织范围</b>（组织机构、主要流程、活动及人员）/ <b>物理范围</b>（具体的物理地点与边界）/ <b>逻辑范围</b>（涉及的信息系统和逻辑边界）</li><li><b>职业道德、知识、技能、资格与经验、专业胜任能力、利用外部专家服务</b>；出自 <b>GB/T 34690.4《信息技术服务 治理 第 4 部分：审计导则》</b></li><li><b>固有风险</b>（IT 活动不存在相关控制的情况下，易于导致重大错误的风险）；<b>控制风险</b>（与 IT 活动相关的内部控制体系不能及时预防或检查出存在的重大错误的风险）；<b>检查风险</b>（通过预定的审计程序未能发现重大、单个或与其他错误相结合的风险）；<b>总体审计风险</b>（针对单个控制目标所产生的各类审计风险总和）</li><li><b>固有风险与控制风险</b>都只能评估、无法控制或影响（固有 = 活动本身所具有；控制 = 内控范畴、与审计无关）。检查风险的影响因素：<b>IT 审计规范不完善、审计人员自身或技术原因</b>等</li><li>「内部控制体系不能及时预防或检查出」= <b>控制风险</b>；「预定审计程序未能发现」= <b>检查风险</b></li><li>①<b>信息系统审计准则</b>（ISACA 国际信息系统审计协会发布）；②<b>《内部控制——整体框架》</b>（COSO 报告）；③<b>《萨班斯法案》SOX</b>（美国法律，管会计职业监管、组织治理、证券市场监管）；④<b>COBIT</b>（目前国际上通用的信息及相关技术控制规范）</li><li><b>访谈法、调查法、检查法、观察法、测试法、程序代码检查法</b>。抽样法属于<b>审计技术</b>（审计抽样技术），不是常用方法</li><li><b>风险评估技术、审计抽样技术、计算机辅助审计技术、大数据审计技术</b></li><li>风险识别：<b>德尔菲法、头脑风暴、检查表法、SWOT 技术及图解技术</b>；风险分析：<b>定性分析 + 定量分析</b>；风险评价：<b>单因素风险评价 + 总体风险评价</b></li><li>属性抽样 = <b>固定样本抽样 / 频率估计抽样</b>，回答「<b>有多少</b>」（总体中某种属性的发生率）；变量抽样 = <b>金额估计抽样 / 平均值估计抽样</b>，由样本估计总体的<b>货币金额或其他度量单位</b></li><li><b>大数据智能分析技术、大数据可视化分析技术、大数据多数据源综合分析技术</b></li><li><b>充分性、客观性、相关性、可靠性、合法性</b>；审计证据是<b>审计意见的支柱</b>、审计人员形成<b>审计结论的基础</b></li><li>审计人员对<b>制订的审计计划、实施的审计程序、获取的相关审计证据、得出的审计结论</b>做出的记录；分<b>综合类、业务类、备查类</b>三类</li><li>内容：<b>资料翔实、重点突出、繁简得当、结论明确</b>；形式：<b>要素齐全、格式规范、标识一致、记录清晰</b></li><li><b>审计机构负责人、部门负责人、项目负责人（或项目经理）</b>；归档后由<b>档案管理部门</b>管理</li><li>作用：有效<b>指导审计工作</b> / <b>提高审计工作效率</b> / <b>保证审计项目质量</b> / <b>规范审计工作</b>。狭义 = 取得证据、完成目标、得出结论过程中的步骤方法；广义 = 项目<b>从开始到结束的整个过程</b>的系统性工作步骤（四阶段）</li><li><b>准备</b>（计划开始 → 发出审计通知书；起点和基础）：明确目的任务 / 组建项目组 / 搜集信息 / 编制计划。<b>实施</b>（中心环节、关键阶段）：深入调查并调整计划 / 了解并初步评估 IT 内部控制 / 符合性测试 / 实质性测试。<b>终结</b>（整理底稿、总结、编写报告、做出结论）：整理复核底稿 / 整理证据 / 评价控制目标实现 / 判断报告发现 / 沟通结果 / 出具报告 / 归档。<b>后续</b>（跟踪纠错）：不是一次新的审计，是前次的有机组成部分；依法依规收集证据、写后续审计报告</li><li><b>IT 内部控制审计</b>（组织层面 IT 控制审计 / IT 一般控制审计 / 应用控制审计）+ <b>IT 专项审计</b>（生命周期 / 开发过程 / 运行维护 / 网络与信息安全 / 信息系统项目 / 数据审计 六种）。组织层面审 IT 战略、组织、架构、业务连续性、风险管理、外包管理、网络与信息安全、监督管理；一般控制审与应用系统、数据库、操作系统、网络相关的策略和措施；应用控制审业务流程层面的人工或自动化程序（输入 / 处理 / 输出控制）。「得到控制、监督并遵循最佳实践要求的合理保证」配<b>信息系统项目审计</b></li></ol>
+</details>
+<h2>四、康奈尔笔记（可打印模板）</h2>
+<p>📄 <b>模板文件</b>：</p>
+<div class="plain-li"><span class="bullet">•</span> <span><code>3.2_康奈尔笔记模板.html</code> — A4 留白手写版（左栏 12 问，右栏分模块手写线）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><code>3.2_康奈尔笔记模板_带答案版.html</code> — A4 带答案版，含「👁 隐藏答案」按钮（可切换填空版打印）</span></div>
+<p><b>用法</b>：左栏 12 个问题为线索，遮住右栏自问；右栏按 3.2.1~3.2.4 分模块留手写线；底部总结区收口。带答案版每条答案都标注关键术语和易混提醒，适合先默写、再对照。</p>
+<p><b>打印后自查（不看书答）</b></p>
+<div class="plain-li"><span class="bullet">•</span> <span>线索栏问题 1~12 全部答出 → 正确率 <code>__ / 12</code></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>答不出的条目抄进「易混 / 易错」区，这是考前唯一要看的块</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>页脚 5 个复习框：当日 ☐　+1 天 ☐　+3 天 ☐　+7 天 ☐　+14 天 ☐</span></div>
+<h2>五、刷题任务</h2>
+<div class="plain-li"><span class="bullet">•</span> <span>先做本仓题库：<code>3.2_考点自测题.html</code>（22 题 · 即时判分 + 逐题精讲，目标 ≥ 18 对）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>再刷填空专练：<code>08_答题系统/index.html</code> → 切到「3.2」tab（12 题，答对自动同步勾选本清单）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>真题来源建议：本章是<b>第 4 版新增章节</b>，2023 上以前的旧真题没有对应题；练「IT 审计 / 审计流程 / 审计证据 / 固有风险」等关键词，<b>2024 以后的回忆版真题</b>优先，教辅（软考达人 / 信管网 / 希赛）的本章章节题是主力</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>错题记入 <code>05_错题本/</code>（格式：考点 / 错选原因 / 正选 + 出处）</span></div>
+<h2>六、与前后章节的衔接</h2>
+<p>3.2 是第 3 章的收尾节，与 3.1 合成「治理 + 监督」闭环：</p>
+<div class="plain-li"><span class="bullet">•</span> <span><b>承接 3.1</b>：IT 审计是 IT 治理的<b>评估和监督工具</b>——3.1 治理流程「统筹、评估、指导、监督」里的「评估、监督」由本节审计落地；3.1 的 GB/T 34960.1 用途之一就是「开展信息技术审计」</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>本章内部主线</b>：治理定方向（3.1）→ 审计做监督（3.2）→ 章末练习串联（3.3）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>向后打通</b>：</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>第 4 章信息系统管理</b>：4.1 的「规划和组织 / 运维和服务」等管理域，正是 3.2 审计内容里「组织层面控制 / 一般控制」所审的对象——先知道「管什么」再回头看「审什么」更顺</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>第 15 章风险管理</b>：本节风险识别 / 分析 / 评价 / 应对四技术与第 15 章风险管理过程同构，口径可复用</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>第 19 章配置与变更管理</b>：项目实施与控制审计里的「配置管理、变更流程」到第 19 章展开</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>第 24 章法律法规与标准规范</b>：网络与信息安全审计的「法律遵从性（数据保护、个人隐私）」对应第 24 章的网络安全法等</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>论文素材（实战映射）</b>：</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>审计流程四阶段</b> → 写「信息系统项目审计 / 内控合规」类项目时，可按「准备（计划、组队）→ 实施（符合性 + 实质性测试）→ 终结（报告、归档）→ 后续（跟踪整改）」给论文搭监督段落骨架</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>三风险</b> → fault-simulator / H3C-NMS 项目里「系统本身缺陷（固有）/ 权限与流程管控不足（控制）/ 验收测试覆盖不足（检查）」可直接对号入座，作风险章的论证素材</span></div>
+</div>
+<script>
+(function(){
+  const REL = "01_教材笔记/第03章_信息系统治理/3.2_IT审计/3.2_知识点清单_可勾选.html";
+  const STORE_KEY = 'checklist:' + REL;
+
+  // 一次性加载整个文件的勾选状态（JSON），避免 key 过长
+  let store = {};
+  try { store = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch (e) {}
+
+  // 兼容迁移：旧的错误 key（包含重复 REL 前缀的）自动迁到新格式
+  for (let i = localStorage.length - 1; i >= 0; i--) {
+    const k = localStorage.key(i);
+    if (!k || !k.startsWith('checklist:')) continue;
+    // 检测旧 bug key：包含 REL 两次
+    if (k.indexOf(REL) !== k.lastIndexOf(REL)) {
+      const v = localStorage.getItem(k);
+      const m = k.match(/:L(\d+)$/);
+      if (m && v === '1') store['L' + m[1]] = true;
+      localStorage.removeItem(k);
+    }
+  }
+
+  const boxes = document.querySelectorAll('.task input[type="checkbox"]');
+  boxes.forEach(box => {
+    const k = box.dataset.key;
+    if (store[k]) box.checked = true;
+    box.addEventListener('change', () => {
+      store[k] = box.checked;
+      try {
+        localStorage.setItem(STORE_KEY, JSON.stringify(store));
+      } catch (e) {
+        console.error('localStorage 写入失败：', e);
+      }
+      updateProgress();
+    });
+  });
+
+  function updateProgress() {
+    const total = boxes.length;
+    const done = Array.from(boxes).filter(b => b.checked).length;
+    const pct = total ? Math.round(done / total * 100) : 0;
+    document.getElementById('progress').innerHTML = '已完成：<b>' + done + ' / ' + total + '</b>（' + pct + '%）';
+  }
+  updateProgress();
+})();
+</script>
+</body>
+</html>

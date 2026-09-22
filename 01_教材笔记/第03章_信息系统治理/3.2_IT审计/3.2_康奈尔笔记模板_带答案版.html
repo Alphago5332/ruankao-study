@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>康奈尔笔记 · 第 3 章第 2 节 IT审计 · 带答案版</title>
+<style>
+  :root{
+    --ink:#1f2328;
+    --ink-2:#4b5563;
+    --ink-3:#8b949e;
+    --line:#2f3742;
+    --rule:#d6dae0;
+    --accent:#185FA5;
+    --accent-soft:#E6F1FB;
+    --warm:#854F0B;
+    --warm-soft:#FAEEDA;
+    --paper:#ffffff;
+    --ans-bg:#fffaf2;
+    --ans-border:#e8d9b8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    padding:28px 16px 48px;
+    background:#eef0f3;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+    color:var(--ink);
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .toolbar{
+    max-width:210mm;margin:0 auto 14px;display:flex;gap:10px;align-items:center;
+    justify-content:space-between;flex-wrap:wrap;
+  }
+  .toolbar .hint{font-size:12.5px;color:#5b6470;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;
+    font-size:13px;padding:7px 14px;border-radius:8px;cursor:pointer;
+    font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn.active{background:var(--warm);border-color:var(--warm);color:#fff;}
+
+  .page{
+    width:210mm;min-height:297mm;margin:0 auto;background:var(--paper);
+    padding:14mm 13mm 12mm;box-shadow:0 2px 14px rgba(16,24,40,.12);
+  }
+
+  .head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    border-bottom:2px solid var(--line);padding-bottom:8px;margin-bottom:10px;
+    gap:12px;
+  }
+  .head h1{font-size:19px;margin:0;font-weight:600;letter-spacing:.3px;}
+  .head .sub{font-size:12px;color:var(--ink-3);margin-top:4px;}
+  .head .meta{font-size:12px;color:var(--ink-2);text-align:right;line-height:1.9;white-space:nowrap;}
+  .head .meta b{font-weight:600;color:var(--accent);}
+
+  .band{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+  .chip{
+    font-size:11.5px;padding:4px 9px;border-radius:5px;
+    background:var(--accent-soft);color:#0C447C;border:1px solid #B5D4F4;
+  }
+  .chip.warm{background:var(--warm-soft);color:#633806;border-color:#EFC98A;}
+
+  .cols{
+    display:grid;grid-template-columns:60mm 1fr;gap:0;
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .col-cue{
+    background:#fafbfc;border-right:1px solid var(--line);padding:8px 9px 9px;
+  }
+  .col-note{padding:8px 11px 9px;}
+  .col-hd{
+    font-size:11.5px;font-weight:600;letter-spacing:.6px;color:var(--ink-2);
+    text-transform:uppercase;padding-bottom:6px;margin-bottom:7px;
+    border-bottom:1px dashed #b9c0c9;
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  .col-hd span{font-size:10.5px;font-weight:400;color:var(--ink-3);text-transform:none;letter-spacing:0;}
+
+  .q{
+    font-size:11.5px;line-height:1.5;color:#1f2328;
+    padding:5px 0 5px 20px;position:relative;border-bottom:1px dotted #dfe3e8;
+  }
+  .q:last-child{border-bottom:0;}
+  .q::before{
+    content:attr(data-n);position:absolute;left:0;top:5px;
+    width:14px;height:14px;border-radius:50%;
+    background:var(--accent);color:#fff;font-size:9.5px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:600;line-height:1;
+  }
+  .q b{font-weight:600;}
+  .q em{font-style:normal;color:var(--warm);font-weight:600;}
+
+  .grouplabel{
+    font-size:10.5px;font-weight:600;color:var(--accent);
+    letter-spacing:.4px;margin:8px 0 2px;
+  }
+  .grouplabel:first-child{margin-top:0;}
+
+  /* === 答案区样式 === */
+  .ans-block{
+    margin-bottom:6px;padding:5px 8px 6px;
+    background:var(--ans-bg);border:1px solid var(--ans-border);border-radius:3px;
+  }
+  .ans-block .ans-title{
+    font-size:10.5px;font-weight:600;color:var(--warm);
+    letter-spacing:.3px;margin-bottom:2px;display:flex;align-items:baseline;gap:6px;
+  }
+  .ans-block .ans-title .num{
+    display:inline-block;min-width:14px;height:14px;border-radius:50%;
+    background:var(--warm);color:#fff;font-size:9.5px;font-weight:600;
+    text-align:center;line-height:14px;
+  }
+  .ans-block ul{
+    margin:2px 0 3px 0;padding:0 0 0 16px;font-size:11px;line-height:1.55;color:#2b323b;
+  }
+  .ans-block ul li{padding:1px 0;}
+  .ans-block .key{
+    color:var(--warm);font-weight:600;
+  }
+  .ans-block .subhd{
+    font-size:10.5px;font-weight:600;color:#0C447C;margin:3px 0 1px;
+    padding-left:2px;border-left:3px solid #B5D4F4;
+  }
+  .ans-block .tip{
+    font-size:10px;color:#633806;margin-top:2px;line-height:1.5;
+    padding:2px 6px;background:var(--warm-soft);border-radius:2px;
+  }
+  .ans-block .fill{
+    height:16px;border-bottom:1px dashed #c8c0aa;margin-top:3px;
+  }
+  body.hide-answers .ans-block{display:none;}
+  body.hide-answers .summary-prefill{display:none;}
+
+  .summary{
+    margin-top:10px;border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .summary .col-hd{
+    margin:0;padding:7px 11px;background:#fafbfc;border-bottom:1px solid var(--line);
+  }
+  .summary .body{padding:6px 11px 8px;font-size:11.5px;line-height:1.7;color:#2b323b;}
+  .summary .body b{color:var(--accent);}
+  .summary .body .small{font-size:10.5px;color:var(--ink-3);margin-top:3px;display:block;}
+
+  .footer{
+    margin-top:9px;font-size:10.5px;color:var(--ink-3);
+    display:flex;justify-content:space-between;gap:10px;
+  }
+
+  .guide{
+    width:210mm;margin:16px auto 0;background:#fff;border:1px solid #d9dee5;
+    border-radius:8px;padding:16px 18px;
+  }
+  .guide h2{font-size:14px;margin:0 0 10px;font-weight:600;}
+  .guide table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .guide th,.guide td{
+    border:1px solid #e2e6eb;padding:7px 9px;text-align:left;vertical-align:top;line-height:1.6;
+  }
+  .guide th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .guide td:first-child{width:88px;font-weight:600;color:var(--accent);}
+  .guide .note{font-size:12px;color:#5b6470;margin-top:10px;line-height:1.7;}
+
+  @page{size:A4 portrait;margin:0;}
+  @media print{
+    body{background:#fff;padding:0;}
+    .toolbar,.guide{display:none;}
+    .page{box-shadow:none;margin:0;width:auto;min-height:auto;padding:13mm 12mm;}
+    body.hide-answers .ans-block{display:none;}
+    body.hide-answers .summary-prefill{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="hint">A4 竖版 · 带答案版 · 建议先默写、再对照；打印时可「隐藏答案」变填空卷</div>
+  <div>
+    <button class="btn" id="toggleBtn" onclick="toggleAnswers()">👁 隐藏答案（打印填空卷）</button>
+    <button class="btn primary" onclick="window.print()">打印 / 导出 PDF</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="head">
+    <div>
+      <h1>康奈尔笔记 · 第 3 章第 2 节 IT审计 <span style="color:var(--warm);font-size:14px;">（带答案版）</span></h1>
+      <div class="sub">《信息系统项目管理师教程（第 4 版）》约 P80 ~ P90　｜　答案口径以 2026-09-22 三方交叉核对为准</div>
+    </div>
+    <div class="meta">
+      日期：__________<br>
+      第 <b>__</b> 轮复习　用时 <b>__</b> 分钟
+    </div>
+  </div>
+
+  <div class="band">
+    <span class="chip">第 4 版新增重点章（综合知识约 3~4 分）</span>
+    <span class="chip">概念辨析 · 流程阶段归属 · 类别归属型</span>
+    <span class="chip warm">必背：四类风险 + 流程四阶段 + 证据五性 + 内控三类/专项六种</span>
+    <span class="chip warm">通读：风险应对技术手段 / 项目管理审计示例表细项</span>
+    <span class="chip warm">📝 含答案</span>
+  </div>
+
+  <div class="cols">
+
+    <div class="col-cue">
+      <div class="col-hd">线索栏 <span>遮住右侧自问</span></div>
+
+      <div class="grouplabel">3.2.1 IT审计基础</div>
+      <div class="q" data-n="1"><b>IT 审计的定义</b>（GB/T 34690.4，四个关键词）？在 IT 治理中扮演什么角色？<b>审计重要性</b>指什么（四种后果）？</div>
+      <div class="q" data-n="2"><b>IT 审计的目的句</b>（落点是什么）？<b>组织的 IT 目标四条</b>？「完整可靠有效」vs「安全可靠有效」各修饰什么？</div>
+      <div class="q" data-n="3"><b>审计范围四范围</b>？各自依据 / 内容？实施前怎么定重点范围？<b>审计人员要求六方面</b>？</div>
+      <div class="q" data-n="4"><b>IT 审计风险四类</b>及定义？哪些「只能评估、无法控制」？<b>检查风险</b>的影响因素？</div>
+
+      <div class="grouplabel">3.2.2 审计方法与技术</div>
+      <div class="q" data-n="5">国际<b>常用审计准则四项</b>？各自归属（谁发布 / 什么性质）？</div>
+      <div class="q" data-n="6"><b>常用审计方法六法</b>？<b>审计技术四类</b>？「抽样」属于方法还是技术？</div>
+      <div class="q" data-n="7"><b>风险评估技术四小类</b>内容？<b>属性 vs 变量抽样</b>？<b>大数据审计三技术</b>？</div>
+      <div class="q" data-n="8"><b>审计证据定义</b>？<b>五特性</b>？审计证据是什么的支柱 / 基础？</div>
+      <div class="q" data-n="9"><b>审计底稿定义</b>？<b>分类三类</b>？内容 / 形式四条？<b>三级复核</b>？作用四条？<b>泄密例外</b>两种？</div>
+
+      <div class="grouplabel">3.2.3 流程 · 3.2.4 内容</div>
+      <div class="q" data-n="10">审计流程<b>作用四条</b>？<b>广义 vs 狭义</b>审计流程怎么分？</div>
+      <div class="q" data-n="11"><b>四阶段定位句</b> + 各阶段<b>工作清单</b>？「后续审计」的特殊性？</div>
+      <div class="q" data-n="12">审计内容<b>两大类</b>？<b>内控三类</b>各审什么？<b>专项六种</b>？「合理保证」配哪种？项目管理审计<b>四类别三方法</b>？</div>
+    </div>
+
+    <div class="col-note">
+      <div class="col-hd">答案区 <span>默写后对照 · 虚线处写自己的补充</span></div>
+
+      <div class="grouplabel">3.2.1 IT审计基础</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">1</span>IT 审计的定义、角色与重要性</div>
+        <ul>
+          <li><b>定义</b>（GB/T 34690.4《信息技术服务 治理 第 4 部分：审计导则》）：IT 审计是根据 <span class="key">IT 审计标准</span>的要求，对<span class="key">信息系统及相关的 IT 内部控制和流程</span>进行<span class="key">检查、评价</span>，并<span class="key">发表审计意见</span></li>
+          <li><b>角色</b>：IT 审计是 IT 治理的<span class="key">评估和监督工具</span>（3.1 治理流程里的「评估、监督」由审计落地）；为有效控制 IT 风险而开展，发挥审计<span class="key">监督</span>作用</li>
+          <li><b>重要性</b>：指 IT 审计风险（<span class="key">固有、控制、检查</span>）对组织影响的<span class="key">严重程度</span>，如：财务损失 · 业务中断 · 失去客户信任 · 经济制裁</li>
+        </ul>
+        <div class="tip">定义抓四词：<b>标准 · 检查评价 · 内部控制流程 · 发表意见</b>。出处记法：<b>4960 = 治理，4690 = 审计</b>，两个国标号别互换</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">2</span>审计目的与组织的 IT 目标</div>
+        <ul>
+          <li><b>目的</b>：通过开展 IT 审计工作，了解组织 IT 系统与 IT 活动的<span class="key">总体状况</span>，对组织是否实现 <span class="key">IT 目标</span>进行<span class="key">审查和评价</span>，充分<span class="key">识别与评估</span>相关 IT 风险，提出<span class="key">评价意见及改进建议</span>，<span class="key">促进组织实现 IT 目标</span></li>
+          <li><b>IT 目标四条</b>：①IT 战略应与业务战略<span class="key">保持一致</span>；②保护<span class="key">信息资产</span>安全及数据的<span class="key">完整、可靠、有效</span>；③提高<span class="key">信息系统</span>的<span class="key">安全性、可靠性及有效性</span>；④合理保证符合有关<span class="key">法律、法规及标准</span>等要求</li>
+        </ul>
+        <div class="tip">口诀：<b>一致 · 安全 · 三性 · 合规</b>。⚠️「完整可靠有效」修饰<b>数据</b>，「安全可靠有效」修饰<b>信息系统</b>；真题考过「不属于审计目的」——选「保护信息资产的安全」（那是 <b>IT 目标</b>，目的的落点是促进实现 IT 目标）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">3</span>审计范围四范围与审计人员要求</div>
+        <ul>
+          <li><b>总体范围</b>：根据<span class="key">审计目的和投入的审计成本</span>来确定</li>
+          <li><b>组织范围</b>：审计涉及的<span class="key">组织机构、主要流程、活动及人员</span>等</li>
+          <li><b>物理范围</b>：具体的<span class="key">物理地点与边界</span></li>
+          <li><b>逻辑范围</b>：涉及的<span class="key">信息系统和逻辑边界</span></li>
+          <li><b>定重点</b>：实施前先<span class="key">了解 + 风险评估</span>，确定主要 IT 风险，结合<span class="key">预计的时间、配备的审计力量</span>确定重点审计范围</li>
+          <li><b>人员要求六方面</b>（GB/T 34690.4）：<span class="key">职业道德 · 知识 · 技能 · 资格与经验 · 专业胜任能力 · 利用外部专家服务</span></li>
+        </ul>
+        <div class="tip">口诀：<b>总组物逻</b>；「目的 + 成本」只配<b>总体范围</b>。人员要求记「<b>德知技资胜外</b>」</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">4</span>IT 审计风险（四类）</div>
+        <ul>
+          <li><b>固有风险</b>：<span class="key">IT 活动不存在相关控制</span>的情况下，<span class="key">易于导致重大错误</span>的风险；IT 活动<span class="key">本身所具有</span>，审计人员<b>只能评估，无法控制或影响</b>；衡量是<b>主观的、复杂的</b></li>
+          <li><b>控制风险</b>：与 IT 活动相关的<span class="key">内部控制体系不能及时预防或检查出</span>存在的重大错误的风险；与<span class="key">内控制度执行的有效性</span>有关、<span class="key">与审计无关</span>；审计人员只能评估其风险水平</li>
+          <li><b>检查风险</b>：通过<span class="key">预定的审计程序未能发现</span>重大、单个或与其他错误相结合的风险；影响因素：<span class="key">IT 审计规范不完善、审计人员自身或技术原因</span>等</li>
+          <li><b>总体审计风险</b>：针对<span class="key">单个控制目标</span>所产生的各类审计风险的<span class="key">总和</span></li>
+        </ul>
+        <div class="tip">口诀：<b>固有 = 没控制就出错（自带）· 控制 = 内控没拦住 · 检查 = 审计没查出 · 总体 = 单目标总和</b>。题眼：「内部控制」字样 → 控制风险；「活动本身」→ 固有；「预定程序未发现」→ 检查</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">3.2.2 审计方法与技术</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">5</span>国际常用审计准则（四项）</div>
+        <ul>
+          <li><span class="key">信息系统审计准则</span>：<b>ISACA（国际信息系统审计协会）</b>发布</li>
+          <li><span class="key">《内部控制——整体框架》报告</span>：通称 <b>COSO</b> 报告（美国虚假财务报告委员会下属的发起人委员会）</li>
+          <li><span class="key">《萨班斯法案》（SOX）</span>：美国政府出台的涉及<b>会计职业监管、组织治理、证券市场监管</b>改革的重要法律</li>
+          <li><span class="key">COBIT（信息及相关技术控制目标）</span>：目前<b>国际上通用的</b>信息及相关技术控制规范</li>
+        </ul>
+        <div class="tip">记法：<b>ISACA 出准则 · COSO 出内控 · SOX 是美国法 · COBIT 是控制目标</b>。COBIT 在 3.1.4 是「治理框架」、在本节是「审计准则」——一个框架两处出场，不冲突</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">6</span>常用方法六法 + 审计技术四类</div>
+        <ul>
+          <li><b>常用方法六法</b>：<span class="key">访谈法 · 调查法 · 检查法 · 观察法 · 测试法 · 程序代码检查法</span></li>
+          <li><b>审计技术四类</b>：<span class="key">风险评估技术 · 审计抽样技术 · 计算机辅助审计技术 · 大数据审计技术</span></li>
+        </ul>
+        <div class="tip">口诀：方法「<b>访调检观试码</b>」、技术「<b>评抽辅数</b>」。⚠️ 抽样是<b>技术</b>不是方法；干扰项常用「穿行法 / 复核法」冒充方法</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">7</span>风险评估技术 · 抽样 · 大数据审计</div>
+        <ul>
+          <li><b>风险评估技术四小类</b>：①<span class="key">风险识别</span>：德尔菲法、头脑风暴、检查表法、SWOT 技术及图解技术；②<span class="key">风险分析</span>：定性分析 + 定量分析；③<span class="key">风险评价</span>：单因素评价 + 总体风险评价；④<span class="key">风险应对</span>：云计算、冗余链路、冗余资源、系统弹性伸缩、两地三中心灾备、业务熔断限流等</li>
+          <li><b>属性抽样</b>（固定样本抽样 / 频率估计抽样）：估计总体中某种<span class="key">属性的发生率</span>，回答「<span class="key">有多少</span>」</li>
+          <li><b>变量抽样</b>（金额估计抽样 / 平均值估计抽样）：由样本估计总体的<span class="key">货币金额或其他度量单位</span></li>
+          <li><b>大数据审计三技术</b>：<span class="key">大数据智能分析 · 大数据可视化分析 · 大数据多数据源综合分析</span></li>
+        </ul>
+        <div class="tip">属性答「<b>有多少</b>」、变量答「<b>值多少</b>」；风险应对技术记「云 / 冗余 / 弹性 / 灾备 / 熔断限流」几个关键词即可</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">8</span>IT 审计证据</div>
+        <ul>
+          <li><b>定义</b>：由审计机构和审计人员获取，用于确定所审计实体或数据是否遵循<span class="key">既定标准或目标</span>，形成<span class="key">审计结论的证明材料</span></li>
+          <li><b>定位</b>：审计证据是<span class="key">审计意见的支柱</span>，是审计人员形成<span class="key">审计结论的基础</span></li>
+          <li><b>特性五条</b>：<span class="key">充分性 · 客观性 · 相关性 · 可靠性 · 合法性</span></li>
+        </ul>
+        <div class="tip">口诀：<b>充 · 客 · 相 · 可 · 合</b>。干扰项常用「真实性 / 完整性 / 及时性」冒充</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">9</span>IT 审计工作底稿</div>
+        <ul>
+          <li><b>定义</b>：审计人员对<span class="key">制订的审计计划、实施的审计程序、获取的相关审计证据、得出的审计结论</span>做出的记录</li>
+          <li><b>分类三类</b>：<span class="key">综合类 · 业务类 · 备查类</span>工作底稿</li>
+          <li><b>编制要求</b>：内容——<span class="key">资料翔实、重点突出、繁简得当、结论明确</span>；形式——<span class="key">要素齐全、格式规范、标识一致、记录清晰</span></li>
+          <li><b>作用四条</b>：形成审计结论、发表审计意见的<b>直接依据</b>；评价考核审计人员的<b>主要依据</b>；审计<b>质量控制与监督的基础</b>；对未来审计业务的<b>参考备查</b>作用</li>
+          <li><b>三级复核</b>：<span class="key">审计机构负责人 · 部门负责人 · 项目负责人（或项目经理）</span></li>
+          <li><b>泄密例外两种</b>：①<span class="key">法院、检察院及国家其他部门依法查阅</span>并按规定办理必要手续；②<span class="key">审计协会或其委派单位</span>对执业情况进行检查。归档后由<span class="key">档案管理部门</span>管理</li>
+        </ul>
+        <div class="tip">分类「<b>综业备</b>」；三级复核「<b>机构 → 部门 → 项目</b>」由大到小；内容四条「翔实 · 突出 · 得当 · 明确」对形式四条「齐全 · 规范 · 一致 · 清晰」</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">3.2.3 流程 · 3.2.4 内容</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">10</span>审计流程的含义与作用</div>
+        <ul>
+          <li><b>作用四条</b>：有效地<span class="key">指导审计工作</span>；有利于<span class="key">提高审计工作效率</span>；有利于<span class="key">保证审计项目质量</span>；有利于<span class="key">规范审计工作</span></li>
+          <li><b>狭义</b>：审计人员在<span class="key">取得审计证据、完成审计目标、得出审计结论</span>过程中所采取的步骤和方法</li>
+          <li><b>广义</b>：审计机构和审计人员对审计项目<span class="key">从开始到结束的整个过程</span>采取的系统性工作步骤，分为<span class="key">审计准备、审计实施、审计终结及后续审计</span>四个阶段</li>
+        </ul>
+        <div class="tip">考「四阶段」默认问<b>广义</b>；狭义只管「证据 → 结论」一段</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">11</span>审计流程四阶段（定位句 + 工作清单）</div>
+        <ul>
+          <li><b>① 准备</b>（从<span class="key">计划开始到发出审计通知书</span>为止；整个过程的<span class="key">起点和基础</span>）：明确审计目的及任务 · <span class="key">组建审计项目组</span> · 搜集相关信息 · <span class="key">编制审计计划</span></li>
+          <li><b>② 实施</b>（将计划付诸实施；审计全过程的<span class="key">中心环节</span>、<span class="key">关键阶段</span>）：深入调查并<span class="key">调整审计计划</span> · 了解并<span class="key">初步评估 IT 内部控制</span> · 进行<span class="key">符合性测试</span> · 进行<span class="key">实质性测试</span></li>
+          <li><b>③ 终结</b>（整理底稿、总结工作、编写报告、做出结论期间）：整理与<span class="key">复核</span>底稿 · 整理<span class="key">审计证据</span> · 评价相关 <span class="key">IT 控制目标</span>的实现 · 判断并<span class="key">报告审计发现</span> · <span class="key">沟通</span>审计结果 · <span class="key">出具审计报告</span> · <span class="key">归档管理</span></li>
+          <li><b>④ 后续审计</b>（检查是否采取<span class="key">纠正措施</span>并取得预期效果的<span class="key">跟踪审计</span>）：<span class="key">不是一次新的审计</span>，是前一次审计的<span class="key">有机组成部分</span>；可不必遵守每一过程和要求，但必须<span class="key">依法依规</span>检查调查、收集证据、写<span class="key">后续审计报告</span></li>
+        </ul>
+        <div class="tip">口诀：准备「目组搜编」→ 实施「调评符实」→ 终结七件事「稿证评报沟档」→ 后续「跟踪纠错不重审」。⚠️「符合性 / 实质性测试」只在<b>实施</b>阶段；「发出审计通知书」是<b>准备</b>阶段终点</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">12</span>审计内容：两大类 + 内控三类 + 专项六种</div>
+        <div class="subhd">总览</div>
+        <ul>
+          <li>IT 审计主要分为 <span class="key">IT 内部控制审计</span> 和 <span class="key">IT 专项审计</span> 两大类；专项审计 = 根据当前面临的<span class="key">特殊风险或需求</span>开展，范围可为 IT 综合审计的<span class="key">某一个或几个部分</span></li>
+        </ul>
+        <div class="subhd">IT 内部控制审计（三类）</div>
+        <ul>
+          <li><span class="key">组织层面 IT 控制审计</span>：IT 战略、组织、架构、业务连续性、风险管理、外包管理、网络与信息安全、监督管理</li>
+          <li><span class="key">IT 一般控制审计</span>：与<span class="key">应用系统、数据库、操作系统、网络</span>相关的策略和措施</li>
+          <li><span class="key">应用控制审计</span>：<span class="key">业务流程层面</span>运行的人工或自动化程序——<span class="key">输入控制、处理控制、输出控制</span></li>
+        </ul>
+        <div class="subhd">IT 专项审计（六种）</div>
+        <ul>
+          <li><span class="key">信息系统生命周期审计</span>（规划·设计·开发·测试·运行·维护）· <span class="key">开发过程审计</span>（规划·设计·建设·实施是否符合 IT 架构和战略）· <span class="key">运行维护审计</span>（运维能力 + 流程策实监改；含基础设施运行 / 系统运行 / 维护 / 质量保证 / IT 服务管理）· <span class="key">网络与信息安全审计</span>（组织·人员·系统·设备·环境；流程制度执行 + 法律遵从）· <span class="key">信息系统项目审计</span>（项目管理过程得到<span class="key">控制、监督并遵循最佳实践</span>的<b>合理保证</b>）· <span class="key">数据审计</span>（定期分析·验证·讨论·改进数据安全管理相关政策标准活动）</li>
+        </ul>
+        <div class="subhd">项目管理审计示例</div>
+        <ul>
+          <li>四类别：<span class="key">组织管理 · 项目启动与计划 · 项目实施与控制 · 项目收尾管理</span>；三方法：<span class="key">访谈 · 观察 · 检查</span></li>
+        </ul>
+        <div class="tip">口诀：<b>内控三类「组织→一般→应用」、专项六种「生开运网项数」</b>。「入处出」三控制属<b>应用控制</b>；「合理保证」配<b>项目审计</b></div>
+        <div class="fill"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="col-hd">总结区 <span>本节本质 + 考点地图</span></div>
+    <div class="body summary-prefill">
+      <b>本节本质</b>：3.2 回答「谁来看住 IT 治理的效果」。主线四步：<b>基础（定义·目的·范围·人员·风险）→ 方法与技术（怎么审）→ 流程（按什么顺序审）→ 内容（审什么）</b>。全节没有计算，题型是「定义配对 + 阶段工作归属 + 类别归属」三类，数字型考点密集（4 目标 / 4 范围 / 4 风险 / 4 准则 / 6 方法 / 4 技术 / 5 证据特性 / 3+4+4 底稿 / 4 阶段 / 2 大类 3+6）。<br>
+      <b>考点地图（按考频排序）</b>：① <b>四类审计风险定义配对</b>（固有 / 控制 / 检查 / 总体）→ ② <b>审计流程四阶段工作清单归属</b>（符合性·实质性测试在实施）→ ③ <b>组织的 IT 目标四条</b>（数据三性 vs 系统三性）→ ④ <b>审计证据五特性</b> → ⑤ <b>内部控制审计三类</b>（组织层面 / 一般控制 / 应用控制·入处出）→ ⑥ <b>专项审计六种</b> → ⑦ <b>审计底稿</b>（分类综业备 + 三级复核）→ ⑧ <b>抽样两分法</b>（属性有多少 / 变量值多少）→ ⑨ <b>审计准则四项归属</b>（ISACA / COSO / SOX / COBIT）→ ⑩ <b>四范围</b>「总组物逻」→ ⑪ 审计定义与目的句（落点 = 促进实现 IT 目标）→ ⑫ 审计人员要求六方面。<br>
+      <span class="small">⚠️ 口径陷阱：① 34960 = <b>治理</b>、34690.4 = <b>审计导则</b>，编号别换位；② 目的句的落点是「<b>促进组织实现 IT 目标</b>」——「保护信息资产安全」是 IT 目标不是审计目的；③ 「符合性 / 实质性测试」只在<b>实施阶段</b>，别填进准备或终结；④ 「后续审计不是一次新的审计」是判断题常客；⑤ 抽样、计算机辅助、大数据是<b>审计技术</b>不是「常用方法」；⑥ 「输入 / 处理 / 输出控制」属<b>应用控制审计</b>；⑦ 属性抽样 = 频率估计（有多少）、变量抽样 = 金额估计（值多少）；⑧ 三级复核 = 机构负责人 → 部门负责人 → 项目负责人，由大到小；⑨ 第 3 章 2023 上以前旧真题无对应题，别拿旧题正确率评估掌握度。</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>康奈尔笔记法 · 第 3 章第 2 节 带答案版　｜　复习记录：当日 ☐　+1 天 ☐　+3 天 ☐　+7 天 ☐　+14 天 ☐</span>
+    <span>正确率 ____ / 12</span>
+  </div>
+
+</div>
+
+<div class="guide">
+  <h2>怎么用这一页</h2>
+  <table>
+    <tr>
+      <th>步骤</th><th>做法</th>
+    </tr>
+    <tr>
+      <td>第 1 遍 · 遮答默写</td>
+      <td>用纸<b>遮住右栏答案区</b>，只看左栏 12 个问题。口头/默写回答，答不出的画「×」。</td>
+    </tr>
+    <tr>
+      <td>第 2 遍 · 对照修正</td>
+      <td>揭开答案区逐项对照。每条答案下的<b>虚线</b>是留给你的「补充线」——记下易漏点（如「四类风险定义」「流程四阶段工作清单」「内控三类 vs 专项六种」「属性 / 变量抽样」）。</td>
+    </tr>
+    <tr>
+      <td>第 3 遍 · 隐藏答案打印</td>
+      <td>点工具栏「👁 隐藏答案」按钮，再打印一份当填空卷，可反复练习。</td>
+    </tr>
+    <tr>
+      <td>第 4 遍 · 复习节奏</td>
+      <td>页脚 5 个框按「当日 → +1 天 → +3 天 → +7 天 → +14 天」打勾，这就是你的艾宾浩斯进度条。全部打勾后，本节可不再看。</td>
+    </tr>
+  </table>
+  <div class="note">
+    <b>为什么这一节要特别加练</b>：第 3 章是<b>第 4 版新增重点章</b>，旧真题没有存货，出题人只能从教材原文的「数字型清单」里挖空——这反而让题目<b>更好预测</b>：四类风险、流程四阶段、证据五特性、内控三类、专项六种、准则四项，全是「缺一个就送分 / 记混就丢分」的固定清单。把本页的口诀串（总组物逻 / 固控检总 / 访调检观试码 / 评抽辅数 / 充客相可合 / 综业备 / 目组搜编·调评符实·稿证评报沟档 / 内控三类·专项六种）默写到条件反射，审计这一块的分就稳了。
+  </div>
+</div>
+
+<script>
+  function toggleAnswers(){
+    document.body.classList.toggle('hide-answers');
+    const btn = document.getElementById('toggleBtn');
+    const hidden = document.body.classList.contains('hide-answers');
+    btn.textContent = hidden ? '👁 显示答案' : '👁 隐藏答案（打印填空卷）';
+    btn.classList.toggle('active', hidden);
+  }
+</script>
+
+</body>
+</html>
