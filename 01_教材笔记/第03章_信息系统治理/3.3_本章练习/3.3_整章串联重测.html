@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3.3 本章练习 · 第 3 章整章串联重测（30 题）</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #333; }
+  .wrap { max-width: 800px; margin: 0 auto; padding: 20px 16px 60px; }
+  header { background: #185FA5; color: #fff; border-radius: 8px; padding: 18px 20px; margin-bottom: 16px; }
+  header h1 { font-size: 19px; margin-bottom: 4px; }
+  header p { font-size: 12.5px; opacity: .88; }
+  .progress-bar { background: rgba(255,255,255,.25); border-radius: 4px; height: 8px; margin-top: 10px; }
+  .progress-bar i { display: block; height: 100%; background: #ffc53d; border-radius: 4px; width: 0; transition: width .3s; }
+  .card { background: #fff; border-radius: 8px; padding: 18px 20px; margin-bottom: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+  .qtag { font-size: 11px; color: #854F0B; background: #fff7e6; border: 1px solid #f0d9a0; border-radius: 3px; padding: 1px 6px; margin-right: 6px; }
+  .qno { font-weight: bold; color: #185FA5; }
+  .qtext { font-size: 14.5px; line-height: 1.65; margin: 8px 0 12px; }
+  .opt { display: block; width: 100%; text-align: left; border: 1px solid #d9e2ec; border-radius: 6px;
+    background: #fff; padding: 9px 12px; font-size: 13.5px; margin-bottom: 8px; cursor: pointer; line-height: 1.5; }
+  .opt:hover { border-color: #185FA5; }
+  .opt.sel { border-color: #185FA5; background: #eef4fb; }
+  .opt.right { border-color: #2e7d32; background: #eef7ee; }
+  .opt.wrong { border-color: #c62828; background: #fdeeee; }
+  .opt .mark { font-weight: bold; margin-right: 6px; color: #185FA5; }
+  .explain { display: none; background: #f4f8fc; border-left: 3px solid #185FA5; border-radius: 4px;
+    padding: 10px 12px; font-size: 13px; line-height: 1.7; color: #444; margin-top: 4px; }
+  .explain b { color: #185FA5; }
+  .btn { background: #185FA5; color: #fff; border: none; border-radius: 6px; padding: 9px 22px;
+    font-size: 14px; cursor: pointer; margin-top: 10px; }
+  .btn.gray { background: #90a4ae; }
+  .btn:disabled { background: #b0bec5; cursor: not-allowed; }
+  #result { display: none; text-align: center; }
+  #result .big { font-size: 40px; font-weight: bold; color: #185FA5; margin: 10px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 14px 0; }
+  th, td { border: 1px solid #d9e2ec; padding: 7px 8px; text-align: center; }
+  th { background: #eef4fb; color: #185FA5; }
+  .module-stat td:first-child { text-align: left; }
+  #reviewList { text-align: left; }
+  .wrong-item { border: 1px solid #f0c4c4; border-radius: 6px; padding: 10px 12px; margin-bottom: 8px; font-size: 13px; background: #fffafa; }
+  .wrong-item b { color: #c62828; }
+  .kbd-tip { font-size: 11.5px; color: #999; margin-top: 8px; }
+  .band { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+  .chip { font-size: 11.5px; padding: 4px 9px; border-radius: 5px; background: #E6F1FB; color: #0C447C; border: 1px solid #B5D4F4; }
+  .chip.warm { background: #FAEEDA; color: #633806; border-color: #EFC98A; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>3.3 本章练习 · 第 3 章整章串联重测（30 题）</h1>
+    <p>3.1 IT治理（15 题）+ 3.2 IT审计（15 题）· 达标线 24/30（80%）</p>
+    <p>键盘 A~D 选择，Enter 确认 · 做完在章级「打卡进度.md」的章末验收表登记得分</p>
+    <div class="progress-bar"><i id="pbar"></i></div>
+  </header>
+
+  <div class="band">
+    <span class="chip">第 3 章 = 第 4 版新增重点章（上午约 3~4 分）</span>
+    <span class="chip">无计算 · 无案例论文主线</span>
+    <span class="chip warm">框架归属 / 标准归属 / 职责层次</span>
+    <span class="chip warm">整章串联 · 混合出题</span>
+  </div>
+
+  <div id="quiz"></div>
+  <div id="result" class="card">
+    <h2>第 3 章整章重测完成</h2>
+    <div class="big" id="finalScore">0 / 30</div>
+    <div id="advice" style="font-size:14px; margin-bottom: 6px;"></div>
+    <table class="module-stat" id="moduleTable">
+      <tr><th>模块</th><th>正确率</th><th>状态</th></tr>
+    </table>
+    <div id="reviewWrap" style="display:none">
+      <h3 style="color:#c62828; font-size:14px; margin-bottom:8px;">错题回顾</h3>
+      <div id="reviewList"></div>
+    </div>
+    <button class="btn" id="retryWrong" style="display:none">只重做错题</button>
+    <button class="btn gray" onclick="initAll()">重新测验</button>
+    <div style="font-size:12.5px;color:#666;margin-top:14px;line-height:1.8;text-align:left;">
+      📌 <b>登记方式</b>：把上面的得分填到<br>
+      <code>01_教材笔记/第03章_信息系统治理/打卡进度.md</code> → 「章末验收」表；<br>
+      同时把本节 README 的「打卡记录」也填一行。
+    </div>
+  </div>
+  <div class="kbd-tip">对照资料：《3.1_知识点清单.md》+《3.2_知识点清单.md》· 教材出处：《信息系统项目管理师教程（第4版）》P67~P91 · ⚠ 第 3 章为第 4 版新增章，2023 上及以前旧真题无对应题</div>
+</div>
+
+<script>
+const QUESTIONS = [
+  // ============ 3.1 IT治理部分（1-15） ============
+  // A·IT治理基础 (1-4)
+  { m: "A·IT治理基础", q: "教材对 IT 治理的定义是：描述组织采用有效的机制对信息技术和数据资源开发利用，（　　），确保实现组织的战略目标的过程。",
+    o: ["平衡信息化发展和数字化转型过程中的风险","控制信息化建设的成本和进度","提升信息系统集成的自动化水平","规范信息系统项目的立项与验收流程"], a: 0,
+    e: "教材 3.1.1 原文：IT 治理是描述组织采用有效的机制对【信息技术和数据资源】开发利用，【平衡信息化发展和数字化转型过程中的风险】，确保实现组织的【战略目标】的过程。定义抓三词：机制 · 平衡风险 · 战略目标。" },
+  { m: "A·IT治理基础", q: "关于 IT 治理的内涵，下列表述错误的是（　　）。",
+    o: ["IT 治理是组织上层管理的一个有机组成部分，由组织治理层或高级管理层负责","IT 治理强调数字目标与组织战略目标保持一致","IT 治理保护利益相关者的权益，对风险进行有效管理","IT 治理由信息技术部门独立实施，无须治理层和最高管理层参与"], a: 3,
+    e: "内涵 5 方面之一明确：IT 治理由【组织治理层或高级管理层】负责，从组织【全局高度】对信息化与数字化转型做出【制度安排】。D 与此相反。其余三项均为内涵原文。" },
+  { m: "A·IT治理基础", q: "IT 治理的主要目标不包括（　　）。",
+    o: ["与业务目标一致","有效利用信息与数据资源","风险管理","消除组织内部全部信息系统风险"], a: 3,
+    e: "IT 治理主要目标三项：与业务目标一致、有效利用信息与数据资源、风险管理（口诀「一有风」）。D「消除全部风险」表述绝对化，教材只要求制定保护级别、对关键资源实施有效监控和事件处理。" },
+  { m: "A·IT治理基础", q: "IT 治理管理层次中，「证实 IT 战略与业务战略是否一致」「证实通过明确的期望和衡量手段交付 IT 价值」是（　　）的主要职责。",
+    o: ["业务与服务执行层","执行管理层","最高管理层","IT 治理委员会秘书处"], a: 2,
+    e: "管理层次三层：最高管理层（如董事会）——两个「证实」+ 指导 IT 战略、平衡投资、指导信息数据资源分配；执行管理层——制定目标、分析机遇风险、建设关键过程与核心竞争力；业务与服务执行层——服务提供和支持、基础设施建设维护、需求提出和响应。两个「证实」是最高管理层专属动词。" },
+  // B·IT治理体系 (5-8)
+  { m: "B·IT治理体系", q: "教材图 3-1 中，IT 治理体系的构成要素「IT 治理流程」对应的问题是「IT 治理怎么做」，其内容是（　　）。",
+    o: ["投资、风险、绩效、标准和规范","统筹、评估、指导、监督","业务目标与 IT 一致","内外评价"], a: 1,
+    e: "体系构成五项与五问的对应：IT 定位（目标是什么）；IT 治理架构（由谁来做）；【IT 治理内容 = 投资、风险、绩效、标准和规范 → 做什么】；【IT 治理流程 = 统筹、评估、指导、监督 → 怎么做】；IT 治理效果（效果如何）。B 是流程、A 是内容，别互换。" },
+  { m: "B·IT治理体系", q: "有效的 IT 治理必须关注五项关键决策。下列关于决策间驱动关系的表述，正确的是（　　）。",
+    o: ["IT 投资和优先顺序驱动着 IT 原则的形成","IT 原则驱动着 IT 整体架构的形成，整体架构又决定了基础设施","业务应用需求决定了 IT 原则","IT 基础设施决定了 IT 架构"], a: 1,
+    e: "链条：【IT 原则 → IT 整体架构 → 基础设施 → 业务应用 → IT 投资（被前面所有决策驱动）】。IT 原则 = 组织高层关于如何使用 IT 的陈述。" },
+  { m: "B·IT治理体系", q: "IT 治理体系框架的具体组成部分不包括（　　）。",
+    o: ["IT 战略目标","IT 治理组织","IT 治理机制","IT 运维外包合同"], a: 3,
+    e: "体系框架六部分：【IT 战略目标、IT 治理组织、IT 治理机制、IT 治理域、IT 治理标准、IT 绩效目标】（口诀「组机域标绩」+战略目标）。「IT 运维外包合同」不属于框架组成。" },
+  { m: "B·IT治理体系", q: "关于 IT 治理核心内容六方面中「价值交付」与「风险管理」的价值定位，正确的是（　　）。",
+    o: ["价值交付是保护业务价值，风险管理是创造业务价值","价值交付是创造业务价值，风险管理是保护业务价值","两者都是创造业务价值","两者都是保护业务价值"], a: 1,
+    e: "固定配对：【价值交付 = 创造业务价值】（IT 项目全生命周期管理确保实现预期业务价值）；【风险管理 = 保护业务价值】（IT 资产安全、灾难恢复、信息资源安全和人员隐私安全）。核心内容六方面口诀「职匹源价风绩」。" },
+  // C·IT治理任务 (9-11)
+  { m: "C·IT治理任务", q: "教材将组织开展 IT 治理活动定义为（　　）。",
+    o: ["统筹、评估、指导、监督","统筹、指导、监督和改进","规划、执行、检查、处理","决策、执行、协调、控制"], a: 1,
+    e: "教材 3.1.3：IT 治理活动定义为【统筹、指导、监督和改进】。⚠ 本节最高频对调陷阱：治理流程 / 作用 =「统筹、评估、指导、监督」（含【评估】），治理活动定义 =「统筹、指导、监督、改进」（含【改进】）。" },
+  { m: "C·IT治理任务", q: "组织开展 IT 治理活动的主要任务聚焦在五个方面，下列不属于的是（　　）。",
+    o: ["全局统筹","价值导向","机制保障","绩效考核否决"], a: 3,
+    e: "五大任务：【全局统筹、价值导向、机制保障、创新发展、文化助推】（口诀「统价机创文」）。D「绩效考核否决」教材无此说法；「绩效」只在治理内容 / 绩效目标里出现。" },
+  { m: "C·IT治理任务", q: "五大任务中，「评审 IT 管理体系的适宜性、充分性和有效性，审计 IT 完整性、有效性和合规性」属于（　　）。",
+    o: ["全局统筹","价值导向","机制保障","文化助推"], a: 2,
+    e: "【机制保障】：保证 IT 需求与实现协调发展，使 IT 安全和风险得到有效识别、管理、防范和处置；具体包括指导建立规范的过程管理和痕迹管理、【评审 IT 管理体系的适宜性、充分性和有效性】、审计 IT 完整性 / 有效性 / 合规性、监督改进内容的实施。" },
+  // D·方法与标准 (12-15)
+  { m: "D·方法与标准", q: "GB/T 34960.1 定义的 IT 治理框架包含三大治理域，下列不属于的是（　　）。",
+    o: ["顶层设计","管理体系","资源","绩效考核"], a: 3,
+    e: "GB/T 34960.1《信息技术服务 治理 第 1 部分：通用要求》定义的 IT 治理框架包含【信息技术顶层设计、管理体系和资源】三大治理域（口诀「顶管资」）。「绩效考核」不属于三大治理域。" },
+  { m: "D·方法与标准", q: "关于 COBIT 框架对「治理」与「管理」的区分，下列表述正确的是（　　）。",
+    o: ["治理和管理均由董事会和执行管理层负责","治理 = 评估、指导和监控（EDM），由董事会和执行管理层负责","管理 = 评估、指导和监控（EDM），由高级和中级管理层负责","APO / BAI / DSS / MEA 四个领域属于治理目标"], a: 1,
+    e: "COBIT 由美国信息系统审计与控制协会（ISACA，1969 年成立）设计编制。【治理 = EDM（评估、指导和监控），董事会和执行管理层负责】；【管理 = APO / BAI / DSS / MEA 四领域，高级和中级管理层负责】。" },
+  { m: "D·方法与标准", q: "ISO/IEC 38500 标准规定的治理机构治理 IT 的三个主要任务是（　　）。",
+    o: ["计划、执行、检查","评估、指导和监督","统筹、协调、控制","决策、实施、评价"], a: 1,
+    e: "ISO/IEC 38500（2008 年 4 月发布，标志信息化正式进入 IT 治理时代）规定治理机构应通过【评估、指导和监督】三个主要任务治理 IT：评估 = 审查判断当前和未来的 IT 使用；指导 = 战略和政策的编制执行；监督 = 通过测量系统监测 IT 表现。" },
+  { m: "D·方法与标准", q: "ISO/IEC 38500 标准包括的原则，下列不属于的是（　　）。",
+    o: ["责任","战略","一致性","敏捷"], a: 3,
+    e: "ISO/IEC 38500 六项原则：【责任、战略、收购、性能、一致性、人的行为】（口诀「责战收性一人」）。「敏捷」不属于该标准的原则。" },
+  // ============ 3.2 IT审计部分（16-30） ============
+  // E·IT审计基础 (16-19)
+  { m: "E·IT审计基础", q: "根据 GB/T 34690.4《信息技术服务 治理 第 4 部分：审计导则》，IT 审计是指根据 IT 审计标准的要求，对信息系统及相关的 IT 内部控制和流程进行检查、评价，并（　　）。",
+    o: ["出具整改方案","发表审计意见","实施风险处置","建立控制矩阵"], a: 1,
+    e: "教材 3.2.1 原文：IT 审计是对信息系统及相关的 IT 内部控制和流程进行检查、评价，并【发表审计意见】。整改方案 / 风险处置都不是审计的收口动作——审计只「评价 + 发表意见」。⚠ GB/T 34690.4 = 审计导则，勿与 3.1 的 GB/T 34960 治理系列混。" },
+  { m: "E·IT审计基础", q: "IT 审计风险中，（　）是指 IT 活动不存在相关控制的情况下，易于导致重大错误的风险。",
+    o: ["固有风险","控制风险","检查风险","总体审计风险"], a: 0,
+    e: "【固有风险】：IT 活动本身所具有，审计人员只能评估、无法控制或影响；【控制风险】与内部控制制度执行有效性有关、与审计无关；【检查风险】= 预定审计程序未能发现重大错误的风险；【总体审计风险】= 针对单个控制目标的各类审计风险总和。" },
+  { m: "E·IT审计基础", q: "IT 审计风险中，「与 IT 活动相关的内部控制体系不能及时预防或检查出存在的重大错误的风险」是指（　）。",
+    o: ["固有风险","控制风险","检查风险","总体审计风险"], a: 1,
+    e: "【控制风险】：与内部控制制度执行的有效性有关、与审计无关（属内部控制范畴），审计人员只能评估其风险水平而不能对其实施控制和影响。题干出现「内部控制体系」字样即选控制风险。" },
+  { m: "E·IT审计基础", q: "IT 审计范围中，（　）需要根据审计目的和投入的审计成本来确定。",
+    o: ["总体范围","组织范围","物理范围","逻辑范围"], a: 0,
+    e: "四范围中只有【总体范围】「根据审计目的和投入的审计成本来确定」；组织范围 = 组织机构、主要流程、活动及人员；物理范围 = 具体物理地点与边界；逻辑范围 = 涉及的信息系统和逻辑边界。" },
+  // F·审计方法与技术 (20-24)
+  { m: "F·审计方法与技术", q: "下列不属于国际上发布的常用审计准则的是（　）。",
+    o: ["信息系统审计准则（ISACA）","《内部控制——整体框架》报告（COSO）","《萨班斯法案》（SOX）","ISO/IEC 38500"], a: 3,
+    e: "教材 3.2.2 国际常用审计准则四项：ISACA 信息系统审计准则、COSO《内部控制——整体框架》、SOX《萨班斯法案》、COBIT。【ISO/IEC 38500 是 3.1.4 的「IT 治理国际标准」】——与 3.1 串起来考的调包陷阱，本题就是整章串联的典型。" },
+  { m: "F·审计方法与技术", q: "下列属于 IT 审计常用方法的是（　）。",
+    o: ["风险评估技术","计算机辅助审计技术","程序代码检查法","大数据审计技术"], a: 2,
+    e: "常用审计方法六法：访谈法、调查法、检查法、观察法、测试法、【程序代码检查法】。风险评估 / 计算机辅助 / 大数据审计技术属于「IT 审计技术」（四类）——「方法」与「技术」是两套清单，出题最爱在这调包（口诀：方法 = 访调检观试码）。" },
+  { m: "F·审计方法与技术", q: "IT 审计技术中，属性抽样（固定样本抽样 / 频率估计抽样）主要用于（　）。",
+    o: ["估计总体中某种属性的发生率，回答「有多少」的问题","由样本估计总体的货币金额","评估信息系统全生命周期风险","验证程序代码的规范性"], a: 0,
+    e: "【属性抽样】估计总体中某种特性（属性）的发生率，回答「有多少」；【变量抽样】（金额估计抽样 / 平均值估计抽样）由样本估计总体的货币金额或其他度量单位，回答「值多少」。" },
+  { m: "F·审计方法与技术", q: "IT 审计证据的特性不包括（　）。",
+    o: ["充分性","相关性","及时性","合法性"], a: 2,
+    e: "审计证据特性五条：【充分性、客观性、相关性、可靠性、合法性】。审计证据是审计意见的支柱、形成审计结论的基础。「及时性」是干扰项——五性里没有它。" },
+  { m: "F·审计方法与技术", q: "审计工作底稿按标准分类，不包括（　）。",
+    o: ["综合类工作底稿","业务类工作底稿","备查类工作底稿","复核类工作底稿"], a: 3,
+    e: "审计工作底稿分为【综合类、业务类、备查类】三类。「复核」是三级复核制度（审计机构负责人、部门负责人、项目负责人为复核人）的动作，不是底稿类别。另记编制要求：【内容】= 资料翔实、重点突出、繁简得当、结论明确；【形式】= 要素齐全、格式规范、标识一致、记录清晰。" },
+  // G·审计流程 (25-27)
+  { m: "G·审计流程", q: "广义的 IT 审计流程一般分为四个阶段，正确的顺序是（　）。",
+    o: ["审计准备→审计实施→审计终结→后续审计","审计准备→审计终结→审计实施→后续审计","审计实施→审计准备→审计终结→后续审计","审计准备→审计实施→后续审计→审计终结"], a: 0,
+    e: "广义审计流程四阶段：【审计准备 → 审计实施 → 审计终结 → 后续审计】。狭义审计流程只指取得审计证据、完成审计目标、得出审计结论过程中所采取的步骤和方法。" },
+  { m: "G·审计流程", q: "IT 审计准备阶段的期间界定是（　）。",
+    o: ["从计划开始到发出审计通知书为止","从组建项目组到进入现场为止","从符合性测试到实质性测试为止","从出具审计报告到归档为止"], a: 0,
+    e: "准备阶段 = 审计项目【从计划开始，到发出审计通知书为止】，是整个审计过程的起点和基础。工作：明确审计目的及任务、组建审计项目组、搜集相关信息、编制审计计划。⚠ 符合性 / 实质性测试只在【实施阶段】。" },
+  { m: "G·审计流程", q: "关于后续审计，下列说法正确的是（　）。",
+    o: ["后续审计是一次全新的独立审计","后续审计必须完整遵守审计流程的每一过程和要求","后续审计是前一次审计的有机组成部分","后续审计无需收集审计证据"], a: 2,
+    e: "后续审计是检查被审计单位是否对审计问题和建议采取适当纠正措施并取得预期效果的跟踪审计。【不是一次新的审计，而是前一次审计的有机组成部分】；可不必遵守审计流程的每一过程和要求，但必须依法依规检查调查、收集审计证据、写出后续审计报告。" },
+  // H·审计内容 (28-30)
+  { m: "H·审计内容", q: "IT 审计内容主要分为（　）两大类。",
+    o: ["IT 内部控制审计和 IT 专项审计","IT 一般控制审计和 IT 应用控制审计","组织层面审计和系统层面审计","生命周期审计和运行维护审计"], a: 0,
+    e: "教材 3.2.4：IT 审计内容主要分为【IT 内部控制审计】和【IT 专项审计】两大类。内控审计含三类（组织层面 / 一般控制 / 应用控制），专项审计含六种——B 项的「一般控制 / 应用控制」只是内控审计的两个子类。" },
+  { m: "H·审计内容", q: "应用控制审计针对业务流程层面运行的人工或自动化程序进行审计，主要包括（　）。",
+    o: ["输入控制、处理控制和输出控制","访问控制、变更控制和发布控制","预防性控制、检查性和纠正性控制","事前控制、事中控制和事后控制"], a: 0,
+    e: "应用控制审计主要包括【输入控制、处理控制、输出控制】审计。区分：IT 一般控制审计针对与应用系统、数据库、操作系统、网络相关的策略和措施；组织层面 IT 控制审计针对 IT 战略、组织、架构、业务连续性、风险管理、外包管理等。" },
+  { m: "H·审计内容", q: "通过对信息系统项目管理过程的评价，向管理层提供信息系统项目管理过程得到控制、监督并遵循最佳实践要求的合理保证，这是（　）的核心定位。",
+    o: ["信息系统生命周期审计","网络与信息安全审计","信息系统项目审计","数据审计"], a: 2,
+    e: "专项审计六种中【信息系统项目审计】：通过对项目管理过程的评价，向管理层提供项目管理过程得到控制、监督并遵循最佳实践要求的【合理保证】。「合理保证」是它的专属标签；生命周期审计审全流程、网安审计看合规、数据审计做数据安全政策标准的定期分析验证改进。" }
+];
+
+let idx = 0, score = 0, answers = [], current = QUESTIONS, locked = false;
+
+function initAll() {
+  idx = 0; score = 0; answers = []; current = QUESTIONS.slice();
+  document.getElementById("quiz").style.display = "block";
+  document.getElementById("result").style.display = "none";
+  renderQ();
+}
+function renderQ() {
+  locked = false;
+  const q = current[idx];
+  document.getElementById("pbar").style.width = (idx / current.length * 100) + "%";
+  let html = '<div class="card"><span class="qtag">' + q.m + '</span><span class="qno">第 ' + (idx+1) + ' / ' + current.length + ' 题</span>';
+  html += '<div class="qtext">' + q.q + '</div>';
+  q.o.forEach((t, i) => { html += '<button class="opt" data-i="' + i + '"><span class="mark">' + "ABCD"[i] + '</span>' + t + '</button>'; });
+  html += '<div class="explain" id="ex"><b>精讲：</b>' + q.e + '</div>';
+  html += '<button class="btn" id="next" disabled>' + (idx === current.length-1 ? "查看结果" : "下一题 (Enter)") + '</button></div>';
+  document.getElementById("quiz").innerHTML = html;
+  document.querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => choose(+b.dataset.i)));
+  document.getElementById("next").addEventListener("click", next);
+}
+function choose(i) {
+  if (locked) return; locked = true;
+  const q = current[idx], ok = i === q.a;
+  if (ok) score++;
+  answers[idx] = { ok, q };
+  document.querySelectorAll(".opt").forEach((b, j) => {
+    b.disabled = true;
+    if (j === q.a) b.classList.add("right");
+    else if (j === i) b.classList.add("wrong");
+  });
+  document.getElementById("ex").style.display = "block";
+  document.getElementById("next").disabled = false;
+}
+function next() {
+  if (idx < current.length - 1) { idx++; renderQ(); }
+  else finish();
+}
+function finish() {
+  document.getElementById("quiz").style.display = "none";
+  document.getElementById("pbar").style.width = "100%";
+  const res = document.getElementById("result");
+  res.style.display = "block";
+  document.getElementById("finalScore").textContent = score + " / " + current.length;
+  const pct = Math.round(score / current.length * 100);
+  document.getElementById("advice").textContent =
+    pct >= 80 ? "✅ 整章达标（≥80%）！第 3 章「第 4 版新增重点章」已经拿下，可进入第 4 章 信息系统管理。" :
+    pct >= 60 ? "🔶 接近达标：整章框架已有，但细节归属还不稳。重点补「治理活动 vs 治理流程四词」「COBIT 治理 vs 管理」「审计风险三分类」「方法六法 vs 技术四类」「审计四阶段」五组，明天重测。" :
+    "❌ 未达标：说明第 3 章的「谁负责什么 / 哪个标准说什么」还没形成条件反射。请回到 3.1 / 3.2 的知识点清单把口诀块重默一遍，再做本节重测。本章是第 4 版新增章、旧真题零覆盖，值得多花一天。";
+  // 分模块统计
+  const mods = {};
+  current.forEach((q, i) => {
+    mods[q.m] = mods[q.m] || { t: 0, r: 0 };
+    mods[q.m].t++;
+    if (answers[i] && answers[i].ok) mods[q.m].r++;
+  });
+  let rows = "";
+  Object.keys(mods).forEach(m => {
+    const st = mods[m].r / mods[m].t >= 0.8 ? "✅" : "🔶";
+    rows += '<tr><td class="module-stat">' + m + '</td><td>' + mods[m].r + " / " + mods[m].t + '</td><td>' + st + '</td></tr>';
+  });
+  document.getElementById("moduleTable").innerHTML = '<tr><th>模块</th><th>正确率</th><th>状态</th></tr>' + rows;
+  // 错题
+  const wrongs = current.map((q, i) => ({ q, i })).filter(x => !answers[x.i] || !answers[x.i].ok);
+  if (wrongs.length) {
+    document.getElementById("reviewWrap").style.display = "block";
+    document.getElementById("retryWrong").style.display = "inline-block";
+    document.getElementById("reviewList").innerHTML = wrongs.map(x =>
+      '<div class="wrong-item"><b>【' + x.q.m + '】</b>' + x.q.q +
+      '<br>✔ 正确答案：<b>' + "ABCD"[x.q.a] + " · " + x.q.o[x.q.a] + '</b><br><span style="color:#666">' + x.q.e + '</span></div>'
+    ).join("");
+  } else {
+    document.getElementById("reviewWrap").style.display = "none";
+    document.getElementById("retryWrong").style.display = "none";
+  }
+}
+document.getElementById("retryWrong").addEventListener("click", () => {
+  current = current.filter((q, i) => !answers[i] || !answers[i].ok);
+  idx = 0; score = 0; answers = [];
+  document.getElementById("result").style.display = "none";
+  document.getElementById("quiz").style.display = "block";
+  renderQ();
+});
+document.addEventListener("keydown", ev => {
+  if (document.getElementById("result").style.display === "block") return;
+  const k = ev.key.toUpperCase();
+  const sel = "ABCD".indexOf(k);
+  if (sel >= 0 && !locked) choose(sel);
+  else if ((ev.key === "Enter" || k === "ENTER") && locked) next();
+});
+initAll();
+</script>
+</body>
+</html>
