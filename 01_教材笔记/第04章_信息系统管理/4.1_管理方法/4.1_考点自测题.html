@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4.1 管理方法 22 题</title>
+<style>
+  *{box-sizing:border-box;}
+  body{
+    margin:0;padding:24px 14px 60px;background:#eef0f3;color:#1f2328;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    gap:14px;margin-bottom:18px;flex-wrap:wrap;
+  }
+  h1{font-size:20px;margin:0;font-weight:600;}
+  .sub{font-size:12.5px;color:#6b7280;margin:5px 0 0;}
+  .score-chip{
+    background:#E6F1FB;border:1px solid #B5D4F4;color:#0C447C;
+    border-radius:8px;padding:7px 13px;font-size:13px;white-space:nowrap;
+  }
+  .score-chip b{font-size:16px;font-weight:600;}
+
+  #quiz{
+    background:#fff;border-radius:12px;padding:22px 24px;
+    box-shadow:0 2px 12px rgba(16,24,40,.08);
+  }
+  .progress-row{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:8px;font-size:13px;color:#4b5563;
+  }
+  .chip{
+    background:#FAEEDA;border:1px solid #EFC98A;color:#633806;
+    border-radius:5px;padding:2px 9px;font-size:12px;
+  }
+  .progress{height:6px;background:#e5e8ee;border-radius:4px;overflow:hidden;margin-bottom:20px;}
+  #bar{height:100%;width:0;background:#185FA5;border-radius:4px;transition:width .25s;}
+
+  .qtext{font-size:16px;line-height:1.75;font-weight:500;margin:0 0 18px;}
+  .opt{
+    display:flex;gap:10px;align-items:flex-start;
+    border:1px solid #d9dee5;border-radius:9px;padding:11px 14px;
+    margin-bottom:10px;cursor:pointer;font-size:14.5px;line-height:1.6;
+    background:#fff;transition:border-color .12s,background .12s;
+  }
+  .opt:hover{border-color:#185FA5;background:#f7fafd;}
+  .opt .tag{
+    flex:0 0 22px;height:22px;border-radius:50%;
+    background:#eef1f5;color:#3b4552;font-size:12px;font-weight:600;
+    display:flex;align-items:center;justify-content:center;margin-top:2px;
+  }
+  .opt.correct{border-color:#0F6E56;background:#E1F5EE;}
+  .opt.correct .tag{background:#0F6E56;color:#fff;}
+  .opt.wrong{border-color:#A32D2D;background:#FCEBEB;}
+  .opt.wrong .tag{background:#A32D2D;color:#fff;}
+  .opt.dim{opacity:.55;cursor:default;}
+  .opt.correct.dim{opacity:1;}
+  .opt.locked{cursor:default;}
+
+  #feedback{margin-top:14px;border-radius:9px;overflow:hidden;border:1px solid #d9dee5;}
+  #verdict{
+    padding:10px 14px;font-size:14px;font-weight:600;
+    background:#E1F5EE;color:#085041;border-bottom:1px solid #cbe9da;
+  }
+  #verdict.bad{background:#FCEBEB;color:#501313;border-bottom:1px solid #f3cdcd;}
+  #explain{padding:12px 14px;font-size:13.5px;line-height:1.8;color:#374151;background:#fdfdfe;}
+  #explain b{color:#1f2328;}
+  #nextBtn{
+    display:block;margin:14px 16px 16px;float:right;
+    background:#185FA5;color:#fff;border:none;border-radius:8px;
+    padding:9px 26px;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  #nextBtn:hover{background:#14507f;}
+  #feedback::after{content:"";display:block;clear:both;}
+  .kbd{font-size:11.5px;color:#9aa3af;margin:14px 2px 0;}
+
+  #result{background:#fff;border-radius:12px;padding:26px 28px;box-shadow:0 2px 12px rgba(16,24,40,.08);}
+  .r-head{display:flex;gap:22px;align-items:center;margin-bottom:6px;flex-wrap:wrap;}
+  .r-score{font-size:44px;font-weight:600;color:#185FA5;line-height:1;}
+  .r-score small{font-size:18px;color:#8b949e;font-weight:400;}
+  .r-msg{font-size:14px;color:#4b5563;line-height:1.7;}
+  h3{font-size:15px;font-weight:600;margin:26px 0 10px;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th,td{border:1px solid #e2e6eb;padding:7px 10px;text-align:left;line-height:1.6;}
+  th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .mbar{height:8px;background:#e5e8ee;border-radius:4px;overflow:hidden;min-width:120px;}
+  .mbar div{height:100%;background:#1D9E75;border-radius:4px;}
+
+  .wq{
+    border:1px solid #f3cdcd;border-radius:9px;padding:13px 15px;
+    margin-bottom:12px;background:#fffafa;
+  }
+  .wq .wt{font-size:14px;font-weight:600;line-height:1.7;margin-bottom:7px;}
+  .wq .wa{font-size:13px;color:#A32D2D;margin-bottom:2px;}
+  .wq .wc{font-size:13px;color:#0F6E56;margin-bottom:8px;}
+  .wq .we{font-size:12.5px;color:#57606a;line-height:1.75;border-top:1px dashed #e8d9d9;padding-top:7px;}
+
+  .btns{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;border-radius:8px;
+    padding:9px 22px;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:#185FA5;border-color:#185FA5;color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn:disabled{opacity:.45;cursor:not-allowed;}
+  .hidden{display:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <h1>4.1 管理方法</h1>
+      <p class="sub">22 题 · 第 4 版教材 4.1 节 · 达标线 18/22（80%）· 逐题精讲 · 键盘 A~D 或 1~4 选择，Enter 下一题</p>
+    </div>
+    <div class="score-chip">已答对 <b id="scoreNow">0</b> / <span id="totalNow">22</span> 题</div>
+  </header>
+
+  <div id="quiz">
+    <div class="progress-row">
+      <span id="pos"></span>
+      <span class="chip" id="moduleChip"></span>
+    </div>
+    <div class="progress"><div id="bar"></div></div>
+    <div class="qcard">
+      <p class="qtext" id="qtext"></p>
+      <div id="options"></div>
+      <div id="feedback" class="hidden">
+        <div id="verdict"></div>
+        <div id="explain"></div>
+        <button id="nextBtn">下一题 →</button>
+      </div>
+    </div>
+    <p class="kbd">键盘可用：A~D 或 1~4 选择，Enter 下一题</p>
+  </div>
+
+  <div id="result" class="hidden"></div>
+
+</div>
+
+<script>
+const QUESTIONS = [
+  // 模块A 管理基础 (1-4)
+  { m: "A·管理基础", q: "教材对信息系统的定义是：对信息进行采集、处理、存储、管理和（　　），形成组织中的信息流动和处理，必要时能向有关人员提供有用信息的系统。",
+    o: ["检索","传输","加密","可视化呈现"], a: 0,
+    e: "教材 4.1.1 原文：信息系统是对信息进行【采集、处理、存储、管理和检索】，形成组织中的信息流动和处理，必要时能向有关人员提供有用信息的系统。定义五动词口诀「采处存管检」。⚠️「信息传输模型」（信源→编码→信道→解码→信宿）不属本节内容。" },
+  { m: "A·管理基础", q: "信息系统由人员、技术、流程和（　　）四个要素组成，是组织中的一种人机系统。",
+    o: ["数据","资金","网络","制度"], a: 0,
+    e: "教材 4.1.1：信息系统是由【人、技术、流程和数据资源】组成的人机系统，四要素 =【人员 · 技术 · 流程 · 数据】。⚠️「网络」是【技术】要素的组成部分（硬件、软件、网络），不是独立要素。" },
+  { m: "A·管理基础", q: "在信息系统的层次架构中，「监督系统的设计和结构，并监控其整体性能」属于（　　）的职责。",
+    o: ["管理","信息系统","人员","数据"], a: 0,
+    e: "教材 4.1.1 图 4-1：层次架构从下往上是【人员·技术·流程·数据 → 信息系统 → 管理】。信息系统【之上】是管理，它【监督系统的设计和结构】并【监控其整体性能】——两个动词都属管理层。" },
+  { m: "A·管理基础", q: "信息系统管理覆盖四大领域，其中「针对信息系统解决方案的定义、采购和实施，以及它们与业务流程的整合」描述的是（　　）。",
+    o: ["设计和实施","规划和组织","运维和服务","优化和持续改进"], a: 0,
+    e: "教材 4.1.1 四大管理领域原文：规划和组织 = 整体组织、战略和支持活动；【设计和实施 = 解决方案的定义、采购和实施，以及它们与业务流程的整合】；运维和服务 = 服务的运行交付和支持（包括安全）；优化和持续改进 = 性能监控及其于内部性能目标、内部控制目标和外部要求的一致性管理。题干含「采购」「整合」→ 设计和实施。" },
+  // 模块B 规划和组织 (5-9)
+  { m: "B·规划和组织", q: "信息系统战略三角突出（　　）三者之间的必要一致性。",
+    o: ["业务战略、信息系统和组织机制","业务战略、技术架构和数据资源","组织机制、项目管理和系统运维","信息系统、网络架构和安全策略"], a: 0,
+    e: "教材 4.1.2 图 4-2：信息系统战略三角 =【业务战略 · 信息系统 · 组织机制】，用于描述信息系统与业务系统必要的协同关系，以及理解信息系统与组织机制间的相互影响。" },
+  { m: "B·规划和组织", q: "教材指出，成功的组织有一个「压倒一切的（　　）」，可以推动组织机制和信息系统的有机融合。",
+    o: ["业务战略","组织机制","信息系统","治理框架"], a: 0,
+    e: "教材 4.1.2 原文：成功的组织有一个【压倒一切的业务战略】，可以推动组织机制和信息系统的有机融合。⚠️「压倒一切」修饰的是业务战略（业务战略是核心），别答成组织机制或信息系统。" },
+  { m: "B·规划和组织", q: "波特竞争力优势模型提出的三种业务战略是（　　）。",
+    o: ["总成本领先战略、差异性战略、专注战略","总成本领先战略、多元化战略、一体化战略","集中化战略、横向一体化战略、纵向战略","创新战略、跟随战略、补缺战略"], a: 0,
+    e: "教材 4.1.2 组织模型（1）业务战略：波特竞争力优势模型三战略 =【总成本领先 · 差异性 · 专注】。教材原文用词是「差异性战略」「专注战略」（部分教辅写差异化 / 专注化）；「一个行业中只存在一个成本引领者」挂在总成本领先战略。" },
+  { m: "B·规划和组织", q: "莱维特钻石模型的组成要素是（　　）。",
+    o: ["任务、结构、信息与控制、人员","任务、结构、人员、技术","硬件、软件、网络、数据","战略、组织、流程、文化"], a: 0,
+    e: "教材 4.1.2 组织机制战略：莱维特钻石模型 =【任务 · 结构 · 信息与控制 · 人员】。⚠️「硬件 / 软件 / 网络 / 数据」是 4.1.2 信息系统战略矩阵框架的四大基础结构——两套「四要素」分属不同战略，最爱互相调包。" },
+  { m: "B·规划和组织", q: "组织机制战略本质上需要回答的问题是（　　）。",
+    o: ["组织将如何构建以实现其目标并实施其业务战略","信息系统应采用集中式还是分布式架构","组织应当在哪些方面投资以及投资多少","如何度量信息系统的性能与可用性"], a: 0,
+    e: "教材 4.1.2：组织机制战略本质上需要回答「【组织将如何构建以实现其目标并实施其业务战略】」这一问题；钻石模型的四要素（任务 / 结构 / 信息与控制 / 人员）是组织计划的关键组成部分。B 属架构决策、C 属 IT 投资决策、D 属绩效与度量。" },
+  // 模块C 设计和实施 (10-13)
+  { m: "C·设计和实施", q: "开展信息系统设计和实施，首先需要将（　　）转换为信息系统架构。",
+    o: ["业务需求","技术选型","预算方案","组织架构"], a: 0,
+    e: "教材 4.1.3：开展设计和实施，首先需要将【业务需求】转换为信息系统架构，信息系统架构为将组织业务战略转换为信息系统的计划提供了【蓝图】。第一步的链条是：业务战略 → 更具体的目标 → 业务需求 → 系统要求 / 标准 / 流程的更详细视图。" },
+  { m: "C·设计和实施", q: "转换框架提出的三类问题是（　　），需要为每个信息系统组件回答这些问题。",
+    o: ["内容、人员、位置","成本、进度、质量","范围、时间、风险","输入、处理、输出"], a: 0,
+    e: "教材 4.1.3 转换框架：提出三类问题【内容 · 人员 · 位置】。其中「内容」相关问题【最常被问到】（回答组件是什么、确定特定类型的技术）；「人员」了解组件涉及哪些个人/团体/部门；「位置（何处）」了解所有内容各自的位置。" },
+  { m: "C·设计和实施", q: "「基于 Web 的架构」是（　　）的别称术语。",
+    o: ["面向服务的系统架构","集中式架构","分布式架构","客户机/服务器架构"], a: 0,
+    e: "教材 4.1.3 表 4-3 的「别称术语」列：集中式架构 =【主机架构】；分布式架构 =【基于服务器的架构】；面向服务的系统架构（SOA）=【基于 Web 的架构】。⚠️「基于 Web 的架构」是 SOA 的别称，【不是第四种架构模式】——三种模式别记成四个。" },
+  { m: "C·设计和实施", q: "某组织的业务本身高度集中，希望系统易于管理、所有功能都在同一个地方，最适宜采用的架构模式是（　　）。",
+    o: ["集中式架构","分布式架构","面向服务的系统架构","混合式架构"], a: 0,
+    e: "教材 4.1.3 表 4-3「什么时候使用」列：集中式架构（别称主机架构）适用于【需要系统易于管理时；所有功能都在同一个地方；业务本身高度集中的时候】；分布式架构（别称基于服务器的架构）适用于【担心可伸缩性时（模块化有帮助）；业务主要是非集中化的时候】。" },
+  // 模块D 运维和服务 (14-17)
+  { m: "D·运维和服务", q: "下列不属于信息系统运维和服务活动的是（　　）。",
+    o: ["项目立项管理","运行管理和控制","IT 服务管理","介质控制"], a: 0,
+    e: "教材 4.1.4：运维和服务主要包括八项——【运行管理和控制 · IT 服务管理 · 运行与监控 · 终端侧管理 · 程序库管理 · 安全管理 · 介质控制 · 数据管理】。「项目立项管理」属项目立项范畴（第 7 章），不在其列。" },
+  { m: "D·运维和服务", q: "管理信息系统运行的管理控制主要包括（　　）。",
+    o: ["过程开发、标准制定、资源分配、过程管理","服务台、事件管理、问题管理、变更管理","规划、组织、领导、控制","定义、度量、分析、改进"], a: 0,
+    e: "教材 4.1.4 运行管理和控制四个主要活动 =【过程开发 · 标准制定 · 资源分配 · 过程管理】（口诀「过程开发加标准，资源分配过程管」）。B 是 IT 服务管理的内容，D 是 DMAIC 的阶段，别接错。" },
+  { m: "D·运维和服务", q: "针对重复出现的同类事件，查找根本原因并彻底解决、减少事件重复发生，这项活动属于（　　）。",
+    o: ["问题管理","事件管理","变更管理","服务级别管理"], a: 0,
+    e: "教材 4.1.4 IT 服务管理：【事件管理】处理计划外的服务中断或质量下降，核心是【快速恢复服务】（治标）；【问题管理】针对重复出现的同类事件做【根因分析】、防止复发（治本）。题干强调「查根因、防复发」→ 问题管理。" },
+  { m: "D·运维和服务", q: "对信息系统、应用程序和基础设施进行监控时，检测和报告的错误类型包括（　　）。",
+    o: ["系统错误、程序错误、通信错误和操作员错误","语法错误、逻辑错误、运行错误和编译错误","硬件错误、软件错误、数据错误和网络错误","随机错误、系统性错误、偶发错误和累积错误"], a: 0,
+    e: "教材 4.1.4 运行与监控：检测和报告的错误类型包括【系统错误 · 程序错误 · 通信错误和操作员错误】（口诀「系程通操」）。监控任务分两类：运行监控 · 安全监控。" },
+  // 模块E 优化和持续改进 (18-21)
+  { m: "E·优化和持续改进", q: "六西格玛倡导的五阶段方法 DMAIC/DMADV 的五个阶段依次是（　　）。",
+    o: ["定义、度量、分析、改进/设计、控制/验证","计划、执行、检查、处理、复盘","规划、设计、实施、验证、移交","识别、排序、执行、检查、标准化"], a: 0,
+    e: "教材 4.1.5：五阶段 =【定义 Define · 度量 Measure · 分析 Analysis · 改进/设计 Improve-Design · 控制/验证 Control-Verify】，是对戴明环 PDCA 四阶段周期的【延伸】。选项 B 是戴明环 PDCA（计划 / 执行 / 检查 / 处理）。" },
+  { m: "E·优化和持续改进", q: "当优化对象是「设计新的产品或过程」时，应使用的六西格玛方法是（　　）。",
+    o: ["DMADV","DMAIC","PDCA","SIPOC"], a: 0,
+    e: "教材 4.1.5：当第 4 阶段「改进」替换为「设计」、第 5 阶段「控制」替换为「验证」时，DMAIC 就转变为【DMADV】。【DMAIC 适用于现有过程 / 流程的改进】（消除缺陷根本原因）；【DMADV 用于设计新的产品或过程】。" },
+  { m: "E·优化和持续改进", q: "在定义阶段，定义核心流程视图的首选工具是（　　）。",
+    o: ["SIPOC 分析","价值流分析","流程基线分析","根本原因分析"], a: 0,
+    e: "教材 4.1.5 定义阶段：核心流程定义关注定义利益干系人、投入和产出以及广泛的功能，【SIPOC 分析（供方 Supplier · 输入 Input · 流程 Process · 输出 Output · 服务对象 Customer）是定义核心流程视图的首选工具】。⚠️【价值流分析】属【分析阶段】，别对调。" },
+  { m: "E·优化和持续改进", q: "关于「良好的度量系统」应具备的特性，下列不属于教材所列的是（　　）。",
+    o: ["可扩展","准确","可重复","稳定"], a: 0,
+    e: "教材 4.1.5 度量阶段：一个良好的度量系统具备的特性可包括【准确 · 可重复 · 线性 · 可重现 · 稳定】（口诀「准重线现稳」）。注意【可重复】与【可重现】两个都在；「可扩展」不在其列。" },
+  // 模块F 综合防坑 (22)
+  { m: "F·综合防坑", q: "下列关于信息系统及其管理的表述，正确的是（　　）。",
+    o: ["信息系统之上是管理，管理监督系统的设计和结构并监控其整体性能","「基于 Web 的架构」是第四种信息系统架构模式","事件管理的核心是查找根本原因、防止同类事件复发","SIPOC 分析是分析阶段定位问题根源的首选工具"], a: 0,
+    e: "A 正确（教材 4.1.1 层次架构：管理在信息系统之上，负责监督设计和结构、监控整体性能）。B 错：「基于 Web 的架构」是【SOA 的别称】，架构模式只有集中式 / 分布式 / SOA 三种。C 错：查根因、防复发是【问题管理】；【事件管理】是快速恢复服务。D 错：SIPOC 属【定义阶段】（定义核心流程视图的首选工具），分析阶段用的是【价值流分析】。" }
+];
+
+const LETTERS = ["A","B","C","D"];
+let pool = [], cur = 0, answered = false, stats = {}, wrongList = [];
+
+function init(list){
+  pool = list.map(x=>Object.assign({},x));
+  cur = 0; answered = false; stats = {}; wrongList = [];
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  document.getElementById("totalNow").textContent = pool.length;
+  document.getElementById("scoreNow").textContent = "0";
+  render();
+}
+function render(){
+  const q = pool[cur];
+  document.getElementById("pos").textContent = "第 " + (cur+1) + " / " + pool.length + " 题";
+  document.getElementById("moduleChip").textContent = q.m;
+  document.getElementById("bar").style.width = (cur/pool.length*100) + "%";
+  document.getElementById("qtext").innerHTML = q.q;
+  const box = document.getElementById("options");
+  box.innerHTML = "";
+  q.o.forEach((t,i)=>{
+    const d = document.createElement("div");
+    d.className = "opt";
+    d.innerHTML = '<span class="tag">'+LETTERS[i]+'</span><span>'+t+"</span>";
+    d.onclick = ()=>choose(i);
+    box.appendChild(d);
+  });
+  document.getElementById("feedback").classList.add("hidden");
+}
+function choose(i){
+  if(answered) return;
+  answered = true;
+  const q = pool[cur];
+  const ok = (i === q.a);
+  if(!stats[q.m]) stats[q.m] = {right:0,total:0};
+  stats[q.m].total++;
+  const opts = document.querySelectorAll(".opt");
+  opts.forEach((d,idx)=>{
+    d.classList.add("locked");
+    if(idx === q.a) d.classList.add("correct");
+    else if(idx === i) d.classList.add("wrong");
+    else d.classList.add("dim");
+    d.onclick = null;
+  });
+  if(ok){
+    stats[q.m].right++;
+    document.getElementById("scoreNow").textContent = sumRight();
+  } else {
+    wrongList.push({q:q, picked:i});
+  }
+  const v = document.getElementById("verdict");
+  v.textContent = ok ? "✓ 答对了" : "✗ 答错了　正确答案：" + LETTERS[q.a];
+  v.className = ok ? "" : "bad";
+  document.getElementById("explain").innerHTML = q.e;
+  document.getElementById("feedback").classList.remove("hidden");
+  document.getElementById("nextBtn").textContent =
+    (cur === pool.length-1) ? "查看成绩单 →" : "下一题 →";
+}
+function sumRight(){
+  let s = 0; for(const k in stats) s += stats[k].right; return s;
+}
+function next(){
+  cur++;
+  if(cur >= pool.length){ showResult(); }
+  else { answered = false; render(); window.scrollTo(0,0); }
+}
+function showResult(){
+  document.getElementById("quiz").classList.add("hidden");
+  const r = document.getElementById("result");
+  const total = pool.length, right = sumRight();
+  const pct = Math.round(right/total*100);
+  let msg;
+  if(pct >= 80) msg = "达标（≥80%）：本节知识点基本闭环，可以进入下一节，或用康奈尔模板的「遮」字诀再过一遍线索栏。";
+  else if(pct >= 60) msg = "接近达标：把下面的错题解析看完，回看对应模块的知识点清单，明天用康奈尔模板遮住答案重测。";
+  else msg = "未达标：正确率低是发现漏洞的正常信号——先把知识点清单的「必背」块过一遍，再点「只重做错题」。";
+
+  let tbl = '<h3>分模块得分</h3><table><tr><th>模块</th><th>正确 / 题数</th><th>正确率</th></tr>';
+  for(const k in stats){
+    const s = stats[k];
+    const p = Math.round(s.right/s.total*100);
+    tbl += '<tr><td>'+k+'</td><td>'+s.right+' / '+s.total+'</td><td><div class="mbar"><div style="width:'+p+'%"></div></div></td></tr>';
+  }
+  tbl += "</table>";
+
+  let wrong = "";
+  if(wrongList.length){
+    wrong = "<h3>错题回顾（"+wrongList.length+" 题）</h3>";
+    wrongList.forEach((w,i)=>{
+      wrong += '<div class="wq"><div class="wt">'+(i+1)+". "+w.q.q+"</div>"
+        + '<div class="wa">你的选择：'+LETTERS[w.picked]+"　"+w.q.o[w.picked]+"</div>"
+        + '<div class="wc">正确答案：'+LETTERS[w.q.a]+"　"+w.q.o[w.q.a]+"</div>"
+        + '<div class="we">'+w.q.e+"</div></div>";
+    });
+  } else {
+    wrong = '<h3>错题回顾</h3><p style="font-size:13px;color:#0F6E56;">全部答对，本节知识点已闭环。</p>';
+  }
+
+  r.innerHTML =
+    '<div class="r-head"><div class="r-score">'+right+"<small> / "+total+"</small></div>"
+    + '<div class="r-msg"><b>'+pct+"%</b><br>"+msg+"</div></div>"
+    + tbl + wrong
+    + '<div class="btns">'
+    + '<button class="btn primary" id="retryWrong"'+(wrongList.length?"":" disabled")+">只重做错题（"+wrongList.length+" 题）</button>"
+    + '<button class="btn" id="retryAll">全部重来</button></div>';
+  r.classList.remove("hidden");
+  document.getElementById("retryWrong").onclick = ()=>{
+    const list = wrongList.map(w=>w.q);
+    init(list);
+    window.scrollTo(0,0);
+  };
+  document.getElementById("retryAll").onclick = ()=>{ init(QUESTIONS); window.scrollTo(0,0); };
+  window.scrollTo(0,0);
+}
+document.getElementById("nextBtn").onclick = next;
+document.addEventListener("keydown", e=>{
+  if(document.getElementById("quiz").classList.contains("hidden")) return;
+  if(e.key === "Enter" || e.key === " "){ if(answered){ e.preventDefault(); next(); } return; }
+  const map = {"a":0,"b":1,"c":2,"d":3,"1":0,"2":1,"3":2,"4":3};
+  const k = e.key.toLowerCase();
+  if(k in map && !answered) choose(map[k]);
+});
+init(QUESTIONS);
+</script>
+</body>
+</html>

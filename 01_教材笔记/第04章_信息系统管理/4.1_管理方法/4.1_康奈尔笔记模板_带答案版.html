@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>康奈尔笔记 · 第 4 章第 1 节 管理方法 · 带答案版</title>
+<style>
+  :root{
+    --ink:#1f2328;
+    --ink-2:#4b5563;
+    --ink-3:#8b949e;
+    --line:#2f3742;
+    --rule:#d6dae0;
+    --accent:#185FA5;
+    --accent-soft:#E6F1FB;
+    --warm:#854F0B;
+    --warm-soft:#FAEEDA;
+    --paper:#ffffff;
+    --ans-bg:#fffaf2;
+    --ans-border:#e8d9b8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    padding:28px 16px 48px;
+    background:#eef0f3;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+    color:var(--ink);
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .toolbar{
+    max-width:210mm;margin:0 auto 14px;display:flex;gap:10px;align-items:center;
+    justify-content:space-between;flex-wrap:wrap;
+  }
+  .toolbar .hint{font-size:12.5px;color:#5b6470;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;
+    font-size:13px;padding:7px 14px;border-radius:8px;cursor:pointer;
+    font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn.active{background:var(--warm);border-color:var(--warm);color:#fff;}
+
+  .page{
+    width:210mm;min-height:297mm;margin:0 auto;background:var(--paper);
+    padding:14mm 13mm 12mm;box-shadow:0 2px 14px rgba(16,24,40,.12);
+  }
+
+  .head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    border-bottom:2px solid var(--line);padding-bottom:8px;margin-bottom:10px;
+    gap:12px;
+  }
+  .head h1{font-size:19px;margin:0;font-weight:600;letter-spacing:.3px;}
+  .head .sub{font-size:12px;color:var(--ink-3);margin-top:4px;}
+  .head .meta{font-size:12px;color:var(--ink-2);text-align:right;line-height:1.9;white-space:nowrap;}
+  .head .meta b{font-weight:600;color:var(--accent);}
+
+  .band{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+  .chip{
+    font-size:11.5px;padding:4px 9px;border-radius:5px;
+    background:var(--accent-soft);color:#0C447C;border:1px solid #B5D4F4;
+  }
+  .chip.warm{background:var(--warm-soft);color:#633806;border-color:#EFC98A;}
+
+  .cols{
+    display:grid;grid-template-columns:60mm 1fr;gap:0;
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .col-cue{
+    background:#fafbfc;border-right:1px solid var(--line);padding:8px 9px 9px;
+  }
+  .col-note{padding:8px 11px 9px;}
+  .col-hd{
+    font-size:11.5px;font-weight:600;letter-spacing:.6px;color:var(--ink-2);
+    text-transform:uppercase;padding-bottom:6px;margin-bottom:7px;
+    border-bottom:1px dashed #b9c0c9;
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  .col-hd span{font-size:10.5px;font-weight:400;color:var(--ink-3);text-transform:none;letter-spacing:0;}
+
+  .q{
+    font-size:11.5px;line-height:1.5;color:#1f2328;
+    padding:5px 0 5px 20px;position:relative;border-bottom:1px dotted #dfe3e8;
+  }
+  .q:last-child{border-bottom:0;}
+  .q::before{
+    content:attr(data-n);position:absolute;left:0;top:5px;
+    width:14px;height:14px;border-radius:50%;
+    background:var(--accent);color:#fff;font-size:9.5px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:600;line-height:1;
+  }
+  .q b{font-weight:600;}
+  .q em{font-style:normal;color:var(--warm);font-weight:600;}
+
+  .grouplabel{
+    font-size:10.5px;font-weight:600;color:var(--accent);
+    letter-spacing:.4px;margin:8px 0 2px;
+  }
+  .grouplabel:first-child{margin-top:0;}
+
+  /* === 答案区样式 === */
+  .ans-block{
+    margin-bottom:6px;padding:5px 8px 6px;
+    background:var(--ans-bg);border:1px solid var(--ans-border);border-radius:3px;
+  }
+  .ans-block .ans-title{
+    font-size:10.5px;font-weight:600;color:var(--warm);
+    letter-spacing:.3px;margin-bottom:2px;display:flex;align-items:baseline;gap:6px;
+  }
+  .ans-block .ans-title .num{
+    display:inline-block;min-width:14px;height:14px;border-radius:50%;
+    background:var(--warm);color:#fff;font-size:9.5px;font-weight:600;
+    text-align:center;line-height:14px;
+  }
+  .ans-block ul{
+    margin:2px 0 3px 0;padding:0 0 0 16px;font-size:11px;line-height:1.55;color:#2b323b;
+  }
+  .ans-block ul li{padding:1px 0;}
+  .ans-block .key{
+    color:var(--warm);font-weight:600;
+  }
+  .ans-block .subhd{
+    font-size:10.5px;font-weight:600;color:#0C447C;margin:3px 0 1px;
+    padding-left:2px;border-left:3px solid #B5D4F4;
+  }
+  .ans-block .tip{
+    font-size:10px;color:#633806;margin-top:2px;line-height:1.5;
+    padding:2px 6px;background:var(--warm-soft);border-radius:2px;
+  }
+  .ans-block .fill{
+    height:16px;border-bottom:1px dashed #c8c0aa;margin-top:3px;
+  }
+  body.hide-answers .ans-block{display:none;}
+  body.hide-answers .summary-prefill{display:none;}
+
+  .summary{
+    margin-top:10px;border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .summary .col-hd{
+    margin:0;padding:7px 11px;background:#fafbfc;border-bottom:1px solid var(--line);
+  }
+  .summary .body{padding:6px 11px 8px;font-size:11.5px;line-height:1.7;color:#2b323b;}
+  .summary .body b{color:var(--accent);}
+  .summary .body .small{font-size:10.5px;color:var(--ink-3);margin-top:3px;display:block;}
+
+  .footer{
+    margin-top:9px;font-size:10.5px;color:var(--ink-3);
+    display:flex;justify-content:space-between;gap:10px;
+  }
+
+  .guide{
+    width:210mm;margin:16px auto 0;background:#fff;border:1px solid #d9dee5;
+    border-radius:8px;padding:16px 18px;
+  }
+  .guide h2{font-size:14px;margin:0 0 10px;font-weight:600;}
+  .guide table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .guide th,.guide td{
+    border:1px solid #e2e6eb;padding:7px 9px;text-align:left;vertical-align:top;line-height:1.6;
+  }
+  .guide th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .guide td:first-child{width:88px;font-weight:600;color:var(--accent);}
+  .guide .note{font-size:12px;color:#5b6470;margin-top:10px;line-height:1.7;}
+
+  @page{size:A4 portrait;margin:0;}
+  @media print{
+    body{background:#fff;padding:0;}
+    .toolbar,.guide{display:none;}
+    .page{box-shadow:none;margin:0;width:auto;min-height:auto;padding:13mm 12mm;}
+    body.hide-answers .ans-block{display:none;}
+    body.hide-answers .summary-prefill{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="hint">A4 竖版 · 带答案版 · 建议先默写、再对照；打印时可「隐藏答案」变填空卷</div>
+  <div>
+    <button class="btn" id="toggleBtn" onclick="toggleAnswers()">👁 隐藏答案（打印填空卷）</button>
+    <button class="btn primary" onclick="window.print()">打印 / 导出 PDF</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="head">
+    <div>
+      <h1>康奈尔笔记 · 第 4 章第 1 节 管理方法 <span style="color:var(--warm);font-size:14px;">（带答案版）</span></h1>
+      <div class="sub">《信息系统项目管理师教程（第 4 版）》约 P93 ~ P104　｜　答案口径以 2026-10-08 核对教材原文为准</div>
+    </div>
+    <div class="meta">
+      日期：__________<br>
+      第 <b>__</b> 轮复习　用时 <b>__</b> 分钟
+    </div>
+  </div>
+
+  <div class="band">
+    <span class="chip">第 4 版新增章（综合知识约 2~3 题）</span>
+    <span class="chip">框架归属 · 名称配对 · 关键词辨析型</span>
+    <span class="chip warm">必背：四要素 + 四大领域 + 战略三角 + 三架构模式 + DMAIC</span>
+    <span class="chip warm">通读：层次架构图示 / 安全监控清单 / 介质控制细节</span>
+    <span class="chip warm">📝 含答案</span>
+  </div>
+
+  <div class="cols">
+
+    <div class="col-cue">
+      <div class="col-hd">线索栏 <span>遮住右侧自问</span></div>
+
+      <div class="grouplabel">4.1.1 管理基础</div>
+      <div class="q" data-n="1"><b>信息系统定义</b>（五个动词）与<b>四大要素</b>？<b>层次架构</b>三层顺序？「监督设计和结构、监控整体性能」是哪层？</div>
+      <div class="q" data-n="2">信息系统管理覆盖哪<b>四大领域</b>？各领域<b>落点</b>（设计实施 vs 优化改进别对调）？</div>
+      <div class="q" data-n="3">系统管理的<b>必要性</b>？信息系统「<b>双面性</b>」与要注重的三点？</div>
+
+      <div class="grouplabel">4.1.2 规划和组织</div>
+      <div class="q" data-n="4"><b>信息系统战略三角</b>由哪三者构成？「压倒一切」修饰谁？战略与使命的关系？</div>
+      <div class="q" data-n="5"><b>波特竞争力优势模型</b>三战略及要点？「只有一个成本引领者」挂哪个？专注战略两种变体？</div>
+      <div class="q" data-n="6"><b>莱维特钻石模型</b>四要素？组织机制战略要回答什么？<b>信息系统战略</b>与矩阵框架（四大基础结构 + 三问）？</div>
+
+      <div class="grouplabel">4.1.3 设计和实施</div>
+      <div class="q" data-n="7"><b>设计方法三步</b>及各自内容？转换框架<b>三类问题</b>（哪类最常被问到）？</div>
+      <div class="q" data-n="8">信息系统<b>三个级别</b>？三种<b>架构模式</b>及别称术语、适用场景？集中式 vs 分布式如何权衡？</div>
+
+      <div class="grouplabel">4.1.4 运维和服务</div>
+      <div class="q" data-n="9">运维和服务<b>八项活动</b>？运行管理和控制<b>四活动</b>？</div>
+      <div class="q" data-n="10"><b>IT 服务管理 11 项</b>？事件管理 vs 问题管理？运行任务 6 条 + 错误四类 + 监控两类？</div>
+
+      <div class="grouplabel">4.1.5 优化和持续改进</div>
+      <div class="q" data-n="11">传统方法（四阶段）？<b>DMAIC/DMADV</b> 五阶段与转换关系、适用场景？</div>
+      <div class="q" data-n="12">定义阶段三目标？度量阶段四目标 + 度量系统<b>五特性</b>？分析三目标？改进/设计、控制/验证阶段目标？</div>
+    </div>
+
+    <div class="col-note">
+      <div class="col-hd">答案区 <span>默写后对照 · 虚线处写自己的补充</span></div>
+
+      <div class="grouplabel">4.1.1 管理基础</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">1</span>信息系统的定义、四要素与层次架构</div>
+        <ul>
+          <li><b>定义</b>：信息系统是对信息进行<span class="key">采集、处理、存储、管理和检索</span>，形成组织中的信息流动和处理，必要时能向有关人员提供有用信息的系统，是由<span class="key">人、技术、流程和数据资源</span>组成的<span class="key">人机系统</span></li>
+          <li><b>四大要素</b>：<span class="key">人员</span>（使用者 / 管理者 / 开发者）· <span class="key">技术</span>（硬件 / 软件 / 网络）· <span class="key">流程</span>（管理流程 / 业务流程）· <span class="key">数据</span>（信息载体 / 决策依据）</li>
+          <li><b>层次架构</b>（图 4-1，从下往上）：<span class="key">人员 · 技术 · 流程 · 数据 → 信息系统 → 管理</span>；在层次架构中<b>信息系统之上是「管理」</b></li>
+          <li><b>管理层的动词</b>：<span class="key">监督</span>系统的设计和结构，并<span class="key">监控</span>其整体性能</li>
+        </ul>
+        <div class="tip">口诀：定义抓五动词「<b>采处存管检</b>」；四要素「<b>人技流数</b>」；「监督 + 监控」属<b>管理</b>层（不是信息系统层）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">2</span>四大管理领域（教材 P94 原文落点）</div>
+        <ul>
+          <li><span class="key">规划和组织</span>：针对信息系统的<b>整体组织、战略和支持活动</b></li>
+          <li><span class="key">设计和实施</span>：针对信息系统解决方案的<b>定义、采购和实施</b>，以及它们<b>与业务流程的整合</b></li>
+          <li><span class="key">运维和服务</span>：针对信息系统<b>服务的运行交付和支持</b>，<b>包括安全</b></li>
+          <li><span class="key">优化和持续改进</span>：针对信息系统<b>性能监控</b>及其于<b>内部性能目标、内部控制目标和外部要求</b>的一致性管理</li>
+        </ul>
+        <div class="tip">口诀 <b>规设运优</b>。⚠️ 包含「<b>采购</b>」二字的是<b>设计和实施</b>；出现「<b>一致性管理</b>」的是<b>优化和持续改进</b>——四个领域最爱互相调包</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">3</span>系统管理的必要性与「双面性」</div>
+        <ul>
+          <li><b>双面性</b>：一面是<b>创新引擎</b>（支撑大数据、AI、物联网等应用），一面是<b>风险载体</b>（<span class="key">网络安全、数据泄露、个人隐私保护</span>等风险挑战）</li>
+          <li><b>因此要</b>：①加强对信息系统的<span class="key">规范管理和监督</span>；②注重<span class="key">平衡不同利益干系人之间的关系</span>；③实现信息系统的<span class="key">良性互动和可持续发展</span></li>
+        </ul>
+        <div class="tip">记法：<b>创新引擎 + 风险载体</b>两句定性，正是「为什么要做信息系统管理」的答案；三个「要」是它落地的方向</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">4.1.2 规划和组织</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">4</span>规划模型：信息系统战略三角</div>
+        <ul>
+          <li><b>前提</b>：根据组织的<b>发展目标</b>和其他相关因素，规划信息系统的<b>战略、组成、建设、运行和运营</b>；目标是<b>通过实施具备一致性的管理方法，满足业务对信息系统的管理需求</b></li>
+          <li><b>战略三角</b>（图 4-2）：<span class="key">业务战略 · 信息系统 · 组织机制</span>，突出三者之间的<b>必要一致性</b>；用于描述<b>信息系统与业务系统必要的协同关系</b>，以及理解<b>信息系统与组织机制间的相互影响</b></li>
+          <li><b>核心句</b>：成功的组织有一个<b>压倒一切的「业务战略」</b>，可以推动<b>组织机制和信息系统的有机融合</b></li>
+          <li><b>战略 / 使命</b>：战略是实现目标、意图和目的的<b>一组协调行动</b>；战略<b>往往始于使命</b>，使命是对组织的宗旨给出的<b>清晰并令人信服的陈述</b></li>
+        </ul>
+        <div class="tip">三角三边「<b>业务战略 · 信息系统 · 组织机制</b>」；「<b>压倒一切</b>」修饰业务战略（不是组织机制）；三者需<b>动态调整</b>而非静态协同</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">5</span>组织模型（1）业务战略：波特竞争力优势模型</div>
+        <ul>
+          <li><span class="key">总成本领先战略</span>：成为市场上<b>成本最低的生产者</b>；<b>最大限度降低成本</b>→获得<b>高于平均水平的绩效</b>；质量须与业内<b>相当</b>（客户感知高性价比）；一个行业中<b>只存在一个成本引领者</b></li>
+          <li><span class="key">差异性战略</span>：以在市场上显得<b>独特</b>的方式<b>定义其产品或服务</b>；确定对客户最重要的<b>定性维度</b>并增加价值；<b>收取的价格相对竞争对手必须公平</b></li>
+          <li><span class="key">专注战略</span>：将范围<b>限制在更狭窄的细分市场</b>并<b>量身定制</b>；两种变体 = ①<b>专注成本</b> ②<b>专注差异化</b>；可实现<b>区域竞争优势</b></li>
+        </ul>
+        <div class="tip">教材原文用词是「<b>差异性</b>战略」「<b>专注</b>战略」（教辅常写差异化 / 专注化，按教材）；「<b>一个行业只存在一个成本引领者</b>」挂总成本领先</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">6</span>组织模型（2）(3)：莱维特钻石模型 + 信息系统战略</div>
+        <div class="subhd">组织机制战略 · 莱维特钻石模型</div>
+        <ul>
+          <li>本质要回答：<span class="key">组织将如何构建以实现其目标并实施其业务战略</span></li>
+          <li><b>四要素</b>：<span class="key">任务</span>（核心业务流程与工作内容）· <span class="key">结构</span>（组织架构 / 部门与汇报关系）· <span class="key">信息与控制</span>（数据流转 / 绩效监控 / 激励机制）· <span class="key">人员</span>（技能 / 经验 / 分工）</li>
+        </ul>
+        <div class="subhd">信息系统战略 · 矩阵框架</div>
+        <ul>
+          <li><span class="key">信息系统战略</span>是组织用来<b>提供信息服务的计划</b>；<b>信息系统支撑组织实施其业务战略</b></li>
+          <li><b>四大基础结构</b>：<span class="key">硬件 · 软件 · 网络 · 数据</span></li>
+          <li><b>三问</b>：<span class="key">有什么 · 谁使用 · 在哪里</span></li>
+        </ul>
+        <div class="tip">⚠️ <b>两套「四要素」别混</b>：组织机制战略 = 钻石「<b>任务 / 结构 / 信息与控制 / 人员</b>」；信息系统战略 = 矩阵「<b>硬件 / 软件 / 网络 / 数据</b>」。配对口诀「<b>业务看波特 · 组织看莱维特 · 信息系统看矩阵</b>」</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">4.1.3 设计和实施</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">7</span>设计方法（三步转换）+ 转换框架</div>
+        <ul>
+          <li><b>前置</b>：首先需要<b>将业务需求转换为信息系统架构</b>——架构为<b>将组织业务战略转换为信息系统的计划</b>提供<b>蓝图</b></li>
+          <li><span class="key">① 从战略到系统架构</span>：业务战略 → <b>更具体的目标</b> → <b>业务需求</b> → 转换为构成信息系统架构的<b>系统要求、标准和流程的更详细视图</b></li>
+          <li><span class="key">② 从系统架构到系统设计</span>：将架构<b>转为系统设计</b>（继承架构 + 添加细节：实际的<b>硬件、数据、网络和软件</b>）</li>
+          <li><span class="key">③ 转换框架</span>：将<b>业务战略</b>→<b>信息系统架构</b>→<b>信息系统设计</b>；提出<b>三类问题</b>，需为每个组件回答</li>
+        </ul>
+        <div class="subhd">转换框架三类问题</div>
+        <ul>
+          <li><span class="key">内容</span>（<b>最常被问到</b>）：回答<b>组件是什么</b>，确定<b>特定类型的技术</b></li>
+          <li><span class="key">人员</span>：了解相关组件<b>涉及哪些个人、团体和部门</b>（单个用户常非系统所有者；系统也可能被<b>租赁</b>，所有者成为组织的<b>外部一方</b>）</li>
+          <li><span class="key">位置（何处）</span>：把<b>所有内容各自的位置</b>弄清楚（组件可能跨越多个位置）</li>
+        </ul>
+        <div class="tip">口诀：<b>战略 → 架构 → 设计</b>（箭头方向别接反）；转换框架三问「<b>内容 · 人员 · 位置</b>」，<b>内容</b>最常被问到</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">8</span>信息系统三级别 + 三种架构模式</div>
+        <div class="subhd">信息系统三个级别</div>
+        <ul>
+          <li><span class="key">全局级别</span>：侧重<b>整个组织</b>，构成整个组织的<b>信息环境</b></li>
+          <li><span class="key">组织间级别</span>：为<b>跨组织边界</b>的服务对象、供应商或其他利益干系人的<b>沟通交流</b>奠定基础</li>
+          <li><span class="key">应用级</span>：考虑<b>特定业务应用</b>时重点考虑的<b>数据库和程序组件</b>，以及它们运行的<b>设备和操作环境</b></li>
+        </ul>
+        <div class="subhd">三种架构模式（表 4-3）</div>
+        <ul>
+          <li><span class="key">集中式架构</span>（别称 <b>主机架构</b>）：大型中央计算机处理<b>所有功能</b>，通常位于<b>数据中心</b>，由 <b>IT 部门直接管理</b>；用于<b>需要系统易于管理 / 所有功能在同一个地方 / 业务本身高度集中</b>时</li>
+          <li><span class="key">分布式架构</span>（别称 <b>基于服务器的架构</b>）：<b>计算能力分散在许多设备</b>（服务器 / PC / 笔记本 / 智能手机 / 平板），设备有足够处理能力执行多数服务、<b>按需连接中央服务器</b>；用于<b>担心可伸缩性（模块化有帮助）/ 业务主要是非集中化</b>时</li>
+          <li><span class="key">面向服务的系统架构 SOA</span>（别称 <b>基于 Web 的架构</b>）：在被称为<b>编排</b>的过程中把较大软件程序<b>分解为相互连接的服务</b>，共同构成一个应用运行整个业务流程；服务可从<b>互联网供应商</b>处获得；用于<b>希望系统成为敏捷架构 / 可重用性和组件化 / 对新应用和快速设计迭代要求较高</b>时</li>
+        </ul>
+        <div class="subhd">集中式 vs 分布的权衡</div>
+        <ul>
+          <li><b>分布式</b>更<b>模块化</b>，允许相对容易地<b>添加服务器</b>、为特定用户添加特定功能的客户端，提供更大的<b>灵活性和多中心化的组织治理机制</b>（可能令架构决策与治理目标更协调）</li>
+          <li><b>集中式</b>在某些方面<b>更易于管理</b>，因为所有功能都在<b>主机或小型机</b>中，而非分布在所有设备和服务器中</li>
+        </ul>
+        <div class="tip">口诀 <b>集中式易管理 · 分布式可扩展 · SOA 更敏捷</b>。⚠️ <b>「基于 Web 的架构」是 SOA 的别称，不是第四种模式</b>；「主机架构」= 集中式、「基于服务器的架构」= 分布式</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">4.1.4 运维和服务</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">9</span>运维和服务八项活动 + 运行管理和控制</div>
+        <ul>
+          <li><b>八项活动</b>：<span class="key">运行管理和控制</span> · <span class="key">IT 服务管理</span> · <span class="key">运行与监控</span> · <span class="key">终端侧管理</span> · <span class="key">程序库管理</span> · <span class="key">安全管理</span> · <span class="key">介质控制</span> · <span class="key">数据管理</span></li>
+          <li><b>运行管理和控制四活动</b>：</li>
+        </ul>
+        <div class="subhd">四活动要点</div>
+        <ul>
+          <li><span class="key">过程开发</span>：<b>重复性活动</b>应以<b>过程形式记录</b>下来；需<b>开发、审查和批准</b>描述每个过程及其步骤的<b>文档</b>并提供给运营人员</li>
+          <li><span class="key">标准制定</span>：从<b>运行执行任务的方式</b>到<b>所使用的技术</b>，采用<b>标准化定义和约束</b></li>
+          <li><span class="key">资源分配</span>：管理层分配支持系统运行的各项能力，包括<b>人力、技术和资源</b></li>
+          <li><span class="key">过程管理</span>：<b>测量和管理</b>所有运行相关过程，确保过程在<b>时间上和预算目标内</b>被<b>正确和准确地执行</b></li>
+        </ul>
+        <div class="tip">口诀：<b>过程开发加标准，资源分配过程管</b>；八项串记「<b>运服监终程安介数</b>」（前三项是重点）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">10</span>IT 服务管理 + 运行与监控</div>
+        <div class="subhd">IT 服务管理（11 项）</div>
+        <ul>
+          <li><span class="key">服务台 · 事件管理 · 问题管理 · 变更管理 · 配置管理 · 发布管理 · 服务级别管理 · 财务管理 · 容量管理 · 服务连续性管理 · 可用性管理</span></li>
+          <li><b>关键辨识</b>：<span class="key">事件管理 = 快速恢复服务</span>（治标）；<span class="key">问题管理 = 根因分析、防复发</span>（治本）；<b>配置管理</b>管配置项与关系（<b>CMDB</b>）；<b>服务级别管理</b>靠 <b>SLA</b>；<b>容量</b>管资源够不够、<b>可用性</b>管能不能用、<b>连续性</b>管灾后恢复</li>
+        </ul>
+        <div class="subhd">运行任务（6 条）</div>
+        <ul>
+          <li>①按照计划执行作业 ②监控作业并按<b>优先级</b>分配资源 ③<b>重新启动失败的作业和进程</b> ④通过加载或变更备份介质、或确保目标的存储系统就绪来<b>优化备份作业</b> ⑤监控<b>信息系统、应用程序和网络的可用性</b>，保证足够性能 ⑥实施<b>空闲期的维护活动</b>（设备清洁 / 系统重启等）</li>
+        </ul>
+        <div class="subhd">监控任务（2 类）与错误类型</div>
+        <ul>
+          <li>监控任务：<span class="key">运行监控 · 安全监控</span>（安全监控是整体策略的一部分，用于预防和响应安全事件，覆盖防火墙例外 / 入侵防御告警 / 数据丢失防护 / 用户访问管理 / 终端管理 / 门禁 / 视频监控等）</li>
+          <li>检测和报告的错误类型：<span class="key">系统错误 · 程序错误 · 通信错误 · 操作员错误</span></li>
+        </ul>
+        <div class="tip">⚠️ <b>事件（快恢复）↔ 问题（查根因）</b>是最高频的调包点；错误四类口诀「<b>系程通操</b>」</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">4.1.5 优化和持续改进</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">11</span>PDCA 与 DMAIC / DMADV</div>
+        <ul>
+          <li><b>作用定位</b>：优化和持续改进能有效保障信息系统的<b>性能和可用性</b>，<b>延长整体系统的有效使用周期</b></li>
+          <li><b>传统方法</b>：<span class="key">戴明环 PDCA</span>——<span class="key">计划 Plan · 执行 Do · 检查 Check · 处理 Act</span></li>
+          <li><b>五阶段方法</b>：优化和持续改进<b>基于有效的变更管理</b>，使用<b>六西格玛倡导</b>的 <span class="key">DMAIC/DMADV</span>，是对戴明环四阶段周期的<b>延伸</b>——<span class="key">定义 Define · 度量 Measure · 分析 Analysis · 改进/设计 Improve-Design · 控制/验证 Control-Verify</span></li>
+          <li><b>转换关系</b>：第 4 阶段「<b>改进</b>」替换为「<b>设计</b>」、第 5 阶段「<b>控制</b>」替换为「<b>验证</b>」→ <b>DMAIC 变 DMADV</b></li>
+          <li><b>适用场景</b>：<b>DMAIC</b> 用于<b>识别和消除缺陷根本原因</b>，适用<b>现有过程/流程的改进</b>；<b>DMADV</b> 用于<b>设计新的产品或过程</b></li>
+        </ul>
+        <div class="tip">五阶段口诀「<b>定度分改控</b>」；<b>DMAIC 改现有 · DMADV 设新的</b>；替换只发生在<b>第 4、5 阶段</b></div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">12</span>五阶段目标与度量系统特性</div>
+        <div class="subhd">定义阶段（三目标）</div>
+        <ul>
+          <li><span class="key">待优化信息系统定义</span>：确定<b>范围、优化目标和目的、系统团队成员和出资人、优化时间表和交付成果</b>；可用「<b>延伸目标</b>」概念（帮助超越渐进式改进）</li>
+          <li><span class="key">核心流程定义</span>：定义<b>利益干系人、投入和产出以及广泛的功能</b>；<b>SIPOC 分析</b>（供方 / 输入 / 流程 / 输出 / 服务对象）是<b>首选工具</b></li>
+          <li><span class="key">团队组建</span>：确定<b>高能力团队</b>，通常由 <b>5~7 名核心成员</b>组成（另可有非关键干系人组的临时成员）</li>
+        </ul>
+        <div class="subhd">度量阶段（四目标 + 度量系统五特性）</div>
+        <ul>
+          <li>四目标：<span class="key">流程定义 · 指标定义 · 流程基线 · 度量系统分析</span>；关键句<b>质量始于度量</b>（质量被量化才能谈优化）</li>
+          <li>良好度量系统特性：<span class="key">准确 · 可重复 · 线性 · 可重现 · 稳定</span></li>
+        </ul>
+        <div class="subhd">分析阶段（三目标）</div>
+        <ul>
+          <li><span class="key">价值流分析 · 信息系统异常的源头分析 · 确定优化改进的驱动因素</span></li>
+        </ul>
+        <div class="subhd">改进/设计 · 控制/验证阶段</div>
+        <ul>
+          <li><b>改进/设计</b>：向<b>发起人</b>提出解决方案并<b>量化收益</b>→达成共识并实施；<b>定义新的操作/设计条件</b>；为<b>新工艺/设计提供定义和缓解故障模式</b></li>
+          <li><b>控制/验证</b>：<b>标准化</b>新程序/新系统的操作控制要素；<b>持续验证</b>优化的可交付成果；<b>记录经验教训</b></li>
+        </ul>
+        <div class="tip">⚠️ <b>SIPOC 属定义阶段</b>、<b>价值流分析属分析阶段</b>（最爱对调）；度量系统五特性「<b>准重线现稳</b>」——<b>可重复</b>与<b>可重现</b>两个都在</div>
+        <div class="fill"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="col-hd">总结区 <span>本节本质 + 考点地图</span></div>
+    <div class="body summary-prefill">
+      <b>本节本质</b>：4.1 回答「信息系统的全生命周期该怎么管」。主线五步：<b>是什么（管理基础）→ 怎么规划（规划和组织）→ 怎么落地（设计和实施）→ 怎么运行（运维和服务）→ 怎么变好（优化和持续改进）</b>。全节没有计算，题型是「框架组成归属 + 模型名称配对 + 关键词辨析」三类，数字型考点密集（4 要素 / 4 领域 / 3 战略三角 / 3 战略 / 4 钻石要素 / 3 设计方法 / 3 架构模式 / 8 + 4 + 11 + 6 运维活动 / 5 阶段）。<br>
+      <b>考点地图（按考频排序）</b>：① <b>信息系统四要素 + 层次架构</b>（管理 → 信息系统 → 人技流数）→ ② <b>四大管理领域及落点</b>（规设运优；含「采购」的是设计实施）→ ③ <b>组织模型三配对</b>（波特 / 莱维特 / 矩阵）→ ④ <b>莱维特钻石四要素</b>（任务 / 结构 / 信息与控制 / 人员）→ ⑤ <b>三种架构模式及别称</b>（主机 / 基于服务器 / 基于 Web）→ ⑥ <b>IT 服务管理 11 项</b>（事件 vs 问题）→ ⑦ <b>DMAIC/DMADV 转换与适用</b>（改现有 / 设新的）→ ⑧ <b>设计方法三步 + 转换框架三问</b>（内容 / 人员 / 位置）→ ⑨ <b>信息系统战略三角</b>（业务战略 · 信息系统 · 组织机制）→ ⑩ <b>波特三战略</b>（总成本领先 / 差异性 / 专注）→ ⑪ <b>运行管理和控制四活动</b> → ⑫ <b>五阶段各项目标 + 度量系统五特性</b>。<br>
+      <span class="small">⚠️ 口径陷阱：① 第 4 章是<b>第 4 版新增章</b>，2023 上及以前旧真题无对应题，别拿旧题正确率评估掌握度；② <b>两套「四要素」</b>别混——组织机制战略 = 钻石「任务 / 结构 / 信息与控制 / 人员」，信息系统战略 = 矩阵「硬件 / 软件 / 网络 / 数据」；③ <b>「基于 Web 的架构」是 SOA 的别称</b>，不是第四种模式；④ <b>事件管理 = 快速恢复</b>、<b>问题管理 = 查根因</b>；⑤ <b>SIPOC 属定义阶段</b>、<b>价值流分析属分析阶段</b>；⑥ DMAIC 的替换只发生在<b>第 4、5 阶段</b>（改进→设计、控制→验证）；⑦ 「监督设计和结构、监控整体性能」属<b>管理</b>层；⑧ 「压倒一切」修饰<b>业务战略</b>；⑨ <b>「采购」「与业务流程整合」属设计和实施</b>，别答成优化和改进。</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>康奈尔笔记法 · 第 4 章第 1 节 带答案版　｜　复习记录：当日 ☐　+1 天 ☐　+3 天 ☐　+7 天 ☐　+14 天 ☐</span>
+    <span>正确率 ____ / 12</span>
+  </div>
+
+</div>
+
+<div class="guide">
+  <h2>怎么用这一页</h2>
+  <table>
+    <tr>
+      <th>步骤</th><th>做法</th>
+    </tr>
+    <tr>
+      <td>第 1 遍 · 遮答默写</td>
+      <td>用纸<b>遮住右栏答案区</b>，只看左栏 12 个问题。口头/默写回答，答不出的画「×」。</td>
+    </tr>
+    <tr>
+      <td>第 2 遍 · 对照修正</td>
+      <td>揭开答案区逐项对照。每条答案下的<b>虚线</b>是留给你的「补充线」——记下易漏点（如「四大领域落点」「钻石四要素 vs 矩阵四组件」「11 项服务管理」「DMAIC 与 DMADV 的替换关系」）。</td>
+    </tr>
+    <tr>
+      <td>第 3 遍 · 隐藏答案打印</td>
+      <td>点工具栏「👁 隐藏答案」按钮，再打印一份当填空卷，可反复练习。</td>
+    </tr>
+    <tr>
+      <td>第 4 遍 · 复习节奏</td>
+      <td>页脚 5 个框按「当日 → +1 天 → +3 天 → +7 天 → +14 天」打勾，这就是你的艾宾浩斯进度条。全部打勾后，本节可不再看。</td>
+    </tr>
+  </table>
+  <div class="note">
+    <b>为什么这一节要特别加练</b>：第 4 章是<b>第 4 版新增章</b>，旧真题没有存货，出题人只能从教材原文的「数字型框架」里挖空——这反而让题目<b>更好预测</b>：四大管理领域、战略三角三个边、钻石四个要素、三种架构模式（含三个别称）、IT 服务管理 11 项、运行任务 6 条、DMAIC 五阶段，全是「缺一个就送分 / 记混就丢分」的固定清单。把本页的口诀串（人技流数 / 规设运优 / 业务看波特·组织看莱维特·信息系统看矩阵 / 集中式易管理·分布式可扩展·SOA 更敏捷 / 定度分改控）默写到条件反射，本章综合知识的 2~3 分就稳了。
+  </div>
+</div>
+
+<script>
+  function toggleAnswers(){
+    document.body.classList.toggle('hide-answers');
+    const btn = document.getElementById('toggleBtn');
+    const hidden = document.body.classList.contains('hide-answers');
+    btn.textContent = hidden ? '👁 显示答案' : '👁 隐藏答案（打印填空卷）';
+    btn.classList.toggle('active', hidden);
+  }
+</script>
+
+</body>
+</html>
