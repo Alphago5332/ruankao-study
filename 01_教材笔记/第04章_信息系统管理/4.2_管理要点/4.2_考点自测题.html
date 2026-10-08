@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4.2 管理要点 22 题</title>
+<style>
+  *{box-sizing:border-box;}
+  body{
+    margin:0;padding:24px 14px 60px;background:#eef0f3;color:#1f2328;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    gap:14px;margin-bottom:18px;flex-wrap:wrap;
+  }
+  h1{font-size:20px;margin:0;font-weight:600;}
+  .sub{font-size:12.5px;color:#6b7280;margin:5px 0 0;}
+  .score-chip{
+    background:#E6F1FB;border:1px solid #B5D4F4;color:#0C447C;
+    border-radius:8px;padding:7px 13px;font-size:13px;white-space:nowrap;
+  }
+  .score-chip b{font-size:16px;font-weight:600;}
+
+  #quiz{
+    background:#fff;border-radius:12px;padding:22px 24px;
+    box-shadow:0 2px 12px rgba(16,24,40,.08);
+  }
+  .progress-row{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:8px;font-size:13px;color:#4b5563;
+  }
+  .chip{
+    background:#FAEEDA;border:1px solid #EFC98A;color:#633806;
+    border-radius:5px;padding:2px 9px;font-size:12px;
+  }
+  .progress{height:6px;background:#e5e8ee;border-radius:4px;overflow:hidden;margin-bottom:20px;}
+  #bar{height:100%;width:0;background:#185FA5;border-radius:4px;transition:width .25s;}
+
+  .qtext{font-size:16px;line-height:1.75;font-weight:500;margin:0 0 18px;}
+  .opt{
+    display:flex;gap:10px;align-items:flex-start;
+    border:1px solid #d9dee5;border-radius:9px;padding:11px 14px;
+    margin-bottom:10px;cursor:pointer;font-size:14.5px;line-height:1.6;
+    background:#fff;transition:border-color .12s,background .12s;
+  }
+  .opt:hover{border-color:#185FA5;background:#f7fafd;}
+  .opt .tag{
+    flex:0 0 22px;height:22px;border-radius:50%;
+    background:#eef1f5;color:#3b4552;font-size:12px;font-weight:600;
+    display:flex;align-items:center;justify-content:center;margin-top:2px;
+  }
+  .opt.correct{border-color:#0F6E56;background:#E1F5EE;}
+  .opt.correct .tag{background:#0F6E56;color:#fff;}
+  .opt.wrong{border-color:#A32D2D;background:#FCEBEB;}
+  .opt.wrong .tag{background:#A32D2D;color:#fff;}
+  .opt.dim{opacity:.55;cursor:default;}
+  .opt.correct.dim{opacity:1;}
+  .opt.locked{cursor:default;}
+
+  #feedback{margin-top:14px;border-radius:9px;overflow:hidden;border:1px solid #d9dee5;}
+  #verdict{
+    padding:10px 14px;font-size:14px;font-weight:600;
+    background:#E1F5EE;color:#085041;border-bottom:1px solid #cbe9da;
+  }
+  #verdict.bad{background:#FCEBEB;color:#501313;border-bottom:1px solid #f3cdcd;}
+  #explain{padding:12px 14px;font-size:13.5px;line-height:1.8;color:#374151;background:#fdfdfe;}
+  #explain b{color:#1f2328;}
+  #nextBtn{
+    display:block;margin:14px 16px 16px;float:right;
+    background:#185FA5;color:#fff;border:none;border-radius:8px;
+    padding:9px 26px;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  #nextBtn:hover{background:#14507f;}
+  #feedback::after{content:"";display:block;clear:both;}
+  .kbd{font-size:11.5px;color:#9aa3af;margin:14px 2px 0;}
+
+  #result{background:#fff;border-radius:12px;padding:26px 28px;box-shadow:0 2px 12px rgba(16,24,40,.08);}
+  .r-head{display:flex;gap:22px;align-items:center;margin-bottom:6px;flex-wrap:wrap;}
+  .r-score{font-size:44px;font-weight:600;color:#185FA5;line-height:1;}
+  .r-score small{font-size:18px;color:#8b949e;font-weight:400;}
+  .r-msg{font-size:14px;color:#4b5563;line-height:1.7;}
+  h3{font-size:15px;font-weight:600;margin:26px 0 10px;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th,td{border:1px solid #e2e6eb;padding:7px 10px;text-align:left;line-height:1.6;}
+  th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .mbar{height:8px;background:#e5e8ee;border-radius:4px;overflow:hidden;min-width:120px;}
+  .mbar div{height:100%;background:#1D9E75;border-radius:4px;}
+
+  .wq{
+    border:1px solid #f3cdcd;border-radius:9px;padding:13px 15px;
+    margin-bottom:12px;background:#fffafa;
+  }
+  .wq .wt{font-size:14px;font-weight:600;line-height:1.7;margin-bottom:7px;}
+  .wq .wa{font-size:13px;color:#A32D2D;margin-bottom:2px;}
+  .wq .wc{font-size:13px;color:#0F6E56;margin-bottom:8px;}
+  .wq .we{font-size:12.5px;color:#57606a;line-height:1.75;border-top:1px dashed #e8d9d9;padding-top:7px;}
+
+  .btns{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;border-radius:8px;
+    padding:9px 22px;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:#185FA5;border-color:#185FA5;color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn:disabled{opacity:.45;cursor:not-allowed;}
+  .hidden{display:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <h1>4.2 管理要点</h1>
+      <p class="sub">22 题 · 第 4 版教材 4.2 节 · 达标线 18/22（80%）· 逐题精讲 · 键盘 A~D 或 1~4 选择，Enter 下一题</p>
+    </div>
+    <div class="score-chip">已答对 <b id="scoreNow">0</b> / <span id="totalNow">22</span> 题</div>
+  </header>
+
+  <div id="quiz">
+    <div class="progress-row">
+      <span id="pos"></span>
+      <span class="chip" id="moduleChip"></span>
+    </div>
+    <div class="progress"><div id="bar"></div></div>
+    <div class="qcard">
+      <p class="qtext" id="qtext"></p>
+      <div id="options"></div>
+      <div id="feedback" class="hidden">
+        <div id="verdict"></div>
+        <div id="explain"></div>
+        <button id="nextBtn">下一题 →</button>
+      </div>
+    </div>
+    <p class="kbd">键盘可用：A~D 或 1~4 选择，Enter 下一题</p>
+    <p class="kbd" style="margin:4px 2px 0;">对照资料：教材 4.2 节（约 P104 ~ P128）· 第 4 版新增章，2023 上及以前的旧真题无对应题</p>
+  </div>
+
+  <div id="result" class="hidden"></div>
+
+</div>
+
+<script>
+const QUESTIONS = [
+  // 模块A 数据管理 (1-6)
+  { m: "A·数据管理", q: "在通常情况下，数据管理是指通过规划、控制与提供数据和信息资产的职能，包括开发、执行和监督有关数据的计划、策略、方案、项目、流程、方法和程序，以获取、控制、保护、交付和（　　）数据和信息资产价值。",
+    o: ["提高","存储","销毁","复制"], a: 0,
+    e: "教材 4.2.1 原文：数据管理是指通过【规划、控制与提供】数据和信息资产的职能，……以【获取、控制、保护、交付和提高】数据和信息资产价值。定义抓三个职能动词「规划·控制·提供」+ 五类价值动作「获取·控制·保护·交付·提高」。⚠️ 国际数据管理协会（DAMA）指出，数据资源管理致力于发展和处理组织数据全生命周期的适当的构建、策略、实践和程序。" },
+  { m: "A·数据管理", q: "数据管理能力成熟度评估模型（DCMM）定义了数据战略、数据治理、数据架构、数据应用、数据安全、数据质量、数据标准和（　　）共 8 个核心能力域。",
+    o: ["数据治理制度","数据生存周期","数据仓库","数据建模"], a: 1,
+    e: "教材 4.2.1：DCMM（国家标准 GB/T 36073）定义 8 个核心能力域 =【数据战略 · 数据治理 · 数据架构 · 数据应用 · 数据安全 · 数据质量 · 数据标准 · 数据生存周期】。口诀「战略治理架构 · 应用安全质量 · 标准生存周期」。⚠️ 别与 DGI（数据治理框架）混——DCMM 是「数据管理能力成熟度评估模型」。" },
+  { m: "A·数据管理", q: "在 DCMM 的 8 个核心能力域中，「元数据管理」属于（　　）。",
+    o: ["数据治理","数据标准","数据架构","数据安全"], a: 2,
+    e: "教材 4.2.1：数据架构能力域包括【数据模型 · 数据分布 · 数据集成与共享 · 元数据管理】四个能力项。「元数据管理」属【数据架构】；「业务术语 / 参考数据和主数据 / 数据元 / 指标数据」属【数据标准】——两域最爱互相调包。" },
+  { m: "A·数据管理", q: "DCMM 将组织的管理成熟度划分为 5 个等级，其中强调「数据已被当作实现组织绩效目标的重要资产、在组织层面制定系列的标准化管理流程，促进数据管理的规范化」的等级是（　　）。",
+    o: ["受管理级","稳健级","量化管理级","优化级"], a: 1,
+    e: "教材 4.2.1 DCMM 五等级 =【初始级 · 受管理级 · 稳健级 · 量化管理级 · 优化级】（口诀「初受稳量优」）。【稳健级】= 数据被当作【实现组织绩效目标的重要资产】+ 组织层面【标准化管理流程】+ 促进【规范化】；【量化管理级】= 数据是【获取竞争优势】的重要资源 + 效率能量化分析监控。两级别最爱对调。" },
+  { m: "A·数据管理", q: "关于国内外常用的数据管理模型，下列对应正确的是（　　）。",
+    o: ["DCMM 由 4 个组件构成","DGI 数据治理框架定义了 5 个等级","DCAM 从三个维度提出 10 个关键通用组件","DAMA 模型由 11 个数据管理职能领域和 7 个基本环境要素构成"], a: 3,
+    e: "教材 4.2.1「理论框架与成熟度」：DCMM = 5 等级 + 8 能力域；DGI（数据治理框架）= 从【组织结构、治理规则和治理过程】三个维度提出 10 个关键通用组件；DCAM（数据管理能力评价模型）= 4 个组件（基础 / 执行 / 分析 / 应用）；DAMA 模型 = 11 个数据管理职能领域 + 7 个基本环境要素。口诀「DCMM 五等级 · DGI 三维度 · DCAM 四组件 · DAMA 十一域」，四个量词别接错。" },
+  { m: "A·数据管理", q: "在 DCMM 的 8 个核心能力域中，「业务术语、参考数据和主数据、数据元、指标数据」属于（　　）。",
+    o: ["数据标准","数据质量","数据应用","数据生存周期"], a: 0,
+    e: "教材 4.2.1：数据标准能力域包括【业务术语 · 参考数据和主数据 · 数据元 · 指标数据】四个能力项。别与数据质量（质量需求 / 检查 / 分析 / 提升）混——两域都含 4 个能力项，但内容完全不同。" },
+  // 模块B 运维管理 (7-10)
+  { m: "B·运维管理", q: "国家标准 GB/T 28827.1《信息技术服务 运行维护 第 1 部分：通用要求》定义的 IT 运维能力模型包含（　　）三个部分。",
+    o: ["人员、过程、技术和资源","治理要求、运行维护服务能力体系和价值实现","策划、实施、检查和改进","数据管理、分析决策和自动控制"], a: 1,
+    e: "教材 4.2.2 能力模型：GB/T 28827.1 定义的 IT 运维能力模型 =【治理要求 · 运行维护服务能力体系 · 价值实现】。⭐ 真题落点：运行维护服务能力体系为价值实现赋能。选项 A 是能力建设四要素，C 是运维能力管理四阶段，D 是智能运维能力平台的三能力域。" },
+  { m: "B·运维管理", q: "在 IT 运维能力模型中，为「价值实现」赋能的是（　　）。",
+    o: ["治理要求","用户需求","运行维护服务能力体系","战略要求"], a: 2,
+    e: "教材 4.2.2（约 P120）：IT 运维能力模型包含治理要求、运行维护服务能力体系和价值实现，其中【运行维护服务能力体系】为【价值实现】赋能（真题原题）。" },
+  { m: "B·运维管理", q: "在运维能力四要素中，确保 IT 运维能「保障做事」的是（　　）。",
+    o: ["人员能力","技术能力","过程","资源能力"], a: 3,
+    e: "教材 4.2.2：【人员能力】=「选人做事」；【资源能力】=「保障做事」（资源包括知识库、服务台、备件库、运行维护工具）；【技术能力】=「高效做事」；【过程】=「正确做事」。四种「做事」的配对最爱调包。" },
+  { m: "B·运维管理", q: "结合 IT 运维工作的特点，运维人员一般分为（　　）三种人员岗位。",
+    o: ["管理类、技术类和操作类","决策类、执行类和监督类","规划类、建设类和运维类","初级、中级和高级"], a: 0,
+    e: "教材 4.2.2 人员能力：运维人员一般分为【管理类 · 技术类 · 操作类】三种人员岗位——管理类负责运维的组织管理，技术类负责运维技术建设及运维活动中的技术决策，操作类负责运维活动的执行。" },
+  // 模块C 智能运维 (11-15)
+  { m: "C·智能运维", q: "中国电子工业标准化技术协会发布的团体标准 T/CESA 1172《信息技术服务 智能运维 通用要求》给出的智能运维能力框架包括（　　）。",
+    o: ["治理要求、运行维护服务能力体系和价值实现","数据战略、数据治理、数据架构和数据应用","组织治理、智能特征、智能运维场景实现、能力域和能力要素","策划、实施、检查和改进"], a: 2,
+    e: "教材 4.2.2 智能运维：T/CESA 1172 给出的智能运维能力框架 =【组织治理 · 智能特征 · 智能运维场景实现 · 能力域 · 能力要素】。选项 A 是 IT 运维能力模型（GB/T 28827.1），别张冠李戴。" },
+  { m: "C·智能运维", q: "在智能运维能力框架中，被认为是「构建智能运维能力的基础」的是（　　）。",
+    o: ["组织治理","能力要素","智能特征","能力平台"], a: 1,
+    e: "教材 4.2.2 智能运维（真题原句）：智能运维能力框架中【能力要素是构建智能运维能力的基础】。组织需在组织治理的指导下，对智能运维场景实现提出能力建设要求，开展智能运维能力规划和建设。" },
+  { m: "C·智能运维", q: "下列不属于智能运维能力要素的是（　　）。",
+    o: ["数据","算法","资金","知识"], a: 2,
+    e: "教材 4.2.2：智能运维的能力要素共 7 项 =【人员 · 技术 · 过程 · 数据 · 算法 · 资源 · 知识】（口诀「人技过数算资知」）。⚠️ 别与运维「能力建设四要素」（人员 / 过程 / 技术 / 资源，「人过技资」）混——四要素 ⊆ 七要素，智能运维多了【数据 · 算法 · 知识】三项。" },
+  { m: "C·智能运维", q: "智能运维需具备若干智能特征，下列属于其智能特征的是（　　）。",
+    o: ["计划、执行、检查、处理、复盘、优化、迭代","定义、度量、分析、改进、设计、控制、验证","感知层、网络层、平台层、应用层、数据层、算法层、知识层","能感知、会描述、自学习、会诊断、可决策、自执行、自适应"], a: 3,
+    e: "教材 4.2.2：智能特征共 7 项 =【能感知 · 会描述 · 自学习 · 会诊断 · 可决策 · 自执行 · 自适应】（口诀「感描学诊决执适」）。选项 A 似 PDCA 的变体、B 是 DMAIC/DMADV 五阶段加环节的混搭、C 是物联网四层架构的变形，均非智能特征。" },
+  { m: "C·智能运维", q: "智能运维能力平台通常具备（　　）等能力。",
+    o: ["数据管理、分析决策、自动控制","数据战略、数据治理、数据架构","组织治理、智能特征、能力要素","规划、实施、检查、改进"], a: 0,
+    e: "教材 4.2.2：智能运维能力平台通常具备【数据管理 · 分析决策 · 自动控制】等能力。数据管理能力用于采集、处理、存储、展示各种运维数据；分析决策能力以感知到的数据作为输入做出实时运维决策，驱动自动化工具实施操作；自动控制能力根据运维决策实施具体的运维操作。" },
+  // 模块D 信息安全 (16-19)
+  { m: "D·信息安全", q: "信息安全三要素（CIA 三要素）是指（　　）。",
+    o: ["机密性、可靠性和可维护性","保密性、完整性和可用性","真实性、完整性和不可否认性","保密性、安全性和稳定性"], a: 1,
+    e: "教材 4.2.3：信息安全三要素（CIA）=【保密性 Confidentiality · 完整性 Integrity · 可用性 Availability】（口诀「保完可」）。⚠️ 教材口径用「保密性」而非「机密性」。三要素是信息安全设计的基础，但并非全部。" },
+  { m: "D·信息安全", q: "「确保信息只被授权者读取，如客户密码仅本人可查」描述的是信息安全 CIA 三要素中的（　　）。",
+    o: ["完整性","可用性","不可否认性","保密性"], a: 3,
+    e: "教材 4.2.3：【保密性 Confidentiality】= 确保信息只被授权者读取（如客户密码仅本人可查）；【完整性 Integrity】= 确保信息不被篡改、真实有效（如合同文件内容完整）；【可用性 Availability】= 确保信息和系统在需要时能正常使用（如网站 24 小时可访问）。" },
+  { m: "D·信息安全", q: "关于 CIA 三要素，下列说法正确的是（　　）。",
+    o: ["CIA 三要素已涵盖信息安全的全部要求","CIA 中的 C 指机密性，教材口径为「机密性」","CIA 三要素是信息安全设计的基础，但并非全部，还需结合合规性、可追溯性等其他要求","可用性指信息不被未授权篡改"], a: 2,
+    e: "教材 4.2.3：CIA 三要素是【信息安全设计的基础，但并非全部】，还需结合【合规性、可追溯性】等其他要求，形成全面的安全策略。A 错（并非全部）；B 错（教材用「保密性」，C 指 Confidentiality）；D 错（「不被未授权篡改」是完整性，可用性指需要时能正常使用）。" },
+  { m: "D·信息安全", q: "下列不属于信息安全管理体系核心内容的是（　　）。",
+    o: ["组织级项目管理办公室的设立","制定安全策略和规划","实施风险管理，识别并防范安全风险","开展安全意识培训，规范人员安全行为"], a: 0,
+    e: "教材 4.2.3：信息安全管理是全生命周期的系统工程，内容包括建立安全管理机构和团队、制定安全策略和规划、实施风险管理、制定业务持续性计划和灾难恢复计划、选择和部署安全措施、规范配置和变更管理、开展安全审计和监控、处理安全事件、开展安全意识培训等。「组织级项目管理办公室（PMO）的设立」属项目管理（第 6 章），不在其列。" },
+  // 模块E 等级保护 (20-21)
+  { m: "E·等级保护", q: "在网络安全等级保护中，等级保护对象受到破坏后「会对社会秩序和公共利益造成严重危害，或者对国家安全造成危害」，该对象的安全保护等级为（　　）。",
+    o: ["第二级","第三级","第四级","第五级"], a: 1,
+    e: "教材 4.2.3 网络安全等级保护：安全保护等级五级（按受破坏后的危害程度）——第一级（对公民 / 法人合法权益造成损害，不危害国家 / 社会 / 公共利益）；第二级（对合法权益严重损害或对社会 / 公共利益造成危害，不危害国家安全）；【第三级（对社会秩序和公共利益造成严重危害，或对国家安全造成危害）】；第四级（对社会 / 公共利益造成特别严重危害，或对国家安全造成严重危害）；第五级（对国家安全造成特别严重危害）。" },
+  { m: "E·等级保护", q: "依据 GB/T 22239《信息安全技术 网络安全等级保护基本要求》，等级保护对象「在统一安全策略下防护免受来自国家级别的、敌对组织的拥有丰富资源的威胁源发起的恶意攻击……在自身遭到损害后能够迅速恢复所有功能」，这描述的是（　　）。",
+    o: ["第二级安全保护能力","第三级安全保护能力","第四级安全保护能力","第五级安全保护能力"], a: 2,
+    e: "教材 4.2.3 安全保护能力等级（GB/T 22239）：第一级（防护个人的、拥有很少资源的威胁源，受损后恢复部分功能）；第二级（外部小型组织、少量资源，能发现重要安全漏洞，受损后一段时间内恢复部分功能）；第三级（统一安全策略下防护外部有组织的团体、较丰富资源，能及时发现监测攻击行为，受损后较快恢复绝大部分功能）；【第四级（统一安全策略下防护国家级别的、敌对组织的丰富资源威胁源，受损后迅速恢复所有功能）】。⚠️ 别与「安全保护等级五级」（按破坏后果：公民→社会→国家）混。" },
+  // 模块F 综合防坑 (22)
+  { m: "F·综合防坑", q: "关于第 4 章信息系统管理，下列说法正确的是（　　）。",
+    o: ["智能运维能力框架中「能力要素」仅包含人员、过程、技术和资源四项","CIA 三要素中「C」在教材中的表述是「机密性」","IT 运维能力模型中「人员能力」确保 IT 运维能「保障做事」","DCMM 将组织的管理成熟度划分为初始级、受管理级、稳健级、量化管理级和优化级五个等级"], a: 3,
+    e: "D 正确（教材 4.2.1：DCMM 五等级 = 初始级 / 受管理级 / 稳健级 / 量化管理级 / 优化级）。A 错：智能运维能力要素是【7 项】（人员 / 技术 / 过程 / 数据 / 算法 / 资源 / 知识），人员 / 过程 / 技术 / 资源只是其中的 4 项。B 错：教材用「保密性 Confidentiality」，不用「机密性」。C 错：「保障做事」是【资源能力】；人员能力是「选人做事」。" }
+];
+
+const LETTERS = ["A","B","C","D"];
+let pool = [], cur = 0, answered = false, stats = {}, wrongList = [];
+
+function init(list){
+  pool = list.map(x=>Object.assign({},x));
+  cur = 0; answered = false; stats = {}; wrongList = [];
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  document.getElementById("totalNow").textContent = pool.length;
+  document.getElementById("scoreNow").textContent = "0";
+  render();
+}
+function render(){
+  const q = pool[cur];
+  document.getElementById("pos").textContent = "第 " + (cur+1) + " / " + pool.length + " 题";
+  document.getElementById("moduleChip").textContent = q.m;
+  document.getElementById("bar").style.width = (cur/pool.length*100) + "%";
+  document.getElementById("qtext").innerHTML = q.q;
+  const box = document.getElementById("options");
+  box.innerHTML = "";
+  q.o.forEach((t,i)=>{
+    const d = document.createElement("div");
+    d.className = "opt";
+    d.innerHTML = '<span class="tag">'+LETTERS[i]+'</span><span>'+t+"</span>";
+    d.onclick = ()=>choose(i);
+    box.appendChild(d);
+  });
+  document.getElementById("feedback").classList.add("hidden");
+}
+function choose(i){
+  if(answered) return;
+  answered = true;
+  const q = pool[cur];
+  const ok = (i === q.a);
+  if(!stats[q.m]) stats[q.m] = {right:0,total:0};
+  stats[q.m].total++;
+  const opts = document.querySelectorAll(".opt");
+  opts.forEach((d,idx)=>{
+    d.classList.add("locked");
+    if(idx === q.a) d.classList.add("correct");
+    else if(idx === i) d.classList.add("wrong");
+    else d.classList.add("dim");
+    d.onclick = null;
+  });
+  if(ok){
+    stats[q.m].right++;
+    document.getElementById("scoreNow").textContent = sumRight();
+  } else {
+    wrongList.push({q:q, picked:i});
+  }
+  const v = document.getElementById("verdict");
+  v.textContent = ok ? "✓ 答对了" : "✗ 答错了　正确答案：" + LETTERS[q.a];
+  v.className = ok ? "" : "bad";
+  document.getElementById("explain").innerHTML = q.e;
+  document.getElementById("feedback").classList.remove("hidden");
+  document.getElementById("nextBtn").textContent =
+    (cur === pool.length-1) ? "查看成绩单 →" : "下一题 →";
+}
+function sumRight(){
+  let s = 0; for(const k in stats) s += stats[k].right; return s;
+}
+function next(){
+  cur++;
+  if(cur >= pool.length){ showResult(); }
+  else { answered = false; render(); window.scrollTo(0,0); }
+}
+function showResult(){
+  document.getElementById("quiz").classList.add("hidden");
+  const r = document.getElementById("result");
+  const total = pool.length, right = sumRight();
+  const pct = Math.round(right/total*100);
+  let msg;
+  if(pct >= 80) msg = "达标（≥80%）：本节知识点基本闭环，可以进入下一节，或用康奈尔模板的「遮」字诀再过一遍线索栏。";
+  else if(pct >= 60) msg = "接近达标：把下面的错题解析看完，回看对应模块的知识点清单，明天用康奈尔模板遮住答案重测。";
+  else msg = "未达标：正确率低是发现漏洞的正常信号——先把知识点清单的「必背」块过一遍，再点「只重做错题」。";
+
+  let tbl = '<h3>分模块得分</h3><table><tr><th>模块</th><th>正确 / 题数</th><th>正确率</th></tr>';
+  for(const k in stats){
+    const s = stats[k];
+    const p = Math.round(s.right/s.total*100);
+    tbl += '<tr><td>'+k+'</td><td>'+s.right+' / '+s.total+'</td><td><div class="mbar"><div style="width:'+p+'%"></div></div></td></tr>';
+  }
+  tbl += "</table>";
+
+  let wrong = "";
+  if(wrongList.length){
+    wrong = "<h3>错题回顾（"+wrongList.length+" 题）</h3>";
+    wrongList.forEach((w,i)=>{
+      wrong += '<div class="wq"><div class="wt">'+(i+1)+". "+w.q.q+"</div>"
+        + '<div class="wa">你的选择：'+LETTERS[w.picked]+"　"+w.q.o[w.picked]+"</div>"
+        + '<div class="wc">正确答案：'+LETTERS[w.q.a]+"　"+w.q.o[w.q.a]+"</div>"
+        + '<div class="we">'+w.q.e+"</div></div>";
+    });
+  } else {
+    wrong = '<h3>错题回顾</h3><p style="font-size:13px;color:#0F6E56;">全部答对，本节知识点已闭环。</p>';
+  }
+
+  r.innerHTML =
+    '<div class="r-head"><div class="r-score">'+right+"<small> / "+total+"</small></div>"
+    + '<div class="r-msg"><b>'+pct+"%</b><br>"+msg+"</div></div>"
+    + tbl + wrong
+    + '<div class="btns">'
+    + '<button class="btn primary" id="retryWrong"'+(wrongList.length?"":" disabled")+">只重做错题（"+wrongList.length+" 题）</button>"
+    + '<button class="btn" id="retryAll">全部重来</button></div>';
+  r.classList.remove("hidden");
+  document.getElementById("retryWrong").onclick = ()=>{
+    const list = wrongList.map(w=>w.q);
+    init(list);
+    window.scrollTo(0,0);
+  };
+  document.getElementById("retryAll").onclick = ()=>{ init(QUESTIONS); window.scrollTo(0,0); };
+  window.scrollTo(0,0);
+}
+document.getElementById("nextBtn").onclick = next;
+document.addEventListener("keydown", e=>{
+  if(document.getElementById("quiz").classList.contains("hidden")) return;
+  if(e.key === "Enter" || e.key === " "){ if(answered){ e.preventDefault(); next(); } return; }
+  const map = {"a":0,"b":1,"c":2,"d":3,"1":0,"2":1,"3":2,"4":3};
+  const k = e.key.toLowerCase();
+  if(k in map && !answered) choose(map[k]);
+});
+init(QUESTIONS);
+</script>
+</body>
+</html>

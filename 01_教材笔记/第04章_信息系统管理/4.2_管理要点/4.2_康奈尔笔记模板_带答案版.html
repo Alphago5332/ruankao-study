@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>康奈尔笔记 · 第 4 章第 2 节 管理要点 · 带答案版</title>
+<style>
+  :root{
+    --ink:#1f2328;
+    --ink-2:#4b5563;
+    --ink-3:#8b949e;
+    --line:#2f3742;
+    --rule:#d6dae0;
+    --accent:#185FA5;
+    --accent-soft:#E6F1FB;
+    --warm:#854F0B;
+    --warm-soft:#FAEEDA;
+    --paper:#ffffff;
+    --ans-bg:#fffaf2;
+    --ans-border:#e8d9b8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    padding:28px 16px 48px;
+    background:#eef0f3;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+    color:var(--ink);
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .toolbar{
+    max-width:210mm;margin:0 auto 14px;display:flex;gap:10px;align-items:center;
+    justify-content:space-between;flex-wrap:wrap;
+  }
+  .toolbar .hint{font-size:12.5px;color:#5b6470;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;
+    font-size:13px;padding:7px 14px;border-radius:8px;cursor:pointer;
+    font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn.active{background:var(--warm);border-color:var(--warm);color:#fff;}
+
+  .page{
+    width:210mm;min-height:297mm;margin:0 auto;background:var(--paper);
+    padding:14mm 13mm 12mm;box-shadow:0 2px 14px rgba(16,24,40,.12);
+  }
+
+  .head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    border-bottom:2px solid var(--line);padding-bottom:8px;margin-bottom:10px;
+    gap:12px;
+  }
+  .head h1{font-size:19px;margin:0;font-weight:600;letter-spacing:.3px;}
+  .head .sub{font-size:12px;color:var(--ink-3);margin-top:4px;}
+  .head .meta{font-size:12px;color:var(--ink-2);text-align:right;line-height:1.9;white-space:nowrap;}
+  .head .meta b{font-weight:600;color:var(--accent);}
+
+  .band{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+  .chip{
+    font-size:11.5px;padding:4px 9px;border-radius:5px;
+    background:var(--accent-soft);color:#0C447C;border:1px solid #B5D4F4;
+  }
+  .chip.warm{background:var(--warm-soft);color:#633806;border-color:#EFC98A;}
+
+  .cols{
+    display:grid;grid-template-columns:60mm 1fr;gap:0;
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .col-cue{
+    background:#fafbfc;border-right:1px solid var(--line);padding:8px 9px 9px;
+  }
+  .col-note{padding:8px 11px 9px;}
+  .col-hd{
+    font-size:11.5px;font-weight:600;letter-spacing:.6px;color:var(--ink-2);
+    text-transform:uppercase;padding-bottom:6px;margin-bottom:7px;
+    border-bottom:1px dashed #b9c0c9;
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  .col-hd span{font-size:10.5px;font-weight:400;color:var(--ink-3);text-transform:none;letter-spacing:0;}
+
+  .q{
+    font-size:11.5px;line-height:1.5;color:#1f2328;
+    padding:5px 0 5px 20px;position:relative;border-bottom:1px dotted #dfe3e8;
+  }
+  .q:last-child{border-bottom:0;}
+  .q::before{
+    content:attr(data-n);position:absolute;left:0;top:5px;
+    width:14px;height:14px;border-radius:50%;
+    background:var(--accent);color:#fff;font-size:9.5px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:600;line-height:1;
+  }
+  .q b{font-weight:600;}
+  .q em{font-style:normal;color:var(--warm);font-weight:600;}
+
+  .grouplabel{
+    font-size:10.5px;font-weight:600;color:var(--accent);
+    letter-spacing:.4px;margin:8px 0 2px;
+  }
+  .grouplabel:first-child{margin-top:0;}
+
+  /* === 答案区样式 === */
+  .ans-block{
+    margin-bottom:6px;padding:5px 8px 6px;
+    background:var(--ans-bg);border:1px solid var(--ans-border);border-radius:3px;
+  }
+  .ans-block .ans-title{
+    font-size:10.5px;font-weight:600;color:var(--warm);
+    letter-spacing:.3px;margin-bottom:2px;display:flex;align-items:baseline;gap:6px;
+  }
+  .ans-block .ans-title .num{
+    display:inline-block;min-width:14px;height:14px;border-radius:50%;
+    background:var(--warm);color:#fff;font-size:9.5px;font-weight:600;
+    text-align:center;line-height:14px;
+  }
+  .ans-block ul{
+    margin:2px 0 3px 0;padding:0 0 0 16px;font-size:11px;line-height:1.55;color:#2b323b;
+  }
+  .ans-block ul li{padding:1px 0;}
+  .ans-block .key{
+    color:var(--warm);font-weight:600;
+  }
+  .ans-block .subhd{
+    font-size:10.5px;font-weight:600;color:#0C447C;margin:3px 0 1px;
+    padding-left:2px;border-left:3px solid #B5D4F4;
+  }
+  .ans-block .tip{
+    font-size:10px;color:#633806;margin-top:2px;line-height:1.5;
+    padding:2px 6px;background:var(--warm-soft);border-radius:2px;
+  }
+  .ans-block .fill{
+    height:16px;border-bottom:1px dashed #c8c0aa;margin-top:3px;
+  }
+  body.hide-answers .ans-block{display:none;}
+  body.hide-answers .summary-prefill{display:none;}
+
+  .summary{
+    margin-top:10px;border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .summary .col-hd{
+    margin:0;padding:7px 11px;background:#fafbfc;border-bottom:1px solid var(--line);
+  }
+  .summary .body{padding:6px 11px 8px;font-size:11.5px;line-height:1.7;color:#2b323b;}
+  .summary .body b{color:var(--accent);}
+  .summary .body .small{font-size:10.5px;color:var(--ink-3);margin-top:3px;display:block;}
+
+  .footer{
+    margin-top:9px;font-size:10.5px;color:var(--ink-3);
+    display:flex;justify-content:space-between;gap:10px;
+  }
+
+  .guide{
+    width:210mm;margin:16px auto 0;background:#fff;border:1px solid #d9dee5;
+    border-radius:8px;padding:16px 18px;
+  }
+  .guide h2{font-size:14px;margin:0 0 10px;font-weight:600;}
+  .guide table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .guide th,.guide td{
+    border:1px solid #e2e6eb;padding:7px 9px;text-align:left;vertical-align:top;line-height:1.6;
+  }
+  .guide th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .guide td:first-child{width:88px;font-weight:600;color:var(--accent);}
+  .guide .note{font-size:12px;color:#5b6470;margin-top:10px;line-height:1.7;}
+
+  @page{size:A4 portrait;margin:0;}
+  @media print{
+    body{background:#fff;padding:0;}
+    .toolbar,.guide{display:none;}
+    .page{box-shadow:none;margin:0;width:auto;min-height:auto;padding:13mm 12mm;}
+    body.hide-answers .ans-block{display:none;}
+    body.hide-answers .summary-prefill{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="hint">A4 竖版 · 带答案版 · 建议先默写、再对照；打印时可「隐藏答案」变填空卷</div>
+  <div>
+    <button class="btn" id="toggleBtn" onclick="toggleAnswers()">👁 隐藏答案（打印填空卷）</button>
+    <button class="btn primary" onclick="window.print()">打印 / 导出 PDF</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="head">
+    <div>
+      <h1>康奈尔笔记 · 第 4 章第 2 节 管理要点 <span style="color:var(--warm);font-size:14px;">（带答案版）</span></h1>
+      <div class="sub">《信息系统项目管理师教程（第 4 版）》约 P104 ~ P128　｜　答案口径以 2026-10-08 核对教材原文为准</div>
+    </div>
+    <div class="meta">
+      日期：__________<br>
+      第 <b>__</b> 轮复习　用时 <b>__</b> 分钟
+    </div>
+  </div>
+
+  <div class="band">
+    <span class="chip">第 4 版新增章（综合知识约 2~3 题）</span>
+    <span class="chip">数量配对 · 归属辨析 · 名称配对型</span>
+    <span class="chip warm">必背：DCMM 8 域 5 级 + 4 模型 + 运维能力模型 + 智能运维 7 要素/7 特征 + CIA + 等保</span>
+    <span class="chip warm">📝 含答案</span>
+  </div>
+
+  <div class="cols">
+
+    <div class="col-cue">
+      <div class="col-hd">线索栏 <span>遮住右侧自问</span></div>
+
+      <div class="grouplabel">4.2.1 数据管理</div>
+      <div class="q" data-n="1"><b>数据管理定义</b>（三个职能动词 + 五类价值动作）？DAMA 指什么？数据管理框架是什么？</div>
+      <div class="q" data-n="2"><b>DCMM 的 8 个核心能力域</b>？国标号？「元数据管理」「指标数据」各属哪个域？</div>
+      <div class="q" data-n="3"><b>DCMM 5 个成熟度等级</b>及各级特征？从哪一级开始强调「规范化 / 实现绩效目标的重要资产」？</div>
+      <div class="q" data-n="4">四个<b>数据管理模型</b>及其量词口径（DCMM / DGI / DCAM / DAMA）？</div>
+
+      <div class="grouplabel">4.2.2 运维管理</div>
+      <div class="q" data-n="5"><b>IT 运维能力模型</b>三部分（GB/T 28827.1）？谁为价值实现赋能？</div>
+      <div class="q" data-n="6">能力建设<b>四要素</b>及四种「做事」（选人 / 保障 / 高效 / 正确）？人员三岗位？资源四件？</div>
+      <div class="q" data-n="7"><b>智能运维能力框架</b>五部分（T/CESA 1172）？哪一部分是「构建智能运维能力的基础」？</div>
+      <div class="q" data-n="8">智能运维<b>能力要素 7 项</b>？<b>智能特征 7 项</b>？能力平台三能力域？</div>
+      <div class="q" data-n="9">「智能运维场景实现」四过程 vs「能力应用」四关键环节？运维场景按复杂程度分哪三类？</div>
+
+      <div class="grouplabel">4.2.3 信息安全管理</div>
+      <div class="q" data-n="10"><b>CIA 三要素</b>（含英文）？为什么说「并非全部」？信息安全管理体系的主要内容？</div>
+      <div class="q" data-n="11">网络安全等级保护（等保 2.0）的<b>安全保护等级五级</b>（按破坏后果）？</div>
+      <div class="q" data-n="12"><b>安全保护能力五级</b>（GB/T 22239）的「威胁源 + 恢复程度」两条线？</div>
+    </div>
+
+    <div class="col-note">
+      <div class="col-hd">答案区 <span>默写后对照 · 虚线处写自己的补充</span></div>
+
+      <div class="grouplabel">4.2.1 数据管理</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">1</span>数据管理的定义</div>
+        <ul>
+          <li><b>定义</b>：<span class="key">数据管理</span>是指通过<span class="key">规划、控制与提供数据和信息资产的职能</span>，包括<span class="key">开发、执行和监督</span>有关数据的<span class="key">计划、策略、方案、项目、流程、方法和程序</span>，以<span class="key">获取、控制、保护、交付和提高数据和信息资产价值</span></li>
+          <li><b>DAMA</b>：<span class="key">国际数据管理协会</span>，指出<b>数据资源管理</b>致力于<b>发展和处理组织数据全生命周期的适当的构建、策略、实践和程序</b></li>
+          <li><b>数据管理框架</b>：是对组织的管理平台或能够产生业务数据的平台产生的数据进行<b>统一的跟踪、协调、管理的功能模型</b></li>
+        </ul>
+        <div class="tip">口诀：三职能「<b>规划 · 控制 · 提供</b>」+ 五价值「<b>获取 · 控制 · 保护 · 交付 · 提高</b>」；<b>DAMA = 国际数据管理协会</b></div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">2</span>DCMM 的 8 个核心能力域（国标 GB/T 36073）</div>
+        <ul>
+          <li><span class="key">数据战略</span>（数据战略规划 / 数据战略实施 / 数据战略评估）</li>
+          <li><span class="key">数据治理</span>（数据治理组织 / 数据制度建设 / 数据治理沟通）</li>
+          <li><span class="key">数据架构</span>（数据模型 / 数据分布 / 数据集成与共享 / <b>元数据管理</b>）</li>
+          <li><span class="key">数据应用</span>（数据分析 / 数据开放共享 / 数据服务）</li>
+          <li><span class="key">数据安全</span>（数据安全策略 / 数据安全管理 / 数据安全审计）</li>
+          <li><span class="key">数据质量</span>（数据质量需求 / 数据质量检查 / 数据质量分析 / 数据质量提升）</li>
+          <li><span class="key">数据标准</span>（业务术语 / 参考数据和主数据 / 数据元 / <b>指标数据</b>）</li>
+          <li><span class="key">数据生存周期</span>（数据需求 / 数据设计和开发 / 数据运维 / 数据退役）</li>
+        </ul>
+        <div class="tip">八域口诀「<b>战略治理架构 · 应用安全质量 · 标准生存周期</b>」；能力项个数「<b>三三四三三四四四</b>」（共 28 项）。⚠️ <b>元数据管理属数据架构</b>、<b>指标数据属数据标准</b>（别挂错域）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">3</span>DCMM 的 5 个成熟度等级</div>
+        <ul>
+          <li><span class="key">初始级</span>：数据需求管理主要在<b>项目级</b>体现，<b>没有统一的管理流程</b>，主要<b>被动式管理</b></li>
+          <li><span class="key">受管理级</span>：组织<b>意识到数据是资产</b>，根据管理策略要求<b>制定了管理流程</b>，<b>指定相关人员进行了初步管理</b></li>
+          <li><span class="key">稳健级</span>：数据已被当作<b>实现组织绩效目标的重要资产</b>，在<b>组织层面制定系列的标准化管理流程</b>，促进数据管理的<b>规范化</b></li>
+          <li><span class="key">量化管理级</span>：数据被认为是<b>获取竞争优势的重要资源</b>，数据管理的<b>效率能量化分析和监控</b></li>
+          <li><span class="key">优化级</span>：数据被认为是<b>组织生存和发展的基础</b>，相关管理流程<b>能实时优化</b>，能在<b>行业内进行最佳实践分享</b></li>
+        </ul>
+        <div class="tip">五等级口诀「<b>初受稳量优</b>」。⭐ 真题落点：从<b>稳健级</b>开始强调「数据管理的规范化」「数据被当作实现组织绩效目标的重要资产」。⚠️ <b>稳健级</b>（绩效目标 / 标准化流程）≠ <b>量化管理级</b>（竞争优势 / 量化分析监控）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">4</span>数据管理的四个常用模型</div>
+        <ul>
+          <li><span class="key">DCMM</span>（数据管理能力成熟度模型）：<b>5 个等级</b> + <b>8 个核心能力域</b></li>
+          <li><span class="key">DGI</span>（数据治理框架）：从<b>组织结构、治理规则和治理过程</b>三个维度提出 <b>10 个关键通用组件</b></li>
+          <li><span class="key">DCAM</span>（数据管理能力评价模型）：<b>4 个组件</b>（基础 / 执行 / 分析 / 应用），强调<b>团队协作（流程）、标准执行和资金支持</b></li>
+          <li><span class="key">DAMA</span>（数据管理模型）：<b>11 个数据管理职能领域</b> + <b>7 个基本环境要素</b>，构成「DAMA 数据管理知识体系」</li>
+        </ul>
+        <div class="tip">量词口诀「<b>DCMM 五等级 · DGI 三维度 · DCAM 四组件 · DAMA 十一域</b>」——四个量词（等级 / 维度 / 组件 / 职能领域）别接错</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">4.2.2 运维管理</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">5</span>IT 运维能力模型（GB/T 28827.1）</div>
+        <ul>
+          <li><b>标准</b>：<span class="key">GB/T 28827.1</span>《信息技术服务 运行维护 第 1 部分：通用要求》定义了 IT 运维能力模型</li>
+          <li><b>三部分</b>：<span class="key">治理要求 · 运行维护服务能力体系 · 价值实现</span></li>
+          <li>⭐ 真题落点：<span class="key">运行维护服务能力体系</span>为<b>价值实现</b>赋能</li>
+          <li><b>能力建设</b>：在治理要求指导下，根据服务场景识别服务能力需求，围绕<b>人员、过程、技术、资源</b>四要素，<b>策划、实施、检查和改进</b>运行维护能力体系</li>
+        </ul>
+        <div class="tip">三部分「<b>治理 · 能力体系 · 价值</b>」；能力建设四要素「<b>人过技资</b>」；管理四阶段「<b>策划 · 实施 · 检查 · 改进</b>」</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">6</span>能力建设四要素与四种「做事」</div>
+        <ul>
+          <li><span class="key">人员能力</span> = <b>选人做事</b>：运维人员一般分为<b>管理类、技术类和操作类</b>三种岗位</li>
+          <li><span class="key">资源能力</span> = <b>保障做事</b>：资源包括<b>知识库、服务台、备件库以及运行维护工具</b></li>
+          <li><span class="key">技术能力</span> = <b>高效做事</b>：<b>发现问题和解决问题</b>的技术</li>
+          <li><span class="key">过程</span> = <b>正确做事</b>：<b>服务级别、服务报告、事件、问题、变更、发布、配置</b>等过程</li>
+        </ul>
+        <div class="tip">配对口诀「<b>人员选人做事 · 资源保障做事 · 技术高效做事 · 过程正确做事</b>」（四者别对调）；人员三岗位「<b>管技操</b>」；资源四件「知识库 · 服务台 · 备件库 · 运维工具」</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">7</span>智能运维能力框架（T/CESA 1172）</div>
+        <ul>
+          <li><b>标准</b>：<span class="key">T/CESA 1172</span>《信息技术服务 智能运维 通用要求》（中国电子工业标准化技术协会团体标准）</li>
+          <li><b>五部分</b>：<span class="key">组织治理 · 智能特征 · 智能运维场景实现 · 能力域 · 能力要素</span></li>
+          <li>其中<b>能力要素是构建智能运维能力的基础</b>（真题原句）</li>
+          <li>组织通过<b>场景分析、场景构建、场景交付和效果评估</b>四个过程，基于<b>数据管理能力域</b>的高质量数据，结合<b>分析决策能力域</b>做判断，驱动<b>自动控制能力域</b>执行运维操作，实现<b>质量可靠、安全可控、效率提升、成本降低</b></li>
+        </ul>
+        <div class="tip">五部分口诀「<b>治理 · 特征 · 场景 · 能力域 · 要素</b>」；<b>能力要素是基础</b>（这是真题原句，最爱挖空）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">8</span>智能运维能力要素（7 项）与智能特征（7 项）</div>
+        <div class="subhd">能力要素（7 项）</div>
+        <ul>
+          <li><span class="key">人员 · 技术 · 过程 · 数据 · 算法 · 资源 · 知识</span></li>
+          <li><b>算法</b>聚焦异常检测、根因分析、故障预测、知识图谱、健康诊断、决策分析，具备<b>有穷性、确切性、有效性</b>；<b>资源</b>配置<b>算力 / 带宽 / 存储</b></li>
+        </ul>
+        <div class="subhd">智能特征（7 项）</div>
+        <ul>
+          <li><span class="key">能感知 · 会描述 · 自学习 · 会诊断 · 可决策 · 自执行 · 自适应</span></li>
+          <li><b>会描述</b> = 直观友好地编排、展现和表达运维场景信息；<b>会诊断</b> = 对人、活动和对象进行分析定位并判断原因</li>
+        </ul>
+        <div class="subhd">能力平台（三能力域）</div>
+        <ul>
+          <li><span class="key">数据管理 · 分析决策 · 自动控制</span>——数据管理提供<b>高质量数据</b>、分析决策<b>做判断/结论</b>、自动控制<b>执行运维操作</b></li>
+        </ul>
+        <div class="tip">⚠️ 别与「能力建设四要素」（人过技资）混：<b>四要素 ⊆ 七要素</b>，智能运维多「<b>数据 / 算法 / 知识</b>」。七要素口诀「人技过数算资知」、七特征口诀「<b>感描学诊决执适</b>」</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">9</span>智能运维「两组四环节」与运维场景三类</div>
+        <div class="subhd">智能运维场景实现的四过程</div>
+        <ul>
+          <li><span class="key">场景分析 · 场景构建 · 场景交付 · 效果评估</span>（能力框架层面的描述）</li>
+        </ul>
+        <div class="subhd">能力应用的四个关键环节</div>
+        <ul>
+          <li><span class="key">场景分析 · 能力构建 · 服务交付 · 迭代调优</span>（落地实施层面，以运维场景为中心）</li>
+        </ul>
+        <div class="subhd">运维场景按复杂程度划分</div>
+        <ul>
+          <li><span class="key">单一场景 · 复合场景 · 全局场景</span></li>
+        </ul>
+        <div class="tip">⚠️ 两组四环节最爱对调：<b>框架层 = 场景构建 / 效果评估</b>，<b>应用层 = 能力构建 / 迭代调优</b>。场景三类口诀「<b>单复全</b>」</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">4.2.3 信息安全管理</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">10</span>CIA 三要素与信息安全管理体系</div>
+        <ul>
+          <li><b>核心</b>：<b>保障信息的保密性、完整性、可用性</b></li>
+          <li><span class="key">保密性 Confidentiality</span>：确保信息<b>只被授权者读取</b></li>
+          <li><span class="key">完整性 Integrity</span>：确保信息<b>不被篡改、真实有效</b></li>
+          <li><span class="key">可用性 Availability</span>：确保信息和系统<b>在需要时能正常使用</b></li>
+          <li>CIA 是<b>信息安全设计的基础，但并非全部</b>，还需结合<b>合规性、可追溯性</b>等其他要求</li>
+        </ul>
+        <div class="subhd">信息安全管理体系（全生命周期的系统工程）</div>
+        <ul>
+          <li>建立安全管理机构和团队 · 制定安全策略和规划 · 实施风险管理 · 制定业务持续性计划和灾难恢复计划 · 选择和部署安全措施 · 规范配置和变更管理 · 开展安全审计和监控 · 处理安全事件 · 开展安全意识培训</li>
+        </ul>
+        <div class="tip">CIA 口诀「<b>保完可</b>」；⚠️ 教材口径是「<b>保密性</b>」（不是「机密性」）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">11</span>网络安全等级保护（等保 2.0）：安全保护等级五级</div>
+        <ul>
+          <li><b>定位</b>：等保 2.0 是我国网络安全的核心制度，把「<b>信息系统安全</b>」扩展为「<b>网络安全</b>」，覆盖<b>信息系统、通信网络设施、数据资源</b>等</li>
+          <li><span class="key">第一级</span>：对<b>公民、法人和其他组织的合法权益造成损害</b>，但<b>不危害国家安全、社会秩序和公共利益</b></li>
+          <li><span class="key">第二级</span>：对合法权益<b>严重损害</b>，或对社会秩序和公共利益<b>造成危害</b>，但<b>不危害国家安全</b></li>
+          <li><span class="key">第三级</span>：对社会秩序和公共利益<b>造成严重危害</b>，或对<b>国家安全造成危害</b></li>
+          <li><span class="key">第四级</span>：对社会秩序和公共利益<b>造成特别严重危害</b>，或对<b>国家安全造成严重危害</b></li>
+          <li><span class="key">第五级</span>：对<b>国家安全造成特别严重危害</b></li>
+        </ul>
+        <div class="tip">五级「<b>公民 → 社会 → 国家</b>」逐级递进；两级出现「严重」、两级出现「特别严重」，第五级只挂「<b>国家安全特别严重</b>」</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">12</span>安全保护能力五级（GB/T 22239）</div>
+        <ul>
+          <li><span class="key">第一级</span>：防护<b>个人的、拥有很少资源</b>的威胁源；受损后<b>恢复部分功能</b></li>
+          <li><span class="key">第二级</span>：防护<b>外部小型组织、拥有少量资源</b>的威胁源；能<b>发现重要安全漏洞</b>并处置；受损后<b>一段时间内恢复部分功能</b></li>
+          <li><span class="key">第三级</span>：<b>统一安全策略下</b>防护<b>外部有组织的团体、拥有较为丰富资源</b>的威胁源；能<b>及时发现、监测攻击行为</b>；受损后<b>较快恢复绝大部分功能</b></li>
+          <li><span class="key">第四级</span>：<b>统一安全策略下</b>防护<b>国家级别的、敌对组织的拥有丰富资源</b>的威胁源；受损后<b>迅速恢复所有功能</b></li>
+          <li><span class="key">第五级</span>：教材从略</li>
+        </ul>
+        <div class="tip">看两列：<b>威胁源</b>（个人 / 小型组织 / 有组织团体 / 国家级）+ <b>恢复程度</b>（部分 / 一段时间内部分 / 绝大部分 / 所有）。⚠️ 与上一问的「安全保护等级五级」不是一个东西（一个按破坏后果、一个按威胁源 + 恢复能力）</div>
+        <div class="fill"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="col-hd">总结区 <span>本节本质 + 考点地图</span></div>
+    <div class="body summary-prefill">
+      <b>本节本质</b>：4.2 把 4.1 的方法论落到「<b>数据 / 运维 / 安全</b>」三件事。全节没有计算，题型是「<b>数量配对 + 归属辨析 + 名称配对</b>」三类，数字型考点极密集（<b>管理要点 3 聚焦 / DCMM 8 域 5 级 / 4 个数据模型 / 4 要素 4 做事 / 智能运维 7 要素 7 特征 3 能力域 3 类场景 / CIA 3 要素 / 等保 2 个五级</b>）。<br>
+      <b>考点地图（按考频排序）</b>：① <b>DCMM 8 个核心能力域 + 5 个成熟度等级</b>（稳健级 = 绩效目标重要资产）→ ② <b>IT 运维能力模型三部分 + 四种「做事」</b>（人员选人 / 资源保障 / 技术高效 / 过程正确）→ ③ <b>智能运维能力要素 7 项 + 智能特征 7 项</b> → ④ <b>CIA 三要素</b>（保密 / 完整 / 可用）→ ⑤ <b>四个数据管理模型量词</b>（等级 / 维度 / 组件 / 职能领域）→ ⑥ <b>智能运维能力框架五部分</b>（能力要素是基础）→ ⑦ <b>等保安全保护等级五级</b>（公民 → 社会 → 国家）→ ⑧ <b>安全保护能力五级</b>（GB/T 22239）→ ⑨ <b>智能运维能力平台三域</b>（数管控）→ ⑩ <b>两组四环节 + 场景三类</b> → ⑪ <b>信息安全管理体系九项内容</b> → ⑫ <b>数据管理定义 / DAMA / 数据管理框架</b>。<br>
+      <span class="small">⚠️ 口径陷阱：① 第 4 章是<b>第 4 版新增章</b>，2023 上及以前旧真题无对应题，别拿旧题正确率评估掌握度；② <b>两套「四要素」</b>别混——运维能力建设 =「人过技资」（4 项），智能运维能力要素 = 7 项（多数据 / 算法 / 知识）；③ 四个数据管理模型量词：<b>DCMM 五等级 · DGI 三维度 · DCAM 四组件 · DAMA 十一域</b>；④ <b>稳健级</b>（绩效目标）≠ <b>量化管理级</b>（竞争优势）；⑤ 教材用「<b>保密性</b>」（非机密性）；⑥ 智能运维两组四环节：<b>场景实现</b>（场景构建 / 效果评估）vs <b>能力应用</b>（能力构建 / 迭代调优）；⑦ <b>等保「两个五级」不是一回事</b>——安全保护等级（按破坏后果）vs 安全保护能力（按威胁源 + 恢复程度）；⑧ <b>元数据管理属数据架构</b>、<b>指标数据属数据标准</b>；⑨ <b>能力要素是构建智能运维能力的基础</b>（真题原句）。</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>康奈尔笔记法 · 第 4 章第 2 节 带答案版　｜　复习记录：当日 ☐　+1 天 ☐　+3 天 ☐　+7 天 ☐　+14 天 ☐</span>
+    <span>正确率 ____ / 12</span>
+  </div>
+
+</div>
+
+<div class="guide">
+  <h2>怎么用这一页</h2>
+  <table>
+    <tr>
+      <th>步骤</th><th>做法</th>
+    </tr>
+    <tr>
+      <td>第 1 遍 · 遮答默写</td>
+      <td>用纸<b>遮住右栏答案区</b>，只看左栏 12 个问题。口头/默写回答，答不出的画「×」。</td>
+    </tr>
+    <tr>
+      <td>第 2 遍 · 对照修正</td>
+      <td>揭开答案区逐项对照。每条答案下的<b>虚线</b>是留给你的「补充线」——记下易漏点（如「DCMM 八能力域」「四个模型的量词」「四种做事配对」「智能运维 7 要素 vs 4 要素」「等保两个五级」）。</td>
+    </tr>
+    <tr>
+      <td>第 3 遍 · 隐藏答案打印</td>
+      <td>点工具栏「👁 隐藏答案」按钮，再打印一份当填空卷，可反复练习。</td>
+    </tr>
+    <tr>
+      <td>第 4 遍 · 复习节奏</td>
+      <td>页脚 5 个框按「当日 → +1 天 → +3 天 → +7 天 → +14 天」打勾，这就是你的艾宾浩斯进度条。全部打勾后，本节可不再看。</td>
+    </tr>
+  </table>
+  <div class="note">
+    <b>为什么这一节要特别加练</b>：4.2 是第 4 章的<b>出题重点区</b>（近年考情「管理要点」比「管理方法」更常出题），而且全是教材原创的<b>数字型框架</b>——DCMM 的 8 域 5 级、四个数据模型的量词、IT 运维能力模型的三个部分、智能运维的 7 要素与 7 特征、CIA 三要素、等保的两个五级。这类题「<b>缺一个就送分、记混就丢分</b>」，属于性价比最高的默写清单。把本页口诀串（数运安 / 初受稳量优 / DCMM 五等级·DGI 三维度·DCAM 四组件·DAMA 十一域 / 人员选人·资源保障·技术高效·过程正确 / 人技过数算资知 / 感描学诊决执适 / 保完可）默写到条件反射，本章综合知识的 2~3 分就稳了。
+  </div>
+</div>
+
+<script>
+  function toggleAnswers(){
+    document.body.classList.toggle('hide-answers');
+    const btn = document.getElementById('toggleBtn');
+    const hidden = document.body.classList.contains('hide-answers');
+    btn.textContent = hidden ? '👁 显示答案' : '👁 隐藏答案（打印填空卷）';
+    btn.classList.toggle('active', hidden);
+  }
+</script>
+
+</body>
+</html>

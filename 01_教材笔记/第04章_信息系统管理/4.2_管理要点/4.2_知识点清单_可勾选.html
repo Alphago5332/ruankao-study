@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4.2 管理要点 · 知识点清单 · 可勾选清单</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Microsoft YaHei", "微软雅黑", sans-serif; background: #f7f9fc; color: #333; padding: 24px; line-height: 1.7; }
+  .wrap { max-width: 820px; margin: 0 auto; background: #fff; padding: 32px 36px; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,.08); }
+  h1 { font-size: 22px; color: #185FA5; margin-bottom: 8px; }
+  h2 { font-size: 18px; color: #185FA5; margin: 22px 0 10px; border-left: 4px solid #185FA5; padding-left: 10px; }
+  h3 { font-size: 15px; color: #185FA5; margin: 16px 0 8px; }
+  h4 { font-size: 14px; color: #185FA5; margin: 14px 0 6px; }
+  blockquote { background: #f4f8fc; border-left: 4px solid #185FA5; padding: 10px 14px; margin: 10px 0; color: #444; font-size: 13.5px; }
+  p, .plain-li { margin: 8px 0; font-size: 14px; }
+  .plain-li { display: flex; gap: 6px; }
+  .bullet { color: #185FA5; font-weight: bold; }
+  .task { display: flex; align-items: flex-start; gap: 8px; margin: 8px 0; cursor: pointer; user-select: none; }
+  .task input[type="checkbox"] { width: 16px; height: 16px; margin-top: 4px; flex-shrink: 0; accent-color: #185FA5; cursor: pointer; }
+  .task-text { font-size: 14px; transition: opacity .2s; }
+  .task input:checked + .task-text { text-decoration: line-through; opacity: .45; color: #666; }
+  .item-body { margin: 4px 0 12px 24px; }
+  .item-body p { margin: 4px 0; color: #555; font-size: 13.5px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; }
+  th, td { border: 1px solid #d9e2ec; padding: 7px 10px; }
+  th { background: #eef4fb; color: #185FA5; font-weight: 600; }
+  td { background: #fff; }
+  ol { margin: 8px 0 8px 22px; font-size: 14px; }
+  li { margin: 4px 0; }
+  code { background: #f0f3f7; padding: 1px 4px; border-radius: 3px; font-family: Consolas, monospace; font-size: 12px; }
+  a { color: #185FA5; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  summary { cursor: pointer; color: #185FA5; font-weight: 600; }
+  details { background: #f9fbfd; border: 1px solid #e3eaf2; border-radius: 6px; padding: 10px 14px; margin: 12px 0; }
+  .progress { position: sticky; top: 0; background: #fff; border-bottom: 1px solid #e3eaf2; padding: 8px 0; margin: -32px -36px 20px; padding-left: 36px; padding-right: 36px; font-size: 12px; color: #666; z-index: 10; }
+  .progress b { color: #185FA5; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="progress" id="progress">已完成：0 / 0</div>
+  <h1>4.2 管理要点 · 知识点清单</h1>
+<blockquote><b>教材</b>：《信息系统项目管理师教程（第 4 版）》第 4 章第 2 节（约 P104 ~ P128）<br><b>学习日</b>：2026-10-08（Day 12）<br><b>上午分值</b>：第 4 章是<b>第 4 版新增章</b>，综合知识平均 <b>2~3 题</b>；4.2 一节是本章的<b>重点区</b>（近年考情「管理要点」出题比「管理方法」更多）。高频块：<b>DCMM 八能力域 + 五等级 / 四个数据管理模型辨析 / IT 运维能力模型三部分 + 四种「做事」/ 智能运维能力要素 7 项 + 智能特征 7 项 / CIA 三要素 + 等保五级</b><br><b>本节定位</b>：<b>数字型考点密集</b>（8 能力域 / 5 等级 / 4 模型 / 4 要素 / 7 要素 / 7 特征 / 5 级等保），题型以「数量配对」「归属辨析」「名称配对」为主，无计算。表格默写就是得分点<br>⚠️ <b>新旧真题提醒</b>：本章为<b>第 4 版新增独立章</b>（旧版教材无「信息系统管理」独立章），2023 上及以前的旧真题<b>没有对应题</b>——别用旧题正确率判断掌握度，以本节自测题 + 清单为准</blockquote>
+<h2>今日目标（学完要能做到）</h2>
+<ol><li>说清 4.2「管理要点」的<b>三大聚焦领域</b>（数据管理 / 运维管理 / 信息安全管理）</li><li>背出<b>数据管理定义</b>（三个职能动词 + 五类价值），以及 <b>DAMA</b> 与<b>数据管理框架</b>的说法</li><li>默写 <b>DCMM 的 8 个核心能力域</b>及其主要能力项，背熟 <b>5 个成熟度等级</b>及各级特征</li><li>辨析<b>四个常用数据管理模型</b>（DCMM 5 等级 / DGI 3 维度 / DCAM 4 组件 / DAMA 11 域）</li><li>背出 <b>IT 运维能力模型三部分</b>（治理要求 / 运行维护服务能力体系 / 价值实现）与<b>能力建设四要素</b></li><li>背熟<b>四种「做事」</b>配对（人员选人 / 资源保障 / 技术高效 / 过程正确）与人员三岗位、资源四件</li><li>背出<b>智能运维能力框架五部分</b>（含「能力要素是基础」），默写<b>能力要素 7 项</b>与<b>智能特征 7 项</b></li><li>区分<b>智能运维「场景实现」四过程 vs「能力应用」四关键环节</b>，背出<b>运维场景三类</b></li><li>背熟 <b>CIA 三要素</b>（保密性 / 完整性 / 可用性）与<b>信息安全体系内容</b></li><li>背出<b>网络安全等级保护的两个五级</b>（安全保护等级五级 + 安全保护能力五级）</li></ol>
+<h2>一、必背清单</h2>
+<h3>模块 A ｜ 管理要点总览（4.2 引言）</h3>
+<label class="task"><input type="checkbox" data-key="A0" ><span class="task-text"><b>A0 · 管理要点的三大聚焦领域</b> ⭕ 必背</span></label><div class="item-body"><p>信息系统管理涉及系统<b>准备、设计、实施、运行</b>等活动的众多方面，管理重点的<b>范围和细致程度随各组织的战略和业务目标的不同而存在差异</b>。从<b>日常管理活动</b>视角来看，各组织关注的管理内容主要聚焦在<b>数据管理、运维管理和信息安全管理</b>等方面的<b>体系化管理</b>。</p></div>
+<blockquote>口诀：管理要点三聚焦「<b>数运安</b>」（数据管理 · 运维管理 · 信息安全管理）——正好对应 4.2.1 / 4.2.2 / 4.2.3</blockquote>
+<h3>模块 B ｜ 4.2.1 数据管理</h3>
+<label class="task"><input type="checkbox" data-key="B0" ><span class="task-text"><b>B0 · 数据管理的定义</b> ⭕ 必背（定义题原句）</span></label><div class="item-body"><p>在通常情况下，<b>数据管理</b>是指通过<b>规划、控制与提供数据和信息资产的职能</b>，包括<b>开发、执行和监督</b>有关数据的<b>计划、策略、方案、项目、流程、方法和程序</b>，以<b>获取、控制、保护、交付和提高数据和信息资产价值</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>国际数据管理协会（DAMA）</b>指出，<b>数据资源管理</b>致力于<b>发展和处理组织数据全生命周期的适当的构建、策略、实践和程序</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>数据管理框架</b>是对组织的管理平台或者能够产生业务数据的平台产生的数据进行<b>统一的跟踪、协调、管理的功能模型</b></span></div>
+<blockquote>记法：定义抓三个职能动词「<b>规划 · 控制 · 提供</b>」+ 五类价值动作「<b>获取 · 控制 · 保护 · 交付 · 提高</b>」；<b>DAMA = 国际数据管理协会</b></blockquote>
+<label class="task"><input type="checkbox" data-key="B1" ><span class="task-text"><b>B1 · DCMM 的 8 个核心能力域</b> ⭕ 必背（数字型高频）</span></label><div class="item-body"><p><b>数据管理能力成熟度评估模型（DCMM）</b> 是国家标准 <b>GB/T 36073</b>《数据管理能力成熟度评估模型》中提出的，旨在帮助组织利用先进的数据管理理念和方法，建立和评价自身数据管理能力，持续完善数据管理组织、程序和制度，充分发挥数据在促进组织向<b>信息化、数字化、智能化</b>发展方面的价值。</p>
+<p><b>DCMM 定义 8 个核心能力域</b>（含主要能力项）：</p></div>
+<table><thead><tr><th>#</th><th>核心能力域</th><th>主要能力项</th></tr></thead><tbody><tr><td>1</td><td><b>数据战略</b></td><td>数据战略规划 / 数据战略实施 / 数据战略评估</td></tr><tr><td>2</td><td><b>数据治理</b></td><td>数据治理组织 / 数据制度建设 / 数据治理沟通</td></tr><tr><td>3</td><td><b>数据架构</b></td><td>数据模型 / 数据分布 / 数据集成与共享 / 元数据管理</td></tr><tr><td>4</td><td><b>数据应用</b></td><td>数据分析 / 数据开放共享 / 数据服务</td></tr><tr><td>5</td><td><b>数据安全</b></td><td>数据安全策略 / 数据安全管理 / 数据安全审计</td></tr><tr><td>6</td><td><b>数据质量</b></td><td>数据质量需求 / 数据质量检查 / 数据质量分析 / 数据质量提升</td></tr><tr><td>7</td><td><b>数据标准</b></td><td>业务术语 / 参考数据和主数据 / 数据元 / 指标数据</td></tr><tr><td>8</td><td><b>数据生存周期</b></td><td>数据需求 / 数据设计和开发 / 数据运维 / 数据退役</td></tr></tbody></table>
+<blockquote>口诀：八能力域「<b>战略治理架构 · 应用安全质量 · 标准生存周期</b>」；能力项个数序列「<b>三三四三三四四四</b>」（战略3·治理3·架构4·应用3·安全3·质量4·标准4·生存周期4，共 28 项）<br>辨析：<b>元数据管理</b>属<b>数据架构</b>；<b>指标数据</b>属<b>数据标准</b>（别挂错域）</blockquote>
+<label class="task"><input type="checkbox" data-key="B2" ><span class="task-text"><b>B2 · DCMM 的 5 个成熟度等级</b> ⭕ 必背（真题原题）</span></label><div class="item-body"><p>DCMM 将组织的管理成熟度划分为 <b>5 个等级</b>：</p></div>
+<table><thead><tr><th>级别</th><th>名称</th><th>特征</th></tr></thead><tbody><tr><td>1</td><td><b>初始级</b></td><td>数据需求的管理主要在<b>项目级</b>体现，<b>没有统一的管理流程</b>，主要<b>被动式管理</b></td></tr><tr><td>2</td><td><b>受管理级</b></td><td>组织<b>意识到数据是资产</b>，根据管理策略的要求<b>制定了管理流程</b>，<b>指定相关人员进行了初步管理</b></td></tr><tr><td>3</td><td><b>稳健级</b></td><td>数据已被当作<b>实现组织绩效目标的重要资产</b>，在<b>组织层面制定系列的标准化管理流程</b>，促进数据管理的<b>规范化</b></td></tr><tr><td>4</td><td><b>量化管理级</b></td><td>数据被认为是<b>获取竞争优势的重要资源</b>，数据管理的<b>效率能量化分析和监控</b></td></tr><tr><td>5</td><td><b>优化级</b></td><td>数据被认为是<b>组织生存和发展的基础</b>，相关管理流程<b>能实时优化</b>，能在<b>行业内进行最佳实践分享</b></td></tr></tbody></table>
+<blockquote>口诀：五等级「<b>初受稳量优</b>」。⭐ 真题落点：从<b>稳健级</b>开始强调「数据管理的<b>规范化</b>」「数据被当作<b>实现组织绩效目标</b>的重要资产」<br>辨析：<b>稳健级</b> = 组织层面标准化流程 + 「<b>绩效目标</b>」重要资产；<b>量化管理级</b> = 「<b>竞争优势</b>」重要资源 + 量化分析监控（两级别对调）</blockquote>
+<label class="task"><input type="checkbox" data-key="B3" ><span class="task-text"><b>B3 · 数据管理的四个常用模型（辨析）</b> ⭕ 常考（框架归属）</span></label><div class="item-body"><p>国内外常用的数据管理模型包括：</p></div>
+<table><thead><tr><th>模型</th><th>关键口径</th></tr></thead><tbody><tr><td><b>DCMM</b>（数据管理能力成熟度模型）</td><td><b>5 个等级</b> + <b>8 个核心能力域</b></td></tr><tr><td><b>DGI</b>（数据治理框架）</td><td>从<b>组织结构、治理规则和治理过程</b>三个维度提出 <b>10 个关键通用组件</b></td></tr><tr><td><b>DCAM</b>（数据管理能力评价模型）</td><td><b>4 个组件</b>（基础组件 / 执行组件 / 分析组件 / 应用组件），强调<b>团队协作（流程）、标准执行和资金支持</b></td></tr><tr><td><b>DAMA</b>（数据管理模型）</td><td><b>11 个数据管理职能领域</b> + <b>7 个基本环境要素</b>，构成「DAMA 数据管理知识体系」</td></tr></tbody></table>
+<blockquote>口诀：<b>DCMM 五等级 · DGI 三维度 · DCAM 四组件 · DAMA 十一域</b>（「等级 / 维度 / 组件 / 职能领域」四个量词别接错）</blockquote>
+<h3>模块 C ｜ 4.2.2 运维管理 · 能力模型</h3>
+<label class="task"><input type="checkbox" data-key="C0" ><span class="task-text"><b>C0 · IT 运维能力模型（三部分）</b> ⭕ 必背（真题：谁为价值实现赋能）</span></label><div class="item-body"><p>国家标准 <b>GB/T 28827.1</b>《信息技术服务 运行维护 第 1 部分：通用要求》定义了 <b>IT 运维能力模型</b>，该模型包含<b>治理要求、运行维护服务能力体系和价值实现</b>三个部分。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>⭐ 真题落点：<b>运行维护服务能力体系</b>为<b>价值实现</b>赋能</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>能力建设</b>：组织需要考虑环境的<b>内外部因素</b>，在<b>治理要求的指导</b>下，根据<b>服务场景</b>识别<b>服务能力需求</b>，围绕<b>人员、过程、技术、资源</b>能力<b>四要素</b>，<b>策划、实施、检查和改进</b>运行维护能力体系，向各种服务场景赋能，通过服务提供实现服务价值</span></div>
+<blockquote>口诀：模型三部分「<b>治理 · 能力体系 · 价值</b>」；能力建设四要素「<b>人过技资</b>」；运维能力管理四阶段「<b>策划 · 实施 · 检查 · 改进</b>」</blockquote>
+<label class="task"><input type="checkbox" data-key="C1" ><span class="task-text"><b>C1 · 能力建设四要素及四种「做事」</b> ⭕ 必考（配对题高频）</span></label>
+<table><thead><tr><th>要素</th><th>定位口诀</th><th>内容</th></tr></thead><tbody><tr><td><b>人员能力</b></td><td><b>选人做事</b></td><td>运维人员一般分为<b>管理类、技术类和操作类</b>三种人员岗位；依据运维能力策划要求，进行人员能力策划、岗位结构、人员储备、人员培训、绩效管理和能力评价</td></tr><tr><td><b>资源能力</b></td><td><b>保障做事</b></td><td>资源包括<b>知识库、服务台、备件库以及运行维护工具</b></td></tr><tr><td><b>技术能力</b></td><td><b>高效做事</b></td><td><b>发现问题和解决问题</b>的技术</td></tr><tr><td><b>过程</b></td><td><b>正确做事</b></td><td><b>服务级别、服务报告、事件、问题、变更、发布、配置</b>等过程；把人员、技术和资源要素以过程为主线串接</td></tr></tbody></table>
+<blockquote>口诀：四种「做事」配对 — <b>人员选人做事 · 资源保障做事 · 技术高效做事 · 过程正确做事</b>（四者别对调）<br>人员三岗位「<b>管技操</b>」；资源四件「<b>知识库 · 服务台 · 备件库 · 运维工具</b>」</blockquote>
+<h3>模块 D ｜ 4.2.2 运维管理 · 智能运维</h3>
+<label class="task"><input type="checkbox" data-key="D0" ><span class="task-text"><b>D0 · 智能运维能力框架（五部分）</b> ⭕ 必背（真题原题）</span></label><div class="item-body"><p>中国电子工业标准化技术协会发布的团体标准 <b>T/CESA 1172</b>《信息技术服务 智能运维 通用要求》给出了<b>智能运维能力框架</b>，包括<b>组织治理、智能特征、智能运维场景实现、能力域和能力要素</b>，其中<b>能力要素是构建智能运维能力的基础</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>组织在<b>组织治理</b>的指导下，对<b>智能运维场景实现</b>提出能力建设要求，开展智能运维能力的<b>规划和建设</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>组织通过<b>场景分析、场景构建、场景交付和效果评估</b>四个过程，基于<b>数据管理能力域</b>提供的高质量数据，结合<b>分析决策能力域</b>做出合理判断或结论，并根据需要驱动<b>自动控制能力域</b>执行运维操作，使运维场景具备智能特征，实现<b>质量可靠、安全可控、效率提升、成本降低</b></span></div>
+<blockquote>口诀：框架五部分「<b>治理 · 特征 · 场景 · 能力域 · 要素</b>」（<b>能力要素是基础</b>，这是真题原句）</blockquote>
+<label class="task"><input type="checkbox" data-key="D1" ><span class="task-text"><b>D1 · 智能运维能力要素（7 项）</b> ⭕ 必背（数字型高频）</span></label><div class="item-body"><p>智能运维的<b>能力要素</b>共 <b>7 项</b>：<b>人员 · 技术 · 过程 · 数据 · 算法 · 资源 · 知识</b></p></div>
+<table><thead><tr><th>要素</th><th>要点</th></tr></thead><tbody><tr><td><b>人员</b></td><td>运维团队需熟悉 IT 运维业务活动与流程，掌握<b>自动化、大数据、人工智能、云计算、算法</b>等技术</td></tr><tr><td><b>技术</b></td><td>统一标准和规范、开放的基础公共资源与服务、数据与流程及服务的<b>互联互通</b></td></tr><tr><td><b>过程</b></td><td>需<b>清晰界定人机界面</b>，考虑<b>权限控制、风险规避</b></td></tr><tr><td><b>数据</b></td><td><b>加强数据治理</b>，保证数据质量、规范数据接口</td></tr><tr><td><b>算法</b></td><td>聚焦<b>异常检测、根因分析、故障预测、知识图谱、健康诊断、决策分析</b>，具备<b>有穷性、确切性、有效性</b></td></tr><tr><td><b>资源</b></td><td>按场景要求配置<b>算力、带宽、存储</b></td></tr><tr><td><b>知识</b></td><td>运维技术方案与方法步骤、经验沉淀、运维对象多维度描述、运维数据智能挖掘结果</td></tr></tbody></table>
+<blockquote>口诀：七要素「<b>人技过数算资知</b>」。⚠️ 别与「能力建设四要素」（人过技资）混——<b>四要素 ⊆ 七要素</b>，智能运维多了<b>数据、算法、知识</b>三项</blockquote>
+<label class="task"><input type="checkbox" data-key="D2" ><span class="task-text"><b>D2 · 智能运维能力平台（三能力域）</b> ⭕ 常考</span></label><div class="item-body"><p>智能运维<b>能力平台</b>通常具备<b>数据管理、分析决策、自动控制</b>等能力域：</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>数据管理能力</b>：用于<b>采集、处理、存储、展示</b>各种运维数据</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>分析决策能力</b>：以<b>感知到的数据作为输入</b>，做出<b>实时的运维决策</b>，驱动自动化工具实施操作</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>自动控制能力</b>：根据<b>运维决策</b>，实施具体的<b>运维操作</b></span></div>
+<blockquote>口诀：能力平台三域「<b>数管控</b>」——数据管理提供<b>高质量数据</b>、分析决策<b>做判断/结论</b>、自动控制<b>执行运维操作</b></blockquote>
+<label class="task"><input type="checkbox" data-key="D3" ><span class="task-text"><b>D3 · 智能运维能力应用与运维场景</b> ⭕ 常考（易混）</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span><b>能力应用</b>：以<b>运维场景</b>为中心，通过<b>场景分析、能力构建、服务交付、迭代调优</b>四个关键环节，可以使运维场景具备智能特征</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>运维场景按复杂程度划分</b>：<b>单一场景 · 复合场景 · 全局场景</b></span></div>
+<blockquote>⚠️ 两组四环节别混：<b>「智能运维场景实现」的四过程 = 场景分析 · 场景构建 · 场景交付 · 效果评估</b>（能力框架层面的描述）；<b>「能力应用」的四关键环节 = 场景分析 · 能力构建 · 服务交付 · 迭代调优</b>（落地实施层面的描述）<br>口诀：场景三类「<b>单复全</b>」</blockquote>
+<label class="task"><input type="checkbox" data-key="D4" ><span class="task-text"><b>D4 · 智能运维的 7 个智能特征</b> ⭕ 必背（数字型高频）</span></label><div class="item-body"><p>智能运维需具备若干<b>智能特征</b>，共 <b>7 项</b>：<b>能感知 · 会描述 · 自学习 · 会诊断 · 可决策 · 自执行 · 自适应</b></p></div>
+<table><thead><tr><th>特征</th><th>含义</th></tr></thead><tbody><tr><td><b>能感知</b></td><td>灵敏、准确、自动地<b>识别和反映</b>人、活动和对象的<b>状态</b></td></tr><tr><td><b>会描述</b></td><td>直观友好地<b>编排、展现和表达</b>运维场景中的各类信息</td></tr><tr><td><b>自学习</b></td><td>挖掘数据、完善模型、总结规律，<b>主动沉淀知识</b></td></tr><tr><td><b>会诊断</b></td><td>对人、活动和对象进行<b>分析定位并判断原因</b></td></tr><tr><td><b>可决策</b></td><td>通过信息搜集、加工和综合分析，<b>给出后续依据或解决方案</b></td></tr><tr><td><b>自执行</b></td><td>对运维场景自动进行<b>分析、判断、决策和处理</b></td></tr><tr><td><b>自适应</b></td><td>自动<b>识别环境变化</b>，<b>动态调配</b>应对措施并优化处理</td></tr></tbody></table>
+<blockquote>口诀：七特征「<b>感描学诊决执适</b>」（能感知 / 会描述 / 自学习 / 会诊断 / 可决策 / 自执行 / 自适应）</blockquote>
+<h3>模块 E ｜ 4.2.3 信息安全管理</h3>
+<label class="task"><input type="checkbox" data-key="E0" ><span class="task-text"><b>E0 · CIA 三要素</b> ⭕ 必背（每年必考）</span></label><div class="item-body"><p>在数字时代，信息价值日益凸显、组织对信息系统的依赖度不断提升，信息安全管理成为重中之重，其核心是<b>保障信息的保密性、完整性、可用性</b>。<b>信息安全三要素（CIA 三要素）</b>：</p></div>
+<table><thead><tr><th>要素</th><th>英文</th><th>含义</th></tr></thead><tbody><tr><td><b>保密性</b></td><td><b>Confidentiality</b></td><td>确保信息<b>只被授权者读取</b>（如客户密码仅本人可查）</td></tr><tr><td><b>完整性</b></td><td><b>Integrity</b></td><td>确保信息<b>不被篡改、真实有效</b>（如合同文件内容完整）</td></tr><tr><td><b>可用性</b></td><td><b>Availability</b></td><td>确保信息和系统<b>在需要时能正常使用</b>（如网站 24 小时可访问）</td></tr></tbody></table>
+<div class="plain-li"><span class="bullet">•</span> <span>CIA 三要素是<b>信息安全设计的基础，但并非全部</b>，还需结合<b>合规性、可追溯性</b>等其他要求，形成全面的安全策略</span></div>
+<blockquote>口诀：CIA =「<b>保完可</b>」（保密 · 完整 · 可用）；⚠️ 教材口径是「<b>保密性</b>」（不是「机密性」）</blockquote>
+<label class="task"><input type="checkbox" data-key="E1" ><span class="task-text"><b>E1 · 信息安全管理体系的内容</b> ⭕ 常考（清单题）</span></label><div class="item-body"><p>信息安全管理是<b>全生命周期的系统工程</b>，核心内容包括：</p>
+<ol><li><b>建立安全管理机构和团队</b>，明确角色与职责</li><li><b>制定安全策略和规划</b></li><li><b>实施风险管理</b>，识别并防范安全风险</li><li>制定<b>业务持续性计划和灾难恢复计划</b></li><li><b>选择和部署安全措施</b>（如防火墙、加密技术）</li><li>规范<b>配置和变更管理</b>，确保安全可控</li><li>开展<b>安全审计和监控</b>，提供安全维护支持</li><li><b>处理安全事件</b></li><li>开展<b>安全意识培训</b>，规范人员安全行为</li></ol></div>
+<blockquote>记法：一条主线「<b>组织 → 策略 → 风险 → 持续性 → 措施 → 配置变更 → 审计监控 → 事件 → 培训</b>」</blockquote>
+<label class="task"><input type="checkbox" data-key="E2" ><span class="task-text"><b>E2 · 网络安全等级保护（等保 2.0）——安全保护等级五级</b> ⭕ 必背（必考数字题）</span></label><div class="item-body"><p><b>网络安全等级保护（等保 2.0）</b> 是我国网络安全的核心制度，将「<b>信息系统安全</b>」扩展为「<b>网络安全</b>」，覆盖<b>信息系统、通信网络设施、数据资源</b>等。<b>等级保护对象的安全保护等级</b>分为<b>五级</b>（按受破坏后的危害程度递增）：</p></div>
+<table><thead><tr><th>级别</th><th>受破坏后的后果</th></tr></thead><tbody><tr><td><b>第一级</b></td><td>对相关<b>公民、法人和其他组织的合法权益造成损害</b>，但<b>不危害国家安全、社会秩序和公共利益</b></td></tr><tr><td><b>第二级</b></td><td>对合法权益<b>严重损害</b>，或对<b>社会秩序和公共利益造成危害</b>，但<b>不危害国家安全</b></td></tr><tr><td><b>第三级</b></td><td>对<b>社会秩序和公共利益造成严重危害</b>，或对<b>国家安全造成危害</b></td></tr><tr><td><b>第四级</b></td><td>对<b>社会秩序和公共利益造成特别严重危害</b>，或对<b>国家安全造成严重危害</b></td></tr><tr><td><b>第五级</b></td><td>对<b>国家安全造成特别严重危害</b></td></tr></tbody></table>
+<blockquote>记法：五级「<b>公民 → 社会 → 国家</b>」逐级递进；两级出现「<b>严重</b>」、两级出现「<b>特别严重</b>」，第五级只挂「<b>国家安全特别严重</b>」<br>备注：部分教辅按《计算机信息系统安全保护等级划分准则》另给级别名称（用户自主保护级 / 系统审计保护级 / 安全标记保护级 / 结构化保护级 / 访问验证保护级），教材第 4 版以「第一级~第五级 + 危害后果」表述为主</blockquote>
+<label class="task"><input type="checkbox" data-key="E3" ><span class="task-text"><b>E3 · 安全保护能力等级五级（GB/T 22239）</b> ⭕ 常考</span></label><div class="item-body"><p><b>GB/T 22239</b>《信息安全技术 网络安全等级保护基本要求》规定了不同级别的等级保护对象应具备的<b>基本安全保护能力</b>：</p></div>
+<table><thead><tr><th>级别</th><th>防护的威胁源</th><th>恢复能力</th></tr></thead><tbody><tr><td><b>第一级</b></td><td><b>个人的、拥有很少资源</b>的威胁源</td><td>受损后<b>恢复部分功能</b></td></tr><tr><td><b>第二级</b></td><td><b>外部小型组织、拥有少量资源</b>的威胁源</td><td>能<b>发现重要安全漏洞</b>并处置安全事件；受损后<b>一段时间内恢复部分功能</b></td></tr><tr><td><b>第三级</b></td><td><b>统一安全策略下</b>，<b>外部有组织的团体、拥有较为丰富资源</b>的威胁源</td><td>能<b>及时发现、监测攻击行为</b>并处置；受损后<b>较快恢复绝大部分功能</b></td></tr><tr><td><b>第四级</b></td><td><b>统一安全策略下</b>，<b>国家级别的、敌对组织的拥有丰富资源</b>的威胁源</td><td>能<b>及时发现、监测发现攻击行为和安全事件</b>；受损后<b>迅速恢复所有功能</b></td></tr><tr><td><b>第五级</b></td><td>（教材从略）</td><td>—</td></tr></tbody></table>
+<blockquote>口诀：能力五级看两列 —「<b>威胁源</b>」（个人 / 小型组织 / 有组织团体 / 国家级）+「<b>恢复程度</b>」（部分 / 一段时间内部分 / 绝大部分 / 所有）</blockquote>
+<h3>模块 F ｜ 考情与易混对照</h3>
+<label class="task"><input type="checkbox" data-key="F0" ><span class="task-text"><b>F0 · 本章考情提醒</b> ⭕ 了解</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span>第 4 章为<b>第 4 版新增章</b>，综合知识约 <b>2~3 题</b>；<b>2023 上及以前的旧真题没有本章对应题</b>，别用旧题正确率评估掌握度</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>近年考情：<b>管理要点</b>比<b>管理方法</b>更常出题（管理要点 · 数据管理 / 运维管理 ≈ 7 题 &gt; 管理方法 ≈ 5 题）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>高频五块：<b>DCMM 八能力域 + 五等级 / 四个数据管理模型辨析 / IT 运维能力模型三部分 + 四要素「做事」/ 智能运维能力要素 7 项 + 智能特征 7 项 / CIA 三要素 + 等保五级</b></span></div>
+<label class="task"><input type="checkbox" data-key="F1" ><span class="task-text"><b>F1 · 高频易混对照</b> ⭕ 必背</span></label>
+<table><thead><tr><th>对照</th><th>内容</th></tr></thead><tbody><tr><td><b>两套「四要素」</b></td><td><b>运维能力建设</b> = 人员 · 过程 · 技术 · 资源（「人过技资」，4 项）；<b>智能运维能力要素</b> = 人员 · 技术 · 过程 · 数据 · 算法 · 资源 · 知识（7 项）——后者多「<b>数据 / 算法 / 知识</b>」</td></tr><tr><td><b>四个数据管理模型量词</b></td><td><b>DCMM 五等级</b>（+8 能力域）· <b>DGI 三维度</b>（+10 组件）· <b>DCAM 四组件</b> · <b>DAMA 十一域</b>（+7 要素）</td></tr><tr><td><b>DCMM 稳健级 vs 量化管理级</b></td><td><b>稳健级</b> = 组织层面标准化流程 +「实现组织<b>绩效目标</b>」的重要资产；<b>量化管理级</b> =「获取<b>竞争优势</b>」的重要资源 + 量化分析监控</td></tr><tr><td><b>「保密性」还是「机密性」</b></td><td>教材 4.2.3 用「<b>保密性</b>（Confidentiality）」</td></tr><tr><td><b>智能运维两组四环节</b></td><td><b>场景实现</b> = 场景分析 · 场景构建 · 场景交付 · 效果评估；<b>能力应用</b> = 场景分析 · 能力构建 · 服务交付 · 迭代调优</td></tr><tr><td><b>等保「两个五级」</b></td><td><b>安全保护等级五级</b>（按破坏后果：公民→社会→国家）；<b>安全保护能力五级</b>（GB/T 22239，按威胁源 + 恢复程度）——别混为一谈</td></tr><tr><td><b>「能力要素」是不是基础</b></td><td>是——<b>能力要素是构建智能运维能力的基础</b>（真题原句）</td></tr></tbody></table>
+<h2>二、可以只通读、暂不背的（标记避免浪费时间）</h2>
+<table><thead><tr><th>小节</th><th>处理方式</th></tr></thead><tbody><tr><td>4.2.1 数据管理 8 个能力域下的能力项明细（28 项）</td><td>通读，只背 8 个能力域名 + 关键归属（如「元数据管理」属数据架构、「指标数据」属数据标准）</td></tr><tr><td>4.2.2 智能运维能力要素表格的逐条说明</td><td>通读，只背 7 个要素名 + 算法「有穷性 / 确切性 / 有效性」、资源「算力 / 带宽 / 存储」</td></tr><tr><td>4.2.3 信息安全管理体系的展开段落</td><td>通读，记九项内容的主线，不必逐字背</td></tr><tr><td>4.2.3 安全保护能力五级的长句描述</td><td>通读，只背「威胁源 + 恢复程度」两条线</td></tr></tbody></table>
+<h2>三、本节自检题（做完再合书）</h2>
+<ol><li>4.2「管理要点」的三大聚焦领域是什么？管理重点的范围和细致程度取决于什么？</li><li>数据管理的定义是什么（三个职能动词 + 五类价值动作）？DAMA 指什么？数据管理框架是什么？</li><li>DCMM 是国家标准 GB/T 多少？它定义了哪 8 个核心能力域？</li><li>DCMM 的 5 个成熟度等级分别是什么？哪一级开始强调「促进数据管理的规范化」「数据被当作实现组织绩效目标的重要资产」？</li><li>国内外常用的四个数据管理模型分别是什么？各自的量词口径（等级 / 维度 / 组件 / 职能领域）？</li><li>IT 运维能力模型由哪三部分组成（GB/T 28827.1）？其中哪一部分为价值实现赋能？</li><li>能力建设的四要素是什么？各对应哪种「做事」（选人 / 保障 / 高效 / 正确）？</li><li>运维人员一般分为哪三种岗位？资源能力包括哪四类资源？</li><li>智能运维能力框架包括哪五部分（T/CESA 1172）？哪一部分是构建智能运维能力的基础？</li><li>智能运维的能力要素有哪 7 项？算法要素聚焦哪些方面、具备哪三个特点？</li><li>智能运维能力平台通常具备哪三项能力？数据管理能力与自动控制能力各做什么？</li><li>「智能运维场景实现」的四个过程是什么？「能力应用」的四个关键环节是什么？运维场景按复杂程度分哪三类？</li><li>智能运维的 7 个智能特征是什么？「会描述」「会诊断」分别指什么？</li><li>信息安全管理的核心是什么？CIA 三要素分别是什么（含英文）？为什么说三要素「并非全部」？</li><li>信息安全管理体系的核心内容主要包括哪些（至少说 6 项）？</li><li>网络安全等级保护（等保 2.0）把「信息系统安全」扩展为什么？覆盖哪些对象？</li><li>等级保护对象的<b>安全保护等级</b>分几级？第三级、第四级受破坏后的危害后果分别是什么？</li><li><b>安全保护能力</b>五级（GB/T 22239）中，第一级与第四级分别要能防护来自谁的威胁？受损后的恢复程度如何？</li><li>DCMM 八能力域中，「元数据管理」和「指标数据」分别属于哪个能力域？</li><li>「稳健级」与「量化管理级」的核心区别是什么（各强调什么关键词）？</li></ol>
+<details>
+<summary>参考答案（先自己答完再展开）</summary>
+<ol><li><b>数据管理 · 运维管理 · 信息安全管理</b>（口诀「数运安」）。管理重点的<b>范围和细致程度随各组织的战略和业务目标的不同而存在差异</b></li><li><b>数据管理</b>是指通过<b>规划、控制与提供数据和信息资产的职能</b>，包括<b>开发、执行和监督</b>有关数据的计划、策略、方案、项目、流程、方法和程序，以<b>获取、控制、保护、交付和提高数据和信息资产价值</b>。<b>DAMA = 国际数据管理协会</b>（指出数据资源管理致力于发展和处理组织数据全生命周期的适当的构建、策略、实践和程序）。<b>数据管理框架</b>是对组织的管理平台或者能够产生业务数据的平台产生的数据进行<b>统一的跟踪、协调、管理的功能模型</b></li><li>国家标准 <b>GB/T 36073</b>《数据管理能力成熟度评估模型》。8 个核心能力域：<b>数据战略 · 数据治理 · 数据架构 · 数据应用 · 数据安全 · 数据质量 · 数据标准 · 数据生存周期</b></li><li><b>初始级 · 受管理级 · 稳健级 · 量化管理级 · 优化级</b>（「初受稳量优」）。从<b>稳健级</b>开始强调「数据管理的<b>规范化</b>」「数据已被当作<b>实现组织绩效目标的重要资产</b>」</li><li><b>DCMM</b>（5 等级 + 8 能力域）· <b>DGI</b>（3 维度 + 10 组件）· <b>DCAM</b>（4 组件：基础 / 执行 / 分析 / 应用）· <b>DAMA</b>（11 个职能领域 + 7 个基本环境要素）</li><li><b>治理要求 · 运行维护服务能力体系 · 价值实现</b>。<b>运行维护服务能力体系</b>为<b>价值实现</b>赋能</li><li>四要素 = <b>人员 · 过程 · 技术 · 资源</b>（「人过技资」）。配对：<b>人员能力 = 选人做事 · 资源能力 = 保障做事 · 技术能力 = 高效做事 · 过程 = 正确做事</b></li><li>三种岗位 = <b>管理类 · 技术类 · 操作类</b>（「管技操」）。资源能力四类 = <b>知识库 · 服务台 · 备件库 · 运行维护工具</b></li><li>框架五部分 = <b>组织治理 · 智能特征 · 智能运维场景实现 · 能力域 · 能力要素</b>。其中<b>能力要素是构建智能运维能力的基础</b></li><li>能力要素 7 项 = <b>人员 · 技术 · 过程 · 数据 · 算法 · 资源 · 知识</b>（「人技过数算资知」）。算法聚焦<b>异常检测、根因分析、故障预测、知识图谱、健康诊断、决策分析</b>，具备<b>有穷性、确切性、有效性</b>三个特点</li><li>能力平台三域 = <b>数据管理 · 分析决策 · 自动控制</b>。<b>数据管理能力</b>用于采集、处理、存储、展示各种运维数据；<b>自动控制能力</b>根据运维决策实施具体的运维操作</li><li>「智能运维场景实现」四过程 = <b>场景分析 · 场景构建 · 场景交付 · 效果评估</b>；「能力应用」四关键环节 = <b>场景分析 · 能力构建 · 服务交付 · 迭代调优</b>。运维场景按复杂程度分 <b>单一场景 · 复合场景 · 全局场景</b>（「单复全」）</li><li>7 个智能特征 = <b>能感知 · 会描述 · 自学习 · 会诊断 · 可决策 · 自执行 · 自适应</b>（「感描学诊决执适」）。<b>会描述</b> = 直观友好地编排、展现和表达运维场景中的各类信息；<b>会诊断</b> = 对人、活动和对象进行分析定位并判断原因</li><li>核心是<b>保障信息的保密性、完整性、可用性</b>。CIA = <b>保密性 Confidentiality</b>（确保信息只被授权者读取）· <b>完整性 Integrity</b>（确保信息不被篡改、真实有效）· <b>可用性 Availability</b>（确保信息和系统在需要时能正常使用）。三要素是<b>信息安全设计的基础，但并非全部</b>，还需结合<b>合规性、可追溯性</b>等其他要求</li><li>主要包括：<b>建立安全管理机构和团队 · 制定安全策略和规划 · 实施风险管理 · 制定业务持续性计划和灾难恢复计划 · 选择和部署安全措施 · 规范配置和变更管理 · 开展安全审计和监控 · 处理安全事件 · 开展安全意识培训</b></li><li>把「信息系统安全」扩展为「<b>网络安全</b>」，覆盖<b>信息系统、通信网络设施、数据资源</b>等</li><li>分 <b>5 级</b>。<b>第三级</b>：对<b>社会秩序和公共利益造成严重危害</b>，或对<b>国家安全造成危害</b>；<b>第四级</b>：对<b>社会秩序和公共利益造成特别严重危害</b>，或对<b>国家安全造成严重危害</b></li><li><b>第一级</b>防护来自<b>个人的、拥有很少资源</b>的威胁源，受损后能<b>恢复部分功能</b>；<b>第四级</b>在<b>统一安全策略下</b>防护来自<b>国家级别的、敌对组织的拥有丰富资源</b>的威胁源，受损后能<b>迅速恢复所有功能</b></li><li>「<b>元数据管理</b>」属<b>数据架构</b>；「<b>指标数据</b>」属<b>数据标准</b></li><li><b>稳健级</b>强调「组织层面制定系列的<b>标准化</b>管理流程」「数据是<b>实现组织绩效目标</b>的重要资产」；<b>量化管理级</b>强调「数据是<b>获取竞争优势</b>的重要资源」「效率能<b>量化分析和监控</b>」</li></ol>
+</details>
+<h2>四、康奈尔笔记（可打印模板）</h2>
+<p>📄 <b>模板文件</b>：</p>
+<div class="plain-li"><span class="bullet">•</span> <span><code>4.2_康奈尔笔记模板.html</code> — A4 留白手写版（左栏 12 问，右栏分模块手写线）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><code>4.2_康奈尔笔记模板_带答案版.html</code> — A4 带答案版，含「👁 隐藏答案」按钮（可切换填空版打印）</span></div>
+<p><b>用法</b>：左栏 12 个问题为线索，遮住右栏自问；右栏按 4.2.1~4.2.3 分模块留手写线；底部总结区收口。带答案版每条答案都标注关键术语和易混提醒，适合先默写、再对照。</p>
+<p><b>打印后自查（不看书答）</b></p>
+<div class="plain-li"><span class="bullet">•</span> <span>线索栏问题 1~12 全部答出 → 正确率 <code>__ / 12</code></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>答不出的条目抄进「易混 / 易错」区，这是考前唯一要看的块</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>页脚 5 个复习框：当日 ☐　+1 天 ☐　+3 天 ☐　+7 天 ☐　+14 天 ☐</span></div>
+<h2>五、刷题任务</h2>
+<div class="plain-li"><span class="bullet">•</span> <span>先做本仓题库：<code>4.2_考点自测题.html</code>（22 题 · 即时判分 + 逐题精讲，目标 ≥ 18 对）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>再刷填空专练：<code>08_答题系统/index.html</code> → 切到「4.2」tab（12 题，答对自动同步勾选本清单）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>真题来源建议：本章是<b>第 4 版新增章</b>，2023 上以前的旧真题没有对应题；练「DCMM 八能力域 / 五等级 / IT 运维能力模型 / 智能运维 7 要素 7 特征 / CIA 三要素 / 等保五级」关键词，<b>2024 以后的回忆版真题</b>优先，教辅（软考达人 / 信管网 / 科科过）的本章章节题是主力</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>⚠️ 特别提醒：第 4 章与「第 5 章 信息系统工程」「第 22 章 组织通用治理」内容相邻，机构讲义常把它们混编；本清单只按<b>教材第 4 章 4.2</b> 的口径出题，勿用别章框架覆盖</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>错题记入 <code>05_错题本/</code>（格式：考点 / 错选原因 / 正选 + 出处）</span></div>
+<h2>六、与前后章节的衔接</h2>
+<p>4.2 是<b>第 4 章的收尾节</b>，把 4.1 的方法论落到「数据 / 运维 / 安全」三件事上：</p>
+<div class="plain-li"><span class="bullet">•</span> <span><b>承接 4.1</b>：4.1 讲「系统管理的方法论底盘」（四要素、四大领域、战略三角、架构模式、运维和服务、持续改进）；4.2 是三大活动的<b>深化落地</b>——4.1 的「<b>数据管理</b>」小节指向 4.2.1，4.1 的「<b>运维和服务</b>」指向 4.2.2，4.1 的「<b>安全管理</b>」指向 4.2.3</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>向后打通</b>：</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>第 5 章 信息系统工程</b>：4.2.1 的数据管理（数据模型 / 数据标准）与第 5 章「数据工程」同源；4.2.2 的运维方法与「部署交付 / 过程管理」呼应</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>第 24 章 法律法规与标准规范</b>：4.2.2 的 ITSS（GB/T 28827.1）、4.2.3 的等保（GB/T 22239）都是<b>标准规范</b>考点，两章可串记国标号</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>第 12 章 质量管理 / 第 18 章 绩效域</b>：DCMM 成熟度「量化管理级」与质量度量、绩效度量思想一致</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>第 6 章 项目管理概论</b>：等保「安全保护能力五级」与项目风险管理中的威胁分级思路相通</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>论文素材（实战映射）</b>：</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>4.2.2 智能运维</b> → 用户所在的 <b>H3C 运维 / 智能体开发</b>场景是「智能运维」的一手素材：fault-simulator（仿真数据模拟、故障注入）对应「<b>算法 → 异常检测 / 根因分析 / 故障预测</b>」；H3C-NMS（设备视图 / 实时监控）对应「<b>能感知 / 会诊断</b>」的智能特征——可写「智能运维平台建设」类论文段落</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>4.2.1 数据管理</b> → fault-simulator 的 1023+ Kafka Topic、U-CENTER 资产同步数据，可套「数据治理 → 数据质量 → 数据服务」的链路</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>4.2.3 信息安全管理</b> → 可写「信息安全等级保护」类论文，用等保五级 + CIA 三要素作为合规依据</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>4.2.2 能力模型四要素</b> → 写运维类论文时，用「人员（选人做事）· 资源（保障做事）· 技术（高效做事）· 过程（正确做事）」四段式组织「运维能力建设」措施</span></div>
+</div>
+<script>
+(function(){
+  const REL = "01_教材笔记/第04章_信息系统管理/4.2_管理要点/4.2_知识点清单.md";
+  const STORE_KEY = 'checklist:' + REL;
+
+  // 一次性加载整个文件的勾选状态（JSON），避免 key 过长
+  let store = {};
+  try { store = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch (e) {}
+
+  // 兼容迁移：旧的错误 key（包含重复 REL 前缀的）自动迁到新格式
+  for (let i = localStorage.length - 1; i >= 0; i--) {
+    const k = localStorage.key(i);
+    if (!k || !k.startsWith('checklist:')) continue;
+    // 检测旧 bug key：包含 REL 两次
+    if (k.indexOf(REL) !== k.lastIndexOf(REL)) {
+      const v = localStorage.getItem(k);
+      const m = k.match(/:L(\d+)$/);
+      if (m && v === '1') store['L' + m[1]] = true;
+      localStorage.removeItem(k);
+    }
+  }
+
+  const boxes = document.querySelectorAll('.task input[type="checkbox"]');
+  boxes.forEach(box => {
+    const k = box.dataset.key;
+    if (store[k]) box.checked = true;
+    box.addEventListener('change', () => {
+      store[k] = box.checked;
+      try {
+        localStorage.setItem(STORE_KEY, JSON.stringify(store));
+      } catch (e) {
+        console.error('localStorage 写入失败：', e);
+      }
+      updateProgress();
+    });
+  });
+
+  function updateProgress() {
+    const total = boxes.length;
+    const done = Array.from(boxes).filter(b => b.checked).length;
+    const pct = total ? Math.round(done / total * 100) : 0;
+    document.getElementById('progress').innerHTML = '已完成：<b>' + done + ' / ' + total + '</b>（' + pct + '%）';
+  }
+  updateProgress();
+})();
+</script>
+</body>
+</html>

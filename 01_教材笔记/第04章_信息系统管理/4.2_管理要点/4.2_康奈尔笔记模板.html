@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4.2 管理要点 · 康奈尔笔记模板</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+    background: #f0f2f5; color: #333; padding: 24px;
+  }
+  .page {
+    width: 210mm; min-height: 297mm; margin: 0 auto; background: #fff;
+    padding: 14mm 12mm; box-shadow: 0 2px 12px rgba(0,0,0,.12);
+  }
+  h1 { font-size: 20px; color: #185FA5; text-align: center; margin-bottom: 4px; }
+  .sub { text-align: center; font-size: 11px; color: #888; margin-bottom: 10px; }
+  .meta { display: flex; justify-content: space-between; font-size: 11px; color: #555;
+    border-bottom: 2px solid #185FA5; padding-bottom: 6px; margin-bottom: 10px; }
+  .cornell { display: flex; border: 1px solid #ccc; min-height: 178mm; }
+  .cue {
+    width: 32%; background: #f4f8fc; border-right: 2px solid #185FA5;
+    padding: 10px 8px; font-size: 11.5px;
+  }
+  .cue h3 { font-size: 12px; color: #185FA5; margin-bottom: 6px; }
+  .cue .q { margin-bottom: 10px; color: #333; line-height: 1.5; }
+  .cue .q b { color: #854F0B; }
+  .cue .grouplabel { font-size: 10.5px; font-weight: bold; color: #185FA5; margin: 7px 0 3px; }
+  .cue .grouplabel:first-of-type { margin-top: 0; }
+  .main { width: 68%; padding: 10px 12px; }
+  .main h4 {
+    font-size: 12px; color: #185FA5; margin: 9px 0 4px;
+    border-left: 4px solid #185FA5; padding-left: 6px;
+  }
+  .main h4:first-child { margin-top: 0; }
+  .lines { line-height: 24px; font-size: 12px; color: #444; }
+  .lines p { border-bottom: 1px solid #e3e3e3; min-height: 24px; }
+  .summary {
+    border: 1px solid #ccc; border-top: none; padding: 8px 10px; min-height: 28mm;
+  }
+  .summary h3 { font-size: 12px; color: #854F0B; margin-bottom: 4px; }
+  .summary p { border-bottom: 1px solid #e3e3e3; min-height: 24px; font-size: 12px; }
+  .footer {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; color: #555; margin-top: 8px;
+  }
+  .ebbing span {
+    display: inline-block; width: 58px; text-align: center;
+    border: 1px solid #185FA5; border-radius: 3px; margin-left: 4px; padding: 1px 0; color: #185FA5;
+  }
+  .score { color: #854F0B; font-weight: bold; }
+  .howto {
+    width: 210mm; margin: 14px auto 0; background: #fffbe8; border: 1px solid #e8d48a;
+    border-radius: 6px; padding: 10px 14px; font-size: 12px; color: #6b5900; line-height: 1.7;
+  }
+  .howto b { color: #854F0B; }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; margin: 0; }
+    .howto { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>4.2 管理要点 · 康奈尔笔记</h1>
+  <div class="sub">《信息系统项目管理师教程（第 4 版）》第 4 章第 2 节 · 4.2.1 数据管理 / 4.2.2 运维管理 / 4.2.3 信息安全管理</div>
+  <div class="meta">
+    <span>日期：______</span><span>学习时长：______</span><span>今日正确率：<span class="score">____ / 22</span></span>
+  </div>
+
+  <div class="cornell">
+    <div class="cue">
+      <h3>线索栏（自问自答）</h3>
+
+      <div class="grouplabel">4.2.1 数据管理</div>
+      <div class="q"><b>1</b> <b>数据管理定义</b>（三个职能动词 + 五类价值动作）？DAMA 指什么？数据管理框架是什么？</div>
+      <div class="q"><b>2</b> <b>DCMM 的 8 个核心能力域</b>？国标号？「元数据管理」「指标数据」各属哪个域？</div>
+      <div class="q"><b>3</b> <b>DCMM 5 个成熟度等级</b>及各级特征？从哪一级开始强调「规范化 / 实现绩效目标的重要资产」？</div>
+      <div class="q"><b>4</b> 四个<b>数据管理模型</b>及其量词口径（DCMM / DGI / DCAM / DAMA）？</div>
+
+      <div class="grouplabel">4.2.2 运维管理</div>
+      <div class="q"><b>5</b> <b>IT 运维能力模型</b>三部分（GB/T 28827.1）？谁为价值实现赋能？</div>
+      <div class="q"><b>6</b> 能力建设<b>四要素</b>及四种「做事」（选人 / 保障 / 高效 / 正确）？人员三岗位？资源四件？</div>
+      <div class="q"><b>7</b> <b>智能运维能力框架</b>五部分（T/CESA 1172）？哪一部分是「构建智能运维能力的基础」？</div>
+      <div class="q"><b>8</b> 智能运维<b>能力要素 7 项</b>？<b>智能特征 7 项</b>？能力平台三能力域？</div>
+      <div class="q"><b>9</b> 「智能运维场景实现」四过程 vs「能力应用」四关键环节？运维场景按复杂程度分哪三类？</div>
+
+      <div class="grouplabel">4.2.3 信息安全管理</div>
+      <div class="q"><b>10</b> <b>CIA 三要素</b>（含英文）？为什么说「并非全部」？信息安全管理体系的主要内容？</div>
+      <div class="q"><b>11</b> 网络安全等级保护（等保 2.0）的<b>安全保护等级五级</b>（按破坏后果）？</div>
+      <div class="q"><b>12</b> <b>安全保护能力五级</b>（GB/T 22239）的「威胁源 + 恢复程度」两条线？</div>
+    </div>
+    <div class="main">
+      <h4>一、数据管理：定义与 DCMM 八能力域（4.2.1）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>二、数据管理：成熟度五等级与四个模型（4.2.1）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>三、运维管理：能力模型与四要素（4.2.2）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>四、运维管理：智能运维框架与要素（4.2.2）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>五、信息安全管理：CIA 与等级保护（4.2.3）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>六、易混 / 易错（考前唯一要看的块）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary">
+    <h3>总结栏（一句话收束）</h3>
+    <p></p><p></p>
+  </div>
+
+  <div class="footer">
+    <span class="ebbing">复习打卡：当日<span>＋1天</span><span>＋3天</span><span>＋7天</span><span>＋14天</span></span>
+    <span>正确率：<span class="score">____ / 22</span></span>
+  </div>
+</div>
+
+<div class="howto">
+  <b>怎么用（记 → 遮 → 补 → 收）：</b>
+  ① <b>记</b>：对照《4.2_知识点清单》通读后，凭记忆在笔记区默写要点（表格优先默「DCMM 八能力域」「DCMM 五等级」「四个数据管理模型量词」「IT 运维能力模型三部分 + 四种做事」「智能运维 7 要素 7 特征」「CIA 三要素」「等保两个五级」）；② <b>遮</b>：用手遮住笔记区，只看线索栏 12 个问题作答；③ <b>补</b>：翻开清单对照，用红笔补漏，重点补「六、易混 / 易错」块（两套四要素、四个模型量词、稳健级 vs 量化管理级、保密性 vs 机密性、两组四环节、等保两个五级）；④ <b>收</b>：在总结栏用 1~2 句话收束本节骨架（如「管理要点三聚焦数运安 → 数据管理（DCMM 8 域 5 级 + 4 模型）→ 运维管理（能力模型三部分 + 四要素做事 + 智能运维 7 要素 7 特征）→ 信息安全管理（CIA 三要素 + 等保两个五级）」）。本章是第 4 版新增章，旧真题无对应题，建议当天默写一遍、次日再遮一次。页脚为艾宾浩斯复习打卡点。
+</div>
+</body>
+</html>
