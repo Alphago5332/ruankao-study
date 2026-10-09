@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5.1 软件工程 · 知识点清单 · 可勾选清单</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Microsoft YaHei", "微软雅黑", sans-serif; background: #f7f9fc; color: #333; padding: 24px; line-height: 1.7; }
+  .wrap { max-width: 820px; margin: 0 auto; background: #fff; padding: 32px 36px; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,.08); }
+  h1 { font-size: 22px; color: #185FA5; margin-bottom: 8px; }
+  h2 { font-size: 18px; color: #185FA5; margin: 22px 0 10px; border-left: 4px solid #185FA5; padding-left: 10px; }
+  h3 { font-size: 15px; color: #185FA5; margin: 16px 0 8px; }
+  h4 { font-size: 14px; color: #185FA5; margin: 14px 0 6px; }
+  blockquote { background: #f4f8fc; border-left: 4px solid #185FA5; padding: 10px 14px; margin: 10px 0; color: #444; font-size: 13.5px; }
+  p, .plain-li { margin: 8px 0; font-size: 14px; }
+  .plain-li { display: flex; gap: 6px; }
+  .bullet { color: #185FA5; font-weight: bold; }
+  .task { display: flex; align-items: flex-start; gap: 8px; margin: 8px 0; cursor: pointer; user-select: none; }
+  .task input[type="checkbox"] { width: 16px; height: 16px; margin-top: 4px; flex-shrink: 0; accent-color: #185FA5; cursor: pointer; }
+  .task-text { font-size: 14px; transition: opacity .2s; }
+  .task input:checked + .task-text { text-decoration: line-through; opacity: .45; color: #666; }
+  .item-body { margin: 4px 0 12px 24px; }
+  .item-body p { margin: 4px 0; color: #555; font-size: 13.5px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; }
+  th, td { border: 1px solid #d9e2ec; padding: 7px 10px; }
+  th { background: #eef4fb; color: #185FA5; font-weight: 600; }
+  td { background: #fff; }
+  ol { margin: 8px 0 8px 22px; font-size: 14px; }
+  li { margin: 4px 0; }
+  code { background: #f0f3f7; padding: 1px 4px; border-radius: 3px; font-family: Consolas, monospace; font-size: 12px; }
+  a { color: #185FA5; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  summary { cursor: pointer; color: #185FA5; font-weight: 600; }
+  details { background: #f9fbfd; border: 1px solid #e3eaf2; border-radius: 6px; padding: 10px 14px; margin: 12px 0; }
+  .progress { position: sticky; top: 0; background: #fff; border-bottom: 1px solid #e3eaf2; padding: 8px 0; margin: -32px -36px 20px; padding-left: 36px; padding-right: 36px; font-size: 12px; color: #666; z-index: 10; }
+  .progress b { color: #185FA5; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="progress" id="progress">已完成：0 / 0</div>
+  <h1>5.1 软件工程 · 知识点清单</h1>
+<blockquote><b>教材</b>：《信息系统项目管理师教程（第 4 版）》第 5 章第 1 节（约 P129 ~ P146）<br><b>学习日</b>：2026-10-09（Day 14）<br><b>上午分值</b>：第 5 章综合知识约 <b>5~8 题</b>，5.1 软件工程占其中 <b>2~3 题</b>；本章内容与第 3 版第 3 章「系统集成专业技术」同源，<b>旧真题有对应题可刷</b>（架构风格 / 需求分析 / 测试 / 部署均为历年高频）<br><b>本节定位</b>：<b>概念辨析 + 归属配对 + 关键词识别型</b>。高频块：<b>五大架构风格 / 架构评估敏感点与权衡点 / QFD 三类需求 / SA 三模型 / UML / 白盒黑盒测试 / 蓝绿与金丝雀部署 / CSMM 五等级</b>。套路是把「风格⇄子风格」「模型⇄图形」「测试方法⇄测试阶段」互相调包<br>⚠️ <b>口径提醒</b>：5.1.6 过程管理讲的是 <b>CSMM（软件过程能力成熟度模型）</b>，不是 CMMI——两者五级名称完全不同，别背串</blockquote>
+<h2>今日目标（学完要能做到）</h2>
+<ol><li>说清软件架构研究的<b>四方面内容</b>与研究软件架构的<b>根本目的</b>（复用 / 质量 / 维护）</li><li>默写<b>五大架构风格</b>及各自的<b>子风格</b>（数据流 / 调用返回 / 独立构件 / 虚拟机 / 仓库）</li><li>分清架构评估中的<b>敏感点</b>与<b>权衡点</b>，背出<b>三类评估方式</b>（基于场景最常用）与场景法三工具（ATAM / SAAM / CBAM）</li><li>背出需求<b>三个层次</b>（业务 / 用户 / 系统）与 <b>QFD 三类需求</b>（常规 / 期望 / 意外）的判别关键词</li><li>默写<b>需求过程四环节</b>与五种<b>需求获取方法</b>，说清 SA 方法的<b>核心（数据字典）与三模型</b>（E-R / DFD / STD）</li><li>背出 OOA 用例模型构建<b>四阶段</b>、<b>SRS</b> 的地位与 UML 的<b>事物四类 / 关系四类 / 14 图 / 5 视图</b></li><li>分清<b>结构化设计</b>（面向数据流 / 高内聚低耦合 / 概要+详细）与<b>面向对象设计</b>（三大特征 + 七原则），背出<b>设计模式三型</b>及代表模式</li><li>默写<b>软件配置管理六项</b>、<b>软件编码三关注点</b>，说清<b>静态测试手段</b>与<b>白盒 / 黑盒</b>的别名、用途、所属测试阶段</li><li>说清<b>持续交付</b>（完全自动化 / 一键部署 / 三阶段方案）与<b>持续部署</b>（容器技术 / build-ship-run / 不可变服务器）的区别</li><li>分清<b>蓝绿部署</b>与<b>金丝雀部署</b>，背出 <b>CSMM 的 4 能力域 / 20 能力子域 / 161 能力要求</b>与<b>五等级名称</b></li></ol>
+<h2>一、必背清单</h2>
+<h3>模块 A ｜ 架构设计（5.1.1）</h3>
+<label class="task"><input type="checkbox" data-key="A0" ><span class="task-text"><b>A0 · 软件架构研究的四方面内容与根本目的</b> ⭕ 必背（原句挖空）</span></label><div class="item-body"><p>软件架构研究的主要内容涉及<b>软件架构描述、软件架构风格、软件架构评估和软件架构的形式化方法</b>等。解决好软件的<b>复用、质量和维护</b>问题，是研究软件架构的根本目的。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>软件架构设计的一个<b>核心问题</b>是能否达到<b>架构级的软件复用</b></span></div>
+<blockquote>记法：研究内容四件套「<b>描述 · 风格 · 评估 · 形式化</b>」；根本目的「<b>复质维</b>（复用 / 质量 / 维护）」</blockquote>
+<label class="task"><input type="checkbox" data-key="A1" ><span class="task-text"><b>A1 · 五大架构风格及子风格</b> ⭕ 必背（风格归属题年年考）</span></label>
+<table><thead><tr><th>风格</th><th>子风格</th><th>关键词</th></tr></thead><tbody><tr><td><b>数据流风格</b></td><td><b>批处理序列</b>、<b>管道/过滤器</b></td><td>顺序执行 / 输入输出数据流</td></tr><tr><td><b>调用/返回风格</b></td><td><b>主程序/子程序</b>、<b>数据抽象和面向对象</b>、<b>层次结构</b></td><td>过程调用 / 对象及封装 / 分层调用</td></tr><tr><td><b>独立构件风格</b></td><td><b>进程通信</b>、<b>事件驱动</b>的系统</td><td>消息传递 / 事件触发调用</td></tr><tr><td><b>虚拟机风格</b></td><td><b>解释器</b>、<b>基于规则</b>的系统</td><td>解释引擎 / 规则集</td></tr><tr><td><b>仓库风格</b></td><td><b>数据库系统</b>、<b>黑板系统</b>、<b>超文本系统</b></td><td>中央共享数据源 / 知识源+黑板 / 非线性交叉引用</td></tr></tbody></table>
+<div class="plain-li"><span class="bullet">•</span> <span>管道/过滤器风格：输出的正确性<b>不依赖于过滤器执行（增量计算）的顺序</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>面向对象（数据抽象）风格的缺点：对象之间调用需要<b>知道所调用对象的标识</b>，标识改变须通知所有调用者</span></div>
+<blockquote>口诀：<b>数调独虚仓</b>。高频对位：「批处理序列」属<b>数据流</b>、「层次结构」属<b>调用/返回</b>、「事件驱动」属<b>独立构件</b>、「解释器」属<b>虚拟机</b>、「黑板系统」属<b>仓库</b></blockquote>
+<label class="task"><input type="checkbox" data-key="A2" ><span class="task-text"><b>A2 · 架构评估：敏感点与权衡点</b> ⭕ 必背（最高频辨析）</span></label><div class="item-body"><p>在架构评估过程中，评估人员所关注的是系统的<b>质量属性</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>敏感点</b>：是一个或多个构件（部件）的特性，影响<b>单个（某一）质量属性</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>权衡点</b>：是影响<b>多个质量属性</b>的特性，是<b>多个质量属性的敏感点</b>（如加密级别越高安全性越好、性能越差）</span></div>
+<blockquote>记法：<b>敏感点管一个，权衡点管一串</b>；「影响多个质量属性」→ 必答权衡点</blockquote>
+<label class="task"><input type="checkbox" data-key="A3" ><span class="task-text"><b>A3 · 三类架构评估方式与场景法三工具</b> ⭕ 必背</span></label><div class="item-body"><p>从目前已有的软件架构评估技术来看，可归纳为三类主要评估方式：基于<b>调查问卷（或检查表）</b>的方式、基于<b>场景</b>的方式和基于<b>度量</b>的方式。其中<b>基于场景的评估方式最为常用</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>基于场景的方式主要包括：<b>架构权衡分析法（ATAM）</b>、<b>软件架构分析法（SAAM）</b>、<b>成本效益分析法（CBAM）</b></span></div>
+<blockquote>记法：问卷 / 场景 / 度量三类，<b>场景最常用</b>；场景三法「<b>ATAM 权衡 · SAAM 分析 · CBAM 成本</b>」</blockquote>
+<h3>模块 B ｜ 需求分析（5.1.2）</h3>
+<label class="task"><input type="checkbox" data-key="B0" ><span class="task-text"><b>B0 · 软件需求定义与三个层次</b> ⭕ 必背（层次归属）</span></label><div class="item-body"><p><b>软件需求</b>是指用户解决问题或达到目标所需的条件或能力，是系统或系统部件要满足合同、标准、规范或其他正式规定文档所需具有的条件或能力。需求是多层次的：</p></div>
+<table><thead><tr><th>层次</th><th>定义</th><th>关键词</th></tr></thead><tbody><tr><td><b>业务需求</b></td><td>反映企业或客户对系统<b>高层次</b>的目标追求</td><td>来自投资人 / 客户 / 管理人员 / 市场或产品策划部门</td></tr><tr><td><b>用户需求</b></td><td>描述<b>用户的具体目标</b>，或用户要求系统必须能完成的任务</td><td>用户能让系统<b>做什么</b></td></tr><tr><td><b>系统需求</b></td><td>从<b>系统的角度</b>说明软件的需求</td><td>包括<b>功能需求、非功能需求和设计约束</b></td></tr></tbody></table>
+<blockquote>记法：三层次从<b>目标到具体、从整体到局部、从概念到细节</b>；「高层次目标」=业务需求、「用户的具体目标」=用户需求、「功能+非功能+设计约束」=系统需求</blockquote>
+<label class="task"><input type="checkbox" data-key="B1" ><span class="task-text"><b>B1 · QFD 与三类需求（常规 / 期望 / 意外）</b> ⭕ 必考（判别关键词挖空）</span></label><div class="item-body"><p><b>质量功能部署（QFD）</b>是一种将用户要求转化成软件需求的技术，其目的是<b>最大限度地提升软件工程过程中用户的满意度</b>。QFD 将软件需求分为三类：</p></div>
+<table><thead><tr><th>类型</th><th>判别关键词</th></tr></thead><tbody><tr><td><b>常规需求</b></td><td>用户认为系统<b>应该实现</b>的功能或性能，<b>实现得越多用户会越满意</b></td></tr><tr><td><b>期望需求</b></td><td>用户<b>想当然</b>以为系统应具备的功能或性能，但<b>不能正确描述</b>；若没有实现，会让用户<b>不满意</b></td></tr><tr><td><b>意外需求</b></td><td>也称<b>兴奋需求</b>，是用户要求<b>范围之外</b>的功能或性能</td></tr></tbody></table>
+<blockquote>记法：常规「越实现越满意」/ 期望「想当然、不实现就不满意」/ 意外「兴奋需求、范围外」</blockquote>
+<label class="task"><input type="checkbox" data-key="B2" ><span class="task-text"><b>B2 · 需求过程四环节与需求获取方法</b> ⭕ 必背</span></label><div class="item-body"><p>需求过程主要包括<b>需求获取、需求分析、需求规格说明书编制、需求验证与确认</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>需求获取</b>：是一个确定和理解不同的<b>项目干系人的需求和约束</b>的过程。常见获取方法：<b>用户访谈、问卷调查、采样、情节串联板、联合需求计划</b>等</span></div>
+<blockquote>记法：四环节「<b>获取 → 分析 → 编制 → 验证确认</b>」；获取方法五件「<b>访问采串联</b>」</blockquote>
+<label class="task"><input type="checkbox" data-key="B3" ><span class="task-text"><b>B3 · 好需求的八个特性</b> ⭕ 常考（多选 / 判断）</span></label><div class="item-body"><p>一个好的需求应该具有<b>无二义性、完整性、一致性、可测试性、确定性、可跟踪性、正确性、必要性</b>等特性。需求分析人员需要把杂乱无章的用户要求和期望转化为（好的）用户需求。</p></div>
+<blockquote>记法：「<b>无完一测确跟正必</b>」；注意<b>没有「可扩展性」「经济性」</b>这类干扰项</blockquote>
+<label class="task"><input type="checkbox" data-key="B4" ><span class="task-text"><b>B4 · 结构化分析（SA）三模型</b> ⭕ 必背（模型⇄图形配对，年年考）</span></label><div class="item-body"><p>使用<b>结构化分析（SA）</b>方法进行需求分析，其建立的模型的<b>核心是数据字典</b>。围绕这个核心，有三个层次的模型：</p></div>
+<table><thead><tr><th>模型</th><th>图形</th><th>描述内容</th></tr></thead><tbody><tr><td><b>数据模型</b></td><td><b>实体关系图（E-R 图）</b></td><td>实体、属性以及实体之间的关系</td></tr><tr><td><b>功能模型</b></td><td><b>数据流图（DFD）</b></td><td>数据传递和加工，逐层细分描述系统功能与数据流向</td></tr><tr><td><b>行为模型</b>（状态模型）</td><td><b>状态转换图（STD）</b></td><td>系统的状态和引起状态转换的事件，表示系统行为</td></tr></tbody></table>
+<blockquote>口诀：<b>核心是数据字典（不是 DFD！）</b>；「<b>数 E-R · 功 DFD · 行 STD</b>」三对配对别接错</blockquote>
+<label class="task"><input type="checkbox" data-key="B5" ><span class="task-text"><b>B5 · 面向对象分析（OOA）与用例模型四阶段</b> ⭕ 必背</span></label><div class="item-body"><p><b>面向对象分析（OOA）</b>的模型包括<b>用例模型和分析模型</b>。构建用例模型一般需要四个阶段：</p>
+<ol><li><b>识别参与者</b>（必须）</li><li><b>合并需求获得用例</b>（必须）</li><li><b>细化用例描述</b>（必须）</li><li><b>调整用例模型</b></li></ol></div>
+<blockquote>记法：OOA 两模型「<b>用例 + 分析</b>」；四阶段「<b>识参与 → 并需求 → 细描述 → 调模型</b>」</blockquote>
+<label class="task"><input type="checkbox" data-key="B6" ><span class="task-text"><b>B6 · 软件需求规格说明书（SRS）</b> ⭕ 常考</span></label><div class="item-body"><p><b>SRS 是需求开发活动的产物</b>，是软件开发过程中<b>最重要的文档之一</b>，对于任何规模和性质的软件项目都<b>不应该缺少</b>。编制 SRS 的目的是使项目干系人与开发团队对系统的初始规定有一个<b>共同的理解</b>，使之成为整个开发工作的<b>基础</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>需求评审</b>就是对 SRS 进行<b>技术评审</b></span></div>
+<blockquote>记法：SRS = 需求开发产物 =「共同理解 + 开发基础」；评审对象是 SRS</blockquote>
+<label class="task"><input type="checkbox" data-key="B7" ><span class="task-text"><b>B7 · UML：事物四类 / 关系四类 / 14 图 / 5 视图</b> ⭕ 必背（UML 是 5.1.2 的压轴考点）</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span><b>UML 中的事物</b>（建模元素）包括：<b>结构事物、行为事物、分组事物和注释事物</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>UML 中的关系</b>四类：</span></div>
+<table><thead><tr><th>关系</th><th>定义关键词</th></tr></thead><tbody><tr><td><b>依赖</b></td><td>一个事物发生变化会影响<b>另一个事物的语义</b></td></tr><tr><td><b>关联</b></td><td>描述一组对象之间<b>链接的结构关系</b></td></tr><tr><td><b>泛化</b></td><td><b>一般化和特殊化</b>的关系，特殊元素对象可替换一般元素对象</td></tr><tr><td><b>实现</b></td><td>类之间的语义关系，一个类制定由另一个类<b>保证执行的契约</b></td></tr></tbody></table>
+<div class="plain-li"><span class="bullet">•</span> <span><b>UML 2.0 的 14 种图</b>：类图、对象图、构件图、组合结构图、用例图、顺序图、通信图、定时图、状态图、活动图、部署图、制品图、包图、交互概览图</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>常考对位：<b>顺序图强调消息的时间次序</b>；<b>通信图（协作图）强调收发消息对象的组织结构</b>；<b>状态图描述对象生命周期</b>；<b>活动图本质是流程图</b>；<b>部署图描述软件到硬件的映射</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>UML 视图</b>（5 种）：<b>逻辑视图</b>（也称设计视图）、<b>进程视图</b>（可执行线程和进程的建模，逻辑视图的一次执行实例）、<b>实现视图</b>（物理代码的文件和构件建模）、<b>部署视图</b>（构件部署到物理节点，软件到硬件的映射）、<b>用例视图</b>（<b>最基本的需求分析模型</b>）</span></div>
+<blockquote>记法：事物「<b>结行分注</b>」/ 关系「<b>依关泛实</b>」；⚠️ <b>UML 五视图 ≠ 架构师考试的「4+1 视图」</b>——教材口径是逻辑 / 进程 / 实现 / 部署 / 用例；「<b>用例视图是最基本的需求分析模型</b>」是原句考点</blockquote>
+<h3>模块 C ｜ 软件设计（5.1.3）</h3>
+<label class="task"><input type="checkbox" data-key="C0" ><span class="task-text"><b>C0 · 结构化设计（SD）</b> ⭕ 必背</span></label><div class="item-body"><p><b>结构化设计（SD）</b>是一种<b>面向数据流</b>的方法，它以 SRS 和 SA 阶段所产生的 <b>DFD 和数据字典</b>等文档为基础，是一个<b>自顶向下、逐步求精和模块化</b>的过程。SD 分为<b>概要设计（又称总体结构设计）</b>和<b>详细设计</b>两个阶段，需要遵循一个基本原则：<b>高内聚、低耦合</b>。</p></div>
+<blockquote>记法：SD 三特征「<b>顶向精模</b>（自顶向下 / 逐步求精 / 模块化）」+ 原则「<b>高内聚低耦合</b>」+ 两阶段「概要=总体结构设计 / 详细」</blockquote>
+<label class="task"><input type="checkbox" data-key="C1" ><span class="task-text"><b>C1 · 面向对象设计（OOD）：基本思想与三大特征</b> ⭕ 必背</span></label><div class="item-body"><p><b>OOD 是 OOA 方法的延续</b>，其基本思想包括<b>抽象、封装和可扩展性</b>，其中<b>可扩展性主要通过继承和多态来实现</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>面向对象的<b>三大特征</b>：<b>封装、继承、多态</b></span></div>
+<blockquote>记法：基本思想三件「<b>抽封扩</b>」；可扩展性 = 继承 + 多态</blockquote>
+<label class="task"><input type="checkbox" data-key="C2" ><span class="task-text"><b>C2 · 面向对象设计的七大原则</b> ⭕ 常考（名称识别）</span></label>
+<table><thead><tr><th>原则</th><th>一句话</th></tr></thead><tbody><tr><td><b>单一职责原则</b></td><td>一个类只负责一项职责</td></tr><tr><td><b>开闭原则</b></td><td>对扩展开放，对修改关闭</td></tr><tr><td><b>里氏替换原则</b></td><td>父类能出现的地方子类必能替换</td></tr><tr><td><b>依赖倒置原则</b></td><td>依赖抽象（接口），不依赖具体实现</td></tr><tr><td><b>接口隔离原则</b></td><td>接口小而专，不强迫依赖无用方法</td></tr><tr><td><b>组合重用原则</b></td><td>多用组合，少用继承</td></tr><tr><td><b>迪米特原则</b></td><td>最少知识原则（别和「陌生人」说话）</td></tr></tbody></table>
+<blockquote>口诀：<b>单开里依接组迪</b></blockquote>
+<label class="task"><input type="checkbox" data-key="C3" ><span class="task-text"><b>C3 · 设计模式：两类范围 + 三种用途</b> ⭕ 必背</span></label><div class="item-body"><p>设计模式是前人经验的总结，使人们可以方便地<b>复用成功的软件设计</b>。按<b>处理范围</b>不同分为<b>类模式和对象模式</b>；按<b>目的和用途</b>不同分为三种：</p></div>
+<table><thead><tr><th>类型</th><th>用途</th><th>代表模式</th></tr></thead><tbody><tr><td><b>创建型模式</b></td><td>主要用于<b>创建对象</b></td><td>工厂方法、抽象工厂、原型、单例、建造者</td></tr><tr><td><b>结构型模式</b></td><td>处理<b>类或对象的组合</b></td><td>适配器、桥接、组合、装饰、外观、享元、代理</td></tr><tr><td><b>行为型模式</b></td><td>描述<b>类或对象的交互以及职责分配</b></td><td>职责链、命令、解释器、迭代器、中介者、备忘录、观察者、状态、策略、模板方法、访问者</td></tr></tbody></table>
+<blockquote>记法：<b>创建建对象 · 结构管组合 · 行为交互职责</b>；单例=创建型、代理=结构型、观察者=行为型是高频对位</blockquote>
+<h3>模块 D ｜ 软件实现（5.1.4）</h3>
+<label class="task"><input type="checkbox" data-key="D0" ><span class="task-text"><b>D0 · 软件配置管理六项</b> ⭕ 常考</span></label><div class="item-body"><p>软件配置管理包括：<b>软件配置管理计划、软件配置标识、软件配置控制、软件配置状态记录、软件配置审计、软件分布（发布）管理与交付</b>。</p></div>
+<blockquote>记法：「<b>计划标识控制 · 记录审计交付</b>」六件套</blockquote>
+<label class="task"><input type="checkbox" data-key="D1" ><span class="task-text"><b>D1 · 软件编码三个关注点</b> ⭕ 通读</span></label><div class="item-body"><p>将设计转化为程序代码，关注：<b>程序设计语言的选择</b>、<b>程序设计风格</b>（源程序文档化、数据说明、语句结构、输入/输出）、<b>编码效率</b>（程序执行速度、内存占用、存储效率、I/O 效率）。</p></div>
+<label class="task"><input type="checkbox" data-key="D2" ><span class="task-text"><b>D2 · 软件测试目的与静态测试</b> ⭕ 必背</span></label><div class="item-body"><p>软件测试的目的是<b>验证软件是否满足</b>软件开发合同或项目开发计划、系统/子系统设计文档、SRS、软件设计说明和软件产品说明等<b>规定的软件质量要求</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>静态测试</b>：采用<b>人工检测</b>和<b>计算机辅助静态分析</b>的手段对程序进行检测，<b>不实际运行程序</b>；包括对文档和代码的静态测试——对文档主要以<b>检查单</b>的方式，对代码主要是<b>桌前检查、代码走查和代码审查</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>静态测试可以发现约 <b>30% ~ 70%</b> 的逻辑设计和编码错误</span></div>
+<blockquote>记法：静态测试代码三手段「<b>桌走审</b>（桌前检查 / 代码走查 / 代码审查）」、文档用「检查单」</blockquote>
+<label class="task"><input type="checkbox" data-key="D3" ><span class="task-text"><b>D3 · 动态测试：白盒 vs 黑盒</b> ⭕ 必背（别名 / 阶段 / 方法三线全对上是得分点）</span></label>
+<table><thead><tr><th>维度</th><th>白盒测试</th><th>黑盒测试</th></tr></thead><tbody><tr><td>别名</td><td><b>结构测试</b></td><td><b>功能测试</b></td></tr><tr><td>视角</td><td>了解程序<b>内部结构和处理算法</b>，覆盖逻辑通路</td><td>只检查程序功能<b>能否按 SRS 要求正常使用</b></td></tr><tr><td>主要用于</td><td><b>单元测试</b></td><td><b>集成测试、确认测试和系统测试</b></td></tr><tr><td>常用方法</td><td>控制流测试、数据流测试、程序编译测试；最常用技术是<b>逻辑覆盖</b>（语句/判定/条件/路径覆盖）</td><td><b>等价类划分、边界值分析、判定表、因果图、状态图、随机测试、猜错法、正交试验法</b></td></tr></tbody></table>
+<blockquote>记法：<b>白盒单元逻辑覆盖 · 黑盒集成确认系统等价边界</b>；「逻辑覆盖」属白盒，「等价类划分」属黑盒，高频对调坑</blockquote>
+<h3>模块 E ｜ 部署交付（5.1.5）</h3>
+<label class="task"><input type="checkbox" data-key="E0" ><span class="task-text"><b>E0 · 软件部署与交付的定义</b> ⭕ 常考</span></label><div class="item-body"><p>软件部署与交付是软件生命周期中的一个<b>重要环节</b>，属于软件开发的<b>后期活动</b>，即通过<b>配置、安装和激活</b>等活动来保障软件制品的后续运行。</p></div>
+<blockquote>记法：三个动词「<b>配装激</b>（配置 / 安装 / 激活）」；「后期活动」</blockquote>
+<label class="task"><input type="checkbox" data-key="E1" ><span class="task-text"><b>E1 · 持续交付</b> ⭕ 必背</span></label><div class="item-body"><p><b>持续交付</b>是一系列开发实践方法，用来确保让代码能够<b>快速、安全地部署到生产环境</b>中。持续交付是一个<b>完全自动化的过程</b>，当业务开发完成时，可以做到<b>一键部署</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>持续交付对传统流程的改进方案：</span></div>
+<table><thead><tr><th>阶段</th><th>做法</th></tr></thead><tbody><tr><td>需求阶段</td><td>抛弃传统需求文档，使用便于开发人员理解的<b>用户故事</b></td></tr><tr><td>开发测试阶段</td><td>做到<b>持续集成</b>，让测试人员尽早进入项目开始测试</td></tr><tr><td>运维阶段</td><td><b>打通开发和运维之间的通路</b>，保持开发环境和运维环境的<b>统一</b></td></tr></tbody></table>
+<div class="plain-li"><span class="bullet">•</span> <span>优势：有效缩短提交代码到正式部署上线的时间、降低部署风险；自动快速提供反馈、及时发现修复缺陷；使软件在整个生命周期内<b>处于可部署状态</b>；简化部署步骤、版本清晰；使交付过程<b>可靠、可预期、可视化</b></span></div>
+<blockquote>记法：核心句「<b>完全自动化 + 一键部署</b>」；三阶段「需求用故事 · 开发持续集成 · 运维环境统一」</blockquote>
+<label class="task"><input type="checkbox" data-key="E2" ><span class="task-text"><b>E2 · 持续部署与部署方案 / 原则 / 层次</b> ⭕ 常考</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span><b>容器技术</b>是目前部署中<b>最流行的技术</b>，常用的持续部署方案：<b>Kubernetes+Docker</b> 和 <b>Matrix</b> 两种</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>部署层次</b>三个环节：<b>Build（编译形成 RPM 包或 Jar 包）→ Ship（第三方依赖和插件安装到环境）→ Run（在不同地方启动整套环境）</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>不可变服务器</b>：是一种<b>部署模式</b>，是指<b>除了更新和安装补丁程序以外，不对服务器进行任何更改</b></span></div>
+<blockquote>记法：容器=最流行；层次口诀「<b>B-S-R（构建-装载-运行）</b>」；不可变服务器=「只打补丁不改服务器」</blockquote>
+<label class="task"><input type="checkbox" data-key="E3" ><span class="task-text"><b>E3 · 蓝绿部署 vs 金丝雀部署</b> ⭕ 必背（两者对调是高频坑）</span></label>
+<table><thead><tr><th>方式</th><th>做法</th><th>特点</th></tr></thead><tbody><tr><td><b>蓝绿部署</b></td><td>准备<b>新旧两个部署版本</b>，通过<b>域名解析切换</b>的方式将用户环境切换到新版本</td><td>出问题可<b>快速切回旧版本</b>，并对新版本修复调整</td></tr><tr><td><b>金丝雀部署</b></td><td>新版本发布时，先让<b>少量用户</b>使用新版本并观察是否存在问题</td><td>有问题及时处理并重新发布；正常则<b>稳步推广给所有用户</b>（灰度发布）</td></tr></tbody></table>
+<blockquote>记法：<b>蓝绿=两套环境整体切换 · 金丝雀=小流量灰度验证</b></blockquote>
+<h3>模块 F ｜ 过程管理（5.1.6）</h3>
+<label class="task"><input type="checkbox" data-key="F0" ><span class="task-text"><b>F0 · CSMM 模型的总体结构</b> ⭕ 必背（数字挖空）</span></label><div class="item-body"><p><b>CSMM（《软件过程能力成熟度模型》）</b>由 <b>4 个能力域、20 个能力子域、161 个能力要求</b>组成。</p></div>
+<blockquote>记法：<b>4 域 / 20 子域 / 161 要求</b>——三个数字都能单独出题</blockquote>
+<label class="task"><input type="checkbox" data-key="F1" ><span class="task-text"><b>F1 · CSMM 的四个能力域</b> ⭕ 必背（子域归属辨析）</span></label>
+<table><thead><tr><th>能力域</th><th>能力子域</th><th>落点</th></tr></thead><tbody><tr><td><b>治理</b></td><td>战略与治理、目标管理</td><td>确定组织的<b>战略、产品方向、业务目标</b>并确保目标实现</td></tr><tr><td><b>开发与交付</b></td><td>需求、设计、开发、测试、部署、服务、开源应用</td><td>通过软件工程过程<b>交付满足需求的软件</b>，为顾客与利益干系人<b>增加价值</b></td></tr><tr><td><b>管理与支持</b></td><td>项目策划、项目监控、项目结项、质量保证、风险管理、配置管理、供应商管理</td><td>覆盖软件开发项目<b>全过程</b>，按既定<b>成本、进度和质量</b>交付</td></tr><tr><td><b>组织管理</b></td><td>过程管理、人员能力管理、组织资源管理、过程能力管理</td><td>对软件<b>组织能力</b>进行综合管理</td></tr></tbody></table>
+<blockquote>记法：治理「战略目标」/ 开发交付「需求设计开发测试部署服务开源」/ 管理支持「策划监控结项 · 质保风险配置供应商」/ 组织管理「过程人员资源」</blockquote>
+<label class="task"><input type="checkbox" data-key="F2" ><span class="task-text"><b>F2 · CSMM 的五个成熟度等级</b> ⭕ 必背（与 CMMI 别背串）</span></label>
+<table><thead><tr><th>等级</th><th>名称</th><th>特征关键词</th></tr></thead><tbody><tr><td>1</td><td><b>初始级</b></td><td>过程和结果<b>不确定性</b></td></tr><tr><td>2</td><td><b>项目规范级</b></td><td><b>基本可按计划</b>实现</td></tr><tr><td>3</td><td><b>组织改进级</b></td><td>组织范围内能够<b>稳定</b>地实现预期目标</td></tr><tr><td>4</td><td><b>量化提升级</b></td><td><b>量化</b>地管理和实现</td></tr><tr><td>5</td><td><b>创新引领级</b></td><td><b>创新、持续提升、引领</b></td></tr></tbody></table>
+<blockquote>口诀：<b>初规组量引</b>。⚠️ CSMM 五级 ≠ CMMI 五级（初始 / 已管理 / 已定义 / 量化管理 / 优化）——第 2 级「项目规范级」、第 3 级「组织改进级」是 CSMM 独有叫法</blockquote>
+<h2>二、通读补充（只看不背）</h2>
+<label class="task"><input type="checkbox" data-key="G0" ><span class="task-text"><b>G0 · 管道/过滤器风格的优缺点</b> ○ 通读</span></label><div class="item-body"><p>优点：体现功能模块「黑盒」特性、高内聚低耦合；支持软件功能模块重用；便于系统维护（新增/替换过滤器）；支持吞吐量计算、死锁检测等特定分析；支持并行操作。缺点：通常导致成批操作；需要协调两个相对独立又有关联的数据流；过滤器可能要自己完成数据解析合成，导致性能下降、实现复杂。</p></div>
+<label class="task"><input type="checkbox" data-key="G1" ><span class="task-text"><b>G1 · 事件驱动风格的特点</b> ○ 通读</span></label><div class="item-body"><p>事件的触发者<b>并不知道</b>哪些构件会受到事件影响，也不能假定构件的处理顺序；典型应用是各种<b>图形界面工具（应用）</b>。</p></div>
+<label class="task"><input type="checkbox" data-key="G2" ><span class="task-text"><b>G2 · 面向对象模式的优缺点</b> ○ 通读</span></label><div class="item-body"><p>优点：高度模块化、封装实现数据隐藏、继承实现代码共享、灵活便于维护扩充。缺点：对象间调用需知道对象标识，标识改变须通知所有调用者。</p></div>
+<label class="task"><input type="checkbox" data-key="G3" ><span class="task-text"><b>G3 · 部署与交付的新趋势</b> ○ 通读</span></label><div class="item-body"><p>软件的部署与交付是一个持续不断的过程，伴随整个研发过程；发展趋势包括自动化程度不断提高、容器化 / 云化部署普及等。</p></div>
+<h2>三、易混防坑（考前再过一遍）</h2>
+<ol><li><b>敏感点 vs 权衡点</b>：敏感点影响<b>单个</b>质量属性；权衡点影响<b>多个</b>质量属性（=多个质量属性的敏感点）</li><li><b>三类评估方式</b>：调查问卷（检查表）/ <b>场景（最常用）</b>/ 度量；ATAM、SAAM、CBAM 都是<b>基于场景</b>的方式</li><li><b>架构风格归属</b>：批处理序列→数据流；层次结构→<b>调用/返回</b>（不是独立构件）；事件驱动→<b>独立构件</b>（不是虚拟机）；黑板系统→<b>仓库</b>；解释器→<b>虚拟机</b></li><li><b>SA 的核心是数据字典</b>（不是 DFD）；三模型配对「数据-E-R / 功能-DFD / 行为-STD」别对调</li><li><b>QFD 三需求</b>：常规「越实现越满意」/ 期望「想当然，不实现会不满意」/ 意外「兴奋需求，范围外」——「想当然」= 期望需求</li><li><b>UML 五视图</b>（逻辑/进程/实现/部署/用例）是教材口径；「用例视图是<b>最基本的需求分析模型</b>」；别与架构师考试的「4+1 视图」混</li><li><b>白盒=结构测试=单元测试=逻辑覆盖</b>；<b>黑盒=功能测试=集成/确认/系统测试=等价类/边界值</b>——三线（别名/阶段/方法）要能同时对上</li><li><b>静态测试</b>不运行程序（桌前检查/代码走查/代码审查），<b>静态测试方法也可以实现白盒测试</b></li><li><b>蓝绿部署</b>：新旧两版本+域名解析切换+快速回滚；<b>金丝雀部署</b>：少量用户先试+灰度推广——两者对调是高频坑</li><li><b>CSMM ≠ CMMI</b>：CSMM 五级「初始 / 项目规范 / 组织改进 / 量化提升 / 创新引领」；CMMI 是「初始 / 已管理 / 已定义 / 量化管理 / 优化」；教材 5.1.6 讲的是 <b>CSMM</b></li><li><b>部署层次 Build→Ship→Run</b>：Build 编译出包、Ship 装依赖、Run 启动环境，顺序别乱</li><li><b>结构化设计分两阶段</b>：概要设计（<b>又称总体结构设计</b>）+ 详细设计；「总体结构设计」就是概要设计的别称</li></ol>
+<h2>四、自检问答（合上清单试着回答）</h2>
+<details>
+<summary>1. 研究软件架构的根本目的是什么？核心问题是什么？</summary>
+<p>解决好软件的<b>复用、质量和维护</b>问题是研究软件架构的根本目的；软件架构设计的一个核心问题是能否达到<b>架构级的软件复用</b>。</p>
+</details>
+<details>
+<summary>2. 五大架构风格各自的子风格有哪些？（每类至少说出 2 个）</summary>
+<p>数据流（批处理序列 / 管道-过滤器）；调用/返回（主程序-子程序 / 数据抽象和面向对象 / 层次结构）；独立构件（进程通信 / 事件驱动）；虚拟机（解释器 / 基于规则的系统）；仓库（数据库系统 / 黑板系统 / 超文本系统）。</p>
+</details>
+<details>
+<summary>3. 什么是敏感点？什么是权衡点？架构评估三类方式中最常用的是哪种？场景法包括哪三种？</summary>
+<p>敏感点 = 影响单个质量属性的构件特性；权衡点 = 影响多个质量属性的特性（多个质量属性的敏感点）。三类方式：调查问卷（检查表）/ 基于场景（<b>最常用</b>）/ 基于度量。场景法：ATAM（架构权衡分析法）/ SAAM（软件架构分析法）/ CBAM（成本效益分析法）。</p>
+</details>
+<details>
+<summary>4. 需求的三个层次是什么？QFD 把软件需求分为哪三类？判别关键词分别是什么？</summary>
+<p>业务需求（高层次目标）、用户需求（用户具体目标 / 用户让系统做什么）、系统需求（功能需求 + 非功能需求 + 设计约束）。QFD 三类：常规需求（应该实现，越实现越满意）、期望需求（想当然、不能正确描述，不实现会不满意）、意外需求（兴奋需求，范围之外）。</p>
+</details>
+<details>
+<summary>5. 需求过程四环节？常见需求获取方法五种？好需求的八个特性？</summary>
+<p>四环节：需求获取 → 需求分析 → 需求规格说明书编制 → 需求验证与确认。获取方法：用户访谈、问卷调查、采样、情节串联板、联合需求计划。八特性：无二义性、完整性、一致性、可测试性、确定性、可跟踪性、正确性、必要性。</p>
+</details>
+<details>
+<summary>6. SA 方法的核心是什么？三个层次的模型分别用什么图表示？</summary>
+<p>核心是<b>数据字典</b>。数据模型→实体关系图（E-R）；功能模型→数据流图（DFD）；行为模型→状态转换图（STD）。</p>
+</details>
+<details>
+<summary>7. OOA 构建用例模型的四个阶段？UML 的事物和关系各分四类是什么？</summary>
+<p>四阶段：识别参与者 → 合并需求获得用例 → 细化用例描述 → 调整用例模型。事物：结构事物、行为事物、分组事物、注释事物。关系：依赖、关联、泛化、实现。</p>
+</details>
+<details>
+<summary>8. UML 五视图是哪五个？哪个视图是最基本的需求分析模型？</summary>
+<p>逻辑视图（也称设计视图）、进程视图、实现视图、部署视图、用例视图；<b>用例视图是最基本的需求分析模型</b>。</p>
+</details>
+<details>
+<summary>9. 结构化设计的基本原则？分哪两个阶段？OOD 的基本思想和三大特征？七大原则口诀？</summary>
+<p>高内聚、低耦合；概要设计（总体结构设计）+ 详细设计。OOD 基本思想：抽象、封装、可扩展性（继承+多态）；三大特征：封装、继承、多态。七原则口诀：单开李依接组迪（单一职责 / 开闭 / 里氏替换 / 依赖倒置 / 接口隔离 / 组合重用 / 迪米特）。</p>
+</details>
+<details>
+<summary>10. 设计模式按用途分哪三类？各类用途和代表模式？</summary>
+<p>创建型（用于创建对象：工厂方法 / 抽象工厂 / 原型 / 单例 / 建造者）；结构型（处理类或对象的组合：适配器 / 桥接 / 组合 / 装饰 / 外观 / 享元 / 代理）；行为型（描述交互及职责分配：观察者 / 策略 / 命令 / 状态等 11 种）。</p>
+</details>
+<details>
+<summary>11. 白盒测试和黑盒测试的别名、用途、常用方法分别是什么？</summary>
+<p>白盒 = 结构测试，用于单元测试，最常用逻辑覆盖（另有控制流 / 数据流 / 程序编译测试）；黑盒 = 功能测试，用于集成、确认和系统测试，方法有等价类划分、边界值分析、判定表、因果图、状态图、随机测试、猜错法、正交试验法。</p>
+</details>
+<details>
+<summary>12. 持续交付和持续部署分别是什么？蓝绿部署和金丝雀部署的区别？CSMM 五个等级的名称？</summary>
+<p>持续交付：一系列开发实践方法，完全自动化、可一键部署、确保代码快速安全部署到生产环境。持续部署：在持续交付基础上自动化完成部署全过程（容器技术最流行：K8s+Docker / Matrix；build-ship-run 三环节）。蓝绿 = 新旧两版本域名解析整体切换、可快速回滚；金丝雀 = 少量用户先试、灰度推广。CSMM 五级：初始级、项目规范级、组织改进级、量化提升级、创新引领级。</p>
+</details>
+<h2>五、刷题任务（软考达人 · 今日份）</h2>
+<div class="plain-li"><span class="bullet">•</span> <span>第 5 章「信息系统工程」模块：<b>软件架构风格 / 架构评估 / 需求分析 / UML / 软件测试</b> 各刷一轮（约 40 题）；错题进错题本</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>真题专项：第 3 版第 3 章同源旧真题（2023 上以前）可刷「软件工程」部分；<b>2023 下以后第 5 章真题优先</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>答题系统：本节 12 道填空题（学完清单后做滚动默写）</span></div>
+</div>
+<script>
+(function(){
+  const REL = "01_教材笔记/第05章_信息系统工程/5.1_软件工程/5.1_知识点清单_可勾选.html";
+  const STORE_KEY = 'checklist:' + REL;
+
+  // 一次性加载整个文件的勾选状态（JSON），避免 key 过长
+  let store = {};
+  try { store = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch (e) {}
+
+  // 兼容迁移：旧的错误 key（包含重复 REL 前缀的）自动迁到新格式
+  for (let i = localStorage.length - 1; i >= 0; i--) {
+    const k = localStorage.key(i);
+    if (!k || !k.startsWith('checklist:')) continue;
+    // 检测旧 bug key：包含 REL 两次
+    if (k.indexOf(REL) !== k.lastIndexOf(REL)) {
+      const v = localStorage.getItem(k);
+      const m = k.match(/:L(\d+)$/);
+      if (m && v === '1') store['L' + m[1]] = true;
+      localStorage.removeItem(k);
+    }
+  }
+
+  const boxes = document.querySelectorAll('.task input[type="checkbox"]');
+  boxes.forEach(box => {
+    const k = box.dataset.key;
+    if (store[k]) box.checked = true;
+    box.addEventListener('change', () => {
+      store[k] = box.checked;
+      try {
+        localStorage.setItem(STORE_KEY, JSON.stringify(store));
+      } catch (e) {
+        console.error('localStorage 写入失败：', e);
+      }
+      updateProgress();
+    });
+  });
+
+  function updateProgress() {
+    const total = boxes.length;
+    const done = Array.from(boxes).filter(b => b.checked).length;
+    const pct = total ? Math.round(done / total * 100) : 0;
+    document.getElementById('progress').innerHTML = '已完成：<b>' + done + ' / ' + total + '</b>（' + pct + '%）';
+  }
+  updateProgress();
+})();
+</script>
+</body>
+</html>

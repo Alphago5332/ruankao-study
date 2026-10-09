@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>康奈尔笔记 · 第 5 章第 1 节 软件工程 · 带答案版</title>
+<style>
+  :root{
+    --ink:#1f2328;
+    --ink-2:#4b5563;
+    --ink-3:#8b949e;
+    --line:#2f3742;
+    --rule:#d6dae0;
+    --accent:#185FA5;
+    --accent-soft:#E6F1FB;
+    --warm:#854F0B;
+    --warm-soft:#FAEEDA;
+    --paper:#ffffff;
+    --ans-bg:#fffaf2;
+    --ans-border:#e8d9b8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    padding:28px 16px 48px;
+    background:#eef0f3;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+    color:var(--ink);
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .toolbar{
+    max-width:210mm;margin:0 auto 14px;display:flex;gap:10px;align-items:center;
+    justify-content:space-between;flex-wrap:wrap;
+  }
+  .toolbar .hint{font-size:12.5px;color:#5b6470;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;
+    font-size:13px;padding:7px 14px;border-radius:8px;cursor:pointer;
+    font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn.active{background:var(--warm);border-color:var(--warm);color:#fff;}
+
+  .page{
+    width:210mm;min-height:297mm;margin:0 auto;background:var(--paper);
+    padding:14mm 13mm 12mm;box-shadow:0 2px 14px rgba(16,24,40,.12);
+  }
+
+  .head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    border-bottom:2px solid var(--line);padding-bottom:8px;margin-bottom:10px;
+    gap:12px;
+  }
+  .head h1{font-size:19px;margin:0;font-weight:600;letter-spacing:.3px;}
+  .head .sub{font-size:12px;color:var(--ink-3);margin-top:4px;}
+  .head .meta{font-size:12px;color:var(--ink-2);text-align:right;line-height:1.9;white-space:nowrap;}
+  .head .meta b{font-weight:600;color:var(--accent);}
+
+  .band{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+  .chip{
+    font-size:11.5px;padding:4px 9px;border-radius:5px;
+    background:var(--accent-soft);color:#0C447C;border:1px solid #B5D4F4;
+  }
+  .chip.warm{background:var(--warm-soft);color:#633806;border-color:#EFC98A;}
+
+  .cols{
+    display:grid;grid-template-columns:60mm 1fr;gap:0;
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .col-cue{
+    background:#fafbfc;border-right:1px solid var(--line);padding:8px 9px 9px;
+  }
+  .col-note{padding:8px 11px 9px;}
+  .col-hd{
+    font-size:11.5px;font-weight:600;letter-spacing:.6px;color:var(--ink-2);
+    text-transform:uppercase;padding-bottom:6px;margin-bottom:7px;
+    border-bottom:1px dashed #b9c0c9;
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  .col-hd span{font-size:10.5px;font-weight:400;color:var(--ink-3);text-transform:none;letter-spacing:0;}
+
+  .q{
+    font-size:11.5px;line-height:1.5;color:#1f2328;
+    padding:5px 0 5px 20px;position:relative;border-bottom:1px dotted #dfe3e8;
+  }
+  .q:last-child{border-bottom:0;}
+  .q::before{
+    content:attr(data-n);position:absolute;left:0;top:5px;
+    width:14px;height:14px;border-radius:50%;
+    background:var(--accent);color:#fff;font-size:9.5px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:600;line-height:1;
+  }
+  .q b{font-weight:600;}
+  .q em{font-style:normal;color:var(--warm);font-weight:600;}
+
+  .grouplabel{
+    font-size:10.5px;font-weight:600;color:var(--accent);
+    letter-spacing:.4px;margin:8px 0 2px;
+  }
+  .grouplabel:first-child{margin-top:0;}
+
+  /* === 答案区样式 === */
+  .ans-block{
+    margin-bottom:6px;padding:5px 8px 6px;
+    background:var(--ans-bg);border:1px solid var(--ans-border);border-radius:3px;
+  }
+  .ans-block .ans-title{
+    font-size:10.5px;font-weight:600;color:var(--warm);
+    letter-spacing:.3px;margin-bottom:2px;display:flex;align-items:baseline;gap:6px;
+  }
+  .ans-block .ans-title .num{
+    display:inline-block;min-width:14px;height:14px;border-radius:50%;
+    background:var(--warm);color:#fff;font-size:9.5px;font-weight:600;
+    text-align:center;line-height:14px;
+  }
+  .ans-block ul{
+    margin:2px 0 3px 0;padding:0 0 0 16px;font-size:11px;line-height:1.55;color:#2b323b;
+  }
+  .ans-block ul li{padding:1px 0;}
+  .ans-block .key{
+    color:var(--warm);font-weight:600;
+  }
+  .ans-block .tip{
+    font-size:10px;color:#633806;margin-top:2px;line-height:1.5;
+    padding:2px 6px;background:var(--warm-soft);border-radius:2px;
+  }
+  .ans-block .fill{
+    height:16px;border-bottom:1px dashed #c8c0aa;margin-top:3px;
+  }
+  body.hide-answers .ans-block{display:none;}
+  body.hide-answers .summary-prefill{display:none;}
+
+  .summary{
+    margin-top:10px;border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .summary .col-hd{
+    margin:0;padding:7px 11px;background:#fafbfc;border-bottom:1px solid var(--line);
+  }
+  .summary .body{padding:6px 11px 8px;font-size:11.5px;line-height:1.7;color:#2b323b;}
+  .summary .body b{color:var(--accent);}
+  .summary .body .small{font-size:10.5px;color:var(--ink-3);margin-top:3px;display:block;}
+
+  .footer{
+    margin-top:9px;font-size:10.5px;color:var(--ink-3);
+    display:flex;justify-content:space-between;gap:10px;
+  }
+
+  .guide{
+    width:210mm;margin:16px auto 0;background:#fff;border:1px solid #d9dee5;
+    border-radius:8px;padding:16px 18px;
+  }
+  .guide h2{font-size:14px;margin:0 0 10px;font-weight:600;}
+  .guide table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .guide th,.guide td{
+    border:1px solid #e2e6eb;padding:7px 9px;text-align:left;vertical-align:top;line-height:1.6;
+  }
+  .guide th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .guide td:first-child{width:88px;font-weight:600;color:var(--accent);}
+  .guide .note{font-size:12px;color:#5b6470;margin-top:10px;line-height:1.7;}
+
+  @page{size:A4 portrait;margin:0;}
+  @media print{
+    body{background:#fff;padding:0;}
+    .toolbar,.guide{display:none;}
+    .page{box-shadow:none;margin:0;width:auto;min-height:auto;padding:13mm 12mm;}
+    body.hide-answers .ans-block{display:none;}
+    body.hide-answers .summary-prefill{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="hint">A4 竖版 · 带答案版 · 建议先默写、再对照；打印时可「隐藏答案」变填空卷</div>
+  <div>
+    <button class="btn" id="toggleBtn" onclick="toggleAnswers()">👁 隐藏答案（打印填空卷）</button>
+    <button class="btn primary" onclick="window.print()">打印 / 导出 PDF</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="head">
+    <div>
+      <h1>康奈尔笔记 · 第 5 章第 1 节 软件工程 <span style="color:var(--warm);font-size:14px;">（带答案版）</span></h1>
+      <div class="sub">《信息系统项目管理师教程（第 4 版）》约 P129 ~ P146　｜　答案口径以 2026-10-09 三方交叉核对为准</div>
+    </div>
+    <div class="meta">
+      日期：__________<br>
+      第 <b>__</b> 轮复习　用时 <b>__</b> 分钟
+    </div>
+  </div>
+
+  <div class="band">
+    <span class="chip">上午约 2~3 题（第 5 章 5~8 题中）</span>
+    <span class="chip">归属 / 配对 / 关键词型</span>
+    <span class="chip warm">必背：五大风格 + 白盒黑盒 + CSMM 五级</span>
+    <span class="chip warm">通读：G0~G3 优缺点类</span>
+    <span class="chip warm">📝 含答案</span>
+  </div>
+
+  <div class="cols">
+
+    <div class="col-cue">
+      <div class="col-hd">线索栏 <span>遮住右侧自问</span></div>
+
+      <div class="grouplabel">5.1.1 架构设计</div>
+      <div class="q" data-n="1"><b>架构研究四方面内容</b>？根本目的？架构设计的核心问题？</div>
+      <div class="q" data-n="2"><b>五大架构风格</b>及子风格？（口诀）</div>
+      <div class="q" data-n="3"><b>敏感点 vs 权衡点</b>？三类评估方式？场景法三工具？</div>
+
+      <div class="grouplabel">5.1.2 需求分析</div>
+      <div class="q" data-n="4"><b>需求三层次</b>关键词？<b>QFD 三类需求</b>判别词？</div>
+      <div class="q" data-n="5"><b>需求过程四环节</b>？<b>获取方法五种</b>？<b>好需求八特性</b>？</div>
+      <div class="q" data-n="6"><b>SA 核心</b>？<b>三模型⇄三图形</b>？<b>OOA 用例模型四阶段</b>？SRS 地位？</div>
+      <div class="q" data-n="7"><b>UML</b>：事物四类 / 关系四类？<b>五视图</b>哪个最基本？</div>
+
+      <div class="grouplabel">5.1.3 软件设计</div>
+      <div class="q" data-n="8"><b>SD</b> 三特征 / 原则 / 两阶段？<b>OOD</b> 思想 / 三大特征 / <b>七原则口诀</b>？</div>
+      <div class="q" data-n="9"><b>设计模式</b>：范围两类？用途三类及代表？</div>
+
+      <div class="grouplabel">5.1.4 软件实现</div>
+      <div class="q" data-n="10"><b>配置管理六项</b>？<b>编码三关注点</b>？<b>静态测试</b>代码三手段？</div>
+      <div class="q" data-n="11"><b>白盒 vs 黑盒</b>：别名 / 阶段 / 方法三线？</div>
+
+      <div class="grouplabel">5.1.5 + 5.1.6 部署与过程</div>
+      <div class="q" data-n="12"><b>持续交付</b>核心句 + 三阶段？<b>部署方案 / 层次 / 不可变服务器</b>？<b>蓝绿 vs 金丝雀</b>？<b>CSMM</b> 三数字 + 五级？</div>
+    </div>
+
+    <div class="col-note">
+      <div class="col-hd">答案区 <span>默写后对照 · 虚线处写自己的补充</span></div>
+
+      <div class="grouplabel">5.1.1 架构设计</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">1</span>架构研究内容与根本目的</div>
+        <ul>
+          <li>研究内容四件套：<span class="key">软件架构描述、软件架构风格、软件架构评估、软件架构的形式化方法</span></li>
+          <li>根本目的：解决好软件的<span class="key">复用、质量和维护</span>问题（口诀「复质维」）</li>
+          <li>软件架构设计的一个核心问题是能否达到<span class="key">架构级的软件复用</span></li>
+        </ul>
+        <div class="tip">「核心问题 = 架构级复用」与「根本目的 = 复用质量维护」两句别互串</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">2</span>五大架构风格及子风格（口诀：数调独虚仓）</div>
+        <ul>
+          <li><span class="key">数据流风格</span>：批处理序列（顺序执行）、管道/过滤器（输入输出数据流）——输出正确性<span class="key">不依赖过滤器执行顺序</span></li>
+          <li><span class="key">调用/返回风格</span>：主程序/子程序、数据抽象和面向对象、<span class="key">层次结构</span></li>
+          <li><span class="key">独立构件风格</span>：进程通信、<span class="key">事件驱动</span>的系统</li>
+          <li><span class="key">虚拟机风格</span>：<span class="key">解释器</span>、基于规则的系统</li>
+          <li><span class="key">仓库风格</span>：数据库系统、<span class="key">黑板系统</span>、超文本系统</li>
+          <li>面向对象风格缺点：对象调用需<span class="key">知道对象标识</span>，标识改变须通知所有调用者</li>
+        </ul>
+        <div class="tip">高频对位陷阱：「层次结构」属<b>调用/返回</b>（不是独立构件）；「事件驱动」属<b>独立构件</b>；「解释器」属<b>虚拟机</b>；「黑板」属<b>仓库</b></div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">3</span>架构评估：敏感点 / 权衡点 / 三方式</div>
+        <ul>
+          <li>评估关注的是系统的<span class="key">质量属性</span></li>
+          <li><span class="key">敏感点</span>：影响<span class="key">单个</span>质量属性的构件特性</li>
+          <li><span class="key">权衡点</span>：影响<span class="key">多个</span>质量属性的特性 = <span class="key">多个质量属性的敏感点</span>（如加密级别：安全性↑性能↓）</li>
+          <li>三类评估方式：基于<span class="key">调查问卷（检查表）</span>、基于<span class="key">场景</span>（<b>最常用</b>）、基于<span class="key">度量</span></li>
+          <li>场景法三工具：<span class="key">ATAM（架构权衡分析法）、SAAM（软件架构分析法）、CBAM（成本效益分析法）</span></li>
+        </ul>
+        <div class="tip">⚠️ ATAM / SAAM / CBAM 都是「<b>基于场景</b>」的方式；「影响多个质量属性」→ 必答<b>权衡点</b></div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">5.1.2 需求分析</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">4</span>需求三层次 + QFD 三类需求</div>
+        <ul>
+          <li><span class="key">业务需求</span>：反映企业或客户对系统<span class="key">高层次</span>的目标追求（来自投资人 / 客户 / 管理层）</li>
+          <li><span class="key">用户需求</span>：描述<span class="key">用户的具体目标</span>，或用户要求系统必须能完成的任务</li>
+          <li><span class="key">系统需求</span>：从系统角度说明软件需求，包括<span class="key">功能需求、非功能需求和设计约束</span></li>
+          <li>QFD：将用户要求转化成软件需求的技术，目的是<span class="key">最大限度提升用户满意度</span></li>
+          <li><span class="key">常规需求</span>：应该实现，<span class="key">实现越多用户越满意</span></li>
+          <li><span class="key">期望需求</span>：用户<span class="key">想当然</span>以为应具备但不能正确描述；不实现会<b>不满意</b></li>
+          <li><span class="key">意外需求</span>：也称<span class="key">兴奋需求</span>，用户要求<span class="key">范围之外</span>的功能或性能</li>
+        </ul>
+        <div class="tip">三层次从「目标到具体、从整体到局部、从概念到细节」；「想当然」= 期望需求、「越实现越满意」= 常规需求</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">5</span>需求过程四环节 + 获取方法 + 八特性</div>
+        <ul>
+          <li>需求过程：<span class="key">需求获取 → 需求分析 → 需求规格说明书编制 → 需求验证与确认</span></li>
+          <li>需求获取：确定和理解不同<span class="key">项目干系人的需求和约束</span>的过程</li>
+          <li>获取方法五种：<span class="key">用户访谈、问卷调查、采样、情节串联板、联合需求计划</span></li>
+          <li>好需求八特性：<span class="key">无二义性、完整性、一致性、可测试性、确定性、可跟踪性、正确性、必要性</span></li>
+        </ul>
+        <div class="tip">八特性没有「可扩展性 / 经济性」这类干扰项；四环节顺序：先获取 → 再分析 → 后编制 → 终验证</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">6</span>SA 三模型 + OOA + SRS</div>
+        <ul>
+          <li>SA 建立的模型<span class="key">核心是数据字典</span></li>
+          <li>三模型配对：<span class="key">数据模型=E-R 图 / 功能模型=DFD 数据流图 / 行为模型=STD 状态转换图</span></li>
+          <li>OOA 模型包括<span class="key">用例模型和分析模型</span>；用例模型四阶段：<span class="key">识别参与者 → 合并需求获得用例 → 细化用例描述 → 调整用例模型</span></li>
+          <li>SRS 是<span class="key">需求开发活动的产物</span>，软件开发过程中<span class="key">最重要的文档之一</span>，任何规模和性质的项目都<span class="key">不应该缺少</span>；编制目的是使干系人与开发团队对初始规定有<span class="key">共同理解</span>，成为整个开发工作的<span class="key">基础</span></li>
+          <li><span class="key">需求评审</span>就是对 SRS 进行<span class="key">技术评审</span></li>
+        </ul>
+        <div class="tip">⚠️ SA 的核心是<b>数据字典</b>，不是 DFD；「数 E-R · 功 DFD · 行 STD」三对配对年年考</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">7</span>UML：事物 / 关系 / 五视图</div>
+        <ul>
+          <li>事物（建模元素）四类：<span class="key">结构事物、行为事物、分组事物、注释事物</span></li>
+          <li>关系四类：<span class="key">依赖</span>（一个事物变化影响另一事物语义）、<span class="key">关联</span>（对象间链接的结构关系）、<span class="key">泛化</span>（一般化与特殊化）、<span class="key">实现</span>（一个类制定由另一个类保证执行的契约）</li>
+          <li>14 图中常考：<span class="key">顺序图强调消息的时间次序、通信图强调对象的组织结构</span>、状态图描述对象生命周期、部署图描述软件到硬件的映射</li>
+          <li>五视图：<span class="key">逻辑视图（也称设计视图）、进程视图、实现视图、部署视图、用例视图</span>；<span class="key">用例视图是最基本的需求分析模型</span></li>
+        </ul>
+        <div class="tip">⚠️ 教材口径是「UML 五视图」：逻辑 / 进程 / 实现 / 部署 / 用例——别与架构师考试的「4+1 视图」（逻辑 / 开发 / 进程 / 物理 / 场景）混</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">5.1.3 软件设计</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">8</span>SD 与 OOD</div>
+        <ul>
+          <li>结构化设计（SD）：<span class="key">面向数据流</span>；以 SRS 和 SA 产生的 <span class="key">DFD 和数据字典</span>为基础；<span class="key">自顶向下、逐步求精、模块化</span></li>
+          <li>SD 两阶段：<span class="key">概要设计（又称总体结构设计）+ 详细设计</span>；基本原则：<span class="key">高内聚、低耦合</span></li>
+          <li>OOD 是 OOA 的延续，基本思想：<span class="key">抽象、封装、可扩展性</span>（可扩展性通过<span class="key">继承和多态</span>实现）</li>
+          <li>三大特征：<span class="key">封装、继承、多态</span></li>
+          <li>七大原则口诀「<span class="key">单开李依接组迪</span>」：单一职责 / 开闭 / 里氏替换 / 依赖倒置 / 接口隔离 / 组合重用 / 迪米特（最少知识）</li>
+        </ul>
+        <div class="tip">「总体结构设计」就是<b>概要设计</b>的别称——别当成第三种设计</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">9</span>设计模式：两类范围 + 三种用途</div>
+        <ul>
+          <li>按处理范围：<span class="key">类模式、对象模式</span></li>
+          <li><span class="key">创建型</span>（用于创建对象）：<span class="key">工厂方法、抽象工厂、原型、单例、建造者</span></li>
+          <li><span class="key">结构型</span>（处理类或对象的组合）：<span class="key">适配器、桥接、组合、装饰、外观、享元、代理</span></li>
+          <li><span class="key">行为型</span>（描述交互及职责分配）：<span class="key">观察者、策略、命令、状态</span>等 11 种</li>
+        </ul>
+        <div class="tip">高频对位：单例 = <b>创建型</b>、代理 = <b>结构型</b>、观察者 = <b>行为型</b>；「用途」口诀：<b>创建建对象 · 结构管组合 · 行为交互职责</b></div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">5.1.4 软件实现</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">10</span>配置管理 + 编码 + 静态测试</div>
+        <ul>
+          <li>配置管理六项：<span class="key">配置管理计划、配置标识、配置控制、配置状态记录、配置审计、分布（发布）管理与交付</span></li>
+          <li>编码三关注点：<span class="key">程序设计语言的选择、程序设计风格</span>（源程序文档化 / 数据说明 / 语句结构 / 输入输出）、<span class="key">编码效率</span></li>
+          <li>软件测试目的：验证软件是否满足<span class="key">合同 / 开发计划 / SRS / 设计说明等规定的质量要求</span></li>
+          <li>静态测试：<span class="key">人工检测 + 计算机辅助静态分析</span>，<b>不实际运行程序</b>；文档用<span class="key">检查单</span>，代码三手段：<span class="key">桌前检查、代码走查、代码审查</span></li>
+          <li>静态测试可发现约 <span class="key">30% ~ 70%</span> 的逻辑设计和编码错误</li>
+        </ul>
+        <div class="tip">代码三手段口诀「<b>桌走审</b>」；静态测试方法<b>也可以实现白盒测试</b>（易考判断）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">11</span>白盒 vs 黑盒（三线对齐）</div>
+        <ul>
+          <li><span class="key">白盒 = 结构测试</span>：了解程序内部结构和处理算法；主要用于<span class="key">单元测试</span>；最常用技术 <span class="key">逻辑覆盖</span>（另有控制流 / 数据流 / 程序编译测试）</li>
+          <li><span class="key">黑盒 = 功能测试</span>：只检查功能能否按 SRS 正常使用；主要用于<span class="key">集成测试、确认测试和系统测试</span>；方法：<span class="key">等价类划分、边界值分析、判定表、因果图、状态图、随机测试、猜错法、正交试验法</span></li>
+        </ul>
+        <div class="tip">口诀「<b>白盒单元逻辑覆盖 · 黑盒集成确认系统等价边界</b>」——别名 / 阶段 / 方法三条线要能同时对上</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">5.1.5 + 5.1.6 部署与过程</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">12</span>持续交付部署 / 蓝绿金丝雀 / CSMM</div>
+        <ul>
+          <li>软件部署与交付：生命周期<span class="key">重要环节</span>、开发<span class="key">后期活动</span>，通过<span class="key">配置、安装、激活</span>保障制品运行</li>
+          <li>持续交付：一系列开发实践方法，确保代码<span class="key">快速、安全部署到生产环境</span>；<span class="key">完全自动化、一键部署</span>；三阶段方案 = 需求用<span class="key">用户故事</span> / 开发测试<span class="key">持续集成</span> / 运维<span class="key">打通开发运维、环境统一</span></li>
+          <li>持续部署：<span class="key">容器技术最流行</span>（Kubernetes+Docker、Matrix）；部署层次 <span class="key">Build→Ship→Run</span>；<span class="key">不可变服务器</span> = 除更新和安装补丁外不对服务器做任何更改</li>
+          <li><span class="key">蓝绿部署</span>：新旧两版本 + <span class="key">域名解析切换</span>，可快速切回旧版本；<span class="key">金丝雀部署</span>：先让<span class="key">少量用户</span>试用观察，正常后稳步推广（灰度）</li>
+          <li>CSMM：《软件过程能力成熟度模型》，<span class="key">4 个能力域、20 个能力子域、161 个能力要求</span>；五级：<span class="key">初始级 → 项目规范级 → 组织改进级 → 量化提升级 → 创新引领级</span>（口诀「初规组量引」）</li>
+          <li>四能力域：治理（战略与治理 / 目标管理）、开发与交付（需求设计开发测试部署服务开源应用）、管理与支持（策划监控结项质保风险配置供应商）、组织管理（过程人员资源过程能力）</li>
+        </ul>
+        <div class="tip">⚠️ 蓝绿 = <b>两套环境整体切换</b>、金丝雀 = <b>小流量灰度</b>；CSMM ≠ CMMI（CMMI：初始 / 已管理 / 已定义 / 量化管理 / 优化）</div>
+        <div class="fill"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="col-hd">总结区 <span>本节本质 + 考点地图</span></div>
+    <div class="body summary-prefill">
+      <b>本节本质</b>：软件工程是第 5 章的<b>技术骨架</b>，六小节一条线（架构 → 需求 → 设计 → 实现 → 部署 → 过程），上午 2~3 题，主流题型是<b>归属配对 + 关键词辨析</b>。<br>
+      <b>考点地图（按考频排序）</b>：① 白盒 vs 黑盒（别名 / 阶段 / 方法三线）→ ② 五大架构风格及子风格归属 → ③ SA 核心数据字典 + 三模型三图 → ④ 敏感点 vs 权衡点 + 场景法最常用 → ⑤ QFD 三类需求判别词 → ⑥ 蓝绿 vs 金丝雀 + build-ship-run → ⑦ UML 事物关系五视图 → ⑧ OOD 七原则 + 设计模式三型 → ⑨ CSMM 三数字 + 五等级 → ⑩ 需求过程四环节 + 获取方法五种。<br>
+      <span class="small">⚠️ 口径陷阱：①SA 核心是数据字典不是 DFD；②层次结构属调用/返回、事件驱动属独立构件、解释器属虚拟机、黑板属仓库；③「影响多个质量属性」= 权衡点；④ATAM/SAAM/CBAM 都基于场景；⑤白盒=结构测试=单元=逻辑覆盖，黑盒=功能测试=集成/确认/系统=等价类/边界值；⑥UML 五视图（逻辑/进程/实现/部署/用例），用例视图=最基本需求分析模型，≠ 4+1 视图；⑦概要设计=总体结构设计；⑧蓝绿=整体切换、金丝雀=灰度；⑨CSMM 五级「初规组量引」≠ CMMI「初已定量化优化」；⑩部署层次 Build→Ship→Run 顺序别乱。</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>康奈尔笔记法 · 第 5 章第 1 节 带答案版　｜　复习记录：当日 ☐　+1 天 ☐　+3 天 ☐　+7 天 ☐　+14 天 ☐</span>
+    <span>正确率 ____ / 12</span>
+  </div>
+
+</div>
+
+<div class="guide">
+  <h2>怎么用这一页</h2>
+  <table>
+    <tr>
+      <th>步骤</th><th>做法</th>
+    </tr>
+    <tr>
+      <td>第 1 遍 · 遮答默写</td>
+      <td>用纸<b>遮住右栏答案区</b>，只看左栏 12 个问题。口头/默写回答，答不出的画「×」。</td>
+    </tr>
+    <tr>
+      <td>第 2 遍 · 对照修正</td>
+      <td>揭开答案区逐项对照。每条答案下的<b>虚线</b>是留给你的「补充线」——记下易漏点（如「三层模型配对」「白盒黑盒三线」「CSMM 与 CMMI 的五级区别」）。</td>
+    </tr>
+    <tr>
+      <td>第 3 遍 · 隐藏答案打印</td>
+      <td>点工具栏「👁 隐藏答案」按钮，再打印一份当填空卷，可反复练习。</td>
+    </tr>
+    <tr>
+      <td>第 4 遍 · 复习节奏</td>
+      <td>页脚 5 个框按「当日 → +1 天 → +3 天 → +7 天 → +14 天」打勾，这就是你的艾宾浩斯进度条。全部打勾后，本节可不再看。</td>
+    </tr>
+  </table>
+  <div class="note">
+    <b>为什么这份是「带答案版」</b>：5.1 节全是「配对 + 辨析」型考点，自己默写时最容易犯的错是<b>把相似名词调包</b>（敏感点 / 权衡点、白盒 / 黑盒、蓝绿 / 金丝雀、CSMM / CMMI、E-R / DFD / STD）。本版每个答案都标注<b>关键术语</b>（暖色）和<b>对照提醒</b>（橙色框），默写后对照一眼就能定位偏差。考前冲刺只看「总结区 · 考点地图」+「橙色 tip 框」即可。
+  </div>
+</div>
+
+<script>
+  function toggleAnswers(){
+    document.body.classList.toggle('hide-answers');
+    const btn = document.getElementById('toggleBtn');
+    const hidden = document.body.classList.contains('hide-answers');
+    btn.textContent = hidden ? '👁 显示答案' : '👁 隐藏答案（打印填空卷）';
+    btn.classList.toggle('active', hidden);
+  }
+</script>
+
+</body>
+</html>

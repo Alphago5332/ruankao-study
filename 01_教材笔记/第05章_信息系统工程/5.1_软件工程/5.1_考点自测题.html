@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5.1 软件工程 · 考点自测 22 题</title>
+<style>
+  *{box-sizing:border-box;}
+  body{
+    margin:0;padding:24px 14px 60px;background:#eef0f3;color:#1f2328;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    gap:14px;margin-bottom:18px;flex-wrap:wrap;
+  }
+  h1{font-size:20px;margin:0;font-weight:600;}
+  .sub{font-size:12.5px;color:#6b7280;margin:5px 0 0;}
+  .score-chip{
+    background:#E6F1FB;border:1px solid #B5D4F4;color:#0C447C;
+    border-radius:8px;padding:7px 13px;font-size:13px;white-space:nowrap;
+  }
+  .score-chip b{font-size:16px;font-weight:600;}
+
+  #quiz{
+    background:#fff;border-radius:12px;padding:22px 24px;
+    box-shadow:0 2px 12px rgba(16,24,40,.08);
+  }
+  .progress-row{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:8px;font-size:13px;color:#4b5563;
+  }
+  .chip{
+    background:#FAEEDA;border:1px solid #EFC98A;color:#633806;
+    border-radius:5px;padding:2px 9px;font-size:12px;
+  }
+  .progress{height:6px;background:#e5e8ee;border-radius:4px;overflow:hidden;margin-bottom:20px;}
+  #bar{height:100%;width:0;background:#185FA5;border-radius:4px;transition:width .25s;}
+
+  .qtext{font-size:16px;line-height:1.75;font-weight:500;margin:0 0 18px;}
+  .opt{
+    display:flex;gap:10px;align-items:flex-start;
+    border:1px solid #d9dee5;border-radius:9px;padding:11px 14px;
+    margin-bottom:10px;cursor:pointer;font-size:14.5px;line-height:1.6;
+    background:#fff;transition:border-color .12s,background .12s;
+  }
+  .opt:hover{border-color:#185FA5;background:#f7fafd;}
+  .opt .tag{
+    flex:0 0 22px;height:22px;border-radius:50%;
+    background:#eef1f5;color:#3b4552;font-size:12px;font-weight:600;
+    display:flex;align-items:center;justify-content:center;margin-top:2px;
+  }
+  .opt.correct{border-color:#0F6E56;background:#E1F5EE;}
+  .opt.correct .tag{background:#0F6E56;color:#fff;}
+  .opt.wrong{border-color:#A32D2D;background:#FCEBEB;}
+  .opt.wrong .tag{background:#A32D2D;color:#fff;}
+  .opt.dim{opacity:.55;cursor:default;}
+  .opt.correct.dim{opacity:1;}
+  .opt.locked{cursor:default;}
+
+  #feedback{margin-top:14px;border-radius:9px;overflow:hidden;border:1px solid #d9dee5;}
+  #verdict{
+    padding:10px 14px;font-size:14px;font-weight:600;
+    background:#E1F5EE;color:#085041;border-bottom:1px solid #cbe9da;
+  }
+  #verdict.bad{background:#FCEBEB;color:#501313;border-bottom:1px solid #f3cdcd;}
+  #explain{padding:12px 14px;font-size:13.5px;line-height:1.8;color:#374151;background:#fdfdfe;}
+  #explain b{color:#1f2328;}
+  #nextBtn{
+    display:block;margin:14px 16px 16px;float:right;
+    background:#185FA5;color:#fff;border:none;border-radius:8px;
+    padding:9px 26px;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  #nextBtn:hover{background:#14507f;}
+  #feedback::after{content:"";display:block;clear:both;}
+  .kbd{font-size:11.5px;color:#9aa3af;margin:14px 2px 0;}
+
+  #result{background:#fff;border-radius:12px;padding:26px 28px;box-shadow:0 2px 12px rgba(16,24,40,.08);}
+  .r-head{display:flex;gap:22px;align-items:center;margin-bottom:6px;flex-wrap:wrap;}
+  .r-score{font-size:44px;font-weight:600;color:#185FA5;line-height:1;}
+  .r-score small{font-size:18px;color:#8b949e;font-weight:400;}
+  .r-msg{font-size:14px;color:#4b5563;line-height:1.7;}
+  h3{font-size:15px;font-weight:600;margin:26px 0 10px;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th,td{border:1px solid #e2e6eb;padding:7px 10px;text-align:left;line-height:1.6;}
+  th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .mbar{height:8px;background:#e5e8ee;border-radius:4px;overflow:hidden;min-width:120px;}
+  .mbar div{height:100%;background:#1D9E75;border-radius:4px;}
+
+  .wq{
+    border:1px solid #f3cdcd;border-radius:9px;padding:13px 15px;
+    margin-bottom:12px;background:#fffafa;
+  }
+  .wq .wt{font-size:14px;font-weight:600;line-height:1.7;margin-bottom:7px;}
+  .wq .wa{font-size:13px;color:#A32D2D;margin-bottom:2px;}
+  .wq .wc{font-size:13px;color:#0F6E56;margin-bottom:8px;}
+  .wq .we{font-size:12.5px;color:#57606a;line-height:1.75;border-top:1px dashed #e8d9d9;padding-top:7px;}
+
+  .btns{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;border-radius:8px;
+    padding:9px 22px;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:#185FA5;border-color:#185FA5;color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn:disabled{opacity:.45;cursor:not-allowed;}
+  .hidden{display:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <h1>5.1 软件工程 · 考点自测</h1>
+      <p class="sub">22 题 · 第 4 版教材 5.1 节 · 达标线 18/22（80%）· 逐题精讲 · 键盘 A~D 或 1~4 选择，Enter 下一题</p>
+    </div>
+    <div class="score-chip">已答对 <b id="scoreNow">0</b> / <span id="totalNow">22</span> 题</div>
+  </header>
+
+  <div id="quiz">
+    <div class="progress-row">
+      <span id="pos"></span>
+      <span class="chip" id="moduleChip"></span>
+    </div>
+    <div class="progress"><div id="bar"></div></div>
+    <div class="qcard">
+      <p class="qtext" id="qtext"></p>
+      <div id="options"></div>
+      <div id="feedback" class="hidden">
+        <div id="verdict"></div>
+        <div id="explain"></div>
+        <button id="nextBtn">下一题 →</button>
+      </div>
+    </div>
+    <p class="kbd">键盘可用：A~D 或 1~4 选择，Enter 下一题</p>
+    <p class="kbd" style="margin:4px 2px 0;">对照资料：5.1_知识点清单 / 5.1_康奈尔笔记模板_带答案版 ｜ 教材约 P129 ~ P146</p>
+  </div>
+
+  <div id="result" class="hidden"></div>
+
+</div>
+
+<script>
+const QUESTIONS = [
+{m:"5.1.1 架构设计",
+ q:"解决好软件的（ ）问题，是研究软件架构的根本目的。",
+ o:["性能、成本和交付","复用、质量和维护","安全、可靠和可用","并发、分布和集成"],a:1,
+ e:"教材原句：解决好软件的<b>复用、质量和维护</b>问题，是研究软件架构的根本目的（口诀「复质维」）。软件架构设计的一个核心问题是能否达到<b>架构级的软件复用</b>。"},
+
+{m:"5.1.1 架构设计",
+ q:"将系统组织成若干层次，每一层为上一层提供服务并使用下一层提供的功能，这种「层次结构」属于（ ）风格。",
+ o:["数据流风格","独立构件风格","调用/返回风格","虚拟机风格"],a:2,
+ e:"「层次结构」属于<b>调用/返回风格</b>（与主程序/子程序、数据抽象和面向对象并列），典型应用是 ISO/OSI 七层网络模型。高频陷阱：别把它放进「独立构件」或「数据流」。"},
+
+{m:"5.1.1 架构设计",
+ q:"关于软件架构风格归类，正确的组合是（ ）。",
+ o:["① 解释器　② 黑板系统　③ 事件驱动　④ 管道/过滤器 —— 依次为：虚拟机、仓库、独立构件、数据流",
+    "① 解释器　② 黑板系统　③ 事件驱动　④ 管道/过滤器 —— 依次为：仓库、虚拟机、数据流、独立构件",
+    "① 解释器　② 黑板系统　③ 事件驱动　④ 管道/过滤器 —— 依次为：虚拟机、仓库、数据流、独立构件",
+    "① 解释器　② 黑板系统　③ 事件驱动　④ 管道/过滤器 —— 依次为：调用/返回、仓库、独立构件、数据流"],a:0,
+ e:"<b>解释器</b>→虚拟机风格；<b>黑板系统</b>→仓库风格（与数据库系统、超文本系统并列）；<b>事件驱动</b>→独立构件风格；<b>管道/过滤器</b>→数据流风格（与批处理序列并列）。五大风格口诀「数调独虚仓」。"},
+
+{m:"5.1.1 架构设计",
+ q:"在软件架构评估过程中，影响多个质量属性的特性（如加密级别越高安全性越好、性能越差）称为（ ）。",
+ o:["敏感点","权衡点","风险点","突破点"],a:1,
+ e:"<b>权衡点</b>是影响<b>多个</b>质量属性的特性，是<b>多个质量属性的敏感点</b>；<b>敏感点</b>只影响<b>单个（某一）</b>质量属性。「影响多个质量属性」→ 必答权衡点。"},
+
+{m:"5.1.1 架构设计",
+ q:"三种软件架构评估方式中，最常用的是（ ）方式；ATAM（架构权衡分析法）属于该类方式中的具体方法。",
+ o:["基于调查问卷（或检查表）","基于场景","基于度量","基于形式化验证"],a:1,
+ e:"三类评估方式：基于调查问卷（检查表）、<b>基于场景（最常用）</b>、基于度量。场景法主要包括 <b>ATAM（架构权衡分析法）、SAAM（软件架构分析法）、CBAM（成本效益分析法）</b>——三个工具都基于场景，别归到问卷或度量名下。"},
+
+{m:"5.1.2 需求分析",
+ q:"反映企业或客户对系统高层次的目标追求，通常来自项目投资人、购买产品的客户或管理人员的需求属于（ ）。",
+ o:["业务需求","用户需求","系统需求","功能需求"],a:0,
+ e:"需求分三个层次：<b>业务需求</b>（高层次目标追求）、<b>用户需求</b>（用户的具体目标或要求系统必须完成的任务）、<b>系统需求</b>（功能需求 + 非功能需求 + 设计约束）。三层次从目标到具体、从整体到局部、从概念到细节。见教材 5.1.2。"},
+
+{m:"5.1.2 需求分析",
+ q:"QFD 将软件需求分为三类。其中，用户「想当然」以为系统应具备、但不能正确描述的功能或性能属于（ ）。",
+ o:["常规需求","期望需求","意外需求","兴奋需求"],a:1,
+ e:"<b>期望需求</b>：用户想当然以为系统应具备，但不能正确描述；若没有实现，用户会<b>不满意</b>。<b>常规需求</b>是实现得越多用户越满意；<b>意外需求</b>（也称兴奋需求）是用户要求范围之外的功能或性能。QFD 的目的是最大限度地提升用户满意度。"},
+
+{m:"5.1.2 需求分析",
+ q:"下列方法中，不属于常见需求获取方法的是（ ）。",
+ o:["用户访谈","联合需求计划","情节串联板","需求评审"],a:3,
+ e:"常见需求获取方法五种：<b>用户访谈、问卷调查、采样、情节串联板、联合需求计划</b>。<b>需求评审</b>属于需求验证与确认环节（对 SRS 进行技术评审），不是获取方法——阶段归属别错位。"},
+
+{m:"5.1.2 需求分析",
+ q:"使用结构化分析（SA）方法进行需求分析时，建立的模型的「核心」是（ ）；其中功能模型用（ ）表示。",
+ o:["数据字典；数据流图（DFD）","数据流图（DFD）；数据字典","E-R 图；状态转换图（STD）","状态转换图（STD）；E-R 图"],a:0,
+ e:"SA 建立的模型的<b>核心是数据字典</b>（不是 DFD！）；围绕核心的三个层次模型：<b>数据模型用 E-R 图、功能模型用 DFD、行为模型用 STD</b>。「数 E-R · 功 DFD · 行 STD」三对配对年年考，顺序别对调。"},
+
+{m:"5.1.2 需求分析",
+ q:"面向对象分析（OOA）构建用例模型的四个阶段，正确顺序是（ ）。",
+ o:["识别参与者 → 合并需求获得用例 → 细化用例描述 → 调整用例模型",
+    "合并需求获得用例 → 识别参与者 → 调整用例模型 → 细化用例描述",
+    "细化用例描述 → 识别参与者 → 合并需求获得用例 → 调整用例模型",
+    "识别参与者 → 细化用例描述 → 合并需求获得用例 → 调整用例模型"],a:0,
+ e:"四阶段顺序：<b>识别参与者 →（合并需求）获得用例 → 细化用例描述 → 调整用例模型</b>。前三个阶段是必须的。OOA 的模型包括<b>用例模型和分析模型</b>。"},
+
+{m:"5.1.2 需求分析",
+ q:"关于 UML 的描述，不正确的是（ ）。",
+ o:["UML 中的事物包括结构事物、行为事物、分组事物和注释事物",
+    "泛化是一般化和特殊化的关系，描述特殊元素的对象可替换一般元素的对象",
+    "实现是类之间的语义关系，其中一个类制定由另一个类保证执行的契约",
+    "UML 五视图中，部署视图是最基本的需求分析模型"],a:3,
+ e:"UML 五视图：逻辑视图（也称设计视图）、进程视图、实现视图、部署视图、<b>用例视图</b>；<b>用例视图才是最基本的需求分析模型</b>。部署视图把构件部署到物理节点上，表示软件到硬件的映射。"},
+
+{m:"5.1.2 需求分析",
+ q:"一个好的需求应该具有的特性中，不包括（ ）。",
+ o:["无二义性","可测试性","可扩展性","可跟踪性"],a:2,
+ e:"好需求八特性：<b>无二义性、完整性、一致性、可测试性、确定性、可跟踪性、正确性、必要性</b>——没有「可扩展性」这一项。「可扩展性」是 OOD 基本思想的组成，主体错位是典型干扰。"},
+
+{m:"5.1.2 需求分析",
+ q:"关于软件需求规格说明书（SRS）的说法，正确的是（ ）。",
+ o:["SRS 是软件设计活动的产物，供概要设计阶段使用",
+    "SRS 是需求开发活动的产物，对任何规模和性质的软件项目都不应该缺少",
+    "SRS 编制完成后即形成需求基线，无需再进行评审",
+    "SRS 只在大型软件项目中才需要编制"],a:1,
+ e:"<b>SRS 是需求开发活动的产物</b>，是软件开发过程中<b>最重要的文档之一</b>，任何规模和性质的项目都<b>不应该缺少</b>；编制目的是使干系人与开发团队对初始规定有共同理解，成为整个开发工作的基础。<b>需求评审就是对 SRS 进行技术评审</b>——所以 C 项「无需评审」错。"},
+
+{m:"5.1.3 软件设计",
+ q:"结构化设计（SD）方法需要遵循的基本原则是（ ）；其概要设计又称为（ ）。",
+ o:["高内聚、低耦合；总体结构设计","高耦合、低内聚；详细设计","高内聚、低耦合；详细设计","开闭原则；总体结构设计"],a:0,
+ e:"SD 是<b>面向数据流</b>的方法，以 SRS 和 SA 阶段产生的 DFD 和数据字典为基础，是<b>自顶向下、逐步求精和模块化</b>的过程；分<b>概要设计（又称总体结构设计）</b>和详细设计两个阶段；基本原则<b>高内聚、低耦合</b>。见教材 5.1.3。"},
+
+{m:"5.1.3 软件设计",
+ q:"OOD 七大原则中，「对扩展开放，对修改关闭」指的是（ ）。",
+ o:["单一职责原则","开闭原则","里氏替换原则","依赖倒置原则"],a:1,
+ e:"<b>开闭原则</b>：对扩展开放，对修改关闭。七原则口诀「<b>单开李依接组迪</b>」：单一职责 / 开闭 / 里氏替换（父类能出现的地方子类必能替换）/ 依赖倒置（面向接口编程）/ 接口隔离（接口小而专）/ 组合重用（多用组合少用继承）/ 迪米特（最少知识）。"},
+
+{m:"5.1.3 软件设计",
+ q:"根据目的和用途划分，单例模式属于（ ）设计模式，代理模式属于（ ）设计模式。",
+ o:["创建型；结构型","结构型；行为型","创建型；行为型","行为型；创建型"],a:0,
+ e:"创建型（用于创建对象）：<b>单例</b>、工厂方法、抽象工厂、原型、建造者；结构型（处理类或对象的组合）：<b>代理</b>、适配器、桥接、组合、装饰、外观、享元；行为型（描述交互及职责分配）：观察者、策略、命令、状态等。高频对位：单例=创建型、代理=结构型、观察者=行为型。"},
+
+{m:"5.1.4 软件实现",
+ q:"关于白盒测试与黑盒测试，正确的说法是（ ）。",
+ o:["白盒测试又称功能测试，主要用于集成测试",
+    "白盒测试又称结构测试，最常用的技术是逻辑覆盖，主要用于单元测试",
+    "黑盒测试需要了解程序的内部结构和处理算法",
+    "黑盒测试主要用于单元测试，白盒测试主要用于系统测试"],a:1,
+ e:"<b>白盒 = 结构测试 = 单元测试 = 逻辑覆盖</b>；<b>黑盒 = 功能测试 = 集成 / 确认 / 系统测试 = 等价类划分 / 边界值分析等</b>。黑盒只检查程序功能能否按 SRS 要求正常使用，不需要了解内部结构——B、D 项把两者对调了。"},
+
+{m:"5.1.4 软件实现",
+ q:"下列测试方法中，不属于黑盒测试常用方法的是（ ）。",
+ o:["等价类划分","边界值分析","判定表","逻辑覆盖"],a:3,
+ e:"黑盒测试方法：<b>等价类划分、边界值分析、判定表、因果图、状态图、随机测试、猜错法、正交试验法</b>；<b>逻辑覆盖（语句 / 判定 / 条件 / 路径覆盖）是白盒测试最常用的技术</b>，不属于黑盒方法。"},
+
+{m:"5.1.4 软件实现",
+ q:"静态测试中，对代码进行检测的主要手段包括桌前检查、代码走查和（ ）；对文档的静态测试主要以（ ）方式进行。",
+ o:["代码审查；检查单","冒烟测试；走查","回归测试；评审会","同行评审；检查单"],a:0,
+ e:"静态测试采用<b>人工检测和计算机辅助静态分析</b>手段，不实际运行程序；<b>对代码：桌前检查、代码走查、代码审查</b>（口诀「桌走审」）；<b>对文档：检查单</b>。静态测试可以发现约 <b>30%~70%</b> 的逻辑设计和编码错误；静态测试方法也可以实现白盒测试。"},
+
+{m:"5.1.5 部署交付",
+ q:"新版本发布时，先让少量用户使用新版本并观察是否存在问题，确认正常后稳步推广给所有用户，这种部署方式是（ ）。",
+ o:["蓝绿部署","金丝雀部署","不可变服务器部署","阶梯式晋级部署"],a:1,
+ e:"<b>金丝雀部署</b>：少量用户先试（灰度发布），出现问题及时处理并重新发布。<b>蓝绿部署</b>：准备新旧两个部署版本，通过<b>域名解析切换</b>使用户环境整体切换到新版本，出问题可快速切回旧版本——「整体切换」vs「小流量灰度」是两者的判别关键词。"},
+
+{m:"5.1.5 部署交付",
+ q:"关于持续交付与持续部署，不正确的是（ ）。",
+ o:["持续交付是一个完全自动化的过程，业务开发完成时可以做到一键部署",
+    "持续交付在需求阶段使用便于开发人员理解的用户故事取代传统需求文档",
+    "部署层次包括 Build、Ship、Run 三个环节",
+    "不可变服务器是指除更新和安装补丁程序外，仍可随时对服务器进行其他更改"],a:3,
+ e:"<b>不可变服务器</b>是指<b>除了更新和安装补丁程序以外，不对服务器进行任何更改</b>——D 项说反了。部署层次三环节：<b>Build（编译形成 RPM/Jar 包）→ Ship（第三方依赖和插件安装到环境）→ Run（启动整套环境）</b>；容器技术（Kubernetes+Docker、Matrix）是目前部署中最流行的技术。"},
+
+{m:"5.1.6 过程管理",
+ q:"CSMM（软件过程能力成熟度模型）的组成结构是（ ），其第 2 级的名称是（ ）。",
+ o:["4 个能力域、20 个能力子域、161 个能力要求；项目规范级",
+    "4 个能力域、18 个能力子域、150 个能力要求；已管理级",
+    "5 个能力域、20 个能力子域、161 个能力要求；组织改进级",
+    "4 个能力域、22 个能力子域、98 个能力要求；项目规范级"],a:0,
+ e:"CSMM 由<b>4 个能力域、20 个能力子域、161 个能力要求</b>组成；五个成熟度等级：<b>初始级 → 项目规范级 → 组织改进级 → 量化提升级 → 创新引领级</b>（口诀「初规组量引」）。⚠️ 别与 CMMI 五级（初始 / 已管理 / 已定义 / 量化管理 / 优化）背串——CSMM 的第 2、3 级名称是独有的。"},
+];
+
+const LETTERS = ["A","B","C","D"];
+let pool = [], cur = 0, answered = false, stats = {}, wrongList = [];
+
+function init(list){
+  pool = list.map(x=>Object.assign({},x));
+  cur = 0; answered = false; stats = {}; wrongList = [];
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  document.getElementById("totalNow").textContent = pool.length;
+  document.getElementById("scoreNow").textContent = "0";
+  render();
+}
+function render(){
+  const q = pool[cur];
+  document.getElementById("pos").textContent = "第 " + (cur+1) + " / " + pool.length + " 题";
+  document.getElementById("moduleChip").textContent = q.m;
+  document.getElementById("bar").style.width = (cur/pool.length*100) + "%";
+  document.getElementById("qtext").innerHTML = q.q;
+  const box = document.getElementById("options");
+  box.innerHTML = "";
+  q.o.forEach((t,i)=>{
+    const d = document.createElement("div");
+    d.className = "opt";
+    d.innerHTML = '<span class="tag">'+LETTERS[i]+'</span><span>'+t+"</span>";
+    d.onclick = ()=>choose(i);
+    box.appendChild(d);
+  });
+  document.getElementById("feedback").classList.add("hidden");
+}
+function choose(i){
+  if(answered) return;
+  answered = true;
+  const q = pool[cur];
+  const ok = (i === q.a);
+  if(!stats[q.m]) stats[q.m] = {right:0,total:0};
+  stats[q.m].total++;
+  const opts = document.querySelectorAll(".opt");
+  opts.forEach((d,idx)=>{
+    d.classList.add("locked");
+    if(idx === q.a) d.classList.add("correct");
+    else if(idx === i) d.classList.add("wrong");
+    else d.classList.add("dim");
+    d.onclick = null;
+  });
+  if(ok){
+    stats[q.m].right++;
+    document.getElementById("scoreNow").textContent = sumRight();
+  } else {
+    wrongList.push({q:q, picked:i});
+  }
+  const v = document.getElementById("verdict");
+  v.textContent = ok ? "✓ 答对了" : "✗ 答错了　正确答案：" + LETTERS[q.a];
+  v.className = ok ? "" : "bad";
+  document.getElementById("explain").innerHTML = q.e;
+  document.getElementById("feedback").classList.remove("hidden");
+  document.getElementById("nextBtn").textContent =
+    (cur === pool.length-1) ? "查看成绩单 →" : "下一题 →";
+}
+function sumRight(){
+  let s = 0; for(const k in stats) s += stats[k].right; return s;
+}
+function next(){
+  cur++;
+  if(cur >= pool.length){ showResult(); }
+  else { answered = false; render(); window.scrollTo(0,0); }
+}
+function showResult(){
+  document.getElementById("quiz").classList.add("hidden");
+  const r = document.getElementById("result");
+  const total = pool.length, right = sumRight();
+  const pct = Math.round(right/total*100);
+  let msg;
+  if(pct >= 80) msg = "达标（≥80%）：本节知识点基本闭环，可以进入下一节，或用康奈尔模板的「遮」字诀再过一遍线索栏。";
+  else if(pct >= 60) msg = "接近达标：把下面的错题解析看完，回看对应模块的知识点清单，明天用康奈尔模板遮住答案重测。";
+  else msg = "未达标：正确率低是发现漏洞的正常信号——先把知识点清单的「必背」块过一遍，再点「只重做错题」。";
+
+  let tbl = '<h3>分模块得分</h3><table><tr><th>模块</th><th>正确 / 题数</th><th>正确率</th></tr>';
+  for(const k in stats){
+    const s = stats[k];
+    const p = Math.round(s.right/s.total*100);
+    tbl += '<tr><td>'+k+'</td><td>'+s.right+' / '+s.total+'</td><td><div class="mbar"><div style="width:'+p+'%"></div></div></td></tr>';
+  }
+  tbl += "</table>";
+
+  let wrong = "";
+  if(wrongList.length){
+    wrong = "<h3>错题回顾（"+wrongList.length+" 题）</h3>";
+    wrongList.forEach((w,i)=>{
+      wrong += '<div class="wq"><div class="wt">'+(i+1)+". "+w.q.q+"</div>"
+        + '<div class="wa">你的选择：'+LETTERS[w.picked]+"　"+w.q.o[w.picked]+"</div>"
+        + '<div class="wc">正确答案：'+LETTERS[w.q.a]+"　"+w.q.o[w.q.a]+"</div>"
+        + '<div class="we">'+w.q.e+"</div></div>";
+    });
+  } else {
+    wrong = '<h3>错题回顾</h3><p style="font-size:13px;color:#0F6E56;">全部答对，本节知识点已闭环。</p>';
+  }
+
+  r.innerHTML =
+    '<div class="r-head"><div class="r-score">'+right+"<small> / "+total+"</small></div>"
+    + '<div class="r-msg"><b>'+pct+"%</b><br>"+msg+"</div></div>"
+    + tbl + wrong
+    + '<div class="btns">'
+    + '<button class="btn primary" id="retryWrong"'+(wrongList.length?"":" disabled")+">只重做错题（"+wrongList.length+" 题）</button>"
+    + '<button class="btn" id="retryAll">全部重来</button></div>';
+  r.classList.remove("hidden");
+  document.getElementById("retryWrong").onclick = ()=>{
+    const list = wrongList.map(w=>w.q);
+    init(list);
+    window.scrollTo(0,0);
+  };
+  document.getElementById("retryAll").onclick = ()=>{ init(QUESTIONS); window.scrollTo(0,0); };
+  window.scrollTo(0,0);
+}
+document.getElementById("nextBtn").onclick = next;
+document.addEventListener("keydown", e=>{
+  if(document.getElementById("quiz").classList.contains("hidden")) return;
+  if(e.key === "Enter" || e.key === " "){ if(answered){ e.preventDefault(); next(); } return; }
+  const map = {"a":0,"b":1,"c":2,"d":3,"1":0,"2":1,"3":2,"4":3};
+  const k = e.key.toLowerCase();
+  if(k in map && !answered) choose(map[k]);
+});
+init(QUESTIONS);
+</script>
+</body>
+</html>

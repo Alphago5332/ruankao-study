@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5.1 软件工程 · 康奈尔笔记模板</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+    background: #f0f2f5; color: #333; padding: 24px;
+  }
+  .page {
+    width: 210mm; min-height: 297mm; margin: 0 auto; background: #fff;
+    padding: 14mm 12mm; box-shadow: 0 2px 12px rgba(0,0,0,.12);
+  }
+  h1 { font-size: 20px; color: #185FA5; text-align: center; margin-bottom: 4px; }
+  .sub { text-align: center; font-size: 11px; color: #888; margin-bottom: 10px; }
+  .meta { display: flex; justify-content: space-between; font-size: 11px; color: #555;
+    border-bottom: 2px solid #185FA5; padding-bottom: 6px; margin-bottom: 10px; }
+  .cornell { display: flex; border: 1px solid #ccc; min-height: 178mm; }
+  .cue {
+    width: 32%; background: #f4f8fc; border-right: 2px solid #185FA5;
+    padding: 10px 8px; font-size: 11.5px;
+  }
+  .cue h3 { font-size: 12px; color: #185FA5; margin-bottom: 6px; }
+  .cue .q { margin-bottom: 10px; color: #333; line-height: 1.5; }
+  .cue .q b { color: #854F0B; }
+  .cue .grouplabel { font-size: 10.5px; font-weight: bold; color: #185FA5; margin: 7px 0 3px; }
+  .cue .grouplabel:first-of-type { margin-top: 0; }
+  .main { width: 68%; padding: 10px 12px; }
+  .main h4 {
+    font-size: 12px; color: #185FA5; margin: 9px 0 4px;
+    border-left: 4px solid #185FA5; padding-left: 6px;
+  }
+  .main h4:first-child { margin-top: 0; }
+  .lines { line-height: 24px; font-size: 12px; color: #444; }
+  .lines p { border-bottom: 1px solid #e3e3e3; min-height: 24px; }
+  .summary {
+    border: 1px solid #ccc; border-top: none; padding: 8px 10px; min-height: 28mm;
+  }
+  .summary h3 { font-size: 12px; color: #854F0B; margin-bottom: 4px; }
+  .summary p { border-bottom: 1px solid #e3e3e3; min-height: 24px; font-size: 12px; }
+  .footer {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; color: #555; margin-top: 8px;
+  }
+  .ebbing span {
+    display: inline-block; width: 58px; text-align: center;
+    border: 1px solid #185FA5; border-radius: 3px; margin-left: 4px; padding: 1px 0; color: #185FA5;
+  }
+  .score { color: #854F0B; font-weight: bold; }
+  .howto {
+    width: 210mm; margin: 14px auto 0; background: #fffbe8; border: 1px solid #e8d48a;
+    border-radius: 6px; padding: 10px 14px; font-size: 12px; color: #6b5900; line-height: 1.7;
+  }
+  .howto b { color: #854F0B; }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; margin: 0; }
+    .howto { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>5.1 软件工程 · 康奈尔笔记</h1>
+  <div class="sub">《信息系统项目管理师教程（第 4 版）》第 5 章第 1 节 · 5.1.1 架构设计 / 5.1.2 需求分析 / 5.1.3 软件设计 / 5.1.4 软件实现 / 5.1.5 部署交付 / 5.1.6 过程管理</div>
+  <div class="meta">
+    <span>日期：______</span><span>学习时长：______</span><span>今日正确率：<span class="score">____ / 22</span></span>
+  </div>
+
+  <div class="cornell">
+    <div class="cue">
+      <h3>线索栏（自问自答）</h3>
+
+      <div class="grouplabel">5.1.1 架构设计</div>
+      <div class="q"><b>1</b> 软件架构研究的四方面内容？根本目的「三件事」？架构设计的核心问题？</div>
+      <div class="q"><b>2</b> 五大架构风格及各自子风格？（口诀 + 每类关键词）</div>
+      <div class="q"><b>3</b> 敏感点 vs 权衡点？三类评估方式哪个最常用？场景法三工具？</div>
+
+      <div class="grouplabel">5.1.2 需求分析</div>
+      <div class="q"><b>4</b> 需求三个层次的关键词？QFD 三类需求的判别词？</div>
+      <div class="q"><b>5</b> 需求过程四环节？获取方法五种？好需求八特性？</div>
+      <div class="q"><b>6</b> SA 的核心是什么？三模型⇄三图形？OOA 用例模型四阶段 + SRS 地位？</div>
+      <div class="q"><b>7</b> UML：事物四类 / 关系四类？五视图哪个是「最基本的需求分析模型」？</div>
+
+      <div class="grouplabel">5.1.3 软件设计</div>
+      <div class="q"><b>8</b> SD 三特征 + 基本原则 + 两阶段？OOD 基本思想 / 三大特征 / 七原则口诀？</div>
+      <div class="q"><b>9</b> 设计模式：按范围两类？按用途三类及各代表模式？</div>
+
+      <div class="grouplabel">5.1.4 软件实现</div>
+      <div class="q"><b>10</b> 配置管理六项？编码三关注点？测试目的？静态测试代码三手段？</div>
+      <div class="q"><b>11</b> 白盒 vs 黑盒：别名 / 所属测试阶段 / 常用方法三线各是什么？</div>
+
+      <div class="grouplabel">5.1.5 + 5.1.6 部署与过程</div>
+      <div class="q"><b>12</b> 持续交付核心句与三阶段方案？持续部署方案 / build-ship-run / 不可变服务器？蓝绿 vs 金丝雀？CSMM 结构三数字 + 五等级？</div>
+    </div>
+    <div class="main">
+      <h4>一、架构设计：五风格 + 评估三方式（5.1.1）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>二、需求分析：三层次 / QFD / 四环节 / SA 三模型 / UML（5.1.2）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>三、软件设计：SD / OOD 七原则 / 设计模式三型（5.1.3）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>四、软件实现：配置管理 / 编码 / 测试三线辨析（5.1.4）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>五、部署交付 + 过程管理：持续交付部署 / 蓝绿金丝雀 / CSMM（5.1.5~5.1.6）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>六、易混 / 易错（考前唯一要看的块）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary">
+    <h3>总结栏（一句话收束）</h3>
+    <p></p><p></p>
+  </div>
+
+  <div class="footer">
+    <span class="ebbing">复习打卡：当日<span>＋1天</span><span>＋3天</span><span>＋7天</span><span>＋14天</span></span>
+    <span>正确率：<span class="score">____ / 22</span></span>
+  </div>
+</div>
+
+<div class="howto">
+  <b>怎么用（记 → 遮 → 补 → 收）：</b>
+  ① <b>记</b>：对照《5.1_知识点清单》通读后，凭记忆在笔记区默写要点；② <b>遮</b>：用手遮住笔记区，只看线索栏 12 个问题作答；③ <b>补</b>：翻开清单对照，用红笔补漏，重点补「六、易混 / 易错」块；④ <b>收</b>：在总结栏用 1~2 句话收束本节骨架（如「五风格 + 场景评估最常用 + 三层需求 + SA 核心数据字典 + 白盒单元黑盒系统 + 蓝绿金丝雀 + CSMM 五级」）。页脚为艾宾浩斯复习打卡点。
+</div>
+</body>
+</html>
