@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5.2 数据工程 · 康奈尔笔记模板</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+    background: #f0f2f5; color: #333; padding: 24px;
+  }
+  .page {
+    width: 210mm; min-height: 297mm; margin: 0 auto; background: #fff;
+    padding: 14mm 12mm; box-shadow: 0 2px 12px rgba(0,0,0,.12);
+  }
+  h1 { font-size: 20px; color: #185FA5; text-align: center; margin-bottom: 4px; }
+  .sub { text-align: center; font-size: 11px; color: #888; margin-bottom: 10px; }
+  .meta { display: flex; justify-content: space-between; font-size: 11px; color: #555;
+    border-bottom: 2px solid #185FA5; padding-bottom: 6px; margin-bottom: 10px; }
+  .cornell { display: flex; border: 1px solid #ccc; min-height: 178mm; }
+  .cue {
+    width: 32%; background: #f4f8fc; border-right: 2px solid #185FA5;
+    padding: 10px 8px; font-size: 11.5px;
+  }
+  .cue h3 { font-size: 12px; color: #185FA5; margin-bottom: 6px; }
+  .cue .q { margin-bottom: 10px; color: #333; line-height: 1.5; }
+  .cue .q b { color: #854F0B; }
+  .cue .grouplabel { font-size: 10.5px; font-weight: bold; color: #185FA5; margin: 7px 0 3px; }
+  .cue .grouplabel:first-of-type { margin-top: 0; }
+  .main { width: 68%; padding: 10px 12px; }
+  .main h4 {
+    font-size: 12px; color: #185FA5; margin: 9px 0 4px;
+    border-left: 4px solid #185FA5; padding-left: 6px;
+  }
+  .main h4:first-child { margin-top: 0; }
+  .lines { line-height: 24px; font-size: 12px; color: #444; }
+  .lines p { border-bottom: 1px solid #e3e3e3; min-height: 24px; }
+  .summary {
+    border: 1px solid #ccc; border-top: none; padding: 8px 10px; min-height: 28mm;
+  }
+  .summary h3 { font-size: 12px; color: #854F0B; margin-bottom: 4px; }
+  .summary p { border-bottom: 1px solid #e3e3e3; min-height: 24px; font-size: 12px; }
+  .footer {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; color: #555; margin-top: 8px;
+  }
+  .ebbing span {
+    display: inline-block; width: 58px; text-align: center;
+    border: 1px solid #185FA5; border-radius: 3px; margin-left: 4px; padding: 1px 0; color: #185FA5;
+  }
+  .score { color: #854F0B; font-weight: bold; }
+  .howto {
+    width: 210mm; margin: 14px auto 0; background: #fffbe8; border: 1px solid #e8d48a;
+    border-radius: 6px; padding: 10px 14px; font-size: 12px; color: #6b5900; line-height: 1.7;
+  }
+  .howto b { color: #854F0B; }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; margin: 0; }
+    .howto { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>5.2 数据工程 · 康奈尔笔记</h1>
+  <div class="sub">《信息系统项目管理师教程（第 4 版）》第 5 章第 2 节 · 5.2.1 数据建模 / 5.2.2 数据标准化 / 5.2.3 数据运维 / 5.2.4 数据开发利用 / 5.2.5 数据库安全</div>
+  <div class="meta">
+    <span>日期：______</span><span>学习时长：______</span><span>今日正确率：<span class="score">____ / 22</span></span>
+  </div>
+
+  <div class="cornell">
+    <div class="cue">
+      <h3>线索栏（自问自答）</h3>
+
+      <div class="grouplabel">5.2.1 数据建模</div>
+      <div class="q"><b>1</b> 三类数据模型按什么划分？概念模型的别称 / 观点 / 五个基本元素？</div>
+      <div class="q"><b>2</b> 逻辑模型五种数据结构？谁最重要？关系完整性约束三大类型？</div>
+      <div class="q"><b>3</b> 物理模型的定位关键词与六个基本元素？建模过程四步各自产出？（DFD / E-R / 关系模式）</div>
+
+      <div class="grouplabel">5.2.2 数据标准化</div>
+      <div class="q"><b>4</b> 数据标准化的地位一句话？五大内容顺口溜？</div>
+      <div class="q"><b>5</b> 元数据 vs 数据元：各自定义？数据元三要素？提取法「新上旧下」怎么对？</div>
+      <div class="q"><b>6</b> 数据模式两种描述方式⇄描述对象配对？数据分类两要素与编码三作用？标准化管理四阶段？</div>
+
+      <div class="grouplabel">5.2.3 数据运维</div>
+      <div class="q"><b>7</b> 存储介质三类 + 存储管理四内容？</div>
+      <div class="q"><b>8</b> 备份：四种结构 + 三种策略？容灾两类按什么分？「子集 / 基础 / 最后一道防线」三句话分别说谁？</div>
+      <div class="q"><b>9</b> RPO vs RTO？质量元素两分 + 直接 / 间接评价判别词？清理三步骤顺序？</div>
+
+      <div class="grouplabel">5.2.4 数据开发利用</div>
+      <div class="q"><b>10</b> 数据集成：统一视图叫什么？透明 + 自治性两关键词？</div>
+      <div class="q"><b>11</b> 数据挖掘五任务 + 流程五阶段？数据服务三类？可视化七类？信息检索四方法（⚠️ 内含哪个跨界方法）？</div>
+
+      <div class="grouplabel">5.2.5 数据库安全</div>
+      <div class="q"><b>12</b> 数据库安全定义（防哪三样）？安全机制五项？哪条对策是「第一道安全防线」？哪条防「推导出机密」？</div>
+    </div>
+    <div class="main">
+      <h4>一、数据建模：三类模型 + 建模四步产出（5.2.1）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>二、数据标准化：元数据 / 数据元 / 模式描述 / 管理四阶段（5.2.2）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>三、数据运维：备份三策略 / 容灾两类 / RPO·RTO / 清理三步（5.2.3）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>四、数据开发利用：挖掘五任务 / 服务三类 / 可视化七类 / 检索（5.2.4）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>五、数据库安全：定义 / 对策要点 / 机制五项（5.2.5）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>六、易混 / 易错（考前唯一要看的块）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary">
+    <h3>总结栏（一句话收束）</h3>
+    <p></p><p></p>
+  </div>
+
+  <div class="footer">
+    <span class="ebbing">复习打卡：当日<span>＋1天</span><span>＋3天</span><span>＋7天</span><span>＋14天</span></span>
+    <span>正确率：<span class="score">____ / 22</span></span>
+  </div>
+</div>
+
+<div class="howto">
+  <b>怎么用（记 → 遮 → 补 → 收）：</b>
+  ① <b>记</b>：对照《5.2_知识点清单》通读后，凭记忆在笔记区默写要点；② <b>遮</b>：用手遮住笔记区，只看线索栏 12 个问题作答；③ <b>补</b>：翻开清单对照，用红笔补漏，重点补「六、易混 / 易错」块；④ <b>收</b>：在总结栏用 1~2 句话收束本节骨架（如「三类模型 + 完整性约束三种 + 数据元三要素 + 新上旧下 + 图描述配数据字典 + 完差增三策略 + RPO 丢数据 RTO 恢复时间 + 析检修 + 挖掘五任务 + 可视化七类 + 安全机制五项」）。页脚为艾宾浩斯复习打卡点。
+</div>
+</body>
+</html>

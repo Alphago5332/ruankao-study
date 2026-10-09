@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5.2 数据工程 · 考点自测题（临时） 22 题</title>
+<style>
+  *{box-sizing:border-box;}
+  body{
+    margin:0;padding:24px 14px 60px;background:#eef0f3;color:#1f2328;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    gap:14px;margin-bottom:18px;flex-wrap:wrap;
+  }
+  h1{font-size:20px;margin:0;font-weight:600;}
+  .sub{font-size:12.5px;color:#6b7280;margin:5px 0 0;}
+  .score-chip{
+    background:#E6F1FB;border:1px solid #B5D4F4;color:#0C447C;
+    border-radius:8px;padding:7px 13px;font-size:13px;white-space:nowrap;
+  }
+  .score-chip b{font-size:16px;font-weight:600;}
+
+  #quiz{
+    background:#fff;border-radius:12px;padding:22px 24px;
+    box-shadow:0 2px 12px rgba(16,24,40,.08);
+  }
+  .progress-row{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:8px;font-size:13px;color:#4b5563;
+  }
+  .chip{
+    background:#FAEEDA;border:1px solid #EFC98A;color:#633806;
+    border-radius:5px;padding:2px 9px;font-size:12px;
+  }
+  .progress{height:6px;background:#e5e8ee;border-radius:4px;overflow:hidden;margin-bottom:20px;}
+  #bar{height:100%;width:0;background:#185FA5;border-radius:4px;transition:width .25s;}
+
+  .qtext{font-size:16px;line-height:1.75;font-weight:500;margin:0 0 18px;}
+  .opt{
+    display:flex;gap:10px;align-items:flex-start;
+    border:1px solid #d9dee5;border-radius:9px;padding:11px 14px;
+    margin-bottom:10px;cursor:pointer;font-size:14.5px;line-height:1.6;
+    background:#fff;transition:border-color .12s,background .12s;
+  }
+  .opt:hover{border-color:#185FA5;background:#f7fafd;}
+  .opt .tag{
+    flex:0 0 22px;height:22px;border-radius:50%;
+    background:#eef1f5;color:#3b4552;font-size:12px;font-weight:600;
+    display:flex;align-items:center;justify-content:center;margin-top:2px;
+  }
+  .opt.correct{border-color:#0F6E56;background:#E1F5EE;}
+  .opt.correct .tag{background:#0F6E56;color:#fff;}
+  .opt.wrong{border-color:#A32D2D;background:#FCEBEB;}
+  .opt.wrong .tag{background:#A32D2D;color:#fff;}
+  .opt.dim{opacity:.55;cursor:default;}
+  .opt.correct.dim{opacity:1;}
+  .opt.locked{cursor:default;}
+
+  #feedback{margin-top:14px;border-radius:9px;overflow:hidden;border:1px solid #d9dee5;}
+  #verdict{
+    padding:10px 14px;font-size:14px;font-weight:600;
+    background:#E1F5EE;color:#085041;border-bottom:1px solid #cbe9da;
+  }
+  #verdict.bad{background:#FCEBEB;color:#501313;border-bottom:1px solid #f3cdcd;}
+  #explain{padding:12px 14px;font-size:13.5px;line-height:1.8;color:#374151;background:#fdfdfe;}
+  #explain b{color:#1f2328;}
+  #nextBtn{
+    display:block;margin:14px 16px 16px;float:right;
+    background:#185FA5;color:#fff;border:none;border-radius:8px;
+    padding:9px 26px;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  #nextBtn:hover{background:#14507f;}
+  #feedback::after{content:"";display:block;clear:both;}
+  .kbd{font-size:11.5px;color:#9aa3af;margin:14px 2px 0;}
+
+  #result{background:#fff;border-radius:12px;padding:26px 28px;box-shadow:0 2px 12px rgba(16,24,40,.08);}
+  .r-head{display:flex;gap:22px;align-items:center;margin-bottom:6px;flex-wrap:wrap;}
+  .r-score{font-size:44px;font-weight:600;color:#185FA5;line-height:1;}
+  .r-score small{font-size:18px;color:#8b949e;font-weight:400;}
+  .r-msg{font-size:14px;color:#4b5563;line-height:1.7;}
+  h3{font-size:15px;font-weight:600;margin:26px 0 10px;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th,td{border:1px solid #e2e6eb;padding:7px 10px;text-align:left;line-height:1.6;}
+  th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .mbar{height:8px;background:#e5e8ee;border-radius:4px;overflow:hidden;min-width:120px;}
+  .mbar div{height:100%;background:#1D9E75;border-radius:4px;}
+
+  .wq{
+    border:1px solid #f3cdcd;border-radius:9px;padding:13px 15px;
+    margin-bottom:12px;background:#fffafa;
+  }
+  .wq .wt{font-size:14px;font-weight:600;line-height:1.7;margin-bottom:7px;}
+  .wq .wa{font-size:13px;color:#A32D2D;margin-bottom:2px;}
+  .wq .wc{font-size:13px;color:#0F6E56;margin-bottom:8px;}
+  .wq .we{font-size:12.5px;color:#57606a;line-height:1.75;border-top:1px dashed #e8d9d9;padding-top:7px;}
+
+  .btns{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;border-radius:8px;
+    padding:9px 22px;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:#185FA5;border-color:#185FA5;color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn:disabled{opacity:.45;cursor:not-allowed;}
+  .hidden{display:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <h1>5.2 数据工程 · 考点自测题（临时）</h1>
+      <p class="sub">22 题 · 第 4 版教材 5.2 节 · 达标线 18/22（80%）· 逐题精讲 · 键盘 A~D 或 1~4 选择，Enter 下一题</p>
+    </div>
+    <div class="score-chip">已答对 <b id="scoreNow">0</b> / <span id="totalNow">22</span> 题</div>
+  </header>
+
+  <div id="quiz">
+    <div class="progress-row">
+      <span id="pos"></span>
+      <span class="chip" id="moduleChip"></span>
+    </div>
+    <div class="progress"><div id="bar"></div></div>
+    <div class="qcard">
+      <p class="qtext" id="qtext"></p>
+      <div id="options"></div>
+      <div id="feedback" class="hidden">
+        <div id="verdict"></div>
+        <div id="explain"></div>
+        <button id="nextBtn">下一题 →</button>
+      </div>
+    </div>
+    <p class="kbd">键盘可用：A~D 或 1~4 选择，Enter 下一题</p>
+  </div>
+
+  <div id="result" class="hidden"></div>
+
+</div>
+
+<script>
+const QUESTIONS = [
+{m:"5.2.1 数据建模",
+ q:"数据工程的主要研究内容包括（ ）等方面的理论和技术。<br>① 数据建模　② 数据标准化　③ 数据运维　④ 数据开发利用与数据安全",
+ o:["仅①②③","仅②③④","①②④","①②③④"],a:3,
+ e:"数据工程的主要研究内容包括<b>数据建模、数据标准化、数据运维、数据开发利用和数据安全</b>等理论和技术——正好对应 5.2.1~5.2.5 五个小节标题，五项全选。见教材 5.2 开篇。"},
+
+{m:"5.2.1 数据建模",
+ q:"关于概念模型，下列说法正确的是（ ）。",
+ o:["概念模型也称结构模型，按计算机系统的观点建模","概念模型也称信息模型，按用户的观点来对数据和信息建模","概念模型必须对应某个具体的 DBMS","概念模型的基本元素包括表、字段、视图、索引等"],a:1,
+ e:"概念模型<b>也称信息模型</b>，是按<b>用户的观点</b>来对数据和信息建模，<b>不依赖具体计算机系统、不对应具体 DBMS</b>；基本元素是<b>实体、属性、域、键、关联</b>。「表、字段、视图、索引」是<b>物理模型</b>的元素。高频坑：别称「信息模型」。"},
+
+{m:"5.2.1 数据建模",
+ q:"逻辑模型是在概念模型的基础上确定模型的数据结构，目前主要的数据结构不包括（ ）。",
+ o:["层次模型","网状模型","关系模型","总线模型"],a:3,
+ e:"目前主要的数据结构有<b>层次模型、网状模型、关系模型、面向对象模型和对象关系模型</b>五种，没有「总线模型」。其中<b>关系模型是目前最重要的一种逻辑数据模型</b>。"},
+
+{m:"5.2.1 数据建模",
+ q:"关系的完整性约束包括三大类型，即（ ）。",
+ o:["实体完整性、参照完整性和用户定义的完整性","结构完整性、操作完整性和语义完整性","实体完整性、逻辑完整性和并发完整性","数据完整性、过程完整性和结果完整性"],a:0,
+ e:"关系的完整性约束包括三大类型：<b>实体完整性、参照完整性和用户定义的完整性</b>（口诀「实参用」）。B 项的「三种完整性」是 <b>5.2.5 数据库安全对策</b>里的内容（数据库完整性 / 操作完整性 / 语义完整性），两处「三完整」是本节最大的跨小节陷阱。"},
+
+{m:"5.2.1 数据建模",
+ q:"在数据建模过程中，E-R 图的设计属于（ ）阶段，将概念模型转换为关系模式属于（ ）阶段。",
+ o:["逻辑模型设计；物理模型设计","概念模型设计；逻辑模型设计","物理模型设计；概念模型设计","需求分析；概念模型设计"],a:1,
+ e:"数据建模过程：数据需求分析（→数据流图）→ <b>概念模型设计（确定实体和数据及其关联，E-R 图）</b>→ <b>逻辑模型设计（关系模式）</b>→ 物理模型设计（针对具体 DBMS 的命名、字段类型、存储过程与触发器）。高频对调坑：<b>E-R 属概念、关系模式属逻辑</b>。"},
+
+{m:"5.2.2 数据标准化",
+ q:"关于数据标准化的地位与主要内容，下列说法正确的是（ ）。",
+ o:["数据标准化是实现数据管理的基础，内容包括数据元标准化等三项","数据标准化是实现数据共享的基础，内容包括元数据、数据元、数据模式、数据分类与编码标准化和数据标准化管理","数据标准化是实现信息安全的基础，内容包括元数据和数据元标准化","数据标准化是实现系统集成的基础，内容包括数据备份与容灾"],a:1,
+ e:"<b>数据标准化是实现数据共享的基础</b>（一句话考点）；主要内容包括<b>元数据标准化、数据元标准化、数据模式标准化、数据分类与编码标准化和数据标准化管理</b>五项（口诀「元元模分管」）。"},
+
+{m:"5.2.2 数据标准化",
+ q:"关于元数据与数据元，下列说法错误的是（ ）。",
+ o:["元数据是关于数据的数据","数据元是数据库、文件和数据交换的基本数据单元","数据库或文件由记录或元组组成，而记录或元组由数据元组成","元数据是由对象、特性和表示三部分组成"],a:3,
+ e:"由<b>对象、特性、表示</b>三部分组成的是<b>数据元</b>（口诀「对特表」），不是元数据。元数据是<b>关于数据的数据</b>（Data About Data），对信息资源的结构化描述。两个相近名词互串是本节第一大坑。"},
+
+{m:"5.2.2 数据标准化",
+ q:"数据元一般来说由三部分组成，分别是（ ）。",
+ o:["实体、属性和关联","对象、特性和表示","概念、组成和结构","记录、元组和域"],a:1,
+ e:"数据元由<b>① 对象　② 特性　③ 表示</b>三部分组成（口诀「对特表」）。A 项是概念模型的基本元素；C 项「概念、组成、结构」是<b>数据模式</b>定义的措辞——注意数据模式是「总称」不是三要素。"},
+
+{m:"5.2.2 数据标准化",
+ q:"对于（新建系统）的数据元提取，一般适用（ ）提取法；对于已建系统的数据元提取，一般适用（ ）提取法。",
+ o:["自上而下；自下而上","自下而上；自上而下","自上而下；自上而下","自下而上；自下而上"],a:0,
+ e:"常用的数据元提取方法有两种：<b>自上而下（Top-Down）</b>提取法和<b>自下而上（Down-Top）</b>提取法。<b>新建系统 → 自上而下；已建系统 → 自下而上</b>（口诀「新上旧下」）。年年考、年年有人对调。"},
+
+{m:"5.2.2 数据标准化",
+ q:"数据模式的描述方式中，用来描述数据集中的实体和实体之间相互关系的是（ ）；用来描述模型中的数据集、单个实体、属性的摘要信息的是（ ）。",
+ o:["数据字典方法；图描述方法","图描述方法；数据字典方法","UML 图；IDEFIX 方法","层次方法；网状方法"],a:1,
+ e:"数据模式的描述方式主要有两种：<b>图描述方法</b>（常用 IDEFIX 方法和 UML 图，描述<b>实体和实体之间的相互关系</b>）和<b>数据字典方法</b>（描述<b>数据集、单个实体、属性的摘要信息</b>）。这是真题原题式配对，方向别接反。"},
+
+{m:"5.2.2 数据标准化",
+ q:"数据标准化阶段的具体过程包括四个阶段，其正确顺序是（ ）。",
+ o:["制定数据标准 → 确定数据需求 → 实施数据标准 → 批准数据标准","确定数据需求 → 批准数据标准 → 制定数据标准 → 实施数据标准","确定数据需求 → 制定数据标准 → 批准数据标准 → 实施数据标准","确定数据需求 → 制定数据标准 → 实施数据标准 → 批准数据标准"],a:2,
+ e:"数据标准化阶段的具体过程包括<b>确定数据需求 → 制定数据标准 → 批准数据标准 → 实施数据标准</b>四个阶段（口诀「需制批施」）。逻辑线：先有需求、再定标准、批准后才能实施——批准在实施之前。"},
+
+{m:"5.2.3 数据运维",
+ q:"关于数据备份，下列说法错误的是（ ）。",
+ o:["常见的备份结构有 DAS 备份结构、基于 LAN 的备份结构、LAN-FREE 备份结构和 SERVER-FREE 备份结构","常见的备份策略主要有完全备份、差分备份和增量备份三种","常见的备份策略主要有完全备份、差异备份和增量备份三种","数据备份是将整个应用系统的数据或一部分关键数据复制到其他存储介质上的过程"],a:2,
+ e:"三种备份策略是<b>完全备份、差分备份和增量备份</b>——教材用词是「<b>差分</b>备份」，选项里写成「差<b>异</b>备份」就是错的（真题常用这种一字之差设坑）。四种备份结构：DAS / 基于 LAN / LAN-FREE / SERVER-FREE。"},
+
+{m:"5.2.3 数据运维",
+ q:"关于数据容灾，下列判断正确的是（ ）。",
+ o:["数据备份就是数据容灾，两者是一回事","容灾主要是一项技术，与流程和规范无关","数据容灾是应用容灾的子集，也是应用容灾最根本的基础","应用容灾是数据容灾的基础"],a:2,
+ e:"根据容灾系统<b>保护对象</b>的不同，容灾系统分为应用容灾和数据容灾两类；<b>数据容灾是应用容灾的子集，也是应用容灾最根本的基础</b>（得数据者得天下）。容灾是一个<b>工程</b>而不仅仅是技术；<b>数据备份是数据容灾的基础</b>、是数据高可用的最后一道防线——但备份≠容灾。"},
+
+{m:"5.2.3 数据运维",
+ q:"衡量容灾系统的两个主要指标 RPO 和 RTO 中，RPO 代表（ ），RTO 代表（ ）。",
+ o:["系统恢复的时间；灾难发生时允许丢失的数据量","灾难发生时允许丢失的数据量；系统恢复的时间","数据备份的周期；数据恢复的周期","灾难发生的概率；系统恢复的概率"],a:1,
+ e:"<b>RPO</b> 代表当灾难发生时<b>允许丢失的数据量</b>；<b>RTO</b> 代表<b>系统恢复的时间</b>。记法：<b>P = Point = 丢点数据，T = Time = 花点时间</b>。两个缩写年年对调，是本节第二大坑。"},
+
+{m:"5.2.3 数据运维",
+ q:"某团队将本库数据与国家权威部门发布的理论值进行逐一对比以确定数据质量，这种方法属于（ ）。",
+ o:["间接评价法","直接评价法","数据清理","数据修正"],a:1,
+ e:"数据质量评价方法分两种：<b>直接评价法</b> = 通过将数据与<b>内部或外部的参照信息（如理论值）进行对比</b>确定质量；<b>间接评价法</b> = 利用数据相关信息（如对数据源、采集方法等的描述）<b>推断或评估</b>。口诀「直比间推」——题干出现「参照信息 / 理论值对比」即直接评价法。"},
+
+{m:"5.2.3 数据运维",
+ q:"数据清理主要包括三个步骤，其正确顺序是（ ）。",
+ o:["数据检测 → 数据分析 → 数据修正","数据分析 → 数据修正 → 数据检测","数据修正 → 数据检测 → 数据分析","数据分析 → 数据检测 → 数据修正"],a:3,
+ e:"数据清理包括<b>数据分析 → 数据检测 → 数据修正</b>三个步骤（口诀「析检修」）：分析是从数据中发现规则、定义清理规则并选算法；检测是按规则检测数据是否正确、记录是否重复；修正是手工或自动修正错误与重复记录。顺序不能乱。"},
+
+{m:"5.2.4 数据开发利用",
+ q:"关于数据集成，下列说法错误的是（ ）。",
+ o:["数据集成是将驻留在不同数据源中的数据进行整合","数据集成向用户提供统一的数据视图（全局模式）","用户能以透明的方式访问数据","数据集成要求放弃各数据源的自治性，实现完全集中"],a:3,
+ e:"数据集成的目标是充分利用已有数据，在<b>尽量保持自治性</b>的前提下，维护数据源<b>整体上的一致性</b>、提高共享利用效率——保持自治性而非放弃自治性。三个关键词填空：「不同数据源」「<b>统一的数据视图（全局模式）</b>」「<b>透明方式</b>访问」。"},
+
+{m:"5.2.4 数据开发利用",
+ q:"数据挖掘常见的主要任务不包括（ ）。",
+ o:["关联分析","分类和预测","聚类分析和孤立点分析","数据清洗和格式转换"],a:3,
+ e:"数据挖掘五任务：<b>数据总结、关联分析、分类和预测、聚类分析、孤立点分析</b>（口诀「总关分聚孤」）。「数据清洗和格式转换」属于数据准备阶段的处理工作，不是挖掘任务。经典对位：「啤酒与尿布」→ 关联分析。"},
+
+{m:"5.2.4 数据开发利用",
+ q:"数据挖掘流程一般包括五个阶段，正确顺序是（ ）。",
+ o:["确定分析对象 → 数据准备 → 数据挖掘 → 结果评估 → 结果应用","数据准备 → 确定分析对象 → 结果评估 → 数据挖掘 → 结果应用","数据挖掘 → 确定分析对象 → 数据准备 → 结果应用 → 结果评估","数据准备 → 数据挖掘 → 确定分析对象 → 结果评估 → 结果应用"],a:0,
+ e:"数据挖掘流程五阶段：<b>确定分析对象 → 数据准备 → 数据挖掘 → 结果评估 → 结果应用</b>（口诀「定备挖评用」）。先定对象再备数据、先挖后评再应用——与软件开发「需求先行」同理。"},
+
+{m:"5.2.4 数据开发利用",
+ q:"数据服务主要包括三类，即（ ）。",
+ o:["数据目录服务、数据查询与浏览及下载服务、数据分发服务","数据集成服务、数据挖掘服务、数据可视化服务","数据存储服务、数据备份服务、数据容灾服务","全文检索服务、字段检索服务、多媒体检索服务"],a:0,
+ e:"数据服务主要包括<b>数据目录服务</b>（建目录方便检索）、<b>数据查询与浏览及下载服务</b>（网上数据共享的重要方式，查询和下载两种用法）、<b>数据分发服务</b>（生产者将数据传送到用户）三类。B 项是「数据开发利用」的内容混排，注意区分粒度。"},
+
+{m:"5.2.4 数据开发利用",
+ q:"关于数据可视化与信息检索，下列说法正确的是（ ）。",
+ o:["数据可视化分为五类，不包括层次数据可视化","数据可视化分为七类，包括一维、二维、三维、多维、时态、层次和网络数据可视化","信息检索的主要方法包括全文检索、字段检索和基于内容的多媒体检索，数据挖掘不属于信息检索方法","信息检索的常用技术包括布尔逻辑检索、截词检索和近似检索"],a:1,
+ e:"可视化分<b>七类</b>：一维 / 二维 / 三维 / 多维 / 时态 / 层次 / 网络数据可视化。⚠️ 信息检索的四种方法<b>包括数据挖掘</b>（全文检索、字段检索、基于内容的多媒体检索、数据挖掘）——这是教材原口径，不是出题错误；常用技术是「<b>临近</b>检索」不是「近似检索」。"},
+
+{m:"5.2.5 数据库安全",
+ q:"关于数据库安全，下列说法错误的是（ ）。",
+ o:["数据库安全是指保护数据库，防止不合法的使用所造成的数据泄露、更改或破坏","数据库安全机制包括用户的身份认证、存取控制、数据库加密、数据审计、推理控制等内容","标识和认证是授权、审计等的前提条件，是第一道安全防线","审计和日志的作用是在并发事务中保证数据库中数据的逻辑一致性"],a:3,
+ e:"<b>并发事务中保证数据的逻辑一致性</b>是安全对策「保证数据的<b>操作完整性</b>」的职责（由并发管理器子系统负责）；<b>审计和日志</b>是有效的<b>威慑和事后追查、分析</b>工具。<b>标识和认证是第一道安全防线</b>；机制五项「身存密审推」均为高频填空。"}
+];
+
+const LETTERS = ["A","B","C","D"];
+let pool = [], cur = 0, answered = false, stats = {}, wrongList = [];
+
+function init(list){
+  pool = list.map(x=>Object.assign({},x));
+  cur = 0; answered = false; stats = {}; wrongList = [];
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  document.getElementById("totalNow").textContent = pool.length;
+  document.getElementById("scoreNow").textContent = "0";
+  render();
+}
+function render(){
+  const q = pool[cur];
+  document.getElementById("pos").textContent = "第 " + (cur+1) + " / " + pool.length + " 题";
+  document.getElementById("moduleChip").textContent = q.m;
+  document.getElementById("bar").style.width = (cur/pool.length*100) + "%";
+  document.getElementById("qtext").innerHTML = q.q;
+  const box = document.getElementById("options");
+  box.innerHTML = "";
+  q.o.forEach((t,i)=>{
+    const d = document.createElement("div");
+    d.className = "opt";
+    d.innerHTML = '<span class="tag">'+LETTERS[i]+'</span><span>'+t+"</span>";
+    d.onclick = ()=>choose(i);
+    box.appendChild(d);
+  });
+  document.getElementById("feedback").classList.add("hidden");
+}
+function choose(i){
+  if(answered) return;
+  answered = true;
+  const q = pool[cur];
+  const ok = (i === q.a);
+  if(!stats[q.m]) stats[q.m] = {right:0,total:0};
+  stats[q.m].total++;
+  const opts = document.querySelectorAll(".opt");
+  opts.forEach((d,idx)=>{
+    d.classList.add("locked");
+    if(idx === q.a) d.classList.add("correct");
+    else if(idx === i) d.classList.add("wrong");
+    else d.classList.add("dim");
+    d.onclick = null;
+  });
+  if(ok){
+    stats[q.m].right++;
+    document.getElementById("scoreNow").textContent = sumRight();
+  } else {
+    wrongList.push({q:q, picked:i});
+  }
+  const v = document.getElementById("verdict");
+  v.textContent = ok ? "✓ 答对了" : "✗ 答错了　正确答案：" + LETTERS[q.a];
+  v.className = ok ? "" : "bad";
+  document.getElementById("explain").innerHTML = q.e;
+  document.getElementById("feedback").classList.remove("hidden");
+  document.getElementById("nextBtn").textContent =
+    (cur === pool.length-1) ? "查看成绩单 →" : "下一题 →";
+}
+function sumRight(){
+  let s = 0; for(const k in stats) s += stats[k].right; return s;
+}
+function next(){
+  cur++;
+  if(cur >= pool.length){ showResult(); }
+  else { answered = false; render(); window.scrollTo(0,0); }
+}
+function showResult(){
+  document.getElementById("quiz").classList.add("hidden");
+  const r = document.getElementById("result");
+  const total = pool.length, right = sumRight();
+  const pct = Math.round(right/total*100);
+  let msg;
+  if(pct >= 80) msg = "达标（≥80%）：本节知识点基本闭环，可以进入下一节，或用康奈尔模板的「遮」字诀再过一遍线索栏。";
+  else if(pct >= 60) msg = "接近达标：把下面的错题解析看完，回看对应模块的知识点清单，明天用康奈尔模板遮住答案重测。";
+  else msg = "未达标：正确率低是发现漏洞的正常信号——先把知识点清单的「必背」块过一遍，再点「只重做错题」。";
+
+  let tbl = '<h3>分模块得分</h3><table><tr><th>模块</th><th>正确 / 题数</th><th>正确率</th></tr>';
+  for(const k in stats){
+    const s = stats[k];
+    const p = Math.round(s.right/s.total*100);
+    tbl += '<tr><td>'+k+'</td><td>'+s.right+' / '+s.total+'</td><td><div class="mbar"><div style="width:'+p+'%"></div></div></td></tr>';
+  }
+  tbl += "</table>";
+
+  let wrong = "";
+  if(wrongList.length){
+    wrong = "<h3>错题回顾（"+wrongList.length+" 题）</h3>";
+    wrongList.forEach((w,i)=>{
+      wrong += '<div class="wq"><div class="wt">'+(i+1)+". "+w.q.q+"</div>"
+        + '<div class="wa">你的选择：'+LETTERS[w.picked]+"　"+w.q.o[w.picked]+"</div>"
+        + '<div class="wc">正确答案：'+LETTERS[w.q.a]+"　"+w.q.o[w.q.a]+"</div>"
+        + '<div class="we">'+w.q.e+"</div></div>";
+    });
+  } else {
+    wrong = '<h3>错题回顾</h3><p style="font-size:13px;color:#0F6E56;">全部答对，本节知识点已闭环。</p>';
+  }
+
+  r.innerHTML =
+    '<div class="r-head"><div class="r-score">'+right+"<small> / "+total+"</small></div>"
+    + '<div class="r-msg"><b>'+pct+"%</b><br>"+msg+"</div></div>"
+    + tbl + wrong
+    + '<div class="btns">'
+    + '<button class="btn primary" id="retryWrong"'+(wrongList.length?"":" disabled")+">只重做错题（"+wrongList.length+" 题）</button>"
+    + '<button class="btn" id="retryAll">全部重来</button></div>';
+  r.classList.remove("hidden");
+  document.getElementById("retryWrong").onclick = ()=>{
+    const list = wrongList.map(w=>w.q);
+    init(list);
+    window.scrollTo(0,0);
+  };
+  document.getElementById("retryAll").onclick = ()=>{ init(QUESTIONS); window.scrollTo(0,0); };
+  window.scrollTo(0,0);
+}
+document.getElementById("nextBtn").onclick = next;
+document.addEventListener("keydown", e=>{
+  if(document.getElementById("quiz").classList.contains("hidden")) return;
+  if(e.key === "Enter" || e.key === " "){ if(answered){ e.preventDefault(); next(); } return; }
+  const map = {"a":0,"b":1,"c":2,"d":3,"1":0,"2":1,"3":2,"4":3};
+  const k = e.key.toLowerCase();
+  if(k in map && !answered) choose(map[k]);
+});
+init(QUESTIONS);
+</script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5.2 数据工程 · 知识点清单 · 可勾选清单</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Microsoft YaHei", "微软雅黑", sans-serif; background: #f7f9fc; color: #333; padding: 24px; line-height: 1.7; }
+  .wrap { max-width: 820px; margin: 0 auto; background: #fff; padding: 32px 36px; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,.08); }
+  h1 { font-size: 22px; color: #185FA5; margin-bottom: 8px; }
+  h2 { font-size: 18px; color: #185FA5; margin: 22px 0 10px; border-left: 4px solid #185FA5; padding-left: 10px; }
+  h3 { font-size: 15px; color: #185FA5; margin: 16px 0 8px; }
+  h4 { font-size: 14px; color: #185FA5; margin: 14px 0 6px; }
+  blockquote { background: #f4f8fc; border-left: 4px solid #185FA5; padding: 10px 14px; margin: 10px 0; color: #444; font-size: 13.5px; }
+  p, .plain-li { margin: 8px 0; font-size: 14px; }
+  .plain-li { display: flex; gap: 6px; }
+  .bullet { color: #185FA5; font-weight: bold; }
+  .task { display: flex; align-items: flex-start; gap: 8px; margin: 8px 0; cursor: pointer; user-select: none; }
+  .task input[type="checkbox"] { width: 16px; height: 16px; margin-top: 4px; flex-shrink: 0; accent-color: #185FA5; cursor: pointer; }
+  .task-text { font-size: 14px; transition: opacity .2s; }
+  .task input:checked + .task-text { text-decoration: line-through; opacity: .45; color: #666; }
+  .item-body { margin: 4px 0 12px 24px; }
+  .item-body p { margin: 4px 0; color: #555; font-size: 13.5px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; }
+  th, td { border: 1px solid #d9e2ec; padding: 7px 10px; }
+  th { background: #eef4fb; color: #185FA5; font-weight: 600; }
+  td { background: #fff; }
+  ol { margin: 8px 0 8px 22px; font-size: 14px; }
+  li { margin: 4px 0; }
+  code { background: #f0f3f7; padding: 1px 4px; border-radius: 3px; font-family: Consolas, monospace; font-size: 12px; }
+  a { color: #185FA5; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  summary { cursor: pointer; color: #185FA5; font-weight: 600; }
+  details { background: #f9fbfd; border: 1px solid #e3eaf2; border-radius: 6px; padding: 10px 14px; margin: 12px 0; }
+  .progress { position: sticky; top: 0; background: #fff; border-bottom: 1px solid #e3eaf2; padding: 8px 0; margin: -32px -36px 20px; padding-left: 36px; padding-right: 36px; font-size: 12px; color: #666; z-index: 10; }
+  .progress b { color: #185FA5; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="progress" id="progress">已完成：0 / 0</div>
+  <h1>5.2 数据工程 · 知识点清单</h1>
+<blockquote><b>教材</b>：《信息系统项目管理师教程（第 4 版）》第 5 章第 2 节（约 P146 ~ P162）<br><b>学习日</b>：2026-10-09（Day 15）<br><b>上午分值</b>：第 5 章综合知识约 <b>5~8 题</b>，5.2 数据工程占其中 <b>2~3 题</b>；与第 3 版第 3 章同源，<b>旧真题有对应题可刷</b>（数据模型三类 / 数据元三要素 / 备份策略 / RPO·RTO / 数据清理三步骤 / 可视化七类均为历年高频）<br><b>本节定位</b>：<b>定义挖空 + 归属配对 + 分类数量型</b>。高频块：<b>三类数据模型 / 关系完整性约束三种 / 数据元三要素「对象特性表示」/ 提取法新旧系统对应 / 图描述 vs 数据字典 / 备份三策略 / RPO 与 RTO / 数据清理三步骤 / 数据挖掘五任务 / 可视化七类 / 数据库安全机制五项</b><br>⚠️ <b>口径提醒</b>：① 「数据备份是数据容灾的基础」——备份 ≠ 容灾，容灾是工程而不仅是技术；② 信息检索的四种方法里<b>包含「数据挖掘」</b>（不是笔误，教材原口径）；③ RPO 管「丢多少数据」、RTO 管「多久恢复」，年年考、年年有人对调</blockquote>
+<h2>今日目标（学完要能做到）</h2>
+<ol><li>背出<b>数据工程主要研究内容五件</b>（建模 / 标准化 / 运维 / 开发利用 / 数据安全）</li><li>默写<b>三类数据模型</b>及各自基本元素，说清概念模型的别称（<b>信息模型</b>）与关系模型的地位（<b>最重要</b>）</li><li>背出<b>关系完整性约束三大类型</b>（实体 / 参照 / 用户定义）与关系数据模型四类操作</li><li>说清<b>数据建模过程四步</b>及各步产出（数据流图 → E-R 图 → 关系模式 → 物理结构）</li><li>背出<b>数据标准化 = 数据共享的基础</b>与五大内容；默写<b>数据元三要素</b>（对象 / 特性 / 表示）与<b>两种提取法的新旧系统对应</b></li><li>分清<b>数据模式两种描述方式</b>（图描述 IDEFIX·UML vs 数据字典）各自的描述对象</li><li>默写<b>四种备份结构、三种备份策略</b>，说清<b>两类容灾</b>与「备份是容灾的基础」「最后一道防线」两句话</li><li>背出 <b>RPO / RTO</b> 各自代表什么，别对调</li><li>说清<b>数据质量</b>的元素分类、<b>直接 / 间接评价法</b>的判别关键词与<b>数据清理三步骤</b></li><li>默写<b>数据挖掘五任务</b>与<b>流程五阶段</b>，背出<b>数据服务三类</b>、<b>可视化七类</b>、<b>信息检索四方法</b></li><li>背出<b>数据库安全机制五项</b>与「标识和认证 = 第一道安全防线」等对策要点</li></ol>
+<h2>一、必背清单</h2>
+<h3>模块 A ｜ 数据建模（5.2.1）</h3>
+<label class="task"><input type="checkbox" data-key="A0" ><span class="task-text"><b>A0 · 数据工程的研究内容总述</b> ⭕ 必背（总起挖空）</span></label><div class="item-body"><p>数据工程的主要研究内容包括<b>数据建模、数据标准化、数据运维、数据开发利用和数据安全</b>等理论和技术。</p></div>
+<blockquote>记法：五件套「<b>建 · 标 · 运 · 开 · 全</b>」——即本节五个小节的标题序列，小节目录本身就是答案</blockquote>
+<label class="task"><input type="checkbox" data-key="A1" ><span class="task-text"><b>A1 · 三类数据模型与概念模型</b> ⭕ 必背（分类 + 别称）</span></label><div class="item-body"><p>根据模型的<b>应用目的</b>不同，可以将数据模型划分为三类：<b>概念模型、逻辑模型和物理模型</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>概念模型</b>也称<b>信息模型</b>，是按<b>用户的观点</b>来对数据和信息建模——把现实世界的客观对象抽象为某种信息结构，<b>不依赖于具体的计算机系统，也不对应某个具体的 DBMS</b>，是<b>概念级别</b>的模型</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>概念模型基本元素：<b>实体、属性、域、键、关联</b></span></div>
+<blockquote>高频陷阱：别称「<b>信息模型</b>」；关键词「按用户观点」「不依赖 DBMS」→ 概念模型</blockquote>
+<label class="task"><input type="checkbox" data-key="A2" ><span class="task-text"><b>A2 · 逻辑模型：五种数据结构与关系模型</b> ⭕ 必背（结构归属 + 完整性约束）</span></label><div class="item-body"><p>逻辑模型是在概念模型的基础上<b>确定模型的数据结构</b>。目前主要的数据结构有：<b>层次模型、网状模型、关系模型、面向对象模型和对象关系模型</b>。其中，<b>关系模型成为目前最重要的一种逻辑数据模型</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>关系数据模型的数据操作主要包括<b>查询、插入、删除和更新数据</b>，这些操作必须满足关系的完整性约束条件</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>关系的完整性约束包括三大类型：<b>实体完整性、参照完整性和用户定义的完整性</b></span></div>
+<blockquote>记法：逻辑五结构「<b>层网关对对象关系</b>」；约束三件「<b>实参用</b>」——「实」体完整「参」照完整「用」户定义</blockquote>
+<label class="task"><input type="checkbox" data-key="A3" ><span class="task-text"><b>A3 · 物理模型：定位与基本元素</b> ⭕ 必背（元素列举）</span></label><div class="item-body"><p>物理数据模型是在逻辑模型的基础上，考虑各种<b>具体的技术实现因素</b>，进行数据库体系结构设计，真正实现数据在数据库中的存放。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>物理模型的基本元素包括<b>表、字段、视图、索引、存储过程、触发器</b>等（其中表、字段、视图与逻辑模型基本元素有一定对应关系）</span></div>
+<blockquote>关键词「考虑具体技术实现因素」「真正实现存放」→ 物理模型；六元素「<b>表字视索存触</b>」</blockquote>
+<label class="task"><input type="checkbox" data-key="A4" ><span class="task-text"><b>A4 · 数据建模过程四步及产出</b> ⭕ 必背（步骤排序 + 产出配对）</span></label><div class="item-body"><p>数据建模过程包括<b>数据需求分析、概念模型设计、逻辑模型设计和物理模型设计</b>等过程：</p></div>
+<table><thead><tr><th>步骤</th><th>产出 / 任务</th></tr></thead><tbody><tr><td><b>数据需求分析</b></td><td>从用户需求出发 → <b>数据流图（DFD）</b></td></tr><tr><td><b>概念模型设计</b></td><td>确定实体和数据及其关联 → <b>E-R 图</b></td></tr><tr><td><b>逻辑模型设计</b></td><td>把概念模型转换为 <b>关系模式</b></td></tr><tr><td><b>物理模型设计</b></td><td>针对具体 DBMS：<b>命名、确定字段类型、编写必要的存储过程与触发器</b>等</td></tr></tbody></table>
+<blockquote>高频配对：<b>E-R 图属概念模型设计</b>（不是逻辑！）、<b>关系模式属逻辑模型设计</b>；「针对具体 DBMS」→ 物理模型设计</blockquote>
+<h3>模块 B ｜ 数据标准化（5.2.2）</h3>
+<label class="task"><input type="checkbox" data-key="B0" ><span class="task-text"><b>B0 · 数据标准化的地位与五大内容</b> ⭕ 必背（总起挖空）</span></label><div class="item-body"><p><b>数据标准化是实现数据共享的基础</b>。数据标准化的主要内容包括<b>元数据标准化、数据元标准化、数据模式标准化、数据分类与编码标准化和数据标准化管理</b>。</p></div>
+<blockquote>记法：地位一句话「<b>共享的基础</b>」；五内容顺口溜「<b>元元模分管</b>」（元数据 / 数据元 / 数据模式 / 分类与编码 / 标准化管理）</blockquote>
+<label class="task"><input type="checkbox" data-key="B1" ><span class="task-text"><b>B1 · 元数据的定义</b> ⭕ 必背（定义挖空，最简定义）</span></label><div class="item-body"><p>元数据最简单的定义是：<b>元数据是关于数据的数据（Data About Data）</b>。其实质是用于描述信息资源或数据的<b>内容、覆盖范围、质量、管理方式、数据的所有者、数据的提供方式</b>等有关的信息，是对信息资源的一种<b>结构化描述</b>。</p></div>
+<blockquote>关键词「<b>关于数据的数据</b>」——出现即选/即填</blockquote>
+<label class="task"><input type="checkbox" data-key="B2" ><span class="task-text"><b>B2 · 数据元的定义与三要素</b> ⭕ 必背（高频挖空）</span></label><div class="item-body"><p><b>数据元</b>是<b>数据库、文件和数据交换的基本数据单元</b>。数据库或文件由记录或元组等组成，而记录或元组则由数据元组成。数据元一般来说由三部分组成：<b>① 对象　② 特性　③ 表示</b>。</p></div>
+<blockquote>记法：「<b>对特表</b>」；对比记忆：<b>元数据</b> = 关于数据的数据，<b>数据元</b> = 基本数据单元——两个词别互串</blockquote>
+<label class="task"><input type="checkbox" data-key="B3" ><span class="task-text"><b>B3 · 数据元提取两种方法</b> ⭕ 必背（新旧系统对调陷阱）</span></label><div class="item-body"><p>常用的数据元提取方法有两种：<b>自上而下（Top-Down）提取法</b>和<b>自下而上（Down-Top）提取法</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>新建系统</b>的数据元提取，一般适用「<b>自上而下</b>」提取法</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>已建系统</b>的数据元提取，一般适用「<b>自下而上</b>」提取法</span></div>
+<blockquote>高频陷阱：<b>新上旧下</b>——「新建系统 → 自上而下」年年考年年错</blockquote>
+<label class="task"><input type="checkbox" data-key="B4" ><span class="task-text"><b>B4 · 数据模式及其两种描述方式</b> ⭕ 必背（对象配对，真题原题）</span></label><div class="item-body"><p><b>数据模式</b>是数据的<b>概念、组成、结构和相互关系</b>的总称。数据模式的描述方式主要有<b>图描述方法</b>和<b>数据字典方法</b>：</p></div>
+<table><thead><tr><th>描述方式</th><th>常用工具 / 内容</th><th>描述对象</th></tr></thead><tbody><tr><td><b>图描述方法</b></td><td><b>IDEFIX 方法、UML 图</b></td><td>数据集中的<b>实体和实体之间的相互关系</b></td></tr><tr><td><b>数据字典方法</b></td><td>摘要信息形式</td><td>模型中的<b>数据集、单个实体、属性的摘要信息</b></td></tr></tbody></table>
+<blockquote>高频配对：看到「IDEFIX / UML」→ 描述<b>实体及相互关系</b>；看到「摘要信息」→ <b>数据字典</b>。数据模式标准化的本质：<b>规范化处理，减少冗余</b></blockquote>
+<label class="task"><input type="checkbox" data-key="B5" ><span class="task-text"><b>B5 · 数据分类与编码标准化</b> ⭕ 必背（两要素 + 三作用）</span></label><div class="item-body"><p>数据分类有<b>分类对象</b>和<b>分类依据</b>两个要素。数据分类与编码的作用主要包括：</p>
+<ol><li>用于信息系统的<b>共享和互操作</b></li><li><b>统一数据的表示法</b></li><li><b>提高信息处理效率</b></li></ol></div>
+<div class="plain-li"><span class="bullet">•</span> <span>编码的意义：确立<b>代码与事物或概念之间的一一对应关系</b>，保证数据的<b>准确性和相容性</b>，为信息集成与资源共享提供良好基础</span></div>
+<label class="task"><input type="checkbox" data-key="B6" ><span class="task-text"><b>B6 · 数据标准化管理四阶段</b> ⭕ 必背（步骤排序）</span></label><div class="item-body"><p>数据标准化阶段的具体过程包括四个阶段：<b>确定数据需求 → 制定数据标准 → 批准数据标准 → 实施数据标准</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>确定数据需求：产生数据需求及相关<b>元数据、域值</b>等文件</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>制定数据标准：现有标准不满足需求时，可建议<b>制定新标准、修改或封存</b>已有标准</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>批准数据标准：数据管理机构审查，一经批准将<b>扩充或修改数据模型</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>实施数据标准：在<b>各信息系统</b>中实施和改进已批准的数据标准</span></div>
+<blockquote>记法：「<b>需批施</b>」——需求 → 制定 → 批准 → 实施</blockquote>
+<h3>模块 C ｜ 数据运维（5.2.3）</h3>
+<label class="task"><input type="checkbox" data-key="C0" ><span class="task-text"><b>C0 · 数据存储：介质与管理</b> ⭕ 必背</span></label><div class="item-body"><p><b>数据存储</b>是根据不同的应用环境，通过采取<b>合理、安全、有效</b>的方式将数据保存到物理介质上，并能保证对数据实施有效的访问。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>存储介质</b>是数据存储的载体和基础，类型主要有<b>磁带、光盘和磁盘</b>三种（并非越贵越好、越先进越好，要按应用环境合理选择）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>存储管理</b>的主要内容：<b>资源调度管理、存储资源管理、负载均衡管理、安全管理</b>四项</span></div>
+<label class="task"><input type="checkbox" data-key="C1" ><span class="task-text"><b>C1 · 数据备份：四种结构与三种策略</b> ⭕ 必背（双列表挖空）</span></label><div class="item-body"><p>数据备份是为防止用户操作失误、系统故障等意外导致的数据丢失，将整个应用系统或一部分关键数据<b>复制到其他存储介质上</b>的过程。</p></div>
+<table><thead><tr><th>分类</th><th>内容</th></tr></thead><tbody><tr><td><b>备份结构（四种）</b></td><td><b>DAS 备份结构、基于 LAN 的备份结构、LAN-FREE 备份结构、SERVER-FREE 备份结构</b></td></tr><tr><td><b>备份策略（三种）</b></td><td><b>完全备份、差分备份、增量备份</b></td></tr></tbody></table>
+<blockquote>记法：策略三件「<b>完差增</b>」；结构四件按「备份流量走不走局域网」递进：DAS 直连 → LAN 走网 → LAN-FREE 走存储网 → SERVER-FREE 不占服务器</blockquote>
+<label class="task"><input type="checkbox" data-key="C2" ><span class="task-text"><b>C2 · 数据容灾：两类容灾与「备份是基础」</b> ⭕ 必背（关系判断）</span></label><div class="item-body"><p>根据<b>容灾系统保护对象</b>的不同，容灾系统分为<b>应用容灾</b>和<b>数据容灾</b>两类：</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>应用容灾</b>：克服灾难对系统的影响，保证应用服务的<b>完整、可靠和安全</b>，使用户在任何情况下都能得到正常服务</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>数据容灾</b>：关注保证<b>用户数据的高可用性</b>，灾难发生时数据<b>尽量少丢失或不丢失</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>数据容灾是应用容灾的子集，也是应用容灾最根本的基础</b>（「得数据者得天下」）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>容灾是一个<b>工程</b>，而不仅仅是技术</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>数据备份是数据容灾的基础</b>；数据备份是<b>数据高可用的最后一道防线</b>，目的是系统崩溃时<b>快速恢复数据</b></span></div>
+<blockquote>判断题三连：备份≠容灾 ✗（备份只是基础）；容灾=技术 ✗（是工程）；「最后一道防线」=数据备份 ✓</blockquote>
+<label class="task"><input type="checkbox" data-key="C3" ><span class="task-text"><b>C3 · 衡量容灾的两个指标：RPO 与 RTO</b> ⭕ 必背（最高频对调陷阱）</span></label><div class="item-body"><p>从技术上看，衡量容灾系统有两个主要指标：</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>RPO（Recovery Point Objective）</b>：代表当灾难发生时<b>允许丢失的数据量</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>RTO（Recovery Time Objective）</b>：代表<b>系统恢复的时间</b></span></div>
+<blockquote>记法：<b>P=Point=丢点数据，T=Time=花点时间</b>。「允许丢失的数据量」→ RPO；「恢复的时间」→ RTO。两个词年年对调</blockquote>
+<label class="task"><input type="checkbox" data-key="C4" ><span class="task-text"><b>C4 · 数据质量：元素分类与两种评价方法</b> ⭕ 必背</span></label><div class="item-body"><p>数据质量可以通过<b>数据质量元素</b>来描述，数据质量元素分为<b>数据质量定量元素</b>和<b>数据质量非定量元素</b>。</p>
+<p>数据质量评价方法分为两种：</p></div>
+<table><thead><tr><th>方法</th><th>判别关键词</th></tr></thead><tbody><tr><td><b>直接评价法</b></td><td>将数据与<b>内部或外部的参照信息（如理论值）进行对比</b>，确定数据质量</td></tr><tr><td><b>间接评价法</b></td><td>利用<b>数据相关信息</b>（如对数据源、采集方法等的描述）<b>推断或评估</b>数据质量</td></tr></tbody></table>
+<blockquote>记法：「<b>直比间推</b>」——直接=拿参照比，间接=靠信息推</blockquote>
+<label class="task"><input type="checkbox" data-key="C5" ><span class="task-text"><b>C5 · 数据质量控制：前期 + 后期</b> ⭕ 必背</span></label><div class="item-body"><p>数据产品的质量控制分成<b>前期控制</b>和<b>后期控制</b>两大部分：</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>前期控制</b>：数据<b>录入前</b>的质量控制 + 数据<b>录入过程中的实时</b>质量控制</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>后期控制</b>：数据<b>录入完成后</b>的后处理质量控制与评价</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>依据建库流程可进一步分为：<b>前期控制、过程控制、系统检测、精度评价</b></span></div>
+<label class="task"><input type="checkbox" data-key="C6" ><span class="task-text"><b>C6 · 数据清理三步骤</b> ⭕ 必背（步骤排序，真题原题）</span></label><div class="item-body"><p>凡是有助于提高数据质量的处理过程，都可以认为是数据清理。数据清理主要包括<b>数据分析、数据检测和数据修正</b>三个步骤：</p>
+<ol><li><b>数据分析</b>：从数据中发现控制数据的一般规则（字段域、业务规则等），定义清理规则并选择合适的清理算法</li><li><b>数据检测</b>：根据预定义的清理规则及相关算法，检测数据是否正确、记录是否重复</li><li><b>数据修正</b>：手工或自动地修正检测到的错误数据或重复记录</li></ol></div>
+<blockquote>记法：<b>析 → 检 → 修</b>；数据清理又称数据清洗</blockquote>
+<h3>模块 D ｜ 数据开发利用（5.2.4）</h3>
+<label class="task"><input type="checkbox" data-key="D0" ><span class="task-text"><b>D0 · 数据集成：全局模式与透明访问</b> ⭕ 必背</span></label><div class="item-body"><p>数据集成就是将驻留在<b>不同数据源</b>中的数据进行整合，向用户提供<b>统一的数据视图（全局模式）</b>，使得用户能以<b>透明的方式</b>访问数据。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>数据集成的目标：充分利用已有数据，在尽量保持其<b>自治性</b>的前提下，<b>维护数据源整体上的一致性</b>，提高数据共享利用效率</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>实现数据集成的系统称为<b>数据集成系统</b>，为用户提供<b>统一的数据源访问接口</b></span></div>
+<blockquote>关键词：「统一的数据视图 / 全局模式」「透明访问」「保持自治性」</blockquote>
+<label class="task"><input type="checkbox" data-key="D1" ><span class="task-text"><b>D1 · 数据挖掘：定义与五任务</b> ⭕ 必背（任务列举）</span></label><div class="item-body"><p>数据挖掘是指从<b>大量的、不完全的、有噪声的、模糊的、随机的</b>实际数据中，提取隐含在其中的、人们不知道的、却是<b>潜在有用的知识</b>——目标是发现隐藏于数据之后的<b>规律或数据间的关系</b>，服务于决策。</p>
+<p>数据挖掘常见的主要任务包括：<b>数据总结、关联分析、分类和预测、聚类分析和孤立点分析</b>。</p></div>
+<blockquote>记法：五任务「<b>总关分聚孤</b>」；「购物篮分析」→ 关联分析；「啤酒尿布」→ 关联分析的经典梗</blockquote>
+<label class="task"><input type="checkbox" data-key="D2" ><span class="task-text"><b>D2 · 数据挖掘流程五阶段</b> ⭕ 必背（步骤排序）</span></label><div class="item-body"><p>数据挖掘流程一般包括<b>确定分析对象、数据准备、数据挖掘、结果评估与结果应用</b>五个阶段。</p></div>
+<blockquote>记法：「<b>定备挖评用</b>」——对象 → 准备 → 挖掘 → 评估 → 应用</blockquote>
+<label class="task"><input type="checkbox" data-key="D3" ><span class="task-text"><b>D3 · 数据服务三类</b> ⭕ 必背</span></label><div class="item-body"><p>数据服务主要包括：<b>数据目录服务、数据查询与浏览及下载服务、数据分发服务</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>数据目录服务</b>：建立目录方便检索服务</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>数据查询与浏览及下载服务</b>：网上数据共享服务的重要方式，用户使用数据的方式有<b>查询和下载</b>两种</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>数据分发服务</b>：数据的生产者通过各种方式将数据传送到用户的过程</span></div>
+<label class="task"><input type="checkbox" data-key="D4" ><span class="task-text"><b>D4 · 数据可视化七类</b> ⭕ 必背（数量 + 列举）</span></label><div class="item-body"><p>可视化技术是指将<b>抽象的事物或过程变成图形图像</b>的表示方法。可视化可分为<b>七类</b>：</p>
+<p><b>一维数据可视化、二维数据可视化、三维数据可视化、多维数据可视化、时态数据可视化、层次数据可视化和网络数据可视化</b>。</p></div>
+<blockquote>记法：<b>三维打底（一二三维）+ 多维 + 时态 + 层次 + 网络</b>＝7；填空常挖「时态 / 层次 / 网络」后三样</blockquote>
+<label class="task"><input type="checkbox" data-key="D5" ><span class="task-text"><b>D5 · 信息检索：四种方法与常用技术</b> ⭕ 必背</span></label><div class="item-body"><p>信息检索的主要方法包括四种：<b>全文检索、字段检索、基于内容的多媒体检索、数据挖掘</b>。</p>
+<p>信息检索的常用技术包括：<b>布尔逻辑检索技术、截词检索技术、临近检索技术、限定字段检索技术、限制检索技术</b>等。</p></div>
+<blockquote>⚠️ 两个坑：① 四方法里<b>有「数据挖掘」</b>——不是出题人手滑，是教材原口径；② 「临近检索」是<b>临近</b>（proximity），别记成「近似检索」</blockquote>
+<h3>模块 E ｜ 数据库安全（5.2.5）</h3>
+<label class="task"><input type="checkbox" data-key="E0" ><span class="task-text"><b>E0 · 数据库安全定义与安全对策要点</b> ⭕ 必背</span></label><div class="item-body"><p>数据库安全是指保护数据库，防止<b>不合法的使用</b>所造成的<b>数据泄露、更改或破坏</b>。</p>
+<p>数据库安全对策（十条）中的判别关键词：</p></div>
+<table><thead><tr><th>对策</th><th>关键词 / 要点</th></tr></thead><tbody><tr><td><b>防止非法的数据访问</b></td><td>数据库安全<b>关键的需求之一</b>；DBMS 根据用户或应用的<b>授权</b>检查访问请求</td></tr><tr><td><b>防止推导</b></td><td>用户通过<b>授权访问的数据经推导得出机密信息</b>（其本身无权访问该机密信息）</td></tr><tr><td><b>保证数据库的完整性</b></td><td>保护数据库不受<b>非授权修改</b>及病毒、系统错误导致的存储数据破坏</td></tr><tr><td><b>保证数据的操作完整性</b></td><td><b>并发事务</b>中保证数据的<b>逻辑一致性</b>（并发管理器子系统负责）</td></tr><tr><td><b>保证数据的语义完整性</b></td><td>修改数据时保证新值在一定范围内<b>符合逻辑上的完整性</b>（完整性约束描述）</td></tr><tr><td><b>审计和日志</b></td><td>有效的<b>威慑和事后追查、分析</b>工具</td></tr><tr><td><b>标识和认证</b></td><td>授权、审计等的<b>前提条件</b>，是<b>第一道安全防线</b></td></tr><tr><td><b>机密数据管理 / 多级保护 / 限界</b></td><td>保密性控制 / 按保密级别划分访问权限 / 防止程序间<b>非授权的信息传递</b></td></tr></tbody></table>
+<blockquote>高频判断：「第一道安全防线」=<b>标识和认证</b>；「并发事务中的逻辑一致性」=<b>操作完整性</b>；「事后追查分析」=<b>审计和日志</b></blockquote>
+<label class="task"><input type="checkbox" data-key="E1" ><span class="task-text"><b>E1 · 数据库安全机制五项</b> ⭕ 必背</span></label><div class="item-body"><p>数据库安全机制包括<b>用户的身份认证、存取控制、数据库加密、数据审计、推理控制</b>等内容。</p></div>
+<blockquote>记法：五机制「<b>身存密审推</b>」；对应记忆——防推导的机制面 = <b>推理控制</b>，认证的机制面 = <b>身份认证</b></blockquote>
+<h2>二、通读清单（读一遍有印象即可）</h2>
+<label class="task"><input type="checkbox" data-key="F0" ><span class="task-text"><b>F0 · OSIE 开放系统互连环境的四要素</b> ○ 通读</span></label><div class="item-body"><p>一个互连、互通、互操作的开放系统互连环境（OSIE）有四个基本要素：<b>硬件、软件、通信和数据</b>——前三个要素的标准化已成熟，因此<b>数据</b>的标准化（数据元标准化）成为重点。</p></div>
+<label class="task"><input type="checkbox" data-key="F1" ><span class="task-text"><b>F1 · 元数据标准化：信息对象与元数据体系</b> ○ 通读</span></label><div class="item-body"><p>元数据标准化围绕<b>信息对象</b>展开，构成元数据体系；元数据被定义为提供关于信息资源或数据的一种<b>结构化数据</b>——描述的内容、覆盖范围、质量、管理方式、所有者、提供方式等即其描述维度。</p></div>
+<label class="task"><input type="checkbox" data-key="F2" ><span class="task-text"><b>F2 · 数据元标准的制定步骤（七步）</b> ○ 通读</span></label><div class="item-body"><p>① 描述 → ② 界定业务范围 → ③ 开展业务流程分析与信息建模 → ④ 借助信息模型提取数据元并规范其属性 → ⑤ 对代码型数据元编制值域（代码表）→ ⑥ 与现有国家标准或行业标准协调 → ⑦ 发布实施并建立<b>动态维护管理机制</b>。</p></div>
+<label class="task"><input type="checkbox" data-key="F3" ><span class="task-text"><b>F3 · 数据挖掘 vs 传统数据分析的四个不同点</b> ○ 通读</span></label><div class="item-body"><p>① <b>数据量</b>：数据挖掘所需数据量更大，数据量越大效果越好；② <b>分析方法</b>：传统分析主要用<b>统计学</b>，数据挖掘综合运用<b>统计、人工智能、可视化</b>等技术；③ <b>分析侧重</b>：传统分析是<b>回顾型和验证型</b>（分析已发生了什么），数据挖掘是<b>预测型和发现型</b>（预测未来、解释原因）；④ <b>成熟度</b>：传统分析相当成熟，数据挖掘部分方法仍处于发展阶段。</p></div>
+<label class="task"><input type="checkbox" data-key="F4" ><span class="task-text"><b>F4 · 数据可视化是一门综合性学科</b> ○ 通读</span></label><div class="item-body"><p>主要运用计算机图形学和图像处理技术，将数据转换为图形或图像在屏幕上显示并进行交互处理，涉及<b>计算机图形学、图像处理、计算机辅助设计、计算机视觉及人机交互</b>等多个领域。</p></div>
+<label class="task"><input type="checkbox" data-key="F5" ><span class="task-text"><b>F5 · 备份的硬件与软件基础</b> ○ 通读</span></label><div class="item-body"><p>备份硬件基础：备份服务器、RAID、磁带机等；备份软件：操作系统自带备份工具 + 专业备份软件。</p></div>
+<h2>三、自检题（先自己答，再展开核对）</h2>
+<ol><li>数据工程的主要研究内容有哪五项？（对应本节哪五个小节标题？）</li><li>概念模型的别称是什么？它按谁的观点建模？基本元素有哪五个？</li><li>逻辑模型的五种数据结构是？其中最重要的是？关系完整性约束三大类型是？</li><li>数据建模过程四步各产出什么？（提示：DFD / E-R 图 / 关系模式 / DBMS 物理结构）</li><li>「元数据」和「数据元」各自的定义分别是什么？</li><li>数据元提取：新建系统用哪种方法？已建系统用哪种方法？</li><li>图描述方法（IDEFIX / UML）与数据字典方法分别描述什么？</li><li>四种备份结构、三种备份策略分别是？</li><li>RPO 和 RTO 分别代表什么？</li><li>数据清理三步骤按什么顺序排列？</li><li>数据挖掘的五任务、流程五阶段分别是？</li><li>数据库安全机制五项是什么？哪一项对策是「第一道安全防线」？</li></ol>
+<details>
+<summary>点击核对答案</summary>
+<ol><li><b>数据建模、数据标准化、数据运维、数据开发利用和数据安全</b>——即 5.2.1~5.2.5 五个小节标题本身。</li><li>概念模型别称<b>信息模型</b>；按<b>用户</b>的观点对数据和信息建模；基本元素<b>实体、属性、域、键、关联</b>。</li><li>层次模型、网状模型、关系模型、面向对象模型、对象关系模型；最重要的是<b>关系模型</b>；约束三大类型：<b>实体完整性、参照完整性、用户定义的完整性</b>。</li><li>数据需求分析 → <b>数据流图</b>；概念模型设计 → <b>E-R 图</b>；逻辑模型设计 → <b>关系模式</b>；物理模型设计 → 针对具体 <b>DBMS</b> 的命名 / 字段类型 / 存储过程与触发器。</li><li><b>元数据</b> = 关于数据的数据（Data About Data）；<b>数据元</b> = 数据库、文件和数据交换的基本数据单元，由<b>对象、特性、表示</b>三部分组成。</li><li>新建系统 → <b>自上而下（Top-Down）</b>；已建系统 → <b>自下而上（Down-Top）</b>。</li><li>图描述（IDEFIX / UML）→ 描述数据集中的<b>实体和实体之间的相互关系</b>；数据字典 → 描述模型中的<b>数据集、单个实体、属性的摘要信息</b>。</li><li>结构四种：<b>DAS / 基于 LAN / LAN-FREE / SERVER-FREE</b>；策略三种：<b>完全备份、差分备份、增量备份</b>。</li><li><b>RPO</b> = 灾难发生时<b>允许丢失的数据量</b>；<b>RTO</b> = <b>系统恢复的时间</b>。</li><li><b>数据分析 → 数据检测 → 数据修正</b>。</li><li>五任务：<b>数据总结、关联分析、分类和预测、聚类分析、孤立点分析</b>；五阶段：<b>确定分析对象、数据准备、数据挖掘、结果评估、结果应用</b>。</li><li>五机制：<b>用户的身份认证、存取控制、数据库加密、数据审计、推理控制</b>；「第一道安全防线」= <b>标识和认证</b>。</li></ol>
+</details>
+<h2>四、刷题任务（完成后在打卡进度回填）</h2>
+<div class="plain-li"><span class="bullet">•</span> <span>软考达人 → 章节练习 → 信息系统工程 → 数据工程相关题（优先 2023 下 ~ 2026 上真题，本章非新增章、旧真题有效）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>本节自测题：5.2_考点自测题.html（22 题，达标线 18/22）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>答题系统：5.2 节 12 填空题（滚动默写用）</span></div>
+</div>
+<script>
+(function(){
+  const REL = "01_教材笔记/第05章_信息系统工程/5.2_数据工程/5.2_知识点清单_可勾选.html";
+  const STORE_KEY = 'checklist:' + REL;
+
+  // 一次性加载整个文件的勾选状态（JSON），避免 key 过长
+  let store = {};
+  try { store = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch (e) {}
+
+  // 兼容迁移：旧的错误 key（包含重复 REL 前缀的）自动迁到新格式
+  for (let i = localStorage.length - 1; i >= 0; i--) {
+    const k = localStorage.key(i);
+    if (!k || !k.startsWith('checklist:')) continue;
+    // 检测旧 bug key：包含 REL 两次
+    if (k.indexOf(REL) !== k.lastIndexOf(REL)) {
+      const v = localStorage.getItem(k);
+      const m = k.match(/:L(\d+)$/);
+      if (m && v === '1') store['L' + m[1]] = true;
+      localStorage.removeItem(k);
+    }
+  }
+
+  const boxes = document.querySelectorAll('.task input[type="checkbox"]');
+  boxes.forEach(box => {
+    const k = box.dataset.key;
+    if (store[k]) box.checked = true;
+    box.addEventListener('change', () => {
+      store[k] = box.checked;
+      try {
+        localStorage.setItem(STORE_KEY, JSON.stringify(store));
+      } catch (e) {
+        console.error('localStorage 写入失败：', e);
+      }
+      updateProgress();
+    });
+  });
+
+  function updateProgress() {
+    const total = boxes.length;
+    const done = Array.from(boxes).filter(b => b.checked).length;
+    const pct = total ? Math.round(done / total * 100) : 0;
+    document.getElementById('progress').innerHTML = '已完成：<b>' + done + ' / ' + total + '</b>（' + pct + '%）';
+  }
+  updateProgress();
+})();
+</script>
+</body>
+</html>

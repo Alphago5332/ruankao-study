@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>康奈尔笔记 · 第 5 章第 2 节 数据工程 · 带答案版</title>
+<style>
+  :root{
+    --ink:#1f2328;
+    --ink-2:#4b5563;
+    --ink-3:#8b949e;
+    --line:#2f3742;
+    --rule:#d6dae0;
+    --accent:#185FA5;
+    --accent-soft:#E6F1FB;
+    --warm:#854F0B;
+    --warm-soft:#FAEEDA;
+    --paper:#ffffff;
+    --ans-bg:#fffaf2;
+    --ans-border:#e8d9b8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    padding:28px 16px 48px;
+    background:#eef0f3;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+    color:var(--ink);
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .toolbar{
+    max-width:210mm;margin:0 auto 14px;display:flex;gap:10px;align-items:center;
+    justify-content:space-between;flex-wrap:wrap;
+  }
+  .toolbar .hint{font-size:12.5px;color:#5b6470;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;
+    font-size:13px;padding:7px 14px;border-radius:8px;cursor:pointer;
+    font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn.active{background:var(--warm);border-color:var(--warm);color:#fff;}
+
+  .page{
+    width:210mm;min-height:297mm;margin:0 auto;background:var(--paper);
+    padding:14mm 13mm 12mm;box-shadow:0 2px 14px rgba(16,24,40,.12);
+  }
+
+  .head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    border-bottom:2px solid var(--line);padding-bottom:8px;margin-bottom:10px;
+    gap:12px;
+  }
+  .head h1{font-size:19px;margin:0;font-weight:600;letter-spacing:.3px;}
+  .head .sub{font-size:12px;color:var(--ink-3);margin-top:4px;}
+  .head .meta{font-size:12px;color:var(--ink-2);text-align:right;line-height:1.9;white-space:nowrap;}
+  .head .meta b{font-weight:600;color:var(--accent);}
+
+  .band{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+  .chip{
+    font-size:11.5px;padding:4px 9px;border-radius:5px;
+    background:var(--accent-soft);color:#0C447C;border:1px solid #B5D4F4;
+  }
+  .chip.warm{background:var(--warm-soft);color:#633806;border-color:#EFC98A;}
+
+  .cols{
+    display:grid;grid-template-columns:60mm 1fr;gap:0;
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .col-cue{
+    background:#fafbfc;border-right:1px solid var(--line);padding:8px 9px 9px;
+  }
+  .col-note{padding:8px 11px 9px;}
+  .col-hd{
+    font-size:11.5px;font-weight:600;letter-spacing:.6px;color:var(--ink-2);
+    text-transform:uppercase;padding-bottom:6px;margin-bottom:7px;
+    border-bottom:1px dashed #b9c0c9;
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  .col-hd span{font-size:10.5px;font-weight:400;color:var(--ink-3);text-transform:none;letter-spacing:0;}
+
+  .q{
+    font-size:11.5px;line-height:1.5;color:#1f2328;
+    padding:5px 0 5px 20px;position:relative;border-bottom:1px dotted #dfe3e8;
+  }
+  .q:last-child{border-bottom:0;}
+  .q::before{
+    content:attr(data-n);position:absolute;left:0;top:5px;
+    width:14px;height:14px;border-radius:50%;
+    background:var(--accent);color:#fff;font-size:9.5px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:600;line-height:1;
+  }
+  .q b{font-weight:600;}
+  .q em{font-style:normal;color:var(--warm);font-weight:600;}
+
+  .grouplabel{
+    font-size:10.5px;font-weight:600;color:var(--accent);
+    letter-spacing:.4px;margin:8px 0 2px;
+  }
+  .grouplabel:first-child{margin-top:0;}
+
+  /* === 答案区样式 === */
+  .ans-block{
+    margin-bottom:6px;padding:5px 8px 6px;
+    background:var(--ans-bg);border:1px solid var(--ans-border);border-radius:3px;
+  }
+  .ans-block .ans-title{
+    font-size:10.5px;font-weight:600;color:var(--warm);
+    letter-spacing:.3px;margin-bottom:2px;display:flex;align-items:baseline;gap:6px;
+  }
+  .ans-block .ans-title .num{
+    display:inline-block;min-width:14px;height:14px;border-radius:50%;
+    background:var(--warm);color:#fff;font-size:9.5px;font-weight:600;
+    text-align:center;line-height:14px;
+  }
+  .ans-block ul{
+    margin:2px 0 3px 0;padding:0 0 0 16px;font-size:11px;line-height:1.55;color:#2b323b;
+  }
+  .ans-block ul li{padding:1px 0;}
+  .ans-block .key{
+    color:var(--warm);font-weight:600;
+  }
+  .ans-block .tip{
+    font-size:10px;color:#633806;margin-top:2px;line-height:1.5;
+    padding:2px 6px;background:var(--warm-soft);border-radius:2px;
+  }
+  .ans-block .fill{
+    height:16px;border-bottom:1px dashed #c8c0aa;margin-top:3px;
+  }
+  body.hide-answers .ans-block{display:none;}
+  body.hide-answers .summary-prefill{display:none;}
+
+  .summary{
+    margin-top:10px;border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .summary .col-hd{
+    margin:0;padding:7px 11px;background:#fafbfc;border-bottom:1px solid var(--line);
+  }
+  .summary .body{padding:6px 11px 8px;font-size:11.5px;line-height:1.7;color:#2b323b;}
+  .summary .body b{color:var(--accent);}
+  .summary .body .small{font-size:10.5px;color:var(--ink-3);margin-top:3px;display:block;}
+
+  .footer{
+    margin-top:9px;font-size:10.5px;color:var(--ink-3);
+    display:flex;justify-content:space-between;gap:10px;
+  }
+
+  .guide{
+    width:210mm;margin:16px auto 0;background:#fff;border:1px solid #d9dee5;
+    border-radius:8px;padding:16px 18px;
+  }
+  .guide h2{font-size:14px;margin:0 0 10px;font-weight:600;}
+  .guide table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .guide th,.guide td{
+    border:1px solid #e2e6eb;padding:7px 9px;text-align:left;vertical-align:top;line-height:1.6;
+  }
+  .guide th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .guide td:first-child{width:88px;font-weight:600;color:var(--accent);}
+  .guide .note{font-size:12px;color:#5b6470;margin-top:10px;line-height:1.7;}
+
+  @page{size:A4 portrait;margin:0;}
+  @media print{
+    body{background:#fff;padding:0;}
+    .toolbar,.guide{display:none;}
+    .page{box-shadow:none;margin:0;width:auto;min-height:auto;padding:13mm 12mm;}
+    body.hide-answers .ans-block{display:none;}
+    body.hide-answers .summary-prefill{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="hint">A4 竖版 · 带答案版 · 建议先默写、再对照；打印时可「隐藏答案」变填空卷</div>
+  <div>
+    <button class="btn" id="toggleBtn" onclick="toggleAnswers()">👁 隐藏答案（打印填空卷）</button>
+    <button class="btn primary" onclick="window.print()">打印 / 导出 PDF</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="head">
+    <div>
+      <h1>康奈尔笔记 · 第 5 章第 2 节 数据工程 <span style="color:var(--warm);font-size:14px;">（带答案版）</span></h1>
+      <div class="sub">《信息系统项目管理师教程（第 4 版）》约 P146 ~ P162　｜　答案口径以 2026-10-09 三方交叉核对为准</div>
+    </div>
+    <div class="meta">
+      日期：__________<br>
+      第 <b>__</b> 轮复习　用时 <b>__</b> 分钟
+    </div>
+  </div>
+
+  <div class="band">
+    <span class="chip">上午约 2~3 题（第 5 章 5~8 题中）</span>
+    <span class="chip">定义挖空 / 归属配对 / 数量分类型</span>
+    <span class="chip warm">必背：数据元三要素 + RPO·RTO + 清理三步</span>
+    <span class="chip warm">通读：F0~F5 背景类</span>
+    <span class="chip warm">📝 含答案</span>
+  </div>
+
+  <div class="cols">
+
+    <div class="col-cue">
+      <div class="col-hd">线索栏 <span>遮住右侧自问</span></div>
+
+      <div class="grouplabel">5.2.1 数据建模</div>
+      <div class="q" data-n="1"><b>三类数据模型</b>按什么划分？概念模型：别称 / 观点 / 基本元素？</div>
+      <div class="q" data-n="2"><b>逻辑模型</b>：五种数据结构？谁最重要？<b>完整性约束三大类型</b>？</div>
+      <div class="q" data-n="3"><b>物理模型</b>定位关键词 + 六元素？<b>建模四步</b>各自产出？</div>
+
+      <div class="grouplabel">5.2.2 数据标准化</div>
+      <div class="q" data-n="4"><b>数据标准化</b>地位一句话？五大内容？</div>
+      <div class="q" data-n="5"><b>元数据 vs 数据元</b>：定义？<b>三要素</b>？<b>提取法</b>新旧系统对应？</div>
+      <div class="q" data-n="6"><b>数据模式</b>两种描述方式⇄对象？分类两要素 + 编码三作用？<b>管理四阶段</b>？</div>
+
+      <div class="grouplabel">5.2.3 数据运维</div>
+      <div class="q" data-n="7"><b>存储介质</b>三类 + <b>存储管理</b>四内容？</div>
+      <div class="q" data-n="8"><b>备份</b>四结构三策略？<b>容灾两类</b>按什么分？「子集 / 基础 / 最后防线」三句？</div>
+      <div class="q" data-n="9"><b>RPO vs RTO</b>？质量元素两分 + <b>直接 / 间接评价</b>判别词？<b>清理三步</b>？</div>
+
+      <div class="grouplabel">5.2.4 数据开发利用</div>
+      <div class="q" data-n="10"><b>数据集成</b>：统一视图叫什么？透明 + 自治关键词？</div>
+      <div class="q" data-n="11"><b>挖掘五任务</b> + 流程五阶段？<b>服务三类</b>？<b>可视化七类</b>？<b>检索四方法</b>（⚠️ 跨界项）？</div>
+
+      <div class="grouplabel">5.2.5 数据库安全</div>
+      <div class="q" data-n="12">数据库安全定义？<b>机制五项</b>？「第一道防线」是哪条对策？哪条防「推导出机密」？</div>
+    </div>
+
+    <div class="col-note">
+      <div class="col-hd">答案区 <span>默写后对照 · 虚线处写自己的补充</span></div>
+
+      <div class="grouplabel">5.2.1 数据建模</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">1</span>三类数据模型与概念模型</div>
+        <ul>
+          <li>按模型的<span class="key">应用目的</span>不同分三类：<span class="key">概念模型、逻辑模型、物理模型</span></li>
+          <li>概念模型<span class="key">也称信息模型</span>：按<span class="key">用户的观点</span>建模，<span class="key">不依赖具体计算机系统、不对应具体 DBMS</span>，是概念级别的模型</li>
+          <li>概念模型基本元素五件：<span class="key">实体、属性、域、键、关联</span></li>
+        </ul>
+        <div class="tip">「按用户观点」→ 概念模型；「不依赖 DBMS」→ 还是概念模型；别称「信息模型」是填空最爱</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">2</span>逻辑模型五结构与完整性约束</div>
+        <ul>
+          <li>逻辑模型五种数据结构：<span class="key">层次模型、网状模型、关系模型、面向对象模型、对象关系模型</span></li>
+          <li><span class="key">关系模型是目前最重要的一种逻辑数据模型</span>；数据操作四类：<span class="key">查询、插入、删除、更新</span>（须满足完整性约束）</li>
+          <li>关系完整性约束三大类型：<span class="key">实体完整性、参照完整性、用户定义的完整性</span>（口诀「实参用」）</li>
+        </ul>
+        <div class="tip">⚠️ 逻辑模型是在<span class="key">概念模型</span>基础上确定数据结构——顺序：概念 → 逻辑 → 物理</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">3</span>物理模型 + 建模过程四步产出</div>
+        <ul>
+          <li>物理模型：在逻辑模型基础上考虑<span class="key">具体的技术实现因素</span>，真正实现数据在数据库中的存放</li>
+          <li>物理模型基本元素六件：<span class="key">表、字段、视图、索引、存储过程、触发器</span></li>
+          <li>建模四步产出配对：<span class="key">数据需求分析 → 数据流图（DFD）</span>；<span class="key">概念模型设计 → E-R 图</span>；<span class="key">逻辑模型设计 → 关系模式</span>；<span class="key">物理模型设计 → 针对具体 DBMS 的命名 / 字段类型 / 存储过程与触发器</span></li>
+        </ul>
+        <div class="tip">高频对调陷阱：<b>E-R 图属概念模型设计</b>、<b>关系模式属逻辑模型设计</b>——「先画 E-R 再转关系模式」</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">5.2.2 数据标准化</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">4</span>数据标准化的地位与五大内容</div>
+        <ul>
+          <li>地位一句话：<span class="key">数据标准化是实现数据共享的基础</span></li>
+          <li>五大内容：<span class="key">元数据标准化、数据元标准化、数据模式标准化、数据分类与编码标准化、数据标准化管理</span>（口诀「元元模分管」）</li>
+        </ul>
+        <div class="tip">OSIE 四要素：<span class="key">硬件、软件、通信、数据</span>——前三者标准化已成熟，<b>数据</b>的标准化是重点（通读 F0）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">5</span>元数据 / 数据元 / 提取法</div>
+        <ul>
+          <li><span class="key">元数据 = 关于数据的数据</span>（Data About Data），是对信息资源的结构化描述</li>
+          <li><span class="key">数据元 = 数据库、文件和数据交换的基本数据单元</span>；记录 / 元组由数据元组成</li>
+          <li>数据元三要素：<span class="key">对象、特性、表示</span>（口诀「对特表」）</li>
+          <li>提取两法：<span class="key">新建系统 → 自上而下（Top-Down）</span>；<span class="key">已建系统 → 自下而上（Down-Top）</span>（口诀「新上旧下」）</li>
+        </ul>
+        <div class="tip">⚠️ 元数据（关于数据的数据）与数据元（基本数据单元）两个词互串是本节第一大坑；「新上旧下」年年考年年错</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">6</span>数据模式 / 分类编码 / 管理四阶段</div>
+        <ul>
+          <li>数据模式 = 数据的<span class="key">概念、组成、结构和相互关系</span>的总称</li>
+          <li>两种描述方式配对：<span class="key">图描述（IDEFIX 方法、UML 图）→ 描述实体和实体之间的相互关系</span>；<span class="key">数据字典 → 描述数据集、单个实体、属性的摘要信息</span></li>
+          <li>数据分类两要素：<span class="key">分类对象、分类依据</span>；编码三作用：<span class="key">共享和互操作、统一数据表示法、提高信息处理效率</span></li>
+          <li>标准化管理四阶段：<span class="key">确定数据需求 → 制定数据标准 → 批准数据标准 → 实施数据标准</span>（口诀「需制批施」）</li>
+        </ul>
+        <div class="tip">数据模式标准化的本质：<span class="key">规范化处理、减少冗余</span>；「IDEFIX / UML」出现 → 图描述 → 实体相互关系</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">5.2.3 数据运维</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">7</span>数据存储：介质与管理</div>
+        <ul>
+          <li>数据存储：按应用环境以<span class="key">合理、安全、有效</span>的方式将数据保存到物理介质上，并保证有效访问</li>
+          <li>存储介质三类：<span class="key">磁带、光盘、磁盘</span>（不是越贵越好、越先进越好）</li>
+          <li>存储管理四内容：<span class="key">资源调度管理、存储资源管理、负载均衡管理、安全管理</span></li>
+        </ul>
+        <div class="tip">介质三件「带盘盘」；管理四件——调度 / 资源 / 均衡 / 安全，别与「安全管理」单件混</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">8</span>备份四结构三策略 + 容灾两类</div>
+        <ul>
+          <li>备份结构四种：<span class="key">DAS 备份结构、基于 LAN 的备份结构、LAN-FREE 备份结构、SERVER-FREE 备份结构</span></li>
+          <li>备份策略三种：<span class="key">完全备份、差分备份、增量备份</span>（口诀「完差增」）</li>
+          <li>按<span class="key">容灾系统保护对象</span>分两类：<span class="key">应用容灾</span>（保证服务的完整可靠安全）、<span class="key">数据容灾</span>（保证数据高可用、尽量少丢失）</li>
+          <li>三句判读：<span class="key">数据容灾是应用容灾的子集、也是其最根本的基础</span>；<span class="key">数据备份是数据容灾的基础</span>；数据备份是<span class="key">数据高可用的最后一道防线</span></li>
+          <li>容灾是一个<span class="key">工程</span>，而不仅仅是技术</li>
+        </ul>
+        <div class="tip">判断题三连：备份 = 容灾？<b>✗</b>（备份只是基础）；容灾 = 技术？<b>✗</b>（是工程）；「最后一道防线」= 数据备份？<b>✓</b></div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">9</span>RPO / RTO + 质量评价 + 清理三步</div>
+        <ul>
+          <li><span class="key">RPO = 灾难发生时允许丢失的数据量</span>（Point=丢点数据）；<span class="key">RTO = 系统恢复的时间</span>（Time=花点时间）</li>
+          <li>数据质量元素分两分：<span class="key">定量元素 / 非定量元素</span></li>
+          <li>评价两法：<span class="key">直接评价法 = 与内部或外部参照信息（如理论值）对比</span>；<span class="key">间接评价法 = 利用数据相关信息（数据源、采集方法描述）推断或评估</span>（口诀「直比间推」）</li>
+          <li>质量控制：<span class="key">前期控制</span>（录入前 + 录入过程实时）+ <span class="key">后期控制</span>（录入完成后的后处理）；建库流程口径：前期控制 / 过程控制 / 系统检测 / 精度评价</li>
+          <li>数据清理三步骤：<span class="key">数据分析 → 数据检测 → 数据修正</span>（口诀「析检修」）</li>
+        </ul>
+        <div class="tip">⚠️ RPO / RTO 对调是本节第二大坑；「参照信息对比」= 直接评价、「推断评估」= 间接评价</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">5.2.4 数据开发利用</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">10</span>数据集成：全局模式与透明访问</div>
+        <ul>
+          <li>数据集成：整合<span class="key">不同数据源</span>的数据，向用户提供<span class="key">统一的数据视图（全局模式）</span>，以<span class="key">透明的方式</span>访问</li>
+          <li>目标：充分利用已有数据，在尽量保持<span class="key">自治性</span>的前提下，维护数据源<span class="key">整体上的一致性</span>，提高共享利用效率</li>
+          <li>实现数据集成的系统 = <span class="key">数据集成系统</span>，提供统一的<span class="key">数据源访问接口</span></li>
+        </ul>
+        <div class="tip">三个填空词：「统一的数据视图 / 全局模式」「透明」「自治性」——出现即数据集成</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">11</span>挖掘五任务 / 服务三类 / 可视化七类 / 检索</div>
+        <ul>
+          <li>数据挖掘：从<span class="key">大量的、不完全的、有噪声的、模糊的、随机的</span>数据中提取<span class="key">潜在有用的知识</span>，服务于决策</li>
+          <li>五任务：<span class="key">数据总结、关联分析、分类和预测、聚类分析、孤立点分析</span>（口诀「总关分聚孤」）</li>
+          <li>流程五阶段：<span class="key">确定分析对象 → 数据准备 → 数据挖掘 → 结果评估 → 结果应用</span>（口诀「定备挖评用」）</li>
+          <li>数据服务三类：<span class="key">数据目录服务、数据查询与浏览及下载服务、数据分发服务</span></li>
+          <li>可视化七类：<span class="key">一维 / 二维 / 三维 / 多维 / 时态 / 层次 / 网络数据可视化</span>（三维打底 + 多时层网）</li>
+          <li>信息检索四方法：<span class="key">全文检索、字段检索、基于内容的多媒体检索、数据挖掘</span>；常用技术：布尔逻辑 / 截词 / 临近 / 限定字段 / 限制检索</li>
+        </ul>
+        <div class="tip">⚠️ 检索四方法里<b>真的有「数据挖掘」</b>（教材原口径，不是出题错误）；「临近检索」不是「近似检索」；挖掘 vs 传统分析四差异（数据量 / 方法 / 侧重 / 成熟度）在通读 F3</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">5.2.5 数据库安全</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">12</span>数据库安全定义 / 机制五项 / 对策要点</div>
+        <ul>
+          <li>定义：保护数据库，防止<span class="key">不合法的使用</span>所造成的<span class="key">数据泄露、更改或破坏</span></li>
+          <li>安全机制五项：<span class="key">用户的身份认证、存取控制、数据库加密、数据审计、推理控制</span>（口诀「身存密审推」）</li>
+          <li>对策判读：<span class="key">标识和认证 = 第一道安全防线</span>（授权、审计的前提）；<span class="key">防止推导 = 用户用授权数据推导出无权访问的机密信息</span>；防止非法的数据访问 = 数据库安全<span class="key">关键的需求之一</span></li>
+          <li>完整性三线：<span class="key">数据库完整性 = 防非授权修改与存储破坏</span>；<span class="key">操作完整性 = 并发事务中的逻辑一致性</span>；<span class="key">语义完整性 = 新值在范围内符合逻辑</span></li>
+          <li>审计和日志 = 有效的<span class="key">威慑和事后追查、分析</span>工具；限界 = 防止程序间<span class="key">非授权的信息传递</span></li>
+        </ul>
+        <div class="tip">「防推导」的机制面 = <b>推理控制</b>；三种完整性（库 / 操作 / 语义）判别词：非授权修改 → 库；并发事务 → 操作；新值范围 → 语义</div>
+        <div class="fill"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="col-hd">总结区 <span>本节本质 + 考点地图</span></div>
+    <div class="body summary-prefill">
+      <b>本节本质</b>：数据工程五小节一条线（建模 → 标准化 → 运维 → 开发利用 → 安全），上午 2~3 题，主流题型是<b>定义挖空 + 数量分类 + 配对辨析</b>——「X 类 / X 种 / X 步 / X 要素」的数字背准就是分。<br>
+      <b>考点地图（按考频排序）</b>：① RPO vs RTO（对调重灾区）→ ② 数据元三要素 + 提取法「新上旧下」→ ③ 关系完整性约束三类型 → ④ 备份三策略「完差增」+ 备份与容灾关系三句 → ⑤ 数据清理「析检修」→ ⑥ 图描述 vs 数据字典配对 → ⑦ 数据挖掘五任务 + 流程五阶段 → ⑧ 可视化七类 → ⑨ 数据库安全机制五项 + 「第一道防线」→ ⑩ 概念模型别称「信息模型」+ 建模四步产出配对。<br>
+      <span class="small">⚠️ 口径陷阱：①元数据（关于数据的数据）≠ 数据元（基本数据单元）；②E-R 图属概念模型设计、关系模式属逻辑模型设计；③新建系统=自上而下、已建系统=自下而上；④IDEFIX/UML=图描述=实体相互关系，摘要信息=数据字典；⑤数据备份是数据容灾的基础、是数据高可用的最后一道防线；⑥RPO 丢数据、RTO 恢复时间；⑦清理=分析→检测→修正；⑧信息检索四方法内含数据挖掘；⑨「第一道安全防线」=标识和认证；⑩容灾是工程不只是技术。</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>康奈尔笔记法 · 第 5 章第 2 节 带答案版　｜　复习记录：当日 ☐　+1 天 ☐　+3 天 ☐　+7 天 ☐　+14 天 ☐</span>
+    <span>正确率 ____ / 12</span>
+  </div>
+
+</div>
+
+<div class="guide">
+  <h2>怎么用这一页</h2>
+  <table>
+    <tr>
+      <th>步骤</th><th>做法</th>
+    </tr>
+    <tr>
+      <td>第 1 遍 · 遮答默写</td>
+      <td>用纸<b>遮住右栏答案区</b>，只看左栏 12 个问题。口头/默写回答，答不出的画「×」。</td>
+    </tr>
+    <tr>
+      <td>第 2 遍 · 对照修正</td>
+      <td>揭开答案区逐项对照。每条答案下的<b>虚线</b>是留给你的「补充线」——记下易漏点（如「三要素」「新上旧下」「RPO/RTO」「清理三步」）。</td>
+    </tr>
+    <tr>
+      <td>第 3 遍 · 隐藏答案打印</td>
+      <td>点工具栏「👁 隐藏答案」按钮，再打印一份当填空卷，可反复练习。</td>
+    </tr>
+    <tr>
+      <td>第 4 遍 · 复习节奏</td>
+      <td>页脚 5 个框按「当日 → +1 天 → +3 天 → +7 天 → +14 天」打勾，这就是你的艾宾浩斯进度条。全部打勾后，本节可不再看。</td>
+    </tr>
+  </table>
+  <div class="note">
+    <b>为什么这份是「带答案版」</b>：5.2 节全是「数量 + 配对」型考点，自己默写时最容易犯的错是<b>数字记串与名词对调</b>（元数据 / 数据元、E-R / 关系模式、新上旧下、RPO / RTO、直接 / 间接评价、三种完整性）。本版每个答案都标注<b>关键术语</b>（暖色）和<b>对照提醒</b>（橙色框），默写后对照一眼就能定位偏差。考前冲刺只看「总结区 · 考点地图」+「橙色 tip 框」即可。
+  </div>
+</div>
+
+<script>
+  function toggleAnswers(){
+    document.body.classList.toggle('hide-answers');
+    const btn = document.getElementById('toggleBtn');
+    const hidden = document.body.classList.contains('hide-answers');
+    btn.textContent = hidden ? '👁 显示答案' : '👁 隐藏答案（打印填空卷）';
+    btn.classList.toggle('active', hidden);
+  }
+</script>
+
+</body>
+</html>
