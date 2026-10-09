@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>康奈尔笔记 · 第 5 章第 3 节 系统集成 · 带答案版</title>
+<style>
+  :root{
+    --ink:#1f2328;
+    --ink-2:#4b5563;
+    --ink-3:#8b949e;
+    --line:#2f3742;
+    --rule:#d6dae0;
+    --accent:#185FA5;
+    --accent-soft:#E6F1FB;
+    --warm:#854F0B;
+    --warm-soft:#FAEEDA;
+    --paper:#ffffff;
+    --ans-bg:#fffaf2;
+    --ans-border:#e8d9b8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    padding:28px 16px 48px;
+    background:#eef0f3;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+    color:var(--ink);
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .toolbar{
+    max-width:210mm;margin:0 auto 14px;display:flex;gap:10px;align-items:center;
+    justify-content:space-between;flex-wrap:wrap;
+  }
+  .toolbar .hint{font-size:12.5px;color:#5b6470;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;
+    font-size:13px;padding:7px 14px;border-radius:8px;cursor:pointer;
+    font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn.active{background:var(--warm);border-color:var(--warm);color:#fff;}
+
+  .page{
+    width:210mm;min-height:297mm;margin:0 auto;background:var(--paper);
+    padding:14mm 13mm 12mm;box-shadow:0 2px 14px rgba(16,24,40,.12);
+  }
+
+  .head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    border-bottom:2px solid var(--line);padding-bottom:8px;margin-bottom:10px;
+    gap:12px;
+  }
+  .head h1{font-size:19px;margin:0;font-weight:600;letter-spacing:.3px;}
+  .head .sub{font-size:12px;color:var(--ink-3);margin-top:4px;}
+  .head .meta{font-size:12px;color:var(--ink-2);text-align:right;line-height:1.9;white-space:nowrap;}
+  .head .meta b{font-weight:600;color:var(--accent);}
+
+  .band{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+  .chip{
+    font-size:11.5px;padding:4px 9px;border-radius:5px;
+    background:var(--accent-soft);color:#0C447C;border:1px solid #B5D4F4;
+  }
+  .chip.warm{background:var(--warm-soft);color:#633806;border-color:#EFC98A;}
+
+  .cols{
+    display:grid;grid-template-columns:60mm 1fr;gap:0;
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .col-cue{
+    background:#fafbfc;border-right:1px solid var(--line);padding:8px 9px 9px;
+  }
+  .col-note{padding:8px 11px 9px;}
+  .col-hd{
+    font-size:11.5px;font-weight:600;letter-spacing:.6px;color:var(--ink-2);
+    text-transform:uppercase;padding-bottom:6px;margin-bottom:7px;
+    border-bottom:1px dashed #b9c0c9;
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  .col-hd span{font-size:10.5px;font-weight:400;color:var(--ink-3);text-transform:none;letter-spacing:0;}
+
+  .q{
+    font-size:11.5px;line-height:1.5;color:#1f2328;
+    padding:5px 0 5px 20px;position:relative;border-bottom:1px dotted #dfe3e8;
+  }
+  .q:last-child{border-bottom:0;}
+  .q::before{
+    content:attr(data-n);position:absolute;left:0;top:5px;
+    width:14px;height:14px;border-radius:50%;
+    background:var(--accent);color:#fff;font-size:9.5px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:600;line-height:1;
+  }
+  .q b{font-weight:600;}
+  .q em{font-style:normal;color:var(--warm);font-weight:600;}
+
+  .grouplabel{
+    font-size:10.5px;font-weight:600;color:var(--accent);
+    letter-spacing:.4px;margin:8px 0 2px;
+  }
+  .grouplabel:first-child{margin-top:0;}
+
+  /* === 答案区样式 === */
+  .ans-block{
+    margin-bottom:6px;padding:5px 8px 6px;
+    background:var(--ans-bg);border:1px solid var(--ans-border);border-radius:3px;
+  }
+  .ans-block .ans-title{
+    font-size:10.5px;font-weight:600;color:var(--warm);
+    letter-spacing:.3px;margin-bottom:2px;display:flex;align-items:baseline;gap:6px;
+  }
+  .ans-block .ans-title .num{
+    display:inline-block;min-width:14px;height:14px;border-radius:50%;
+    background:var(--warm);color:#fff;font-size:9.5px;font-weight:600;
+    text-align:center;line-height:14px;
+  }
+  .ans-block ul{
+    margin:2px 0 3px 0;padding:0 0 0 16px;font-size:11px;line-height:1.55;color:#2b323b;
+  }
+  .ans-block ul li{padding:1px 0;}
+  .ans-block .key{
+    color:var(--warm);font-weight:600;
+  }
+  .ans-block .tip{
+    font-size:10px;color:#633806;margin-top:2px;line-height:1.5;
+    padding:2px 6px;background:var(--warm-soft);border-radius:2px;
+  }
+  .ans-block .fill{
+    height:16px;border-bottom:1px dashed #c8c0aa;margin-top:3px;
+  }
+  body.hide-answers .ans-block{display:none;}
+  body.hide-answers .summary-prefill{display:none;}
+
+  .summary{
+    margin-top:10px;border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .summary .col-hd{
+    margin:0;padding:7px 11px;background:#fafbfc;border-bottom:1px solid var(--line);
+  }
+  .summary .body{padding:6px 11px 8px;font-size:11.5px;line-height:1.7;color:#2b323b;}
+  .summary .body b{color:var(--accent);}
+  .summary .body .small{font-size:10.5px;color:var(--ink-3);margin-top:3px;display:block;}
+
+  .footer{
+    margin-top:9px;font-size:10.5px;color:var(--ink-3);
+    display:flex;justify-content:space-between;gap:10px;
+  }
+
+  .guide{
+    width:210mm;margin:16px auto 0;background:#fff;border:1px solid #d9dee5;
+    border-radius:8px;padding:16px 18px;
+  }
+  .guide h2{font-size:14px;margin:0 0 10px;font-weight:600;}
+  .guide table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .guide th,.guide td{
+    border:1px solid #e2e6eb;padding:7px 9px;text-align:left;vertical-align:top;line-height:1.6;
+  }
+  .guide th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .guide td:first-child{width:88px;font-weight:600;color:var(--accent);}
+  .guide .note{font-size:12px;color:#5b6470;margin-top:10px;line-height:1.7;}
+
+  @page{size:A4 portrait;margin:0;}
+  @media print{
+    body{background:#fff;padding:0;}
+    .toolbar,.guide{display:none;}
+    .page{box-shadow:none;margin:0;width:auto;min-height:auto;padding:13mm 12mm;}
+    body.hide-answers .ans-block{display:none;}
+    body.hide-answers .summary-prefill{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="hint">A4 竖版 · 带答案版 · 建议先默写、再对照；打印时可「隐藏答案」变填空卷</div>
+  <div>
+    <button class="btn" id="toggleBtn" onclick="toggleAnswers()">👁 隐藏答案（打印填空卷）</button>
+    <button class="btn primary" onclick="window.print()">打印 / 导出 PDF</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="head">
+    <div>
+      <h1>康奈尔笔记 · 第 5 章第 3 节 系统集成 <span style="color:var(--warm);font-size:14px;">（带答案版）</span></h1>
+      <div class="sub">《信息系统项目管理师教程（第 4 版）》约 P163 ~ P169　｜　答案口径以 2026-10-09 多方交叉核对为准</div>
+    </div>
+    <div class="meta">
+      日期：__________<br>
+      第 <b>__</b> 轮复习　用时 <b>__</b> 分钟
+    </div>
+  </div>
+
+  <div class="band">
+    <span class="chip">上午约 1~2 题（第 5 章 5~8 题中）</span>
+    <span class="chip">原则辨析 / 层次配对 / 数量型</span>
+    <span class="chip warm">必背：EAI 黑白盒配对 + 语法·语义·语用</span>
+    <span class="chip warm">通读：F0~F4 背景类</span>
+    <span class="chip warm">📝 含答案</span>
+  </div>
+
+  <div class="cols">
+
+    <div class="col-cue">
+      <div class="col-hd">线索栏 <span>遮住右侧自问</span></div>
+
+      <div class="grouplabel">5.3.1 集成基础</div>
+      <div class="q" data-n="1"><b>系统集成</b>「专指」什么？<b>三内容</b> + 五平台？</div>
+      <div class="q" data-n="2"><b>四大原则</b>？开放性三大「可」？结构化 / 先进性 / 主流化判别词？</div>
+
+      <div class="grouplabel">5.3.2 网络集成</div>
+      <div class="q" data-n="3"><b>网络集成体系框架</b>几个子系统？逐一说出（高项口径）？</div>
+      <div class="q" data-n="4"><b>传输子系统</b>定位 + 无线 / 有线介质？<b>交换子系统</b>按什么分三类？</div>
+
+      <div class="grouplabel">5.3.3 数据集成</div>
+      <div class="q" data-n="5"><b>数据集成</b>处理对象？「什么技术是关键」？<b>四层次</b>？</div>
+      <div class="q" data-n="6"><b>基本数据集成</b>两问题？<b>多级视图</b>三级两级映射？<b>模式集成</b>三等价？多粒度「综合 / 细化」？</div>
+      <div class="q" data-n="7"><b>异构数据集成方法</b>教材说「几种」？过程式 / 声明式 / 中间件各自怎么做？</div>
+
+      <div class="grouplabel">5.3.4 软件集成</div>
+      <div class="q" data-n="8"><b>五大构件标准</b>？CORBA 谁制定？COM 对象形式 + <b>五特征</b>？</div>
+      <div class="q" data-n="9"><b>DCOM/COM+</b>扩展特性？COM+ 定位关键词？<b>.NET / J2EE</b> 各涉及技术 + J2EE 四层？</div>
+
+      <div class="grouplabel">5.3.5 应用集成</div>
+      <div class="q" data-n="10"><b>语法 / 语义 / 语用</b>各对应哪种集成？<b>EAI 三要求</b> + 可连接组件三件？</div>
+      <div class="q" data-n="11"><b>EAI 四层次</b> + 黑白盒配对（谁唯一白盒）？各层实现技术关键词？</div>
+      <div class="q" data-n="12"><b>EDA</b> 消息传递机制？「发布 / 订阅」下事件如何分发？</div>
+    </div>
+
+    <div class="col-note">
+      <div class="col-hd">答案区 <span>默写后对照 · 虚线处写自己的补充</span></div>
+
+      <div class="grouplabel">5.3.1 集成基础</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">1</span>系统集成定义与三内容</div>
+        <ul>
+          <li>系统集成概念<span class="key">专指计算机系统的集成</span>：含计算机硬件平台、网络系统、系统软件、工具软件、应用软件的集成，以及相应咨询、服务和技术支持</li>
+          <li>三内容：<span class="key">技术环境的集成、数据环境的集成、应用程序的集成</span>（「技·数·应」）</li>
+          <li>实现手段五平台：<span class="key">硬件平台、网络通信平台、数据库平台、工具平台、应用软件平台</span></li>
+        </ul>
+        <div class="tip">题干出现「专指计算机系统的集成」→ 就是系统集成本身；三内容别漏「应用程序的集成」</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">2</span>四大原则与判别词</div>
+        <ul>
+          <li>四原则：<span class="key">开放性、结构化、先进性、主流化</span>（「开·结·先·主」）</li>
+          <li><span class="key">开放性</span>：系统硬软件平台 / 通信接口 / 软件开发工具 / 网络结构的选择要<span class="key">遵循工业开放标准</span>；只有开放系统才能满足<span class="key">可互操作性、可移植性、可伸缩性</span></li>
+          <li><span class="key">结构化</span>：<span class="key">自顶向下逐层模块化分解</span>（复杂系统设计的最基本方法）</li>
+          <li><span class="key">先进性</span>：两层意义 = <span class="key">目前先进性和未来先进性</span>；建立在技术先进性之上，还表现在系统设计先进性（先进技术的有机集成 / 问题的合理划分 / 应用软件符合认知特点）</li>
+          <li><span class="key">主流化</span>：每个产品应属于<span class="key">该产品发展的主流</span>，有可靠技术支持、成熟使用环境、良好升级发展势头</li>
+        </ul>
+        <div class="tip">⚠️「工业开放标准」→ 开放性；「自顶向下逐层模块化」→ 结构化；「两层意义 / 目前·未来」→ 先进性</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">5.3.2 网络集成</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">3</span>网络集成体系框架七子系统</div>
+        <ul>
+          <li><span class="key">传输子系统</span>（网络核心，「公路」「血管」）</li>
+          <li><span class="key">交换子系统</span>（局域网 / 城域网 / 广域网交换技术）</li>
+          <li><span class="key">安全子系统</span>（防火墙、数据加密、访问控制）</li>
+          <li><span class="key">网管子系统</span>（监控运行、解决「瓶颈」）</li>
+          <li><span class="key">服务器子系统</span>（为工作站提供资源和服务）</li>
+          <li><span class="key">网络操作系统</span>（调度管理网络资源，提供统一透明使用手段）</li>
+          <li><span class="key">服务子系统</span>（互联网服务、多媒体检索、信息广播、远程计算、事务处理）</li>
+        </ul>
+        <div class="tip">⚠️ 高项第 4 版 = <span class="key">七个</span>；中级第 3 版 = <span class="key">五大</span>（传输 / 交换 / 网管 / 安全 / 服务）——两卷别混</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">4</span>传输与交换子系统</div>
+        <ul>
+          <li><span class="key">传输是网络的核心</span>，是网络信息的「公路」和「血管」；带宽高低体现通信能力与现代化水平</li>
+          <li>无线介质：<span class="key">无线电波、微波、红外线</span>；有线介质：<span class="key">双绞线、同轴电缆、光纤</span></li>
+          <li>交换子系统：按覆盖区域分<span class="key">局域网、城域网、广域网</span>三类交换技术</li>
+        </ul>
+        <div class="tip">「公路 / 血管」→ 传输；出现「局域网 / 城域网 / 广域网」→ 交换子系统</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">5.3.3 数据集成</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">5</span>数据集成对象、关键与四层次</div>
+        <ul>
+          <li>处理对象：系统中<span class="key">各种异构数据库中的数据</span>；<span class="key">数据仓库技术是数据集成的关键</span></li>
+          <li>四层次：<span class="key">基本数据集成、多级视图集成、模式集成、多粒度数据集成</span>（「基·多视·模·多粒」）</li>
+        </ul>
+        <div class="tip">「数据仓库技术是数据集成的关键」是填空原句，别答成「数据标准化」「中间件」</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">6</span>四层次各自要点</div>
+        <ul>
+          <li><span class="key">基本数据集成</span>：核心是<span class="key">通用标识符问题</span>和<span class="key">数据丢失问题</span>；解法 = <span class="key">隔离和调和</span>、生成接近实际估计值</li>
+          <li><span class="key">多级视图集成</span>：底层（局部模型）→ 中间层（公共模型）→ 高层（综合模型），<span class="key">两级映射</span></li>
+          <li><span class="key">模式集成</span>：解决<span class="key">命名、结构等语义冲突</span>；设计好坏视设计者经验；三等价 = <span class="key">属性等价、关联等价、类等价</span>（归结为属性等价）</li>
+          <li><span class="key">多粒度数据集成</span>：理想模式是<span class="key">自动逐步抽象</span>；<span class="key">数据综合</span>（高精度→低精度大粒度）/ <span class="key">数据细化</span>（低精度→高精度）</li>
+        </ul>
+        <div class="tip">⚠️「局部 / 公共 / 综合」+「两级映射」→ 多级视图集成；「设计取决于设计者经验」→ 模式集成</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">7</span>异构数据集成方法（★口径陷阱）</div>
+        <ul>
+          <li>教材原文：<span class="key">归纳起来主要有两种</span>——<span class="key">过程式方法</span>和<span class="key">声明式方法</span>；<span class="key">另一类方法</span>是利用<span class="key">中间件</span>集成异构数据库</li>
+          <li><span class="key">过程式</span>：点对点（Ad-hoc）设计，用 <span class="key">Wrapper 封装数据源 + Mediator 合并一致化数据</span></li>
+          <li><span class="key">声明式</span>：用一套合适的语言<span class="key">建模</span>，构建统一数据表示，通过<span class="key">推理机制</span>存取数据源</li>
+          <li><span class="key">中间件</span>：<span class="key">不改变原始数据的存储和管理方式</span>；位于异构数据库系统（数据层）与应用程序（应用层）之间</li>
+        </ul>
+        <div class="tip">🚩 别答「三种方法」——教材把中间件定位为「另一类」（不在「两种」之内），这是本节最容易被教辅带偏的点</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">5.3.4 软件集成</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">8</span>五大构件标准 · CORBA · COM</div>
+        <ul>
+          <li>五大标准：<span class="key">CORBA、COM、DCOM 与 COM+、.NET、J2EE</span></li>
+          <li><span class="key">CORBA</span>（公共对象请求代理结构）：由<span class="key">对象管理组织（OMG）</span>制定，1989 年建立；可自动匹配对象登记、定位、激活多路请求、组帧和错误控制、参数编排 / 反编排、操作分配等公共网络任务</li>
+          <li><span class="key">COM</span>：对象是<span class="key">二进制代码对象</span>（DLL 或 EXE），直接注册在 Windows 系统库中，由系统平台直接支持</li>
+          <li>COM 的软件集成五特征：<span class="key">面向对象、客户机/服务器、语言无关性、进程透明性、可重复性</span>（「对·客·语·进·可」）</li>
+        </ul>
+        <div class="tip">「OMG 制定」→ CORBA；「二进制代码对象 + 系统库」→ COM；五特征顺序不用背，能认全即可</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">9</span>DCOM/COM+ · .NET · J2EE</div>
+        <ul>
+          <li><span class="key">DCOM 与 COM+</span>：作为 COM 的扩展，针对分布环境提供<span class="key">位置透明性、网络安全性、跨平台调用</span>等新特性</li>
+          <li><span class="key">COM+</span> 把 COM 组件软件<span class="key">提升到应用层</span>而不再是底层软件结构——与操作系统结合更紧密</li>
+          <li><span class="key">.NET</span>：基于一组开放的互联网协议；涉及技术 <span class="key">VB、C++、C#、JScript、ASP.NET、ADO.NET</span></li>
+          <li><span class="key">J2EE</span>：Java 开发组织级应用<span class="key">事实上的工业标准</span>；体系结构四层 = <span class="key">客户端层、服务器端组件层、EJB、信息系统层</span>；涉及技术 <span class="key">EJB、Java Servlets API、JSP 和 XML</span></li>
+        </ul>
+        <div class="tip">⚠️ 最易混：C# / VB / ASP.NET → .NET；EJB / Servlet / JSP → J2EE。「提升到应用层」→ COM+</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">5.3.5 应用集成</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">10</span>语法·语义·语用 + EAI 三要求 + 三组件</div>
+        <ul>
+          <li><span class="key">网络集成解决语法的问题、数据集成解决语义的问题、应用集成解决语用的问题</span>；应用集成在最上层，解决<span class="key">应用的互操作性</span></li>
+          <li><span class="key">EAI</span> = 将独立的软件应用连接起来实现协同工作；技术要求三项 = <span class="key">应用间的互操作性、分布式环境中应用的可移植性、系统中应用分布的透明性</span></li>
+          <li>可协调连接各种应用的组件三件 = <span class="key">应用编程接口（API）、事件驱动型操作、数据映射</span></li>
+        </ul>
+        <div class="tip">🚩 三句一一对应，考排序 / 配对——「语用」属于<span class="key">应用</span>集成，别配给数据集成</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">11</span>EAI 四层次 + 黑白盒 + 实现技术</div>
+        <ul>
+          <li><span class="key">表示集成</span>（界面集成）：<span class="key">黑盒集成</span>，最原始最浅层次，用<span class="key">屏幕截取技术、输入模拟技术</span></li>
+          <li><span class="key">数据集成</span>：<span class="key">白盒集成</span>（唯一白盒），集成点在<span class="key">中间件</span>；先<span class="key">标识并编成目录</span>、确定<span class="key">元数据模型</span></li>
+          <li><span class="key">控制集成</span>（功能集成 / 应用集成）：<span class="key">黑盒集成</span>，在<span class="key">业务逻辑层</span>集成；借助 <span class="key">RPC/RMI、面向消息的中间件、分布式对象技术、事务处理监控器</span>，常用公开 API</li>
+          <li><span class="key">业务流程集成</span>（过程集成）：超越数据和系统，由一系列基于标准的、统一数据格式的<span class="key">工作流</span>组成</li>
+        </ul>
+        <div class="tip">⚠️ 黑白盒配对是高频：「在业务逻辑层上进行黑盒集成」→ <span class="key">控制集成</span>；「白盒」只属于数据集成</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">12</span>EDA 事件驱动的企业应用集成</div>
+        <ul>
+          <li><span class="key">事件驱动架构（EDA）</span>：事件触发消息在<span class="key">独立的、非耦合的模块之间</span>传递（模块之间不需要知道对方）</li>
+          <li>机制：<span class="key">事件源</span>发送消息到<span class="key">中间件或消息代理</span>，<span class="key">订阅者</span>订阅该消息</li>
+          <li>因采用<span class="key">发布 / 订阅</span>方式，<span class="key">一个事件可以传送给多个订阅者</span>；EDA 允许企业通过<span class="key">事件管理</span>标识和响应事件</li>
+        </ul>
+        <div class="tip">「发布 / 订阅」「事件源→消息代理→订阅者」「一事件多订阅者」三条同时出现 → EDA</div>
+        <div class="fill"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="col-hd">总结区 <span>本节本质 + 考点地图</span></div>
+    <div class="body summary-prefill">
+      <b>本节本质</b>：系统集成 = 把「硬软件 + 网络 + 数据 + 应用」拧成一个整体，五小节一条线（集成基础 → 网络集成 → 数据集成 → 软件集成 → 应用集成），上午 1~2 题，主流题型是<b>原则辨析 + 层次配对 + 「X 类 / X 种」数量型</b>——记住层次名称与黑白盒配对就是分。<br>
+      <b>考点地图（按考频排序）</b>：① EAI 四层次与黑白盒配对（数据集成唯一白盒）→ ② 语法·语义·语用三对应 → ③ 异构数据集成「两种 + 另一类」→ ④ 系统集成四大原则判别词 → ⑤ 数据集成四层次 + 多级视图两级映射 → ⑥ 五大构件标准 + COM 五特征 → ⑦ .NET / J2EE 涉及技术配对 → ⑧ 网络集成七子系统 → ⑨ EAI 三要求 + 可连接组件三件 → ⑩ EDA 发布 / 订阅机制。<br>
+      <span class="small">⚠️ 口径陷阱：①系统集成三内容 = 技术环境 / 数据环境 / 应用程序；②开放性 = 工业开放标准，三「可」= 互操作 / 移植 / 伸缩；③先进性是「目前 + 未来」两层意义；④异构数据集成教材说「两种」（过程式 / 声明式），中间件是「另一类」不是第三种；⑤「数据仓库技术是数据集成的关键」；⑥多级视图 = 局部→公共→综合（两级映射）；⑦COM = 二进制代码对象；⑧.NET 是 C#/VB/ASP.NET，J2EE 是 EJB/Servlet/JSP；⑨数据集成是唯一白盒集成；⑩网络集成解决语法、数据集成解决语义、应用集成解决语用。</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>康奈尔笔记法 · 第 5 章第 3 节 带答案版　｜　复习记录：当日 ☐　+1 天 ☐　+3 天 ☐　+7 天 ☐　+14 天 ☐</span>
+    <span>正确率 ____ / 12</span>
+  </div>
+
+</div>
+
+<div class="guide">
+  <h2>怎么用这一页</h2>
+  <table>
+    <tr>
+      <th>步骤</th><th>做法</th>
+    </tr>
+    <tr>
+      <td>第 1 遍 · 遮答默写</td>
+      <td>用纸<b>遮住右栏答案区</b>，只看左栏 12 个问题。口头/默写回答，答不出的画「×」。</td>
+    </tr>
+    <tr>
+      <td>第 2 遍 · 对照修正</td>
+      <td>揭开答案区逐项对照。每条答案下的<b>虚线</b>是留给你的「补充线」——记下易漏点（如「三内容技数应」「七子系统」「两种加另一类」「黑白盒配对」「语法语义语用」）。</td>
+    </tr>
+    <tr>
+      <td>第 3 遍 · 隐藏答案打印</td>
+      <td>点工具栏「👁 隐藏答案」按钮，再打印一份当填空卷，可反复练习。</td>
+    </tr>
+    <tr>
+      <td>第 4 遍 · 复习节奏</td>
+      <td>页脚 5 个框按「当日 → +1 天 → +3 天 → +7 天 → +14 天」打勾，这就是你的艾宾浩斯进度条。全部打勾后，本节可不再看。</td>
+    </tr>
+  </table>
+  <div class="note">
+    <b>为什么这份是「带答案版」</b>：5.3 节全是「层次 + 配对 + 数量」型考点，自己默写时最容易犯的错是<b>层次名称记串与黑白盒配错</b>（表示 / 数据 / 控制 / 业务流程、黑盒 / 白盒、语法 / 语义 / 语用、.NET / J2EE 技术清单）。本版每个答案都标注<b>关键术语</b>（暖色）和<b>对照提醒</b>（橙色框），默写后对照一眼就能定位偏差。考前冲刺只看「总结区 · 考点地图」+「橙色 tip 框」即可。
+  </div>
+</div>
+
+<script>
+  function toggleAnswers(){
+    document.body.classList.toggle('hide-answers');
+    const btn = document.getElementById('toggleBtn');
+    const hidden = document.body.classList.contains('hide-answers');
+    btn.textContent = hidden ? '👁 显示答案' : '👁 隐藏答案（打印填空卷）';
+    btn.classList.toggle('active', hidden);
+  }
+</script>
+
+</body>
+</html>

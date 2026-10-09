@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5.3 系统集成 · 康奈尔笔记模板</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+    background: #f0f2f5; color: #333; padding: 24px;
+  }
+  .page {
+    width: 210mm; min-height: 297mm; margin: 0 auto; background: #fff;
+    padding: 14mm 12mm; box-shadow: 0 2px 12px rgba(0,0,0,.12);
+  }
+  h1 { font-size: 20px; color: #185FA5; text-align: center; margin-bottom: 4px; }
+  .sub { text-align: center; font-size: 11px; color: #888; margin-bottom: 10px; }
+  .meta { display: flex; justify-content: space-between; font-size: 11px; color: #555;
+    border-bottom: 2px solid #185FA5; padding-bottom: 6px; margin-bottom: 10px; }
+  .cornell { display: flex; border: 1px solid #ccc; min-height: 178mm; }
+  .cue {
+    width: 32%; background: #f4f8fc; border-right: 2px solid #185FA5;
+    padding: 10px 8px; font-size: 11.5px;
+  }
+  .cue h3 { font-size: 12px; color: #185FA5; margin-bottom: 6px; }
+  .cue .q { margin-bottom: 10px; color: #333; line-height: 1.5; }
+  .cue .q b { color: #854F0B; }
+  .cue .grouplabel { font-size: 10.5px; font-weight: bold; color: #185FA5; margin: 7px 0 3px; }
+  .cue .grouplabel:first-of-type { margin-top: 0; }
+  .main { width: 68%; padding: 10px 12px; }
+  .main h4 {
+    font-size: 12px; color: #185FA5; margin: 9px 0 4px;
+    border-left: 4px solid #185FA5; padding-left: 6px;
+  }
+  .main h4:first-child { margin-top: 0; }
+  .lines { line-height: 24px; font-size: 12px; color: #444; }
+  .lines p { border-bottom: 1px solid #e3e3e3; min-height: 24px; }
+  .summary {
+    border: 1px solid #ccc; border-top: none; padding: 8px 10px; min-height: 28mm;
+  }
+  .summary h3 { font-size: 12px; color: #854F0B; margin-bottom: 4px; }
+  .summary p { border-bottom: 1px solid #e3e3e3; min-height: 24px; font-size: 12px; }
+  .footer {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; color: #555; margin-top: 8px;
+  }
+  .ebbing span {
+    display: inline-block; width: 58px; text-align: center;
+    border: 1px solid #185FA5; border-radius: 3px; margin-left: 4px; padding: 1px 0; color: #185FA5;
+  }
+  .score { color: #854F0B; font-weight: bold; }
+  .howto {
+    width: 210mm; margin: 14px auto 0; background: #fffbe8; border: 1px solid #e8d48a;
+    border-radius: 6px; padding: 10px 14px; font-size: 12px; color: #6b5900; line-height: 1.7;
+  }
+  .howto b { color: #854F0B; }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; margin: 0; }
+    .howto { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>5.3 系统集成 · 康奈尔笔记</h1>
+  <div class="sub">《信息系统项目管理师教程（第 4 版）》第 5 章第 3 节 · 5.3.1 集成基础 / 5.3.2 网络集成 / 5.3.3 数据集成 / 5.3.4 软件集成 / 5.3.5 应用集成</div>
+  <div class="meta">
+    <span>日期：______</span><span>学习时长：______</span><span>今日正确率：<span class="score">____ / 22</span></span>
+  </div>
+
+  <div class="cornell">
+    <div class="cue">
+      <h3>线索栏（自问自答）</h3>
+
+      <div class="grouplabel">5.3.1 集成基础</div>
+      <div class="q"><b>1</b> 系统集成「专指」什么？三内容 + 五平台？</div>
+      <div class="q"><b>2</b> 四大原则是哪四个？开放性三大「可」是什么？结构化 / 先进性 / 主流化各自的判别词？</div>
+
+      <div class="grouplabel">5.3.2 网络集成</div>
+      <div class="q"><b>3</b> 网络集成体系框架共几个子系统？逐一说出（高项口径）？</div>
+      <div class="q"><b>4</b> 传输子系统的定位 + 无线 / 有线介质各三种？交换子系统按什么分三类？</div>
+
+      <div class="grouplabel">5.3.3 数据集成</div>
+      <div class="q"><b>5</b> 数据集成处理对象？「什么技术是数据集成的关键」？数据集成四层次？</div>
+      <div class="q"><b>6</b> 基本数据集成两问题？多级视图三级两级映射？模式集成三等价？多粒度「综合 / 细化」？</div>
+      <div class="q"><b>7</b> 异构数据集成方法教材说「几种」？过程式 / 声明式 / 中间件各自怎么做？</div>
+
+      <div class="grouplabel">5.3.4 软件集成</div>
+      <div class="q"><b>8</b> 五大构件标准？CORBA 谁制定？COM 的「对象形式」+ 五特征？</div>
+      <div class="q"><b>9</b> DCOM/COM+ 的扩展特性？COM+ 的定位关键词？.NET 与 J2EE 各自涉及技术 + J2EE 四层？</div>
+
+      <div class="grouplabel">5.3.5 应用集成</div>
+      <div class="q"><b>10</b> 「语法 / 语义 / 语用」分别对应哪种集成？EAI 技术要求三项 + 可连接组件三件？</div>
+      <div class="q"><b>11</b> EAI 四层次 + 黑白盒配对（谁唯一白盒）？各层实现技术关键词？</div>
+      <div class="q"><b>12</b> EDA 的消息传递机制？「发布/订阅」下事件如何分发？</div>
+    </div>
+    <div class="main">
+      <h4>一、集成基础：三内容 + 五平台 + 四原则（5.3.1）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>二、网络集成：七子系统 + 传输 / 交换（5.3.2）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>三、数据集成：四层次 + 异构两方法 + 另一类中间件（5.3.3）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>四、软件集成：五大标准 + COM 五特征 + .NET/J2EE（5.3.4）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>五、应用集成：语法·语义·语用 + EAI 四层次黑白盒 + EDA（5.3.5）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>六、易混 / 易错（考前唯一要看的块）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary">
+    <h3>总结栏（一句话收束）</h3>
+    <p></p><p></p>
+  </div>
+
+  <div class="footer">
+    <span class="ebbing">复习打卡：当日<span>＋1天</span><span>＋3天</span><span>＋7天</span><span>＋14天</span></span>
+    <span>正确率：<span class="score">____ / 22</span></span>
+  </div>
+</div>
+
+<div class="howto">
+  <b>怎么用（记 → 遮 → 补 → 收）：</b>
+  ① <b>记</b>：对照《5.3_知识点清单》通读后，凭记忆在笔记区默写要点；② <b>遮</b>：用手遮住笔记区，只看线索栏 12 个问题作答；③ <b>补</b>：翻开清单对照，用红笔补漏，重点补「六、易混 / 易错」块；④ <b>收</b>：在总结栏用 1~2 句话收束本节骨架（如「三内容技数应 + 四原则开结先主 + 网络七子系统 + 数据四层次基多视模多粒 + 异构两种加另一类 + 五标准 CORBA·COM·DCOM·NET·J2EE + 语法语义语用 + EAI 四层次数据集成唯一白盒」）。页脚为艾宾浩斯复习打卡点。
+</div>
+</body>
+</html>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5.3 系统集成 22 题</title>
+<style>
+  *{box-sizing:border-box;}
+  body{
+    margin:0;padding:24px 14px 60px;background:#eef0f3;color:#1f2328;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    gap:14px;margin-bottom:18px;flex-wrap:wrap;
+  }
+  h1{font-size:20px;margin:0;font-weight:600;}
+  .sub{font-size:12.5px;color:#6b7280;margin:5px 0 0;}
+  .score-chip{
+    background:#E6F1FB;border:1px solid #B5D4F4;color:#0C447C;
+    border-radius:8px;padding:7px 13px;font-size:13px;white-space:nowrap;
+  }
+  .score-chip b{font-size:16px;font-weight:600;}
+
+  #quiz{
+    background:#fff;border-radius:12px;padding:22px 24px;
+    box-shadow:0 2px 12px rgba(16,24,40,.08);
+  }
+  .progress-row{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:8px;font-size:13px;color:#4b5563;
+  }
+  .chip{
+    background:#FAEEDA;border:1px solid #EFC98A;color:#633806;
+    border-radius:5px;padding:2px 9px;font-size:12px;
+  }
+  .progress{height:6px;background:#e5e8ee;border-radius:4px;overflow:hidden;margin-bottom:20px;}
+  #bar{height:100%;width:0;background:#185FA5;border-radius:4px;transition:width .25s;}
+
+  .qtext{font-size:16px;line-height:1.75;font-weight:500;margin:0 0 18px;}
+  .opt{
+    display:flex;gap:10px;align-items:flex-start;
+    border:1px solid #d9dee5;border-radius:9px;padding:11px 14px;
+    margin-bottom:10px;cursor:pointer;font-size:14.5px;line-height:1.6;
+    background:#fff;transition:border-color .12s,background .12s;
+  }
+  .opt:hover{border-color:#185FA5;background:#f7fafd;}
+  .opt .tag{
+    flex:0 0 22px;height:22px;border-radius:50%;
+    background:#eef1f5;color:#3b4552;font-size:12px;font-weight:600;
+    display:flex;align-items:center;justify-content:center;margin-top:2px;
+  }
+  .opt.correct{border-color:#0F6E56;background:#E1F5EE;}
+  .opt.correct .tag{background:#0F6E56;color:#fff;}
+  .opt.wrong{border-color:#A32D2D;background:#FCEBEB;}
+  .opt.wrong .tag{background:#A32D2D;color:#fff;}
+  .opt.dim{opacity:.55;cursor:default;}
+  .opt.correct.dim{opacity:1;}
+  .opt.locked{cursor:default;}
+
+  #feedback{margin-top:14px;border-radius:9px;overflow:hidden;border:1px solid #d9dee5;}
+  #verdict{
+    padding:10px 14px;font-size:14px;font-weight:600;
+    background:#E1F5EE;color:#085041;border-bottom:1px solid #cbe9da;
+  }
+  #verdict.bad{background:#FCEBEB;color:#501313;border-bottom:1px solid #f3cdcd;}
+  #explain{padding:12px 14px;font-size:13.5px;line-height:1.8;color:#374151;background:#fdfdfe;}
+  #explain b{color:#1f2328;}
+  #nextBtn{
+    display:block;margin:14px 16px 16px;float:right;
+    background:#185FA5;color:#fff;border:none;border-radius:8px;
+    padding:9px 26px;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  #nextBtn:hover{background:#14507f;}
+  #feedback::after{content:"";display:block;clear:both;}
+  .kbd{font-size:11.5px;color:#9aa3af;margin:14px 2px 0;}
+
+  #result{background:#fff;border-radius:12px;padding:26px 28px;box-shadow:0 2px 12px rgba(16,24,40,.08);}
+  .r-head{display:flex;gap:22px;align-items:center;margin-bottom:6px;flex-wrap:wrap;}
+  .r-score{font-size:44px;font-weight:600;color:#185FA5;line-height:1;}
+  .r-score small{font-size:18px;color:#8b949e;font-weight:400;}
+  .r-msg{font-size:14px;color:#4b5563;line-height:1.7;}
+  h3{font-size:15px;font-weight:600;margin:26px 0 10px;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th,td{border:1px solid #e2e6eb;padding:7px 10px;text-align:left;line-height:1.6;}
+  th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .mbar{height:8px;background:#e5e8ee;border-radius:4px;overflow:hidden;min-width:120px;}
+  .mbar div{height:100%;background:#1D9E75;border-radius:4px;}
+
+  .wq{
+    border:1px solid #f3cdcd;border-radius:9px;padding:13px 15px;
+    margin-bottom:12px;background:#fffafa;
+  }
+  .wq .wt{font-size:14px;font-weight:600;line-height:1.7;margin-bottom:7px;}
+  .wq .wa{font-size:13px;color:#A32D2D;margin-bottom:2px;}
+  .wq .wc{font-size:13px;color:#0F6E56;margin-bottom:8px;}
+  .wq .we{font-size:12.5px;color:#57606a;line-height:1.75;border-top:1px dashed #e8d9d9;padding-top:7px;}
+
+  .btns{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;border-radius:8px;
+    padding:9px 22px;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:#185FA5;border-color:#185FA5;color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn:disabled{opacity:.45;cursor:not-allowed;}
+  .hidden{display:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <h1>5.3 系统集成</h1>
+      <p class="sub">22 题 · 第 4 版教材 5.3 节 · 达标线 18/22（80%）· 逐题精讲 · 键盘 A~D 或 1~4 选择，Enter 下一题</p>
+    </div>
+    <div class="score-chip">已答对 <b id="scoreNow">0</b> / <span id="totalNow">22</span> 题</div>
+  </header>
+
+  <div id="quiz">
+    <div class="progress-row">
+      <span id="pos"></span>
+      <span class="chip" id="moduleChip"></span>
+    </div>
+    <div class="progress"><div id="bar"></div></div>
+    <div class="qcard">
+      <p class="qtext" id="qtext"></p>
+      <div id="options"></div>
+      <div id="feedback" class="hidden">
+        <div id="verdict"></div>
+        <div id="explain"></div>
+        <button id="nextBtn">下一题 →</button>
+      </div>
+    </div>
+    <p class="kbd">键盘可用：A~D 或 1~4 选择，Enter 下一题</p>
+    <p class="kbd" style="margin:4px 2px 0;">对照资料：本目录《5.3_知识点清单.md》与《5.3_康奈尔笔记模板_带答案版.html》 ｜ 教材：第 4 版 P163 ~ P169（5.3.1 集成基础 / 5.3.2 网络集成 / 5.3.3 数据集成 / 5.3.4 软件集成 / 5.3.5 应用集成）</p>
+  </div>
+
+  <div id="result" class="hidden"></div>
+
+</div>
+
+<script>
+const QUESTIONS = [
+{m:"5.3.1 集成基础",
+ q:"关于系统集成的概念，下列说法正确的是（ ）。",
+ o:["系统集成是指企业管理系统的集成，包括组织架构与业务流程的整合","系统集成概念专指计算机系统的集成，包括计算机硬件平台、网络系统、系统软件、工具软件、应用软件的集成","系统集成专指应用软件的集成，不包括网络系统","系统集成不涉及围绕系统的咨询、服务和技术支持"],
+ a:1,
+ e:"系统集成概念<b>专指计算机系统的集成</b>，包括计算机硬件平台、网络系统、系统软件、工具软件、应用软件的集成，以及围绕这些系统的相应<b>咨询、服务和技术支持</b>。见教材 5.3 开篇。"},
+
+{m:"5.3.1 集成基础",
+ q:"系统集成的内容包括（ ）。<br>① 技术环境的集成　② 数据环境的集成　③ 应用程序的集成　④ 人员的集成",
+ o:["①②③","①②④","②③④","①②③④"],
+ a:0,
+ e:"系统集成的内容包括<b>技术环境的集成、数据环境的集成和应用程序的集成</b>（口诀「技·数·应」）。「人员的集成」不是教材表述。见教材 5.3.1。"},
+
+{m:"5.3.1 集成基础",
+ q:"系统集成在技术上需要遵循的基本原则包括（ ）。",
+ o:["灵活性、经济性、可靠性、安全性","开放性、结构化、先进性、主流化","标准化、模块化、自动化、智能化","可行性、先进性、经济性、合理性"],
+ a:1,
+ e:"系统集成在技术上需要遵循的基本原则包括<b>开放性、结构化、先进性和主流化</b>（口诀「开·结·先·主」）。见教材 5.3.1。"},
+
+{m:"5.3.1 集成基础",
+ q:"「系统硬软件平台、通信接口、软件开发工具、网络结构的选择要遵循工业开放标准」，这体现的是系统集成的（ ）原则。",
+ o:["开放性","结构化","先进性","主流化"],
+ a:0,
+ e:"这是<b>开放性</b>原则的教材定义。只有开放的系统才能满足<b>可互操作性、可移植性以及可伸缩性</b>的要求，才可能与另一个标准兼容的系统实现「无缝」互操作。见教材 5.3.1。"},
+
+{m:"5.3.1 集成基础",
+ q:"系统集成的「先进性」原则具有两层意义，是指（ ）。",
+ o:["技术先进性和管理先进性","目前先进性和未来先进性","硬件先进性和软件先进性","设计先进性和实现先进性"],
+ a:1,
+ e:"先进性有两层意义：<b>目前先进性和未来先进性</b>。系统的先进性是建立在<b>技术先进性</b>之上的；还表现在<b>系统设计的先进性</b>——先进技术的有机集成、问题的合理划分，以及应用软件符合人们认知特点等。见教材 5.3.1。"},
+
+{m:"5.3.2 网络集成",
+ q:"计算机网络集成的一般体系框架包括多个子系统，下列不属于其子系统的是（ ）。",
+ o:["传输子系统","交换子系统","存储子系统","网管子系统"],
+ a:2,
+ e:"网络集成体系框架的子系统为<b>传输、交换、安全、网管、服务器、网络操作系统、服务</b>（高项第 4 版共七个）。<b>存储子系统</b>属于数据中心集成的业务/存储层面，<b>不在网络集成基础框架的标准划分之内</b>。见教材 5.3.2。"},
+
+{m:"5.3.2 网络集成",
+ q:"关于网络集成中的传输子系统，下列说法正确的是（ ）。",
+ o:["传输子系统是网络应用的核心，负责提供互联网服务","传输是网络的核心，是网络信息的「公路」和「血管」","传输介质只包括双绞线、同轴电缆和光纤三种","传输线路带宽的高低与网络的通信能力无关"],
+ a:1,
+ e:"<b>传输是网络的核心</b>，是网络信息的「<b>公路</b>」和「<b>血管</b>」；带宽高低体现了网络的通信能力与现代化水平。传输介质分<b>无线（无线电波、微波、红外线）</b>与<b>有线（双绞线、同轴电缆、光纤）</b>两类。「网络应用的核心」是<b>服务子系统</b>。见教材 5.3.2。"},
+
+{m:"5.3.2 网络集成",
+ q:"网络按所覆盖的区域可分为局域网、城域网和广域网，由此网络交换也可分为对应的三类交换技术，这属于网络集成体系框架中的（ ）。",
+ o:["传输子系统","交换子系统","安全子系统","网管子系统"],
+ a:1,
+ e:"<b>交换子系统</b>：网络按覆盖区域可分为局域网、城域网和广域网，由此网络交换也可分为<b>局域网交换技术、城域网交换技术和广域网交换技术</b>。见教材 5.3.2。"},
+
+{m:"5.3.2 网络集成",
+ q:"网络集成体系框架中，负责「保证网络良好运行、找出并解决网络瓶颈」的是（ ）。",
+ o:["安全子系统","网管子系统","服务子系统","网络操作系统"],
+ a:1,
+ e:"<b>网管子系统</b>负责监控网络运行、排查并解决「<b>瓶颈</b>」，保证网络持续满足组织需求。<b>安全子系统</b>负责防火墙、数据加密、访问控制；<b>服务子系统</b>提供互联网服务、多媒体检索、信息广播、远程计算和事务处理；<b>网络操作系统</b>调度和管理网络资源。见教材 5.3.2。"},
+
+{m:"5.3.3 数据集成",
+ q:"数据集成处理的主要对象是系统中各种异构数据库中的数据，其中（ ）是数据集成的关键。",
+ o:["数据加密技术","数据仓库技术","元数据技术","数据挖掘技术"],
+ a:1,
+ e:"教材原文：数据集成处理的主要对象是系统中各种异构数据库中的数据，<b>数据仓库技术是数据集成的关键</b>。见教材 5.3.3。"},
+
+{m:"5.3.3 数据集成",
+ q:"数据集成包括的层次是（ ）。<br>① 基本数据集成　② 多级视图集成　③ 模式集成　④ 多粒度数据集成",
+ o:["①②③","①②④","②③④","①②③④"],
+ a:3,
+ e:"数据集成包括<b>基本数据集成、多级视图集成、模式集成和多粒度数据集成</b>四个层次（口诀「基·多视·模·多粒」）。见教材 5.3.3。"},
+
+{m:"5.3.3 数据集成",
+ q:"基本数据集成面临的诸多问题中，最核心的两个问题是（ ）。",
+ o:["通用标识符问题和数据丢失问题","数据加密问题和访问权限问题","系统性能问题和存储容量问题","命名语义问题和编码格式问题"],
+ a:0,
+ e:"基本数据集成要解决的核心是<b>通用标识符问题</b>（同一实体在不同数据源中标识不同）和<b>数据丢失问题</b>；解决方法包括<b>隔离和调和</b>，以及生成接近实际估计值的方式处理数据丢失。「命名、结构等语义冲突」属于<b>模式集成</b>。见教材 5.3.3。"},
+
+{m:"5.3.3 数据集成",
+ q:"多级视图集成利用多级视图机制对数据源之间的关系进行集成，其三级视图依次是（ ）。",
+ o:["物理模型 → 逻辑模型 → 概念模型","底层（局部模型）→ 中间层（公共模型）→ 高层（综合模型）","数据层 → 中间件层 → 应用层","基本数据 → 模式数据 → 多粒度数据"],
+ a:1,
+ e:"多级视图集成实现从局部数据库到综合视图的映射：<b>底层（局部模型）→ 中间层（公共模型）→ 高层（综合模型）</b>，是一个<b>两级映射</b>过程。见教材 5.3.3。"},
+
+{m:"5.3.3 数据集成",
+ q:"关于异构数据集成的方法，下列说法正确的是（ ）。",
+ o:["教材将异构数据集成方法归纳为过程式方法、声明式方法和中间件方法三种","异构数据集成方法归纳起来主要有两种，分别是过程式方法和声明式方法，中间件是另一类方法","过程式方法的特点是构建统一数据表示，并通过推理机制存取数据源","声明式方法一般采用点对点（Ad-hoc）的设计方法集成数据"],
+ a:1,
+ e:"教材原文：异构数据集成方法<b>归纳起来主要有两种，分别是过程式方法和声明式方法</b>；<b>另一类方法</b>是利用<b>中间件</b>集成异构数据库（不改变原始数据的存储和管理方式）。<b>过程式</b>=点对点（Ad-hoc）设计，用 Wrapper 封装数据源、Mediator 合并数据；<b>声明式</b>=用一套合适语言建模、构建统一数据表示、通过推理机制存取。⚠️ 别答「三种方法」。见教材 5.3.3。"},
+
+{m:"5.3.4 软件集成",
+ q:"软件集成领域中，有代表性的软件构件标准不包括（ ）。",
+ o:["CORBA","COM","J2EE","COBOL"],
+ a:3,
+ e:"有代表性的软件构件标准包括<b>公共对象请求代理结构（CORBA）、COM、DCOM 与 COM+、.NET、J2EE</b>。<b>COBOL</b> 是一种编程语言，不是构件标准。见教材 5.3.4。"},
+
+{m:"5.3.4 软件集成",
+ q:"COM 具备了软件集成所需要的许多特征，下列不属于这些特征的是（ ）。",
+ o:["面向对象","语言无关性","进程透明性","按值传递"],
+ a:3,
+ e:"COM 具备的软件集成特征包括<b>面向对象、客户机/服务器、语言无关性、进程透明性和可重复性</b>（口诀「对·客·语·进·可」）。「按值传递」不属于教材列举的特征。见教材 5.3.4。"},
+
+{m:"5.3.4 软件集成",
+ q:"下列技术中，属于 J2EE 涉及的技术的是（ ）。<br>① EJB　② Java Servlets API　③ JSP　④ ASP.NET",
+ o:["①②③","①②④","②③④","①②③④"],
+ a:0,
+ e:"J2EE 涉及的技术包括 <b>EJB、Java Servlets API、JSP 和 XML</b>；<b>ASP.NET</b> 属于 <b>.NET</b>（.NET 涉及 VB、C++、C#、JScript、ASP.NET、ADO.NET）。J2EE 体系结构分客户端层、服务器端组件层、EJB 和信息系统层。见教材 5.3.4。"},
+
+{m:"5.3.4 软件集成",
+ q:"作为 COM 的扩展，针对分布环境还提供了位置透明性、网络安全性、跨平台调用等新特性的是（ ）。",
+ o:["CORBA","DCOM 与 COM+",".NET","J2EE"],
+ a:1,
+ e:"<b>DCOM 与 COM+</b>作为 COM 的<b>扩展</b>，针对分布环境提供了<b>位置透明性、网络安全性、跨平台调用</b>等新特性。其中 <b>COM+</b> 把 COM 组件软件<b>提升到应用层</b>而不再是底层的软件结构，与操作系统结合更加紧密。见教材 5.3.4。"},
+
+{m:"5.3.5 应用集成",
+ q:"从信息系统集成技术的角度看，网络集成、数据集成、应用集成分别解决的问题是（ ）。",
+ o:["语法、语义、语用","语用、语义、语法","语法、语用、语义","语义、语法、语用"],
+ a:0,
+ e:"教材点睛句：<b>网络集成解决语法的问题，数据集成解决语义的问题，应用集成解决语用的问题</b>。应用集成在集成的堆栈上位于<b>最上层</b>，主要解决应用的<b>互操作性</b>问题。见教材 5.3.5。"},
+
+{m:"5.3.5 应用集成",
+ q:"对应用集成（EAI）的技术要求大致包括（ ）。<br>① 应用间的互操作性　② 分布式环境中应用的可移植性　③ 系统中应用分布的透明性　④ 数据的强一致性",
+ o:["①②③","①②④","②③④","①②③④"],
+ a:0,
+ e:"对应用集成的技术要求大致有：<b>具有应用间的互操作性、具有分布式环境中应用的可移植性、具有系统中应用分布的透明性</b>。此外，可协调连接各种应用的组件有<b>应用编程接口（API）、事件驱动型操作、数据映射</b>。见教材 5.3.5。"},
+
+{m:"5.3.5 应用集成",
+ q:"企业应用集成（EAI）包括表示集成、数据集成、控制集成和业务流程集成等层次，其中属于白盒集成的是（ ）。",
+ o:["表示集成","数据集成","控制集成","业务流程集成"],
+ a:1,
+ e:"<b>数据集成是白盒集成</b>（集成点在中间件）；<b>表示集成</b>（界面集成）是黑盒集成，常用屏幕截取和输入模拟技术；<b>控制集成</b>（功能集成/应用集成）是黑盒集成，在业务逻辑层上集成；<b>业务流程集成</b>（过程集成）由一系列基于标准的、统一数据格式的工作流组成。见教材 5.3.5。"},
+
+{m:"5.3.5 应用集成",
+ q:"关于事件驱动的企业应用集成（EDA），下列说法不正确的是（ ）。",
+ o:["事件触发消息在独立的、非耦合的模块之间传递","事件源通常发送消息到中间件或消息代理，订阅者订阅这个消息","采用发布/订阅方式，一个事件可以传送给多个订阅者","EDA 要求事件的生产者与消费者必须彼此知道对方"],
+ a:3,
+ e:"EDA 的核心恰恰是——事件触发消息在<b>独立的、非耦合的模块之间</b>传递，<b>模块之间不需要知道对方</b>。事件源发送消息到中间件或消息代理，订阅者订阅该消息；采用<b>发布/订阅</b>方式，<b>一个事件可以传送给多个订阅者</b>。见教材 5.3.5。"}
+];
+
+const LETTERS = ["A","B","C","D"];
+let pool = [], cur = 0, answered = false, stats = {}, wrongList = [];
+
+function init(list){
+  pool = list.map(x=>Object.assign({},x));
+  cur = 0; answered = false; stats = {}; wrongList = [];
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  document.getElementById("totalNow").textContent = pool.length;
+  document.getElementById("scoreNow").textContent = "0";
+  render();
+}
+function render(){
+  const q = pool[cur];
+  document.getElementById("pos").textContent = "第 " + (cur+1) + " / " + pool.length + " 题";
+  document.getElementById("moduleChip").textContent = q.m;
+  document.getElementById("bar").style.width = (cur/pool.length*100) + "%";
+  document.getElementById("qtext").innerHTML = q.q;
+  const box = document.getElementById("options");
+  box.innerHTML = "";
+  q.o.forEach((t,i)=>{
+    const d = document.createElement("div");
+    d.className = "opt";
+    d.innerHTML = '<span class="tag">'+LETTERS[i]+'</span><span>'+t+"</span>";
+    d.onclick = ()=>choose(i);
+    box.appendChild(d);
+  });
+  document.getElementById("feedback").classList.add("hidden");
+}
+function choose(i){
+  if(answered) return;
+  answered = true;
+  const q = pool[cur];
+  const ok = (i === q.a);
+  if(!stats[q.m]) stats[q.m] = {right:0,total:0};
+  stats[q.m].total++;
+  const opts = document.querySelectorAll(".opt");
+  opts.forEach((d,idx)=>{
+    d.classList.add("locked");
+    if(idx === q.a) d.classList.add("correct");
+    else if(idx === i) d.classList.add("wrong");
+    else d.classList.add("dim");
+    d.onclick = null;
+  });
+  if(ok){
+    stats[q.m].right++;
+    document.getElementById("scoreNow").textContent = sumRight();
+  } else {
+    wrongList.push({q:q, picked:i});
+  }
+  const v = document.getElementById("verdict");
+  v.textContent = ok ? "✓ 答对了" : "✗ 答错了　正确答案：" + LETTERS[q.a];
+  v.className = ok ? "" : "bad";
+  document.getElementById("explain").innerHTML = q.e;
+  document.getElementById("feedback").classList.remove("hidden");
+  document.getElementById("nextBtn").textContent =
+    (cur === pool.length-1) ? "查看成绩单 →" : "下一题 →";
+}
+function sumRight(){
+  let s = 0; for(const k in stats) s += stats[k].right; return s;
+}
+function next(){
+  cur++;
+  if(cur >= pool.length){ showResult(); }
+  else { answered = false; render(); window.scrollTo(0,0); }
+}
+function showResult(){
+  document.getElementById("quiz").classList.add("hidden");
+  const r = document.getElementById("result");
+  const total = pool.length, right = sumRight();
+  const pct = Math.round(right/total*100);
+  let msg;
+  if(pct >= 80) msg = "达标（≥80%）：本节知识点基本闭环，可以进入下一节，或用康奈尔模板的「遮」字诀再过一遍线索栏。";
+  else if(pct >= 60) msg = "接近达标：把下面的错题解析看完，回看对应模块的知识点清单，明天用康奈尔模板遮住答案重测。";
+  else msg = "未达标：正确率低是发现漏洞的正常信号——先把知识点清单的「必背」块过一遍，再点「只重做错题」。";
+
+  let tbl = '<h3>分模块得分</h3><table><tr><th>模块</th><th>正确 / 题数</th><th>正确率</th></tr>';
+  for(const k in stats){
+    const s = stats[k];
+    const p = Math.round(s.right/s.total*100);
+    tbl += '<tr><td>'+k+'</td><td>'+s.right+' / '+s.total+'</td><td><div class="mbar"><div style="width:'+p+'%"></div></div></td></tr>';
+  }
+  tbl += "</table>";
+
+  let wrong = "";
+  if(wrongList.length){
+    wrong = "<h3>错题回顾（"+wrongList.length+" 题）</h3>";
+    wrongList.forEach((w,i)=>{
+      wrong += '<div class="wq"><div class="wt">'+(i+1)+". "+w.q.q+"</div>"
+        + '<div class="wa">你的选择：'+LETTERS[w.picked]+"　"+w.q.o[w.picked]+"</div>"
+        + '<div class="wc">正确答案：'+LETTERS[w.q.a]+"　"+w.q.o[w.q.a]+"</div>"
+        + '<div class="we">'+w.q.e+"</div></div>";
+    });
+  } else {
+    wrong = '<h3>错题回顾</h3><p style="font-size:13px;color:#0F6E56;">全部答对，本节知识点已闭环。</p>';
+  }
+
+  r.innerHTML =
+    '<div class="r-head"><div class="r-score">'+right+"<small> / "+total+"</small></div>"
+    + '<div class="r-msg"><b>'+pct+"%</b><br>"+msg+"</div></div>"
+    + tbl + wrong
+    + '<div class="btns">'
+    + '<button class="btn primary" id="retryWrong"'+(wrongList.length?"":" disabled")+">只重做错题（"+wrongList.length+" 题）</button>"
+    + '<button class="btn" id="retryAll">全部重来</button></div>';
+  r.classList.remove("hidden");
+  document.getElementById("retryWrong").onclick = ()=>{
+    const list = wrongList.map(w=>w.q);
+    init(list);
+    window.scrollTo(0,0);
+  };
+  document.getElementById("retryAll").onclick = ()=>{ init(QUESTIONS); window.scrollTo(0,0); };
+  window.scrollTo(0,0);
+}
+document.getElementById("nextBtn").onclick = next;
+document.addEventListener("keydown", e=>{
+  if(document.getElementById("quiz").classList.contains("hidden")) return;
+  if(e.key === "Enter" || e.key === " "){ if(answered){ e.preventDefault(); next(); } return; }
+  const map = {"a":0,"b":1,"c":2,"d":3,"1":0,"2":1,"3":2,"4":3};
+  const k = e.key.toLowerCase();
+  if(k in map && !answered) choose(map[k]);
+});
+init(QUESTIONS);
+</script>
+</body>
+</html>

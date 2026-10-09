@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5.3 系统集成 · 知识点清单 · 可勾选清单</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Microsoft YaHei", "微软雅黑", sans-serif; background: #f7f9fc; color: #333; padding: 24px; line-height: 1.7; }
+  .wrap { max-width: 820px; margin: 0 auto; background: #fff; padding: 32px 36px; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,.08); }
+  h1 { font-size: 22px; color: #185FA5; margin-bottom: 8px; }
+  h2 { font-size: 18px; color: #185FA5; margin: 22px 0 10px; border-left: 4px solid #185FA5; padding-left: 10px; }
+  h3 { font-size: 15px; color: #185FA5; margin: 16px 0 8px; }
+  h4 { font-size: 14px; color: #185FA5; margin: 14px 0 6px; }
+  blockquote { background: #f4f8fc; border-left: 4px solid #185FA5; padding: 10px 14px; margin: 10px 0; color: #444; font-size: 13.5px; }
+  p, .plain-li { margin: 8px 0; font-size: 14px; }
+  .plain-li { display: flex; gap: 6px; }
+  .bullet { color: #185FA5; font-weight: bold; }
+  .task { display: flex; align-items: flex-start; gap: 8px; margin: 8px 0; cursor: pointer; user-select: none; }
+  .task input[type="checkbox"] { width: 16px; height: 16px; margin-top: 4px; flex-shrink: 0; accent-color: #185FA5; cursor: pointer; }
+  .task-text { font-size: 14px; transition: opacity .2s; }
+  .task input:checked + .task-text { text-decoration: line-through; opacity: .45; color: #666; }
+  .item-body { margin: 4px 0 12px 24px; }
+  .item-body p { margin: 4px 0; color: #555; font-size: 13.5px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; }
+  th, td { border: 1px solid #d9e2ec; padding: 7px 10px; }
+  th { background: #eef4fb; color: #185FA5; font-weight: 600; }
+  td { background: #fff; }
+  ol { margin: 8px 0 8px 22px; font-size: 14px; }
+  li { margin: 4px 0; }
+  code { background: #f0f3f7; padding: 1px 4px; border-radius: 3px; font-family: Consolas, monospace; font-size: 12px; }
+  a { color: #185FA5; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  summary { cursor: pointer; color: #185FA5; font-weight: 600; }
+  details { background: #f9fbfd; border: 1px solid #e3eaf2; border-radius: 6px; padding: 10px 14px; margin: 12px 0; }
+  .progress { position: sticky; top: 0; background: #fff; border-bottom: 1px solid #e3eaf2; padding: 8px 0; margin: -32px -36px 20px; padding-left: 36px; padding-right: 36px; font-size: 12px; color: #666; z-index: 10; }
+  .progress b { color: #185FA5; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="progress" id="progress">已完成：0 / 0</div>
+  <h1>5.3 系统集成 · 知识点清单</h1>
+<blockquote><b>教材</b>：《信息系统项目管理师教程（第 4 版）》第 5 章第 3 节（约 P163 ~ P169）<br><b>学习日</b>：2026-10-09（Day 16）<br><b>上午分值</b>：第 5 章综合知识约 <b>5~8 题</b>，5.3 系统集成占其中 <b>1~2 题</b>；与第 3 版第 3 章同源，<b>旧真题有对应题可刷</b>（系统集成四原则 / EAI 四层次与黑白盒 / 数据集成四层次 / 异构数据集成两方法 / 构件标准 CORBA·COM·J2EE 均为历年高频）<br><b>本节定位</b>：<b>原则辨析 + 层次配对 + 数量型</b>。教材只有 7 页，但考点密度极高，是「背准就得分」的典型。高频块：<b>系统集成三内容四原则 / 网络集成七子系统 / 数据集成四层次 / 异构数据集成「两种 + 另一类」/ 构件标准五件 / EAI 四层次与黑白盒 / 语法·语义·语用三对应</b><br>⚠️ <b>口径提醒</b>：① 教材原文是「<b>网络集成解决语法、数据集成解决语义、应用集成解决语用</b>」，别接错；② 异构数据集成的方法教材说「<b>归纳起来主要有两种</b>（过程式 / 声明式）」，中间件是「<b>另一类方法</b>」——教辅常并称三种，<b>按教材答「两种」</b>；③ EAI 黑盒白盒：<b>表示集成黑盒 / 数据集成白盒 / 控制集成黑盒</b>，数据集成是唯一白盒</blockquote>
+<h2>今日目标（学完要能做到）</h2>
+<ol><li>说出<b>系统集成定义专指「计算机系统的集成」</b>，背出<b>三内容</b>（技术环境 / 数据环境 / 应用程序）与<b>五平台</b></li><li>默写<b>系统集成四大原则</b>（开放性 / 结构化 / 先进性 / 主流化）及各自判别关键词</li><li>背出<b>网络集成体系框架七个子系统</b>，说清传输 / 交换 / 安全 / 网管 / 服务器 / 网络操作系统 / 服务各子系统的作用</li><li>背出<b>数据集成四层次</b>（基本 / 多级视图 / 模式 / 多粒度）及每层要解决的核心问题</li><li>说清<b>异构数据集成方法</b>：「两种」（过程式：Wrapper+Mediator 点对点 / 声明式：统一建模+推理机制）<b>+ 另一类</b>（中间件）</li><li>背出<b>软件集成五大构件标准</b>（CORBA / COM / DCOM 与 COM+ / .NET / J2EE）与 COM 的软件集成五特征</li><li>分清 <b>.NET 涉及技术</b> 与 <b>J2EE 涉及技术</b>、<b>J2EE 体系结构四层</b></li><li>默写<b>应用集成（EAI）技术要求三项</b>与<b>可协调连接各种应用的组件三件</b></li><li>背出 <b>EAI 四层次</b>（表示 / 数据 / 控制 / 业务流程），说清<b>黑白盒属性配对</b>与<b>各层的实现技术</b></li><li>记住 <b>EDA（事件驱动的企业应用集成）</b> 的机制（事件源 → 中间件 / 消息代理 → 订阅者）</li></ol>
+<h2>一、必背清单</h2>
+<h3>模块 A ｜ 集成基础（5.3.1）</h3>
+<label class="task"><input type="checkbox" data-key="A0" ><span class="task-text"><b>A0 · 系统集成的定义与三内容</b> ⭕ 必背（总起挖空）</span></label><div class="item-body"><p>系统集成概念<b>专指计算机系统的集成</b>，包括计算机硬件平台、网络系统、系统软件、工具软件、应用软件的集成，围绕这些系统的相应咨询、服务和技术支持。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>系统集成的内容</b>包括<b>技术环境的集成、数据环境的集成和应用程序的集成</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>实现手段：通过<b>硬件平台、网络通信平台、数据库平台、工具平台、应用软件平台</b>将各类资源有机、高效地集成到一起，形成一个完整的工作台面</span></div>
+<blockquote>高频：题干出现「<b>专指计算机系统的集成</b>」→ 系统集成；三内容「<b>技 · 数 · 应</b>」；五平台「硬 · 网 · 库 · 工 · 用」</blockquote>
+<label class="task"><input type="checkbox" data-key="A1" ><span class="task-text"><b>A1 · 系统集成四大原则总览</b> ⭕ 必背（分类列举）</span></label><div class="item-body"><p>在技术上需要遵循的基本原则包括：<b>开放性、结构化、先进性和主流化</b>。</p></div>
+<blockquote>记法：<b>「开 · 结 · 先 · 主」</b>——开放（跟谁都能连）· 结构（怎么搭才稳）· 先进（技术够不够新）· 主流（产品会不会被淘汰）</blockquote>
+<label class="task"><input type="checkbox" data-key="A2" ><span class="task-text"><b>A2 · 开放性原则</b> ⭕ 必背（定义配对）</span></label><div class="item-body"><p><b>系统硬软件平台、通信接口、软件开发工具、网络结构的选择要遵循工业开放标准</b>，这是关系到<b>系统生命周期长短</b>的重要问题。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>一个集成的信息系统必然是一个开放的信息系统；只有开放的系统才能满足<b>可互操作性、可移植性以及可伸缩性</b>的要求，才可能与另一个标准兼容的系统实现「<b>无缝</b>」的互操作</span></div>
+<blockquote>判别词：<b>「工业开放标准」</b>→ 开放性；三个「可」——可互操作 / 可移植 / 可伸缩</blockquote>
+<label class="task"><input type="checkbox" data-key="A3" ><span class="task-text"><b>A3 · 结构化原则</b> ⭕ 必背（关键词）</span></label><div class="item-body"><p><b>复杂系统设计的最基本方法依然是结构化系统分析设计方法</b>。把一个复杂系统分解成相对独立和简单的子系统，每个子系统再分解成更简单的模块，<b>自顶向下逐层模块化分解</b>，直到底层每个模块都是<b>可具体说明和可执行</b>的为止。</p></div>
+<blockquote>判别词：<b>「自顶向下逐层模块化分解」</b>→ 结构化；这一思想至今仍是复杂系统设计的精髓</blockquote>
+<label class="task"><input type="checkbox" data-key="A4" ><span class="task-text"><b>A4 · 先进性原则 + 主流化原则</b> ⭕ 必背（两层意义 + 配对）</span></label><div class="item-body"><p><b>先进性</b>有两层意义：<b>目前先进性和未来先进性</b>。系统的先进性是<b>建立在技术先进性之上</b>的；系统的先进性还表现在<b>系统设计的先进性</b>：<b>先进技术的有机集成、问题的合理划分，以及应用软件符合人们认知特点</b>等。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>主流化</b>：系统构成的<b>每一个产品应属于该产品发展的主流</b>，有可靠的技术支持，有成熟的使用环境，并具有良好的升级发展势头</span></div>
+<blockquote>判别词：「两层意义 / 目前·未来」→ 先进性；「产品属于发展主流 / 可靠技术支持 / 成熟使用环境 / 良好升级势头」→ 主流化</blockquote>
+<h3>模块 B ｜ 网络集成（5.3.2）</h3>
+<label class="task"><input type="checkbox" data-key="B0" ><span class="task-text"><b>B0 · 网络集成体系框架七个子系统</b> ⭕ 必背（列举 + 数量）</span></label><div class="item-body"><p>网络集成不仅涉及不同厂家的网络设备和管理软件，也会涉及<b>异构和异质网络系统的互联</b>问题。计算机网络集成的一般体系框架包含<b>七个子系统</b>：</p></div>
+<table><thead><tr><th>子系统</th><th>核心作用</th></tr></thead><tbody><tr><td><b>传输子系统</b></td><td>网络的<b>核心</b>，网络信息的「<b>公路</b>」和「<b>血管</b>」</td></tr><tr><td><b>交换子系统</b></td><td>按覆盖范围分局域网 / 城域网 / 广域网交换技术</td></tr><tr><td><b>安全子系统</b></td><td>防火墙、数据加密、访问控制</td></tr><tr><td><b>网管子系统</b></td><td>监控网络运行、找出并解决「瓶颈」</td></tr><tr><td><b>服务器子系统</b></td><td>为工作站提供资源和服务（高性能、大内存、大磁盘、高可靠）</td></tr><tr><td><b>网络操作系统</b></td><td>调度和管理网络资源，提供统一透明的使用手段</td></tr><tr><td><b>服务子系统</b></td><td>网络应用的核心（互联网服务、多媒体检索、信息广播、远程计算、事务处理）</td></tr></tbody></table>
+<blockquote>⚠️ <b>防坑</b>：高项第 4 版是<b>七个子系统</b>（含<b>服务器子系统</b>和<b>网络操作系统</b>）；中级第 3 版口径是「<b>五大子系统</b>」（传输 / 交换 / 网管 / 安全 / 服务）——两卷别混</blockquote>
+<label class="task"><input type="checkbox" data-key="B1" ><span class="task-text"><b>B1 · 传输子系统</b> ⭕ 必背（介质分类）</span></label><div class="item-body"><p><b>传输是网络的核心</b>，是网络信息的「公路」和「血管」。传输线路带宽的高低不仅体现了网络的通信能力，也体现了网络的现代化水平；传输介质在很大程度上决定了通信质量，从而直接影响网络协议。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>无线传输介质</b>：无线电波、微波、红外线等</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>有线传输介质</b>：双绞线、同轴电缆、光纤等</span></div>
+<blockquote>记法：无线「<b>电 · 微 · 红</b>」/ 有线「<b>双 · 同 · 光</b>」</blockquote>
+<label class="task"><input type="checkbox" data-key="B2" ><span class="task-text"><b>B2 · 交换子系统</b> ⭕ 必背（三分类）</span></label><div class="item-body"><p>网络按所覆盖的区域可分为<b>局域网、城域网和广域网</b>，由此网络交换也可分为<b>局域网交换技术、城域网交换技术和广域网交换技术</b>。</p></div>
+<blockquote>判别词：题干出现「局域网 / 城域网 / 广域网」→ 交换子系统（不是传输）</blockquote>
+<label class="task"><input type="checkbox" data-key="B3" ><span class="task-text"><b>B3 · 安全 / 网管 / 服务器 / 网络操作系统 / 服务子系统</b> ⭕ 必背（归属配对）</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span><b>安全子系统</b>：解决网络安全问题，包括<b>防火墙技术、数据加密技术和访问控制</b>等</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>网管子系统</b>：保证网络良好运行，<b>找出并解决网络「瓶颈」</b>问题</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>服务器子系统</b>：为工作站提供资源和服务，需考虑 CPU、内存、总线、磁盘容量 / 性能 / 容错、接口等</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>网络操作系统</b>：<b>调度和管理网络资源</b>，为用户提供统一、透明的网络资源使用手段</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>服务子系统</b>：网络服务是<b>网络应用的核心</b>，包括<b>互联网服务、多媒体信息检索、信息广播、远程计算和事务处理</b>等</span></div>
+<blockquote>高频配对：「防火墙 / 加密 / 访问控制」→ 安全；「瓶颈」→ 网管；「统一透明的资源使用手段」→ 网络操作系统</blockquote>
+<h3>模块 C ｜ 数据集成（5.3.3）</h3>
+<label class="task"><input type="checkbox" data-key="C0" ><span class="task-text"><b>C0 · 数据集成的对象与关键</b> ⭕ 必背（两句定位）</span></label><div class="item-body"><p>数据集成处理的主要对象是系统中<b>各种异构数据库中的数据</b>；<b>数据仓库技术是数据集成的关键</b>。数据集成的目的是运用一定的技术手段将系统中的数据按一定规则组织成为一个整体，使得用户能有效地对数据进行操作。</p></div>
+<blockquote>判别词：<b>「数据仓库技术是数据集成的关键」</b>——直接考填空</blockquote>
+<label class="task"><input type="checkbox" data-key="C1" ><span class="task-text"><b>C1 · 数据集成四层次总览</b> ⭕ 必背（分类列举）</span></label><div class="item-body"><p>数据集成是将参与数据库的信息<b>逻辑上集成为一个异构分布式数据库的全局概念模式</b>，以实现信息共享。数据集成包括<b>四个层次</b>：</p></div>
+<blockquote>记法：<b>「基 · 多视 · 模 · 多粒」</b>——基本数据集成 / 多级视图集成 / 模式集成 / 多粒度数据集成</blockquote>
+<label class="task"><input type="checkbox" data-key="C2" ><span class="task-text"><b>C2 · 基本数据集成</b> ⭕ 必背（两个问题 + 解法）</span></label><div class="item-body"><p>基本数据集成面临诸多问题，最核心的是<b>通用标识符问题</b>（同一实体在不同数据源中标识不同）和<b>数据丢失问题</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>解决方法包括<b>隔离和调和</b>，以及<b>生成接近实际估计值</b>的方式处理数据丢失</span></div>
+<blockquote>判别词：「<b>通用标识符问题</b>」「数据丢失」→ 基本数据集成</blockquote>
+<label class="task"><input type="checkbox" data-key="C3" ><span class="task-text"><b>C3 · 多级视图集成</b> ⭕ 必背（三级两级映射）</span></label><div class="item-body"><p>多级视图集成利用<b>多级视图机制</b>对数据源之间的关系进行集成，实现从<b>局部数据库到综合视图的映射</b>：<b>底层（局部模型）→ 中间层（公共模型）→ 高层（综合模型）</b>，是一个<b>两级映射</b>过程。</p></div>
+<blockquote>判别词：出现「<b>局部模型 / 公共模型 / 综合模型</b>」→ 多级视图集成</blockquote>
+<label class="task"><input type="checkbox" data-key="C4" ><span class="task-text"><b>C4 · 模式集成</b> ⭕ 必背（冲突类型 + 三种等价）</span></label><div class="item-body"><p>模式集成是<b>数据库设计中的重要问题</b>，其设计好坏<b>常视设计者的经验</b>而定，在实际应用中可参考的成熟理论较少。需要<b>解决命名、结构等语义冲突</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>基本框架如<b>属性等价、关联等价和类等价</b>，可最终归结为<b>属性等价</b></span></div>
+<blockquote>判别词：「语义冲突 / 设计取决于设计者经验」→ 模式集成；三等价「<b>属 · 关 · 类</b>」</blockquote>
+<label class="task"><input type="checkbox" data-key="C5" ><span class="task-text"><b>C5 · 多粒度数据集成</b> ⭕ 必背（综合 / 细化）</span></label><div class="item-body"><p>理想的多粒度数据集成模式是<b>自动逐步抽象</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>数据综合（数据抽象）</b>：由<b>高精度</b>数据经抽象形成<b>精度较低但粒度较大</b>的数据（对各局域数据综合、提取主要特征）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>数据细化</b>：通过一定精度的数据<b>获取精度较高</b>的数据，主要途径有<b>时空转换、相关分析或者由综合中数据变动的记录进行恢复</b></span></div>
+<blockquote>判别词：「高精度 → 低精度 / 粒度变大」→ 数据综合；「低精度 → 高精度」→ 数据细化</blockquote>
+<label class="task"><input type="checkbox" data-key="C6" ><span class="task-text"><b>C6 · 异构数据集成的方法</b> ⭕ 必背（★教材「两种 + 另一类」）</span></label><div class="item-body"><p>数据集成的目的是为应用提供<b>统一的访问支持</b>，因此集成后的数据必须保证一定的完整性，包括<b>数据完整性和约束完整性</b>；还<b>必须考虑语义冲突</b>问题。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>异构数据集成方法归纳起来主要有两种</b>：</span></div><div class="item-body"><ol><li><b>过程式方法</b>：一般根据一组信息需求，采用<b>点对点（Ad-hoc）</b>的设计方法来集成数据。依赖 <b>Wrapper（封装数据源）</b> + <b>Mediator（合并和一致化数据）</b>，软件模块不需要关于完整数据模式的清晰概念</li><li><b>声明式方法</b>：通过<b>一套合适的语言</b>对多个数据源的数据进行<b>建模</b>，构建<b>统一的数据表示</b>，并<b>基于这一数据表示对整体系统数据进行查询</b>，通过一套有效的<b>推理机制</b>存取数据源</li></ol></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>另一类方法</b>：利用<b>中间件</b>集成异构数据库——<b>不需要改变原始数据的存储和管理方式</b>；中间件位于<b>异构数据库系统（数据层）和应用程序（应用层）之间</b>，向下协调各数据库系统、向上提供<b>统一的数据模式和数据访问的通用接口</b></span></div>
+<blockquote>🚩 <b>本节点睛</b>：教材原话是「<b>归纳起来主要有两种，分别是过程式方法和声明式方法</b>」+「<b>另一类</b>方法是中间件」——<b>别答「三种方法」</b></blockquote>
+<label class="task"><input type="checkbox" data-key="C7" ><span class="task-text"><b>C7 · 开放数据库互联标准与数据交换标准</b> ⭕ 必背（提取 + 全局模式）</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span><b>开放数据库互联标准（ODBC）</b>：实现异构数据源集成，<b>首先要解决原始数据的提取</b>；从异构数据库提取数据大多采用 ODBC（数据库系统之间存取数据的<b>标准应用程序接口</b>）。另一种提取方法是<b>针对不同数据源编写专用的嵌入式 C 接口程序</b>，可<b>提高提取速度</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>基于 XML 的数据交换标准</b>：使用中间件集成异构数据源时，需要为中间件选择一种<b>全局数据模式</b>，来统一异构数据源的数据模式。全局模式需满足：<b>① 能描述各种数据格式（结构化或半结构化）；② 易于发布和进行数据交换</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>基于 JSON 的数据交换格式</b>：随着 <b>AJAX 技术</b>的兴起，JSON 作为一种<b>轻量级的数据交换格式</b>，以其<b>易于阅读和编写</b>的优点被越来越多地应用</span></div>
+<blockquote>高频：ODBC = 异构数据源提取的<b>标准 API</b>；全局模式两条要求；JSON ↔ AJAX</blockquote>
+<h3>模块 D ｜ 软件集成（5.3.4）</h3>
+<label class="task"><input type="checkbox" data-key="D0" ><span class="task-text"><b>D0 · 软件集成的五大构件标准</b> ⭕ 必背（列举）</span></label><div class="item-body"><p>软件集成要实现不同软件的互操作，核心是<b>遵循构件标准</b>。有代表性的软件构件标准包括：<b>公共对象请求代理结构（CORBA）、COM、DCOM 与 COM+、.NET、J2EE 应用架构标准</b>。</p></div>
+<blockquote>记法：<b>「CORBA · COM · DCOM/COM+ · .NET · J2EE」</b>五件</blockquote>
+<label class="task"><input type="checkbox" data-key="D1" ><span class="task-text"><b>D1 · CORBA</b> ⭕ 必背（制定者 + 作用）</span></label><div class="item-body"><p><b>CORBA（公共对象请求代理结构）</b>：<b>对象管理组织（OMG）</b>是其规范的制定者，由 800 多个信息系统供应商、软件开发者和用户共同构成的国际组织，建立于 <b>1989 年</b>。OMG 的目的是<b>将对象和分布式系统技术集成为一个可相互操作的统一结构</b>，此结构既支持现有的平台也将支持未来的平台集成。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>CORBA 可<b>自动匹配许多公共网络任务</b>：对象登记、定位、激活多路请求、组帧和错误控制、参数编排和反编排、操作分配等</span></div>
+<blockquote>判别词：「OMG 制定」「面向对象的分布式对象计算标准」→ CORBA</blockquote>
+<label class="task"><input type="checkbox" data-key="D2" ><span class="task-text"><b>D2 · COM 及软件集成五特征</b> ⭕ 必背（对象形式 + 五特征）</span></label><div class="item-body"><p><b>COM</b>：对象是一种<b>二进制代码对象</b>，其代码形式是 <b>DLL 或 EXE 执行代码</b>，对象都被<b>直接注册在 Windows 的系统库中</b>，是由<b>系统平台直接支持</b>的对象。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>COM 具备了软件集成所需要的许多特征，包括<b>面向对象、客户机 / 服务器、语言无关性、进程透明性和可重复性</b></span></div>
+<blockquote>记法：五特征「<b>对 · 客 · 语 · 进 · 可</b>」——面向对象 / 客户机服务器 / 语言无关性 / 进程透明性 / 可重复性</blockquote>
+<label class="task"><input type="checkbox" data-key="D3" ><span class="task-text"><b>D3 · DCOM 与 COM+</b> ⭕ 必背（扩展特性）</span></label><div class="item-body"><p><b>DCOM 与 COM+</b>：作为 COM 的<b>扩展</b>，针对分布环境还提供了一些新的特性，如<b>位置透明性、网络安全性、跨平台调用</b>等。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>COM+</b> 是 COM 的新发展（COM 更高层次上的应用），底层结构仍以 COM 为基础，几乎包容了 COM 的所有内容。COM+ 把 COM 组件软件<b>提升到应用层</b>而<b>不再是底层的软件结构</b>，把所有组件的底层细节留给操作系统——因此 <b>COM+ 与操作系统的结合更加紧密</b></span></div>
+<blockquote>判别词：「位置透明性 / 网络安全性 / 跨平台调用」→ DCOM；「提升到应用层」→ COM+</blockquote>
+<label class="task"><input type="checkbox" data-key="D4" ><span class="task-text"><b>D4 · .NET 与 J2EE</b> ⭕ 必背（★技术清单配对）</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span><b>.NET</b>：是<b>基于一组开放的互联网协议</b>，推出的一系列产品、技术和服务。涉及的技术：<b>VB、C++、C#、JScript、ASP.NET、ADO.NET</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>J2EE</b>：使用 Java 技术开发组织级应用的一种<b>事实上的工业标准</b>，为搭建具有<b>可伸缩性、灵活性、易维护性</b>的组织系统提供了良好的机制。其<b>体系结构分为客户端层、服务器端组件层、EJB 和信息系统层</b>；涉及的技术：<b>EJB、Java Servlets API、JSP 和 XML</b></span></div>
+<blockquote>⚠️ <b>最易混</b>：C#/VB/ASP.NET/ADO.NET 属 <b>.NET</b>；EJB/Servlet/JSP 属 <b>J2EE</b>。四层 = 客户端层 / 服务器端组件层 / EJB / 信息系统层</blockquote>
+<h3>模块 E ｜ 应用集成（5.3.5）</h3>
+<label class="task"><input type="checkbox" data-key="E0" ><span class="task-text"><b>E0 · 语法 · 语义 · 语用三对应</b> ⭕ 必背（★教材点睛句）</span></label><div class="item-body"><p>从信息系统集成技术的角度看，<b>网络集成解决语法的问题，数据集成解决语义的问题，应用集成解决语用的问题</b>；在集成的堆栈上，<b>应用集成在最上层</b>，主要解决<b>应用的互操作性问题</b>。</p></div>
+<blockquote>高频：三句一一对应，考排序 / 配对，<b>别把「语用」配给数据集成</b></blockquote>
+<label class="task"><input type="checkbox" data-key="E1" ><span class="task-text"><b>E1 · 应用集成（EAI）的定义与技术要求</b> ⭕ 必背（定义 + 三项要求）</span></label><div class="item-body"><p><b>应用集成或组织应用集成（EAI）</b>是指将<b>独立的软件应用连接起来，实现协同工作</b>。借助应用集成，组织可以提高运营效率、实现工作流自动化，并增强不同部门和团队之间的协作。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>对应用集成的<b>技术要求</b>大致有：<b>① 具有应用间的互操作性；② 具有分布式环境中应用的可移植性；③ 具有系统中应用分布的透明性</b></span></div>
+<blockquote>记法：三要求「<b>互操作 · 可移植 · 透明性</b>」</blockquote>
+<label class="task"><input type="checkbox" data-key="E2" ><span class="task-text"><b>E2 · 可协调连接各种应用的组件</b> ⭕ 必背（列举三件）</span></label><div class="item-body"><p>可以协调连接各种应用的组件有：<b>应用编程接口（API）、事件驱动型操作、数据映射</b>。</p></div>
+<blockquote>记法：<b>「API · 事件 · 映射」</b>三件——API 定义交互规则、事件驱动由触发器启动、数据映射统一不同系统数据字段</blockquote>
+<label class="task"><input type="checkbox" data-key="E3" ><span class="task-text"><b>E3 · EAI 四层次与黑白盒配对</b> ⭕ 必背（★层次 + 黑白盒）</span></label><div class="item-body"><p>从单个企业的角度，<b>EAI 可以包括表示集成、数据集成、控制集成和业务流程集成等多个层次</b>（也可以在多个企业之间进行应用集成）。</p></div>
+<table><thead><tr><th>层次</th><th>别称</th><th>黑白盒</th><th>核心定位</th></tr></thead><tbody><tr><td><b>表示集成</b></td><td>界面集成</td><td><b>黑盒集成</b></td><td>最原始、最浅层次；把零散系统界面集中到新界面</td></tr><tr><td><b>数据集成</b></td><td>—</td><td><b>白盒集成</b></td><td>集成点在<b>中间件</b>；先对数据标识并编成目录、确定元数据模型</td></tr><tr><td><b>控制集成</b></td><td>功能集成 / 应用集成</td><td><b>黑盒集成</b></td><td>在<b>业务逻辑层</b>上集成；集成点存于程序代码中</td></tr><tr><td><b>业务流程集成</b></td><td>过程集成</td><td>—</td><td>超越数据和系统，由一系列基于标准的、统一数据格式的<b>工作流</b>组成</td></tr></tbody></table>
+<blockquote>🚩 <b>本节点睛</b>：<b>数据集成是唯一的白盒集成</b>（其余黑盒）；「在业务逻辑层上进行黑盒集成」→ <b>控制集成</b></blockquote>
+<label class="task"><input type="checkbox" data-key="E4" ><span class="task-text"><b>E4 · 各集成层的实现技术</b> ⭕ 必背（技术归属）</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span><b>表示集成</b>：无需了解程序与数据库的内部构造，常用的集成技术主要有<b>屏幕截取技术和输入模拟技术</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>数据集成</b>：集成之前必须首先<b>对数据进行标识并编成目录</b>，然后<b>确定元数据模型</b>，保证数据在数据库系统中分布和共享</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>控制集成</b>：集成点存于程序代码中，可借助<b>远程过程调用（RPC）或远程方法调用（RMI）、面向消息的中间件、分布式对象技术和事务处理监控器</b>来实现；集成处可能只需简单使用<b>公开的 API</b> 就可以访问</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>业务流程集成</b>：企业必须对各种业务信息的<b>交换进行定义、授权和管理</b>，以便改进操作、减少成本、提高响应速度</span></div>
+<blockquote>配对：「屏幕截取 / 输入模拟」→ 表示集成；「元数据模型」→ 数据集成；「RPC / RMI / 消息中间件」→ 控制集成</blockquote>
+<label class="task"><input type="checkbox" data-key="E5" ><span class="task-text"><b>E5 · 事件驱动的企业应用集成（EDA）</b> ⭕ 必背（机制）</span></label><div class="item-body"><p><b>事件驱动架构（Event-Driven Architecture，EDA）</b>是一种设计和构建应用的方法：<b>事件触发消息在独立的、非耦合的模块之间传递</b>（模块之间不需要知道对方）。<b>事件源</b>通常发送消息到<b>中间件或消息代理</b>，<b>订阅者</b>订阅这个消息。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>因为事件消息用<b>发布 / 订阅</b>方式通过消息代理传输，<b>一个事件可以传送给多个订阅者</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>EDA 的主要优势：允许企业通过<b>事件管理</b>来标识和响应一个或多个系统中的事件</span></div>
+<blockquote>判别词：「发布 / 订阅」「事件源 → 消息代理 → 订阅者」「一个事件多个订阅者」→ EDA</blockquote>
+<h2>二、只通读清单（知道即可，别背）</h2>
+<label class="task"><input type="checkbox" data-key="F0" ><span class="task-text"><b>F0 · 系统集成的地位与价值</b></span></label><div class="item-body"><p>系统集成是信息系统实施中一项重要的工作，「<b>以计算机有关技术储备为基础，以可靠的产品为工具，用以实现某一特定的计算机系统功能组合的工程行为</b>」；<b>系统集成是开放系统驱动的</b>，顺应了计算机工业发展的潮流；系统集成工作的好坏对系统开发、维护有极大的影响。</p></div>
+<label class="task"><input type="checkbox" data-key="F1" ><span class="task-text"><b>F1 · 信息孤岛与 EAI 的意义</b></span></label><div class="item-body"><p>企业信息化建设中缺乏统一规划和总体布局，往往形成多个<b>信息孤岛</b>（数据一致性无法保证、信息无法共享和反馈、需重复采集输入）；其成因既有<b>技术因素</b>也有<b>管理因素</b>，还有<b>业务流程和标准</b>方面的因素。<b>EAI 技术可以消除信息孤岛</b>，将多个企业信息系统连接起来实现无缝集成，使它们像一个整体一样。</p></div>
+<label class="task"><input type="checkbox" data-key="F2" ><span class="task-text"><b>F2 · EAI 所连接的应用类型</b></span></label><div class="item-body"><p>EAI 所连接的应用包括各种<b>电子商务系统、ERP、CRM、SCM、OA、数据库系统和数据仓库</b>等。</p></div>
+<label class="task"><input type="checkbox" data-key="F3" ><span class="task-text"><b>F3 · 中级 vs 高项的网络集成子系统数（防坑提醒）</b></span></label><div class="item-body"><p><b>高项第 4 版 = 七个子系统</b>（比中级多出<b>服务器子系统</b>与<b>网络操作系统</b>）；中级第 3 版（系统集成项目管理工程师）= <b>五大子系统</b>（传输 / 交换 / 网管 / 安全 / 服务）。两卷真题混刷时注意口径差异。</p></div>
+<label class="task"><input type="checkbox" data-key="F4" ><span class="task-text"><b>F4 · 数据集成的地位</b></span></label><div class="item-body"><p>数据集成是<b>最终实现数据共享和辅助决策的基础</b>；数据集成还必须考虑<b>语义冲突</b>问题——信息资源之间存在的语义区别可能引起各种矛盾（从简单的名字语义冲突到复杂的结构语义冲突）。</p></div>
+<h2>三、口诀速记</h2>
+<table><thead><tr><th>考点</th><th>口诀 / 关键词</th></tr></thead><tbody><tr><td>系统集成三内容</td><td><b>技 · 数 · 应</b>（技术环境 / 数据环境 / 应用程序）</td></tr><tr><td>系统集成四原则</td><td><b>开 · 结 · 先 · 主</b></td></tr><tr><td>开放性三「可」</td><td>可<b>互操作</b> / 可<b>移植</b> / 可<b>伸缩</b></td></tr><tr><td>网络集成七子系统</td><td>传 · 交 · 安 · 网管 · 服务器 · 网络操作系统 · 服务</td></tr><tr><td>传输介质</td><td>无线「电微红」/ 有线「双同光」</td></tr><tr><td>数据集成四层次</td><td><b>基 · 多视 · 模 · 多粒</b></td></tr><tr><td>多级视图三级</td><td>局部模型 → 公共模型 → 综合模型（两级映射）</td></tr><tr><td>模式集成三等价</td><td><b>属 · 关 · 类</b></td></tr><tr><td>异构数据集成方法</td><td>教材口径 <b>两种</b>（过程式 / 声明式）+ <b>另一类</b>（中间件）</td></tr><tr><td>软件集成五标准</td><td>CORBA · COM · DCOM/COM+ · .NET · J2EE</td></tr><tr><td>COM 五特征</td><td><b>对 · 客 · 语 · 进 · 可</b></td></tr><tr><td>J2EE 四层</td><td>客户端层 / 服务器端组件层 / EJB / 信息系统层</td></tr><tr><td>应用集成三要求</td><td><b>互操作 · 可移植 · 透明性</b></td></tr><tr><td>可连接组件三件</td><td><b>API · 事件驱动型操作 · 数据映射</b></td></tr><tr><td>EAI 四层次</td><td>表示 → 数据 → 控制 → 业务流程</td></tr><tr><td>黑白盒</td><td>表示<b>黑</b> / 数据<b>白</b> / 控制<b>黑</b>（数据集成唯一白盒）</td></tr><tr><td>语法·语义·语用</td><td>网络=<b>语法</b> / 数据=<b>语义</b> / 应用=<b>语用</b></td></tr><tr><td>EDA 机制</td><td>事件源 → 消息代理 → 订阅者（发布/订阅、一事件多订阅者）</td></tr></tbody></table>
+<h2>四、自检题（先自答，再展开对答案）</h2>
+<details>
+<summary>1. 系统集成的四大基本原则是什么？各自的关键判别词是什么？</summary>
+<p><b>开放性、结构化、先进性、主流化</b>。</p>
+<p>- 开放性 → 「工业开放标准」；满足可互操作性、可移植性、可伸缩性</p>
+<p>- 结构化 → 「自顶向下逐层模块化分解」</p>
+<p>- 先进性 → 两层意义（目前先进性 / 未来先进性），建立在技术先进性之上</p>
+<p>- 主流化 → 「产品属于该产品发展的主流」，有可靠技术支持、成熟使用环境、良好升级势头</p>
+</details>
+<details>
+<summary>2. 计算机网络集成的体系框架包含哪些子系统？各自作用是什么？</summary>
+<p><b>七个子系统</b>：<b>传输</b>（网络核心，「公路」「血管」）· <b>交换</b>（局域网/城域网/广域网交换技术）· <b>安全</b>（防火墙、数据加密、访问控制）· <b>网管</b>（监控运行、解决「瓶颈」）· <b>服务器</b>（为工作站提供资源和服务）· <b>网络操作系统</b>（调度管理网络资源，提供统一透明使用手段）· <b>服务</b>（互联网服务、多媒体检索、信息广播、远程计算、事务处理）。</p>
+<p>⚠️ 中级第 3 版是「五大子系统」（无服务器子系统和网络操作系统）。</p>
+</details>
+<details>
+<summary>3. 数据集成分为哪四个层次？「多级视图集成」的映射关系是怎样的？</summary>
+<p>四层次：<b>基本数据集成、多级视图集成、模式集成、多粒度数据集成</b>。</p>
+<p>多级视图集成 = <b>底层（局部模型）→ 中间层（公共模型）→ 高层（综合模型）</b> 的<b>两级映射</b>，实现从局部数据库到综合视图的映射。</p>
+</details>
+<details>
+<summary>4. 异构数据集成的方法有几种？分别是什么？</summary>
+<p>教材原文：<b>归纳起来主要有两种</b>——<b>过程式方法</b>和<b>声明式方法</b>；<b>另一类方法</b>是利用<b>中间件</b>集成异构数据库。</p>
+<p>- 过程式：点对点（Ad-hoc）设计，用 <b>Wrapper 封装数据源 + Mediator 合并一致化数据</b></p>
+<p>- 声明式：用一套合适语言<b>建模</b>，构建<b>统一数据表示</b>，通过<b>推理机制</b>存取</p>
+<p>- 中间件：<b>不改变原始数据存储和管理方式</b>，位于数据层与应用层之间</p>
+<p>🚩 别答「三种方法」——教材把中间件定位为「另一类」（不在「两种」之内）。</p>
+</details>
+<details>
+<summary>5. 软件集成有哪些代表构件标准？COM 具备哪些软件集成特征？</summary>
+<p>五大标准：<b>CORBA、COM、DCOM 与 COM+、.NET、J2EE</b>。</p>
+<p>COM 具备的特征：<b>面向对象、客户机/服务器、语言无关性、进程透明性和可重复性</b>（五特征）。</p>
+</details>
+<details>
+<summary>6. .NET 与 J2EE 各自涉及哪些技术？J2EE 体系结构分哪几层？</summary>
+<p>- <b>.NET</b>：VB、C++、C#、JScript、ASP.NET、ADO.NET</p>
+<p>- <b>J2EE</b>：EJB、Java Servlets API、JSP 和 XML；体系结构分<b>客户端层、服务器端组件层、EJB、信息系统层</b>四层</p>
+</details>
+<details>
+<summary>7. EAI（企业应用集成）包括哪几个层次？各自是黑盒还是白盒集成？</summary>
+<p>四层次：<b>表示集成、数据集成、控制集成、业务流程集成</b>。</p>
+<p>- 表示集成（界面集成）：<b>黑盒集成</b></p>
+<p>- 数据集成：<b>白盒集成</b>（集成点在中间件）——<b>唯一白盒</b></p>
+<p>- 控制集成（功能集成/应用集成）：<b>黑盒集成</b>（业务逻辑层）</p>
+<p>- 业务流程集成（过程集成）：由一系列基于标准的、统一数据格式的工作流组成</p>
+</details>
+<details>
+<summary>8. 教材中「网络集成 / 数据集成 / 应用集成」分别解决什么问题？</summary>
+<p><b>网络集成解决语法的问题，数据集成解决语义的问题，应用集成解决语用的问题</b>；应用集成在最上层，主要解决应用的互操作性问题。</p>
+</details>
+<details>
+<summary>9. 对应用集成的技术要求有哪些？可以协调连接各种应用的组件有哪几种？</summary>
+<p>技术要求三项：<b>应用间的互操作性、分布式环境中应用的可移植性、系统中应用分布的透明性</b>。</p>
+<p>可协调连接各种应用的组件：<b>应用编程接口（API）、事件驱动型操作、数据映射</b>。</p>
+</details>
+<details>
+<summary>10. 什么是 EDA？它的消息传递机制是怎样的？</summary>
+<p><b>事件驱动架构（EDA）</b>：事件触发消息在<b>独立的、非耦合的模块之间</b>传递（模块之间不需要知道对方）。<b>事件源</b>发送消息到<b>中间件或消息代理</b>，<b>订阅者</b>订阅该消息；采用<b>发布/订阅</b>方式，<b>一个事件可传送给多个订阅者</b>。EDA 允许企业通过<b>事件管理</b>来标识和响应一个或多个系统中的事件。</p>
+</details>
+<details>
+<summary>11. 表示集成、数据集成、控制集成各自常用的实现技术 / 关键动作是什么？</summary>
+<p>- <b>表示集成</b>：<b>屏幕截取技术、输入模拟技术</b>（无需了解程序与数据库内部构造）</p>
+<p>- <b>数据集成</b>：先对数据<b>标识并编成目录</b>，确定<b>元数据模型</b></p>
+<p>- <b>控制集成</b>：借助 <b>RPC/RMI、面向消息的中间件、分布式对象技术、事务处理监控器</b>；集成处可能只需简单使用<b>公开的 API</b></p>
+</details>
+<details>
+<summary>12. 「基本数据集成」要解决哪两个核心问题？「模式集成」的三类等价是什么？</summary>
+<p>基本数据集成：<b>通用标识符问题</b>和<b>数据丢失问题</b>；解决方法包括<b>隔离和调和</b>，以及生成接近实际估计值处理数据丢失。</p>
+<p>模式集成三类等价：<b>属性等价、关联等价和类等价</b>（可最终归结为属性等价）。</p>
+</details>
+<h2>五、刷题任务</h2>
+<div class="plain-li"><span class="bullet">•</span> <span>刷第 5 章相关的<b>旧真题</b>（第 3 版第 3 章同源，历年高频：系统集成四原则 / EAI 四层次黑白盒 / 数据集成四层次 / 异构数据集成两方法 / CORBA·COM·J2EE）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>本清单自检题 12 道全部口答一遍，重点口答第 4、7、8 题（最容易踩教材口径的「两种 vs 三种」「白盒唯一」「语法语义语用」）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>做完本节的《5.3 考点自测题.html》（22 题，达标 18/22），错题回查对应模块</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>本节的答题系统填空题（12 题）用于滚动默写</span></div>
+</div>
+<script>
+(function(){
+  const REL = "01_教材笔记/第05章_信息系统工程/5.3_系统集成/5.3_知识点清单_可勾选.html";
+  const STORE_KEY = 'checklist:' + REL;
+
+  // 一次性加载整个文件的勾选状态（JSON），避免 key 过长
+  let store = {};
+  try { store = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch (e) {}
+
+  // 兼容迁移：旧的错误 key（包含重复 REL 前缀的）自动迁到新格式
+  for (let i = localStorage.length - 1; i >= 0; i--) {
+    const k = localStorage.key(i);
+    if (!k || !k.startsWith('checklist:')) continue;
+    // 检测旧 bug key：包含 REL 两次
+    if (k.indexOf(REL) !== k.lastIndexOf(REL)) {
+      const v = localStorage.getItem(k);
+      const m = k.match(/:L(\d+)$/);
+      if (m && v === '1') store['L' + m[1]] = true;
+      localStorage.removeItem(k);
+    }
+  }
+
+  const boxes = document.querySelectorAll('.task input[type="checkbox"]');
+  boxes.forEach(box => {
+    const k = box.dataset.key;
+    if (store[k]) box.checked = true;
+    box.addEventListener('change', () => {
+      store[k] = box.checked;
+      try {
+        localStorage.setItem(STORE_KEY, JSON.stringify(store));
+      } catch (e) {
+        console.error('localStorage 写入失败：', e);
+      }
+      updateProgress();
+    });
+  });
+
+  function updateProgress() {
+    const total = boxes.length;
+    const done = Array.from(boxes).filter(b => b.checked).length;
+    const pct = total ? Math.round(done / total * 100) : 0;
+    document.getElementById('progress').innerHTML = '已完成：<b>' + done + ' / ' + total + '</b>（' + pct + '%）';
+  }
+  updateProgress();
+})();
+</script>
+</body>
+</html>
