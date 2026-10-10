@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5.4 安全工程 22 题</title>
+<style>
+  *{box-sizing:border-box;}
+  body{
+    margin:0;padding:24px 14px 60px;background:#eef0f3;color:#1f2328;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    gap:14px;margin-bottom:18px;flex-wrap:wrap;
+  }
+  h1{font-size:20px;margin:0;font-weight:600;}
+  .sub{font-size:12.5px;color:#6b7280;margin:5px 0 0;}
+  .score-chip{
+    background:#E6F1FB;border:1px solid #B5D4F4;color:#0C447C;
+    border-radius:8px;padding:7px 13px;font-size:13px;white-space:nowrap;
+  }
+  .score-chip b{font-size:16px;font-weight:600;}
+
+  #quiz{
+    background:#fff;border-radius:12px;padding:22px 24px;
+    box-shadow:0 2px 12px rgba(16,24,40,.08);
+  }
+  .progress-row{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:8px;font-size:13px;color:#4b5563;
+  }
+  .chip{
+    background:#FAEEDA;border:1px solid #EFC98A;color:#633806;
+    border-radius:5px;padding:2px 9px;font-size:12px;
+  }
+  .progress{height:6px;background:#e5e8ee;border-radius:4px;overflow:hidden;margin-bottom:20px;}
+  #bar{height:100%;width:0;background:#185FA5;border-radius:4px;transition:width .25s;}
+
+  .qtext{font-size:16px;line-height:1.75;font-weight:500;margin:0 0 18px;}
+  .opt{
+    display:flex;gap:10px;align-items:flex-start;
+    border:1px solid #d9dee5;border-radius:9px;padding:11px 14px;
+    margin-bottom:10px;cursor:pointer;font-size:14.5px;line-height:1.6;
+    background:#fff;transition:border-color .12s,background .12s;
+  }
+  .opt:hover{border-color:#185FA5;background:#f7fafd;}
+  .opt .tag{
+    flex:0 0 22px;height:22px;border-radius:50%;
+    background:#eef1f5;color:#3b4552;font-size:12px;font-weight:600;
+    display:flex;align-items:center;justify-content:center;margin-top:2px;
+  }
+  .opt.correct{border-color:#0F6E56;background:#E1F5EE;}
+  .opt.correct .tag{background:#0F6E56;color:#fff;}
+  .opt.wrong{border-color:#A32D2D;background:#FCEBEB;}
+  .opt.wrong .tag{background:#A32D2D;color:#fff;}
+  .opt.dim{opacity:.55;cursor:default;}
+  .opt.correct.dim{opacity:1;}
+  .opt.locked{cursor:default;}
+
+  #feedback{margin-top:14px;border-radius:9px;overflow:hidden;border:1px solid #d9dee5;}
+  #verdict{
+    padding:10px 14px;font-size:14px;font-weight:600;
+    background:#E1F5EE;color:#085041;border-bottom:1px solid #cbe9da;
+  }
+  #verdict.bad{background:#FCEBEB;color:#501313;border-bottom:1px solid #f3cdcd;}
+  #explain{padding:12px 14px;font-size:13.5px;line-height:1.8;color:#374151;background:#fdfdfe;}
+  #explain b{color:#1f2328;}
+  #nextBtn{
+    display:block;margin:14px 16px 16px;float:right;
+    background:#185FA5;color:#fff;border:none;border-radius:8px;
+    padding:9px 26px;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  #nextBtn:hover{background:#14507f;}
+  #feedback::after{content:"";display:block;clear:both;}
+  .kbd{font-size:11.5px;color:#9aa3af;margin:14px 2px 0;}
+
+  #result{background:#fff;border-radius:12px;padding:26px 28px;box-shadow:0 2px 12px rgba(16,24,40,.08);}
+  .r-head{display:flex;gap:22px;align-items:center;margin-bottom:6px;flex-wrap:wrap;}
+  .r-score{font-size:44px;font-weight:600;color:#185FA5;line-height:1;}
+  .r-score small{font-size:18px;color:#8b949e;font-weight:400;}
+  .r-msg{font-size:14px;color:#4b5563;line-height:1.7;}
+  h3{font-size:15px;font-weight:600;margin:26px 0 10px;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th,td{border:1px solid #e2e6eb;padding:7px 10px;text-align:left;line-height:1.6;}
+  th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .mbar{height:8px;background:#e5e8ee;border-radius:4px;overflow:hidden;min-width:120px;}
+  .mbar div{height:100%;background:#1D9E75;border-radius:4px;}
+
+  .wq{
+    border:1px solid #f3cdcd;border-radius:9px;padding:13px 15px;
+    margin-bottom:12px;background:#fffafa;
+  }
+  .wq .wt{font-size:14px;font-weight:600;line-height:1.7;margin-bottom:7px;}
+  .wq .wa{font-size:13px;color:#A32D2D;margin-bottom:2px;}
+  .wq .wc{font-size:13px;color:#0F6E56;margin-bottom:8px;}
+  .wq .we{font-size:12.5px;color:#57606a;line-height:1.75;border-top:1px dashed #e8d9d9;padding-top:7px;}
+
+  .btns{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;border-radius:8px;
+    padding:9px 22px;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:#185FA5;border-color:#185FA5;color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn:disabled{opacity:.45;cursor:not-allowed;}
+  .hidden{display:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <h1>5.4 安全工程</h1>
+      <p class="sub">22 题 · 第 4 版教材 5.4 节 · 达标线 18/22（80%）· 逐题精讲 · 键盘 A~D 或 1~4 选择，Enter 下一题</p>
+    </div>
+    <div class="score-chip">已答对 <b id="scoreNow">0</b> / <span id="totalNow">22</span> 题</div>
+  </header>
+
+  <div id="quiz">
+    <div class="progress-row">
+      <span id="pos"></span>
+      <span class="chip" id="moduleChip"></span>
+    </div>
+    <div class="progress"><div id="bar"></div></div>
+    <div class="qcard">
+      <p class="qtext" id="qtext"></p>
+      <div id="options"></div>
+      <div id="feedback" class="hidden">
+        <div id="verdict"></div>
+        <div id="explain"></div>
+        <button id="nextBtn">下一题 →</button>
+      </div>
+    </div>
+    <p class="kbd">键盘可用：A~D 或 1~4 选择，Enter 下一题</p>
+    <p class="kbd" style="margin:4px 2px 0;">对照资料：<b>《信息系统项目管理师教程（第 4 版）》第 5 章第 4 节，约 P170 ~ P181</b> ｜ 答案口径以 2026-10-10 多方交叉核对为准</p>
+  </div>
+
+  <div id="result" class="hidden"></div>
+
+</div>
+
+<script>
+const QUESTIONS = [
+{m:"5.4.1 工程概述",
+ q:"关于「信息系统」与「信息系统工程」的组成，下列说法正确的是（ ）。",
+ o:["信息系统 = 业务应用信息系统 + 信息安全系统；信息系统工程 = 业务应用信息系统工程（不含信息安全）","信息系统工程 = 信息安全系统工程 + 信息系统安全工程","信息系统 = 业务应用信息系统 + 信息安全系统；信息系统工程 = 业务应用信息系统工程 + 信息安全系统工程","信息系统 = 业务应用信息系统 + 信息系统安全工程"],
+ a:2,
+ e:"<b>信息系统 = 业务应用信息系统 + 信息安全系统</b>；<b>信息系统工程 = 业务应用信息系统工程 + 信息安全系统工程</b>，两个工程是「<b>独立且不可分割</b>」的。见教材 5.4.1。"},
+
+{m:"5.4.1 工程概述",
+ q:"教材特别强调本节讲述的是「信息安全系统工程」而不是「信息系统安全工程」，其主要原因是（ ）。",
+ o:["「信息系统安全工程」的字面会误解为「安全地建设一个信息系统」，从而忽略信息系统中的信息安全问题","「信息系统安全工程」是中级教材的用语，第 4 版已取消","「信息安全系统工程」是国际标准术语，「信息系统安全工程」是国标术语","两者含义完全相同，只是翻译习惯不同"],
+ a:0,
+ e:"教材专设「术语澄清」：讲的是<b>信息安全系统工程</b>，<b>不是信息系统安全工程</b>——后者从字面上会误解为「<b>安全地建设一个信息系统</b>」，从而忽略信息系统中的信息安全问题（可安全地建成一个没有信息安全子系统的信息系统）。见教材 5.4.1。"},
+
+{m:"5.4.1 工程概述",
+ q:"为达到建设好业务应用信息系统所组织实施的工程，一般称为（ ）。",
+ o:["信息安全系统工程","组织信息化工程","密码工程","信息系统集成项目工程"],
+ a:3,
+ e:"<b>业务应用信息系统工程</b>是为了达到建设好业务应用信息系统所组织实施的工程，<b>一般称为「信息系统集成项目工程」</b>，它是信息系统工程的一部分。见教材 5.4.1。"},
+
+{m:"5.4.2 安全系统",
+ q:"关于信息安全系统的定位，下列说法错误的是（ ）。",
+ o:["信息安全保障系统一般简称为信息安全系统","信息安全系统是业务应用信息系统的一个功能模块，不能独立存在","信息安全系统用于保证「业务应用信息系统」正常运营","信息安全系统是客观的、独立于业务应用信息系统而存在的信息系统"],
+ a:1,
+ e:"B 错误——教材明确：<b>信息安全系统是客观的、独立于业务应用信息系统而存在的信息系统</b>。它虽然服务于业务应用信息系统，但<b>不能脱离、也不能混为一谈</b>。见教材 5.4.2。"},
+
+{m:"5.4.2 安全系统",
+ q:"信息安全系统的体系架构可以用一个「宏观三维空间」来反映，其 X、Y、Z 三个轴分别是（ ）。",
+ o:["安全技术 / 安全服务 / 安全机制","安全机制 / 安全技术 / 安全服务","安全机制 / OSI 网络参考模型 / 安全服务","OSI 网络参考模型 / 安全机制 / 安全技术"],
+ a:2,
+ e:"信息安全空间三维：<b>X 轴 = 安全机制、Y 轴 = OSI 网络参考模型、Z 轴 = 安全服务</b>。⚠️ 别把中间的 OSI 换成「安全技术」。见教材 5.4.2。"},
+
+{m:"5.4.2 安全系统",
+ q:"由 X、Y、Z 三个轴形成的信息安全系统「安全空间」达到的五大属性（五要素）是（ ）。",
+ o:["认证、权限、完整、加密、不可否认","保密性、完整性、可用性、可控性、可审查性","预警、保护、检测、反应、恢复","身份、授权、审计、加密、备份"],
+ a:0,
+ e:"安全空间的五大属性 = <b>认证、权限、完整、加密、不可否认</b>（口诀「认权完加不可否认」）。B 是传统信息安全五属性的说法，非本节口径。见教材 5.4.2。"},
+
+{m:"5.4.2 安全系统",
+ q:"下列各项中，不属于「安全机制」的是（ ）。",
+ o:["平台安全","数据保密服务","数据安全","安全防范体系"],
+ a:1,
+ e:"<b>数据保密服务属于「安全服务」</b>（Z 轴），不属于安全机制。安全机制 9 项 = <b>基础设施实体安全、平台安全、数据安全、通信安全、应用安全、运行安全、管理安全、授权和审计安全、安全防范体系</b>。见教材 5.4.2。"},
+
+{m:"5.4.2 安全系统",
+ q:"「操作系统漏洞检测与修复、网络基础设施漏洞检测与修复、通用基础应用程序漏洞检测与修复、网络安全产品部署」属于安全机制中的（ ）。",
+ o:["数据安全","通信安全","运行安全","平台安全"],
+ a:3,
+ e:"「<b>漏洞检测与修复 + 网络安全产品部署</b>」是<b>平台安全</b>的组成内容。数据安全侧重「介质与载体 / 访问控制 / 备份」，通信安全侧重「加密设施 / 安全通道」。见教材 5.4.2。"},
+
+{m:"5.4.2 安全系统",
+ q:"组织安全防范体系的「核心」与 WPDRRC 信息安全保障体系的六环节分别是（ ）。",
+ o:["核心是实现组织信息安全资源的综合管理（EISRM）；六环节为预警、保护、检测、反应、恢复、反击","核心是防火墙与入侵检测；六环节为识别、防护、检测、响应、恢复、取证","核心是实现组织信息安全资源的综合管理（EISRM）；六环节为认证、权限、完整、加密、审计、不可否认","核心是安全风险评估；六环节为预警、保护、检测、反应、恢复、反击"],
+ a:0,
+ e:"组织安全防范体系的<b>核心是实现组织信息安全资源的综合管理，即 EISRM</b>；六环节 <b>WPDRRC = 预警(Warn)、保护(Protect)、检测(Detect)、反应(Response)、恢复(Recover)、反击(Counter-attack)</b>。见教材 5.4.2。"},
+
+{m:"5.4.2 安全系统",
+ q:"下列各项中，不属于「安全服务」的是（ ）。",
+ o:["数据完整性服务","禁止否认服务","数据挖掘","犯罪证据提供服务"],
+ a:2,
+ e:"<b>数据挖掘属于「安全技术」</b>（安全技术涉及加密、数字签名技术、访问控制、数据完整性、认证、<b>数据挖掘</b>），不属于安全服务。安全服务 6 项 = 对等实体认证、数据保密、数据完整性、数据源点认证、禁止否认、犯罪证据提供。见教材 5.4.2。"},
+
+{m:"5.4.2 安全系统",
+ q:"「用于确保数据发自真正的源点，防止假冒」的安全服务是（ ）。",
+ o:["对等实体认证服务","数据源点认证服务","数据保密服务","禁止否认服务"],
+ a:1,
+ e:"<b>数据源点认证服务</b>确保数据<b>发自真正的源点</b>；<b>对等实体认证服务</b>则用于两个开放系统同等层实体建立链接或传输数据时，确认对方实体的<b>合法性、真实性</b>。两者别混。见教材 5.4.2。"},
+
+{m:"5.4.2 安全系统",
+ q:"信息安全技术主要涉及的内容包括（ ）。<br>① 加密　② 数字签名技术　③ 访问控制　④ 数据挖掘",
+ o:["①②③","①②","②③④","①②③④"],
+ a:3,
+ e:"安全技术主要涉及<b>加密、数字签名技术、访问控制、数据完整性、认证、数据挖掘</b>，四项均包含。⚠️「数据挖掘」这一项别漏。见教材 5.4.2。"},
+
+{m:"5.4.3 工程基础",
+ q:"信息安全系统工程活动离不开其他相关工程，下列不属于其相关工程的是（ ）。",
+ o:["人力资源工程","硬件工程","密码工程","数据存储与灾备工程"],
+ a:0,
+ e:"工程基础涉及的 8 类相关工程 = <b>硬件工程、软件工程、通信及网络工程、数据存储与灾备工程、系统工程、测试工程、密码工程、组织信息化工程</b>。「人力资源工程」不在其中。见教材 5.4.3。"},
+
+{m:"5.4.3 工程基础",
+ q:"信息安全系统工程应吸纳的安全管理成熟规范不包括（ ）。",
+ o:["辐射安全","输入/输出产品的安全","网络安全审查","信息审计安全"],
+ a:2,
+ e:"安全管理规范 12 项 = <b>物理安全、计算机安全、网络安全、通信安全、输入/输出产品的安全、操作系统安全、数据库系统安全、数据安全、信息审计安全、人员安全、管理安全、辐射安全</b>。「网络安全审查」不是教材表述。见教材 5.4.3。"},
+
+{m:"5.4.4 工程体系架构",
+ q:"关于 ISSE-CMM（信息安全系统工程能力成熟度模型），下列说法正确的是（ ）。",
+ o:["它主要适用于软件开发组织，是软件过程能力的度量标准","它是信息安全技术产品的评测标准，主要适用于产品供应商","它等同于国内软件成熟度模型 CSMM，五级名称完全相同","它是信息安全系统工程实施的度量标准，主要适用于工程组织、获取组织和评估组织"],
+ a:3,
+ e:"<b>ISSE-CMM 是信息安全系统工程实施的度量标准</b>，主要适用于 <b>工程组织、获取组织和评估组织</b>。⚠️ 它属于「信息安全系统工程」CMM，别与软件 CMM / 国内 CSMM 混。见教材 5.4.4。"},
+
+{m:"5.4.4 工程体系架构",
+ q:"ISSE 过程由三个相互独立又有有机联系的部分组成，它们是（ ）。",
+ o:["规划过程、执行过程、监控过程","工程过程、风险过程、保证过程","需求过程、设计过程、实施过程","安全过程、管理过程、审计过程"],
+ a:1,
+ e:"ISSE 过程三部分 = <b>工程过程、风险过程、保证过程</b>（口诀「工险保」）。见教材 5.4.4。"},
+
+{m:"5.4.4 工程体系架构",
+ q:"ISSE 的工程过程是一个涵盖全生命周期的完整过程，包括（ ）。",
+ o:["概念、设计、实现、测试、部署、运行、维护、退出","概念、规划、设计、开发、测试、上线、运维","需求、设计、编码、测试、集成、交付、维护","立项、招标、设计、施工、验收、运营"],
+ a:0,
+ e:"工程过程是包括<b>概念、设计、实现、测试、部署、运行、维护、退出</b>的完整过程（口诀「概设实测部运维退」）。见教材 5.4.4。"},
+
+{m:"5.4.4 工程体系架构",
+ q:"在 ISSE 的风险过程中，「一个有害事件」由（ ）三个部分组成。",
+ o:["风险、威胁、脆弱性","威胁、风险、影响","威胁、脆弱性、影响","脆弱性、影响、损失"],
+ a:2,
+ e:"风险过程中，<b>一个有害事件由「威胁、脆弱性和影响」三个部分组成</b>。⚠️ 不是「风险+威胁+脆弱性」。风险过程主要目标是降低信息系统运行的风险。见教材 5.4.4。"},
+
+{m:"5.4.4 工程体系架构",
+ q:"ISSE 三个过程中，以「安全需求得到满足的可信程度」为目标的是（ ）。",
+ o:["工程过程","保证过程","风险过程","管理过程"],
+ a:1,
+ e:"<b>保证过程</b>是指<b>安全需求得到满足的可信程度</b>，通过证据构建保证论据，确保安全措施按需求运行（来自措施的正确性和有效性）。见教材 5.4.4。"},
+
+{m:"5.4.4 工程体系架构",
+ q:"ISSE-CMM 的体系结构采用两维设计，这两维分别是（ ）。",
+ o:["过程维 / 技术维","时间维 / 空间维","安全维 / 管理维","域（Domain）/ 能力（Capability）"],
+ a:3,
+ e:"ISSE-CMM 体系结构采用<b>两维设计：一维是「域（Domain）」，另一维是「能力（Capability）」</b>。域维管「做什么」（过程域），能力维管「做得多好」（公共特性 / 级别）。见教材 5.4.4。"},
+
+{m:"5.4.4 工程体系架构",
+ q:"ISSE-CMM 域维中，由基本实施组成的 11 个「安全工程过程域」不包括（ ）。",
+ o:["保证质量","实施安全控制","评估威胁","协调安全"],
+ a:0,
+ e:"「<b>保证质量</b>」属于 <b>11 个与项目和组织实施有关的过程域</b>（PA12~PA22），不属于 11 个安全工程过程域。11 个安全工程过程域 = 实施安全控制 / 评估影响 / 评估安全风险 / 评估威胁 / 评估脆弱性 / 建立保证论据 / 协调安全 / 监控安全态 / 提供安全输入 / 确定安全需求 / 验证和证实安全。见教材 5.4.4。"},
+
+{m:"5.4.4 工程体系架构",
+ q:"ISSE-CMM 的 5 级能力级别，由低到高依次是（ ）。",
+ o:["初始级、可重复级、已定义级、量化管理级、持续优化级","非正规实施级、已定义级、规划和跟踪级、量化控制级、持续改进级","非正规实施级、规划和跟踪级、充分定义级、量化控制级、持续改进级","初始级、规划和跟踪级、充分定义级、量化控制级、持续改进级"],
+ a:2,
+ e:"5 级能力级别 = <b>非正规实施级（L1）→ 规划和跟踪级（L2）→ 充分定义级（L3）→ 量化控制级（L4）→ 持续改进级（L5）</b>，口诀「<b>非规充量持</b>」。⚠️ 别套用软件 CMM 的「已定义级 / 量化管理级」名称。见教材 5.4.4。"}
+];
+
+const LETTERS = ["A","B","C","D"];
+let pool = [], cur = 0, answered = false, stats = {}, wrongList = [];
+
+function init(list){
+  pool = list.map(x=>Object.assign({},x));
+  cur = 0; answered = false; stats = {}; wrongList = [];
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  document.getElementById("totalNow").textContent = pool.length;
+  document.getElementById("scoreNow").textContent = "0";
+  render();
+}
+function render(){
+  const q = pool[cur];
+  document.getElementById("pos").textContent = "第 " + (cur+1) + " / " + pool.length + " 题";
+  document.getElementById("moduleChip").textContent = q.m;
+  document.getElementById("bar").style.width = (cur/pool.length*100) + "%";
+  document.getElementById("qtext").innerHTML = q.q;
+  const box = document.getElementById("options");
+  box.innerHTML = "";
+  q.o.forEach((t,i)=>{
+    const d = document.createElement("div");
+    d.className = "opt";
+    d.innerHTML = '<span class="tag">'+LETTERS[i]+'</span><span>'+t+"</span>";
+    d.onclick = ()=>choose(i);
+    box.appendChild(d);
+  });
+  document.getElementById("feedback").classList.add("hidden");
+}
+function choose(i){
+  if(answered) return;
+  answered = true;
+  const q = pool[cur];
+  const ok = (i === q.a);
+  if(!stats[q.m]) stats[q.m] = {right:0,total:0};
+  stats[q.m].total++;
+  const opts = document.querySelectorAll(".opt");
+  opts.forEach((d,idx)=>{
+    d.classList.add("locked");
+    if(idx === q.a) d.classList.add("correct");
+    else if(idx === i) d.classList.add("wrong");
+    else d.classList.add("dim");
+    d.onclick = null;
+  });
+  if(ok){
+    stats[q.m].right++;
+    document.getElementById("scoreNow").textContent = sumRight();
+  } else {
+    wrongList.push({q:q, picked:i});
+  }
+  const v = document.getElementById("verdict");
+  v.textContent = ok ? "✓ 答对了" : "✗ 答错了　正确答案：" + LETTERS[q.a];
+  v.className = ok ? "" : "bad";
+  document.getElementById("explain").innerHTML = q.e;
+  document.getElementById("feedback").classList.remove("hidden");
+  document.getElementById("nextBtn").textContent =
+    (cur === pool.length-1) ? "查看成绩单 →" : "下一题 →";
+}
+function sumRight(){
+  let s = 0; for(const k in stats) s += stats[k].right; return s;
+}
+function next(){
+  cur++;
+  if(cur >= pool.length){ showResult(); }
+  else { answered = false; render(); window.scrollTo(0,0); }
+}
+function showResult(){
+  document.getElementById("quiz").classList.add("hidden");
+  const r = document.getElementById("result");
+  const total = pool.length, right = sumRight();
+  const pct = Math.round(right/total*100);
+  let msg;
+  if(pct >= 80) msg = "达标（≥80%）：本节知识点基本闭环，可以进入下一节，或用康奈尔模板的「遮」字诀再过一遍线索栏。";
+  else if(pct >= 60) msg = "接近达标：把下面的错题解析看完，回看对应模块的知识点清单，明天用康奈尔模板遮住答案重测。";
+  else msg = "未达标：正确率低是发现漏洞的正常信号——先把知识点清单的「必背」块过一遍，再点「只重做错题」。";
+
+  let tbl = '<h3>分模块得分</h3><table><tr><th>模块</th><th>正确 / 题数</th><th>正确率</th></tr>';
+  for(const k in stats){
+    const s = stats[k];
+    const p = Math.round(s.right/s.total*100);
+    tbl += '<tr><td>'+k+'</td><td>'+s.right+' / '+s.total+'</td><td><div class="mbar"><div style="width:'+p+'%"></div></div></td></tr>';
+  }
+  tbl += "</table>";
+
+  let wrong = "";
+  if(wrongList.length){
+    wrong = "<h3>错题回顾（"+wrongList.length+" 题）</h3>";
+    wrongList.forEach((w,i)=>{
+      wrong += '<div class="wq"><div class="wt">'+(i+1)+". "+w.q.q+"</div>"
+        + '<div class="wa">你的选择：'+LETTERS[w.picked]+"　"+w.q.o[w.picked]+"</div>"
+        + '<div class="wc">正确答案：'+LETTERS[w.q.a]+"　"+w.q.o[w.q.a]+"</div>"
+        + '<div class="we">'+w.q.e+"</div></div>";
+    });
+  } else {
+    wrong = '<h3>错题回顾</h3><p style="font-size:13px;color:#0F6E56;">全部答对，本节知识点已闭环。</p>';
+  }
+
+  r.innerHTML =
+    '<div class="r-head"><div class="r-score">'+right+"<small> / "+total+"</small></div>"
+    + '<div class="r-msg"><b>'+pct+"%</b><br>"+msg+"</div></div>"
+    + tbl + wrong
+    + '<div class="btns">'
+    + '<button class="btn primary" id="retryWrong"'+(wrongList.length?"":" disabled")+">只重做错题（"+wrongList.length+" 题）</button>"
+    + '<button class="btn" id="retryAll">全部重来</button></div>';
+  r.classList.remove("hidden");
+  document.getElementById("retryWrong").onclick = ()=>{
+    const list = wrongList.map(w=>w.q);
+    init(list);
+    window.scrollTo(0,0);
+  };
+  document.getElementById("retryAll").onclick = ()=>{ init(QUESTIONS); window.scrollTo(0,0); };
+  window.scrollTo(0,0);
+}
+document.getElementById("nextBtn").onclick = next;
+document.addEventListener("keydown", e=>{
+  if(document.getElementById("quiz").classList.contains("hidden")) return;
+  if(e.key === "Enter" || e.key === " "){ if(answered){ e.preventDefault(); next(); } return; }
+  const map = {"a":0,"b":1,"c":2,"d":3,"1":0,"2":1,"3":2,"4":3};
+  const k = e.key.toLowerCase();
+  if(k in map && !answered) choose(map[k]);
+});
+init(QUESTIONS);
+</script>
+</body>
+</html>

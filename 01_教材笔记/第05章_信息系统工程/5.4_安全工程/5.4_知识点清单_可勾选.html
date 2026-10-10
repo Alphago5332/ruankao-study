@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5.4 安全工程 · 知识点清单 · 可勾选清单</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Microsoft YaHei", "微软雅黑", sans-serif; background: #f7f9fc; color: #333; padding: 24px; line-height: 1.7; }
+  .wrap { max-width: 820px; margin: 0 auto; background: #fff; padding: 32px 36px; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,.08); }
+  h1 { font-size: 22px; color: #185FA5; margin-bottom: 8px; }
+  h2 { font-size: 18px; color: #185FA5; margin: 22px 0 10px; border-left: 4px solid #185FA5; padding-left: 10px; }
+  h3 { font-size: 15px; color: #185FA5; margin: 16px 0 8px; }
+  h4 { font-size: 14px; color: #185FA5; margin: 14px 0 6px; }
+  blockquote { background: #f4f8fc; border-left: 4px solid #185FA5; padding: 10px 14px; margin: 10px 0; color: #444; font-size: 13.5px; }
+  p, .plain-li { margin: 8px 0; font-size: 14px; }
+  .plain-li { display: flex; gap: 6px; }
+  .bullet { color: #185FA5; font-weight: bold; }
+  .task { display: flex; align-items: flex-start; gap: 8px; margin: 8px 0; cursor: pointer; user-select: none; }
+  .task input[type="checkbox"] { width: 16px; height: 16px; margin-top: 4px; flex-shrink: 0; accent-color: #185FA5; cursor: pointer; }
+  .task-text { font-size: 14px; transition: opacity .2s; }
+  .task input:checked + .task-text { text-decoration: line-through; opacity: .45; color: #666; }
+  .item-body { margin: 4px 0 12px 24px; }
+  .item-body p { margin: 4px 0; color: #555; font-size: 13.5px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; }
+  th, td { border: 1px solid #d9e2ec; padding: 7px 10px; }
+  th { background: #eef4fb; color: #185FA5; font-weight: 600; }
+  td { background: #fff; }
+  ol { margin: 8px 0 8px 22px; font-size: 14px; }
+  li { margin: 4px 0; }
+  code { background: #f0f3f7; padding: 1px 4px; border-radius: 3px; font-family: Consolas, monospace; font-size: 12px; }
+  a { color: #185FA5; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  summary { cursor: pointer; color: #185FA5; font-weight: 600; }
+  details { background: #f9fbfd; border: 1px solid #e3eaf2; border-radius: 6px; padding: 10px 14px; margin: 12px 0; }
+  .progress { position: sticky; top: 0; background: #fff; border-bottom: 1px solid #e3eaf2; padding: 8px 0; margin: -32px -36px 20px; padding-left: 36px; padding-right: 36px; font-size: 12px; color: #666; z-index: 10; }
+  .progress b { color: #185FA5; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="progress" id="progress">已完成：0 / 0</div>
+  <h1>5.4 安全工程 · 知识点清单</h1>
+<blockquote><b>教材</b>：《信息系统项目管理师教程（第 4 版）》第 5 章第 4 节（约 P170 ~ P181）<br><b>学习日</b>：2026-10-10（Day 17）<br><b>上午分值</b>：第 5 章综合知识约 <b>5~8 题</b>，5.4 安全工程占其中 <b>1~2 题</b>；与第 3 版第 3 章「信息安全工程」同源，<b>旧真题有对应题可刷</b>（安全空间三维 / 安全机制·服务·技术分类 / ISSE 过程三部分 / ISSE-CMM 体系结构两维 / 公共特性五级均为历年高频）<br><b>本节定位</b>：<b>数量型 + 分类配对 + 模型结构</b>。教材共 11 页，其中 <b>5.4.4 工程体系架构（P174~181）独占 7 页，是本节绝对重头</b>（ISSE-CMM 的域维 / 能力维 / 能力级别）。高频块：<b>信息系统工程两组术语 / 安全空间三维五属性 / 安全机制 9 项 / 安全服务 6 项 / 安全技术 6 项 / ISSE 过程三部分 / ISSE-CMM 两维 + 11 个安全工程过程域 + 公共特性 5 级</b><br>⚠️ <b>口径提醒</b>：① 教材讲的是「<b>信息安全系统工程</b>」（ISSE），<b>不是</b>「信息系统安全工程」——教材专设「术语澄清」强调此点；② 信息系统工程 = 业务应用信息系统工程 + 信息安全系统工程，<b>两者「独立且不可分割」</b>；③ 安全空间三维是「<b>机制 / OSI / 服务</b>」而非「机制 / 技术 / 服务」；④ ISSE-CMM 是「<b>信息安全系统工程能力成熟度模型</b>」，别与软件 CMM / CSMM 混</blockquote>
+<h2>今日目标（学完要能做到）</h2>
+<ol><li>说出<b>信息安全系统工程（ISSE）的定位</b>，理清<b>两组术语关系</b>：信息系统 = 业务应用信息系统 + 信息安全系统；信息系统工程 = 业务应用信息系统工程 + 信息安全系统工程</li><li>背出<b>信息安全系统</b>的定义（信息安全保障系统简称）与「客观、独立于业务应用信息系统而存在」的定位</li><li>默写<b>信息安全空间三维坐标</b>（X 安全机制 / Y OSI 网络参考模型 / Z 安全服务）与<b>五大属性</b>（认证 / 权限 / 完整 / 加密 / 不可否认）</li><li>背出<b>安全机制 9 项</b>（基础设施实体 / 平台 / 数据 / 通信 / 应用 / 运行 / 管理 / 授权和审计 / 安全防范体系）与 <b>WPDRRC 六环节</b></li><li>背出<b>安全服务 6 项</b>（对等实体认证 / 数据保密 / 数据完整性 / 数据源点认证 / 禁止否认 / 犯罪证据提供）</li><li>背出<b>安全技术 6 项</b>（加密 / 数字签名 / 访问控制 / 数据完整性 / 认证 / 数据挖掘）</li><li>背出<b>工程基础 8 类相关工程</b>与<b>安全管理规范 12 项</b></li><li>说清 <b>ISSE-CMM 基础</b>（度量标准 + 三个适用组织）与 <b>ISSE 过程三部分</b>（工程过程 / 风险过程 / 保证过程）</li><li>默写 <b>ISSE-CMM 体系结构两维</b>（域维 / 能力维），背出 <b>11 个安全工程过程域 PA01~PA11</b></li><li>背出<b>公共特性 5 个能力级别</b>（非正规实施 / 规划和跟踪 / 充分定义 / 量化控制 / 持续改进）</li></ol>
+<h2>一、必背清单</h2>
+<h3>模块 A ｜ 工程概述（5.4.1）</h3>
+<label class="task"><input type="checkbox" data-key="A0" ><span class="task-text"><b>A0 · 信息安全系统工程的由来与定位</b> ⭕ 必背（总起 + 定位）</span></label><div class="item-body"><p>随着互联网畅通与业务扩展，信息安全风险急剧增加。<b>由业务应用信息系统来解决安全性问题已不能胜任</b>，<b>由操作系统、数据库系统、网络管理系统来解决安全问题也不能满足实际需要</b>，于是不得不建立<b>独立的信息安全系统</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>信息安全系统工程</b>就是要<b>建造一个信息安全系统</b>，它是整个信息系统工程的一部分，而且<b>最好是与业务应用信息系统工程同步进行</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>建设内容围绕「信息安全」：风险评估 / 策略制定 / 需求确定 / 总体设计 / 详细设计 / 设备选型 / 招投标 / 密钥密码机制确定 / 资源界定和授权 / 施工防泄密 / 测试·运营·维护的安全管理</span></div>
+<blockquote>高频：题干出现「<b>独立的信息安全系统</b>」「<b>与业务应用信息系统工程同步进行</b>」→ 信息安全系统工程</blockquote>
+<label class="task"><input type="checkbox" data-key="A1" ><span class="task-text"><b>A1 · 两组术语关系</b> ⭕ 必背（结构图 + 高频）</span></label>
+<table><thead><tr><th>上位概念</th><th>包含的两个部分</th></tr></thead><tbody><tr><td><b>信息系统</b></td><td><b>业务应用信息系统</b> + <b>信息安全系统</b></td></tr><tr><td><b>信息系统工程</b></td><td><b>业务应用信息系统工程</b> + <b>信息安全系统工程</b></td></tr></tbody></table>
+<div class="plain-li"><span class="bullet">•</span> <span><b>信息系统工程的两个部分是「独立且不可分割」的</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>信息安全系统<b>服务于</b>业务应用信息系统并与之密不可分，但<b>不能混为一谈</b>：二者的<b>功能、操作流程、管理方式、人员要求、技术领域都完全不同</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>信息安全系统<b>不能脱离业务应用信息系统而存在</b>（如国税 / 公安 / 社保信息系统，一定同时包含两部分）</span></div>
+<blockquote>记法：<b>「信息系统 = 业 + 安」「信息系统工程 = 业工 + 安工」</b>——上面一对是「系统」，下面一对是「工程」，别串行</blockquote>
+<label class="task"><input type="checkbox" data-key="A2" ><span class="task-text"><b>A2 · 四个关键术语的定义</b> ⭕ 必背（定义配对）</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span><b>业务应用信息系统</b>：<b>支撑业务运营</b>的计算机应用信息系统，如银行柜台业务信息系统、国税征收信息系统</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>业务应用信息系统工程</b>：为达到建设好业务应用信息系统所组织实施的工程，<b>一般称为「信息系统集成项目工程」</b>，是信息系统工程的一部分</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>信息安全系统工程</b>：为达到建设好信息安全系统的特殊需要而组织实施的工程，是信息系统工程的一部分；<b>作为信息系统工程的一个子集，其安全体系和策略必须遵从系统工程的一般性原则和规律</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>信息安全系统工程原理<b>适用于系统和应用的开发、集成、运行、管理、维护和演变，以及产品的开发、交付和演变</b></span></div>
+<blockquote>判别词：「一般称为<b>信息系统集成项目工程</b>」→ 业务应用信息系统工程；「<b>遵从系统工程一般性原则</b>」→ 信息安全系统工程</blockquote>
+<label class="task"><input type="checkbox" data-key="A3" ><span class="task-text"><b>A3 · 术语澄清：讲的是「信息安全系统工程」不是「信息系统安全工程」</b> ⭕ 必背（辨析）</span></label><div class="item-body"><p>教材专设术语澄清：本节讲述的是<b>信息安全系统工程</b>，而<b>不是信息系统安全工程</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>「信息系统安全工程」从字面上会<b>误解为「安全地建设一个信息系统」</b>，从而<b>忽略信息系统中的信息安全问题</b>（可以安全地建成一个没有信息安全子系统的信息系统 → 留下隐患）</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>「信息安全系统工程」明白无误地确定了：<b>这个工程就是建设一个信息安全系统</b></span></div>
+<blockquote>高频陷阱：题干若强调「<b>建一个信息安全系统</b>」→ 信息安全系统工程；强调「<b>把信息系统建安全</b>」是错误理解方向</blockquote>
+<h3>模块 B ｜ 安全系统（5.4.2）</h3>
+<label class="task"><input type="checkbox" data-key="B0" ><span class="task-text"><b>B0 · 信息安全系统的定位与信息安全空间三维</b> ⭕ 必背（三维坐标）</span></label><div class="item-body"><p><b>信息安全保障系统一般简称「信息安全系统」</b>，它是「信息系统」的一个部分，用于<b>保证「业务应用信息系统」正常运营</b>。现在人们已明确：要建立一个「信息系统」，就<b>必须建立一个或多个业务应用信息系统和一个信息安全系统</b>。信息安全系统是<b>客观的、独立于业务应用信息系统而存在</b>的信息系统。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>用「宏观」<b>三维空间图</b>反映信息安全系统的体系架构：</span></div>
+<table><thead><tr><th>轴</th><th>内容</th></tr></thead><tbody><tr><td><b>X 轴</b></td><td><b>安全机制</b></td></tr><tr><td><b>Y 轴</b></td><td><b>OSI 网络参考模型</b>（应用/表示/会话/传输/网络/数据链路/物理）</td></tr><tr><td><b>Z 轴</b></td><td><b>安全服务</b></td></tr></tbody></table>
+<div class="plain-li"><span class="bullet">•</span> <span>由 X、Y、Z 三轴形成的三维空间就是信息系统的「<b>安全空间</b>」</span></div>
+<blockquote>记法：<b>X 机制 · Y OSI · Z 服务</b>；「许多技术技巧都是在网络各层面上实施的，离开网络信息系统的安全也就失去意义」</blockquote>
+<label class="task"><input type="checkbox" data-key="B1" ><span class="task-text"><b>B1 · 安全空间五大属性</b> ⭕ 必背（数量 + 列举）</span></label><div class="item-body"><p>随着网络的逐层扩展，安全空间范围逐步加大、内涵更丰富，达到具有<b>认证、权限、完整、加密和不可否认</b>五大要素，也叫「<b>安全空间」的五大属性</b>。</p></div>
+<blockquote>记法：<b>「认 · 权 · 完 · 加 · 不可否认」</b>——注意是<b>五大属性</b>，别与安全技术 6 项混</blockquote>
+<label class="task"><input type="checkbox" data-key="B2" ><span class="task-text"><b>B2 · 安全机制 9 项总览</b> ⭕ 必背（分类列举 + 高频）</span></label><div class="item-body"><p>安全机制可以理解为<b>提供某些安全服务，利用各种安全技术和技巧，所形成的一个较为完善的结构体系</b>。包含 <b>9 项</b>：</p>
+<p><b>基础设施实体安全、平台安全、数据安全、通信安全、应用安全、运行安全、管理安全、授权和审计安全、安全防范体系</b>。</p></div>
+<blockquote>记法：<b>「实体 · 平台 · 数据 · 通信 · 应用 · 运行 · 管理 · 授权审计 · 防范体系」</b>（9 项）<br>⚠️ 高频陷阱：题干若出现「<b>平台安全</b>机制 = 安全操作系统 + 安全数据库 + ……」→ 属安全机制；安全机制是 X 轴</blockquote>
+<label class="task"><input type="checkbox" data-key="B3" ><span class="task-text"><b>B3 · 平台安全 / 数据安全 / 通信安全 的组成</b> ⭕ 必背（内容配对）</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span><b>平台安全</b>：操作系统漏洞检测与修复、网络基础设施漏洞检测与修复、通用基础应用程序漏洞检测与修复、网络安全产品部署</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>数据安全</b>：介质与载体安全保护、数据访问控制、数据完整性、数据可用性、数据监控和审计、数据存储与备份安全</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>通信安全</b>：通信线路和网络基础设施安全性测试与优化、安装网络加密设施、设置通信加密软件、设置身份鉴别机制、设置并测试安全通道、测试各项网络协议运行漏洞</span></div>
+<blockquote>判别词：出现「<b>漏洞检测与修复</b>」→ 平台安全；出现「<b>介质与载体 / 访问控制 / 备份</b>」→ 数据安全；出现「<b>加密设施 / 安全通道</b>」→ 通信安全</blockquote>
+<label class="task"><input type="checkbox" data-key="B4" ><span class="task-text"><b>B4 · 应用安全 / 运行安全 的组成</b> ⭕ 必背（内容配对）</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span><b>应用安全</b>：业务软件程序安全性测试（Bug 分析）、防抵赖测试、访问控制验证测试、身份鉴别检测、备份与恢复机制检查、数据唯一性与一致性及防冲突检测、保密性测试、可靠性测试、可用性测试</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>运行安全</b>：应急处置机制和配套服务、网络系统安全性监测、网络安全产品运行监测、定期检查和评估、系统升级和补丁提供、跟踪最新安全漏洞及通报、灾难恢复机制与预防、系统改造管理、网络安全专业技术咨询服务</span></div>
+<blockquote>判别词：出现「<b>业务软件 / 防抵赖 / 现场</b>」→ 应用安全；出现「<b>应急处置 / 监测 / 补丁 / 灾难恢复</b>」→ 运行安全</blockquote>
+<label class="task"><input type="checkbox" data-key="B5" ><span class="task-text"><b>B5 · 授权和审计安全 / 安全防范体系（WPDRRC + EISRM）</b> ⭕ 必背（六环节 + 高频）</span></label>
+<div class="plain-li"><span class="bullet">•</span> <span><b>授权安全</b>：以向用户和应用程序<b>提供权限管理和授权服务</b>为目标，提供用户身份到应用授权的<b>映射功能</b>，实现与具体应用系统开发和管理<b>无关</b>的访问控制机制</span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>安全防范体系</b>：<b>核心是实现组织信息安全资源的综合管理，即 EISRM（Enterprise Information Security Resource Management）</b>；其六项能力构成 <b>WPDRRC</b> 信息安全保障体系：</span></div>
+<table><thead><tr><th>环节</th><th>英文</th></tr></thead><tbody><tr><td><b>预警</b></td><td>Warn</td></tr><tr><td><b>保护</b></td><td>Protect</td></tr><tr><td><b>检测</b></td><td>Detect</td></tr><tr><td><b>反应</b></td><td>Response</td></tr><tr><td><b>恢复</b></td><td>Recover</td></tr><tr><td><b>反击</b></td><td>Counter-attack</td></tr></tbody></table>
+<div class="plain-li"><span class="bullet">•</span> <span>可结合 WPDRRC 从<b>人员、技术、政策（法律/法规/制度/管理）三大要素</b>构成宏观信息网络安全保障体系框架</span></div>
+<blockquote>记法：<b>WPDRRC = 警 · 保 · 检 · 应 · 恢 · 反</b>；组织安全防范体系核心 = <b>EISRM</b></blockquote>
+<label class="task"><input type="checkbox" data-key="B6" ><span class="task-text"><b>B6 · 安全服务 6 项</b> ⭕ 必背（分类列举 + 高频）</span></label><div class="item-body"><p>安全服务就是<b>从网络中的各个层次提供给信息应用系统所需要的安全服务支持</b>。包括 <b>6 项</b>：</p>
+<p><b>对等实体认证服务、数据保密服务、数据完整性服务、数据源点认证服务、禁止否认服务、犯罪证据提供服务</b>。</p></div>
+<table><thead><tr><th>服务</th><th>作用</th></tr></thead><tbody><tr><td><b>对等实体认证服务</b></td><td>两个开放系统同等层中的实体建立链接或传输数据时，对对方实体的<b>合法性、真实性</b>进行确认，<b>以防假冒</b></td></tr><tr><td><b>数据保密服务</b></td><td>防止网络中各系统之间的数据被<b>截获或非法存取而泄密</b>，提供密码加密保护（链接/无链接两种方式）</td></tr><tr><td><b>数据完整性服务</b></td><td>防止非法实体对数据的<b>修改、插入、删除</b>及交换过程中的<b>数据丢失</b>（分 5 种：带/不带恢复功能的链接、选择字段链接、选择字段无链接、无链接）</td></tr><tr><td><b>数据源点认证服务</b></td><td>确保数据<b>发自真正的源点</b>，防止假冒</td></tr><tr><td><b>禁止否认服务</b></td><td>防止发送方<b>否认发送</b>、接收方<b>否认收到或伪造接收</b>（由「不得否认发送」「不得否认接收」两种组成）</td></tr><tr><td><b>犯罪证据提供服务</b></td><td>为违反法律法规的行为提供<b>各类数字证据、信息线索</b></td></tr></tbody></table>
+<blockquote>记法：<b>「对 · 密 · 完 · 源 · 否 · 罪」</b>——注意「数据源点认证」≠「对等实体认证」</blockquote>
+<label class="task"><input type="checkbox" data-key="B7" ><span class="task-text"><b>B7 · 安全技术 6 项</b> ⭕ 必背（列举）</span></label><div class="item-body"><p>安全技术主要涉及：<b>加密、数字签名技术、访问控制、数据完整性、认证、数据挖掘</b>。</p></div>
+<blockquote>记法：<b>「加 · 签 · 控 · 完 · 认 · 挖」</b>——⚠️ 教材原文含「<b>数据挖掘</b>」这一项（别漏）；「访问控制」（教材旧版 OCR 常误作「防控控制」）<br>高频陷阱：安全技术 6 项 <b>≠</b> 安全服务 6 项 <b>≠</b> 安全空间五属性——三组数量都不同，别对调</blockquote>
+<h3>模块 C ｜ 工程基础（5.4.3）</h3>
+<label class="task"><input type="checkbox" data-key="C0" ><span class="task-text"><b>C0 · 工程基础 8 类相关工程</b> ⭕ 必背（列举 + 数量）</span></label><div class="item-body"><p>信息安全系统的建设是在 <b>OSI 网络参考模型的各个层面</b>进行的，因此信息安全系统工程活动<b>离不开其他相关工程</b>，主要包括 <b>8 类</b>：</p>
+<p><b>硬件工程、软件工程、通信及网络工程、数据存储与灾备工程、系统工程、测试工程、密码工程、组织信息化工程</b>。</p></div>
+<blockquote>记法：<b>「硬 · 软 · 通 · 存 · 系 · 测 · 密 · 组」</b>（8 类）——「密码工程」是信息安全特色的一个，别漏</blockquote>
+<label class="task"><input type="checkbox" data-key="C1" ><span class="task-text"><b>C1 · 工程协调</b> ⭕ 必背（一句话结论）</span></label><div class="item-body"><p>信息安全系统建设遵从组织所制定的<b>安全策略</b>。而安全策略由<b>组织和组织的客户和服务对象、集成商、安全产品开发者、密码研制单位、独立评估者和其他相关组织共同协商建立</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>因此信息安全系统工程活动<b>必须与其他外部实体进行协调</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span>这些关系接口<b>遍布各种组织且相互影响</b>，所以信息安全系统工程与其他工程相比<b>更加复杂</b></span></div>
+<blockquote>高频：题干出现「<b>安全策略由多方共同协商建立 / 接口遍布各种组织</b>」→ 强调 ISSE 的<b>协调性 / 复杂性</b></blockquote>
+<label class="task"><input type="checkbox" data-key="C2" ><span class="task-text"><b>C2 · 安全管理规范 12 项</b> ⭕ 必背（列举）</span></label><div class="item-body"><p>信息安全系统工程应吸纳<b>安全管理</b>的成熟规范部分，这些安全管理包括 <b>12 项</b>：</p>
+<p><b>物理安全、计算机安全、网络安全、通信安全、输入/输出产品的安全、操作系统安全、数据库系统安全、数据安全、信息审计安全、人员安全、管理安全、辐射安全</b>。</p></div>
+<blockquote>记法：<b>「物 · 计 · 网 · 通 · 输 · 操 · 库 · 数 · 审 · 人 · 管 · 辐」</b>（12 项）——注意含「<b>辐射安全</b>」</blockquote>
+<h3>模块 D ｜ 工程体系架构 · ISSE-CMM 基础与 ISSE 过程（5.4.4）</h3>
+<label class="task"><input type="checkbox" data-key="D0" ><span class="task-text"><b>D0 · ISSE-CMM 基础</b> ⭕ 必背（定义 + 三适用组织）</span></label><div class="item-body"><p><b>ISSE-CMM = 信息安全系统工程能力成熟度模型</b>（Information Security Systems Engineering Capability Maturity Model），是<b>信息安全系统工程实施的度量标准</b>，主要适用于 <b>3 类组织</b>：</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>工程组织</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>获取组织</b></span></div>
+<div class="plain-li"><span class="bullet">•</span> <span><b>评估组织</b></span></div>
+<blockquote>记法：<b>「工程施工方 · 获取方 · 评估方」</b>；⚠️ 它是「<b>信息安全</b>系统工程」CMM，<b>别与软件 CMM / 国内 CSMM 混</b></blockquote>
+<label class="task"><input type="checkbox" data-key="D1" ><span class="task-text"><b>D1 · ISSE 过程三部分</b> ⭕ 必背（总览 + 高频）</span></label><div class="item-body"><p><b>ISSE 过程的目标是提供一个框架，每个工程项目都可以对这个框架进行裁剪以符合自己特定的需求。</b> 由<b>三个相互独立又有有机联系的基本部分</b>组成：</p></div>
+<table><thead><tr><th>过程</th><th>核心目标</th></tr></thead><tbody><tr><td><b>工程过程</b></td><td>包括概念、设计、实现、测试、部署、运行、维护、退出的<b>完整过程</b>，与其他工程合作识别安全需求、创建解决方案</td></tr><tr><td><b>风险过程</b></td><td>主要目标是<b>降低信息系统运行的风险</b></td></tr><tr><td><b>保证过程</b></td><td>安全需求<b>得到满足的可信程度</b>（非常重要的部分）</td></tr></tbody></table>
+<blockquote>记法：<b>「工 · 险 · 保」</b>（工程 / 风险 / 保证）</blockquote>
+<label class="task"><input type="checkbox" data-key="D2" ><span class="task-text"><b>D2 · 工程过程</b> ⭕ 必背（八阶段）</span></label><div class="item-body"><p>工程过程是一个包括<b>概念、设计、实现、测试、部署、运行、维护、退出</b>的<b>完整过程</b>；与其他工程合作，<b>识别安全需求、创建解决方案</b>。</p></div>
+<blockquote>记法：八阶段「<b>概 · 设 · 实 · 测 · 部 · 运 · 维 · 退</b>」——是 ISSE 中涵盖全生命周期的那一部分</blockquote>
+<label class="task"><input type="checkbox" data-key="D3" ><span class="task-text"><b>D3 · 风险过程</b> ⭕ 必背（有害事件三组成 + 高频）</span></label><div class="item-body"><p>风险过程主要目标是<b>降低信息系统运行的风险</b>。<b>一个有害事件由「威胁、脆弱性和影响」三个部分组成</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>流程：识别威胁 / 脆弱性 / 影响 → 评估风险并优先级排序 → 量化风险、建立风险承受级别 → 实施安全措施减轻风险 → <b>接受残留风险</b></span></div>
+<blockquote>高频陷阱：<b>有害事件三组成 = 威胁 + 脆弱性 + 影响</b>（不是「风险+威胁+脆弱性」）</blockquote>
+<label class="task"><input type="checkbox" data-key="D4" ><span class="task-text"><b>D4 · 保证过程</b> ⭕ 必背（一句话）</span></label><div class="item-body"><p>保证过程是指<b>安全需求得到满足的可信程度</b>，它是信息安全系统工程<b>非常重要的部分</b>；通过<b>证据构建保证论据</b>，确保安全措施<b>按需求运行</b>（来自于措施的<b>正确性和有效性</b>）。</p></div>
+<blockquote>判别词：出现「<b>可信程度 / 保证论据</b>」→ 保证过程</blockquote>
+<h3>模块 E ｜ 工程体系架构 · ISSE-CMM 体系结构（5.4.4）</h3>
+<label class="task"><input type="checkbox" data-key="E0" ><span class="task-text"><b>E0 · ISSE-CMM 体系结构两维设计</b> ⭕ 必背（结构 + 高频）</span></label><div class="item-body"><p>ISSE-CMM 的体系结构可以<b>在整个信息安全系统工程范围内决定信息安全工程组织的成熟性</b>；目标是<b>落实安全策略，从管理和制度化方面突出信息安全工程的基本特征</b>。采用<b>两维设计</b>：</p></div>
+<table><thead><tr><th>维度</th><th>名称</th><th>内容</th></tr></thead><tbody><tr><td>一维</td><td><b>域（Domain）</b></td><td><b>域维 / 安全工程过程域</b>——汇集定义 ISSE 的所有实施活动（即过程域 PA）</td></tr><tr><td>另一维</td><td><b>能力（Capability）</b></td><td><b>能力维 / 公共特性</b>——代表组织能力（过程管理能力 + 制度化能力）</td></tr></tbody></table>
+<blockquote>记法：<b>「一维域 · 一维能力」</b>；域维管「<b>做什么</b>」（过程域），能力维管「<b>做得多好</b>」（公共特性 / 级别）</blockquote>
+<label class="task"><input type="checkbox" data-key="E1" ><span class="task-text"><b>E1 · 域维：11 个安全工程过程域（PA01~PA11）</b> ⭕ 必背（列举 + 高频）</span></label><div class="item-body"><p><b>ISSE 包括 6 个基本实施，这些基本实施被组织成 11 个信息安全工程过程域</b>（由基本实施组成）：</p></div>
+<table><thead><tr><th>编号</th><th>过程域</th></tr></thead><tbody><tr><td>PA01</td><td><b>实施安全控制</b></td></tr><tr><td>PA02</td><td><b>评估影响</b></td></tr><tr><td>PA03</td><td><b>评估安全风险</b></td></tr><tr><td>PA04</td><td><b>评估威胁</b></td></tr><tr><td>PA05</td><td><b>评估脆弱性</b></td></tr><tr><td>PA06</td><td><b>建立保证论据</b></td></tr><tr><td>PA07</td><td><b>协调安全</b></td></tr><tr><td>PA08</td><td><b>监控安全态</b></td></tr><tr><td>PA09</td><td><b>提供安全输入</b></td></tr><tr><td>PA10</td><td><b>确定安全需求</b></td></tr><tr><td>PA11</td><td><b>验证和证实安全</b></td></tr></tbody></table>
+<blockquote>记法：<b>「控(01) · 影(02) · 险(03) · 胁(04) · 脆(05) · 据(06) · 协(07) · 监(08) · 输(09) · 需(10) · 证(11)」</b><br>⚠️ 高频陷阱：PA 编号顺序别背串（评估三兄弟顺序 = <b>影响→风险→威胁→脆弱性</b>，教材就是这么排的）</blockquote>
+<label class="task"><input type="checkbox" data-key="E2" ><span class="task-text"><b>E2 · 域维：另 11 个与项目和组织实施有关的过程域（PA12~PA22）</b> ⭕ 必背（数量 + 列举）</span></label><div class="item-body"><p>ISSE-CMM <b>还包括 11 个与项目和组织实施有关的过程域</b>（PA12~PA22）：</p>
+<p><b>保证质量、管理配置、管理项目风险、监测和控制技术工程项目、规划技术工程项目、定义组织的系统工程过程、改进组织的系统工程过程、管理产品线的演变、管理系统工程支持环境、提供不断更新的技能和知识、与供应商的协调</b>。</p></div>
+<blockquote>记法：域维共 <b>22 个过程域</b> = 11 个<b>安全工程过程域</b>（E1）+ 11 个<b>项目/组织过程域</b>（E2）；教材重点考的是前 11 个</blockquote>
+<label class="task"><input type="checkbox" data-key="E3" ><span class="task-text"><b>E3 · 能力维：公共特性（5 个级别）</b> ⭕ 必背（结构 + 数量）</span></label><div class="item-body"><p><b>通用实施（Generic Practices，GP）由被称为「公共特性」的逻辑域组成</b>。公共特性<b>分为 5 个级别，依次表示增强的组织能力</b>。</p></div>
+<div class="plain-li"><span class="bullet">•</span> <span>与域维的基本实施不同：<b>能力维的通用实施按成熟性排序</b>，因此<b>高级别的通用实施位于能力维的高端</b></span></div>
+<blockquote>记法：能力维 = <b>公共特性 = 5 级</b>；「按成熟性排序、高级别在高处」</blockquote>
+<label class="task"><input type="checkbox" data-key="E4" ><span class="task-text"><b>E4 · 5 级能力级别</b> ⭕ 必背（五级 + 高频）</span></label><div class="item-body"><p>能力级别代表<b>工程组织的成熟度级别的 5 级模型</b>：</p></div>
+<table><thead><tr><th>级别</th><th>名称</th><th>公共特性（重点）</th></tr></thead><tbody><tr><td><b>Level 1</b></td><td><b>非正规实施级</b></td><td><b>执行基本实施</b></td></tr><tr><td><b>Level 2</b></td><td><b>规划和跟踪级</b></td><td>规划执行、规范化执行、验证执行、跟踪执行</td></tr><tr><td><b>Level 3</b></td><td><b>充分定义级</b></td><td>定义标准化过程、执行已定义的过程、协调安全实施</td></tr><tr><td><b>Level 4</b></td><td><b>量化控制级</b></td><td>建立可测度的质量目标、对执行情况实施客观管理</td></tr><tr><td><b>Level 5</b></td><td><b>持续改进级</b></td><td>改进组织能力、改进过程的效能</td></tr></tbody></table>
+<blockquote>记法：<b>「非 · 规 · 充 · 量 · 持」</b>（非正规实施 → 规划和跟踪 → 充分定义 → 量化控制 → 持续改进）<br>⚠️ 高频陷阱：L2 叫「<b>规划和跟踪级</b>」、L3 叫「<b>充分定义级</b>」——别与软件 CMM 的 L3「已定义级」、L4「量化管理级」等名称混</blockquote>
+<h3>模块 F ｜ 只通读（了解即可，不做挖空）</h3>
+<label class="task"><input type="checkbox" data-key="F0" ><span class="task-text"><b>F0 · 安全机制各项的细目</b> — 基础设施实体安全（机房 / 场地 / 设施 / 动力系统 / 灾难预防与恢复）、运行安全 9 条、管理安全 10 条（人员 / 培训 / 应用系统 / 软件 / 设备 / 文档 / 数据 / 操作 / 运行 / 机房管理）等细目，<b>只认大项，不用背小条</b></span></label>
+<label class="task"><input type="checkbox" data-key="F1" ><span class="task-text"><b>F1 · 数据完整性服务的 5 种方式</b> — 带恢复功能的链接 / 不带恢复功能的链接 / 选择字段链接 / 选择字段无链接 / 无链接方式（能认出「有多种方式」即可）</span></label>
+<label class="task"><input type="checkbox" data-key="F2" ><span class="task-text"><b>F2 · WPDRRC 的政策三要素落点</b> — 人员 / 技术 / 政策（法律·法规·制度·管理）；配套的物理 / 机房 / 主机 / 数据库 / 网络 / 终端 / 软件 / 授权访问 / 审计追踪九类管理（细目略读）</span></label>
+<label class="task"><input type="checkbox" data-key="F3" ><span class="task-text"><b>F3 · 工程协调的协商主体</b> — 组织 + 客户与服务对象 + 集成商 + 安全产品开发者 + 密码研制单位 + 独立评估者 + 其他相关组织</span></label>
+<label class="task"><input type="checkbox" data-key="F4" ><span class="task-text"><b>F4 · ISSE-CMM 的来源背景</b> — 基于<b>统计过程控制理论</b>，覆盖<b>全生命周期</b>；源流上属 SSE-CMM 家族（了解即可）</span></label>
+<label class="task"><input type="checkbox" data-key="F5" ><span class="task-text"><b>F5 · 5.4.5 本章练习</b> — 教材 P181，复习自测用</span></label>
+<h2>二、自检题（先做，再看答案）</h2>
+<details>
+<summary>1. 信息系统由哪两个部分组成？信息系统工程又由哪两个部分组成？</summary>
+<p>信息系统 = <b>业务应用信息系统</b> + <b>信息安全系统</b>；信息系统工程 = <b>业务应用信息系统工程</b> + <b>信息安全系统工程</b>（两个工程是「独立且不可分割」的）。</p>
+</details>
+<details>
+<summary>2. 教材特别强调本节讲的是「信息安全系统工程」，为什么不叫「信息系统安全工程」？</summary>
+<p>因为「信息系统安全工程」的字面会<b>误解为「安全地建设一个信息系统」</b>，从而忽略信息系统中的信息安全问题（可能建成一个没有信息安全子系统的信息系统）。而「信息安全系统工程」明白无误地确定了：这个工程就是<b>建设一个信息安全系统</b>。</p>
+</details>
+<details>
+<summary>3. 信息安全空间的三维坐标分别是什么？五大属性是哪五个？</summary>
+<p>三维：<b>X 轴 = 安全机制、Y 轴 = OSI 网络参考模型、Z 轴 = 安全服务</b>。五大属性：<b>认证、权限、完整、加密、不可否认</b>。</p>
+</details>
+<details>
+<summary>4. 安全机制包含哪 9 项？安全服务、安全技术各包含哪些？</summary>
+<p>- 安全机制 9 项：<b>基础设施实体安全、平台安全、数据安全、通信安全、应用安全、运行安全、管理安全、授权和审计安全、安全防范体系</b></p>
+<p>- 安全服务 6 项：<b>对等实体认证、数据保密、数据完整性、数据源点认证、禁止否认、犯罪证据提供</b></p>
+<p>- 安全技术 6 项：<b>加密、数字签名技术、访问控制、数据完整性、认证、数据挖掘</b></p>
+</details>
+<details>
+<summary>5. WPDRRC 指的是哪六个环节？组织安全防范体系的核心是什么？</summary>
+<p>WPDRRC = <b>预警(Warn) / 保护(Protect) / 检测(Detect) / 反应(Response) / 恢复(Recover) / 反击(Counter-attack)</b>。安全防范体系的核心 = <b>实现组织信息安全资源的综合管理，即 EISRM</b>。</p>
+</details>
+<details>
+<summary>6. 工程基础涉及哪 8 类相关工程？</summary>
+<p><b>硬件工程、软件工程、通信及网络工程、数据存储与灾备工程、系统工程、测试工程、密码工程、组织信息化工程</b>。</p>
+</details>
+<details>
+<summary>7. ISSE-CMM 是什么？主要适用于哪三类组织？</summary>
+<p><b>信息安全系统工程能力成熟度模型</b>，是<b>信息安全系统工程实施的度量标准</b>，适用于 <b>工程组织、获取组织、评估组织</b>。</p>
+</details>
+<details>
+<summary>8. ISSE 过程由哪三个部分组成？「有害事件」由哪三部分组成？</summary>
+<p>三个过程：<b>工程过程、风险过程、保证过程</b>。有害事件由 <b>威胁、脆弱性和影响</b> 三个部分组成（风险过程的核心）。</p>
+</details>
+<details>
+<summary>9. ISSE-CMM 体系结构采用几维设计？两维分别是什么？</summary>
+<p><b>两维设计</b>：<b>域（Domain）/ 安全工程过程域</b> 与 <b>能力（Capability）/ 公共特性</b>。域维管「做什么」（过程域），能力维管「做得多好」（公共特性 / 级别）。</p>
+</details>
+<details>
+<summary>10. 域维包含 11 个安全工程过程域，请说出至少 6 个；域维一共多少个过程域？</summary>
+<p>11 个安全工程过程域：<b>实施安全控制 / 评估影响 / 评估安全风险 / 评估威胁 / 评估脆弱性 / 建立保证论据 / 协调安全 / 监控安全态 / 提供安全输入 / 确定安全需求 / 验证和证实安全</b>。域维共 <b>22 个过程域</b>（11 个安全工程过程域 + 11 个与项目和组织实施有关的过程域）。</p>
+</details>
+<details>
+<summary>11. ISSE-CMM 的 5 级能力级别分别叫什么？</summary>
+<p><b>非正规实施级（L1）→ 规划和跟踪级（L2）→ 充分定义级（L3）→ 量化控制级（L4）→ 持续改进级（L5）</b>（口诀「非规充量持」）。</p>
+</details>
+<details>
+<summary>12. 「能力维的通用实施按什么排序？高级别位于哪里？」</summary>
+<p>能力维的通用实施<b>按其成熟性排序</b>，因此<b>高级别的通用实施位于能力维的高端</b>（与域维的基本实施不同，基本实施无高低排序）。</p>
+</details>
+<h2>三、今日刷题任务</h2>
+<ol><li>做完本节《5.4_考点自测题.html》（22 题，达标线 18/22），错题当场回看精讲</li><li>到 <code>08_答题系统/</code> 做 5.4 节填空题（12 题）</li><li>打开《5.4_知识点清单_可勾选.html》逐条勾选，未掌握的对照《5.4_康奈尔笔记模板_带答案版.html》</li><li>本节完成后可做第 5 章整章串联重测（5.5 本章练习，P181）</li><li>真题优先刷 <b>2023 下 ~ 2026 上</b> 第 5 章对应题（第 5 章与第 3 版第 3 章同源，旧真题有对应题）</li></ol>
+</div>
+<script>
+(function(){
+  const REL = "01_教材笔记/第05章_信息系统工程/5.4_安全工程/5.4_知识点清单_可勾选.html";
+  const STORE_KEY = 'checklist:' + REL;
+
+  // 一次性加载整个文件的勾选状态（JSON），避免 key 过长
+  let store = {};
+  try { store = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch (e) {}
+
+  // 兼容迁移：旧的错误 key（包含重复 REL 前缀的）自动迁到新格式
+  for (let i = localStorage.length - 1; i >= 0; i--) {
+    const k = localStorage.key(i);
+    if (!k || !k.startsWith('checklist:')) continue;
+    // 检测旧 bug key：包含 REL 两次
+    if (k.indexOf(REL) !== k.lastIndexOf(REL)) {
+      const v = localStorage.getItem(k);
+      const m = k.match(/:L(\d+)$/);
+      if (m && v === '1') store['L' + m[1]] = true;
+      localStorage.removeItem(k);
+    }
+  }
+
+  const boxes = document.querySelectorAll('.task input[type="checkbox"]');
+  boxes.forEach(box => {
+    const k = box.dataset.key;
+    if (store[k]) box.checked = true;
+    box.addEventListener('change', () => {
+      store[k] = box.checked;
+      try {
+        localStorage.setItem(STORE_KEY, JSON.stringify(store));
+      } catch (e) {
+        console.error('localStorage 写入失败：', e);
+      }
+      updateProgress();
+    });
+  });
+
+  function updateProgress() {
+    const total = boxes.length;
+    const done = Array.from(boxes).filter(b => b.checked).length;
+    const pct = total ? Math.round(done / total * 100) : 0;
+    document.getElementById('progress').innerHTML = '已完成：<b>' + done + ' / ' + total + '</b>（' + pct + '%）';
+  }
+  updateProgress();
+})();
+</script>
+</body>
+</html>

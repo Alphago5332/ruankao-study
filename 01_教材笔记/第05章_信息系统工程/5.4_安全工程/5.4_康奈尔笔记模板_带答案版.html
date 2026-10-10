@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>康奈尔笔记 · 第 5 章第 4 节 安全工程 · 带答案版</title>
+<style>
+  :root{
+    --ink:#1f2328;
+    --ink-2:#4b5563;
+    --ink-3:#8b949e;
+    --line:#2f3742;
+    --rule:#d6dae0;
+    --accent:#185FA5;
+    --accent-soft:#E6F1FB;
+    --warm:#854F0B;
+    --warm-soft:#FAEEDA;
+    --paper:#ffffff;
+    --ans-bg:#fffaf2;
+    --ans-border:#e8d9b8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    padding:28px 16px 48px;
+    background:#eef0f3;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+    color:var(--ink);
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .toolbar{
+    max-width:210mm;margin:0 auto 14px;display:flex;gap:10px;align-items:center;
+    justify-content:space-between;flex-wrap:wrap;
+  }
+  .toolbar .hint{font-size:12.5px;color:#5b6470;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;
+    font-size:13px;padding:7px 14px;border-radius:8px;cursor:pointer;
+    font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn.active{background:var(--warm);border-color:var(--warm);color:#fff;}
+
+  .page{
+    width:210mm;min-height:297mm;margin:0 auto;background:var(--paper);
+    padding:14mm 13mm 12mm;box-shadow:0 2px 14px rgba(16,24,40,.12);
+  }
+
+  .head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    border-bottom:2px solid var(--line);padding-bottom:8px;margin-bottom:10px;
+    gap:12px;
+  }
+  .head h1{font-size:19px;margin:0;font-weight:600;letter-spacing:.3px;}
+  .head .sub{font-size:12px;color:var(--ink-3);margin-top:4px;}
+  .head .meta{font-size:12px;color:var(--ink-2);text-align:right;line-height:1.9;white-space:nowrap;}
+  .head .meta b{font-weight:600;color:var(--accent);}
+
+  .band{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+  .chip{
+    font-size:11.5px;padding:4px 9px;border-radius:5px;
+    background:var(--accent-soft);color:#0C447C;border:1px solid #B5D4F4;
+  }
+  .chip.warm{background:var(--warm-soft);color:#633806;border-color:#EFC98A;}
+
+  .cols{
+    display:grid;grid-template-columns:60mm 1fr;gap:0;
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .col-cue{
+    background:#fafbfc;border-right:1px solid var(--line);padding:8px 9px 9px;
+  }
+  .col-note{padding:8px 11px 9px;}
+  .col-hd{
+    font-size:11.5px;font-weight:600;letter-spacing:.6px;color:var(--ink-2);
+    text-transform:uppercase;padding-bottom:6px;margin-bottom:7px;
+    border-bottom:1px dashed #b9c0c9;
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  .col-hd span{font-size:10.5px;font-weight:400;color:var(--ink-3);text-transform:none;letter-spacing:0;}
+
+  .q{
+    font-size:11.5px;line-height:1.5;color:#1f2328;
+    padding:5px 0 5px 20px;position:relative;border-bottom:1px dotted #dfe3e8;
+  }
+  .q:last-child{border-bottom:0;}
+  .q::before{
+    content:attr(data-n);position:absolute;left:0;top:5px;
+    width:14px;height:14px;border-radius:50%;
+    background:var(--accent);color:#fff;font-size:9.5px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:600;line-height:1;
+  }
+  .q b{font-weight:600;}
+  .q em{font-style:normal;color:var(--warm);font-weight:600;}
+
+  .grouplabel{
+    font-size:10.5px;font-weight:600;color:var(--accent);
+    letter-spacing:.4px;margin:8px 0 2px;
+  }
+  .grouplabel:first-child{margin-top:0;}
+
+  /* === 答案区样式 === */
+  .ans-block{
+    margin-bottom:6px;padding:5px 8px 6px;
+    background:var(--ans-bg);border:1px solid var(--ans-border);border-radius:3px;
+  }
+  .ans-block .ans-title{
+    font-size:10.5px;font-weight:600;color:var(--warm);
+    letter-spacing:.3px;margin-bottom:2px;display:flex;align-items:baseline;gap:6px;
+  }
+  .ans-block .ans-title .num{
+    display:inline-block;min-width:14px;height:14px;border-radius:50%;
+    background:var(--warm);color:#fff;font-size:9.5px;font-weight:600;
+    text-align:center;line-height:14px;
+  }
+  .ans-block ul{
+    margin:2px 0 3px 0;padding:0 0 0 16px;font-size:11px;line-height:1.55;color:#2b323b;
+  }
+  .ans-block ul li{padding:1px 0;}
+  .ans-block .key{
+    color:var(--warm);font-weight:600;
+  }
+  .ans-block .tip{
+    font-size:10px;color:#633806;margin-top:2px;line-height:1.5;
+    padding:2px 6px;background:var(--warm-soft);border-radius:2px;
+  }
+  .ans-block .fill{
+    height:16px;border-bottom:1px dashed #c8c0aa;margin-top:3px;
+  }
+  body.hide-answers .ans-block{display:none;}
+  body.hide-answers .summary-prefill{display:none;}
+
+  .summary{
+    margin-top:10px;border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .summary .col-hd{
+    margin:0;padding:7px 11px;background:#fafbfc;border-bottom:1px solid var(--line);
+  }
+  .summary .body{padding:6px 11px 8px;font-size:11.5px;line-height:1.7;color:#2b323b;}
+  .summary .body b{color:var(--accent);}
+  .summary .body .small{font-size:10.5px;color:var(--ink-3);margin-top:3px;display:block;}
+
+  .footer{
+    margin-top:9px;font-size:10.5px;color:var(--ink-3);
+    display:flex;justify-content:space-between;gap:10px;
+  }
+
+  .guide{
+    width:210mm;margin:16px auto 0;background:#fff;border:1px solid #d9dee5;
+    border-radius:8px;padding:16px 18px;
+  }
+  .guide h2{font-size:14px;margin:0 0 10px;font-weight:600;}
+  .guide table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .guide th,.guide td{
+    border:1px solid #e2e6eb;padding:7px 9px;text-align:left;vertical-align:top;line-height:1.6;
+  }
+  .guide th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .guide td:first-child{width:88px;font-weight:600;color:var(--accent);}
+  .guide .note{font-size:12px;color:#5b6470;margin-top:10px;line-height:1.7;}
+
+  @page{size:A4 portrait;margin:0;}
+  @media print{
+    body{background:#fff;padding:0;}
+    .toolbar,.guide{display:none;}
+    .page{box-shadow:none;margin:0;width:auto;min-height:auto;padding:13mm 12mm;}
+    body.hide-answers .ans-block{display:none;}
+    body.hide-answers .summary-prefill{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="hint">A4 竖版 · 带答案版 · 建议先默写、再对照；打印时可「隐藏答案」变填空卷</div>
+  <div>
+    <button class="btn" id="toggleBtn" onclick="toggleAnswers()">👁 隐藏答案（打印填空卷）</button>
+    <button class="btn primary" onclick="window.print()">打印 / 导出 PDF</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="head">
+    <div>
+      <h1>康奈尔笔记 · 第 5 章第 4 节 安全工程 <span style="color:var(--warm);font-size:14px;">（带答案版）</span></h1>
+      <div class="sub">《信息系统项目管理师教程（第 4 版）》约 P170 ~ P181　｜　答案口径以 2026-10-10 多方交叉核对为准</div>
+    </div>
+    <div class="meta">
+      日期：__________<br>
+      第 <b>__</b> 轮复习　用时 <b>__</b> 分钟
+    </div>
+  </div>
+
+  <div class="band">
+    <span class="chip">上午约 1~2 题（第 5 章 5~8 题中）</span>
+    <span class="chip">数量型 / 分类配对 / 模型结构</span>
+    <span class="chip warm">重点：5.4.4 ISSE-CMM（占 7 页）</span>
+    <span class="chip warm">必背：安全空间三维 + ISSE-CMM 两维</span>
+    <span class="chip warm">通读：F0~F5 背景类</span>
+    <span class="chip warm">📝 含答案</span>
+  </div>
+
+  <div class="cols">
+
+    <div class="col-cue">
+      <div class="col-hd">线索栏 <span>遮住右侧自问</span></div>
+
+      <div class="grouplabel">5.4.1 工程概述</div>
+      <div class="q" data-n="1"><b>信息安全系统工程</b>定义与由来？<b>信息系统</b>与<b>信息系统工程</b>各由哪两部分组成？</div>
+      <div class="q" data-n="2"><b>四个关键术语</b>定义？为什么叫「信息安全系统工程」不叫「信息系统安全工程」？</div>
+
+      <div class="grouplabel">5.4.2 安全系统</div>
+      <div class="q" data-n="3"><b>信息安全系统</b>定位（简称）？<b>安全空间三维</b>？<b>五大属性</b>（五要素）？</div>
+      <div class="q" data-n="4"><b>安全机制</b>共几项？逐一说出？平台 / 数据 / 通信安全组成关键词？</div>
+      <div class="q" data-n="5">应用 / 运行安全关键词？<b>授权和审计安全</b>目标？<b>安全防范体系</b>核心 + <b>WPDRRC</b> 六环节？</div>
+      <div class="q" data-n="6"><b>安全服务 6 项</b>？对等实体认证 vs 数据源点认证？禁止否认服务两种？<b>安全技术 6 项</b>？</div>
+
+      <div class="grouplabel">5.4.3 工程基础</div>
+      <div class="q" data-n="7"><b>工程基础</b>几类相关工程？逐一说出？<b>安全管理规范 12 项</b>？工程协调强调什么？</div>
+
+      <div class="grouplabel">5.4.4 工程体系架构</div>
+      <div class="q" data-n="8"><b>ISSE-CMM</b> 是什么？适用哪三类组织？<b>ISSE 过程三部分</b>及各自目标？</div>
+      <div class="q" data-n="9"><b>工程过程</b>八阶段？<b>风险过程</b>「有害事件」三组成？<b>保证过程</b>指什么？</div>
+      <div class="q" data-n="10"><b>ISSE-CMM 体系结构</b>几维设计？<b>域维</b>与<b>能力维</b>各管什么？</div>
+      <div class="q" data-n="11"><b>域维</b>共多少过程域？<b>11 个安全工程过程域</b> PA01~PA11？</div>
+      <div class="q" data-n="12"><b>公共特性</b>分几级？<b>5 级能力级别</b>名称 + 特征？通用实施按什么排序？</div>
+    </div>
+
+    <div class="col-note">
+      <div class="col-hd">答案区 <span>默写后对照 · 虚线处写自己的补充</span></div>
+
+      <div class="grouplabel">5.4.1 工程概述</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">1</span>信息安全系统工程的定义、由来与两组术语</div>
+        <ul>
+          <li>由来：由<span class="key">业务应用信息系统</span>或<span class="key">操作系统 / 数据库系统 / 网络管理系统</span>来解决安全问题已不能满足需要 → 不得不建立<span class="key">独立的信息安全系统</span></li>
+          <li><span class="key">信息安全系统工程</span>就是要<span class="key">建造一个信息安全系统</span>，它是整个信息系统工程的一部分，最好与业务应用信息系统工程<span class="key">同步进行</span></li>
+          <li>两组术语：<span class="key">信息系统 = 业务应用信息系统 + 信息安全系统</span>；<span class="key">信息系统工程 = 业务应用信息系统工程 + 信息安全系统工程</span>（两个工程<span class="key">独立且不可分割</span>）</li>
+          <li>信息安全系统<span class="key">服务于</span>业务应用信息系统、密不可分，但二者的功能 / 操作流程 / 管理方式 / 人员要求 / 技术领域<span class="key">完全不同</span>、不能混为一谈</li>
+        </ul>
+        <div class="tip">记法：<span class="key">上面一对是「系统」、下面一对是「工程」</span>——信息系统（业+安）/ 信息系统工程（业工+安工），别串行</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">2</span>四个关键术语 + 术语澄清</div>
+        <ul>
+          <li><span class="key">业务应用信息系统</span>：支撑业务运营的计算机应用信息系统（如银行柜台业务信息系统、国税征收信息系统）</li>
+          <li><span class="key">业务应用信息系统工程</span>：为建好业务应用信息系统所实施的工程，<span class="key">一般称为「信息系统集成项目工程」</span></li>
+          <li><span class="key">信息安全系统工程</span>：为建好信息安全系统所实施的工程；作为信息系统工程的一个子集，其安全体系和策略必须<span class="key">遵从系统工程的一般性原则和规律</span></li>
+          <li>术语澄清：讲的是<span class="key">信息安全系统工程</span>，<span class="key">不是「信息系统安全工程」</span>——后者字面会误解为「安全地建设一个信息系统」，从而忽略信息系统的信息安全问题</li>
+        </ul>
+        <div class="tip">⚠️ 题干强调「<span class="key">建一个信息安全系统</span>」→ 信息安全系统工程；强调「把信息系统建安全」是错误理解方向</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">5.4.2 安全系统</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">3</span>信息安全系统定位 + 安全空间三维五属性</div>
+        <ul>
+          <li><span class="key">信息安全保障系统一般简称为信息安全系统</span>，是「信息系统」的一个部分，用于<span class="key">保证「业务应用信息系统」正常运营</span>；它是<span class="key">客观的、独立于业务应用信息系统而存在</span>的信息系统</li>
+          <li>安全空间三维：<span class="key">X 轴 = 安全机制</span>、<span class="key">Y 轴 = OSI 网络参考模型</span>、<span class="key">Z 轴 = 安全服务</span></li>
+          <li>五大属性（「安全空间」五要素）：<span class="key">认证、权限、完整、加密、不可否认</span></li>
+        </ul>
+        <div class="tip">🚩 三维是「<span class="key">机制 / OSI / 服务</span>」，<span class="key">不是</span>「机制 / 技术 / 服务」；五属性口诀「认权完加不可否认」</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">4</span>安全机制 9 项 + 三项组成</div>
+        <ul>
+          <li>安全机制 9 项：<span class="key">基础设施实体安全、平台安全、数据安全、通信安全、应用安全、运行安全、管理安全、授权和审计安全、安全防范体系</span></li>
+          <li><span class="key">平台安全</span>：操作系统 / 网络基础设施 / 通用基础应用程序的<span class="key">漏洞检测与修复</span>、网络安全产品部署</li>
+          <li><span class="key">数据安全</span>：<span class="key">介质与载体安全保护、数据访问控制、数据完整性、数据可用性、数据监控和审计、数据存储与备份安全</span></li>
+          <li><span class="key">通信安全</span>：通信线路与网络基础设施安全性测试与优化、安装网络加密设施、设置通信加密软件、设置身份鉴别机制、设置并测试安全通道、测试各项网络协议运行漏洞</li>
+        </ul>
+        <div class="tip">「漏洞检测与修复」→ 平台安全；「介质与载体 / 备份」→ 数据安全；「加密设施 / 安全通道」→ 通信安全</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">5</span>应用 / 运行安全 + 授权审计 + 安全防范体系</div>
+        <ul>
+          <li><span class="key">应用安全</span>：业务软件程序安全性测试（Bug 分析）、<span class="key">防抵赖测试</span>、访问控制验证测试、身份鉴别检测、备份与恢复机制检查、数据唯一性与一致性及防冲突检测、保密性 / 可靠性 / 可用性测试</li>
+          <li><span class="key">运行安全</span>：<span class="key">应急处置机制和配套服务</span>、网络系统安全性监测、网络安全产品运行监测、定期检查和评估、系统升级和补丁提供、跟踪最新安全漏洞及通报、灾难恢复机制与预防、系统改造管理、网络安全专业技术咨询服务</li>
+          <li><span class="key">授权和审计安全</span>：授权安全 = 提供<span class="key">权限管理和授权服务</span>，实现用户身份到应用授权的<span class="key">映射</span>，提供与具体应用开发和管理<span class="key">无关</span>的访问控制机制</li>
+          <li><span class="key">安全防范体系</span>：核心 = <span class="key">实现组织信息安全资源的综合管理，即 EISRM</span>；六项能力构成 <span class="key">WPDRRC</span> = <span class="key">预警(Warn)、保护(Protect)、检测(Detect)、反应(Response)、恢复(Recover)、反击(Counter-attack)</span></li>
+        </ul>
+        <div class="tip">「业务软件 / 防抵赖」→ 应用安全；「应急处置 / 补丁 / 灾难恢复」→ 运行安全；<span class="key">WPDRRC = 警保检应恢反</span></div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">6</span>安全服务 6 项 + 安全技术 6 项</div>
+        <ul>
+          <li>安全服务 6 项：<span class="key">对等实体认证服务、数据保密服务、数据完整性服务、数据源点认证服务、禁止否认服务、犯罪证据提供服务</span></li>
+          <li><span class="key">对等实体认证服务</span>：两个开放系统同等层实体建立链接或传输数据时，确认对方<span class="key">合法性、真实性</span>以防假冒；<span class="key">数据源点认证服务</span>：确保数据<span class="key">发自真正的源点</span>（两者别混）</li>
+          <li><span class="key">禁止否认服务</span>：防止发送方否认发送、接收方否认收到或伪造接收；由<span class="key">「不得否认发送」「不得否认接收」</span>两种组成</li>
+          <li>安全技术 6 项：<span class="key">加密、数字签名技术、访问控制、数据完整性、认证、数据挖掘</span></li>
+        </ul>
+        <div class="tip">🚩 三组数量别对调：<span class="key">安全机制 9 / 安全服务 6 / 安全技术 6 / 五大属性 5</span>；安全技术含「<span class="key">数据挖掘</span>」这一项别漏</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">5.4.3 工程基础</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">7</span>工程基础 8 类相关工程 + 协调 + 管理规范 12 项</div>
+        <ul>
+          <li>信息安全系统建设在 <span class="key">OSI 网络参考模型各个层面</span>进行，离不开 <span class="key">8 类相关工程</span>：<span class="key">硬件工程、软件工程、通信及网络工程、数据存储与灾备工程、系统工程、测试工程、密码工程、组织信息化工程</span></li>
+          <li>工程协调：安全策略由<span class="key">组织和组织的客户与服务对象、集成商、安全产品开发者、密码研制单位、独立评估者和其他相关组织共同协商建立</span>→ ISSE 必须与其他外部实体协调，因此<span class="key">比其他工程更复杂</span></li>
+          <li>安全管理规范 12 项：<span class="key">物理安全、计算机安全、网络安全、通信安全、输入/输出产品的安全、操作系统安全、数据库系统安全、数据安全、信息审计安全、人员安全、管理安全、辐射安全</span></li>
+        </ul>
+        <div class="tip">8 类记法「硬软通存系测密组」；12 项注意含「<span class="key">辐射安全</span>」</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">5.4.4 工程体系架构</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">8</span>ISSE-CMM 基础 + ISSE 过程三部分</div>
+        <ul>
+          <li><span class="key">ISSE-CMM</span> = <span class="key">信息安全系统工程能力成熟度模型</span>，是信息安全系统工程实施的<span class="key">度量标准</span>，主要适用于 <span class="key">工程组织、获取组织、评估组织</span>（3 类）</li>
+          <li><span class="key">ISSE 过程</span>：目标是提供一个框架，<span class="key">每个工程项目都可以对这个框架进行裁剪以符合自己特定的需求</span></li>
+          <li>三部分：<span class="key">工程过程</span>（含概念 / 设计 / 实现 / 测试 / 部署 / 运行 / 维护 / 退出的完整过程，与其他工程合作识别安全需求、创建解决方案）· <span class="key">风险过程</span>（主要目标是<span class="key">降低信息系统运行的风险</span>）· <span class="key">保证过程</span>（安全需求<span class="key">得到满足的可信程度</span>）</li>
+        </ul>
+        <div class="tip">⚠️ 它是「<span class="key">信息安全</span>系统工程」CMM，<span class="key">别与软件 CMM / 国内 CSMM（5.1.6）混</span>；三过程口诀「工险保」</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">9</span>工程过程 / 风险过程 / 保证过程</div>
+        <ul>
+          <li><span class="key">工程过程</span>：八阶段 = <span class="key">概念 → 设计 → 实现 → 测试 → 部署 → 运行 → 维护 → 退出</span>（覆盖全生命周期的完整过程）</li>
+          <li><span class="key">风险过程</span>：一个<span class="key">有害事件</span>由 <span class="key">威胁、脆弱性和影响</span> 三个部分组成；流程 = 识别三要素 → 评估风险并优先级排序 → 建立风险承受级别 → 实施安全措施减轻风险 → <span class="key">接受残留风险</span></li>
+          <li><span class="key">保证过程</span>：通过<span class="key">证据构建保证论据</span>，确保安全措施<span class="key">按需求运行</span>（来自措施的<span class="key">正确性和有效性</span>）</li>
+        </ul>
+        <div class="tip">🚩 有害事件三组成 = <span class="key">威胁 + 脆弱性 + 影响</span>（不是「风险+威胁+脆弱性」）；「可信程度 / 保证论据」→ 保证过程</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">10</span>ISSE-CMM 体系结构两维设计</div>
+        <ul>
+          <li>ISSE-CMM 的体系结构可<span class="key">在整个信息安全系统工程范围内决定信息安全工程组织的成熟性</span>；目标是<span class="key">落实安全策略，从管理和制度化方面突出信息安全工程的基本特征</span></li>
+          <li>采用<span class="key">两维设计</span>：一维是 <span class="key">域（Domain）</span>，另一维是 <span class="key">能力（Capability）</span></li>
+          <li><span class="key">域维 / 安全工程过程域</span>：汇集定义 ISSE 的所有实施活动（称为<span class="key">过程域</span>，即「做什么」）</li>
+          <li><span class="key">能力维 / 公共特性</span>：代表组织能力（<span class="key">过程管理能力 + 制度化能力</span>，即「做得多好」）</li>
+        </ul>
+        <div class="tip">域维管「<span class="key">做什么</span>」（过程域），能力维管「<span class="key">做得多好</span>」（公共特性 / 级别）</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">11</span>域维：11 个安全工程过程域 PA01~PA11</div>
+        <ul>
+          <li>ISSE 包括 <span class="key">6 个基本实施</span>，被组织成 <span class="key">11 个信息安全工程过程域</span>：</li>
+          <li><span class="key">PA01 实施安全控制 · PA02 评估影响 · PA03 评估安全风险 · PA04 评估威胁 · PA05 评估脆弱性 · PA06 建立保证论据 · PA07 协调安全 · PA08 监控安全态 · PA09 提供安全输入 · PA10 确定安全需求 · PA11 验证和证实安全</span></li>
+          <li>ISSE-CMM 还包括 <span class="key">11 个与项目和组织实施有关的过程域</span>（PA12~PA22）：保证质量、管理配置、管理项目风险、监测和控制技术工程项目、规划技术工程项目、定义组织的系统工程过程、改进组织的系统工程过程、管理产品线的演变、管理系统工程支持环境、提供不断更新的技能和知识、与供应商的协调</li>
+          <li>域维合计 = <span class="key">22 个过程域</span>（11 个安全工程过程域 + 11 个项目 / 组织过程域）</li>
+        </ul>
+        <div class="tip">🚩 评估三兄弟顺序 = <span class="key">影响 → 安全风险 → 威胁 → 脆弱性</span>（教材就是这么排，别背串）；域维共 <span class="key">22</span> 个过程域</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">12</span>公共特性 5 级能力级别</div>
+        <ul>
+          <li><span class="key">通用实施（GP）由被称为「公共特性」的逻辑域组成</span>；公共特性<span class="key">分为 5 个级别，依次表示增强的组织能力</span>；能力维的通用实施<span class="key">按成熟性排序，高级别位于能力维的高端</span></li>
+          <li><span class="key">Level 1 非正规实施级</span>：执行基本实施</li>
+          <li><span class="key">Level 2 规划和跟踪级</span>：规划执行、规范化执行、验证执行、跟踪执行</li>
+          <li><span class="key">Level 3 充分定义级</span>：定义标准化过程、执行已定义的过程、协调安全实施</li>
+          <li><span class="key">Level 4 量化控制级</span>：建立可测度的质量目标、对执行情况实施客观管理</li>
+          <li><span class="key">Level 5 持续改进级</span>：改进组织能力、改进过程的效能</li>
+        </ul>
+        <div class="tip">🚩 五级口诀「<span class="key">非规充量持</span>」；L2 = 规划和跟踪级、L3 = 充分定义级——<span class="key">别套用软件 CMM 的「已定义级 / 量化管理级」名称</span></div>
+        <div class="fill"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="col-hd">总结区 <span>本节本质 + 考点地图</span></div>
+    <div class="body summary-prefill">
+      <b>本节本质</b>：安全工程 = 把「业务应用信息系统」之外的<b>独立信息安全系统</b>建起来，四小节一条线（工程概述 → 安全系统 → 工程基础 → 工程体系架构），上午 1~2 题，主流题型是<b>数量型 + 分类配对 + 模型结构</b>——记住三组数量、五级名称、两维设计就是分。<br>
+      <b>考点地图（按考频排序）</b>：① ISSE-CMM 两维 + 11 个安全工程过程域（PA01~PA11）→ ② 安全空间三维（机制 / OSI / 服务）与五属性 → ③ 安全机制 9 / 安全服务 6 / 安全技术 6 三组数量 → ④ ISSE 过程三部分 + 有害事件三组成 → ⑤ 公共特性 5 级能力级别「非规充量持」→ ⑥ 两组术语（信息系统 / 信息系统工程）→ ⑦ 工程基础 8 类相关工程 → ⑧ 术语澄清（信息安全系统工程 ≠ 信息系统安全工程）→ ⑨ WPDRRC 六环节 + EISRM → ⑩ 安全管理规范 12 项。<br>
+      <span class="small">⚠️ 口径陷阱：①讲的是「信息安全系统工程」（ISSE）不是「信息系统安全工程」；②信息系统工程 = 业务应用信息系统工程 + 信息安全系统工程（独立且不可分割）；③安全空间三维 = 机制 / OSI / 服务，五属性 = 认证 / 权限 / 完整 / 加密 / 不可否认；④安全机制 9 项、安全服务 6 项、安全技术 6 项（含数据挖掘）三组数量别对调；⑤WPDRRC = 警保检应恢反，核心是 EISRM；⑥工程基础 8 类相关工程（含密码工程、组织信息化工程）；⑦ISSE-CMM 适用工程 / 获取 / 评估三类组织；⑧ISSE 过程 = 工程 / 风险 / 保证；⑨有害事件 = 威胁 + 脆弱性 + 影响；⑩域维 22 过程域（安全工程 11 个 PA01~PA11 + 项目组织 11 个）；⑪公共特性 5 级「非规充量持」，高级别在能力维高端。</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>康奈尔笔记法 · 第 5 章第 4 节 带答案版　｜　复习记录：当日 ☐　+1 天 ☐　+3 天 ☐　+7 天 ☐　+14 天 ☐</span>
+    <span>正确率 ____ / 12</span>
+  </div>
+
+</div>
+
+<div class="guide">
+  <h2>怎么用这一页</h2>
+  <table>
+    <tr>
+      <th>步骤</th><th>做法</th>
+    </tr>
+    <tr>
+      <td>第 1 遍 · 遮答默写</td>
+      <td>用纸<b>遮住右栏答案区</b>，只看左栏 12 个问题。口头/默写回答，答不出的画「×」。</td>
+    </tr>
+    <tr>
+      <td>第 2 遍 · 对照修正</td>
+      <td>揭开答案区逐项对照。每条答案下的<b>虚线</b>是留给你的「补充线」——记下易漏点（如「三维机制OSI服务」「机制9服务6技术6」「ISSE 工险保」「有害事件威胁脆弱性影响」「两维域22能力5级非规充量持」）。</td>
+    </tr>
+    <tr>
+      <td>第 3 遍 · 隐藏答案打印</td>
+      <td>点工具栏「👁 隐藏答案」按钮，再打印一份当填空卷，可反复练习。</td>
+    </tr>
+    <tr>
+      <td>第 4 遍 · 复习节奏</td>
+      <td>页脚 5 个框按「当日 → +1 天 → +3 天 → +7 天 → +14 天」打勾，这就是你的艾宾浩斯进度条。全部打勾后，本节可不再看。</td>
+    </tr>
+  </table>
+  <div class="note">
+    <b>为什么这份是「带答案版」</b>：5.4 节全是「数量 + 分类 + 模型结构」型考点，自己默写时最容易犯的错是<b>三组数量记串（机制 9 / 服务 6 / 技术 6）与 ISSE-CMM 结构张冠李戴</b>（域维 / 能力维、过程域 / 公共特性 / 能力级别）。本版每个答案都标注<b>关键术语</b>（暖色）和<b>对照提醒</b>（橙色框），默写后对照一眼就能定位偏差。考前冲刺只看「总结区 · 考点地图」+「橙色 tip 框」即可。
+  </div>
+</div>
+
+<script>
+  function toggleAnswers(){
+    document.body.classList.toggle('hide-answers');
+    const btn = document.getElementById('toggleBtn');
+    const hidden = document.body.classList.contains('hide-answers');
+    btn.textContent = hidden ? '👁 显示答案' : '👁 隐藏答案（打印填空卷）';
+    btn.classList.toggle('active', hidden);
+  }
+</script>
+
+</body>
+</html>
