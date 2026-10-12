@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5.5 本章练习 · 第 5 章整章串联重测 50 题</title>
+<style>
+  *{box-sizing:border-box;}
+  body{
+    margin:0;padding:24px 14px 60px;background:#eef0f3;color:#1f2328;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    gap:14px;margin-bottom:18px;flex-wrap:wrap;
+  }
+  h1{font-size:20px;margin:0;font-weight:600;}
+  .sub{font-size:12.5px;color:#6b7280;margin:5px 0 0;}
+  .score-chip{
+    background:#E6F1FB;border:1px solid #B5D4F4;color:#0C447C;
+    border-radius:8px;padding:7px 13px;font-size:13px;white-space:nowrap;
+  }
+  .score-chip b{font-size:16px;font-weight:600;}
+
+  #quiz{
+    background:#fff;border-radius:12px;padding:22px 24px;
+    box-shadow:0 2px 12px rgba(16,24,40,.08);
+  }
+  .progress-row{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:8px;font-size:13px;color:#4b5563;
+  }
+  .chip{
+    background:#FAEEDA;border:1px solid #EFC98A;color:#633806;
+    border-radius:5px;padding:2px 9px;font-size:12px;
+  }
+  .progress{height:6px;background:#e5e8ee;border-radius:4px;overflow:hidden;margin-bottom:20px;}
+  #bar{height:100%;width:0;background:#185FA5;border-radius:4px;transition:width .25s;}
+
+  .qtext{font-size:16px;line-height:1.75;font-weight:500;margin:0 0 18px;}
+  .opt{
+    display:flex;gap:10px;align-items:flex-start;
+    border:1px solid #d9dee5;border-radius:9px;padding:11px 14px;
+    margin-bottom:10px;cursor:pointer;font-size:14.5px;line-height:1.6;
+    background:#fff;transition:border-color .12s,background .12s;
+  }
+  .opt:hover{border-color:#185FA5;background:#f7fafd;}
+  .opt .tag{
+    flex:0 0 22px;height:22px;border-radius:50%;
+    background:#eef1f5;color:#3b4552;font-size:12px;font-weight:600;
+    display:flex;align-items:center;justify-content:center;margin-top:2px;
+  }
+  .opt.correct{border-color:#0F6E56;background:#E1F5EE;}
+  .opt.correct .tag{background:#0F6E56;color:#fff;}
+  .opt.wrong{border-color:#A32D2D;background:#FCEBEB;}
+  .opt.wrong .tag{background:#A32D2D;color:#fff;}
+  .opt.dim{opacity:.55;cursor:default;}
+  .opt.correct.dim{opacity:1;}
+  .opt.locked{cursor:default;}
+
+  #feedback{margin-top:14px;border-radius:9px;overflow:hidden;border:1px solid #d9dee5;}
+  #verdict{
+    padding:10px 14px;font-size:14px;font-weight:600;
+    background:#E1F5EE;color:#085041;border-bottom:1px solid #cbe9da;
+  }
+  #verdict.bad{background:#FCEBEB;color:#501313;border-bottom:1px solid #f3cdcd;}
+  #explain{padding:12px 14px;font-size:13.5px;line-height:1.8;color:#374151;background:#fdfdfe;}
+  #explain b{color:#1f2328;}
+  #nextBtn{
+    display:block;margin:14px 16px 16px;float:right;
+    background:#185FA5;color:#fff;border:none;border-radius:8px;
+    padding:9px 26px;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  #nextBtn:hover{background:#14507f;}
+  #feedback::after{content:"";display:block;clear:both;}
+  .kbd{font-size:11.5px;color:#9aa3af;margin:14px 2px 0;}
+
+  #result{background:#fff;border-radius:12px;padding:26px 28px;box-shadow:0 2px 12px rgba(16,24,40,.08);}
+  .r-head{display:flex;gap:22px;align-items:center;margin-bottom:6px;flex-wrap:wrap;}
+  .r-score{font-size:44px;font-weight:600;color:#185FA5;line-height:1;}
+  .r-score small{font-size:18px;color:#8b949e;font-weight:400;}
+  .r-msg{font-size:14px;color:#4b5563;line-height:1.7;}
+  h3{font-size:15px;font-weight:600;margin:26px 0 10px;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th,td{border:1px solid #e2e6eb;padding:7px 10px;text-align:left;line-height:1.6;}
+  th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .mbar{height:8px;background:#e5e8ee;border-radius:4px;overflow:hidden;min-width:120px;}
+  .mbar div{height:100%;background:#1D9E75;border-radius:4px;}
+
+  .wq{
+    border:1px solid #f3cdcd;border-radius:9px;padding:13px 15px;
+    margin-bottom:12px;background:#fffafa;
+  }
+  .wq .wt{font-size:14px;font-weight:600;line-height:1.7;margin-bottom:7px;}
+  .wq .wa{font-size:13px;color:#A32D2D;margin-bottom:2px;}
+  .wq .wc{font-size:13px;color:#0F6E56;margin-bottom:8px;}
+  .wq .we{font-size:12.5px;color:#57606a;line-height:1.75;border-top:1px dashed #e8d9d9;padding-top:7px;}
+
+  .btns{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;border-radius:8px;
+    padding:9px 22px;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:#185FA5;border-color:#185FA5;color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn:disabled{opacity:.45;cursor:not-allowed;}
+  .hidden{display:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <h1>5.5 本章练习 · 第 5 章整章串联重测</h1>
+      <p class="sub">50 题 · 第 4 版教材 5.5 节 · 达标线 40/50（80%）· 逐题精讲 · 键盘 A~D 或 1~4 选择，Enter 下一题</p>
+    </div>
+    <div class="score-chip">已答对 <b id="scoreNow">0</b> / <span id="totalNow">50</span> 题</div>
+  </header>
+
+  <div id="quiz">
+    <div class="progress-row">
+      <span id="pos"></span>
+      <span class="chip" id="moduleChip"></span>
+    </div>
+    <div class="progress"><div id="bar"></div></div>
+    <div class="qcard">
+      <p class="qtext" id="qtext"></p>
+      <div id="options"></div>
+      <div id="feedback" class="hidden">
+        <div id="verdict"></div>
+        <div id="explain"></div>
+        <button id="nextBtn">下一题 →</button>
+      </div>
+    </div>
+    <p class="kbd">键盘可用：A~D 或 1~4 选择，Enter 下一题</p>
+    <p class="kbd" style="margin:4px 2px 0;">对照资料：《5.1_知识点清单.md》~《5.4_知识点清单.md》· 教材出处：《信息系统项目管理师教程（第4版）》P129~P181 · 第 5 章与第 3 版第 3 章同源，2023 下及以后真题有对应题可刷 · 做完把得分登记到章级「打卡进度.md」的章末验收表</p>
+  </div>
+
+  <div id="result" class="hidden"></div>
+
+</div>
+
+<script>
+const QUESTIONS = [
+{m:"A·架构设计",
+ q:"五大软件架构风格各有其子风格。下列各组中，全部属于「数据流风格」的是（　）。",
+ o:["主程序/子程序、层次结构","批处理序列、管道/过滤器","解释器、基于规则的系统","进程通信、事件驱动的系统"],a:1,
+ e:"教材 5.1.1：五大架构风格——<b>数据流</b>（批处理序列 / 管道-过滤器）、<b>调用/返回</b>（主程序-子程序 / 数据抽象和面向对象 / 层次结构）、<b>独立构件</b>（进程通信 / 事件驱动）、<b>虚拟机</b>（解释器 / 基于规则的系统）、<b>仓库</b>（数据库系统 / 黑板系统 / 超文本系统）。「层次结构」属调用/返回、「事件驱动」属独立构件——风格归属题年年考。"},
+
+{m:"A·架构设计",
+ q:"在软件架构评估中，ATAM（架构权衡分析法）、SAAM（软件架构分析法）和 CBAM（成本效益分析法）三种具体方法都属于（　）。",
+ o:["基于调查问卷（或检查表）的评估方式","基于度量的评估方式","基于形式化验证的评估方式","基于场景的评估方式"],a:3,
+ e:"软件架构评估可归纳为三类方式：基于<b>调查问卷（或检查表）</b>、基于<b>场景</b>、基于<b>度量</b>，其中<b>基于场景的方式最为常用</b>；ATAM / SAAM / CBAM 三种具体方法都属于基于场景的方式。"},
+
+{m:"A·架构设计",
+ q:"在架构评估中，「加密级别越高安全性越好，但性能越差」这一特性同时影响多个质量属性，它属于（　）。",
+ o:["权衡点","敏感点","风险点","非功能约束点"],a:0,
+ e:"<b>敏感点</b> = 影响<b>单个（某一）</b>质量属性的构件特性；<b>权衡点</b> = 影响<b>多个</b>质量属性的特性（即多个质量属性的敏感点）。题干同时涉及「安全性」与「性能」两个质量属性 → 权衡点。"},
+
+{m:"B·需求分析",
+ q:"「描述用户的具体目标，或用户要求系统必须能完成的任务」，属于需求的哪一层次（　）。",
+ o:["业务需求","系统需求","用户需求","设计约束"],a:2,
+ e:"需求三层次：<b>业务需求</b>（企业或客户对系统<b>高层次</b>的目标追求，来自投资人、客户、管理人员或市场/产品策划部门）、<b>用户需求</b>（描述<b>用户的具体目标</b>、用户让系统必须完成的任务）、<b>系统需求</b>（从系统角度说明，包括功能需求、非功能需求和设计约束）。"},
+
+{m:"B·需求分析",
+ q:"需求过程包括四个环节，其中「确定和理解不同的项目干系人的需求和约束」属于（　）。",
+ o:["需求分析","需求获取","需求规格说明书编制","需求验证与确认"],a:1,
+ e:"需求过程四环节 = <b>需求获取 → 需求分析 → 需求规格说明书编制 → 需求验证与确认</b>。<b>需求获取</b>即「确定和理解不同的项目干系人的需求和约束」的过程，常见方法有用户访谈、问卷调查、采样、情节串联板、联合需求计划。"},
+
+{m:"B·需求分析",
+ q:"UML 2.0 提供了多种图，其中「强调收发消息的对象之间的组织结构」的是（　）。",
+ o:["顺序图","状态图","活动图","通信图"],a:3,
+ e:"<b>顺序图</b>强调消息的<b>时间次序</b>；<b>通信图（协作图）</b>强调收发消息对象的<b>组织结构</b>；<b>状态图</b>描述对象的生命周期；<b>活动图</b>本质是流程图；<b>部署图</b>描述软件到硬件的映射。"},
+
+{m:"B·需求分析",
+ q:"关于软件需求规格说明书（SRS）与需求评审，下列说法正确的是（　）。",
+ o:["对 SRS 进行的技术评审称为需求评审","SRS 只需在大型项目中编制，小型项目可省略","SRS 是需求获取阶段的直接产物，无需与干系人确认","需求评审属于管理评审，不属于技术评审"],a:0,
+ e:"教材 5.1.2：<b>SRS 是需求开发活动的产物</b>，是软件开发过程中<b>最重要的文档之一</b>，对于任何规模和性质的软件项目<b>都不应该缺少</b>；编制 SRS 的目的是使项目干系人与开发团队对系统的初始规定有一个<b>共同的理解</b>，成为整个开发工作的基础。<b>需求评审就是对 SRS 进行技术评审</b>。"},
+
+{m:"C·软件设计",
+ q:"面向对象设计（OOD）七大原则中，「子类型必须能够替换掉它们的父类型」指的是（　）。",
+ o:["开闭原则","依赖倒置原则","里氏替换原则","迪米特原则"],a:2,
+ e:"七原则：单一职责（一个类只负责一项职责）、<b>开闭</b>（对扩展开放、对修改关闭）、<b>里氏替换</b>（父类能出现的地方子类必能替换）、<b>依赖倒置</b>（依赖抽象而非具体实现）、接口隔离（接口小而专）、组合重用（多用组合少用继承）、<b>迪米特</b>（最少知识原则）。"},
+
+{m:"C·软件设计",
+ q:"按目的和用途划分，下列属于结构型设计模式的是（　）。",
+ o:["观察者","单例","策略","适配器"],a:3,
+ e:"设计模式按用途分三类：<b>创建型</b>（工厂方法、抽象工厂、原型、单例、建造者）、<b>结构型</b>（适配器、桥接、组合、装饰、外观、享元、代理）、<b>行为型</b>（职责链、命令、解释器、迭代器、中介者、备忘录、观察者、状态、策略、模板方法、访问者）。观察者与策略属行为型、单例属创建型。"},
+
+{m:"C·软件设计",
+ q:"结构化设计（SD）是一种面向（　）的方法，它以 SRS 和 SA 阶段产生的 DFD 与数据字典等文档为基础。",
+ o:["对象","数据流","数据结构","过程"],a:1,
+ e:"教材 5.1.3：<b>结构化设计（SD）是一种面向数据流的方法</b>，以 SRS 和 SA 阶段所产生的 <b>DFD 和数据字典</b>等文档为基础，是一个<b>自顶向下、逐步求精和模块化</b>的过程；分为<b>概要设计（又称总体结构设计）</b>和<b>详细设计</b>两个阶段，遵循<b>高内聚、低耦合</b>的基本原则。"},
+
+{m:"D·实现与部署",
+ q:"静态测试采用人工检测和计算机辅助静态分析的手段对程序进行检测。下列不属于「对代码的静态测试」手段的是（　）。",
+ o:["边界值分析","桌前检查","代码走查","代码审查"],a:0,
+ e:"教材 5.1.4：<b>静态测试不实际运行程序</b>——对文档主要以<b>检查单</b>方式进行，对代码主要是<b>桌前检查、代码走查和代码审查</b>。<b>边界值分析属于黑盒（动态）测试方法</b>，不在静态测试之列。"},
+
+{m:"D·实现与部署",
+ q:"持续部署的部署层次包含三个环节，其正确顺序是（　）。",
+ o:["Run → Ship → Build","Build → Run → Ship","Build → Ship → Run","Ship → Build → Run"],a:2,
+ e:"部署层次三环节：<b>Build（编译形成 RPM 包或 Jar 包）→ Ship（把第三方依赖和插件安装到环境）→ Run（在不同地方启动整套环境）</b>。常用持续部署方案有 Kubernetes+Docker 与 Matrix 两种；<b>容器技术</b>是目前最流行的部署技术。"},
+
+{m:"D·实现与部署",
+ q:"准备新旧两个部署版本，通过域名解析切换的方式把用户环境切换到新版本，出问题时可以快速切回旧版本——这属于（　）。",
+ o:["金丝雀部署","蓝绿部署","滚动部署","灰度部署"],a:1,
+ e:"<b>蓝绿部署</b>：准备新旧两个版本，通过<b>域名解析切换</b>把用户环境<b>整体切换</b>到新版本，出问题可<b>快速切回</b>旧版本并修复。<b>金丝雀部署 = 灰度发布</b>：先让<b>少量用户</b>使用新版本，确认正常后稳步推广。两者对调是高频坑。"},
+
+{m:"E·过程管理",
+ q:"CSMM 的四个能力域中，「项目策划、项目监控、质量保证、风险管理、供应商管理」等能力子域属于（　）。",
+ o:["治理","开发与交付","组织管理","管理与支持"],a:3,
+ e:"教材 5.1.6：CSMM 由 <b>4 个能力域 / 20 个能力子域 / 161 个能力要求</b>组成。四域：<b>治理</b>（战略与治理、目标管理）、<b>开发与交付</b>（需求、设计、开发、测试、部署、服务、开源应用）、<b>管理与支持</b>（项目策划、项目监控、项目结项、质量保证、风险管理、配置管理、供应商管理）、<b>组织管理</b>（过程管理、人员能力管理、组织资源管理、过程能力管理）。"},
+
+{m:"F·数据建模",
+ q:"「按用户的观点来对数据和信息建模，不依赖于具体的计算机系统，也不对应某个具体的 DBMS」——这描述的是（　）。",
+ o:["概念模型","逻辑模型","物理模型","关系模型"],a:0,
+ e:"教材 5.2.1：三类数据模型按<b>应用目的</b>划分——<b>概念模型</b>（也称<b>信息模型</b>）按<b>用户的观点</b>建模，不依赖具体计算机系统、不对应具体 DBMS；<b>逻辑模型</b>在概念模型基础上确定数据结构；<b>物理模型</b>考虑各种具体技术实现因素、真正实现数据在数据库中的存放。"},
+
+{m:"F·数据建模",
+ q:"逻辑模型是在概念模型的基础上确定模型的数据结构。下列不属于主要逻辑数据结构的是（　）。",
+ o:["层次模型","网状模型","实体关系模型","对象关系模型"],a:2,
+ e:"教材 5.2.1：目前主要的数据结构有 <b>层次模型、网状模型、关系模型、面向对象模型、对象关系模型</b>（口诀「层网关对对象关系」），其中<b>关系模型最重要</b>。<b>实体关系模型（E-R 模型）属概念模型</b>，不是逻辑数据结构。"},
+
+{m:"F·数据建模",
+ q:"数据建模过程中，「把概念模型转换为关系模式」属于（　）。",
+ o:["数据需求分析","概念模型设计","物理模型设计","逻辑模型设计"],a:3,
+ e:"数据建模四步产出：数据需求分析 → <b>数据流图（DFD）</b>；概念模型设计 → <b>E-R 图</b>；<b>逻辑模型设计 → 关系模式</b>；物理模型设计 → 针对具体 DBMS 命名、确定字段类型、编写必要的存储过程与触发器。「E-R 图属概念、关系模式属逻辑」是年年考的配对。"},
+
+{m:"G·数据标准化",
+ q:"关于元数据与数据元，下列说法正确的是（　）。",
+ o:["数据元是关于数据的数据","元数据最简单的定义是关于数据的数据","元数据是数据库、文件和数据交换的基本数据单元","数据元由对象、特性和存储三部分组成"],a:1,
+ e:"教材 5.2.2：<b>元数据 = 关于数据的数据（Data About Data）</b>；<b>数据元 = 数据库、文件和数据交换的基本数据单元</b>，由<b>对象、特性、表示</b>三部分组成（口诀「对特表」）。两个词最容易互串——「关于数据的数据」永远指元数据。"},
+
+{m:"G·数据标准化",
+ q:"数据标准化阶段的具体过程包括四个阶段，其正确顺序是（　）。",
+ o:["确定数据需求 → 制定数据标准 → 批准数据标准 → 实施数据标准","制定数据标准 → 确定数据需求 → 批准数据标准 → 实施数据标准","确定数据需求 → 批准数据标准 → 制定数据标准 → 实施数据标准","确定数据需求 → 制定数据标准 → 实施数据标准 → 批准数据标准"],a:0,
+ e:"四阶段「需·制·批·施」：<b>确定数据需求</b>（产生需求及相关元数据、域值等文件）→ <b>制定数据标准</b>（现有标准不满足需求时，可建议制定新标准、修改或封存已有标准）→ <b>批准数据标准</b>（数据管理机构审查，一经批准将扩充或修改数据模型）→ <b>实施数据标准</b>（在各信息系统中实施和改进）。"},
+
+{m:"H·数据运维",
+ q:"数据备份策略通常包括三种。下列表述完全正确的是（　）。",
+ o:["完全备份、增量备份、差异备份","全量备份、按需备份、镜像备份","完全备份、差分备份、增量备份","完全备份、差分备份、镜像备份"],a:2,
+ e:"教材 5.2.3：备份策略三种 = <b>完全备份、差分备份、增量备份</b>——教材用词是「<b>差分</b>」不是「差异」。另记备份结构四种：DAS 备份结构、基于 LAN 的备份结构、LAN-FREE 备份结构、SERVER-FREE 备份结构。"},
+
+{m:"H·数据运维",
+ q:"关于数据容灾与数据备份的关系，下列说法正确的是（　）。",
+ o:["数据容灾是数据备份的基础","数据备份是应用容灾的子集","容灾只是一种技术，不属于工程范畴","数据备份是数据容灾的基础，也是数据高可用的最后一道防线"],a:3,
+ e:"教材 5.2.3：<b>数据备份是数据容灾的基础</b>，是<b>数据高可用的最后一道防线</b>（系统崩溃时快速恢复数据）；<b>数据容灾是应用容灾的子集</b>，也是应用容灾<b>最根本的基础</b>；<b>容灾是一个工程，而不仅仅是技术</b>。A/B/C 三句都是典型错项。"},
+
+{m:"H·数据运维",
+ q:"不直接对比数据本身，而是利用对数据源、采集方法等数据相关信息的描述，来推断或评估数据质量——这属于（　）。",
+ o:["直接评价法","间接评价法","定量元素评价法","参照评价法"],a:1,
+ e:"数据质量评价两法「<b>直比间推</b>」：<b>直接评价法</b> = 把数据与<b>内部或外部的参照信息（如理论值）进行对比</b>来确定数据质量；<b>间接评价法</b> = 利用<b>数据相关信息</b>（如对数据源、采集方法等的描述）<b>推断或评估</b>数据质量。"},
+
+{m:"I·数据开发",
+ q:"「啤酒与尿布」式的购物篮分析，属于数据挖掘主要任务中的（　）。",
+ o:["数据总结","聚类分析","关联分析","孤立点分析"],a:2,
+ e:"教材 5.2.4：数据挖掘五任务「<b>总·关·分·聚·孤</b>」= 数据总结、<b>关联分析</b>、分类和预测、聚类分析、孤立点分析。购物篮分析（啤酒与尿布）是<b>关联分析</b>的经典例子；「购物篮分析」四个字出现即选关联分析。"},
+
+{m:"I·数据开发",
+ q:"信息检索的主要方法包括四种，下列不属于这四种方法的是（　）。",
+ o:["布尔逻辑检索","全文检索","字段检索","基于内容的多媒体检索"],a:0,
+ e:"教材 5.2.4：信息检索的<b>主要方法</b>四种 = <b>全文检索、字段检索、基于内容的多媒体检索、数据挖掘</b>（注意含「数据挖掘」，教材原口径）；<b>常用技术</b>包括<b>布尔逻辑检索</b>、截词检索、临近检索、限定字段检索、限制检索——布尔逻辑检索属「技术」不属「方法」。"},
+
+{m:"J·数据库安全",
+ q:"数据库中，防止用户通过其有权访问的数据经推导得出无权访问的机密信息，所对应的安全机制是（　）。",
+ o:["存取控制","数据库加密","数据审计","推理控制"],a:3,
+ e:"教材 5.2.5：数据库安全机制五项「<b>身·存·密·审·推</b>」= 用户的身份认证、存取控制、数据库加密、数据审计、<b>推理控制</b>。<b>推理控制</b>对应安全对策中的「防止推导」——用户通过授权访问的数据<b>推导</b>出机密信息。"},
+
+{m:"K·集成基础",
+ q:"「系统构成的每一个产品应属于该产品发展的主流，有可靠的技术支持，有成熟的使用环境，并具有良好的升级发展势头」——这体现的是系统集成的（　）原则。",
+ o:["开放性","主流化","结构化","先进性"],a:1,
+ e:"教材 5.3.1：系统集成四大原则「<b>开·结·先·主</b>」。<b>开放性</b> = 遵循<b>工业开放标准</b>（可互操作/可移植/可伸缩）；<b>结构化</b> = <b>自顶向下逐层模块化分解</b>；<b>先进性</b> = 「目前先进性 + 未来先进性」<b>两层意义</b>；<b>主流化</b> = 每个产品属于该产品发展的<b>主流</b>。"},
+
+{m:"K·集成基础",
+ q:"「把复杂系统分解成相对独立和简单的子系统，自顶向下逐层模块化分解，直到底层每个模块都是可具体说明和可执行的为止」——这体现的是（　）原则。",
+ o:["开放性","先进性","结构化","主流化"],a:2,
+ e:"<b>结构化原则</b>：复杂系统设计的最基本方法依然是结构化系统分析设计方法，<b>自顶向下逐层模块化分解</b>，直到底层每个模块都是<b>可具体说明和可执行</b>的为止。与「工业开放标准」（开放性）、「产品属发展主流 / 可靠技术支持」（主流化）、「两层意义」（先进性）别混。"},
+
+{m:"L·网络集成",
+ q:"计算机网络集成的一般体系框架包含（　）子系统，其中被称为「网络应用的核心」的是（　）。",
+ o:["七个；服务子系统","五个；服务子系统","七个；传输子系统","五个；传输子系统"],a:0,
+ e:"教材 5.3.2：高项第 4 版网络集成体系框架 = <b>七个子系统</b>（传输、交换、安全、网管、<b>服务器</b>、<b>网络操作系统</b>、服务）；中级第 3 版口径是五大子系统（无服务器子系统和网络操作系统）。「<b>网络的核心</b>」= <b>传输子系统</b>；「<b>网络应用的核心</b>」= <b>服务子系统</b>——一句话里两个「核心」最容易串。"},
+
+{m:"L·网络集成",
+ q:"网络集成的传输子系统中，下列全部属于「有线传输介质」的是（　）。",
+ o:["无线电波、微波、红外线","双绞线、同轴电缆、光纤","双绞线、微波、光纤","同轴电缆、红外线、光纤"],a:1,
+ e:"教材 5.3.2：<b>无线传输介质</b> = 无线电波、微波、红外线（「电·微·红」）；<b>有线传输介质</b> = 双绞线、同轴电缆、光纤（「双·同·光」）。传输是<b>网络的核心</b>，是网络信息的「公路」和「血管」，传输介质在很大程度上决定了通信质量。"},
+
+{m:"M·数据集成",
+ q:"关于异构数据集成的方法，下列表述符合教材口径的是（　）。",
+ o:["归纳起来主要有三种：过程式、声明式和中间件","只有过程式方法一种","归纳起来主要有两种：中间件方法和声明式方法","归纳起来主要有两种：过程式方法和声明式方法，另有一类中间件方法"],a:3,
+ e:"教材 5.3.3 原话：异构数据集成方法「<b>归纳起来主要有两种</b>」= <b>过程式方法</b>（点对点 Ad-hoc + Wrapper/Mediator）与<b>声明式方法</b>（统一建模 + 推理机制）；中间件是「<b>另一类方法</b>」——<b>别答「三种方法」</b>（教辅常并称三种）。"},
+
+{m:"M·数据集成",
+ q:"多粒度数据集成中，「通过一定精度的数据获取精度较高的数据」属于（　）。",
+ o:["数据细化","数据综合","数据抽象","数据抽取"],a:0,
+ e:"教材 5.3.3：<b>数据综合（数据抽象）</b> = 由<b>高精度</b>数据经抽象形成<b>精度较低但粒度较大</b>的数据；<b>数据细化</b> = 通过一定精度的数据<b>获取精度较高</b>的数据（途径：时空转换、相关分析、由综合中数据变动的记录恢复）。理想的多粒度数据集成模式是<b>自动逐步抽象</b>。"},
+
+{m:"N·软件集成",
+ q:"公共对象请求代理结构（CORBA）的规范制定者是（　）。",
+ o:["国际标准化组织（ISO）","微软公司","对象管理组织（OMG）","Sun 公司"],a:2,
+ e:"教材 5.3.4：<b>CORBA</b> 的规范制定者是<b>对象管理组织（OMG）</b>——由 800 多个信息系统供应商、软件开发者和用户共同构成的国际组织，建于 <b>1989 年</b>；目的是把对象和分布式系统技术集成为可相互操作的统一结构，既支持现有平台也支持未来的平台集成。"},
+
+{m:"N·软件集成",
+ q:"下列技术中，属于 J2EE 涉及技术的是（　）。",
+ o:["ASP.NET","EJB","ADO.NET","JScript"],a:1,
+ e:"教材 5.3.4：<b>.NET</b> 涉及 <b>VB、C++、C#、JScript、ASP.NET、ADO.NET</b>；<b>J2EE</b> 涉及 <b>EJB、Java Servlets API、JSP、XML</b>，其体系结构四层 = 客户端层 / 服务器端组件层 / EJB / 信息系统层。两套技术清单别混——看到 <b>EJB/JSP/Servlet</b> 就想 J2EE。"},
+
+{m:"O·应用集成",
+ q:"「在业务逻辑层上进行黑盒集成，集成点存于程序代码中」——这指的是 EAI 的（　）层次。",
+ o:["表示集成","数据集成","业务流程集成","控制集成"],a:3,
+ e:"教材 5.3.5：EAI 四层次——<b>表示集成</b>（界面集成，<b>黑盒</b>，最浅层次）、<b>数据集成</b>（<b>白盒</b>，唯一白盒，集成点在中间件）、<b>控制集成</b>（功能集成/应用集成，<b>黑盒</b>，在<b>业务逻辑层</b>集成、集成点存于<b>程序代码</b>中）、<b>业务流程集成</b>（过程集成，由统一数据格式的工作流组成）。"},
+
+{m:"O·应用集成",
+ q:"从信息系统集成技术的角度看，网络集成、数据集成、应用集成分别解决（　）的问题。",
+ o:["语法、语义、语用","语用、语义、语法","语义、语法、语用","语法、语用、语义"],a:0,
+ e:"教材 5.3.5 原句：<b>网络集成解决语法的问题，数据集成解决语义的问题，应用集成解决语用的问题</b>；在集成的堆栈上，<b>应用集成在最上层</b>，主要解决应用的<b>互操作性</b>问题。"},
+
+{m:"P·工程概述",
+ q:"关于「信息系统」与「信息系统工程」的组成，下列表述正确的是（　）。",
+ o:["信息系统 = 业务应用信息系统；信息系统工程 = 业务应用信息系统工程 + 信息安全系统工程","信息系统 = 业务应用信息系统 + 信息安全系统；信息系统工程 = 业务应用信息系统工程","信息系统 = 业务应用信息系统工程 + 信息安全系统工程","信息系统 = 业务应用信息系统 + 信息安全系统；信息系统工程 = 业务应用信息系统工程 + 信息安全系统工程"],a:2,
+ e:"教材 5.4.1：<b>信息系统 = 业务应用信息系统 + 信息安全系统</b>；<b>信息系统工程 = 业务应用信息系统工程 + 信息安全系统工程</b>，两个部分是<b>独立且不可分割</b>的。业务应用信息系统工程一般称为「<b>信息系统集成项目工程</b>」。"},
+
+{m:"P·工程概述",
+ q:"教材特别强调本节讲述的是「信息安全系统工程」而不是「信息系统安全工程」，其原因是（　）。",
+ o:["两者是完全相同的概念，只是名称不同","「信息安全系统工程」是国际标准术语，其他说法不规范","两者所属的工程范围不同，信息安全系统工程不包含在信息系统工程内","「信息系统安全工程」的字面会误解为「安全地建设一个信息系统」，从而忽略信息系统中的信息安全问题"],a:3,
+ e:"教材 5.4.1 术语澄清：「信息系统安全工程」从字面上会<b>误解为「安全地建设一个信息系统」</b>，从而<b>忽略信息系统中的信息安全问题</b>（可能安全地建成一个<b>没有信息安全子系统</b>的信息系统，留下隐患）；「信息安全系统工程」明白无误地确定了：这个工程就是<b>建设一个信息安全系统</b>。"},
+
+{m:"Q·安全系统",
+ q:"信息安全系统的体系架构可用宏观三维空间图反映，「安全空间」的 X、Y、Z 三轴分别是（　）。",
+ o:["X 安全服务 / Y 安全机制 / Z OSI 网络参考模型","X 安全机制 / Y OSI 网络参考模型 / Z 安全服务","X 安全机制 / Y 安全服务 / Z OSI 网络参考模型","X OSI 网络参考模型 / Y 安全机制 / Z 安全服务"],a:1,
+ e:"教材 5.4.2：<b>X 轴 = 安全机制、Y 轴 = OSI 网络参考模型、Z 轴 = 安全服务</b>（口诀「X 机制·Y OSI·Z 服务」）；三轴形成的三维空间就是「<b>安全空间</b>」，达到<b>认证、权限、完整、加密、不可否认</b>五大属性（「认·权·完·加·不可否认」）。"},
+
+{m:"Q·安全系统",
+ q:"信息安全系统的三组「数量型」构成，对应完全正确的是（　）。",
+ o:["安全机制 6 项 / 安全服务 9 项 / 安全技术 6 项","安全机制 9 项 / 安全服务 6 项 / 安全技术 5 项","安全机制 9 项 / 安全服务 6 项 / 安全技术 6 项","安全机制 9 项 / 安全服务 5 项 / 安全技术 6 项"],a:2,
+ e:"教材 5.4.2：<b>安全机制 9 项</b>（实体·平台·数据·通信·应用·运行·管理·授权审计·防范体系）、<b>安全服务 6 项</b>（对等实体认证·数据保密·数据完整性·数据源点认证·禁止否认·犯罪证据提供）、<b>安全技术 6 项</b>（加密·数字签名·访问控制·数据完整性·认证·<b>数据挖掘</b>）。三组数量别对调。"},
+
+{m:"Q·安全系统",
+ q:"信息安全技术主要涉及的内容不包括（　）。",
+ o:["犯罪证据提供","数据挖掘","访问控制","数字签名技术"],a:0,
+ e:"教材 5.4.2：<b>安全技术 6 项</b> = 加密、数字签名技术、访问控制、数据完整性、认证、<b>数据挖掘</b>——注意教材原文含「数据挖掘」这一冷门项；<b>犯罪证据提供属于「安全服务」6 项之一</b>，不是安全技术。"},
+
+{m:"R·工程基础与 ISSE 过程",
+ q:"信息安全系统工程活动离不开其他相关工程。下列不属于「工程基础 8 类相关工程」的是（　）。",
+ o:["硬件工程","密码工程","组织信息化工程","人力资源工程"],a:3,
+ e:"教材 5.4.3：工程基础 <b>8 类相关工程</b>「硬·软·通·存·系·测·密·组」= <b>硬件工程、软件工程、通信及网络工程、数据存储与灾备工程、系统工程、测试工程、密码工程、组织信息化工程</b>（「密码工程」是信息安全特色的一个，别漏）。"},
+
+{m:"R·工程基础与 ISSE 过程",
+ q:"在 ISSE 的风险过程中，「一个有害事件」由（　）三个部分组成。",
+ o:["风险、威胁和脆弱性","威胁、脆弱性和影响","威胁、风险和资产","脆弱性、影响和资产"],a:1,
+ e:"教材 5.4.4：<b>一个有害事件 = 威胁 + 脆弱性 + 影响</b>（不是「风险+威胁+脆弱性」）。风险过程目标是<b>降低信息系统运行的风险</b>：识别威胁/脆弱性/影响 → 评估并排序风险 → 量化风险、建立风险承受级别 → 实施安全措施减轻风险 → 接受<b>残留风险</b>。"},
+
+{m:"R·工程基础与 ISSE 过程",
+ q:"ISSE 三个过程中，「安全需求得到满足的可信程度」指的是（　）。",
+ o:["保证过程","工程过程","风险过程","协调过程"],a:0,
+ e:"ISSE 过程三部分「<b>工·险·保</b>」：<b>工程过程</b>（概念/设计/实现/测试/部署/运行/维护/退出，涵盖全生命周期）、<b>风险过程</b>（主要目标是降低信息系统运行的风险）、<b>保证过程</b>（<b>安全需求得到满足的可信程度</b>，是 ISSE 非常重要的部分）。"},
+
+{m:"S·ISSE-CMM 架构",
+ q:"ISSE-CMM 的体系结构采用两维设计，下列关于两维「管什么」的表述正确的是（　）。",
+ o:["能力维管「做什么」、域维管「做得多好」","域维管「做什么」、能力维管「怎么做」","域维（安全工程过程域）管「做什么」、能力维（公共特性）管「做得多好」","公共特性管「做什么」、安全工程过程域管「做得多好」"],a:2,
+ e:"教材 5.4.4：ISSE-CMM 体系结构采用<b>两维设计</b>——<b>域（Domain）维</b> = 安全工程过程域，汇集定义 ISSE 的所有实施活动（管「<b>做什么</b>」）；<b>能力（Capability）维</b> = 公共特性，代表组织能力（管「<b>做得多好</b>」）。"},
+
+{m:"S·ISSE-CMM 架构",
+ q:"ISSE-CMM 域维中共有（　）个过程域，其中与安全工程直接相关（由基本实施组成）的有（　）个。",
+ o:["11；11","22；11","22；22","11；22"],a:1,
+ e:"教材 5.4.4：域维共 <b>22 个过程域</b> = <b>11 个安全工程过程域</b>（PA01~PA11：实施安全控制/评估影响/评估安全风险/评估威胁/评估脆弱性/建立保证论据/协调安全/监控安全态/提供安全输入/确定安全需求/验证和证实安全）+ <b>11 个与项目和组织实施有关的过程域</b>（PA12~PA22，含「保证质量」）。"},
+
+{m:"S·ISSE-CMM 架构",
+ q:"ISSE-CMM 的五级能力级别，由低到高依次是（　）。",
+ o:["初始级 → 已管理级 → 已定义级 → 量化管理级 → 优化级","初始级 → 项目规范级 → 组织改进级 → 量化提升级 → 创新引领级","非正规实施级 → 充分定义级 → 规划和跟踪级 → 量化控制级 → 持续改进级","非正规实施级 → 规划和跟踪级 → 充分定义级 → 量化控制级 → 持续改进级"],a:3,
+ e:"ISSE-CMM 五级「<b>非·规·充·量·持</b>」= <b>非正规实施级（L1）→ 规划和跟踪级（L2）→ 充分定义级（L3）→ 量化控制级（L4）→ 持续改进级（L5）</b>。选项 A 是 CMMI 口径、选项 B 是 CSMM 口径——三者别混。另记：<b>能力维的通用实施按成熟性排序，高级别位于能力维的高端</b>。"},
+
+{m:"T·跨节串联",
+ q:"关于第 5 章四节的核心表述，下列说法正确的是（　）。",
+ o:["5.3 系统集成中「网络集成解决语义的问题」","5.2 数据工程中「数据元是关于数据的数据」","5.4 安全工程讲的是「信息安全系统工程」，不是「信息系统安全工程」","5.1 软件工程中「架构评估的敏感点影响多个质量属性」"],a:2,
+ e:"A 错——<b>网络集成解决语法、数据集成解决语义、应用集成解决语用</b>；B 错——<b>元数据</b>才是「关于数据的数据」，数据元是「数据库、文件和数据交换的基本数据单元」；D 错——<b>敏感点影响单个质量属性</b>，影响多个的是<b>权衡点</b>。C 正确（教材 5.4.1 专设的术语澄清）。"},
+
+{m:"T·跨节串联",
+ q:"下列关于第 5 章各节分类数量的对应，完全正确的是（　）。",
+ o:["安全机制 9 项 / 安全服务 6 项 / 数据可视化 7 类","安全机制 6 项 / 安全服务 9 项 / 数据可视化 7 类","安全机制 9 项 / 安全服务 6 项 / 数据可视化 5 类","安全机制 9 项 / 安全服务 6 项 / 数据可视化 6 类"],a:0,
+ e:"<b>安全机制 9 项 / 安全服务 6 项 / 安全技术 6 项</b>（5.4.2）；<b>数据可视化 7 类</b>（一维/二维/三维 + 多维 + 时态 + 层次 + 网络，5.2.4）。把「可视化七类」记成六类或五类，是本组最常见的错。"},
+
+{m:"T·跨节串联",
+ q:"下列关于第 5 章各节「基础 / 核心」的表述，错误的是（　）。",
+ o:["数据标准化是实现数据共享的基础","数据备份是数据容灾的基础","安全防范体系的核心是实现组织信息安全资源的综合管理（EISRM）","传输子系统是网络应用的核心"],a:3,
+ e:"D 错——<b>传输子系统是「网络的核心」</b>（网络信息的公路和血管），<b>「网络应用的核心」是服务子系统</b>。A（5.2.2 数据标准化 = 实现数据共享的基础）、B（5.2.3 数据备份是数据容灾的基础）、C（5.4.2 安全防范体系核心 = EISRM）均正确。"},
+
+{m:"T·跨节串联",
+ q:"下列关于第 5 章各节核心概念配对的表述，正确的是（　）。",
+ o:["结构化分析（SA）的核心是数据流图（DFD）","数据集成是 EAI 四层次中唯一的白盒集成","模式集成的三种等价可最终归结为「关联等价」","5.1 中「概要设计」又称「详细设计」"],a:1,
+ e:"A 错——SA 的核心是<b>数据字典</b>（不是 DFD）；C 错——模式集成三等价（属性/关联/类）可最终归结为「<b>属性等价</b>」；D 错——概要设计又称<b>总体结构设计</b>，与详细设计并列。B 正确：EAI 四层次中<b>数据集成是唯一的白盒集成</b>，表示集成与控制集成均为黑盒。"}
+];
+
+const LETTERS = ["A","B","C","D"];
+let pool = [], cur = 0, answered = false, stats = {}, wrongList = [];
+
+function init(list){
+  pool = list.map(x=>Object.assign({},x));
+  cur = 0; answered = false; stats = {}; wrongList = [];
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  document.getElementById("totalNow").textContent = pool.length;
+  document.getElementById("scoreNow").textContent = "0";
+  render();
+}
+function render(){
+  const q = pool[cur];
+  document.getElementById("pos").textContent = "第 " + (cur+1) + " / " + pool.length + " 题";
+  document.getElementById("moduleChip").textContent = q.m;
+  document.getElementById("bar").style.width = (cur/pool.length*100) + "%";
+  document.getElementById("qtext").innerHTML = q.q;
+  const box = document.getElementById("options");
+  box.innerHTML = "";
+  q.o.forEach((t,i)=>{
+    const d = document.createElement("div");
+    d.className = "opt";
+    d.innerHTML = '<span class="tag">'+LETTERS[i]+'</span><span>'+t+"</span>";
+    d.onclick = ()=>choose(i);
+    box.appendChild(d);
+  });
+  document.getElementById("feedback").classList.add("hidden");
+}
+function choose(i){
+  if(answered) return;
+  answered = true;
+  const q = pool[cur];
+  const ok = (i === q.a);
+  if(!stats[q.m]) stats[q.m] = {right:0,total:0};
+  stats[q.m].total++;
+  const opts = document.querySelectorAll(".opt");
+  opts.forEach((d,idx)=>{
+    d.classList.add("locked");
+    if(idx === q.a) d.classList.add("correct");
+    else if(idx === i) d.classList.add("wrong");
+    else d.classList.add("dim");
+    d.onclick = null;
+  });
+  if(ok){
+    stats[q.m].right++;
+    document.getElementById("scoreNow").textContent = sumRight();
+  } else {
+    wrongList.push({q:q, picked:i});
+  }
+  const v = document.getElementById("verdict");
+  v.textContent = ok ? "✓ 答对了" : "✗ 答错了　正确答案：" + LETTERS[q.a];
+  v.className = ok ? "" : "bad";
+  document.getElementById("explain").innerHTML = q.e;
+  document.getElementById("feedback").classList.remove("hidden");
+  document.getElementById("nextBtn").textContent =
+    (cur === pool.length-1) ? "查看成绩单 →" : "下一题 →";
+}
+function sumRight(){
+  let s = 0; for(const k in stats) s += stats[k].right; return s;
+}
+function next(){
+  cur++;
+  if(cur >= pool.length){ showResult(); }
+  else { answered = false; render(); window.scrollTo(0,0); }
+}
+function showResult(){
+  document.getElementById("quiz").classList.add("hidden");
+  const r = document.getElementById("result");
+  const total = pool.length, right = sumRight();
+  const pct = Math.round(right/total*100);
+  let msg;
+  if(pct >= 80) msg = "达标（≥80%）：本节知识点基本闭环，可以进入下一节，或用康奈尔模板的「遮」字诀再过一遍线索栏。";
+  else if(pct >= 60) msg = "接近达标：把下面的错题解析看完，回看对应模块的知识点清单，明天用康奈尔模板遮住答案重测。";
+  else msg = "未达标：正确率低是发现漏洞的正常信号——先把知识点清单的「必背」块过一遍，再点「只重做错题」。";
+
+  let tbl = '<h3>分模块得分</h3><table><tr><th>模块</th><th>正确 / 题数</th><th>正确率</th></tr>';
+  for(const k in stats){
+    const s = stats[k];
+    const p = Math.round(s.right/s.total*100);
+    tbl += '<tr><td>'+k+'</td><td>'+s.right+' / '+s.total+'</td><td><div class="mbar"><div style="width:'+p+'%"></div></div></td></tr>';
+  }
+  tbl += "</table>";
+
+  let wrong = "";
+  if(wrongList.length){
+    wrong = "<h3>错题回顾（"+wrongList.length+" 题）</h3>";
+    wrongList.forEach((w,i)=>{
+      wrong += '<div class="wq"><div class="wt">'+(i+1)+". "+w.q.q+"</div>"
+        + '<div class="wa">你的选择：'+LETTERS[w.picked]+"　"+w.q.o[w.picked]+"</div>"
+        + '<div class="wc">正确答案：'+LETTERS[w.q.a]+"　"+w.q.o[w.q.a]+"</div>"
+        + '<div class="we">'+w.q.e+"</div></div>";
+    });
+  } else {
+    wrong = '<h3>错题回顾</h3><p style="font-size:13px;color:#0F6E56;">全部答对，本节知识点已闭环。</p>';
+  }
+
+  r.innerHTML =
+    '<div class="r-head"><div class="r-score">'+right+"<small> / "+total+"</small></div>"
+    + '<div class="r-msg"><b>'+pct+"%</b><br>"+msg+"</div></div>"
+    + tbl + wrong
+    + '<div class="btns">'
+    + '<button class="btn primary" id="retryWrong"'+(wrongList.length?"":" disabled")+">只重做错题（"+wrongList.length+" 题）</button>"
+    + '<button class="btn" id="retryAll">全部重来</button></div>';
+  r.classList.remove("hidden");
+  document.getElementById("retryWrong").onclick = ()=>{
+    const list = wrongList.map(w=>w.q);
+    init(list);
+    window.scrollTo(0,0);
+  };
+  document.getElementById("retryAll").onclick = ()=>{ init(QUESTIONS); window.scrollTo(0,0); };
+  window.scrollTo(0,0);
+}
+document.getElementById("nextBtn").onclick = next;
+document.addEventListener("keydown", e=>{
+  if(document.getElementById("quiz").classList.contains("hidden")) return;
+  if(e.key === "Enter" || e.key === " "){ if(answered){ e.preventDefault(); next(); } return; }
+  const map = {"a":0,"b":1,"c":2,"d":3,"1":0,"2":1,"3":2,"4":3};
+  const k = e.key.toLowerCase();
+  if(k in map && !answered) choose(map[k]);
+});
+init(QUESTIONS);
+</script>
+</body>
+</html>
