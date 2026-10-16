@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> 22 题</title>
+<style>
+  *{box-sizing:border-box;}
+  body{
+    margin:0;padding:24px 14px 60px;background:#eef0f3;color:#1f2328;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    gap:14px;margin-bottom:18px;flex-wrap:wrap;
+  }
+  h1{font-size:20px;margin:0;font-weight:600;}
+  .sub{font-size:12.5px;color:#6b7280;margin:5px 0 0;}
+  .score-chip{
+    background:#E6F1FB;border:1px solid #B5D4F4;color:#0C447C;
+    border-radius:8px;padding:7px 13px;font-size:13px;white-space:nowrap;
+  }
+  .score-chip b{font-size:16px;font-weight:600;}
+
+  #quiz{
+    background:#fff;border-radius:12px;padding:22px 24px;
+    box-shadow:0 2px 12px rgba(16,24,40,.08);
+  }
+  .progress-row{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:8px;font-size:13px;color:#4b5563;
+  }
+  .chip{
+    background:#FAEEDA;border:1px solid #EFC98A;color:#633806;
+    border-radius:5px;padding:2px 9px;font-size:12px;
+  }
+  .progress{height:6px;background:#e5e8ee;border-radius:4px;overflow:hidden;margin-bottom:20px;}
+  #bar{height:100%;width:0;background:#185FA5;border-radius:4px;transition:width .25s;}
+
+  .qtext{font-size:16px;line-height:1.75;font-weight:500;margin:0 0 18px;}
+  .opt{
+    display:flex;gap:10px;align-items:flex-start;
+    border:1px solid #d9dee5;border-radius:9px;padding:11px 14px;
+    margin-bottom:10px;cursor:pointer;font-size:14.5px;line-height:1.6;
+    background:#fff;transition:border-color .12s,background .12s;
+  }
+  .opt:hover{border-color:#185FA5;background:#f7fafd;}
+  .opt .tag{
+    flex:0 0 22px;height:22px;border-radius:50%;
+    background:#eef1f5;color:#3b4552;font-size:12px;font-weight:600;
+    display:flex;align-items:center;justify-content:center;margin-top:2px;
+  }
+  .opt.correct{border-color:#0F6E56;background:#E1F5EE;}
+  .opt.correct .tag{background:#0F6E56;color:#fff;}
+  .opt.wrong{border-color:#A32D2D;background:#FCEBEB;}
+  .opt.wrong .tag{background:#A32D2D;color:#fff;}
+  .opt.dim{opacity:.55;cursor:default;}
+  .opt.correct.dim{opacity:1;}
+  .opt.locked{cursor:default;}
+
+  #feedback{margin-top:14px;border-radius:9px;overflow:hidden;border:1px solid #d9dee5;}
+  #verdict{
+    padding:10px 14px;font-size:14px;font-weight:600;
+    background:#E1F5EE;color:#085041;border-bottom:1px solid #cbe9da;
+  }
+  #verdict.bad{background:#FCEBEB;color:#501313;border-bottom:1px solid #f3cdcd;}
+  #explain{padding:12px 14px;font-size:13.5px;line-height:1.8;color:#374151;background:#fdfdfe;}
+  #explain b{color:#1f2328;}
+  #nextBtn{
+    display:block;margin:14px 16px 16px;float:right;
+    background:#185FA5;color:#fff;border:none;border-radius:8px;
+    padding:9px 26px;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  #nextBtn:hover{background:#14507f;}
+  #feedback::after{content:"";display:block;clear:both;}
+  .kbd{font-size:11.5px;color:#9aa3af;margin:14px 2px 0;}
+
+  #result{background:#fff;border-radius:12px;padding:26px 28px;box-shadow:0 2px 12px rgba(16,24,40,.08);}
+  .r-head{display:flex;gap:22px;align-items:center;margin-bottom:6px;flex-wrap:wrap;}
+  .r-score{font-size:44px;font-weight:600;color:#185FA5;line-height:1;}
+  .r-score small{font-size:18px;color:#8b949e;font-weight:400;}
+  .r-msg{font-size:14px;color:#4b5563;line-height:1.7;}
+  h3{font-size:15px;font-weight:600;margin:26px 0 10px;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th,td{border:1px solid #e2e6eb;padding:7px 10px;text-align:left;line-height:1.6;}
+  th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .mbar{height:8px;background:#e5e8ee;border-radius:4px;overflow:hidden;min-width:120px;}
+  .mbar div{height:100%;background:#1D9E75;border-radius:4px;}
+
+  .wq{
+    border:1px solid #f3cdcd;border-radius:9px;padding:13px 15px;
+    margin-bottom:12px;background:#fffafa;
+  }
+  .wq .wt{font-size:14px;font-weight:600;line-height:1.7;margin-bottom:7px;}
+  .wq .wa{font-size:13px;color:#A32D2D;margin-bottom:2px;}
+  .wq .wc{font-size:13px;color:#0F6E56;margin-bottom:8px;}
+  .wq .we{font-size:12.5px;color:#57606a;line-height:1.75;border-top:1px dashed #e8d9d9;padding-top:7px;}
+
+  .btns{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;border-radius:8px;
+    padding:9px 22px;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:#185FA5;border-color:#185FA5;color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn:disabled{opacity:.45;cursor:not-allowed;}
+  .hidden{display:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <h1></h1>
+      <p class="sub">22 题 · 第 4 版教材  节 · 达标线 18/22（80%）· 逐题精讲 · 键盘 A~D 或 1~4 选择，Enter 下一题</p>
+    </div>
+    <div class="score-chip">已答对 <b id="scoreNow">0</b> / <span id="totalNow">22</span> 题</div>
+  </header>
+
+  <div id="quiz">
+    <div class="progress-row">
+      <span id="pos"></span>
+      <span class="chip" id="moduleChip"></span>
+    </div>
+    <div class="progress"><div id="bar"></div></div>
+    <div class="qcard">
+      <p class="qtext" id="qtext"></p>
+      <div id="options"></div>
+      <div id="feedback" class="hidden">
+        <div id="verdict"></div>
+        <div id="explain"></div>
+        <button id="nextBtn">下一题 →</button>
+      </div>
+    </div>
+    <p class="kbd">键盘可用：A~D 或 1~4 选择，Enter 下一题</p>
+  </div>
+
+  <div id="result" class="hidden"></div>
+
+</div>
+
+<script>
+const QUESTIONS = [
+{m:"6.1 PMBOK的发展",
+ q:"PMBOK（项目管理知识体系）是由（　）开发的项目管理知识框架。",
+ o:["美国项目管理协会（PMI）","国际标准化组织（ISO）","电气电子工程师学会（IEEE）","美国国家标准协会（ANSI）"],a:0,
+ e:"<b>PMBOK 是美国项目管理协会（PMI）开发的项目管理知识框架</b>，核心是<b>总结</b>项目管理的优秀实践、知识、技能和工具。教材 6.1 开篇原话。"},
+
+{m:"6.1 PMBOK的发展",
+ q:"关于 PMBOK 的发展历程，正确的说法是（　）。",
+ o:["1987 年发布第 1 版，奠定了项目管理专业化的基础","截至 2022 年已发布 8 个版本","自 1981 年启动研发以来经历多版更新，截至 2022 年已发布 7 版","1996 年第 1 版首次标注了 ANSI 标准"],a:2,
+ e:"PMBOK <b>自 1981 年启动研发</b>，经历了多版更新，<b>截至 2022 年已发布 7 版</b>，其中 <b>4 个版本变化最为突出</b>（1996 第 1 版 / 2004 第 3 版 / 2017 第 6 版 / 2021 第 7 版）。首次标注 ANSI 标准的是<b>第 3 版（2004）</b>，不是第 1 版。"},
+
+{m:"6.1 PMBOK的发展",
+ q:"PMBOK 首次将「敏捷」内容纳入正文的版本是（　）。",
+ o:["第 3 版（2004）","第 6 版（2017）","第 1 版（1996）","第 7 版（2021）"],a:1,
+ e:"<b>第 6 版（2017）</b>清晰区分 ANSI 标准和指南，<b>首次将「敏捷」内容纳入正文</b>，并拓展知识领域前言、补充核心概念 / 新兴实践 / 裁剪因素。第 7 版则是转向「原则 + 绩效域」架构。"},
+
+{m:"6.1 PMBOK的发展",
+ q:"PMBOK 首次标注「ANSI 标准」、并正式区分《项目管理标准》和《项目管理框架和知识体系》的版本是（　）。",
+ o:["第 1 版（1996）","第 6 版（2017）","第 7 版（2021）","第 3 版（2004）"],a:3,
+ e:"<b>第 3 版（2004）</b>首次标注 ANSI 标准，正式区分《项目的项目管理<b>标准</b>》和《项目管理<b>框架和知识体系</b>》，强调「适用于多数项目的良好实践」。版本配对是 6.1 的高频考法。"},
+
+{m:"6.1 PMBOK的发展",
+ q:"PMBOK 第 7 版（2021）发生的重大架构转型是（　）。",
+ o:["从系统视角论述项目管理，新增 12 个项目管理原则和 8 个绩效域，并加入「价值交付系统」","首次区分 ANSI 标准和指南，将敏捷纳入正文","采用基于过程的标准，为项目管理专业化奠定基础","以 5 大过程组和 49 个过程为核心组织内容"],a:0,
+ e:"第 7 版（2021）<b>从系统视角</b>论述项目管理，加入「<b>价值交付系统</b>」，<b>新增 8 个绩效域和 12 个项目管理原则</b>，兼容预测型、适应型等多种开发方法。B 选项是第 6 版的变化，C 选项是第 1 版，D 选项是第 6 版的架构（不是第 7 版的新增）。"},
+
+{m:"6.2.1 项目基础",
+ q:"项目的标准定义：项目是为创造（　）而进行的临时性工作。",
+ o:["持续稳定的价值","独特的产品、服务或成果","可重复量产的成果","组织日常运营的产出"],a:1,
+ e:"<b>项目是为创造独特的产品、服务或成果而进行的临时性工作</b>——两个关键词 <b>独特性 + 临时性</b>，缺一不可。判断一个活动是否为项目，就看有没有「明确的起点终点 + 独特成果」。"},
+
+{m:"6.2.1 项目基础",
+ q:"关于项目「临时性」的说法中，<b>不正确</b>的是（　）。",
+ o:["项目有明确的起点和终点","「临时性」并不一定意味着项目的持续时间短","项目的可交付成果可能长期存在","项目的临时性决定了项目成果也会随项目结束而消失"],a:3,
+ e:"临时性指项目有<b>明确的起点和终点</b>，<b>不代表持续时间短</b>；项目的<b>可交付成果可能长期存在</b>（如纪念碑建成后矗立百年）——所以 D 选项错误。「临时 ≠ 时间短」和「临时 ≠ 成果临时」是两大高频陷阱。"},
+
+{m:"6.2.1 项目基础",
+ q:"下列选项中，<b>不属于</b>项目终止情形的是（　）。",
+ o:["项目达成目标","项目资金耗尽","项目团队规模扩大","项目需求消失"],a:2,
+ e:"项目终止的情形包括：<b>达成目标 / 无法达成目标 / 资金耗尽 / 需求消失</b>等。「团队规模扩大」只是执行状态的变化，不是项目终止的原因。"},
+
+{m:"6.2.1 项目基础",
+ q:"从业务价值角度看，项目旨在推动组织（　）。",
+ o:["从「当前状态」转换到「将来状态」","从「将来状态」回退到「当前状态」","始终维持「当前状态」不变","在「当前状态」与「将来状态」之间循环往复"],a:0,
+ e:"<b>项目驱动变更</b>：项目旨在推动组织从「<b>当前状态</b>」转换到「<b>将来状态</b>」，实现特定目标和更高业务价值。这个「当前态 → 将来态」表述与 6.2.3 成功标准、6.4.1 原则 12 反复呼应，全章通用。"},
+
+{m:"6.2.1 项目基础",
+ q:"项目创造的业务价值中，「商誉、品牌认知度、战略一致性」属于（　）。",
+ o:["有形效益","无形效益","财务效益","货币效益"],a:1,
+ e:"效益分两类：<b>有形效益</b>（货币资产、股东权益、市场占有率等）/ <b>无形效益</b>（商誉、品牌认知度、战略一致性等）。判断线索：能不能直接用货币量化——能 → 有形，不能 → 无形。"},
+
+{m:"6.2.1 项目基础",
+ q:"某企业因「国家新出台数据安全法规」而启动合规改造项目。该项目最直接的启动背景属于 4 类因素中的（　）。",
+ o:["满足干系人要求","创造 / 改进 / 修复产品、过程或服务","符合法律法规或社会需求","实施或变更业务或技术战略"],a:2,
+ e:"项目启动背景 4 类因素（记法「<b>法 · 干 · 产 · 战</b>」）：<b>符合法律法规或社会需求 / 满足干系人要求 / 创造改进修复产品过程服务 / 实施或变更业务或技术战略</b>。「新法规出台」→ 法规驱动，选 C。"},
+
+{m:"6.2.2 项目管理的重要性",
+ q:"项目管理的标准定义是（　）。",
+ o:["为创造独特的产品、服务或成果而进行的临时性工作","持续生产产品或提供服务，维持组织日常运转的活动","对产品全生命周期进行创建、维护和开发的活动","将知识、技能、工具与技术应用于项目活动，以满足项目的要求"],a:3,
+ e:"<b>项目管理 = 将知识、技能、工具与技术应用于项目活动，以满足项目的要求</b>。A 是「项目」的定义，B 是「运营管理」，C 是「产品管理」——四个定义经常互相冒充。教材同时指出：项目是组织<b>创造价值的主要方式</b>，有效高效的项目管理是组织的<b>战略能力</b>。"},
+
+{m:"6.2.3 项目成功的标准",
+ q:"关于项目成功的标准，说法正确的是（　）。",
+ o:["只要时间、成本、范围、质量四个约束达标，项目必然成功","项目成功标准对所有项目都是统一的","除传统约束外更需关注业务价值的实现，且成功标准因项目而异、须由干系人认可","项目成功标准由项目经理单方面确定即可"],a:2,
+ e:"项目成功<b>不仅看时间、成本、范围、质量</b>，更需关注<b>业务价值实现</b>（效益管理计划、NPV / ROI 等财务指标、当前态 → 将来态、用户采纳度等）；<b>成功标准因项目而异</b>，须由<b>干系人认可</b>。业务环境变化时可能出现「范围 / 进度 / 预算都达标但业务层面失败」的情况。"},
+
+{m:"6.2.4 四方关系",
+ q:"「做正确的事」（选择符合战略的组件、排优先级、分资源）是哪一层级管理的重点？（　）",
+ o:["项目管理","项目组合管理","项目集管理","运营管理"],a:1,
+ e:"教材原句：<b>项目组合做正确的事，项目集和项目为正确地做事</b>；运营管理「高效地做事」。项目组合管理通过<b>确定各组件优先级</b>，让最有利于战略目标的部分拥有所需资源。三方管理重点是全章必背配对。"},
+
+{m:"6.2.4 四方关系",
+ q:"项目集定义的核心表述是（　）。",
+ o:["为实现战略目标而组合在一起管理的项目、项目集和运营工作","为创造独特产品、服务或成果而进行的临时性工作","关注产品持续生产和服务的持续提供","相互关联且被协调管理的项目、子项目集或其他活动，以获得分别管理所无法实现的利益"],a:3,
+ e:"<b>项目集 = 相互关联且被协调管理</b>的项目 / 子项目集 / 活动，获取<b>分别管理（单独管理）所无法实现的利益</b>；项目集管理注重<b>项目之间的依赖关系</b>，拥抱变更、通过变更寻求最优值。典型例子：通信卫星系统（卫星与地面站设计建造 + 卫星发射 + 系统整合）。A 是项目组合的定义。"},
+
+{m:"6.2.4 四方关系",
+ q:"关于项目组合的组成，正确的说法是（　）。",
+ o:["项目组合包括项目、项目集、子项目组合和运营工作","项目组合中只能包含彼此相互依赖的项目","项目组合中的组件必须直接相关","项目组合不包含任何运营工作"],a:0,
+ e:"项目组合包含<b>项目、项目集、子项目组合和运营工作</b>，且组件间<b>不一定彼此依赖或直接相关</b>（如文件夹与其中的文件）。这是教材明确写法——「项目组合含运营工作」这一点很容易被误判。"},
+
+{m:"6.2.4 四方关系",
+ q:"运营管理的特点与管理重点是（　）。",
+ o:["临时性、独特性——正确地做事","重复性、持续性——高效地做事","战略性、选择性——做正确的事","依赖性、协调性——正确地做事"],a:1,
+ e:"<b>运营管理关注产品的持续生产、服务的持续提供</b>（组织或业务的持续高效运行），特点是<b>重复性、持续性</b>，管理重点是「<b>高效地做事</b>」。教材明确：<b>运营管理不属于项目管理范围</b>；项目与运营在产品生命周期中交叉（新产品开发、产品升级、生命周期结束等节点）。"},
+
+{m:"6.2.5 项目内外部运行环境",
+ q:"「进度计划软件、配置管理系统、协作工具」在项目运行环境中属于（　）。",
+ o:["组织过程资产（OPA）","外部事业环境因素（EEF）","内部事业环境因素（EEF）","治理框架"],a:2,
+ e:"进度计划软件、配置管理系统、信息系统网络接口、协作工具和工作授权系统属<b>内部 EEF 的「信息技术软件」</b>。⚠️ 高频错点：很多人把它当 OPA（模板 / 工具方法），但教材把它列在<b>内部事业环境因素</b>下。定性口诀：<b>OPA「支持」项目（可复用资产）vs EEF「制约」项目（客观条件）</b>。"},
+
+{m:"6.2.5 项目内外部运行环境",
+ q:"组织过程资产（OPA）中，「项目团队成员、主题专家和其他员工的隐性知识」属于（　）。",
+ o:["过程资产","数据资产","治理文件","知识资产"],a:3,
+ e:"OPA 五类（记法「<b>过 · 治 · 数 · 知 · 保</b>」）：<b>过程资产</b>（工具 / 方法论 / 模板 / PMO 资源）/ <b>治理文件</b>（政策和流程）/ <b>数据资产</b>（以前项目的数据库 / 度量指标）/ <b>知识资产</b>（员工<b>隐性知识</b>）/ <b>安保和安全</b>。「隐性知识」→ 知识资产。"},
+
+{m:"6.2.6 组织系统",
+ q:"某公司项目中，项目经理为兼职、职权「低到中」、预算由职能经理和项目经理「混合」管理。该公司的组织结构类型是（　）。",
+ o:["弱矩阵","均衡矩阵","强矩阵","项目导向"],a:1,
+ e:"六大组织结构权力谱中，<b>均衡（平衡）矩阵：项目经理和管理人员均兼职、职权低到中、预算管理者为「混合」</b>。弱矩阵预算归职能经理；强矩阵起项目经理转全职、预算归项目经理。「预算管理者」是反推组织结构的关键线索。"},
+
+{m:"6.2.6 组织系统",
+ q:"PMO 的三种类型中，「直接管理和控制项目、指定项目经理并对其负责」的是（　）。",
+ o:["指令型","支持型","控制型","项目导向型"],a:0,
+ e:"PMO 三类型控制程度（记法「<b>支低 · 控中 · 指高</b>」）：<b>支持型</b>（顾问角色 / 项目资源库，控制程度低）/ <b>控制型</b>（要求项目服从统一框架与治理，控制程度中）/ <b>指令型</b>（<b>直接管理和控制项目</b>，指定项目经理并对其负责，控制程度高）。"},
+
+{m:"6.2.7 项目管理和产品管理",
+ q:"项目管理与产品管理的核心区别是（　）。",
+ o:["项目管理聚焦「临时性成果交付」，产品管理聚焦「全生命周期价值实现」","项目管理聚焦「全生命周期价值实现」，产品管理聚焦「临时性成果交付」","两者没有区别，只是称呼不同","产品管理是项目管理的一个子集"],a:0,
+ e:"<b>项目管理聚焦「临时性成果交付」，产品管理聚焦「全生命周期价值实现」</b>。三点关联：产品生命周期中可包含<b>多个项目集 / 项目</b>；项目可交付物可能是产品的<b>初始版本或组件</b>，后续通过新项目集 / 项目优化。判断线索：「交付一个版本后团队解散」→ 项目管理；「持续规划产品路线图、管理产品从上市到退市」→ 产品管理。附：<b>产品生命周期四阶段 = 引入 → 成长 → 成熟 → 衰退</b>，别与「项目生命周期」（启动项目 → 组织与准备 → 执行项目工作 → 结束项目，6.4.2 讲）混淆。"}
+
+];
+
+const LETTERS = ["A","B","C","D"];
+let pool = [], cur = 0, answered = false, stats = {}, wrongList = [];
+
+function init(list){
+  pool = list.map(x=>Object.assign({},x));
+  cur = 0; answered = false; stats = {}; wrongList = [];
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  document.getElementById("totalNow").textContent = pool.length;
+  document.getElementById("scoreNow").textContent = "0";
+  render();
+}
+function render(){
+  const q = pool[cur];
+  document.getElementById("pos").textContent = "第 " + (cur+1) + " / " + pool.length + " 题";
+  document.getElementById("moduleChip").textContent = q.m;
+  document.getElementById("bar").style.width = (cur/pool.length*100) + "%";
+  document.getElementById("qtext").innerHTML = q.q;
+  const box = document.getElementById("options");
+  box.innerHTML = "";
+  q.o.forEach((t,i)=>{
+    const d = document.createElement("div");
+    d.className = "opt";
+    d.innerHTML = '<span class="tag">'+LETTERS[i]+'</span><span>'+t+"</span>";
+    d.onclick = ()=>choose(i);
+    box.appendChild(d);
+  });
+  document.getElementById("feedback").classList.add("hidden");
+}
+function choose(i){
+  if(answered) return;
+  answered = true;
+  const q = pool[cur];
+  const ok = (i === q.a);
+  if(!stats[q.m]) stats[q.m] = {right:0,total:0};
+  stats[q.m].total++;
+  const opts = document.querySelectorAll(".opt");
+  opts.forEach((d,idx)=>{
+    d.classList.add("locked");
+    if(idx === q.a) d.classList.add("correct");
+    else if(idx === i) d.classList.add("wrong");
+    else d.classList.add("dim");
+    d.onclick = null;
+  });
+  if(ok){
+    stats[q.m].right++;
+    document.getElementById("scoreNow").textContent = sumRight();
+  } else {
+    wrongList.push({q:q, picked:i});
+  }
+  const v = document.getElementById("verdict");
+  v.textContent = ok ? "✓ 答对了" : "✗ 答错了　正确答案：" + LETTERS[q.a];
+  v.className = ok ? "" : "bad";
+  document.getElementById("explain").innerHTML = q.e;
+  document.getElementById("feedback").classList.remove("hidden");
+  document.getElementById("nextBtn").textContent =
+    (cur === pool.length-1) ? "查看成绩单 →" : "下一题 →";
+}
+function sumRight(){
+  let s = 0; for(const k in stats) s += stats[k].right; return s;
+}
+function next(){
+  cur++;
+  if(cur >= pool.length){ showResult(); }
+  else { answered = false; render(); window.scrollTo(0,0); }
+}
+function showResult(){
+  document.getElementById("quiz").classList.add("hidden");
+  const r = document.getElementById("result");
+  const total = pool.length, right = sumRight();
+  const pct = Math.round(right/total*100);
+  let msg;
+  if(pct >= 80) msg = "达标（≥80%）：本节知识点基本闭环，可以进入下一节，或用康奈尔模板的「遮」字诀再过一遍线索栏。";
+  else if(pct >= 60) msg = "接近达标：把下面的错题解析看完，回看对应模块的知识点清单，明天用康奈尔模板遮住答案重测。";
+  else msg = "未达标：正确率低是发现漏洞的正常信号——先把知识点清单的「必背」块过一遍，再点「只重做错题」。";
+
+  let tbl = '<h3>分模块得分</h3><table><tr><th>模块</th><th>正确 / 题数</th><th>正确率</th></tr>';
+  for(const k in stats){
+    const s = stats[k];
+    const p = Math.round(s.right/s.total*100);
+    tbl += '<tr><td>'+k+'</td><td>'+s.right+' / '+s.total+'</td><td><div class="mbar"><div style="width:'+p+'%"></div></div></td></tr>';
+  }
+  tbl += "</table>";
+
+  let wrong = "";
+  if(wrongList.length){
+    wrong = "<h3>错题回顾（"+wrongList.length+" 题）</h3>";
+    wrongList.forEach((w,i)=>{
+      wrong += '<div class="wq"><div class="wt">'+(i+1)+". "+w.q.q+"</div>"
+        + '<div class="wa">你的选择：'+LETTERS[w.picked]+"　"+w.q.o[w.picked]+"</div>"
+        + '<div class="wc">正确答案：'+LETTERS[w.q.a]+"　"+w.q.o[w.q.a]+"</div>"
+        + '<div class="we">'+w.q.e+"</div></div>";
+    });
+  } else {
+    wrong = '<h3>错题回顾</h3><p style="font-size:13px;color:#0F6E56;">全部答对，本节知识点已闭环。</p>';
+  }
+
+  r.innerHTML =
+    '<div class="r-head"><div class="r-score">'+right+"<small> / "+total+"</small></div>"
+    + '<div class="r-msg"><b>'+pct+"%</b><br>"+msg+"</div></div>"
+    + tbl + wrong
+    + '<div class="btns">'
+    + '<button class="btn primary" id="retryWrong"'+(wrongList.length?"":" disabled")+">只重做错题（"+wrongList.length+" 题）</button>"
+    + '<button class="btn" id="retryAll">全部重来</button></div>';
+  r.classList.remove("hidden");
+  document.getElementById("retryWrong").onclick = ()=>{
+    const list = wrongList.map(w=>w.q);
+    init(list);
+    window.scrollTo(0,0);
+  };
+  document.getElementById("retryAll").onclick = ()=>{ init(QUESTIONS); window.scrollTo(0,0); };
+  window.scrollTo(0,0);
+}
+document.getElementById("nextBtn").onclick = next;
+document.addEventListener("keydown", e=>{
+  if(document.getElementById("quiz").classList.contains("hidden")) return;
+  if(e.key === "Enter" || e.key === " "){ if(answered){ e.preventDefault(); next(); } return; }
+  const map = {"a":0,"b":1,"c":2,"d":3,"1":0,"2":1,"3":2,"4":3};
+  const k = e.key.toLowerCase();
+  if(k in map && !answered) choose(map[k]);
+});
+init(QUESTIONS);
+</script>
+</body>
+</html>

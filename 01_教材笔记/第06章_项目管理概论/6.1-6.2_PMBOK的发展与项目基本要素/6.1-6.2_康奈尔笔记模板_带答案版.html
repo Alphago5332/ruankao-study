@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>康奈尔笔记 · 第 6 章第 1~2 节 PMBOK的发展与项目基本要素 · 带答案版</title>
+<style>
+  :root{
+    --ink:#1f2328;
+    --ink-2:#4b5563;
+    --ink-3:#8b949e;
+    --line:#2f3742;
+    --rule:#d6dae0;
+    --accent:#185FA5;
+    --accent-soft:#E6F1FB;
+    --warm:#854F0B;
+    --warm-soft:#FAEEDA;
+    --paper:#ffffff;
+    --ans-bg:#fffaf2;
+    --ans-border:#e8d9b8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    padding:28px 16px 48px;
+    background:#eef0f3;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+    color:var(--ink);
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .toolbar{
+    max-width:210mm;margin:0 auto 14px;display:flex;gap:10px;align-items:center;
+    justify-content:space-between;flex-wrap:wrap;
+  }
+  .toolbar .hint{font-size:12.5px;color:#5b6470;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;
+    font-size:13px;padding:7px 14px;border-radius:8px;cursor:pointer;
+    font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn.active{background:var(--warm);border-color:var(--warm);color:#fff;}
+
+  .page{
+    width:210mm;min-height:297mm;margin:0 auto;background:var(--paper);
+    padding:14mm 13mm 12mm;box-shadow:0 2px 14px rgba(16,24,40,.12);
+  }
+
+  .head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    border-bottom:2px solid var(--line);padding-bottom:8px;margin-bottom:10px;
+    gap:12px;
+  }
+  .head h1{font-size:19px;margin:0;font-weight:600;letter-spacing:.3px;}
+  .head .sub{font-size:12px;color:var(--ink-3);margin-top:4px;}
+  .head .meta{font-size:12px;color:var(--ink-2);text-align:right;line-height:1.9;white-space:nowrap;}
+  .head .meta b{font-weight:600;color:var(--accent);}
+
+  .band{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+  .chip{
+    font-size:11.5px;padding:4px 9px;border-radius:5px;
+    background:var(--accent-soft);color:#0C447C;border:1px solid #B5D4F4;
+  }
+  .chip.warm{background:var(--warm-soft);color:#633806;border-color:#EFC98A;}
+
+  .cols{
+    display:grid;grid-template-columns:60mm 1fr;gap:0;
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .col-cue{
+    background:#fafbfc;border-right:1px solid var(--line);padding:8px 9px 9px;
+  }
+  .col-note{padding:8px 11px 9px;}
+  .col-hd{
+    font-size:11.5px;font-weight:600;letter-spacing:.6px;color:var(--ink-2);
+    text-transform:uppercase;padding-bottom:6px;margin-bottom:7px;
+    border-bottom:1px dashed #b9c0c9;
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  .col-hd span{font-size:10.5px;font-weight:400;color:var(--ink-3);text-transform:none;letter-spacing:0;}
+
+  .q{
+    font-size:11.5px;line-height:1.5;color:#1f2328;
+    padding:5px 0 5px 20px;position:relative;border-bottom:1px dotted #dfe3e8;
+  }
+  .q:last-child{border-bottom:0;}
+  .q::before{
+    content:attr(data-n);position:absolute;left:0;top:5px;
+    width:14px;height:14px;border-radius:50%;
+    background:var(--accent);color:#fff;font-size:9.5px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:600;line-height:1;
+  }
+  .q b{font-weight:600;}
+  .q em{font-style:normal;color:var(--warm);font-weight:600;}
+
+  .grouplabel{
+    font-size:10.5px;font-weight:600;color:var(--accent);
+    letter-spacing:.4px;margin:8px 0 2px;
+  }
+  .grouplabel:first-child{margin-top:0;}
+
+  /* === 答案区样式 === */
+  .ans-block{
+    margin-bottom:6px;padding:5px 8px 6px;
+    background:var(--ans-bg);border:1px solid var(--ans-border);border-radius:3px;
+  }
+  .ans-block .ans-title{
+    font-size:10.5px;font-weight:600;color:var(--warm);
+    letter-spacing:.3px;margin-bottom:2px;display:flex;align-items:baseline;gap:6px;
+  }
+  .ans-block .ans-title .num{
+    display:inline-block;min-width:14px;height:14px;border-radius:50%;
+    background:var(--warm);color:#fff;font-size:9.5px;font-weight:600;
+    text-align:center;line-height:14px;
+  }
+  .ans-block ul{
+    margin:2px 0 3px 0;padding:0 0 0 16px;font-size:11px;line-height:1.55;color:#2b323b;
+  }
+  .ans-block ul li{padding:1px 0;}
+  .ans-block .key{
+    color:var(--warm);font-weight:600;
+  }
+  .ans-block .tip{
+    font-size:10px;color:#633806;margin-top:2px;line-height:1.5;
+    padding:2px 6px;background:var(--warm-soft);border-radius:2px;
+  }
+  .ans-block .fill{
+    height:16px;border-bottom:1px dashed #c8c0aa;margin-top:3px;
+  }
+  body.hide-answers .ans-block{display:none;}
+  body.hide-answers .summary-prefill{display:none;}
+
+  .summary{
+    margin-top:10px;border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .summary .col-hd{
+    margin:0;padding:7px 11px;background:#fafbfc;border-bottom:1px solid var(--line);
+  }
+  .summary .body{padding:6px 11px 8px;font-size:11.5px;line-height:1.7;color:#2b323b;}
+  .summary .body b{color:var(--accent);}
+  .summary .body .small{font-size:10.5px;color:var(--ink-3);margin-top:3px;display:block;}
+
+  .footer{
+    margin-top:9px;font-size:10.5px;color:var(--ink-3);
+    display:flex;justify-content:space-between;gap:10px;
+  }
+
+  .guide{
+    width:210mm;margin:16px auto 0;background:#fff;border:1px solid #d9dee5;
+    border-radius:8px;padding:16px 18px;
+  }
+  .guide h2{font-size:14px;margin:0 0 10px;font-weight:600;}
+  .guide table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .guide th,.guide td{
+    border:1px solid #e2e6eb;padding:7px 9px;text-align:left;vertical-align:top;line-height:1.6;
+  }
+  .guide th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .guide td:first-child{width:88px;font-weight:600;color:var(--accent);}
+  .guide .note{font-size:12px;color:#5b6470;margin-top:10px;line-height:1.7;}
+
+  @page{size:A4 portrait;margin:0;}
+  @media print{
+    body{background:#fff;padding:0;}
+    .toolbar,.guide{display:none;}
+    .page{box-shadow:none;margin:0;width:auto;min-height:auto;padding:13mm 12mm;}
+    body.hide-answers .ans-block{display:none;}
+    body.hide-answers .summary-prefill{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="hint">A4 竖版 · 带答案版 · 建议先默写、再对照；打印时可「隐藏答案」变填空卷</div>
+  <div>
+    <button class="btn" id="toggleBtn" onclick="toggleAnswers()">👁 隐藏答案（打印填空卷）</button>
+    <button class="btn primary" onclick="window.print()">打印 / 导出 PDF</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="head">
+    <div>
+      <h1>康奈尔笔记 · 第 6 章第 1~2 节 PMBOK的发展与项目基本要素 <span style="color:var(--warm);font-size:14px;">（带答案版）</span></h1>
+      <div class="sub">《信息系统项目管理师教程（第 4 版）》约 P183 ~ P196　｜　答案口径以 2026-10-16 多方交叉核对为准</div>
+    </div>
+    <div class="meta">
+      日期：__________<br>
+      第 <b>__</b> 轮复习　用时 <b>__</b> 分钟
+    </div>
+  </div>
+
+  <div class="band">
+    <span class="chip">上午约 2~3 题（第 6 章 3~5 题中）</span>
+    <span class="chip">概念辨析 / 定义配对 / 组织结构权力谱</span>
+    <span class="chip warm">重点：四方辨析 + 组织结构六类型</span>
+    <span class="chip warm">必背：项目定义 + PMO 三类型</span>
+    <span class="chip warm">通读：H0~H4 背景类</span>
+    <span class="chip warm">📝 含答案</span>
+  </div>
+
+  <div class="cols">
+
+    <div class="col-cue">
+      <div class="col-hd">线索栏 <span>遮住右侧自问</span></div>
+
+      <div class="grouplabel">6.1 PMBOK的发展</div>
+      <div class="q" data-n="1"><b>PMBOK</b> 是什么、由谁开发？何时启动研发、共几版？<b>四个关键版本</b>的年份与变化？</div>
+      <div class="q" data-n="2"><b>第 6 版 → 第 7 版</b>的架构与视角转型？第 7 版新增了什么？</div>
+
+      <div class="grouplabel">6.2.1 项目基础</div>
+      <div class="q" data-n="3"><b>项目定义</b>？两个关键词？<b>临时性 / 独特性</b>的精确含义与高频误区？项目终止 4 种情形？</div>
+      <div class="q" data-n="4">项目如何<b>驱动变更</b>？业务价值<b>两类效益</b>？<b>项目启动背景 4 类因素</b>？</div>
+
+      <div class="grouplabel">6.2.2~6.2.3 重要性 / 成功标准</div>
+      <div class="q" data-n="5"><b>项目管理定义</b>？有效项目管理的价值 vs 缺失后果（各举 3 例）？</div>
+      <div class="q" data-n="6">项目成功只看<b>时间成本范围质量</b>吗？成功标准还有哪些维度？「<em>达标但业务失败</em>」陷阱？</div>
+
+      <div class="grouplabel">6.2.4 四方关系</div>
+      <div class="q" data-n="7"><b>项目 / 项目集 / 项目组合 / 运营管理</b>的定义、特点、管理重点？</div>
+      <div class="q" data-n="8"><b>项目集 vs 项目组合</b>核心区别？<b>组织级项目管理（OPM）</b>定义？</div>
+
+      <div class="grouplabel">6.2.5 项目内外部运行环境</div>
+      <div class="q" data-n="9"><b>OPA vs EEF</b>定性区别？OPA 五类？内 / 外部 EEF 各包括哪些？「<em>进度计划软件</em>」属哪个？</div>
+
+      <div class="grouplabel">6.2.6 组织系统</div>
+      <div class="q" data-n="10"><b>治理框架 vs 管理要素</b>？<b>六大组织结构类型</b>的兼职 / 全职、职权、预算管理者？兼职与全职的分界线？</div>
+      <div class="q" data-n="11"><b>PMO</b>定义、三类型及控制程度？PMO 主要职能 6 条？</div>
+
+      <div class="grouplabel">6.2.7 项目管理和产品管理</div>
+      <div class="q" data-n="12"><b>产品生命周期</b>四阶段？项目管理与产品管理三点关联与核心区别？</div>
+    </div>
+
+    <div class="col-note">
+      <div class="col-hd">答案区 <span>默写后对照 · 虚线处写自己的补充</span></div>
+
+      <div class="grouplabel">6.1 PMBOK的发展</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">1</span>PMBOK 定位与发展脉络 + 四个关键版本</div>
+        <ul>
+          <li><span class="key">PMBOK（项目管理知识体系）是美国项目管理协会（PMI）开发的项目管理知识框架</span>，核心是<span class="key">总结</span>项目管理的优秀实践、知识、技能和工具</li>
+          <li><span class="key">自 1981 年启动研发</span>，多版更新，<span class="key">截至 2022 年已发布 7 版</span>，其中 <span class="key">4 个版本变化最为突出</span>：</li>
+          <li><span class="key">1996 第 1 版</span>：定位「项目管理知识体系指南」，采用<span class="key">基于过程</span>的标准，奠定项目管理<span class="key">专业化</span>基础</li>
+          <li><span class="key">2004 第 3 版</span>：<span class="key">首次标注 ANSI 标准</span>，区分《项目的项目管理<span class="key">标准</span>》和《项目管理<span class="key">框架和知识体系</span>》</li>
+          <li><span class="key">2017 第 6 版</span>：清晰区分 ANSI 标准和指南，<span class="key">首次将「敏捷」内容纳入正文</span>，补充核心概念 / 新兴实践 / 裁剪因素</li>
+          <li><span class="key">2021 第 7 版</span>：从<span class="key">系统视角</span>论述项目管理，加入「<span class="key">价值交付系统</span>」，<span class="key">新增 8 个绩效域和 12 个项目管理原则</span>，兼容多种开发方法</li>
+        </ul>
+        <div class="tip">记法「<span class="key">96 初版定专业 · 04 标 ANSI · 17 纳敏捷 · 21 转原则</span>」；开发主体 = <span class="key">PMI</span>；启动研发 = <span class="key">1981</span></div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">2</span>第 6 版 → 第 7 版的架构转型</div>
+        <ul>
+          <li>第 6 版（2017）：架构 = <span class="key">5 大过程组 + 10 大知识领域</span>（49 个过程），过程导向，侧重「<span class="key">怎么做</span>」（流程、ITTO）</li>
+          <li>第 7 版（2021）：架构 = <span class="key">12 个项目管理原则 + 8 个绩效域</span>，系统视角，侧重「<span class="key">为什么做</span>」（结果、价值、原则）</li>
+          <li>第 7 版新增：<span class="key">价值交付系统</span>（聚焦价值链与业务能力结合，交付价值给组织及干系人）</li>
+        </ul>
+        <div class="tip">⚠️ 第 4 版教材以第 7 版为纲，但「5 过程组 + 10 知识领域」<span class="key">并未作废</span>——仍在教材 6.4.3 / 6.4.4 讲述</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">6.2.1 项目基础</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">3</span>项目定义 + 两大特性</div>
+        <ul>
+          <li><span class="key">项目是为创造独特的产品、服务或成果而进行的临时性工作</span>——两个关键词 = <span class="key">独特性 + 临时性</span></li>
+          <li><span class="key">临时性</span>：有<span class="key">明确的起点和终点</span>；<span class="key">不一定意味着持续时间短</span>；终止情形 = <span class="key">达成目标 / 无法达成目标 / 资金耗尽 / 需求消失</span>；<span class="key">可交付成果可能长期存在</span>（如纪念碑）</li>
+          <li><span class="key">独特性</span>：可交付成果（<span class="key">有形或无形</span>）具有唯一性；即便元素相似，<span class="key">需求、环境、干系人</span>等仍有差异</li>
+        </ul>
+        <div class="tip">🚩 三大陷阱：「临时 = 时间短」❌；「项目临时 → 成果也临时」❌；「有重复元素 → 不独特」❌</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">4</span>驱动变更 + 业务价值 + 启动背景 4 类</div>
+        <ul>
+          <li><span class="key">项目驱动变更</span>：从业务价值角度看，项目旨在推动组织从「<span class="key">当前状态</span>」转换到「<span class="key">将来状态</span>」</li>
+          <li>创造业务价值两类效益：<span class="key">有形效益</span>（货币资产、市场份额）/ <span class="key">无形效益</span>（商誉、品牌认知度、战略一致性）</li>
+          <li>项目启动背景 4 类因素（记法「<span class="key">法 · 干 · 产 · 战</span>」）：①<span class="key">符合法律法规或社会需求</span> ②<span class="key">满足干系人要求</span> ③<span class="key">创造 / 改进 / 修复产品、过程或服务</span> ④<span class="key">实施或变更业务或技术战略</span></li>
+        </ul>
+        <div class="tip">「当前态 → 将来态」表述与 6.2.3 成功标准、6.4.1 原则 12 反复呼应，全章通用</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">6.2.2~6.2.3 重要性 / 成功标准</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">5</span>项目管理定义 + 重要性正反对照</div>
+        <ul>
+          <li><span class="key">项目管理是将知识、技能、工具与技术应用于项目活动，以满足项目的要求</span></li>
+          <li><span class="key">项目是组织创造价值的主要方式</span>；有效高效的项目管理是<span class="key">组织的战略能力</span></li>
+          <li>有效项目管理价值：<span class="key">达成业务目标 / 满足干系人期望 / 提高可预测性和成功率 / 按时交付合格产品 / 应对风险 / 优化资源使用 / 管理变更</span></li>
+          <li>缺失项目管理后果：<span class="key">超时超支质量低劣 / 返工 / 范围失控 / 组织声誉受损 / 干系人不满 / 无法达成目标</span></li>
+        </ul>
+        <div class="tip">出题套路：给一条描述问属于「价值」还是「后果」——抓「可预测性」「按时交付」代表词</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">6</span>项目成功的标准</div>
+        <ul>
+          <li>项目成功<span class="key">不仅看时间、成本、范围、质量</span>等传统指标，<span class="key">更需关注业务价值的实现</span></li>
+          <li>判断维度：完成<span class="key">项目效益管理计划</span>；达成财务指标（<span class="key">NPV、ROI</span>）和非财务目标；组织从当前状态成功过渡到<span class="key">将来状态</span>；履行合同条款、满足干系人期望、<span class="key">用户采纳度高</span>、符合治理规则</li>
+          <li>⚠️ 成功标准<span class="key">因项目而异</span>，须由<span class="key">干系人认可</span>；业务需求 / 市场环境变化时，可能出现「<span class="key">范围 / 进度 / 预算都达标但业务层面失败</span>」</li>
+        </ul>
+        <div class="tip">🚩 判断题「按期在预算内范围质量达标 = 项目一定成功」直接判错——项目需<span class="key">持续与组织战略对齐</span></div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">6.2.4 四方关系</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">7</span>项目 / 项目集 / 项目组合 / 运营管理</div>
+        <ul>
+          <li><span class="key">项目</span>：创造独特产品 / 服务 / 成果的<span class="key">临时性</span>工作 → <span class="key">正确地做事</span>（按计划交付成果）</li>
+          <li><span class="key">项目集</span>：<span class="key">相互关联</span>且被<span class="key">协调管理</span>的项目 / 子项目集 / 活动，获取<span class="key">单独管理无法获得的效益</span> → <span class="key">正确地做事</span>（协调组件实现整体效益）；例：通信卫星系统</li>
+          <li><span class="key">项目组合</span>：为实现<span class="key">战略目标</span>组合管理的项目 / 项目集 / <span class="key">运营工作</span>，组件<span class="key">不一定相关</span> → <span class="key">做正确的事</span>（选择符合战略的组件）</li>
+          <li><span class="key">运营管理</span>：持续生产 / 提供服务，<span class="key">重复性、持续性</span> → <span class="key">高效地做事</span>；<span class="key">不属于项目管理范围</span></li>
+        </ul>
+        <div class="tip">记法「<span class="key">项目、项目集都正确地做事，组合做正确的事，运营高效地做事</span>」；项目组合<span class="key">包含运营工作</span>是教材明确写法</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">8</span>项目集 vs 项目组合 + OPM</div>
+        <ul>
+          <li>项目集管理注重<span class="key">项目之间的依赖关系</span>，<span class="key">拥抱变更</span>、通过变更寻求最优值与整体目标</li>
+          <li>项目组合组件间<span class="key">不一定彼此依赖或直接相关</span>（如文件夹与文件）；通过<span class="key">确定各组件优先级</span>，让最有利于战略目标的部分获得财力 / 人力 / 实物资源</li>
+          <li>项目与项目集管理聚焦「<span class="key">如何做好</span>」，项目组合管理聚焦「<span class="key">做什么</span>」；项目与运营在<span class="key">产品生命周期</span>交叉（新产品开发 / 产品升级 / 生命周期结束）</li>
+          <li><span class="key">组织级项目管理（OPM）</span>：通过对【项目组合、项目集和项目】进行<span class="key">系统化管理</span>，确保项目符合组织<span class="key">战略业务目标</span>，确保组织开展正确项目并合适地分配关键资源</li>
+        </ul>
+        <div class="tip">教材原句「<span class="key">项目组合做正确的事，项目集和项目为正确地做事</span>」；OPM 抓「系统化管理 + 战略业务目标」</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">6.2.5 项目内外部运行环境</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">9</span>OPA 与 EEF</div>
+        <ul>
+          <li>定性：<span class="key">OPA「支持」项目</span>（执行组织正式使用的计划、流程、政策、程序和数据，可复用）；<span class="key">EEF「制约」项目</span>（内外部客观条件）</li>
+          <li>OPA 五类（记法「<span class="key">过 · 治 · 数 · 知 · 保</span>」）：<span class="key">过程资产</span>（工具 / 方法论 / 模板 / PMO 资源）/ <span class="key">治理文件</span>（政策、流程）/ <span class="key">数据资产</span>（以前项目的数据库、度量指标）/ <span class="key">知识资产</span>（员工隐性知识）/ <span class="key">安保和安全</span></li>
+          <li>内部 EEF：<span class="key">组织文化结构与治理 / 设施物理分布 / 基础设施 / 信息技术软件 / 资源可用性 / 员工能力</span></li>
+          <li>外部 EEF（记法「<span class="key">市社监库研标财物</span>」）：<span class="key">市场条件 / 社会文化因素 / 监管环境 / 商业数据库 / 学术研究 / 行业标准 / 财务因素 / 物理环境</span></li>
+        </ul>
+        <div class="tip">🚩 「<span class="key">进度计划软件</span>」属<span class="key">内部 EEF（信息技术软件）</span>，不是 OPA——最高频错点；「商业数据库 / 学术研究」属<span class="key">外部</span> EEF</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">6.2.6 组织系统</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">10</span>治理框架 + 六大组织结构权力谱</div>
+        <ul>
+          <li><span class="key">治理框架</span> = 组织<span class="key">行使职权的规则、政策、程序</span>（影响目标设定 / 风险监控 / 绩效优化）；<span class="key">管理要素</span> = 关键职能或一般管理原则（部门设置、职责分配、<span class="key">统一指挥 / 统一领导</span>、资源优化利用、沟通渠道）</li>
+          <li>六大组织结构（项目经理职权由低到高）：<span class="key">职能（集中式）兼职·极少或无·职能经理管预算</span> → <span class="key">弱矩阵 兼职·低·职能经理</span> → <span class="key">均衡矩阵 兼职·低到中·「混合」</span> → <span class="key">强矩阵 全职·中到高·项目经理</span> → <span class="key">项目导向 全职·高到几乎全部·项目经理</span> → <span class="key">PMO 全职·高到几乎全部·项目经理</span></li>
+        </ul>
+        <div class="tip">🚩 兼职 / 全职分界线 = <span class="key">强矩阵</span>（弱、均衡矩阵均兼职）；<span class="key">均衡矩阵预算管理者是「混合」</span>；真题给「多少人全职 + 谁管预算」反推组织结构</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">11</span>PMO 三类型 + 主要职能</div>
+        <ul>
+          <li>PMO = 对项目相关治理过程进行<span class="key">标准化</span>，并促进<span class="key">资源、方法论、工具和技术共享</span>的组织结构</li>
+          <li>三类型（记法「<span class="key">支低 · 控中 · 指高</span>」）：<span class="key">支持型</span>（顾问角色、项目资源库，控制程度<span class="key">低</span>）/ <span class="key">控制型</span>（<span class="key">要求项目服从</span>统一框架 / 工具 / 治理，控制程度<span class="key">中</span>）/ <span class="key">指令型</span>（<span class="key">直接管理和控制项目</span>、指定项目经理，控制程度<span class="key">高</span>）</li>
+          <li>主要职能 6 条（记法「<span class="key">资 · 法 · 导 · 审 · 文 · 通</span>」）：①管理<span class="key">共享资源</span> ②识别制定项目管理<span class="key">方法、最佳实践和标准</span> ③指导、辅导、培训和监督 ④通过项目<span class="key">审计</span>监督合规性 ⑤制定管理政策 / 程序 / 模板（组织过程资产）⑥协调<span class="key">跨项目的沟通</span></li>
+        </ul>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">6.2.7 项目管理和产品管理</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">12</span>产品生命周期 + 项目管理 vs 产品管理</div>
+        <ul>
+          <li><span class="key">产品</span>：可量化生产的工件（包括服务）；产品生命周期四阶段 = <span class="key">引入、成长、成熟、衰退</span></li>
+          <li><span class="key">产品管理</span>：在产品<span class="key">全生命周期</span>内对产品进行<span class="key">创建、维护和开发</span></li>
+          <li>三点关联：产品生命周期中可包含<span class="key">多个</span>项目集 / 项目；项目可交付物可能是产品的<span class="key">初始版本或组件</span>；产品管理可由产品生命周期内<span class="key">多个项目集 / 项目</span>实现</li>
+          <li>核心区别：项目管理聚焦「<span class="key">临时性成果交付</span>」，产品管理聚焦「<span class="key">全生命周期价值实现</span>」</li>
+        </ul>
+        <div class="tip">⚠️ 产品生命周期（引入成长成熟衰退）≠ 项目生命周期（启动→组织与准备→执行→结束，6.4.2 讲）——两个「生命周期」不是一回事</div>
+        <div class="fill"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="col-hd">总结区 <span>本节本质 + 考点地图</span></div>
+    <div class="body summary-prefill">
+      <b>本节本质</b>：PMBOK 发展史（1 页）+ 项目管理概念的「地基词汇表」（12 页）——定义、四方辨析、组织环境三件事。第 6 章是全书「项目管理」部分的地基章，本节的每个定义都会被后面 7~20 章反复引用，<b>四方辨析 + 组织结构权力谱 + PMO 三类型</b>是上午选择题的高频考点。<br>
+      <b>考点地图（按考频排序）</b>：① 项目 / 项目集 / 项目组合 / 运营管理四方辨析（管理重点 + 依赖关系 + 是否含运营）→ ② 六大组织结构权力谱（兼职全职 / 职权 / 预算管理者）→ ③ PMO 三类型与控制程度 → ④ OPA vs EEF（「进度计划软件」属内部 EEF）→ ⑤ 项目定义与两大特性的三个误区 → ⑥ 项目成功标准（不止四约束、须干系人认可）→ ⑦ PMBOK 四个关键版本（96/04/17/21）→ ⑧ 第 6 版 → 第 7 版转型（12 原则 + 8 绩效域 + 价值交付系统）→ ⑨ 项目启动背景 4 类（法干产战）→ ⑩ 项目管理 vs 产品管理。<br>
+      <span class="small">⚠️ 口径陷阱：①临时 ≠ 持续时间短、成果可长期存在；②项目组合包含运营工作、组件不一定相关；③「项目组合做正确的事，项目集和项目正确地做事」；④均衡矩阵预算管理者是「混合」、兼职全职分界在强矩阵；⑤组织结构只有 6 大类（别多选虚拟型 / 混合型）；⑥PMO 控制程度「支低控中指高」；⑦成功标准因项目而异、须干系人认可，「四约束达标 = 必成功」是错的；⑧产品生命周期 ≠ 项目生命周期；⑨刷旧真题注意 PMBOK 第 6 版口径（49 过程表述）与第 4 版教材不一致。</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>康奈尔笔记法 · 第 6 章第 1~2 节 带答案版　｜　复习记录：当日 ☐　+1 天 ☐　+3 天 ☐　+7 天 ☐　+14 天 ☐</span>
+    <span>正确率 ____ / 12</span>
+  </div>
+
+</div>
+
+<div class="guide">
+  <h2>怎么用这一页</h2>
+  <table>
+    <tr>
+      <th>步骤</th><th>做法</th>
+    </tr>
+    <tr>
+      <td>第 1 遍 · 遮答默写</td>
+      <td>用纸<b>遮住右栏答案区</b>，只看左栏 12 个问题。口头/默写回答，答不出的画「×」。</td>
+    </tr>
+    <tr>
+      <td>第 2 遍 · 对照修正</td>
+      <td>揭开答案区逐项对照。每条答案下的<b>虚线</b>是留给你的「补充线」——记下易漏点（如「96/04/17/21 四关键版」「法干产战」「均衡矩阵预算混合」「支低控中指高」）。</td>
+    </tr>
+    <tr>
+      <td>第 3 遍 · 隐藏答案打印</td>
+      <td>点工具栏「👁 隐藏答案」按钮，再打印一份当填空卷，可反复练习。</td>
+    </tr>
+    <tr>
+      <td>第 4 遍 · 复习节奏</td>
+      <td>页脚 5 个框按「当日 → +1 天 → +3 天 → +7 天 → +14 天」打勾，这就是你的艾宾浩斯进度条。全部打勾后，本节可不再看。</td>
+    </tr>
+  </table>
+  <div class="note">
+    <b>为什么这份是「带答案版」</b>：本节全是「定义 + 辨析 + 表格」型考点，自己默写时最容易犯的错是<b>四方管理重点张冠李戴</b>（正确地做事 × 2 / 做正确的事 / 高效地做事）与<b>组织结构六类型权力谱记串</b>（兼职全职分界、预算管理者）。本版每个答案都标注<b>关键术语</b>（暖色）和<b>对照提醒</b>（橙色框），默写后对照一眼就能定位偏差。考前冲刺只看「总结区 · 考点地图」+「橙色 tip 框」即可。
+  </div>
+</div>
+
+<script>
+  function toggleAnswers(){
+    document.body.classList.toggle('hide-answers');
+    const btn = document.getElementById('toggleBtn');
+    const hidden = document.body.classList.contains('hide-answers');
+    btn.textContent = hidden ? '👁 显示答案' : '👁 隐藏答案（打印填空卷）';
+    btn.classList.toggle('active', hidden);
+  }
+</script>
+
+</body>
+</html>
