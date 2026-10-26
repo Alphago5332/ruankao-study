@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6.3 项目经理的角色 22 题</title>
+<style>
+  *{box-sizing:border-box;}
+  body{
+    margin:0;padding:24px 14px 60px;background:#eef0f3;color:#1f2328;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    gap:14px;margin-bottom:18px;flex-wrap:wrap;
+  }
+  h1{font-size:20px;margin:0;font-weight:600;}
+  .sub{font-size:12.5px;color:#6b7280;margin:5px 0 0;}
+  .score-chip{
+    background:#E6F1FB;border:1px solid #B5D4F4;color:#0C447C;
+    border-radius:8px;padding:7px 13px;font-size:13px;white-space:nowrap;
+  }
+  .score-chip b{font-size:16px;font-weight:600;}
+
+  #quiz{
+    background:#fff;border-radius:12px;padding:22px 24px;
+    box-shadow:0 2px 12px rgba(16,24,40,.08);
+  }
+  .progress-row{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:8px;font-size:13px;color:#4b5563;
+  }
+  .chip{
+    background:#FAEEDA;border:1px solid #EFC98A;color:#633806;
+    border-radius:5px;padding:2px 9px;font-size:12px;
+  }
+  .progress{height:6px;background:#e5e8ee;border-radius:4px;overflow:hidden;margin-bottom:20px;}
+  #bar{height:100%;width:0;background:#185FA5;border-radius:4px;transition:width .25s;}
+
+  .qtext{font-size:16px;line-height:1.75;font-weight:500;margin:0 0 18px;}
+  .opt{
+    display:flex;gap:10px;align-items:flex-start;
+    border:1px solid #d9dee5;border-radius:9px;padding:11px 14px;
+    margin-bottom:10px;cursor:pointer;font-size:14.5px;line-height:1.6;
+    background:#fff;transition:border-color .12s,background .12s;
+  }
+  .opt:hover{border-color:#185FA5;background:#f7fafd;}
+  .opt .tag{
+    flex:0 0 22px;height:22px;border-radius:50%;
+    background:#eef1f5;color:#3b4552;font-size:12px;font-weight:600;
+    display:flex;align-items:center;justify-content:center;margin-top:2px;
+  }
+  .opt.correct{border-color:#0F6E56;background:#E1F5EE;}
+  .opt.correct .tag{background:#0F6E56;color:#fff;}
+  .opt.wrong{border-color:#A32D2D;background:#FCEBEB;}
+  .opt.wrong .tag{background:#A32D2D;color:#fff;}
+  .opt.dim{opacity:.55;cursor:default;}
+  .opt.correct.dim{opacity:1;}
+  .opt.locked{cursor:default;}
+
+  #feedback{margin-top:14px;border-radius:9px;overflow:hidden;border:1px solid #d9dee5;}
+  #verdict{
+    padding:10px 14px;font-size:14px;font-weight:600;
+    background:#E1F5EE;color:#085041;border-bottom:1px solid #cbe9da;
+  }
+  #verdict.bad{background:#FCEBEB;color:#501313;border-bottom:1px solid #f3cdcd;}
+  #explain{padding:12px 14px;font-size:13.5px;line-height:1.8;color:#374151;background:#fdfdfe;}
+  #explain b{color:#1f2328;}
+  #nextBtn{
+    display:block;margin:14px 16px 16px;float:right;
+    background:#185FA5;color:#fff;border:none;border-radius:8px;
+    padding:9px 26px;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  #nextBtn:hover{background:#14507f;}
+  #feedback::after{content:"";display:block;clear:both;}
+  .kbd{font-size:11.5px;color:#9aa3af;margin:14px 2px 0;}
+
+  #result{background:#fff;border-radius:12px;padding:26px 28px;box-shadow:0 2px 12px rgba(16,24,40,.08);}
+  .r-head{display:flex;gap:22px;align-items:center;margin-bottom:6px;flex-wrap:wrap;}
+  .r-score{font-size:44px;font-weight:600;color:#185FA5;line-height:1;}
+  .r-score small{font-size:18px;color:#8b949e;font-weight:400;}
+  .r-msg{font-size:14px;color:#4b5563;line-height:1.7;}
+  h3{font-size:15px;font-weight:600;margin:26px 0 10px;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th,td{border:1px solid #e2e6eb;padding:7px 10px;text-align:left;line-height:1.6;}
+  th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .mbar{height:8px;background:#e5e8ee;border-radius:4px;overflow:hidden;min-width:120px;}
+  .mbar div{height:100%;background:#1D9E75;border-radius:4px;}
+
+  .wq{
+    border:1px solid #f3cdcd;border-radius:9px;padding:13px 15px;
+    margin-bottom:12px;background:#fffafa;
+  }
+  .wq .wt{font-size:14px;font-weight:600;line-height:1.7;margin-bottom:7px;}
+  .wq .wa{font-size:13px;color:#A32D2D;margin-bottom:2px;}
+  .wq .wc{font-size:13px;color:#0F6E56;margin-bottom:8px;}
+  .wq .we{font-size:12.5px;color:#57606a;line-height:1.75;border-top:1px dashed #e8d9d9;padding-top:7px;}
+
+  .btns{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;border-radius:8px;
+    padding:9px 22px;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:#185FA5;border-color:#185FA5;color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn:disabled{opacity:.45;cursor:not-allowed;}
+  .hidden{display:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <h1>6.3 项目经理的角色</h1>
+      <p class="sub">22 题 · 第 4 版教材 6.3 节 · 达标线 18/22（80%）· 逐题精讲 · 键盘 A~D 或 1~4 选择，Enter 下一题</p>
+    </div>
+    <div class="score-chip">已答对 <b id="scoreNow">0</b> / <span id="totalNow">22</span> 题</div>
+  </header>
+
+  <div id="quiz">
+    <div class="progress-row">
+      <span id="pos"></span>
+      <span class="chip" id="moduleChip"></span>
+    </div>
+    <div class="progress"><div id="bar"></div></div>
+    <div class="qcard">
+      <p class="qtext" id="qtext"></p>
+      <div id="options"></div>
+      <div id="feedback" class="hidden">
+        <div id="verdict"></div>
+        <div id="explain"></div>
+        <button id="nextBtn">下一题 →</button>
+      </div>
+    </div>
+    <p class="kbd">键盘可用：A~D 或 1~4 选择，Enter 下一题</p>
+    <p class="kbd" style="margin:4px 2px 0;">对照资料：<b>《信息系统项目管理师教程（第 4 版）》第 6 章第 3 节，约 P196 ~ P201</b> ｜ 答案口径以 2026-10-26 多方交叉核对为准</p>
+  </div>
+
+  <div id="result" class="hidden"></div>
+
+</div>
+
+<script>
+const QUESTIONS = [
+{m:"6.3.1 定义",
+ q:"关于项目经理的定义，正确的是（　）。",
+ o:["项目经理由项目团队选举产生，负责带领团队实现项目目标",
+    "项目经理由执行组织委派，负责领导团队实现项目目标",
+    "项目经理由项目发起人任命，主要负责保证业务运营的高效性",
+    "项目经理由客户指定，专注于对职能领域或业务部门的管理监督"],a:1,
+ e:"<b>教材 6.3.1 原话：项目经理由执行组织委派，负责领导团队实现项目目标</b>。三个关键词：执行组织委派 / 领导团队 / 实现项目目标。C 的「业务运营的高效性」是<b>运营经理</b>的职责，D 的「职能领域或业务部门的管理监督」是<b>职能经理</b>的职责。"},
+{m:"6.3.1 定义",
+ q:"「负责保证业务运营的高效性」描述的是（　）。",
+ o:["项目经理","职能经理","项目发起人","运营经理"],a:3,
+ e:"<b>三经理辨析</b>：运营经理 = 保证<b>业务运营的高效性</b>（对日常运转效率负责）；职能经理 = 对某个<b>职能领域或业务部门的管理监督</b>；项目经理 = 执行组织委派、领导团队实现项目目标。出题套路就是拿另外两句职责描述来混淆。"},
+{m:"6.3.2 影响力范围",
+ q:"项目经理的影响力范围涉及（　）层面的角色。",
+ o:["5 个层面：项目、组织、行业、专业学科、跨领域",
+    "3 个层面：项目、组织、行业",
+    "6 个层面：项目、组织、行业、专业学科、跨领域、政府",
+    "4 个层面：项目、组织、行业、跨领域"],a:0,
+ e:"<b>教材 6.3.2 概述：项目经理会涉及项目、组织、行业、专业学科和跨领域范围内的角色</b>——记法「项·组·行·专·跨」，由内向外扩散。「政府」是干扰项，教材没有这个层面。这些角色反映项目经理的能力，体现其价值和作用。"},
+{m:"6.3.2 影响力范围",
+ q:"教材对项目层面「共识」的定义是（　）。",
+ o:["全体干系人对项目决定 100% 赞同",
+    "多数干系人投票通过即可执行",
+    "即便不能做到 100% 赞同，干系人也会支持项目的决定和行动",
+    "项目发起人拍板后干系人不得再有异议"],a:2,
+ e:"项目经理使用<b>软技能</b>（人际关系技能、人员管理技能）平衡干系人相互冲突和竞争的目标，<b>以达成共识</b>。共识的教材定义 = <b>即便不能做到 100% 赞同，干系人也会支持项目的决定和行动</b>——「共识 = 全体一致同意」是高频错误项。"},
+{m:"6.3.2 影响力范围",
+ q:"关于项目经理的人际网络，正确的是（　）。",
+ o:["正式人际网络（如组织架构图）比非正式的更重要",
+    "项目经理发展、维护和培养的非正式人际网络更加重要",
+    "非正式人际网络指组织架构图所体现的关系",
+    "项目经理只需维护与团队成员的正式汇报关系"],a:1,
+ e:"正式人际网络如<b>组织架构图</b>；非正式人际网络 = 与<b>专家和具有影响力的领导者</b>建立的个人人际关系。教材明确：项目经理发展、维护和培养的<b>非正式人际网络更加重要</b>——反向判断题高频。"},
+{m:"6.3.2 影响力范围",
+ q:"组织层面，其他独立项目可能因下列原因影响本项目，其中<b>不属于</b>教材所列原因的是（　）。",
+ o:["团队成员的个人爱好与性格",
+    "对相同资源的需求",
+    "资金分配的优先顺序",
+    "可交付成果的接受或发布"],a:0,
+ e:"教材所列 4 个原因为：<b>①对相同资源的需求 ②资金分配的优先顺序 ③可交付成果的接受或发布 ④项目与组织战略和目标的一致性</b>——记法「资源·资金·成果·战略」。「团队成员个人爱好」不在列。"},
+{m:"6.3.2 影响力范围",
+ q:"项目经理「指导和教育其他专业人员（生产、市场、销售、财务等）了解项目管理方法对组织的价值」，属于影响力范围的（　）层面。",
+ o:["专业学科","组织","行业","跨领域"],a:3,
+ e:"<b>跨领域层面</b> = 指导和教育<b>其他领域的专业人员</b>学习掌握项目管理方法，还可担任<b>非正式的宣传大使</b>，宣传项目管理在按时交付、质量、创新和资源管理方面的优势。区分：专业学科 = 对「同行」分享知识、参与培训继续教育；行业 = 关注行业最新发展趋势。"},
+{m:"6.3.3 三类技能",
+ q:"项目经理需重点关注的三类关键技能不包括（　）。",
+ o:["项目管理技能","领导力技能","技术研发技能","战略和商务管理技能"],a:2,
+ e:"三类关键技能 = <b>项目管理技能、战略和商务管理技能、领导力技能</b>（「项·战·领」），需要<b>平衡</b>使用。「技术研发技能」不是教材所列；另注意别选 PMI 2022 新三角叫法（工作方式 / 商业敏锐度 / 权力技能），教材用老三角。"},
+{m:"6.3.3 三类技能",
+ q:"关于项目管理技能，下列说法<b>不正确</b>的是（　）。",
+ o:["顶尖项目经理会针对每个项目裁剪，有选择地使用传统工具、敏捷工具、技术、方法",
+    "项目管理技能仅指编制进度计划的能力",
+    "要重点关注项目成功的关键因素、进度表、指定的财务报告和问题日志",
+    "项目经理经常依赖专家判断来有效开展工作"],a:1,
+ e:"项目管理技能 = <b>有效运用项目管理知识实现项目集或项目的预期成果的能力</b>，远不止编制进度计划。「关键项目管理要素」四件 = <b>成功关键因素、进度表、指定的财务报告、问题日志</b>；4 条关键技能记法「盯要素·会裁剪·定计划·控制约」。"},
+{m:"6.3.3 三类技能",
+ q:"战略和商务管理技能有助于项目经理（　）。",
+ o:["提高绩效并取得更好的业务成果",
+    "直接提高技术开发的效率",
+    "替代组织高管制定公司战略",
+    "保证项目团队的日常运营高效"],a:0,
+ e:"教材定义：战略和商务管理技能是关于<b>行业和组织</b>的知识和专业技能，<b>有助于提高绩效并取得更好的业务成果</b>。三技能各自「帮助达成」要配对：项目管理→<b>项目目标</b>；战略和商务→<b>业务成果</b>；领导力→<b>业务目标</b>（帮助组织达成）。C 错——是「执行有利于战略调整和创新的决策及行动」，不是替代高管。"},
+{m:"6.3.3 三类技能",
+ q:"战略和商务管理技能涉及的「商业因素」中，财务类指标是（　）。",
+ o:["干系人登记册与沟通计划",
+    "团队绩效报告",
+    "成本效益分析（净现值 NPV、投资回报率 ROI 等），包括各种可选方案",
+    "项目审计报告"],a:2,
+ e:"商业因素包括：<b>风险和问题 / 财务影响 / 成本效益分析（NPV、ROI 等，含各种可选方案）/ 业务价值 / 效益预期实现情况和战略 / 范围、预算、进度和质量</b>。NPV、ROI 与 6.2.3 项目成功标准的财务指标相呼应，别混章节。"},
+{m:"6.3.3 领导力技能",
+ q:"教材列举的领导力技能包括协商、抗压、（　）、解决问题、批判性思考和人际关系技能。",
+ o:["投资决策","市场推广","合同索赔","沟通"],a:3,
+ e:"领导力即能<b>指导、激励和带领团队</b>的能力，六项技能记法「<b>协·抗·沟·解·批·人</b>」= 协商、抗压、<b>沟通</b>、解决问题、批判性思考、人际关系技能。项目经理需运用领导力技能与<b>所有项目干系人</b>合作。"},
+{m:"6.3.3 领导力技能",
+ q:"占据项目经理工作绝大部分的是（　）。",
+ o:["编写技术方案","人际交往","编制预算报表","风险建模"],a:1,
+ e:"教材原话：<b>人际交往占据项目经理工作的绝大部分</b>，项目经理需要<b>研究人的行为和动机</b>，尽力成为一个好的领导者，并借助人际关系让项目相关事项得到落实。「PM 最主要的工作是技术攻关」是高频错误判断。"},
+{m:"6.3.3 政策与权力",
+ q:"「地位」权力在教材中有时又称为（　）。",
+ o:["正式的、权威的、合法的",
+    "专家的、经验的",
+    "参考的、信任的",
+    "情境的、临时的"],a:0,
+ e:"<b>地位权力有时称为正式的、权威的、合法的</b>——指组织或团队授予的<b>正式职位</b>。这是权力部分最高频的辨析：地位 ↔ 正式/权威/合法是同一权力的别称，不是四种不同权力。"},
+{m:"6.3.3 政策与权力",
+ q:"项目经理因「他人的尊重和赞赏」而获得信任，这种权力的表现形式是（　）。",
+ o:["专家权力","情境权力","参考权力","奖励权力"],a:2,
+ e:"<b>参考权力 = 因为他人的尊重和赞赏而获得的信任</b>。区分：专家 = 拥有的技能和信息、经验、培训、教育、证书；情境 = 在<b>危机等特殊情况</b>下获得的权力；奖励相关 = 给予表扬、金钱或其他奖励。"},
+{m:"6.3.3 政策与权力",
+ q:"卓越的项目经理对待权力的正确做法是（　）。",
+ o:["坐等组织正式授权后再行动",
+    "在组织政策、协议和程序许可的范围内，主动寻求所需的权力和职权",
+    "为达成目标可以突破组织政策的限制",
+    "只使用奖励权力，避免处罚权力"],a:1,
+ e:"教材原话：在权力方面，卓越的项目经理<b>积极主动且目的明确</b>，会在<b>组织政策、协议和程序许可的范围内主动寻求</b>所需的权力和职权，<b>而不是坐等组织授权</b>——更不是越权行事。「被动等授权」是高频反向陷阱。"},
+{m:"6.3.3 领导力与管理",
+ q:"教材对「管理」的定义是（　）。",
+ o:["通过讨论或辩论方式与他人合作，带领他们从一个位置到另一个位置",
+    "用个人魅力激励他人追随共同愿景",
+    "根据目标、反馈和成就给予下属奖励",
+    "指挥一个人执行一系列已知的预期行为，从一个位置到另一个位置"],a:3,
+ e:"<b>管理 = 指挥一个人执行一系列已知的预期行为，从一个位置到另一个位置</b>；<b>领导力 = 通过讨论或辩论方式与他人合作，带领他们从一个位置到另一个位置</b>。A 是领导力的定义（最大干扰项）；C 是交易型领导风格。「领导力不等同于管理」，成功须<b>同时采用两种方式</b>找平衡。"},
+{m:"6.3.3 领导力与管理",
+ q:"选择并调整领导力风格时，教材列举的考虑因素<b>不包括</b>（　）。",
+ o:["客户的付款习惯","领导者的特点","团队成员的特点","组织特点与环境特点"],a:0,
+ e:"教材列举 4 个考虑因素，记法「<b>领·员·组·环</b>」= <b>领导者的特点 / 团队成员的特点 / 组织的特点（目标、结构、工作类型）/ 环境特点（社会形势、经济状况和政策因素）</b>。「客户的付款习惯」不在列。注意关键词是「<b>选择并调整</b>」——风格不是一成不变。"},
+{m:"6.3.3 领导力风格",
+ q:"「做出服务承诺，处处先为他人着想；关注他人的成长、学习、发展、自主性和福利；服务优先于领导」描述的领导力风格是（　）。",
+ o:["放任型","变革型","服务型","魅力型"],a:2,
+ e:"<b>服务型</b>领导力风格的教材原话。高频陷阱：这段描述最容易被错记成变革型或放任型——变革型四件套 = <b>理想化特质和行为、鼓舞性激励、促进创新和创造、个人关怀</b>；放任型 = 允许团队自主决策和设定目标（「无为而治型」）。"},
+{m:"6.3.3 领导力风格",
+ q:"交互型领导力风格结合了（　）三种领导的特点。",
+ o:["放任型、交易型、服务型","服务型、变革型、魅力型","交易型、放任型、魅力型","交易型、变革型、魅力型"],a:3,
+ e:"<b>交互型 = 结合了交易型、变革型和魅力型领导的特点</b>（三合一），不含服务型、放任型。六种风格速记：放任 = 无为而治；交易 = 按绩给奖；服务 = 服务优先于领导；变革 = 四件套；魅力 = 精神饱满热情洋溢充满自信；交互 = 三合一。"},
+{m:"6.3.3 领导力风格",
+ q:"关于六种领导力风格的配对，正确的是（　）。",
+ o:["放任型——根据目标、反馈和成就给予奖励",
+    "交易型——根据目标、反馈和成就给予奖励",
+    "魅力型——允许团队自主决策和设定目标",
+    "服务型——精神饱满、热情洋溢、充满自信"],a:1,
+ e:"<b>交易型 = 根据目标、反馈和成就给予奖励</b>。A 的描述张冠李戴给了放任型（放任 = 允许团队自主决策和设定目标，即 C 的描述）；「精神饱满、热情洋溢、充满自信、说服力强」是<b>魅力型</b>的描述（D 错）。此类「描述反配风格名」是本节最常见考法。"},
+{m:"6.3.3 个性与甄别",
+ q:"关于本节内容与旧题甄别，正确的是（　）。",
+ o:["第 4 版教材 6.3 没有独立的「情商五要素」小节，相关表述仅零散出现在个性特征中",
+    "PMI 新人才三角（工作方式 / 商业敏锐度 / 权力技能）是本节考试的作答依据",
+    "教材建议项目经理坐等组织授予正式权力后再开展工作",
+    "领导力等同于管理，两者可以互换使用"],a:0,
+ e:"B 错——教材本节用的仍是老三角「项·战·领」；C 错——应在组织政策协议程序许可范围内<b>主动寻求</b>权力；D 错——「领导力不等同于管理」，须同时采用两种方式找平衡。A 正确：教材 6.3 无独立「情商」小节，「情绪」「社会（能够理解和管理他人）」仅出现在<b>个性特征</b>中。"}
+];
+
+const LETTERS = ["A","B","C","D"];
+let pool = [], cur = 0, answered = false, stats = {}, wrongList = [];
+
+function init(list){
+  pool = list.map(x=>Object.assign({},x));
+  cur = 0; answered = false; stats = {}; wrongList = [];
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  document.getElementById("totalNow").textContent = pool.length;
+  document.getElementById("scoreNow").textContent = "0";
+  render();
+}
+function render(){
+  const q = pool[cur];
+  document.getElementById("pos").textContent = "第 " + (cur+1) + " / " + pool.length + " 题";
+  document.getElementById("moduleChip").textContent = q.m;
+  document.getElementById("bar").style.width = (cur/pool.length*100) + "%";
+  document.getElementById("qtext").innerHTML = q.q;
+  const box = document.getElementById("options");
+  box.innerHTML = "";
+  q.o.forEach((t,i)=>{
+    const d = document.createElement("div");
+    d.className = "opt";
+    d.innerHTML = '<span class="tag">'+LETTERS[i]+'</span><span>'+t+"</span>";
+    d.onclick = ()=>choose(i);
+    box.appendChild(d);
+  });
+  document.getElementById("feedback").classList.add("hidden");
+}
+function choose(i){
+  if(answered) return;
+  answered = true;
+  const q = pool[cur];
+  const ok = (i === q.a);
+  if(!stats[q.m]) stats[q.m] = {right:0,total:0};
+  stats[q.m].total++;
+  const opts = document.querySelectorAll(".opt");
+  opts.forEach((d,idx)=>{
+    d.classList.add("locked");
+    if(idx === q.a) d.classList.add("correct");
+    else if(idx === i) d.classList.add("wrong");
+    else d.classList.add("dim");
+    d.onclick = null;
+  });
+  if(ok){
+    stats[q.m].right++;
+    document.getElementById("scoreNow").textContent = sumRight();
+  } else {
+    wrongList.push({q:q, picked:i});
+  }
+  const v = document.getElementById("verdict");
+  v.textContent = ok ? "✓ 答对了" : "✗ 答错了　正确答案：" + LETTERS[q.a];
+  v.className = ok ? "" : "bad";
+  document.getElementById("explain").innerHTML = q.e;
+  document.getElementById("feedback").classList.remove("hidden");
+  document.getElementById("nextBtn").textContent =
+    (cur === pool.length-1) ? "查看成绩单 →" : "下一题 →";
+}
+function sumRight(){
+  let s = 0; for(const k in stats) s += stats[k].right; return s;
+}
+function next(){
+  cur++;
+  if(cur >= pool.length){ showResult(); }
+  else { answered = false; render(); window.scrollTo(0,0); }
+}
+function showResult(){
+  document.getElementById("quiz").classList.add("hidden");
+  const r = document.getElementById("result");
+  const total = pool.length, right = sumRight();
+  const pct = Math.round(right/total*100);
+  let msg;
+  if(pct >= 80) msg = "达标（≥80%）：本节知识点基本闭环，可以进入下一节，或用康奈尔模板的「遮」字诀再过一遍线索栏。";
+  else if(pct >= 60) msg = "接近达标：把下面的错题解析看完，回看对应模块的知识点清单，明天用康奈尔模板遮住答案重测。";
+  else msg = "未达标：正确率低是发现漏洞的正常信号——先把知识点清单的「必背」块过一遍，再点「只重做错题」。";
+
+  let tbl = '<h3>分模块得分</h3><table><tr><th>模块</th><th>正确 / 题数</th><th>正确率</th></tr>';
+  for(const k in stats){
+    const s = stats[k];
+    const p = Math.round(s.right/s.total*100);
+    tbl += '<tr><td>'+k+'</td><td>'+s.right+' / '+s.total+'</td><td><div class="mbar"><div style="width:'+p+'%"></div></div></td></tr>';
+  }
+  tbl += "</table>";
+
+  let wrong = "";
+  if(wrongList.length){
+    wrong = "<h3>错题回顾（"+wrongList.length+" 题）</h3>";
+    wrongList.forEach((w,i)=>{
+      wrong += '<div class="wq"><div class="wt">'+(i+1)+". "+w.q.q+"</div>"
+        + '<div class="wa">你的选择：'+LETTERS[w.picked]+"　"+w.q.o[w.picked]+"</div>"
+        + '<div class="wc">正确答案：'+LETTERS[w.q.a]+"　"+w.q.o[w.q.a]+"</div>"
+        + '<div class="we">'+w.q.e+"</div></div>";
+    });
+  } else {
+    wrong = '<h3>错题回顾</h3><p style="font-size:13px;color:#0F6E56;">全部答对，本节知识点已闭环。</p>';
+  }
+
+  r.innerHTML =
+    '<div class="r-head"><div class="r-score">'+right+"<small> / "+total+"</small></div>"
+    + '<div class="r-msg"><b>'+pct+"%</b><br>"+msg+"</div></div>"
+    + tbl + wrong
+    + '<div class="btns">'
+    + '<button class="btn primary" id="retryWrong"'+(wrongList.length?"":" disabled")+">只重做错题（"+wrongList.length+" 题）</button>"
+    + '<button class="btn" id="retryAll">全部重来</button></div>';
+  r.classList.remove("hidden");
+  document.getElementById("retryWrong").onclick = ()=>{
+    const list = wrongList.map(w=>w.q);
+    init(list);
+    window.scrollTo(0,0);
+  };
+  document.getElementById("retryAll").onclick = ()=>{ init(QUESTIONS); window.scrollTo(0,0); };
+  window.scrollTo(0,0);
+}
+document.getElementById("nextBtn").onclick = next;
+document.addEventListener("keydown", e=>{
+  if(document.getElementById("quiz").classList.contains("hidden")) return;
+  if(e.key === "Enter" || e.key === " "){ if(answered){ e.preventDefault(); next(); } return; }
+  const map = {"a":0,"b":1,"c":2,"d":3,"1":0,"2":1,"3":2,"4":3};
+  const k = e.key.toLowerCase();
+  if(k in map && !answered) choose(map[k]);
+});
+init(QUESTIONS);
+</script>
+</body>
+</html>
