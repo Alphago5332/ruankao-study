@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6.4上 项目管理原则与生命周期 22 题</title>
+<style>
+  *{box-sizing:border-box;}
+  body{
+    margin:0;padding:24px 14px 60px;background:#eef0f3;color:#1f2328;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  header{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    gap:14px;margin-bottom:18px;flex-wrap:wrap;
+  }
+  h1{font-size:20px;margin:0;font-weight:600;}
+  .sub{font-size:12.5px;color:#6b7280;margin:5px 0 0;}
+  .score-chip{
+    background:#E6F1FB;border:1px solid #B5D4F4;color:#0C447C;
+    border-radius:8px;padding:7px 13px;font-size:13px;white-space:nowrap;
+  }
+  .score-chip b{font-size:16px;font-weight:600;}
+
+  #quiz{
+    background:#fff;border-radius:12px;padding:22px 24px;
+    box-shadow:0 2px 12px rgba(16,24,40,.08);
+  }
+  .progress-row{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:8px;font-size:13px;color:#4b5563;
+  }
+  .chip{
+    background:#FAEEDA;border:1px solid #EFC98A;color:#633806;
+    border-radius:5px;padding:2px 9px;font-size:12px;
+  }
+  .progress{height:6px;background:#e5e8ee;border-radius:4px;overflow:hidden;margin-bottom:20px;}
+  #bar{height:100%;width:0;background:#185FA5;border-radius:4px;transition:width .25s;}
+
+  .qtext{font-size:16px;line-height:1.75;font-weight:500;margin:0 0 18px;}
+  .opt{
+    display:flex;gap:10px;align-items:flex-start;
+    border:1px solid #d9dee5;border-radius:9px;padding:11px 14px;
+    margin-bottom:10px;cursor:pointer;font-size:14.5px;line-height:1.6;
+    background:#fff;transition:border-color .12s,background .12s;
+  }
+  .opt:hover{border-color:#185FA5;background:#f7fafd;}
+  .opt .tag{
+    flex:0 0 22px;height:22px;border-radius:50%;
+    background:#eef1f5;color:#3b4552;font-size:12px;font-weight:600;
+    display:flex;align-items:center;justify-content:center;margin-top:2px;
+  }
+  .opt.correct{border-color:#0F6E56;background:#E1F5EE;}
+  .opt.correct .tag{background:#0F6E56;color:#fff;}
+  .opt.wrong{border-color:#A32D2D;background:#FCEBEB;}
+  .opt.wrong .tag{background:#A32D2D;color:#fff;}
+  .opt.dim{opacity:.55;cursor:default;}
+  .opt.correct.dim{opacity:1;}
+  .opt.locked{cursor:default;}
+
+  #feedback{margin-top:14px;border-radius:9px;overflow:hidden;border:1px solid #d9dee5;}
+  #verdict{
+    padding:10px 14px;font-size:14px;font-weight:600;
+    background:#E1F5EE;color:#085041;border-bottom:1px solid #cbe9da;
+  }
+  #verdict.bad{background:#FCEBEB;color:#501313;border-bottom:1px solid #f3cdcd;}
+  #explain{padding:12px 14px;font-size:13.5px;line-height:1.8;color:#374151;background:#fdfdfe;}
+  #explain b{color:#1f2328;}
+  #nextBtn{
+    display:block;margin:14px 16px 16px;float:right;
+    background:#185FA5;color:#fff;border:none;border-radius:8px;
+    padding:9px 26px;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  #nextBtn:hover{background:#14507f;}
+  #feedback::after{content:"";display:block;clear:both;}
+  .kbd{font-size:11.5px;color:#9aa3af;margin:14px 2px 0;}
+
+  #result{background:#fff;border-radius:12px;padding:26px 28px;box-shadow:0 2px 12px rgba(16,24,40,.08);}
+  .r-head{display:flex;gap:22px;align-items:center;margin-bottom:6px;flex-wrap:wrap;}
+  .r-score{font-size:44px;font-weight:600;color:#185FA5;line-height:1;}
+  .r-score small{font-size:18px;color:#8b949e;font-weight:400;}
+  .r-msg{font-size:14px;color:#4b5563;line-height:1.7;}
+  h3{font-size:15px;font-weight:600;margin:26px 0 10px;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th,td{border:1px solid #e2e6eb;padding:7px 10px;text-align:left;line-height:1.6;}
+  th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .mbar{height:8px;background:#e5e8ee;border-radius:4px;overflow:hidden;min-width:120px;}
+  .mbar div{height:100%;background:#1D9E75;border-radius:4px;}
+
+  .wq{
+    border:1px solid #f3cdcd;border-radius:9px;padding:13px 15px;
+    margin-bottom:12px;background:#fffafa;
+  }
+  .wq .wt{font-size:14px;font-weight:600;line-height:1.7;margin-bottom:7px;}
+  .wq .wa{font-size:13px;color:#A32D2D;margin-bottom:2px;}
+  .wq .wc{font-size:13px;color:#0F6E56;margin-bottom:8px;}
+  .wq .we{font-size:12.5px;color:#57606a;line-height:1.75;border-top:1px dashed #e8d9d9;padding-top:7px;}
+
+  .btns{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;border-radius:8px;
+    padding:9px 22px;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:#185FA5;border-color:#185FA5;color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn:disabled{opacity:.45;cursor:not-allowed;}
+  .hidden{display:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <h1>6.4上 项目管理原则与生命周期</h1>
+      <p class="sub">22 题 · 第 4 版教材 6.4 节 · 达标线 18/22（80%）· 逐题精讲 · 键盘 A~D 或 1~4 选择，Enter 下一题</p>
+    </div>
+    <div class="score-chip">已答对 <b id="scoreNow">0</b> / <span id="totalNow">22</span> 题</div>
+  </header>
+
+  <div id="quiz">
+    <div class="progress-row">
+      <span id="pos"></span>
+      <span class="chip" id="moduleChip"></span>
+    </div>
+    <div class="progress"><div id="bar"></div></div>
+    <div class="qcard">
+      <p class="qtext" id="qtext"></p>
+      <div id="options"></div>
+      <div id="feedback" class="hidden">
+        <div id="verdict"></div>
+        <div id="explain"></div>
+        <button id="nextBtn">下一题 →</button>
+      </div>
+    </div>
+    <p class="kbd">键盘可用：A~D 或 1~4 选择，Enter 下一题</p>
+  </div>
+
+  <div id="result" class="hidden"></div>
+
+</div>
+
+<script>
+const QUESTIONS = [
+{m:"6.4.1 原则总述",
+ q:"关于项目管理原则的作用，教材的表述是（　）。",
+ o:["用于指导项目管理过程的执行，帮助项目团队按时按量完成任务","用于指导项目参与者的行为，帮助参与项目的组织和个人在项目执行过程中保持一致性","用于规范项目文档的编写，确保项目文件符合组织标准","用于考核项目绩效，为项目奖惩提供依据"],a:1,
+ e:"<b>教材 6.4.1 开篇原话：项目管理原则用于指导项目参与者的行为，这些原则可以帮助参与项目的组织和个人在项目执行过程中保持一致性</b>。两个关键词：指导「行为」、保持「一致性」。A 混入「过程的执行」、C「文档规范」、D「绩效考核」都不是原则的定位。"},
+
+{m:"6.4.1 原则总述",
+ q:"价值驱动的项目管理知识体系中，项目管理原则包括（　）。<br>①营造协作的项目团队环境　②促进干系人有效参与　③聚焦于价值　④专注于工作过程和能力　⑤根据环境进行裁剪　⑥处理采购事宜　⑦驾驭复杂性",
+ o:["①②③④⑤","②③④⑤⑥","①③⑤⑥⑦","①②③⑤⑦"],a:3,
+ e:"<b>12 条原则清单判断题（希赛真题样式）</b>：④「专注于工作过程和能力」和⑥「处理采购事宜」都<b>不是</b>教材 12 条原则中的表述。完整 12 条口诀「勤·营·促·价·系，展·裁·质·驾·优，拥·驱」：勤勉尊重关心他人 / 营造协作团队环境 / 促进干系人有效参与 / 聚焦价值 / 识别评估响应系统交互 / 展现领导力行为 / 根据环境裁剪 / 将质量融入过程和成果 / 驾驭复杂性 / 优化风险应对 / 拥抱适应性和韧性 / 为实现目标驱动变革。"},
+
+{m:"6.4.1 原则 1",
+ q:"「勤勉、尊重和关心他人」原则中，秉持整体观时应综合考虑的因素包括（　）。",
+ o:["进度、成本、范围、质量","财务、社会、技术和可持续的发展环境等","人、流程、工具、系统","风险、问题、变更、绩效"],a:1,
+ e:"<b>教材关键点：秉持整体观，综合考虑财务、社会、技术和可持续的发展环境等因素</b>。这条原则还有两个关键点：关注组织内部和外部的职责；坚持诚信、关心、可信、合规原则。A 是项目管理四约束，不是整体观内容。"},
+
+{m:"6.4.1 原则 2",
+ q:"关于「营造协作的项目团队环境」原则，教材的表述是（　）。",
+ o:["项目团队在组织文化和准则范围内开展工作，通常会建立自己的「本地」文化","项目团队应无条件服从组织的一切文化安排，不得有自己的文化","项目团队应当先建立自己的文化，组织文化随后向团队文化靠拢","协作环境要求项目团队与组织文化保持完全一致，不允许任何差异"],a:0,
+ e:"<b>教材关键点：项目是由项目团队交付的；项目团队在组织文化和准则范围内开展工作，通常会建立自己的「本地」文化</b>。协作的项目团队环境有助于与其他组织文化和指南保持一致、个人和团队的学习和发展、为交付期望成果做出最佳贡献。「本地文化」一词直接配原则 2。"},
+
+{m:"6.4.1 原则 3",
+ q:"关于「促进干系人有效参与」原则，正确的说法是（　）。",
+ o:["干系人的参与主要用于监督项目团队的考勤","干系人只在项目收尾阶段参与一次即可","干系人的参与可主动地推进价值交付","干系人仅通过书面报告了解项目，无需互动"],a:2,
+ e:"<b>教材关键点：① 干系人会影响项目、绩效和成果；② 项目团队通过与干系人互动来为干系人服务；③ 干系人的参与可主动地推进价值交付</b>（最大化积极影响、最小化消极影响）。C「只在收尾参与」D「无需互动」均与「有效参与、互动服务」相反。"},
+
+{m:"6.4.1 原则 4",
+ q:"关于「聚焦于价值」原则，下列说法正确的是（　）。",
+ o:["价值只能在项目完全结束后才能实现","价值无法衡量，只能靠主观感受判断","价值是项目成功的最终指标，可在项目进行期间、结束或完成后实现，可定性和/或定量地定义和衡量","价值与干系人期望无关，仅取决于项目利润"],a:2,
+ e:"<b>⭐金句：价值是项目成功的最终指标</b>。教材关键点还有：价值可以在整个项目进行期间、项目结束或完成后实现（A 错）；可以从定性和/或定量的角度进行定义和衡量（B 错）；以成果为导向；评估项目进展并做出调整，使期望的价值最大化。"},
+
+{m:"6.4.1 原则 5",
+ q:"「识别、评估和响应系统交互」原则中，对「项目」的系统式理解是（　）。",
+ o:["项目是由多个相互依赖且相互作用的活动域组成的一个系统","项目是一个独立封闭、与外部环境无关的系统","项目是一次性的线性流程，各环节互不影响","项目系统是静态的，一旦建立就不再变化"],a:0,
+ e:"<b>教材关键点：项目是由多个相互依赖且相互作用的活动域组成的一个系统</b>；需要从系统角度进行思考，整体了解项目各部分如何相互作用、如何与外部系统交互；系统不断变化，需始终关注内外部环境（D 错）；对系统交互作出响应可使团队充分利用积极的成果。B「封闭无关」C「线性互不影响」都与系统观相反。"},
+
+{m:"6.4.1 原则 6",
+ q:"关于「展现领导力行为」原则，正确的说法是（　）。",
+ o:["领导力行为只能由项目经理展现，其他成员无权展现","任何项目团队成员都可以表现出领导力行为，领导力与职权不同","领导力与职权是一回事，职位越高领导力越强","展现领导力行为必须先获得组织的正式任命"],a:1,
+ e:"<b>教材关键点：任何项目团队成员都可以表现出领导力行为；领导力与职权不同</b>。有效的领导者会根据情境调整自己的风格、认识到团队成员之间动机的差异性，并在诚实、正直和道德行为规范方面展现出期望的行为。A「只能 PM」C「必须任命」都是对「领导力≠职权」的反向陷阱。"},
+
+{m:"6.4.1 原则 7",
+ q:"关于「根据环境进行裁剪」原则，教材强调裁剪应（　）。",
+ o:["在整个项目进展过程中持续进行","仅在项目启动阶段一次性完成","仅在项目收尾阶段进行总结性裁剪","由 PMO 统一规定，项目团队不得自行调整"],a:0,
+ e:"<b>教材关键点：每个项目都具有独特性，项目成功取决于适合项目的独特环境和方法；裁剪应该在整个项目进展过程中持续进行</b>。B「一次性」是高频反向陷阱——与 6.3 顶尖 PM「针对每个项目裁剪」呼应，裁剪是持续动作，不是一次性动作。"},
+
+{m:"6.4.1 原则 8",
+ q:"「将质量融入到过程和成果中」原则中，质量的衡量方式是（　）。",
+ o:["通过项目利润率衡量","通过客户满意度问卷衡量","通过项目工期达成率衡量","通过成果的验收标准来衡量"],a:3,
+ e:"<b>教材关键点：项目成果的质量要求达到干系人期望并满足项目和产品需求；质量通过成果的验收标准来衡量</b>。注意原则名称本身就是考点——质量要融入「过程和成果」两面，不是只管最终成果。"},
+
+{m:"6.4.1 原则 9",
+ q:"「驾驭复杂性」原则中，复杂性主要来源于（　）。",
+ o:["范围蔓延、进度延误、成本超支、质量缺陷","人员离职、设备故障、资金断裂、需求变更","组织架构、市场环境、政策法规、客户偏好","人类行为、系统交互、不确定性、技术创新"],a:3,
+ e:"<b>教材关键点：复杂性主要来源于人类行为、系统交互、不确定性、技术创新等</b>；需持续识别复杂性来源并降低其影响。B 是项目管理常见的「问题」不是「复杂性的来源」；D 是「商业因素/环境」类干扰项。四个来源逐字记：人类行为 / 系统交互 / 不确定性 / 技术创新。"},
+
+{m:"6.4.1 原则 10",
+ q:"关于「优化风险应对」原则，正确的说法是（　）。",
+ o:["风险是仅含负面影响的确定事件","风险只与成本相关，与进度和质量无关","风险是影响目标的不确定事件，包含机会和威胁两个面向，需在整个项目生命周期内识别、评估，并结合组织风险偏好制定应对措施","风险应对只在规划阶段进行一次"],a:2,
+ e:"<b>教材关键点：风险是影响目标的不确定事件，包含机会和威胁</b>（A「仅负面」错、说「确定事件」也错——是不确定事件）；需在整个项目生命周期内识别、评估风险（C「只规划阶段」错）；结合组织风险偏好制定应对措施；目标是最大化机会、最小化威胁。与第 15 章风险管理直接呼应。"},
+
+{m:"6.4.1 原则 11",
+ q:"「拥抱适应性和韧性」原则中，适应性与韧性的定义分别是（　）。",
+ o:["适应性 = 从挫折中恢复的能力，韧性 = 应对变化的能力","适应性和韧性是同一概念的不同说法","适应性 = 遵守流程的能力，韧性 = 抵抗变革的能力","适应性 = 应对变化的能力，韧性 = 从挫折中恢复的能力"],a:3,
+ e:"<b>教材关键点：适应性是应对变化的能力，韧性是从挫折中恢复的能力</b>。可通过较短的反馈路径、持续学习、多样化团队等方式提升。A 是典型的「交叉错接」干扰项；B「同一概念」也是反向陷阱。"},
+
+{m:"6.4.1 原则 12",
+ q:"关于「为实现目标而驱动变革」，教材在变革节奏上的主张是（　）。",
+ o:["变革推进越快越好，速度决定变革成败","变革一次到位即可，后续无需任何强化活动","试图在太短的时间内进行过多的变革，会因变革饱和而受到抵制，需要掌握变革的节奏","变革只需要高层推动，与项目团队和干系人无关"],a:2,
+ e:"<b>⭐变革饱和（样章 PDF 逐字原文）：试图在太短的时间内进行过多的变革，会因变革饱和而受到抵制</b>——项目团队成员和项目经理需要掌握变革的节奏。教材还主张：在项目早期开始沟通愿景和目标；鼓励双向沟通营造有效变革的环境；与干系人共同合作解决抵制变革问题；变革实施后开展活动强化效果、避免再次回到变革前的初始状态（C 错）。"},
+
+{m:"6.4.2 生命周期定义",
+ q:"关于项目生命周期，教材的表述是（　）。",
+ o:["项目生命周期指项目从启动到完成所经历的一系列阶段，这些阶段之间的关系可以顺序、迭代或交叠进行，适用于任何类型的项目","项目生命周期专指从需求分析到系统上线的软件开发过程","项目生命周期的各阶段必须严格顺序进行，不得有任何交叠","项目生命周期只适用于大型复杂项目，小项目无需生命周期管理"],a:0,
+ e:"<b>样章 PDF 原文：项目生命周期指项目从启动到完成所经历的一系列阶段，这些阶段之间的关系可以顺序、迭代或交叠进行。它为项目管理提供了一个基本框架，适用于任何类型的项目</b>。C「必须严格顺序」D「只适用大型项目」都是原文的反向表述。"},
+
+{m:"6.4.2 通用结构",
+ q:"通用的项目生命周期结构包含的 4 个阶段是（　）。",
+ o:["概念、计划、执行、收尾","启动项目、组织与准备、执行项目工作、结束项目","立项、开发、测试、部署","需求、设计、构建、交付"],a:1,
+ e:"<b>样章 PDF 原文：不论项目大小繁简，所有项目都呈现包含启动项目、组织与准备、执行项目工作、结束项目 4 个项目阶段的通用的生命周期结构</b>。A「概念计划」是普适管理口径、B/D 是软件工程口径，都不是教材 6.4.2 的通用结构四阶段。各阶段典型输出：项目章程 → 项目管理计划 → 验收的可交付成果 → 存档的项目文件。"},
+
+{m:"6.4.2 两大特征",
+ q:"关于通用生命周期结构的特征，下列说法正确的是（　）。",
+ o:["风险与不确定性在项目开始时最小，随进展逐步增大","做出变更和纠正错误的成本，随项目越来越接近完成而显著增高","成本与人力投入从项目开始到结束始终保持在最高水平","变更在项目后期实施代价最低"],a:1,
+ e:"<b>样章 PDF 原文（特征②）：风险与不确定性在项目开始时最大，在整个生命周期中随着决策的制定与可交付成果的验收而逐步降低；做出变更和纠正错误的成本，随项目越来越接近完成而显著增高</b>。A 方向反了（开始时最大）；C 错——成本人力是「开始低→执行期最高→快结束时迅速回落」；D 与 B 相反。两条曲线的方向是判断题高发区。"},
+
+{m:"6.4.2 两大特征",
+ q:"通用生命周期结构中，成本与人力投入的典型走势是（　）。",
+ o:["开始时较高，执行期下降，结束时再升高","全程保持均匀不变","开始时最高，随后持续下降到零","开始时较低，在工作执行期间达到最高，并在项目快要结束时迅速回落"],a:3,
+ e:"<b>样章 PDF 原文（特征①）：成本与人力投入在开始时较低，在工作执行期间达到最高，并在项目快要结束时迅速回落</b>。这是一条「先升后降」的驼峰曲线；D 是「风险递减曲线」的错接——别把风险曲线和人力曲线混为一谈。"},
+
+{m:"6.4.2 预测型",
+ q:"关于预测型生命周期，正确的说法是（　）。",
+ o:["适用于需求不确定、不断发展变化的项目","每个阶段可以反复进行多次，直至客户满意","适用于已经充分了解并明确确定需求的项目，每个阶段只进行一次，且对任何范围的变更都要进行严格管理","不需要前期规划，凭经验随时调整即可"],a:2,
+ e:"<b>样章 PDF 原文：预测型（又称瀑布型/计划驱动型）适用于已经充分了解并明确确定需求的项目</b>；在生命周期的早期阶段确定项目范围、时间和成本，对任何范围的变更都要进行严格管理，<b>每个阶段只进行一次</b>，每个阶段都侧重于某一特定类型的工作。A 是适应型的适用场景；B「反复多次」是适应型迭代的特征。「每个阶段只进行一次」是预测型的独有表述。"},
+
+{m:"6.4.2 迭代与增量",
+ q:"教材对迭代方法与增量方法的辨析是（　）。",
+ o:["迭代方法渐进地增加产品的功能，增量方法通过重复的循环活动来开发产品","迭代方法通过一系列重复的循环活动来开发产品，增量方法渐进地增加产品的功能","迭代方法与增量方法是完全相同的概念","迭代方法只用于软件开发，增量方法只用于工程建设"],a:1,
+ e:"<b>⭐教材辨析金句：迭代方法是通过一系列重复的循环活动来开发产品；增量方法是渐进地增加产品的功能</b>。B 是交叉错接；助记（画蒙娜丽莎）：迭代 = 先画整幅初稿再反复打磨越画越清晰；增量 = 先画头再画身体逐块构建。增量型还有一句考点：只有在最后一次迭代之后，可交付成果具有了必要和足够的能力，才被视为完整的。"},
+
+{m:"6.4.2 适应型",
+ q:"关于适应型生命周期的迭代循环，正确的顺序是（　）。",
+ o:["迭代前项目和产品愿景的范围被明确定义和批准 → 每次迭代（又称「冲刺」）结束时客户对功能性可交付物审查 → 项目团队更新待办事项列表，确定下一次迭代中特性和功能的优先级","迭代后审查 → 迭代前批准范围 → 更新待办事项列表","项目结束时一次性审查 → 编制详细计划 → 严格限制变更","先编制详细计划控制风险，再按里程碑点邀请干系人审查"],a:0,
+ e:"<b>样章 PDF 原文（适应型又称敏捷型/变更驱动型）：每次迭代前，项目和产品愿景的范围被明确定义和批准；每次迭代（又称「冲刺」）结束时，客户对具有功能性的可交付物进行审查，关键干系人提供反馈，项目团队更新项目待办事项列表，确定下一次迭代中特性和功能的优先级</b>。适应型还强调：先基于初始需求制定一套高层级计划，再逐渐把需求细化。C、D 是预测型做法的错接。"},
+
+{m:"6.4.2 混合型与对比",
+ q:"关于混合型生命周期与表 6-6 的对比，正确的说法是（　）。",
+ o:["混合型生命周期是预测型生命周期和适应型生命周期的组合；项目生命周期具有多维性，特定项目的不同阶段往往采用不同的生命周期；干系人参与方面，预测型在特定里程碑点、适应型持续参与","混合型生命周期是迭代型生命周期和增量型生命周期的组合","关键干系人参与方面，预测型是持续参与、适应型是特定里程碑点参与","一个项目的所有阶段必须采用同一种开发生命周期"],a:0,
+ e:"<b>样章 PDF 原文：混合型生命周期是预测型生命周期和适应型生命周期的组合</b>（A「迭代+增量」是高频陷阱）；项目生命周期具有复杂性和多维性，特定项目的不同阶段往往采用不同的生命周期（C 错）。表 6-6 干系人参与一行：预测型 = 特定里程碑点参与、迭代增量型 = 定期参与、适应型 = 持续参与（B 说反了）。"}
+];
+
+const LETTERS = ["A","B","C","D"];
+let pool = [], cur = 0, answered = false, stats = {}, wrongList = [];
+
+function init(list){
+  pool = list.map(x=>Object.assign({},x));
+  cur = 0; answered = false; stats = {}; wrongList = [];
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  document.getElementById("totalNow").textContent = pool.length;
+  document.getElementById("scoreNow").textContent = "0";
+  render();
+}
+function render(){
+  const q = pool[cur];
+  document.getElementById("pos").textContent = "第 " + (cur+1) + " / " + pool.length + " 题";
+  document.getElementById("moduleChip").textContent = q.m;
+  document.getElementById("bar").style.width = (cur/pool.length*100) + "%";
+  document.getElementById("qtext").innerHTML = q.q;
+  const box = document.getElementById("options");
+  box.innerHTML = "";
+  q.o.forEach((t,i)=>{
+    const d = document.createElement("div");
+    d.className = "opt";
+    d.innerHTML = '<span class="tag">'+LETTERS[i]+'</span><span>'+t+"</span>";
+    d.onclick = ()=>choose(i);
+    box.appendChild(d);
+  });
+  document.getElementById("feedback").classList.add("hidden");
+}
+function choose(i){
+  if(answered) return;
+  answered = true;
+  const q = pool[cur];
+  const ok = (i === q.a);
+  if(!stats[q.m]) stats[q.m] = {right:0,total:0};
+  stats[q.m].total++;
+  const opts = document.querySelectorAll(".opt");
+  opts.forEach((d,idx)=>{
+    d.classList.add("locked");
+    if(idx === q.a) d.classList.add("correct");
+    else if(idx === i) d.classList.add("wrong");
+    else d.classList.add("dim");
+    d.onclick = null;
+  });
+  if(ok){
+    stats[q.m].right++;
+    document.getElementById("scoreNow").textContent = sumRight();
+  } else {
+    wrongList.push({q:q, picked:i});
+  }
+  const v = document.getElementById("verdict");
+  v.textContent = ok ? "✓ 答对了" : "✗ 答错了　正确答案：" + LETTERS[q.a];
+  v.className = ok ? "" : "bad";
+  document.getElementById("explain").innerHTML = q.e;
+  document.getElementById("feedback").classList.remove("hidden");
+  document.getElementById("nextBtn").textContent =
+    (cur === pool.length-1) ? "查看成绩单 →" : "下一题 →";
+}
+function sumRight(){
+  let s = 0; for(const k in stats) s += stats[k].right; return s;
+}
+function next(){
+  cur++;
+  if(cur >= pool.length){ showResult(); }
+  else { answered = false; render(); window.scrollTo(0,0); }
+}
+function showResult(){
+  document.getElementById("quiz").classList.add("hidden");
+  const r = document.getElementById("result");
+  const total = pool.length, right = sumRight();
+  const pct = Math.round(right/total*100);
+  let msg;
+  if(pct >= 80) msg = "达标（≥80%）：本节知识点基本闭环，可以进入下一节，或用康奈尔模板的「遮」字诀再过一遍线索栏。";
+  else if(pct >= 60) msg = "接近达标：把下面的错题解析看完，回看对应模块的知识点清单，明天用康奈尔模板遮住答案重测。";
+  else msg = "未达标：正确率低是发现漏洞的正常信号——先把知识点清单的「必背」块过一遍，再点「只重做错题」。";
+
+  let tbl = '<h3>分模块得分</h3><table><tr><th>模块</th><th>正确 / 题数</th><th>正确率</th></tr>';
+  for(const k in stats){
+    const s = stats[k];
+    const p = Math.round(s.right/s.total*100);
+    tbl += '<tr><td>'+k+'</td><td>'+s.right+' / '+s.total+'</td><td><div class="mbar"><div style="width:'+p+'%"></div></div></td></tr>';
+  }
+  tbl += "</table>";
+
+  let wrong = "";
+  if(wrongList.length){
+    wrong = "<h3>错题回顾（"+wrongList.length+" 题）</h3>";
+    wrongList.forEach((w,i)=>{
+      wrong += '<div class="wq"><div class="wt">'+(i+1)+". "+w.q.q+"</div>"
+        + '<div class="wa">你的选择：'+LETTERS[w.picked]+"　"+w.q.o[w.picked]+"</div>"
+        + '<div class="wc">正确答案：'+LETTERS[w.q.a]+"　"+w.q.o[w.q.a]+"</div>"
+        + '<div class="we">'+w.q.e+"</div></div>";
+    });
+  } else {
+    wrong = '<h3>错题回顾</h3><p style="font-size:13px;color:#0F6E56;">全部答对，本节知识点已闭环。</p>';
+  }
+
+  r.innerHTML =
+    '<div class="r-head"><div class="r-score">'+right+"<small> / "+total+"</small></div>"
+    + '<div class="r-msg"><b>'+pct+"%</b><br>"+msg+"</div></div>"
+    + tbl + wrong
+    + '<div class="btns">'
+    + '<button class="btn primary" id="retryWrong"'+(wrongList.length?"":" disabled")+">只重做错题（"+wrongList.length+" 题）</button>"
+    + '<button class="btn" id="retryAll">全部重来</button></div>';
+  r.classList.remove("hidden");
+  document.getElementById("retryWrong").onclick = ()=>{
+    const list = wrongList.map(w=>w.q);
+    init(list);
+    window.scrollTo(0,0);
+  };
+  document.getElementById("retryAll").onclick = ()=>{ init(QUESTIONS); window.scrollTo(0,0); };
+  window.scrollTo(0,0);
+}
+document.getElementById("nextBtn").onclick = next;
+document.addEventListener("keydown", e=>{
+  if(document.getElementById("quiz").classList.contains("hidden")) return;
+  if(e.key === "Enter" || e.key === " "){ if(answered){ e.preventDefault(); next(); } return; }
+  const map = {"a":0,"b":1,"c":2,"d":3,"1":0,"2":1,"3":2,"4":3};
+  const k = e.key.toLowerCase();
+  if(k in map && !answered) choose(map[k]);
+});
+init(QUESTIONS);
+</script>
+</body>
+</html>

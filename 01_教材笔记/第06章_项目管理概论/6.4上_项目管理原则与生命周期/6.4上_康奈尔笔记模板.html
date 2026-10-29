@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6.4上 项目管理原则与生命周期 · 康奈尔笔记模板</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+    background: #f0f2f5; color: #333; padding: 24px;
+  }
+  .page {
+    width: 210mm; min-height: 297mm; margin: 0 auto; background: #fff;
+    padding: 14mm 12mm; box-shadow: 0 2px 12px rgba(0,0,0,.12);
+  }
+  h1 { font-size: 20px; color: #185FA5; text-align: center; margin-bottom: 4px; }
+  .sub { text-align: center; font-size: 11px; color: #888; margin-bottom: 10px; }
+  .meta { display: flex; justify-content: space-between; font-size: 11px; color: #555;
+    border-bottom: 2px solid #185FA5; padding-bottom: 6px; margin-bottom: 10px; }
+  .cornell { display: flex; border: 1px solid #ccc; min-height: 178mm; }
+  .cue {
+    width: 32%; background: #f4f8fc; border-right: 2px solid #185FA5;
+    padding: 10px 8px; font-size: 11.5px;
+  }
+  .cue h3 { font-size: 12px; color: #185FA5; margin-bottom: 6px; }
+  .cue .q { margin-bottom: 10px; color: #333; line-height: 1.5; }
+  .cue .q b { color: #854F0B; }
+  .cue .grouplabel { font-size: 10.5px; font-weight: bold; color: #185FA5; margin: 7px 0 3px; }
+  .cue .grouplabel:first-of-type { margin-top: 0; }
+  .main { width: 68%; padding: 10px 12px; }
+  .main h4 {
+    font-size: 12px; color: #185FA5; margin: 9px 0 4px;
+    border-left: 4px solid #185FA5; padding-left: 6px;
+  }
+  .main h4:first-child { margin-top: 0; }
+  .lines { line-height: 24px; font-size: 12px; color: #444; }
+  .lines p { border-bottom: 1px solid #e3e3e3; min-height: 24px; }
+  .summary {
+    border: 1px solid #ccc; border-top: none; padding: 8px 10px; min-height: 28mm;
+  }
+  .summary h3 { font-size: 12px; color: #854F0B; margin-bottom: 4px; }
+  .summary p { border-bottom: 1px solid #e3e3e3; min-height: 24px; font-size: 12px; }
+  .footer {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; color: #555; margin-top: 8px;
+  }
+  .ebbing span {
+    display: inline-block; width: 58px; text-align: center;
+    border: 1px solid #185FA5; border-radius: 3px; margin-left: 4px; padding: 1px 0; color: #185FA5;
+  }
+  .score { color: #854F0B; font-weight: bold; }
+  .howto {
+    width: 210mm; margin: 14px auto 0; background: #fffbe8; border: 1px solid #e8d48a;
+    border-radius: 6px; padding: 10px 14px; font-size: 12px; color: #6b5900; line-height: 1.7;
+  }
+  .howto b { color: #854F0B; }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; margin: 0; }
+    .howto { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>6.4上 项目管理原则与生命周期 · 康奈尔笔记</h1>
+  <div class="sub">《信息系统项目管理师教程（第 4 版）》第 6 章第 4 节上段 · 6.4.1 项目管理原则（12 项）/ 6.4.2 项目生命周期和项目阶段（通用结构 + 5 种开发生命周期）</div>
+  <div class="meta">
+    <span>日期：______</span><span>学习时长：______</span><span>今日正确率：<span class="score">____ / 22</span></span>
+  </div>
+
+  <div class="cornell">
+    <div class="cue">
+      <h3>线索栏（自问自答）</h3>
+
+      <div class="grouplabel">6.4 价值驱动的知识体系 · 总览</div>
+      <div class="q"><b>1</b> 6.4 价值驱动的项目管理知识体系由哪几块组成？核心是什么？本段（Day 21）与下一段（Day 22）各学什么？</div>
+
+      <div class="grouplabel">6.4.1 项目管理原则（12 条）</div>
+      <div class="q"><b>2</b> 12 条项目管理原则完整默写。口诀？原则的用途（指导什么、保持什么）？</div>
+      <div class="q"><b>3</b> 原则 1~4 各自关键点：「勤勉尊重关心」的整体观指什么？团队「本地文化」？干系人参与如何推进价值？「<b>价值</b>」的金句？</div>
+      <div class="q"><b>4</b> 原则 5~8：「系统交互」怎么理解？<b>领导力 ≠ 职权</b>、谁能展现？裁剪何时进行？质量用什么衡量？</div>
+      <div class="q"><b>5</b> 原则 9~12：复杂性的<b>四个来源</b>？风险的两面？适应性 vs 韧性的定义？「<b>变革饱和</b>」怎么应对？</div>
+
+      <div class="grouplabel">6.4.2 项目生命周期和项目阶段</div>
+      <div class="q"><b>6</b> 项目生命周期的定义？阶段间可哪三种方式进行？通用结构的 <b>4 个阶段</b>与各阶段典型输出？</div>
+      <div class="q"><b>7</b> 通用生命周期的<b>两大特征</b>（成本人力曲线 / 风险与变更代价）？「几乎所有项目都有，但什么不同」？</div>
+
+      <div class="grouplabel">6.4.2 开发生命周期 5 种</div>
+      <div class="q"><b>8</b> 5 种开发生命周期 + 各别名称？<b>预测型</b>的适用前提与四个做法？「每个阶段只进行一次」是谁的表述？</div>
+      <div class="q"><b>9</b> 迭代型 vs 增量型各自定义？教材的<b>辨析金句</b>？「最后一次迭代之后才算完整」是谁？</div>
+      <div class="q"><b>10</b> 适应型（敏捷/变更驱动）的<b>完整迭代循环</b>（迭代前→迭代中→迭代后）？「先高层级计划再细化」？混合型是什么的组合、「多维性」指什么？</div>
+      <div class="q"><b>11</b> 表 6-6 五维对比：预测 / 迭代增量 / 适应在「需求确定 · 交付 · 变更 · 干系人参与 · 风险成本控制」上分别怎么表述？</div>
+
+      <div class="grouplabel">防坑与旧题甄别</div>
+      <div class="q"><b>12</b> 本段高频陷阱有哪些？（价值只能项目后实现❌ / 领导力只属 PM❌ / 裁剪一次❌ / 混合=迭代+增量❌ …）为什么旧真题无对应题？</div>
+    </div>
+    <div class="main">
+      <h4>一、价值驱动知识体系总览（6.4）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p>
+      </div>
+      <h4>二、12 条项目管理原则清单 + 口诀（6.4.1）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>三、原则 1~4：勤勉 / 协作环境 / 干系人参与 / 聚焦价值（6.4.1）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>四、原则 5~8：系统交互 / 领导力行为 / 裁剪 / 质量（6.4.1）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>五、原则 9~12：复杂性 / 风险 / 适应性韧性 / 驱动变革（6.4.1）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>六、生命周期定义 + 通用结构 4 阶段 + 各阶段输出（6.4.2）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>七、两大特征曲线：成本人力 / 风险与变更代价（6.4.2）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>八、5 种开发生命周期 + 预测型（6.4.2）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>九、迭代型 vs 增量型 + 适应型循环 + 混合型（6.4.2）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+      <h4>十、表 6-6 五维对比 + 高频陷阱块（6.4.2）</h4>
+      <div class="lines">
+        <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary">
+    <h3>总结栏（一句话收束）</h3>
+    <p></p><p></p>
+  </div>
+
+  <div class="footer">
+    <span class="ebbing">复习打卡：当日<span>＋1天</span><span>＋3天</span><span>＋7天</span><span>＋14天</span></span>
+    <span>正确率：<span class="score">____ / 22</span></span>
+  </div>
+</div>
+
+<div class="howto">
+  <b>怎么用（记 → 遮 → 补 → 收）：</b>
+  ① <b>记</b>：对照《6.4上_知识点清单》通读后，凭记忆在笔记区默写要点；② <b>遮</b>：用手遮住笔记区，只看线索栏 12 个问题作答；③ <b>补</b>：翻开清单对照，用红笔补漏，重点补「十、表 6-6 + 陷阱块」；④ <b>收</b>：在总结栏用 1~2 句话收束本段骨架（如「12原则勤营促价系展裁质驾优拥驱·价值=成功最终指标·任何成员可展现领导力·裁剪持续·变革饱和防快推·生命周期4阶段章程-计划-验收-存档·风险始最高变更越晚越贵·5种预测迭代增量适应混合·迭代=重复循环vs增量=渐进加功能·适应=冲刺+客户审查+待办列表」）。页脚为艾宾浩斯复习打卡点。
+</div>
+</body>
+</html>

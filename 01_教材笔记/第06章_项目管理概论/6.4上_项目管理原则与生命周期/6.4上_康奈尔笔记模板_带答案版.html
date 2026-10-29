@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>康奈尔笔记 · 第 6 章第 4 节上段 项目管理原则与生命周期 · 带答案版</title>
+<style>
+  :root{
+    --ink:#1f2328;
+    --ink-2:#4b5563;
+    --ink-3:#8b949e;
+    --line:#2f3742;
+    --rule:#d6dae0;
+    --accent:#185FA5;
+    --accent-soft:#E6F1FB;
+    --warm:#854F0B;
+    --warm-soft:#FAEEDA;
+    --paper:#ffffff;
+    --ans-bg:#fffaf2;
+    --ans-border:#e8d9b8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    padding:28px 16px 48px;
+    background:#eef0f3;
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+    color:var(--ink);
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .toolbar{
+    max-width:210mm;margin:0 auto 14px;display:flex;gap:10px;align-items:center;
+    justify-content:space-between;flex-wrap:wrap;
+  }
+  .toolbar .hint{font-size:12.5px;color:#5b6470;}
+  .btn{
+    border:1px solid #c6ccd4;background:#fff;color:#2b323b;
+    font-size:13px;padding:7px 14px;border-radius:8px;cursor:pointer;
+    font-family:inherit;
+  }
+  .btn:hover{background:#f6f8fa;}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn.primary:hover{background:#14507f;}
+  .btn.active{background:var(--warm);border-color:var(--warm);color:#fff;}
+
+  .page{
+    width:210mm;min-height:297mm;margin:0 auto;background:var(--paper);
+    padding:14mm 13mm 12mm;box-shadow:0 2px 14px rgba(16,24,40,.12);
+  }
+
+  .head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    border-bottom:2px solid var(--line);padding-bottom:8px;margin-bottom:10px;
+    gap:12px;
+  }
+  .head h1{font-size:19px;margin:0;font-weight:600;letter-spacing:.3px;}
+  .head .sub{font-size:12px;color:var(--ink-3);margin-top:4px;}
+  .head .meta{font-size:12px;color:var(--ink-2);text-align:right;line-height:1.9;white-space:nowrap;}
+  .head .meta b{font-weight:600;color:var(--accent);}
+
+  .band{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+  .chip{
+    font-size:11.5px;padding:4px 9px;border-radius:5px;
+    background:var(--accent-soft);color:#0C447C;border:1px solid #B5D4F4;
+  }
+  .chip.warm{background:var(--warm-soft);color:#633806;border-color:#EFC98A;}
+
+  .cols{
+    display:grid;grid-template-columns:60mm 1fr;gap:0;
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .col-cue{
+    background:#fafbfc;border-right:1px solid var(--line);padding:8px 9px 9px;
+  }
+  .col-note{padding:8px 11px 9px;}
+  .col-hd{
+    font-size:11.5px;font-weight:600;letter-spacing:.6px;color:var(--ink-2);
+    text-transform:uppercase;padding-bottom:6px;margin-bottom:7px;
+    border-bottom:1px dashed #b9c0c9;
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  .col-hd span{font-size:10.5px;font-weight:400;color:var(--ink-3);text-transform:none;letter-spacing:0;}
+
+  .q{
+    font-size:11.5px;line-height:1.5;color:#1f2328;
+    padding:5px 0 5px 20px;position:relative;border-bottom:1px dotted #dfe3e8;
+  }
+  .q:last-child{border-bottom:0;}
+  .q::before{
+    content:attr(data-n);position:absolute;left:0;top:5px;
+    width:14px;height:14px;border-radius:50%;
+    background:var(--accent);color:#fff;font-size:9.5px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:600;line-height:1;
+  }
+  .q b{font-weight:600;}
+  .q em{font-style:normal;color:var(--warm);font-weight:600;}
+
+  .grouplabel{
+    font-size:10.5px;font-weight:600;color:var(--accent);
+    letter-spacing:.4px;margin:8px 0 2px;
+  }
+  .grouplabel:first-child{margin-top:0;}
+
+  /* === 答案区样式 === */
+  .ans-block{
+    margin-bottom:6px;padding:5px 8px 6px;
+    background:var(--ans-bg);border:1px solid var(--ans-border);border-radius:3px;
+  }
+  .ans-block .ans-title{
+    font-size:10.5px;font-weight:600;color:var(--warm);
+    letter-spacing:.3px;margin-bottom:2px;display:flex;align-items:baseline;gap:6px;
+  }
+  .ans-block .ans-title .num{
+    display:inline-block;min-width:14px;height:14px;border-radius:50%;
+    background:var(--warm);color:#fff;font-size:9.5px;font-weight:600;
+    text-align:center;line-height:14px;
+  }
+  .ans-block ul{
+    margin:2px 0 3px 0;padding:0 0 0 16px;font-size:11px;line-height:1.55;color:#2b323b;
+  }
+  .ans-block ul li{padding:1px 0;}
+  .ans-block .key{
+    color:var(--warm);font-weight:600;
+  }
+  .ans-block .tip{
+    font-size:10px;color:#633806;margin-top:2px;line-height:1.5;
+    padding:2px 6px;background:var(--warm-soft);border-radius:2px;
+  }
+  .ans-block .fill{
+    height:16px;border-bottom:1px dashed #c8c0aa;margin-top:3px;
+  }
+  body.hide-answers .ans-block{display:none;}
+  body.hide-answers .summary-prefill{display:none;}
+
+  .summary{
+    margin-top:10px;border:1px solid var(--line);border-radius:3px;overflow:hidden;
+  }
+  .summary .col-hd{
+    margin:0;padding:7px 11px;background:#fafbfc;border-bottom:1px solid var(--line);
+  }
+  .summary .body{padding:6px 11px 8px;font-size:11.5px;line-height:1.7;color:#2b323b;}
+  .summary .body b{color:var(--accent);}
+  .summary .body .small{font-size:10.5px;color:var(--ink-3);margin-top:3px;display:block;}
+
+  .footer{
+    margin-top:9px;font-size:10.5px;color:var(--ink-3);
+    display:flex;justify-content:space-between;gap:10px;
+  }
+
+  .guide{
+    width:210mm;margin:16px auto 0;background:#fff;border:1px solid #d9dee5;
+    border-radius:8px;padding:16px 18px;
+  }
+  .guide h2{font-size:14px;margin:0 0 10px;font-weight:600;}
+  .guide table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .guide th,.guide td{
+    border:1px solid #e2e6eb;padding:7px 9px;text-align:left;vertical-align:top;line-height:1.6;
+  }
+  .guide th{background:#f6f8fa;font-weight:600;color:#2b323b;}
+  .guide td:first-child{width:88px;font-weight:600;color:var(--accent);}
+  .guide .note{font-size:12px;color:#5b6470;margin-top:10px;line-height:1.7;}
+
+  @page{size:A4 portrait;margin:0;}
+  @media print{
+    body{background:#fff;padding:0;}
+    .toolbar,.guide{display:none;}
+    .page{box-shadow:none;margin:0;width:auto;min-height:auto;padding:13mm 12mm;}
+    body.hide-answers .ans-block{display:none;}
+    body.hide-answers .summary-prefill{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="hint">A4 竖版 · 带答案版 · 建议先默写、再对照；打印时可「隐藏答案」变填空卷</div>
+  <div>
+    <button class="btn" id="toggleBtn" onclick="toggleAnswers()">👁 隐藏答案（打印填空卷）</button>
+    <button class="btn primary" onclick="window.print()">打印 / 导出 PDF</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="head">
+    <div>
+      <h1>康奈尔笔记 · 第 6 章第 4 节上段 项目管理原则与生命周期 <span style="color:var(--warm);font-size:14px;">（带答案版）</span></h1>
+      <div class="sub">《信息系统项目管理师教程（第 4 版）》约 P201 ~ P216　｜　6.4.2 原文已用清华社样章 PDF 核对（2026-10-29）</div>
+    </div>
+    <div class="meta">
+      日期：__________<br>
+      第 <b>__</b> 轮复习　用时 <b>__</b> 分钟
+    </div>
+  </div>
+
+  <div class="band">
+    <span class="chip">全书项目管理部分的「宪法」</span>
+    <span class="chip">12 条原则 = 第 18 章绩效域的前置</span>
+    <span class="chip warm">必背：口诀「勤营促价系，展裁质驾优，拥驱」</span>
+    <span class="chip warm">必背：5 种开发生命周期 + 表 6-6</span>
+    <span class="chip warm">原文级：两大特征曲线 · 变革饱和</span>
+    <span class="chip warm">📝 含答案</span>
+  </div>
+
+  <div class="cols">
+
+    <div class="col-cue">
+      <div class="col-hd">线索栏 <span>遮住右侧自问</span></div>
+
+      <div class="grouplabel">6.4 价值驱动的知识体系 · 总览</div>
+      <div class="q" data-n="1"><b>6.4 知识体系</b>由哪几块组成、核心是什么？本段与下段各学什么？</div>
+
+      <div class="grouplabel">6.4.1 项目管理原则（12 条）</div>
+      <div class="q" data-n="2"><b>12 条原则</b>完整默写 + 口诀？原则用来<b>指导什么、保持什么</b>？</div>
+      <div class="q" data-n="3"><b>原则 1~4</b>关键点：整体观综合考虑哪些因素？团队「<em>本地文化</em>」？干系人参与如何推进价值？「价值」的<b>金句</b>与实现时机？</div>
+      <div class="q" data-n="4"><b>原则 5~8</b>：系统交互怎么理解？<em>任何成员都可展现领导力</em>、领导力与职权什么关系？裁剪何时进行？质量靠什么衡量？</div>
+      <div class="q" data-n="5"><b>原则 9~12</b>：复杂性<b>四个来源</b>？风险的两面？<b>适应性 vs 韧性</b>定义？「<em>变革饱和</em>」如何应对？</div>
+
+      <div class="grouplabel">6.4.2 项目生命周期和项目阶段</div>
+      <div class="q" data-n="6"><b>项目生命周期定义</b>？阶段间可哪三种方式进行？<b>通用结构 4 阶段</b>及各阶段典型输出？</div>
+      <div class="q" data-n="7"><b>两大特征</b>：成本人力曲线怎么走？风险怎么变、<b>变更代价</b>怎么变？「几乎所有项目都有，但什么不同」？</div>
+
+      <div class="grouplabel">6.4.2 开发生命周期 5 种</div>
+      <div class="q" data-n="8"><b>5 种开发生命周期</b> + 别称？<b>预测型</b>适用前提与四个做法？「每个阶段只进行一次」是谁的表述？</div>
+      <div class="q" data-n="9"><b>迭代型 vs 增量型</b>定义与<b>教材辨析金句</b>？「最后一次迭代之后才完整」是谁？</div>
+      <div class="q" data-n="10"><b>适应型</b>完整迭代循环（迭代前 / 中 / 后）？「先高层级计划再细化」？<b>混合型</b>是什么的组合、「多维性」指什么？</div>
+      <div class="q" data-n="11"><b>表 6-6 五维对比</b>：需求 / 交付 / 变更 / 干系人参与 / 风险成本控制，三列各自表述？</div>
+
+      <div class="grouplabel">防坑与旧题甄别</div>
+      <div class="q" data-n="12">本段<b>高频陷阱</b>有哪些？为什么<em>旧真题无对应题</em>？</div>
+    </div>
+
+    <div class="col-note">
+      <div class="col-hd">答案区 <span>默写后对照 · 虚线处写自己的补充</span></div>
+
+      <div class="grouplabel">6.4 价值驱动的知识体系 · 总览</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">1</span>知识体系组成</div>
+        <ul>
+          <li>6.4 全节以「<span class="key">价值实现</span>」为核心，构成：<span class="key">项目管理原则 → 项目生命周期 → 过程组 → 知识领域 → 绩效域 → 价值交付系统</span></li>
+          <li>本段（Day 21）学前两块：<span class="key">12 条原则 + 生命周期</span>；下段（Day 22）学后四块（5 过程组 / 10 知识领域 / 8 绩效域 / 价值交付系统）</li>
+        </ul>
+        <div class="tip">这张结构图是第 6 章后四天的「地图」——先混脸熟，学到 Day 22 再回看</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">6.4.1 项目管理原则（12 条）</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">2</span>12 条原则 + 口诀</div>
+        <ul>
+          <li>用途：<span class="key">指导项目参与者的行为</span>，帮助参与项目的组织和个人在项目执行过程中<span class="key">保持一致性</span></li>
+          <li>① <span class="key">勤勉、尊重和关心他人</span> ② <span class="key">营造协作的项目团队环境</span> ③ <span class="key">促进干系人有效参与</span> ④ <span class="key">聚焦于价值</span> ⑤ <span class="key">识别、评估和响应系统交互</span> ⑥ <span class="key">展现领导力行为</span> ⑦ <span class="key">根据环境进行裁剪</span> ⑧ <span class="key">将质量融入到过程和成果中</span> ⑨ <span class="key">驾驭复杂性</span> ⑩ <span class="key">优化风险应对</span> ⑪ <span class="key">拥抱适应性和韧性</span> ⑫ <span class="key">为实现目标而驱动变革</span></li>
+          <li>口诀「<span class="key">勤 · 营 · 促 · 价 · 系，展 · 裁 · 质 · 驾 · 优，拥 · 驱</span>」</li>
+        </ul>
+        <div class="tip">🚩 清单判断题套路：7 个编号句子混入「专注于工作过程的能力」「处理采购事宜」等<span class="key">不属于</span>原则的表述——背全 12 条名称是唯一解法</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">3</span>原则 1~4 关键点</div>
+        <ul>
+          <li><span class="key">① 勤勉尊重关心</span>：关注<span class="key">组织内部和外部职责</span>；坚持<span class="key">诚信、关心、可信、合规</span>；整体观综合考虑<span class="key">财务、社会、技术和可持续的发展环境</span>（PMBOK 助记「管家式」）</li>
+          <li><span class="key">② 营造协作团队环境</span>：项目由<span class="key">项目团队交付</span>；团队在组织文化和准则范围内工作，通常建立自己的「<span class="key">本地文化</span>」；协作环境有助一致性 + 个人和团队学习发展 + 最佳贡献</li>
+          <li><span class="key">③ 促进干系人有效参与</span>：干系人<span class="key">影响</span>项目、绩效和成果；通过<span class="key">互动</span>为干系人服务；干系人参与可<span class="key">主动推进价值交付</span>（最大化积极、最小化消极影响）</li>
+          <li><span class="key">④ 聚焦于价值</span>：⭐<span class="key">价值是项目成功的最终指标</span>；可在<span class="key">项目期间、结束或完成后</span>实现；可<span class="key">定性 / 定量</span>定义衡量；<span class="key">以成果为导向</span>；评估进展并调整使价值<span class="key">最大化</span></li>
+        </ul>
+        <div class="tip">高频判断：「价值只能在项目结束后实现」❌——项目期间也可以</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">4</span>原则 5~8 关键点</div>
+        <ul>
+          <li><span class="key">⑤ 系统交互</span>：项目 = <span class="key">多个相互依赖且相互作用的活动域</span>组成的系统；需<span class="key">从系统角度思考</span>（内部各部分 + 与外部系统交互）；系统不断变化，<span class="key">始终关注内外部环境</span></li>
+          <li><span class="key">⑥ 展现领导力行为</span>：⭐<span class="key">任何项目团队成员都可以表现出领导力行为</span>；<span class="key">领导力与职权不同</span>；按<span class="key">情境调整风格</span>、认识<span class="key">动机差异性</span>；在<span class="key">诚实、正直和道德行为规范</span>方面展现期望行为</li>
+          <li><span class="key">⑦ 根据环境进行裁剪</span>：<span class="key">每个项目都具有独特性</span>；成功取决于<span class="key">适合项目的独特环境和方法</span>；裁剪应<span class="key">在整个项目进展过程中持续进行</span></li>
+          <li><span class="key">⑧ 将质量融入过程和成果</span>：质量要求 = <span class="key">达到干系人期望并满足项目和产品需求</span>；通过成果的<span class="key">验收标准</span>来衡量</li>
+        </ul>
+        <div class="tip">🚩「领导力行为只属于项目经理」❌；「裁剪只在启动阶段一次完成」❌——持续进行</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">5</span>原则 9~12 关键点</div>
+        <ul>
+          <li><span class="key">⑨ 驾驭复杂性</span>：四个来源 = <span class="key">人类行为、系统交互、不确定性、技术创新</span>；需持续识别并降低影响</li>
+          <li><span class="key">⑩ 优化风险应对</span>：风险 = 影响目标的<span class="key">不确定事件</span>，含<span class="key">机会和威胁</span>；全生命周期识别评估；结合<span class="key">组织风险偏好</span>；<span class="key">最大化机会、最小化威胁</span></li>
+          <li><span class="key">⑪ 拥抱适应性和韧性</span>：<span class="key">适应性 = 应对变化的能力</span>；<span class="key">韧性 = 从挫折中恢复的能力</span>；可经<span class="key">较短反馈路径、持续学习、多样化团队</span>提升</li>
+          <li><span class="key">⑫ 为实现目标驱动变革</span>：<span class="key">结构化方法</span>推动组织从<span class="key">当前状态</span>过渡到<span class="key">未来状态</span>；<span class="key">项目早期开始</span>沟通愿景与目标；<span class="key">双向沟通</span>营造环境、合作解决抵制；⭐<span class="key">变革饱和</span>——太短时间过多变革会受抵制，须<span class="key">掌握变革节奏</span>；实施后<span class="key">强化效果、避免回到初始状态</span></li>
+        </ul>
+        <div class="tip">🚩「变革推进越快越好」❌；「风险只有负面含义」❌——机会与威胁两面</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">6.4.2 项目生命周期和项目阶段</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">6</span>定义 + 通用结构 4 阶段</div>
+        <ul>
+          <li>项目生命周期 = 项目从<span class="key">启动到完成</span>所经历的<span class="key">一系列阶段</span>，阶段间关系可<span class="key">顺序、迭代或交叠</span>进行；为项目管理提供<span class="key">基本框架</span>，适用于<span class="key">任何类型的项目</span></li>
+          <li>通用结构 4 阶段（不论大小繁简）：<span class="key">启动项目 → 组织与准备 → 执行项目工作 → 结束项目</span></li>
+          <li>各阶段典型输出：启动（<span class="key">项目章程</span>）→ 组织与准备（<span class="key">项目管理计划</span>）→ 执行（<span class="key">验收的可交付成果</span>）→ 结束（<span class="key">存档的项目文件</span>）</li>
+        </ul>
+        <div class="tip">🚩「阶段间只能顺序进行」❌；「生命周期只适用于大型项目」❌</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">7</span>两大特征曲线</div>
+        <ul>
+          <li>① <span class="key">成本与人力投入</span>：开始时<span class="key">较低</span> → 工作执行期间<span class="key">最高</span> → 快要结束时<span class="key">迅速回落</span></li>
+          <li>② <span class="key">风险与不确定性</span>：开始时<span class="key">最大</span>，随<span class="key">决策的制定与可交付成果的验收</span>逐步降低；同时<span class="key">变更和纠错成本</span>随项目<span class="key">接近完成而显著增高</span></li>
+          <li>补充：上述特征在<span class="key">几乎所有项目生命周期中都存在，但程度有所不同</span></li>
+        </ul>
+        <div class="tip">三条曲线方向别接反：风险「始最高→渐低」、变更代价「越晚越高」、人力「低→高→回落」——判断题高发区</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">6.4.2 开发生命周期 5 种</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">8</span>5 种总览 + 预测型</div>
+        <ul>
+          <li>5 种：<span class="key">预测型（瀑布 / 计划驱动）· 迭代型 · 增量型 · 适应型（敏捷 / 变更驱动）· 混合型</span>；采用不同开发生命周期的项目呈现不同的项目生命周期特点</li>
+          <li>预测型适用：<span class="key">已经充分了解并明确确定需求</span>的项目</li>
+          <li>做法：<span class="key">早期阶段确定范围、时间和成本</span>；对任何范围变更<span class="key">严格管理</span>；<span class="key">每个阶段只进行一次</span>，各阶段<span class="key">侧重特定类型的工作</span></li>
+          <li>高度预测型：<span class="key">范围变更很少、干系人高度共识</span>，受益于<span class="key">前期详细规划</span>；但增加范围 / 需求变化 / 市场变化会导致<span class="key">某些阶段重复进行</span></li>
+        </ul>
+        <div class="tip">「每个阶段只进行一次」是<span class="key">预测型</span>独有表述——别把它安到适应型头上</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">9</span>迭代型 vs 增量型</div>
+        <ul>
+          <li><span class="key">迭代型</span>：<span class="key">范围通常在早期确定</span>，<span class="key">时间及成本随对产品理解的深入而定期修改</span>——<span class="key">通过一系列重复的循环活动</span>来开发产品</li>
+          <li><span class="key">增量型</span>：在<span class="key">预定的时间区间内渐进增加产品功能</span>的一系列迭代产出可交付成果；<span class="key">只有在最后一次迭代之后</span>，可交付成果具有必要和足够能力<span class="key">才被视为完整</span></li>
+          <li>⭐ 教材辨析金句：<span class="key">迭代方法 = 重复的循环活动开发产品；增量方法 = 渐进地增加产品的功能</span></li>
+        </ul>
+        <div class="tip">蒙娜丽莎助记：迭代 = 先画整幅初稿再反复打磨；增量 = 先画头再画身体逐块构建</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">10</span>适应型循环 + 混合型</div>
+        <ul>
+          <li>适应型又称<span class="key">敏捷型 / 变更驱动型</span>，适合<span class="key">需求不确定、不断发展变化</span>的项目</li>
+          <li>完整循环：<span class="key">迭代前</span>——项目和产品愿景的范围被<span class="key">明确定义和批准</span>；<span class="key">迭代中</span>——以迭代（又称<span class="key">「冲刺」</span>）为单位交付；<span class="key">迭代后</span>——<span class="key">客户审查功能性可交付物</span>，关键干系人提供反馈，团队<span class="key">更新待办事项列表</span>、确定<span class="key">下次迭代的优先级</span></li>
+          <li>特点：<span class="key">先基于初始需求制定一套高层级计划</span>，再逐渐把需求<span class="key">细化</span>到特定规划周期所需详细程度</li>
+          <li><span class="key">混合型 = 预测型 + 适应型的组合</span>；项目生命周期具有<span class="key">复杂性和多维性</span>——特定项目<span class="key">不同阶段往往采用不同的生命周期</span>，需确定各阶段最适合的生命周期</li>
+        </ul>
+        <div class="tip">🚩「混合型 = 迭代型 + 增量型的组合」❌——是<span class="key">预测 + 适应</span>；「一个项目只能用一种生命周期」❌</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">11</span>表 6-6 五维对比</div>
+        <ul>
+          <li><span class="key">需求</span>：预测 = 开发前预先确定；迭代增量 = 交付期间<span class="key">定期</span>细化；适应 = 交付期间<span class="key">频繁</span>细化</li>
+          <li><span class="key">交付</span>：预测 = <span class="key">项目结束时一次交付</span>最终产品；迭代增量 = <span class="key">分次交付</span>各个子集；适应 = <span class="key">频繁交付</span>对客户有价值的子集</li>
+          <li><span class="key">变更</span>：预测 = <span class="key">尽量限制</span>；迭代增量 = <span class="key">定期</span>融入；适应 = <span class="key">实时</span>融入</li>
+          <li><span class="key">干系人参与</span>：预测 = <span class="key">特定里程碑点</span>；迭代增量 = <span class="key">定期</span>；适应 = <span class="key">持续</span>参与</li>
+          <li><span class="key">风险成本控制</span>：预测 = 对基本已知情况<span class="key">编制详细计划</span>；迭代增量 = <span class="key">用新信息逐渐细化计划</span>；适应 = <span class="key">随着需求和制约因素的显现</span>而控制</li>
+        </ul>
+        <div class="tip">三列节奏递进：预测「前定/一次/限制」→ 迭代增量「定期/分次」→ 适应「频繁/实时/持续」——适应型一列全是「快进」词</div>
+        <div class="fill"></div>
+      </div>
+
+      <div class="grouplabel">防坑与旧题甄别</div>
+
+      <div class="ans-block">
+        <div class="ans-title"><span class="num">12</span>高频陷阱 + 旧题甄别</div>
+        <ul>
+          <li>① 「价值只能在项目结束后实现」❌（项目期间 / 结束 / 完成后均可）② 「领导力行为只属 PM」❌（任何成员）③ 「裁剪一次性动作」❌（持续进行）④ 「风险只有威胁」❌（机会 + 威胁）⑤ 「变革越快越好」❌（防变革饱和、掌握节奏）</li>
+          <li>⑥ 「阶段只能顺序进行」❌（可顺序 / 迭代 / 交叠）⑦ 「每个阶段只进行一次」是<span class="key">预测型</span>的表述 ⑧ 「混合型 = 迭代 + 增量」❌（预测 + 适应）⑨ 清单判断题混入「专注于工作过程的能力」「处理采购事宜」等非原则表述</li>
+          <li>旧题甄别：12 原则与 5 种开发生命周期均为<span class="key">第 4 版（PMBOK 第 7 版口径）新增</span>，<span class="key">2023 下之前旧真题无对应题</span>；旧题考「49 过程」等第 6 版口径按教材为准</li>
+        </ul>
+        <div class="tip">本段是「清单 + 配对」型考点——默写最易犯的错是<span class="key">12 条原则记串顺序</span>与<span class="key">迭代 / 增量 / 适应三型混淆</span>；考前用口诀 + 表 6-6 各默写 3 遍</div>
+        <div class="fill"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="col-hd">总结区 <span>本段本质 + 考点地图</span></div>
+    <div class="body summary-prefill">
+      <b>本段本质</b>：全书项目管理知识的「宪法 + 进化论」——12 条原则是所有干系人在项目全生命周期的<b>行为指南</b>（勤营促价系，展裁质驾优，拥驱），5 种开发生命周期回答「不同需求确定度下项目怎么开发」（预测一次到位 / 迭代循环打磨 / 增量逐块拼装 / 适应冲刺反馈 / 混合两端组合）。生命周期两条铁律：<b>风险开始最大、变更代价越晚越高</b>——这是后续一切「尽早发现变更」类考题的出处。<br>
+      <b>考点地图（按考频排序）</b>：① 12 原则清单判断（混入非原则表述）→ ② 表 6-6 五维对比（干系人参与：里程碑/定期/持续）→ ③ 通用生命周期 4 阶段 + 两特征曲线 → ④ 生命周期 5 型别称配对（瀑布=计划驱动、敏捷=变更驱动）→ ⑤ 迭代 vs 增量辨析 → ⑥ 适应型完整循环（迭代前批准 / 迭代后客户审查 + 更新待办）→ ⑦ 金句「价值是项目成功的最终指标」→ ⑧ 「任何成员可展现领导力、领导力≠职权」→ ⑨ 裁剪持续进行 → ⑩ 变革饱和与变革节奏。<br>
+      <span class="small">⚠️ 口径提醒：① 6.4.2 已用清华社样章 PDF 逐字核对（2026-10 样章更新含第 6 章节选）；② 12 原则与 5 型生命周期均为第 4 版新增口径，旧真题无对应题；③「每个阶段只进行一次」属预测型；④ 混合型 = 预测 + 适应的组合；⑤ 项目阶段间可顺序、迭代或交叠进行。</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>康奈尔笔记法 · 第 6 章第 4 节上段 带答案版　｜　复习记录：当日 ☐　+1 天 ☐　+3 天 ☐　+7 天 ☐　+14 天 ☐</span>
+    <span>正确率 ____ / 12</span>
+  </div>
+
+</div>
+
+<div class="guide">
+  <h2>怎么用这一页</h2>
+  <table>
+    <tr>
+      <th>步骤</th><th>做法</th>
+    </tr>
+    <tr>
+      <td>第 1 遍 · 遮答默写</td>
+      <td>用纸<b>遮住右栏答案区</b>，只看左栏 12 个问题。口头/默写回答，答不出的画「×」。</td>
+    </tr>
+    <tr>
+      <td>第 2 遍 · 对照修正</td>
+      <td>揭开答案区逐项对照。每条答案下的<b>虚线</b>是留给你的「补充线」——记下易漏点（如口诀「勤营促价系，展裁质驾优，拥驱」、「迭代=重复循环 vs 增量=渐进加功能」、「混合=预测+适应」）。</td>
+    </tr>
+    <tr>
+      <td>第 3 遍 · 隐藏答案打印</td>
+      <td>点工具栏「👁 隐藏答案」按钮，再打印一份当填空卷，可反复练习。</td>
+    </tr>
+    <tr>
+      <td>第 4 遍 · 复习节奏</td>
+      <td>页脚 5 个框按「当日 → +1 天 → +3 天 → +7 天 → +14 天」打勾，这就是你的艾宾浩斯进度条。全部打勾后，本段可不再看。</td>
+    </tr>
+  </table>
+  <div class="note">
+    <b>为什么这份是「带答案版」</b>：本段是「清单 + 配对」型考点，默写时最容易犯的错是<b>12 条原则记漏记串</b>（清单判断题一漏就是整题丢分）与<b>五种开发生命周期张冠李戴</b>（每个阶段只进行一次 → 预测型；冲刺 → 适应型）。本版每个答案都标注<b>关键术语</b>（暖色）和<b>对照提醒</b>（橙色框），默写后对照一眼就能定位偏差。考前冲刺只看「总结区 · 考点地图」+「橙色 tip 框」即可。
+  </div>
+</div>
+
+<script>
+  function toggleAnswers(){
+    document.body.classList.toggle('hide-answers');
+    const btn = document.getElementById('toggleBtn');
+    const hidden = document.body.classList.contains('hide-answers');
+    btn.textContent = hidden ? '👁 显示答案' : '👁 隐藏答案（打印填空卷）';
+    btn.classList.toggle('active', hidden);
+  }
+</script>
+
+</body>
+</html>
